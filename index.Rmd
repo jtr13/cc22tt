@@ -1,9 +1,9 @@
 ---
-title: "Community Contributions for ..."
+title: "Community Contributions for EDAV Fall 2022 Tues/Thurs"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
-github-repo: YOUR_USER_NAME/YOUR_REPO
-description: "This book contains community contributions for ..."
+github-repo: jtr13/cc22tt
+description: "This book contains community contributions for EDAV Fall 2022 Tues/Thurs"
 ---
 
 # Welcome!
