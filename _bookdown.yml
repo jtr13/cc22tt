@@ -14,7 +14,6 @@ rmd_files: [
   'assignment.Rmd',
   'instructions.Rmd',
   'sample_project.Rmd',
-  'timeseriesanalysis.Rmd',
 
   # Part: Cheatsheets
  
