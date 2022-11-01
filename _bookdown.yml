@@ -16,9 +16,9 @@ rmd_files: [
   'sample_project.Rmd',
 
   # Part: Cheatsheets
- 
+
   # Part: Tutorials
-  
+  'time_series_visualization_project.Rmd',  
   # Part: Workshops
   
   # Part: Appendices
