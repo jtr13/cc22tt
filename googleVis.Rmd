@@ -10,15 +10,16 @@ library(googleVis)
 
 
 ## Introducing googleVis
-
+Kiyan
 
 ### Why googleVis
-
+Kiyan 
 
 ##### googleVis rendering
-
+Kiyan 
 
 ##### googleVis Basic Graphs with Interaction
+Kiyan
 Line, double axis
   area
 Bar
@@ -28,23 +29,23 @@ Combo chart
 candlestick barplot
 Alluvial
 ##### googleVis Geo chart
-
+Kiyan
 ##### googleVis Gauge chart
-
+Kiyan
 ##### googleVis Tabular Charts
-
+Sushant
 ##### googleVis Tree Map/Chart
-
+Sushant
 ##### googleVis Annotation
-
+Sushant
 ##### googleVis Calender Chart
-
+Sushant
 ##### googleVis Timline Chart
-
+Sushant
 ##### googleVis Gantt Chart
-
+Sushant
 ##### googleVis Merging Charts
-
+Sushant
 ```{r}
 
 df=data.frame(country=c("US", "GB", "BR"), 
