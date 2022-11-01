@@ -1,0 +1,56 @@
+# Time Series Analysis in R
+
+Sushant Prabhu, Kiyan Mohebbizadeh
+
+```{r}
+
+library(googleVis)
+
+```
+
+
+## Introducing googleVis
+
+
+### Why googleVis
+
+
+##### googleVis rendering
+
+
+##### googleVis Basic Graphs with Interaction
+Line, double axis
+  area
+Bar
+  area
+Histogram
+Combo chart
+candlestick barplot
+Alluvial
+##### googleVis Geo chart
+
+##### googleVis Gauge chart
+
+##### googleVis Tabular Charts
+
+##### googleVis Tree Map/Chart
+
+##### googleVis Annotation
+
+##### googleVis Calender Chart
+
+##### googleVis Timline Chart
+
+##### googleVis Gantt Chart
+
+##### googleVis Merging Charts
+
+```{r}
+
+df=data.frame(country=c("US", "GB", "BR"), 
+              val1=c(10,13,14), 
+              val2=c(23,12,32))
+Line <- gvisLineChart(df)
+plot(Line)
+
+```
