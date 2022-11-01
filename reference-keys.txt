@@ -16,6 +16,14 @@ what-if-i-catch-mistakes-before-my-pull-request-is-merged
 what-if-i-catch-mistakes-after-my-pull-request-is-merged
 other-questions
 sample-project
+part-tutorials
+preprocessing-and-visualization-of-time-series-data
+preprocess-on-a-time-series-data
+transform-dataset
+deal-with-missing-values
+deal-with-problematic-data-points
+visualize-a-time-series-data
+conclusion
 github-initial-setup
 create-new-repo
 pages-in-repo-settings
