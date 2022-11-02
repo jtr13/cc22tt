@@ -2,5 +2,12 @@
 
 Abhiram Gaddam, Devan Samant
 
-Section 1: Introduction
-Test
+Section 1: introduction and context of Benford’s Law 
+
+Case Study
+Section 2: how to use this package on a particular data set (something that shows distribution) on the first digit.(decaying curve): show the curve and display the p value (or other metrics)
+
+Section 3: show how to detect fraud. For eg: price and quantity. Show the graph in this randomized data. 
+Re-run on manipulated data. Show the difference in graphs. Mainly display bar charts 
+
+Conclusion: Show what we learned, its drawbacks, future readings on the package.
