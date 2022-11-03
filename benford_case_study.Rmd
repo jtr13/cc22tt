@@ -2,7 +2,7 @@
 
 Abhiram Gaddam, Devan Samant
 
-In this tutorial, we will introduce Benford's Law and describe its application in fraud detection with a case study using the benford_analysis package in r.
+In this tutorial, we will introduce Benford's Law and illustrate its applications in fraud detection with a case study using the benford_analysis package in r.
 
 Section 1: Introduction to Benford's Law
 
@@ -33,9 +33,9 @@ While Benford's Law is not applicable to all datasets, it is generally applicabl
 
 
 Applications in Fraud Detection:
-One primary and practical use for Benford’s law is fraud and error detection. It is expected that a large set of numbers will follow the law, so accountants, auditors, economists and tax professionals have a benchmark what the normal levels of any particular number in a set are. Below are some famously documented examples of Benford's Law being applied towards fraud detection:
+One primary and practical use for Benford’s law is fraud and error detection. It is expected that a large set of numbers will follow the law, so accountants, auditors, economists and tax professionals have a benchmark for what the normal levels of any particular number in a set are. Below are some famously documented examples of Benford's Law being applied towards fraud detection:
 
-1) In the latter half of the 1990s, accountant Mark Nigrini found that Benford’s law can be an effective red-flag test for fabricated tax returns; True tax data usually follows Benford’s law, whereas made-up returns do not.
+1) In the latter half of the 1990s, an accountant named Mark Nigrini found that Benford’s law can be an effective red-flag test for fabricated tax returns; True tax data usually follows Benford’s law, whereas made-up returns do not.
 
 2) The law was used in 2001 to study economic data from Greece, with the implication that the country may have manipulated numbers to join the European Union.
 
@@ -43,14 +43,64 @@ One primary and practical use for Benford’s law is fraud and error detection. 
 
 
 
-Section 2: benford_analysis package in r
+Section 2: benford.analysis package in r
+
+The Benford Analysis (benford.analysis) package provides tools that make it easier to validate data using Benford’s Law. The main purpose of the package is to identify suspicious data that need further verification.
+
+Documentation on the package can be found here:
+https://cran.r-project.org/web/packages/benford.analysis/benford.analysis.pdf
+
+
+You can install the package from CRAN by running:
+
+```{r}
+install.packages("benford.analysis")
+```
+
+The package comes with 6 real datasets from Mark Nigrini’s book Benford’s Law: Applications for Forensic Accounting, Auditing, and Fraud Detection
+
+
+Section 3: Example Usage of benford.analysis
+Here we will give an example using 189,470 records from the corporate payments dataset which is provided with the package.
+
+Load the package and data
+```{r}
+library(benford.analysis) 
+data(corporate.payment) 
+
+df <- corporate.payment
+head(df)
+```
+
+To validate the data against Benford’s law you simply use the function "benford" on the appropriate column:
+```{r}
+bfd <- benford(df$Amount)
+bfd
+```
+This creates an object of class “Benford” with the results for the analysis using the first two significant digits
+
+Lets plot the bfd and observe the trends. Note that we running this analysis using the default parameters, i.e., no.of.digits = 2. This paramter can be modified if we only want to analyze the first digit 
+```{r}
+plot(bfd)
+```
+
+The original data is in blue and the expected frequency according to Benford’s law is in red. 
+In this example, the first plot shows that the data do have a tendency to follow Benford’s law.
+There is also a clear outlier at 50.
+
+The package also provides some helper functions to further investigate the data. For example, you can easily extract the observations with the largest discrepancies by using the "getSuspects" function.
+
+```{r}
+suspects <- getSuspects(bfd, df)
+suspects
+```
 
 
 
-how to use this package on a particular data set (something that shows distribution) on the first digit.(decaying curve): show the curve and display the p value (or other metrics)
 
-Case Study
-Section 3: show how to detect fraud. For eg: price and quantity. Show the graph in this randomized data. 
+Section 3: Case Study
+
+Show how to detect fraud. For eg: price and quantity. Show the graph in this randomized data. 
 Re-run on manipulated data. Show the difference in graphs. Mainly display bar charts 
 
 Conclusion: Show what we learned, its drawbacks, future readings on the package.
@@ -58,6 +108,12 @@ Conclusion: Show what we learned, its drawbacks, future readings on the package.
 
 Sources:
 Benford, F. “The Law of Anomalous Numbers,” Proceedings of the American Philosophical Society, 78, 551–572. 1938.
+
+https://cran.r-project.org/web/packages/benford.analysis/benford.analysis.pdf
+
 https://www.statisticshowto.com/benfords-law/
+
 Frunza, M. (2015). Solving Modern Crime in Financial Markets: Analytics and Case Studies. Academic Press.
+
 https://www.journalofaccountancy.com/issues/2017/apr/excel-and-benfords-law-to-detect-fraud.html#:~:text=Briefly%20explained%2C%20Benford's%20Law%20maintains,leading%20digit%20with%20decreasing%20frequency.
+
