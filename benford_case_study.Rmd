@@ -2,12 +2,62 @@
 
 Abhiram Gaddam, Devan Samant
 
-Section 1: introduction and context of Benford’s Law 
+In this tutorial, we will introduce Benford's Law and describe its application in fraud detection with a case study using the benford_analysis package in r.
+
+Section 1: Introduction to Benford's Law
+
+What is Benford's Law?
+Benford’s law (also called the first digit law) states that the leading digits in a collection of data sets are probably going to be small. For example, most numbers in a set (about 30%) will have a leading digit of 1, when the expected probability is 11.1% (one out of nine digits). This is followed by about 17.5% starting with a number 2. This is clearly an unexpected phenomenon. To put it simply, Benford’s law is a probability distribution for the likelihood of the first digit in a set of numbers (Frunza, 2015). The formula for Benford's Law is:
+
+$P(d) = \frac{ln(1 + \frac{1}{d})}{ln10}$
+where $d$ is the leading digit (a number from 1 to 9)
+
+Below is a distribution that shows the expected occurrence of leading digits according to Benford's Law.
+
+NOTE: Need to figure out how to render this image remotely
+![Benfords Law Distribution.](/Users/abhiramgaddam21/Desktop/b1.jpeg)
+A few caveats regarding the application of Benford's Law:
+1) Benford's Law works better with larger sets of data. While the law has been shown to hold true for data sets containing as few as 50 to 100 numbers, most experts believe data sets of 500 or more numbers are better suited for this type of analysis.
+
+2) To conform with the law, the data set you use must contain data in which each number 1 through 9 has an equal chance of being the leading digit. Otherwise, Benford's Law doesn't apply. For example, consider a listing of the heights of all the NBA basketball players in history. In this case, because NBA players range in height from 5 feet 3 inches (Muggsy Bogues, who played from 1987 to 2001) to 7 feet 7 inches (Manute Bol and Gheorghe Mureșan, who played during the 1980s and 1990s), there are no player heights that begin with a 1, 2, 3, 4, 8, or 9; hence those digits have no chance of being the first digit in such a listing, making Benford's Law inapplicable.
+
+While Benford's Law is not applicable to all datasets, it is generally applicable to large sets of naturally occurring numbers with some connection like:
+
+1) Companies’ stock market values.
+2) Data found in texts.
+3) Demographic data, including state and city populations.
+4) Income tax data.
+5) Mathematical tables, like logarithms.
+6) River drainage rates.
+7) Scientific data.
+
+
+Applications in Fraud Detection:
+One primary and practical use for Benford’s law is fraud and error detection. It is expected that a large set of numbers will follow the law, so accountants, auditors, economists and tax professionals have a benchmark what the normal levels of any particular number in a set are. Below are some famously documented examples of Benford's Law being applied towards fraud detection:
+
+1) In the latter half of the 1990s, accountant Mark Nigrini found that Benford’s law can be an effective red-flag test for fabricated tax returns; True tax data usually follows Benford’s law, whereas made-up returns do not.
+
+2) The law was used in 2001 to study economic data from Greece, with the implication that the country may have manipulated numbers to join the European Union.
+
+3) Ponzi schemes can be detected using the law. Unrealistic returns, such as those purported by the Maddoff scam, fall far from the expected Benford probability distribution (Frunza, 2015).
+
+
+
+Section 2: benford_analysis package in r
+
+
+
+how to use this package on a particular data set (something that shows distribution) on the first digit.(decaying curve): show the curve and display the p value (or other metrics)
 
 Case Study
-Section 2: how to use this package on a particular data set (something that shows distribution) on the first digit.(decaying curve): show the curve and display the p value (or other metrics)
-
 Section 3: show how to detect fraud. For eg: price and quantity. Show the graph in this randomized data. 
 Re-run on manipulated data. Show the difference in graphs. Mainly display bar charts 
 
 Conclusion: Show what we learned, its drawbacks, future readings on the package.
+
+
+Sources:
+Benford, F. “The Law of Anomalous Numbers,” Proceedings of the American Philosophical Society, 78, 551–572. 1938.
+https://www.statisticshowto.com/benfords-law/
+Frunza, M. (2015). Solving Modern Crime in Financial Markets: Analytics and Case Studies. Academic Press.
+https://www.journalofaccountancy.com/issues/2017/apr/excel-and-benfords-law-to-detect-fraud.html#:~:text=Briefly%20explained%2C%20Benford's%20Law%20maintains,leading%20digit%20with%20decreasing%20frequency.
