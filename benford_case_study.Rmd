@@ -100,10 +100,72 @@ suspects
 
 Section 3: Case Study
 
-Show how to detect fraud. For eg: price and quantity. Show the graph in this randomized data. 
-Re-run on manipulated data. Show the difference in graphs. Mainly display bar charts 
+--Show how to detect fraud. For eg: price and quantity. Show the graph in this randomized data. 
+Let us try an experiment to see if we can use Benford's Law to detech potential data manipulation. We'll use random data for this where we can pretend a company has data made up of prices and quantities of items that they have sold.
 
-Conclusion: Show what we learned, its drawbacks, future readings on the package.
+```{r}
+library(dplyr)
+library(plotly)
+library(tidyverse)
+
+price <- sample(1:10000, size = 100000, replace=TRUE)
+quantity <- sample(1:100000, size = 100000, replace=TRUE)
+df <- data.frame(price,quantity) %>% 
+  mutate(value = price*quantity) %>% 
+  mutate(digit = substr(as.character(value), 1, 1))
+
+df_group <- df %>% group_by(digit) %>% summarise(count = n()) %>%
+    mutate(count_percent = count/sum(count))
+
+base_benford = data.frame(c(1,2,3,4,5,6,7,8,9), c(.31,.176,.125,.097,.079,.067,.058,.051,.046))
+colnames(base_benford) <- c('digit','percent')
+
+ggplot(data=df_group, aes(x=digit, y=count_percent, fill="blue")) +
+  geom_bar(stat="identity", fill='lightblue') + 
+  geom_point(aes(x=base_benford$digit, y=base_benford$percent))
+
+```
+
+The total value of this data exhibits some commonality with Benford's Law but it is not exact. We will address some limitation in the next section. For now, let us try manipulating the data to see if the patterns changes. 
+
+--Re-run on manipulated data. Show the difference in graphs. Mainly display bar charts 
+
+In this next piece of code, we can pretend someone has entered in additional sales "randomly" by adding in relatively smaller sales under 100k.  
+```{r}
+
+value2 <- sample(1:99999, size = 50000, replace=TRUE)
+df_extra_sales <- data.frame(0,0,value2)
+colnames(df_extra_sales) <- c('price','quantity','value')
+df2 <- data.frame(price,quantity) %>% 
+  mutate(value = price*(quantity)) %>% 
+  rbind(df_extra_sales)  %>% 
+  mutate(digit = substr(as.character(value), 1, 1))
+
+df_group2 <- df2 %>% group_by(digit) %>% summarise(count = n()) %>%
+    mutate(count_percent = count/sum(count))
+
+p2 <- ggplot(data=df_group2, aes(x=digit, y=count_percent)) +
+  geom_bar(stat="identity", fill='lightblue') + 
+  geom_point(aes(x=base_benford$digit, y=base_benford$percent))
+p2
+#gridExtra::grid.arrange(p1,p2, ncol=2)
+
+df_group_combined <- data.frame(df_group$digit,df_group$count_percent,df_group2$count_percent) 
+colnames(df_group_combined) <- c('digit','original_percent','updated_percent')
+df_group_combined <- df_group_combined %>% pivot_longer(cols=c('original_percent','updated_percent'))
+colnames(df_group_combined) <- c('digit','dataset','count_percent')
+
+ggplot(data=df_group_combined, aes(x=digit, y=count_percent, fill=dataset)) +
+  geom_bar(stat="identity", position='dodge') 
+```
+
+--apply benford package metrics too?
+We can see that the distribution has changed between graphs with this manipulation. This is an extreme example to highlight a point. Note that this does not prove anything but is just an indicator that something looks weird. History has shown that real instances are also detectable because human manipulation (even if using randomness) can be basic and many people do not realize that Benford's Law is something they need to look out for. Now a bad actor that has a stats background that knows how to properly generate fake sales would be hard to catch. 
+
+
+
+
+Section 4 Conclusion: Show what we learned, its drawbacks, future readings on the package.
 
 
 Sources:
