@@ -6,6 +6,7 @@ In this tutorial, we will introduce Benford's Law and illustrate its application
 
 Section 1: Introduction to Benford's Law
 
+-- Devan to add more context
 What is Benford's Law?
 Benford’s law (also called the first digit law) states that the leading digits in a collection of data sets are probably going to be small. For example, most numbers in a set (about 30%) will have a leading digit of 1, when the expected probability is 11.1% (one out of nine digits). This is followed by about 17.5% starting with a number 2. This is clearly an unexpected phenomenon. To put it simply, Benford’s law is a probability distribution for the likelihood of the first digit in a set of numbers (Frunza, 2015). The formula for Benford's Law is:
 
@@ -16,6 +17,7 @@ Below is a distribution that shows the expected occurrence of leading digits acc
 
 NOTE: Need to figure out how to render this image remotely
 ![Benfords Law Distribution.](/Users/abhiramgaddam21/Desktop/b1.jpeg)
+
 A few caveats regarding the application of Benford's Law:
 1) Benford's Law works better with larger sets of data. While the law has been shown to hold true for data sets containing as few as 50 to 100 numbers, most experts believe data sets of 500 or more numbers are better suited for this type of analysis.
 
@@ -96,12 +98,10 @@ suspects
 ```
 
 
-
-
 Section 3: Case Study
 
 --Show how to detect fraud. For eg: price and quantity. Show the graph in this randomized data. 
-Let us try an experiment to see if we can use Benford's Law to detech potential data manipulation. We'll use random data for this where we can pretend a company has data made up of prices and quantities of items that they have sold.
+Let us try an experiment to see if we can use Benford's Law to detect potential data manipulation. We'll use random data for this where we can pretend a company has data made up of prices and quantities of items that they have sold.
 
 ```{r}
 library(dplyr)
@@ -133,7 +133,7 @@ The total value of this data exhibits some commonality with Benford's Law but it
 In this next piece of code, we can pretend someone has entered in additional sales "randomly" by adding in relatively smaller sales under 100k.  
 ```{r}
 
-value2 <- sample(1:99999, size = 50000, replace=TRUE)
+value2 <- sample(1:99999, size = 150000, replace=TRUE)
 df_extra_sales <- data.frame(0,0,value2)
 colnames(df_extra_sales) <- c('price','quantity','value')
 df2 <- data.frame(price,quantity) %>% 
@@ -159,6 +159,43 @@ ggplot(data=df_group_combined, aes(x=digit, y=count_percent, fill=dataset)) +
   geom_bar(stat="identity", position='dodge') 
 ```
 
+```{r}
+
+bfd_1 <- benford(df$value)
+bfd_1
+
+bfd_2 <- benford(df2$value)
+bfd_2
+
+
+```
+
+--Comparison of statistics between df and df2:
+
+Df
+Statistic  Value
+        Mean  0.525
+         Var  0.073
+ Ex.Kurtosis -1.049
+    Skewness -0.142
+
+
+Df2
+Statistic  Value
+        Mean  0.616
+         Var  0.074
+ Ex.Kurtosis -0.837
+    Skewness -0.491
+
+
+--If the data follows Benford’s Law, the numbers should be close to:
+Statistic	Value
+Mean	0.5
+Variance	1/12 (0.08333…)
+Ex. Kurtosis	-1.2
+Skewness	0
+
+
 --apply benford package metrics too?
 We can see that the distribution has changed between graphs with this manipulation. This is an extreme example to highlight a point. Note that this does not prove anything but is just an indicator that something looks weird. History has shown that real instances are also detectable because human manipulation (even if using randomness) can be basic and many people do not realize that Benford's Law is something they need to look out for. Now a bad actor that has a stats background that knows how to properly generate fake sales would be hard to catch. 
 
@@ -166,6 +203,8 @@ We can see that the distribution has changed between graphs with this manipulati
 
 
 Section 4 Conclusion: Show what we learned, its drawbacks, future readings on the package.
+
+
 
 
 Sources:
