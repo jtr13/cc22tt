@@ -7,8 +7,9 @@ In this tutorial, we will introduce Benford's Law and illustrate its application
 Section 1: Introduction to Benford's Law
 
 -- Devan to add more context
+
 What is Benford's Law?
-Benford’s law (also called the first digit law) states that the leading digits in a collection of data sets are probably going to be small. For example, most numbers in a set (about 30%) will have a leading digit of 1, when the expected probability is 11.1% (one out of nine digits). This is followed by about 17.5% starting with a number 2. This is clearly an unexpected phenomenon. To put it simply, Benford’s law is a probability distribution for the likelihood of the first digit in a set of numbers (Frunza, 2015). The formula for Benford's Law is:
+Benford’s law (also known as the first digit law) states that the leading digits in a collection of data sets are probably going to be small. For example, most numbers in a set (about 30%) will have a leading digit of 1, when the expected probability is 11.1% (one out of nine digits). This is followed by about 17.5% starting with a number 2. This is clearly an unexpected phenomenon. To put it simply, Benford’s law is a probability distribution for the likelihood of the first digit in a set of numbers (Frunza, 2015). The formula for Benford's Law is:
 
 $P(d) = \frac{ln(1 + \frac{1}{d})}{ln10}$
 where $d$ is the leading digit (a number from 1 to 9)
@@ -16,12 +17,13 @@ where $d$ is the leading digit (a number from 1 to 9)
 Below is a distribution that shows the expected occurrence of leading digits according to Benford's Law.
 
 NOTE: Need to figure out how to render this image remotely
-![Benfords Law Distribution.](/Users/abhiramgaddam21/Desktop/b1.jpeg)
+![Benfords Law Distribution.](/resources/benford_case_study/b1.jpeg)
+
 
 A few caveats regarding the application of Benford's Law:
 1) Benford's Law works better with larger sets of data. While the law has been shown to hold true for data sets containing as few as 50 to 100 numbers, most experts believe data sets of 500 or more numbers are better suited for this type of analysis.
 
-2) To conform with the law, the data set you use must contain data in which each number 1 through 9 has an equal chance of being the leading digit. Otherwise, Benford's Law doesn't apply. For example, consider a listing of the heights of all the NBA basketball players in history. In this case, because NBA players range in height from 5 feet 3 inches (Muggsy Bogues, who played from 1987 to 2001) to 7 feet 7 inches (Manute Bol and Gheorghe Mureșan, who played during the 1980s and 1990s), there are no player heights that begin with a 1, 2, 3, 4, 8, or 9; hence those digits have no chance of being the first digit in such a listing, making Benford's Law inapplicable.
+2) To conform with the law, the data set you use must contain data in which each number 1 through 9 has an equal chance of occuring as the leading digit. Otherwise, Benford's Law doesn't apply. For example, consider a listing of the heights of current NBA players. Since NBA players range in height from 5 feet 10 inches to 7 feet 3 inches, there are no player heights that begin with a 1, 2, 3, 4, 8, or 9; Clearly those digits have no chance of being the first digit in such a listing, making Benford's Law inapplicable.
 
 While Benford's Law is not applicable to all datasets, it is generally applicable to large sets of naturally occurring numbers with some connection like:
 
@@ -204,6 +206,7 @@ We can see that the distribution has changed between graphs with this manipulati
 
 Section 4 Conclusion: Show what we learned, its drawbacks, future readings on the package.
 
+An important thing to note is that Benford's law does not have a strict mathematical proof, and is simply a heuristic. It is a broad guideline which helps with the investigation of large data sets to see if they conform with the observed trends. A feature of a dataset that conforms with Benford's Law is not proof  of validity, or vice versa. For this reason, a Benford analysis is usually conducted as a primary investigatory exercise, following which a more thorough investigation is conducted. 
 
 
 
