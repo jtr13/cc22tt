@@ -1,5 +1,0 @@
-# R window functions cheatsheet
-
-Gokul Sunilkumar and Pooja Srinivasan
-
-Content starts here
