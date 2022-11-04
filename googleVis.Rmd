@@ -3,33 +3,86 @@
 Sushant Prabhu, Kiyan Mohebbizadeh
 
 ```{r}
-
 library(googleVis)
-
+library(tidyverse)
+library(datasets)
 ```
 
 
 ## Introducing googleVis
-Kiyan
+Googlevis is a package in R that allows users of R to use the Google Charts API.
+The interface between R and Google Charts allows users to access Google Charts' 
+interactive charts. GoogleVis allows users to use the data in R data frames to 
+create Google Charts without uploading the data onto Google. 
 
 ### Why googleVis
-Kiyan 
+This package allows users to create interactive visualizations which R's most popular
+visualization package (ggplot) does not allow. Although their are packages that work 
+in conjunction with ggplot to make interactive visualizations, googleVis offers a 
+wholistic package that allows for some unique and interactive visualizations.
+
+By using Google Charts, one is able to create a wide variety of visualizations
+ranging from typical bar and line graphs to mapping and timeline charts all from one package. 
+The visualizations created by googleVis add a level of interest to the consumer
+due to their interactive layer. viewers are able to gather specific bits of information
+by hovering over and clicking values in the visualizations. This not only allows
+for increased aesthetics, but also more information being transferred to the viewers.
 
 ##### googleVis rendering
-Kiyan 
+
+The output of googleVis can either be embedded into an HTML file or read dynamically. 
+These visualizations are most often rendered online and in a web format. Therefore,
+a browser and internet connection are required to view the interactive version of the
+output. 
+
+For use in R, googleVis allows a user to render as a *Shiny* file that then allows
+a preview with interaction within R. This is used to preview a chart before a final
+render.
 
 ##### googleVis Basic Graphs with Interaction
-Kiyan
-Line, double axis
-  area
-Bar
-  area
-Histogram
-Combo chart
-candlestick barplot
-Alluvial
+```{r}
+df = data.frame(pet=c('cat', 'dog', 'hamster', 'snake'),
+                monthly_food_cost=c(50, 100, 10, 40),
+                monthly_medical_cost=c(30, 60, 5, 50))
+Line <- gvisLineChart(df)
+
+Bar <- gvisBarChart(df)
+
+Column <- gvisColumnChart(df)
+
+SteppedArea <- gvisSteppedAreaChart(df, xvar="pet", 
+                                    yvar=c("food cost", "health cost"),
+                                    options=list(isStacked=TRUE))
+
+Combo <- gvisComboChart(df, xvar="pet",
+                        yvar=c("food cost", "health cost"),
+                        options=list(seriesType="bars",
+                                     series='{1: {type:"line"}}'))
+```
+
+```{r}
+df <- iris
+
+Histogram <- gvisHistogram(data.frame(df$Sepal.Width))
+              
+```
+
+```{r}
+df <- data.frame(From=c(rep("Math",3), rep("Science", 3)),
+                    To=c(rep(c('Lunch', 'Art', 'Music'),2)),
+                    Weight=c(17,15,13,5,12,8))
+
+Alluvial <- gvisSankey(df, from="From", to="To", weight="Weight")
+              
+```
 ##### googleVis Geo chart
-Kiyan
+```{r}
+df = data.frame(country=c('US', 'CN', 'BR', 'IS', 'RU', 'TH', 'TR', 'ID', 'MX', 'IR' ),
+                incarceration_rate = c(2068800, 1690000, 811707, 478600, 471490, 309282, 291198, 266259, 220866, 189000))
+
+G <- gvisGeoChart(df, locationvar = "country", colorvar = "incarceration_rate")
+              
+```
 ##### googleVis Gauge chart
 Kiyan
 ##### googleVis Tabular Charts
@@ -46,12 +99,3 @@ Sushant
 Sushant
 ##### googleVis Merging Charts
 Sushant
-```{r}
-
-df=data.frame(country=c("US", "GB", "BR"), 
-              val1=c(10,13,14), 
-              val2=c(23,12,32))
-Line <- gvisLineChart(df)
-plot(Line)
-
-```
