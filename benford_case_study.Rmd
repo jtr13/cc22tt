@@ -33,18 +33,17 @@ While Benford's Law is not applicable to all datasets, it is generally applicabl
 4) Income tax data.
 5) Mathematical tables, like logarithms.
 6) River drainage rates.
-7) Scientific data.
+7) Scientific data (Benford, F).
 
 
 Applications in Fraud Detection:
 One primary and practical use for Benford’s law is fraud and error detection. It is expected that a large set of numbers will follow the law, so accountants, auditors, economists and tax professionals have a benchmark for what the normal levels of any particular number in a set are. Below are some famously documented examples of Benford's Law being applied towards fraud detection:
 
-1) In the latter half of the 1990s, an accountant named Mark Nigrini found that Benford’s law can be an effective red-flag test for fabricated tax returns; True tax data usually follows Benford’s law, whereas made-up returns do not.
+1) In the 1990s, an accountant named Mark Nigrini found that Benford’s law can be an effective red-flag test for fabricated tax returns. Authentic tax data usually follows Benford’s law, whereas made-up returns do not.
 
 2) The law was used in 2001 to study economic data from Greece, with the implication that the country may have manipulated numbers to join the European Union.
 
 3) Ponzi schemes can be detected using the law. Unrealistic returns, such as those purported by the Maddoff scam, fall far from the expected Benford probability distribution (Frunza, 2015).
-
 
 
 Section 2: benford.analysis package in r
@@ -64,7 +63,7 @@ install.packages("benford.analysis")
 The package comes with 6 real datasets from Mark Nigrini’s book Benford’s Law: Applications for Forensic Accounting, Auditing, and Fraud Detection
 
 
-Section 3: Example Usage of benford.analysis
+Section 4: Example Usage of benford.analysis
 Here we will give an example using 189,470 records from the corporate payments dataset which is provided with the package.
 
 Load the package and data
@@ -83,7 +82,7 @@ bfd
 ```
 This creates an object of class “Benford” with the results for the analysis using the first two significant digits
 
-Lets plot the bfd and observe the trends. Note that we running this analysis using the default parameters, i.e., no.of.digits = 2. This paramter can be modified if we only want to analyze the first digit 
+Lets plot the bfd and observe the trends. Note that we running this analysis using the default parameters, i.e., no.of.digits = 2. This parameter can be modified if we only want to analyze the first digit 
 ```{r}
 plot(bfd)
 ```
@@ -100,7 +99,7 @@ suspects
 ```
 
 
-Section 3: Case Study
+Section 4: Case Study
 
 --Show how to detect fraud. For eg: price and quantity. Show the graph in this randomized data. 
 Let us try an experiment to see if we can use Benford's Law to detect potential data manipulation. We'll use random data for this where we can pretend a company has data made up of prices and quantities of items that they have sold.
@@ -172,30 +171,34 @@ bfd_2
 
 ```
 
---Comparison of statistics between df and df2:
+Here is a comparison of the statistics between the two dataframes:
 
-Df
-Statistic  Value
-        Mean  0.525
-         Var  0.073
- Ex.Kurtosis -1.049
-    Skewness -0.142
+1) df
 
-
-Df2
-Statistic  Value
-        Mean  0.616
-         Var  0.074
- Ex.Kurtosis -0.837
-    Skewness -0.491
+Statistic     Value
+Mean          0.525
+Var           0.073
+Ex.Kurtosis  -1.049
+Skewness     -0.142
 
 
---If the data follows Benford’s Law, the numbers should be close to:
-Statistic	Value
-Mean	0.5
-Variance	1/12 (0.08333…)
-Ex. Kurtosis	-1.2
-Skewness	0
+2) df2
+Statistic     Value
+Mean          0.616
+Var           0.074
+Ex.Kurtosis  -0.837
+Skewness     -0.491
+
+
+If the data follows Benford’s Law, the expected statistics should be close to:
+Statistic	    Value
+Mean	        0.5
+Var         	1/12 (0.083..)
+Ex.Kurtosis	  -1.2
+Skewness    	0
+
+
+From a glance, it is evident that the statistics corresponding to df are much closer to the expected statistics than those from df2. In particular, the Ex.Kurtosis and Skewness differ significantly in df2 from the expected values. These are all indicators that the set of values deviate from the expected distribution corresponding to Benford's Law.
 
 
 --apply benford package metrics too?
@@ -203,8 +206,7 @@ We can see that the distribution has changed between graphs with this manipulati
 
 
 
-
-Section 4 Conclusion: Show what we learned, its drawbacks, future readings on the package.
+Section 5 Conclusion: Show what we learned, its drawbacks, future readings on the package.
 
 An important thing to note is that Benford's law does not have a strict mathematical proof, and is simply a heuristic. It is a broad guideline which helps with the investigation of large data sets to see if they conform with the observed trends. A feature of a dataset that conforms with Benford's Law is not proof  of validity, or vice versa. For this reason, a Benford analysis is usually conducted as a primary investigatory exercise, following which a more thorough investigation is conducted. 
 
