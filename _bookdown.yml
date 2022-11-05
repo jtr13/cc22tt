@@ -20,6 +20,8 @@ rmd_files: [
 
   # Part: Tutorials
   'time_series_visualization_project.Rmd',  
+  'googleVis.Rmd',
+  
   # Part: Workshops
   
   # Part: Appendices
