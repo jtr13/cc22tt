@@ -1,4 +1,4 @@
-# Time Series Analysis in R
+# googleVis in R
 
 Sushant Prabhu, Kiyan Mohebbizadeh
 
