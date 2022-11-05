@@ -24,12 +24,12 @@ ranging from typical bar and line graphs to mapping and timeline charts all from
 
 ##### googleVis rendering
 
-The output of googleVis can either be embedded into an HTML file or read dynamically. 
+- The output of googleVis can either be embedded into an HTML file or read dynamically. 
 These visualizations are most often rendered online and in a web format. Therefore,
 a browser and internet connection are required to view the interactive version of the
 output. 
 
-For use in R, googleVis allows a user to render as a *Shiny* file that then allows
+- For use in R, googleVis allows a user to render as a *Shiny* file that then allows
 a preview with interaction within R. This is used to preview a chart before a final
 render.
 
