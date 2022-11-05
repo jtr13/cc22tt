@@ -84,7 +84,15 @@ G <- gvisGeoChart(df, locationvar = "country", colorvar = "incarceration_rate")
               
 ```
 ##### googleVis Gauge chart
-Kiyan
+```{r}
+temperature <- data.frame(city=c('Las Vegas', 'Los Angeleges', 'Pheonix', 'Dallas', 'Houston', 'Miami'),
+                          temp=c(115, 103, 120, 110, 112, 101))
+Gauge <-  gvisGauge(temperature, 
+                    options=list(min=0, max=150, greenFrom=0,
+                                 greenTo=50, yellowFrom=50, yellowTo=100,
+                                 redFrom=100, redTo=150, width=400, height=300))
+
+```
 ##### googleVis Tabular Charts
 Sushant
 ##### googleVis Tree Map/Chart
