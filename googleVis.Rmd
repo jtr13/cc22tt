@@ -10,23 +10,17 @@ library(datasets)
 
 
 ## Introducing googleVis
-Googlevis is a package in R that allows users of R to use the Google Charts API.
-The interface between R and Google Charts allows users to access Google Charts' 
-interactive charts. GoogleVis allows users to use the data in R data frames to 
-create Google Charts without uploading the data onto Google. 
+- googleVis is a package in R that allows users of R to use the Google Charts API.
+- The interface between R and Google Charts allows users to access Google Charts' interactive charts. 
+- googleVis allows users to use the data in R data frames to create Google Charts without uploading the data onto Google. 
 
 ### Why googleVis
-This package allows users to create interactive visualizations which R's most popular
-visualization package (ggplot) does not allow. Although their are packages that work 
-in conjunction with ggplot to make interactive visualizations, googleVis offers a 
-wholistic package that allows for some unique and interactive visualizations.
-
-By using Google Charts, one is able to create a wide variety of visualizations
+- googleVis package allows users to create interactive visualizations which R's most popular
+visualization package (ggplot) does not allow. 
+- Although there are packages that work in conjunction with ggplot to make interactive visualizations, googleVis offers a holistic package that allows for some unique and interactive visualizations.
+- By using Google Charts, one is able to create a wide variety of visualizations
 ranging from typical bar and line graphs to mapping and timeline charts all from one package. 
-The visualizations created by googleVis add a level of interest to the consumer
-due to their interactive layer. viewers are able to gather specific bits of information
-by hovering over and clicking values in the visualizations. This not only allows
-for increased aesthetics, but also more information being transferred to the viewers.
+- The visualizations created by googleVis add a level of interest to the consumer due to their interactive layer and viewers are able to gather specific bits of information by hovering over and clicking values in the visualizations. This not only allows for increased aesthetics, but also more information being transferred to the viewers.
 
 ##### googleVis rendering
 
