@@ -19,7 +19,8 @@ rmd_files: [
   'r_window_functions_cheatsheet.Rmd',
 
   # Part: Tutorials
-  'time_series_visualization_project.Rmd',  
+  'time_series_visualization_project.Rmd',
+  
   # Part: Workshops
   
   # Part: Appendices
