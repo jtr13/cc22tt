@@ -37,11 +37,11 @@ Bar <- gvisBarChart(df)
 Column <- gvisColumnChart(df)
 
 SteppedArea <- gvisSteppedAreaChart(df, xvar="pet", 
-                                    yvar=c("food cost", "health cost"),
+                                    yvar=c("monthly_food_cost", "monthly_medical_cost"),
                                     options=list(isStacked=TRUE))
 
 Combo <- gvisComboChart(df, xvar="pet",
-                        yvar=c("food cost", "health cost"),
+                        yvar=c("monthly_food_cost", "monthly_medical_cost"),
                         options=list(seriesType="bars",
                                      series='{1: {type:"line"}}'))
 ```
