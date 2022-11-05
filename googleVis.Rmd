@@ -62,7 +62,7 @@ The above charts are best used in comparisons between groups. As seen in the exa
 df <- iris
 
 Histogram <- gvisHistogram(data.frame(df$Sepal.Width))
-              
+
 ```
 
 The histogram allows users to represent the distribution of one particular group or variable by showing the frequency of the particular group or variable within a range. The charts by googleVis have an advantage over regular histograms because almost no histogram allows or recommends specific information regarding the counts at different points in the visualization, however, with googleVis the audience can not only look at the distribution but access specific metrics through interaction as well.
@@ -73,7 +73,7 @@ df <- data.frame(From=c(rep("Math",3), rep("Science", 3)),
                     Weight=c(17,15,13,5,12,8))
 
 Alluvial <- gvisSankey(df, from="From", to="To", weight="Weight")
-              
+
 ```
 
 Alluvial charts best show the movement of the sample or population among different variables. In the example above the movement of students within a school from class to class is represented. This visualization can be helpful with data that has an ordinal and timeline specific values. With googleVis, the audience is exposed to the general trends with a clean looking chart as well as the specifics of the graph through interaction.
@@ -85,7 +85,7 @@ df = data.frame(country=c('US', 'CN', 'BR', 'IS', 'RU', 'TH', 'TR', 'ID', 'MX', 
                 incarceration_rate = c(2068800, 1690000, 811707, 478600, 471490, 309282, 291198, 266259, 220866, 189000))
 
 G <- gvisGeoChart(df, locationvar = "country", colorvar = "incarceration_rate")
-              
+
 ```
 
 ##### googleVis Gauge chart
