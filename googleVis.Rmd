@@ -32,6 +32,7 @@ Googlevis is a package in R that allows users of R to use the Google Charts API.
 
 
 ##### googleVis Basic Graphs with Interaction
+
 ```{r}
 df = data.frame(pet=c('cat', 'dog', 'hamster', 'snake'),
                 monthly_food_cost=c(50, 100, 10, 40),
@@ -50,7 +51,6 @@ Combo <- gvisComboChart(df, xvar="pet",
                         yvar=c("monthly_food_cost", "monthly_medical_cost"),
                         options=list(seriesType="bars",
                                      series='{1: {type:"line"}}'))
-plot(Combo)
 ```
 
 The above charts are best used in comparisons between groups. As seen in the examples, there are comparisons between costs of owning different pets.
@@ -63,7 +63,6 @@ The above charts are best used in comparisons between groups. As seen in the exa
 df <- iris
 
 Histogram <- gvisHistogram(data.frame(df$Sepal.Width))
-
 ```
 
 The histogram allows users to represent the distribution of one particular group or variable by showing the frequency of the particular group or variable within a range. The charts by googleVis have an advantage over regular histograms because almost no histogram allows or recommends specific information regarding the counts at different points in the visualization, however, with googleVis the audience can not only look at the distribution but access specific metrics through interaction as well.
@@ -74,10 +73,10 @@ df <- data.frame(From=c(rep("Math",3), rep("Science", 3)),
                     Weight=c(17,15,13,5,12,8))
 
 Alluvial <- gvisSankey(df, from="From", to="To", weight="Weight")
-
 ```
 
 Alluvial charts best show the movement of the sample or population among different variables. In the example above the movement of students within a school from class to class is represented. This visualization can be helpful with data that has an ordinal and timeline specific values. With googleVis, the audience is exposed to the general trends with a clean looking chart as well as the specifics of the graph through interaction.
+
 
 ##### googleVis Geo chart
 
@@ -86,8 +85,10 @@ df = data.frame(country=c('US', 'CN', 'BR', 'IS', 'RU', 'TH', 'TR', 'ID', 'MX', 
                 incarceration_rate = c(2068800, 1690000, 811707, 478600, 471490, 309282, 291198, 266259, 220866, 189000))
 
 G <- gvisGeoChart(df, locationvar = "country", colorvar = "incarceration_rate")
-
 ```
+
+Map visualizations by googleVis are incredibly easy to create and manipulate. They are useful for comparing different geographic areas to each other. GoogleVis automatically color scales the values and the interaction allows the map to be simple and cllean, but get specific values when hovering over a particular geographic area. 
+
 
 ##### googleVis Gauge chart
 
@@ -98,10 +99,10 @@ Gauge <-  gvisGauge(temperature,
                     options=list(min=0, max=150, greenFrom=0,
                                  greenTo=50, yellowFrom=50, yellowTo=100,
                                  redFrom=100, redTo=150, width=400, height=300))
-
 ```
 
 The gauge charts are not interactive, however they do offer a unique way to model data that is always within a certain range. For example, temperatures, speeds, pressure, etc. This chart allows for quick comparison between groups and aesthetic value to any presentation.
+
 
 ##### googleVis Tabular Charts
 
@@ -129,42 +130,37 @@ The data formatted as a table can be paged and sorted. It has a flexible option 
 ##### googleVis Tree Map/Chart
 
 ```{r}
-
 Country_Tree <- gvisTreeMap(Regions, "Region", "Parent", "Val", "Fac", 
                      options=list(width=800, height=500, fontSize=15,
                                   minColor='#cfe2f3',midColor='#6fa8dc',maxColor='#0b5394',
                                   headerHeight=10,fontColor='black',showScale=TRUE))
-plot(Country_Tree)
-
 ```
 
-The googleVis tree map is a visual representation of a data tree, where each node has 0 or more children,
-and 1 parent barring the root node. One can specify how many levels to display simultaneously, and optionally to
-display deeper levels. One can move down the tree when the person left-clicks a node, and moves back up the tree when the person right-clicks the graph.The total size of the graph is determined by the size of the elements contained in the graph.
+The googleVis tree map is a visual representation of a data tree, where each node has 0 or more children, and 1 parent barring the root node. One can specify how many levels to display simultaneously, and optionally to display deeper levels. One can move down the tree when the person left-clicks a node, and moves back up the tree when the person right-clicks the graph.The total size of the graph is determined by the size of the elements contained in the graph.
+
 This googleVis tree map chart captures the relative sizes of data categories, that helps for quick insight of the datapoints that are bigger contributors to each category. Color helps scrutinize datapoints that are underperforming / overperforming) compared to their siblings from the same category.
+
 
 ##### googleVis Annotation
 
 ```{r}
-
 Stock_Annotation <- gvisAnnotationChart(Stock, datevar="Date",numvar="Value", idvar="Device", titlevar="Title",
                                         annotationvar="Annotation",
                                         options=list(displayAnnotations=TRUE,                                                                             chart="{chartArea:{backgroundColor:'#ebf0f7'}}",
                                                      legendPosition='newRow',width=800, height=450,
                                         scaleColumns='[0,1]',scaleType='allmaximized'))
-plot(Stock_Annotation)
-
-
 ```
 
 Annotation charts are useful, interactive time series like line charts that enable annotations.These annotated charts are leveraged to highlight specific data or value-add the contextual notes within the visualization.
+
 To answer the "so what ?" kind of questions, such well defined annotations highlight the significance of data in the chart, with keen detail in the textual description / annotation.
+
 One can also slice through the interactive timeline chart to look for a snapshot of data which is aesthetically pleasing and also provides great detail insights within the same visualization. These annotation charts are SVG (scalable vector graphics) /VML (vector graphics rendering ).
+
 
 ##### googleVis Calender Chart
 
 ```{r}
-
 Calendar_Temp <- gvisCalendar(Cairo, datevar="Date", numvar="Temp",
                     options=list(title="Cairo's variation in Daily
                                  temperature",height=400,width=1000,
@@ -172,12 +168,12 @@ Calendar_Temp <- gvisCalendar(Cairo, datevar="Date", numvar="Temp",
                                  fontSize: 20, color: 'black', bold: true},
                                  cellSize: 10,cellColor:{stroke: 'black', strokeOpacity: 0.2},
                                  focusedCellColor: {stroke:'red'}}"), chartid="Calendar")
-plot(Calendar_Temp)
-
 ```
 
 The googleVis calendar chart is a definitive visualization that can be used to show activity over the course of a longer duration of time, example in months or years or decades. One can illustrate the variation of 1 quantity depending on the days of the given week, or trends over the timeline period.
+
 Such calendar charts demonstrate data records, or events, on a daily, weekly, monthly, yearly calendar. It is highly interactive and one can view the value on hovering on any particular time of the entire timeperiod.
+
 
 ##### googleVis Timeline Chart
 
@@ -197,18 +193,16 @@ Timeline <- gvisTimeline(data=Position_Timeline_Data,
                          options=list(timeline="{groupByRowLabel:false}",
                                       backgroundColor='#e3f4ff', 
                                       height=400,colors="['#0e407d', '#78b2ff', '#3737ab']"))
-plot(Timeline)
-
 ```
 
 This googleVis Timeline chart is a great and fascinating way of visualizing the different dates / events. Here is an example, showing duration of Presidents & VPs / Sessions of Congress over the timeline period. The exact times and durations are given when one interactively hovers over the bars.
+
 These timeline charts are versatile visuals for illustrating a sequence of events chronologically. It provides an amazing aid to conceptualize event sequences / processes to gain valuable insights, sometimes maybe summarize historical events, or time frame of minutes, hours, years or datewise.
+
 
 ##### googleVis Gantt Chart
 
 ```{r}
-
-# Generating Data
 daysToMilliseconds <- function(days){days * 24 * 60 * 60 * 1000}
 dat <- data.frame(taskID = c("PS", "EDA", "R", "ML", "DP"),
                  taskName = c("Identify Problem Statement", "EDA Analysis", "Research",
@@ -229,18 +223,15 @@ Gantt_Tasks <- gvisGantt(dat, taskID = "taskID",taskName = "taskName",resource =
                          gantt = "{criticalPathEnabled:true,innerGridHorizLine: {
                          stroke: '#e3f4ff',strokeWidth: 2},innerGridTrack: {fill: '#e8f3fa'},innerGridDarkTrack:
                          {fill: '#c7e9ff'},labelStyle: {fontName: 'sans-serif',fontSize: 16}}"))
-plot(Gantt_Tasks)
-
 ```
 
 googleVis Gantt charts would help teams to plan work around deadlines and allocate resources efficiently. 
-Project planners also leverage Gantt charts to maintain a bird's eye high level view of projects and track them. These depict the relationship between the start and end dates of tasks, milestones, and dependent tasks for each of them over the entire timeline of the project.
-This Gantt chart illustrates the breakdown of a project into its component tasks very effectively.
+Project planners also leverage Gantt charts to maintain a bird's eye high level view of projects and track them. These depict the relationship between the start and end dates of tasks, milestones, and dependent tasks for each of them over the entire timeline of the project. This Gantt chart illustrates the breakdown of a project into its component tasks very effectively.
+
 
 ##### googleVis Merging Charts
 
 ```{r}
-
 Geographic <- gvisGeoChart(Exports,
                            locationvar="Country",colorvar="Profit",
                            options=list(width=400, height=200))
@@ -249,10 +240,8 @@ Tabular <- gvisTable(Exports,
                      options=list(width=400, height=400))
 
 Merged_Charts <- gvisMerge(Geographic, Tabular, horizontal=FALSE, tableOptions="bgcolor=\"#7cdeb5\"")
-
-plot(Merged_Charts)
-
 ```
 
 googleVis Merge chart provides the flexibility of merging two gvis-objects, either next or below each other into one gvis-object. These objects are arranged in a HTML table format.
+
 The multiples charts view allows to split up the individual charts Bar, Column, Line or Geographic, Tabular etc. charts into multiple charts, separated. There are numerous use cases like showing your product sales per region and then providing more information about it. It gives a lot of flexibility in the report creation and delivery aesthetically.
