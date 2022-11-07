@@ -226,6 +226,7 @@ Gantt_Tasks <- gvisGantt(dat, taskID = "taskID",taskName = "taskName",resource =
 ```
 
 googleVis Gantt charts would help teams to plan work around deadlines and allocate resources efficiently. 
+
 Project planners also leverage Gantt charts to maintain a bird's eye high level view of projects and track them. These depict the relationship between the start and end dates of tasks, milestones, and dependent tasks for each of them over the entire timeline of the project. This Gantt chart illustrates the breakdown of a project into its component tasks very effectively.
 
 
