@@ -51,7 +51,7 @@ results:  ('markup') Mark up text output with the appropriate environments depen
 ```
 [1] 1 2 3
 ```
-In this case, results='markup' means to put the text output in fenced code blocks (```).
+In this case, results='markup' means to put the text output in fenced code blocks.
 
 warning: (TRUE; logical) Whether to preserve warnings (produced by warning()) in the output. If FALSE, all warnings will be printed in the console instead of the output document:
 {r}
