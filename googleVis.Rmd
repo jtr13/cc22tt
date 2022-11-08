@@ -2,45 +2,51 @@
 
 Sushant Prabhu and Kiyan Mohebbizadeh
 
-```{r}
-library(googleVis)
+```{r setup, include=FALSE}
 library(tidyverse)
 library(datasets)
+suppressMessages(library(googleVis))
+# Display Charts in Rmd - googleVis plot option
+op <- options(gvis.plot.tag='chart') 
 ```
-
-
 ## Introducing googleVis
 
-Googlevis is a package in R that allows users of R to use the Google Charts API. The interface between R and Google Charts allows users to access Google Charts' interactive charts. GoogleVis allows users to use the data in R data frames to create Google Charts without uploading the data onto Google. 
+> GoogleVis is a package in R that allows users of R to use the Google Charts API. 
 
+The interface between `R` and `Google Charts` allows users to access Google Charts' interactive charts. `googleVis` allows users to use the data in R data frames to create Google Charts without uploading the data onto Google. 
 
-### Why googleVis
-
-- googleVis package allows users to create interactive visualizations which R's most popular visualization package (ggplot) does not allow.
-- Although there are packages that work in conjunction with ggplot to make interactive visualizations, googleVis offers a holistic package that allows for some unique and interactive visualizations.
-- By using Google Charts, one is able to create a wide variety of visualizations ranging from typical bar and line graphs to mapping and timeline charts all from one package. 
-- The visualizations created by googleVis add a level of interest to the consumer due to their interactive layer and viewers are able to gather specific bits of information by hovering over and clicking values in the visualizations. This not only allows for increased aesthetics, but also more information being transferred to the viewers.
-
-
-##### googleVis rendering
-
-- The output of googleVis can either be embedded into an HTML file or read dynamically. These visualizations are most often rendered online and in a web format. Therefore, a browser and internet connection are required to view the interactive version of the output. 
-- For use in R, googleVis allows a user to render as a *Shiny* file that then allows a preview with interaction within R. This is used to preview a chart before a final render.
-- googleVis is a package in R that allows users of R to use the Google Charts API.
-- The interface between R and Google Charts allows users to access Google Charts' interactive charts.
-- googleVis allows users to use the data in R data frames to create Google Charts without uploading the data onto Google. 
-
+Demonstrating using `googleVis` Library - Installion and Usage
+```
+install.packages('googleVis')
+```
 ```{r}
-suppressMessages(library(googleVis))
-op <- options(gvis.plot.tag='chart') # Display Charts in Rmd - googleVis plot option
+library(`googleVis`)
 ```
 
-##### googleVis Basic Graphs with Interaction
+## Why use googleVis ?
 
-```{r}
+> `googleVis` package allows users to create interactive visualizations which R's most popular visualization package (ggplot) does not allow.
+
+- Although there are packages that work in conjunction with ggplot to make interactive visualizations, `googleVis` offers a holistic package that allows for some unique and interactive visualizations.
+- By using Google Charts, one is able to create a wide variety of visualizations ranging from typical bar and line graphs to mapping and timeline charts all from one package. 
+- The visualizations created by `googleVis` add a level of interest to the consumer due to their interactive layer and viewers are able to gather specific bits of information by hovering over and clicking values in the visualizations. This not only allows for increased aesthetics, but also more information being transferred to the viewers.
+
+
+## googleVis Rendering & Interaction
+
+> The output of `googleVis` can either be embedded into an HTML file or read dynamically. These visualizations are most often rendered online and in a web format. Therefore, a browser and internet connection are required to view the interactive version of the output compared to `ggplot`
+
+- For use in R, `googleVis` allows a user to render as a *Shiny* file that then allows a preview with interaction within R. This is used to preview a chart before a final render.
+- `googleVis` is a package in R that allows users of R to use the Google Charts API.
+- The interface between R and Google Charts allows users to access Google Charts' interactive charts.
+- `googleVis` allows users to use the data in R data frames to create Google Charts without uploading the data onto Google.
+
+### Basic Graphs (Line, Bar, Combo)
+
+```{r BasicExample, results='asis', tidy=FALSE}
 df = data.frame(pet=c('cat', 'dog', 'hamster', 'snake'),
-                monthly_food_cost=c(50, 100, 10, 40),
-                monthly_medical_cost=c(30, 60, 5, 50))
+                food_cost_monthly=c(50, 100, 10, 40),
+                medical_cost_monthly=c(30, 60, 5, 50))
 Line <- gvisLineChart(df)
 
 Bar <- gvisBarChart(df)
@@ -48,13 +54,18 @@ Bar <- gvisBarChart(df)
 Column <- gvisColumnChart(df)
 
 SteppedArea <- gvisSteppedAreaChart(df, xvar="pet", 
-                                    yvar=c("monthly_food_cost", "monthly_medical_cost"),
+                                    yvar=c("food_cost_monthly", "medical_cost_monthly"),
                                     options=list(isStacked=TRUE))
 
 Combo <- gvisComboChart(df, xvar="pet",
-                        yvar=c("monthly_food_cost", "monthly_medical_cost"),
+                        yvar=c("food_cost_monthly", "medical_cost_monthly"),
                         options=list(seriesType="bars",
                                      series='{1: {type:"line"}}'))
+plot(Line)
+plot(Bar)
+plot(Column)
+plot(SteppedArea)
+plot(Combo)
 ```
 
 The above charts are best used in comparisons between groups. As seen in the examples, there are comparisons between costs of owning different pets.
@@ -63,58 +74,71 @@ The above charts are best used in comparisons between groups. As seen in the exa
 - The bar and column chart are essentially the same just rotated on an axis. They allow for great in group comparisons as well as comparisons among groups. However, These charts are best used for in-group comparisons.
 - Combo charts are great for multiple variable comparisons and allow the user to get the best of both worlds. by carefully selecting which variables are represented in bars and which ones are lines, the user is able to best show the relationship within groups and trends of the population.
 
-```{r}
-df <- iris
+### googleVis Histogram Chart
 
-Histogram <- gvisHistogram(data.frame(df$Sepal.Width))
+```{r HistogramExample, results='asis', tidy=FALSE}
+df <- iris
+Histogram <- gvisHistogram(data.frame(Sepal_Width = df$Sepal.Width))
+
+plot(Histogram)
 ```
 
-The histogram allows users to represent the distribution of one particular group or variable by showing the frequency of the particular group or variable within a range. The charts by googleVis have an advantage over regular histograms because almost no histogram allows or recommends specific information regarding the counts at different points in the visualization, however, with googleVis the audience can not only look at the distribution but access specific metrics through interaction as well.
+The histogram allows users to represent the distribution of one particular group or variable by showing the frequency of the particular group or variable within a range. The charts by `googleVis` have an advantage over regular histograms because almost no histogram allows or recommends specific information regarding the counts at different points in the visualization, however, with `googleVis` the audience can not only look at the distribution but access specific metrics through interaction as well.
 
-```{r}
+### googleVis Alluvial/Sankey Chart
+
+```{r AlluvialExample, results='asis', tidy=FALSE}
 df <- data.frame(From=c(rep("Math",3), rep("Science", 3)),
                     To=c(rep(c('Lunch', 'Art', 'Music'),2)),
                     Weight=c(17,15,13,5,12,8))
 
 Alluvial <- gvisSankey(df, from="From", to="To", weight="Weight")
+
+plot(Alluvial)
 ```
 
-Alluvial charts best show the movement of the sample or population among different variables. In the example above the movement of students within a school from class to class is represented. This visualization can be helpful with data that has an ordinal and timeline specific values. With googleVis, the audience is exposed to the general trends with a clean looking chart as well as the specifics of the graph through interaction.
+Alluvial charts best show the movement of the sample or population among different variables. In the example above the movement of students within a school from class to class is represented. This visualization can be helpful with data that has an ordinal and timeline specific values. With `googleVis`, the audience is exposed to the general trends with a clean looking chart as well as the specifics of the graph through interaction.
 
 
-##### googleVis Geo chart
+### googleVis Geographic Chart
 
-```{r}
+```{r GeoExample, results='asis', tidy=FALSE}
 df = data.frame(country=c('US', 'CN', 'BR', 'IS', 'RU', 'TH', 'TR', 'ID', 'MX', 'IR' ),
                 incarceration_rate = c(2068800, 1690000, 811707, 478600, 471490, 309282, 291198, 266259, 220866, 189000))
 
-G <- gvisGeoChart(df, locationvar = "country", colorvar = "incarceration_rate")
+G <- gvisGeoChart(df, locationvar = "country", colorvar = "incarceration_rate",
+                  options=list(
+                         gvis.editor="Edit the Geo Chart !"))
+
+plot(G)
 ```
 
-Map visualizations by googleVis are incredibly easy to create and manipulate. They are useful for comparing different geographic areas to each other. GoogleVis automatically color scales the values and the interaction allows the map to be simple and cllean, but get specific values when hovering over a particular geographic area. 
+Map visualizations by `googleVis` are incredibly easy to create and manipulate. They are useful for comparing different geographic areas to each other. `googleVis` automatically color scales the values and the interaction allows the map to be simple and clean, but get specific values when hovering over a particular geographic area. 
 
 
-##### googleVis Gauge chart
+### googleVis Gauge Chart
 
-```{r}
+```{r GaugeExample, results='asis', tidy=FALSE}
 temperature <- data.frame(city=c('Las Vegas', 'Los Angeles', 'Pheonix', 'Dallas', 'Houston', 'Miami'),
                           temp=c(115, 103, 120, 110, 112, 101))
 Gauge <-  gvisGauge(temperature, 
                     options=list(min=0, max=150, greenFrom=0,
                                  greenTo=50, yellowFrom=50, yellowTo=100,
                                  redFrom=100, redTo=150, width=400, height=300))
+
+plot(Gauge)
 ```
 
 The gauge charts are not interactive, however they do offer a unique way to model data that is always within a certain range. For example, temperatures, speeds, pressure, etc. This chart allows for quick comparison between groups and aesthetic value to any presentation.
 
 
-##### googleVis Tabular Charts
+### googleVis Tabular Chart
 
-```{r}
-
-# Tabular Data Unpaged
+```{r TabularExample, results='asis', tidy=FALSE}
+## Tabular Data Un-Paged
 Population_Tabular_Unpaged <- gvisTable(Population[1:30,],
                                         formats=list(Population="#,###",'% of World Population'='#.#%'))
+
 plot(Population_Tabular_Unpaged)
 
 ## Tabular Data Paged
@@ -125,34 +149,38 @@ Population_Tabular_paged <- gvisTable(Population[1:30,],
                                                    width='automatic'))
 
 plot(Population_Tabular_paged)
-
 ```
 
 The data formatted as a table can be paged and sorted. It has a flexible option to select single rows either with the keyboard or the mouse. It also powers sorting on rows across all dimensions in the columns of the dataset. The navigation through paged tabular information is super smooth and simple.
 
 
-##### googleVis Tree Map/Chart
+### googleVis Tree Map Chart
 
-```{r}
+```{r TreemapExample, results='asis', tidy=FALSE}
 Country_Tree <- gvisTreeMap(Regions, "Region", "Parent", "Val", "Fac", 
                      options=list(width=800, height=500, fontSize=15,
                                   minColor='#cfe2f3',midColor='#6fa8dc',maxColor='#0b5394',
                                   headerHeight=10,fontColor='black',showScale=TRUE))
+
+plot(Country_Tree)
 ```
 
-The googleVis tree map is a visual representation of a data tree, where each node has 0 or more children, and 1 parent barring the root node. One can specify how many levels to display simultaneously, and optionally to display deeper levels. One can move down the tree when the person left-clicks a node, and moves back up the tree when the person right-clicks the graph.The total size of the graph is determined by the size of the elements contained in the graph.
+The `googleVis` tree map is a visual representation of a data tree, where each node has 0 or more children, and 1 parent barring the root node. One can specify how many levels to display simultaneously, and optionally to display deeper levels. One can move down the tree when the person left-clicks a node, and moves back up the tree when the person right-clicks the graph.The total size of the graph is determined by the size of the elements contained in the graph.
 
-This googleVis tree map chart captures the relative sizes of data categories, that helps for quick insight of the datapoints that are bigger contributors to each category. Color helps scrutinize datapoints that are underperforming / overperforming) compared to their siblings from the same category.
+This `googleVis` tree map chart captures the relative sizes of data categories, that helps for quick insight of the datapoints that are bigger contributors to each category. Color helps scrutinize datapoints that are underperforming / overperforming) compared to their siblings from the same category.
 
 
-##### googleVis Annotation
+### googleVis Annotation Chart
 
-```{r}
+```{r AnnotationExample, results='asis', tidy=FALSE}
 Stock_Annotation <- gvisAnnotationChart(Stock, datevar="Date",numvar="Value", idvar="Device", titlevar="Title",
                                         annotationvar="Annotation",
-                                        options=list(displayAnnotations=TRUE,                                                                             chart="{chartArea:{backgroundColor:'#ebf0f7'}}",
-                                                     legendPosition='newRow',width=800, height=450,
+                                        options=list(displayAnnotations=TRUE,
+                                        chart="{chartArea:{backgroundColor:'#ebf0f7'}}",
+                                        legendPosition='newRow',width=800, height=450,
                                         scaleColumns='[0,1]',scaleType='allmaximized'))
+
+plot(Stock_Annotation)
 ```
 
 Annotation charts are useful, interactive time series like line charts that enable annotations.These annotated charts are leveraged to highlight specific data or value-add the contextual notes within the visualization.
@@ -162,9 +190,9 @@ To answer the "so what ?" kind of questions, such well defined annotations highl
 One can also slice through the interactive timeline chart to look for a snapshot of data which is aesthetically pleasing and also provides great detail insights within the same visualization. These annotation charts are SVG (scalable vector graphics) /VML (vector graphics rendering ).
 
 
-##### googleVis Calender Chart
+### googleVis Calendar Chart
 
-```{r}
+```{r CalendarExample, results='asis', tidy=FALSE}
 Calendar_Temp <- gvisCalendar(Cairo, datevar="Date", numvar="Temp",
                     options=list(title="Cairo's variation in Daily
                                  temperature",height=400,width=1000,
@@ -172,16 +200,17 @@ Calendar_Temp <- gvisCalendar(Cairo, datevar="Date", numvar="Temp",
                                  fontSize: 20, color: 'black', bold: true},
                                  cellSize: 10,cellColor:{stroke: 'black', strokeOpacity: 0.2},
                                  focusedCellColor: {stroke:'red'}}"), chartid="Calendar")
-```
 
-The googleVis calendar chart is a definitive visualization that can be used to show activity over the course of a longer duration of time, example in months or years or decades. One can illustrate the variation of 1 quantity depending on the days of the given week, or trends over the timeline period.
+plot(Calendar_Temp)
+```
+The `googleVis` calendar chart is a definitive visualization that can be used to show activity over the course of a longer duration of time, example in months or years or decades. One can illustrate the variation of 1 quantity depending on the days of the given week, or trends over the timeline period.
 
 Such calendar charts demonstrate data records, or events, on a daily, weekly, monthly, yearly calendar. It is highly interactive and one can view the value on hovering on any particular time of the entire timeperiod.
 
 
-##### googleVis Timeline Chart
+### googleVis Timeline Chart
 
-```{r}
+```{r TimelineExample, results='asis', tidy=FALSE}
 
 Position_Timeline_Data <- data.frame(Position=c(rep("President", 4), rep("Vice", 4)),
                     Name=c("William Clinton","George Bush", "Barack Obama", "	Donald Trump",
@@ -197,16 +226,18 @@ Timeline <- gvisTimeline(data=Position_Timeline_Data,
                          options=list(timeline="{groupByRowLabel:false}",
                                       backgroundColor='#e3f4ff', 
                                       height=400,colors="['#0e407d', '#78b2ff', '#3737ab']"))
+
+plot(Timeline)
 ```
 
-This googleVis Timeline chart is a great and fascinating way of visualizing the different dates / events. Here is an example, showing duration of Presidents & VPs / Sessions of Congress over the timeline period. The exact times and durations are given when one interactively hovers over the bars.
+This `googleVis` Timeline chart is a great and fascinating way of visualizing the different dates / events. Here is an example, showing duration of Presidents & VPs / Sessions of Congress over the timeline period. The exact times and durations are given when one interactively hovers over the bars.
 
 These timeline charts are versatile visuals for illustrating a sequence of events chronologically. It provides an amazing aid to conceptualize event sequences / processes to gain valuable insights, sometimes maybe summarize historical events, or time frame of minutes, hours, years or datewise.
 
 
-##### googleVis Gantt Chart
+### googleVis Gantt Chart
 
-```{r}
+```{r GanttExample, results='asis', tidy=FALSE}
 daysToMilliseconds <- function(days){days * 24 * 60 * 60 * 1000}
 dat <- data.frame(taskID = c("PS", "EDA", "R", "ML", "DP"),
                  taskName = c("Identify Problem Statement", "EDA Analysis", "Research",
@@ -227,14 +258,16 @@ Gantt_Tasks <- gvisGantt(dat, taskID = "taskID",taskName = "taskName",resource =
                          gantt = "{criticalPathEnabled:true,innerGridHorizLine: {
                          stroke: '#e3f4ff',strokeWidth: 2},innerGridTrack: {fill: '#e8f3fa'},innerGridDarkTrack:
                          {fill: '#c7e9ff'},labelStyle: {fontName: 'sans-serif',fontSize: 16}}"))
+
+plot(Gantt_Tasks)
 ```
 
-googleVis Gantt charts would help teams to plan work around deadlines and allocate resources efficiently. 
+`googleVis` Gantt charts would help teams to plan work around deadlines and allocate resources efficiently. 
 
 Project planners also leverage Gantt charts to maintain a bird's eye high level view of projects and track them. These depict the relationship between the start and end dates of tasks, milestones, and dependent tasks for each of them over the entire timeline of the project. This Gantt chart illustrates the breakdown of a project into its component tasks very effectively.
 
 
-##### googleVis Merging Charts
+### googleVis Merging Charts
 
 ```{r MergeExample, results='asis', tidy=FALSE}
 Geographic <- gvisGeoChart(Exports,
@@ -245,10 +278,38 @@ Tabular <- gvisTable(Exports,
                      options=list(width=400, height=400))
 
 Merged_Charts <- gvisMerge(Geographic, Tabular, horizontal=FALSE, tableOptions="bgcolor=\"#7cdeb5\"")
-#plot(Merged_Charts,browser=rstudioapi::viewer)
+
 plot(Merged_Charts)
 ```
 
-googleVis Merge chart provides the flexibility of merging two gvis-objects, either next or below each other into one gvis-object. These objects are arranged in a HTML table format.
+`googleVis` Merge chart provides the flexibility of merging two gvis-objects, either next or below each other into one gvis-object. These objects are arranged in a HTML table format.
 
 The multiples charts view allows to split up the individual charts Bar, Column, Line or Geographic, Tabular etc. charts into multiple charts, separated. There are numerous use cases like showing your product sales per region and then providing more information about it. It gives a lot of flexibility in the report creation and delivery aesthetically.
+
+## Use googleVis in RStudio
+
+Using googleVis in RStudio is straightforward. By default, the RStudio renders the charts in a new webpage -
+
+```
+plot(Chart)
+```
+On the other hand, to view it within RStudio,
+> To View in RStudio Viewer just use to view it locally
+
+```
+plot(Chart, browser=rstudioapi::viewer)
+```
+
+> To Knit the Rmd Markdown file to HTML, to perform the following command set the Chunk option results to `asis` with `{r ChartExample, results='asis', tidy=FALSE}` and `plot(Chart, 'chart')`
+
+### googleVis References
+
+* [Documentation](https://mages.github.io/googleVis/)
+* [Google Charts](https://developers.google.com/chart/interactive/docs/quick_start)
+* [Demo](https://cran.r-project.org/web/packages/googleVis/vignettes/googleVis_examples.html)
+* [Paper](https://journal.r-project.org/archive/2011-2/RJournal_2011-2_Gesmann+de~Castillo.pdf)
+* [CRAN-Stable Version](https://cran.r-project.org/web/packages/googleVis/index.html)
+
+> Thank you for learning `googleVis` with us !
+
+<!-- If you need PDF output, uncomment bookdown::pdf_book above in YAML. You will need a LaTeX installation, e.g., https://yihui.name/tinytex/ -->
