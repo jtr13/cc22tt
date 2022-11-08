@@ -1,6 +1,6 @@
 # googleVis in R
 
-Sushant Prabhu, Kiyan Mohebbizadeh
+Sushant Prabhu and Kiyan Mohebbizadeh
 
 ```{r}
 library(googleVis)
@@ -30,6 +30,10 @@ Googlevis is a package in R that allows users of R to use the Google Charts API.
 - The interface between R and Google Charts allows users to access Google Charts' interactive charts.
 - googleVis allows users to use the data in R data frames to create Google Charts without uploading the data onto Google. 
 
+```{r}
+suppressMessages(library(googleVis))
+op <- options(gvis.plot.tag='chart') # Display Charts in Rmd - googleVis plot option
+```
 
 ##### googleVis Basic Graphs with Interaction
 
@@ -232,7 +236,7 @@ Project planners also leverage Gantt charts to maintain a bird's eye high level 
 
 ##### googleVis Merging Charts
 
-```{r}
+```{r MergeExample, results='asis', tidy=FALSE}
 Geographic <- gvisGeoChart(Exports,
                            locationvar="Country",colorvar="Profit",
                            options=list(width=400, height=200))
@@ -241,6 +245,8 @@ Tabular <- gvisTable(Exports,
                      options=list(width=400, height=400))
 
 Merged_Charts <- gvisMerge(Geographic, Tabular, horizontal=FALSE, tableOptions="bgcolor=\"#7cdeb5\"")
+#plot(Merged_Charts,browser=rstudioapi::viewer)
+plot(Merged_Charts)
 ```
 
 googleVis Merge chart provides the flexibility of merging two gvis-objects, either next or below each other into one gvis-object. These objects are arranged in a HTML table format.
