@@ -13,9 +13,9 @@ op <- options(gvis.plot.tag='chart')
 
 > GoogleVis is a package in R that allows users of R to use the Google Charts API. 
 
-The interface between `R` and `Google Charts` allows users to access Google Charts' interactive charts. `googleVis` allows users to use the data in R data frames to create Google Charts without uploading the data onto Google. 
+The interface between R and Google Charts allows users to access Google Charts' interactive charts. `googleVis` allows users to use the data in R data frames to create Google Charts without uploading the data onto Google. 
 
-Demonstrating using `googleVis` Library - Installion and Usage
+Demonstrating using `googleVis` Library - Installation and Usage
 ```
 install.packages('googleVis')
 ```
@@ -151,7 +151,7 @@ Population_Tabular_paged <- gvisTable(Population[1:30,],
 plot(Population_Tabular_paged)
 ```
 
-The data formatted as a table can be paged and sorted. It has a flexible option to select single rows either with the keyboard or the mouse. It also powers sorting on rows across all dimensions in the columns of the dataset. The navigation through paged tabular information is super smooth and simple.
+The data formatted as a table can be paged and sorted. It has a flexible option to select single rows either with the keyboard or the mouse. It also powers sorting on rows across all dimensions in the columns of the dataset. The navigation through paged tabular information is smooth and simple.
 
 
 ### googleVis Tree Map Chart
@@ -203,6 +203,7 @@ Calendar_Temp <- gvisCalendar(Cairo, datevar="Date", numvar="Temp",
 
 plot(Calendar_Temp)
 ```
+
 The `googleVis` calendar chart is a definitive visualization that can be used to show activity over the course of a longer duration of time, example in months or years or decades. One can illustrate the variation of 1 quantity depending on the days of the given week, or trends over the timeline period.
 
 Such calendar charts demonstrate data records, or events, on a daily, weekly, monthly, yearly calendar. It is highly interactive and one can view the value on hovering on any particular time of the entire timeperiod.
@@ -230,7 +231,7 @@ Timeline <- gvisTimeline(data=Position_Timeline_Data,
 plot(Timeline)
 ```
 
-This `googleVis` Timeline chart is a great and fascinating way of visualizing the different dates / events. Here is an example, showing duration of Presidents & VPs / Sessions of Congress over the timeline period. The exact times and durations are given when one interactively hovers over the bars.
+This `googleVis` Timeline chart is a great and fascinating way of visualizing the different dates / events. Here is an example, showing duration of Presidents & Vice Presidents / Sessions of Congress over the timeline period. The exact times and durations are given when one interactively hovers over the bars.
 
 These timeline charts are versatile visuals for illustrating a sequence of events chronologically. It provides an amazing aid to conceptualize event sequences / processes to gain valuable insights, sometimes maybe summarize historical events, or time frame of minutes, hours, years or datewise.
 
@@ -285,6 +286,7 @@ plot(Merged_Charts)
 `googleVis` Merge chart provides the flexibility of merging two gvis-objects, either next or below each other into one gvis-object. These objects are arranged in a HTML table format.
 
 The multiples charts view allows to split up the individual charts Bar, Column, Line or Geographic, Tabular etc. charts into multiple charts, separated. There are numerous use cases like showing your product sales per region and then providing more information about it. It gives a lot of flexibility in the report creation and delivery aesthetically.
+
 
 ## Use googleVis in RStudio
 
