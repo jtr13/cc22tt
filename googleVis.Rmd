@@ -15,7 +15,7 @@ op <- options(gvis.plot.tag='chart')
 
 The interface between `R` and `Google Charts` allows users to access Google Charts' interactive charts. `googleVis` allows users to use the data in R data frames to create Google Charts without uploading the data onto Google. 
 
-Demonstrating using `googleVis` Library - Installion and Usage
+Demonstrating using `googleVis` Library - Installation and Usage
 ```
 install.packages('googleVis')
 ```
