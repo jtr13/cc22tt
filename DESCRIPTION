@@ -9,6 +9,7 @@ Suggests:
     bookdown,
     bslib,
     downlit,
+    googleVis,
     withr,
     xml2
 Remotes:
