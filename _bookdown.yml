@@ -19,6 +19,7 @@ rmd_files: [
   'r_window_functions_cheatsheet.Rmd',
   'chunk_option_cheatsheet.Rmd',
   'helpful_ggplot2_extensions_cheatsheet.Rmd',
+  'EDAV_Commonly_Used_Graph_Cheatsheet.Rmd',
 
   # Part: Tutorials
   'time_series_visualization_project.Rmd',  
