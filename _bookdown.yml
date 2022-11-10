@@ -17,6 +17,7 @@ rmd_files: [
 
   # Part: Cheatsheets
   'r_window_functions_cheatsheet.Rmd',
+  'chunk_option_cheatsheet.Rmd',
 
   # Part: Tutorials
   'time_series_visualization_project.Rmd',  
