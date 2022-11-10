@@ -13,6 +13,7 @@ Suggests:
     sqldf,
     withr,
     xml2,
-    benford.analysis
+    benford.analysis,
+    plotly
 Remotes:
     hadley/emo
