@@ -19,7 +19,6 @@ sample-project
 part-cheatsheets
 r-window-functions-cheatsheet
 rmd-chunk-option-cheat-sheet
-part-cheatsheets-1
 helpful-ggplot2-extensions-cheatsheet
 part-tutorials
 preprocessing-and-visualization-of-time-series-data

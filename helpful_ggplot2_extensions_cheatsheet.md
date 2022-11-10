@@ -1,5 +1,3 @@
-# (PART) Cheatsheets
-
 # Helpful ggplot2 Extensions Cheatsheet
 
 Frank Li and Liang Zhuang
