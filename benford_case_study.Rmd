@@ -2,7 +2,15 @@
 
 Abhiram Gaddam, Devan Samant
 
-*Contents*
+```{r}
+library(benford.analysis)  #install.packages("benford.analysis")
+library(dplyr)
+library(plotly)
+library(tidyverse)
+```
+
+
+## Contents
 In this tutorial, we will introduce a numeric property called Benford's Law and illustrate its applications in fraud detection. We will be using the benford_analysis package in R along with an example case study. 
 
 Sections:
@@ -14,11 +22,11 @@ Sections:
 5) Sources
 
 
-*Section 1.1: Introduction*
+## Introduction
 
   There is a niche area of the consulting industry called forensic analytics in which analysts try to identify risks and quantify wrongdoing using an array of statistical and data techniques. For example, imagine a whistleblower notifies a company's general counsel that there has been some collusion between sales and finance representatives to artificially create invoices. The company may hire forensic analysts to extract and determine what is happening. There are many quantitative and qualitative methods to perform before concluding anything and they will need to be specific to the context of the project. One such heuristic is Benford's Law. 
 
-*Section 1.2: What is Benford's Law?*
+### What is Benford's Law?
   Benford’s law (also known as the first digit law) states that the leading digits in many data sets are probably going to be small. For example, most numbers in a set (about 30%) will have a leading digit of 1, when one might expect the probability to be 11.1% (one out of nine digits). After one, the second most common leading digit is 2 at about 17.5%. And so forth for 3 and onward. To put it simply, Benford’s law is a probability distribution for the likelihood of the first digit in a set of numbers (Frunza, 2015). This pattern is not an intuitive phenomenon but holds true for many naturally occurring datasets (ex. height of mountains around the world) as well as man-made ones such as a company's general ledger.
   
 The formula for Benford's Law is:
@@ -48,7 +56,7 @@ While Benford's Law is not applicable to all datasets, it is generally applicabl
 (Benford, F)
 
 
-*Section 1.2: Applications in Fraud Detection*
+### Applications in Fraud Detection
 One primary and practical use for Benford’s Law is fraud and error detection. It is expected that a large set of numbers will follow the law, so accountants, auditors, economists and tax professionals have a benchmark for what the normal levels of any particular number in a set are. Below are some famously documented examples of Benford's Law being applied towards fraud detection (Frunza, 2015):
 
 1) In the 1990s, an accountant named Mark Nigrini found that Benford’s law can be an effective red-flag test for fabricated tax returns. Authentic tax data usually follows Benford’s law, whereas made-up returns do not.
@@ -56,7 +64,7 @@ One primary and practical use for Benford’s Law is fraud and error detection. 
 3) Ponzi schemes can be detected using the law. Unrealistic returns, such as those purported by the Maddoff scam, fall far from the expected Benford probability distribution .
 
 
-*Section 2.1: benford.analysis package in r*
+## benford.analysis package in r
 
 The Benford Analysis (benford.analysis) package provides tools that make it easier to validate data using Benford’s Law. The main purpose of the package is to identify suspicious data that may need further verification.
 
@@ -72,12 +80,11 @@ You can install the package from CRAN by running the following (uncommented):
 The package comes with 6 real datasets from Mark Nigrini’s book Benford’s Law: Applications for Forensic Accounting, Auditing, and Fraud Detection.
 
 
-*Section 2.2: Example Usage of benford.analysis*
+### Example Usage of benford.analysis
 In this section we will give an example using 189,470 records from the corporate payments dataset which is provided with the package.
 
 Load the package and data
 ```{r}
-library(benford.analysis) 
 data(corporate.payment) 
 
 df <- corporate.payment
@@ -108,17 +115,12 @@ suspects
 ```
 
 
-*Section 3: Randomized Case Study*
-*Section 3.1: Baseline Data*
+## Randomized Case Study
+### Baseline Data*
 In the prior section we saw that when data is manipulated with static values, clearly the first digit rule is broken. But what about when data is randomly manipulated?
 
 Let us try an experiment to see if we can use Benford's Law to detect potential data manipulation where a bad actor randomly generated fake sales. For this experiment, our baseline will be also be using random data to highlight a point in the conclusion below. Let us pretend a company has sales data comprised of prices and quantities of items that they have sold. This code chunck sets up a data frame where one row is an recorded sale of a number of items sold at a set price. 
 
-```{r}
-library(dplyr)
-library(plotly)
-library(tidyverse)
-```
 
 ```{r}
 price <- sample(1:1e3, size = 1e5, replace=TRUE)
@@ -152,7 +154,7 @@ ggplot(data=df_group, aes(x=digit, y=count_percent, fill="blue")) +
 
 The [value] of the sales exhibits some commonality with Benford's Law but it is not exact as we see the first digit is not quite 30%. However there is still that decreasing probability of the leading digit. We will address some limitation in the next section. For now, let us try manipulating the data to see if any patterns change. 
 
-*Section 3.2: Manipulated Data*
+### Manipulated Data
 In this next piece of code, we can pretend someone has entered in additional sales "randomly" by adding lots of relatively smaller sales under 100k.  
 ```{r}
 value2 <- sample(1:1e6, size = 4e5, replace=TRUE)
@@ -225,17 +227,17 @@ Skewness    	0
 From a glance, it is evident that the statistics corresponding to the original df are much closer to the expected statistics than those from df2. In particular, the Ex.Kurtosis and Skewness differ significantly in df2 from the expected values. These are all indicators that the set of values deviate from the expected distribution corresponding to Benford's Law.
 
 
-*Section 3.3: Findings*
+### Findings
 So what does this show us? If both sets were randomly generated, why would one not conform to Benford's Law? One reason is that data that is the product of many random variables tends to exhibit a log-normal distribution which fits well with the first digit rule. However, by adding values in a static way, we change the data to be more uniform and distort the decaying curve. 
 
 Now it is important to understand that 1) this case is an extreme example to highlight a point, and 2) that Benford's Law and its statistics do not prove anything - they only provide some guidance on areas that may look strange. In reality, forensic testing would be done on specific segments or accounts, people would be interviewed, systems and logs analyzed, etc. Similarly, even when Benford's Law holds true, it does not mean there is no fraud; a bad actor that understands fraud detection methods will likely hide better. 
 
 
-*Section 4: Conclusion*
+## Conclusion
 An important thing to note is that Benford's law does not have a strict mathematical proof, and is simply a heuristic. It is a broad guideline which helps with the investigation of large data sets to see if they conform with the observed trends. A feature of a dataset that conforms with Benford's Law is not proof of validity or vice versa. For this reason, a Benford analysis is usually conducted as a primary investigatory exercise, following which a more thorough investigation as described in the previous section is conducted. 
 
 
-*Section 5 Sources*
+## Sources
 --[FORMAT Sources in standard way?]
 
 Benford, F. “The Law of Anomalous Numbers,” Proceedings of the American Philosophical Society, 78, 551–572. 1938.
