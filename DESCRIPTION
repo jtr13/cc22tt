@@ -12,6 +12,7 @@ Suggests:
     googleVis,
     sqldf,
     withr,
-    xml2
+    xml2,
+    benford.analysis
 Remotes:
     hadley/emo
