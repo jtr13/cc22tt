@@ -18,7 +18,6 @@ other-questions
 sample-project
 part-cheatsheets
 r-window-functions-cheatsheet
-part-cheatsheets-1
 rmd-chunk-option-cheat-sheet
 part-tutorials
 preprocessing-and-visualization-of-time-series-data
