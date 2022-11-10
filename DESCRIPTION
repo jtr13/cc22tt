@@ -10,6 +10,7 @@ Suggests:
     bslib,
     downlit,
     googleVis,
+    sqldf,
     withr,
     xml2
 Remotes:
