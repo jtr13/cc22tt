@@ -16,9 +16,19 @@ rmd_files: [
   'sample_project.Rmd',
 
   # Part: Cheatsheets
+  'r_window_functions_cheatsheet.Rmd',
+  'chunk_option_cheatsheet.Rmd',
+  'helpful_ggplot2_extensions_cheatsheet.Rmd',
+  'EDAV_Commonly_Used_Graph_Cheatsheet.Rmd',
 
   # Part: Tutorials
   'time_series_visualization_project.Rmd',  
+  'how_to_use_sqldf.Rmd',
+  'googleVis.Rmd',
+  
+  # Part: Interview Prep
+  'ten_interview_questions.Rmd',
+  
   # Part: Workshops
   
   # Part: Appendices
