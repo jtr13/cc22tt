@@ -1,3 +1,5 @@
+# (PART) Case Studies
+
 # Benford Case Study
 
 Abhiram Gaddam, Devan Samant
