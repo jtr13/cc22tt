@@ -17,9 +17,15 @@ rmd_files: [
 
   # Part: Cheatsheets
   'r_window_functions_cheatsheet.Rmd',
+  'chunk_option_cheatsheet.Rmd',
 
   # Part: Tutorials
   'time_series_visualization_project.Rmd',  
+  'how_to_use_sqldf.Rmd',
+  
+  # Part: Interview Prep
+  'ten_interview_questions.Rmd',
+  
   # Part: Workshops
   
   # Part: Appendices
