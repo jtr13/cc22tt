@@ -20,6 +20,8 @@ rmd_files: [
 
   # Part: Tutorials
   'time_series_visualization_project.Rmd',  
+  'how_to_use_sqldf.Rmd',
+  
   # Part: Workshops
   
   # Part: Appendices
