@@ -22,6 +22,9 @@ rmd_files: [
   'time_series_visualization_project.Rmd',  
   'how_to_use_sqldf.Rmd',
   
+  # Part: Interview Prep
+  'ten_interview_questions.Rmd',
+  
   # Part: Workshops
   
   # Part: Appendices
