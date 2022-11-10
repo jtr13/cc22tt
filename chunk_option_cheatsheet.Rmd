@@ -1,5 +1,3 @@
-# (PART) Cheatsheets
-
 # Rmd chunk option cheat sheet 
 
 Yunchen Jiang
