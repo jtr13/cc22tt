@@ -4,15 +4,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 1 Welcome! | Community Contributions for EDAV Fall 2022 Tues/Thurs</title>
-<meta name="description" content="This book contains community contributions for EDAV Fall 2022 Tues/Thurs">
+<title>Chapter 9 Helpful ggplot2 Extensions Cheatsheet | Community Contributions for EDAV Fall 2022 Tues/Thurs</title>
+<meta name="description" content="Frank Li and Liang Zhuang Currently, there are a total of 117 ggplot2 extensions and those extensions add additional features to ggplot2 and make it more powerful. This cheatsheet includes useful...">
 <meta name="generator" content="bookdown 0.30 with bs4_book()">
-<meta property="og:title" content="Chapter 1 Welcome! | Community Contributions for EDAV Fall 2022 Tues/Thurs">
+<meta property="og:title" content="Chapter 9 Helpful ggplot2 Extensions Cheatsheet | Community Contributions for EDAV Fall 2022 Tues/Thurs">
 <meta property="og:type" content="book">
-<meta property="og:description" content="This book contains community contributions for EDAV Fall 2022 Tues/Thurs">
+<meta property="og:description" content="Frank Li and Liang Zhuang Currently, there are a total of 117 ggplot2 extensions and those extensions add additional features to ggplot2 and make it more powerful. This cheatsheet includes useful...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 1 Welcome! | Community Contributions for EDAV Fall 2022 Tues/Thurs">
-<meta name="twitter:description" content="This book contains community contributions for EDAV Fall 2022 Tues/Thurs">
+<meta name="twitter:title" content="Chapter 9 Helpful ggplot2 Extensions Cheatsheet | Community Contributions for EDAV Fall 2022 Tues/Thurs">
+<meta name="twitter:description" content="Frank Li and Liang Zhuang Currently, there are a total of 117 ggplot2 extensions and those extensions add additional features to ggplot2 and make it more powerful. This cheatsheet includes useful...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.1/transition.js"></script><script src="libs/bs3compat-0.4.1/tabs.js"></script><script src="libs/bs3compat-0.4.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -41,7 +41,7 @@
 
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
-<li><a class="active" href="index.html"><span class="header-section-number">1</span> Welcome!</a></li>
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Welcome!</a></li>
 <li><a class="" href="community-contribution.html"><span class="header-section-number">2</span> Community Contribution</a></li>
 <li><a class="" href="github-submission-instructions.html"><span class="header-section-number">3</span> GitHub submission instructions</a></li>
 <li><a class="" href="sample-project.html"><span class="header-section-number">4</span> Sample project</a></li>
@@ -49,7 +49,7 @@
 <li><a class="" href="r-window-functions-cheatsheet.html"><span class="header-section-number">6</span> R window functions cheatsheet</a></li>
 <li class="book-part">Cheatsheets</li>
 <li><a class="" href="rmd-chunk-option-cheat-sheet.html"><span class="header-section-number">8</span> Rmd chunk option cheat sheet</a></li>
-<li><a class="" href="helpful-ggplot2-extensions-cheatsheet.html"><span class="header-section-number">9</span> Helpful ggplot2 Extensions Cheatsheet</a></li>
+<li><a class="active" href="helpful-ggplot2-extensions-cheatsheet.html"><span class="header-section-number">9</span> Helpful ggplot2 Extensions Cheatsheet</a></li>
 <li class="book-part">Tutorials</li>
 <li><a class="" href="preprocessing-and-visualization-of-time-series-data.html"><span class="header-section-number">11</span> Preprocessing and Visualization of Time Series Data</a></li>
 <li><a class="" href="how-to-use-sqldf.html"><span class="header-section-number">12</span> How to use sqldf</a></li>
@@ -65,28 +65,32 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><!--bookdown:title:end--><!--bookdown:title:start--><div id="welcome" class="section level1">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="helpful-ggplot2-extensions-cheatsheet" class="section level1">
 <h1>
-<span class="header-section-number">1</span> Welcome!<a class="anchor" aria-label="anchor" href="#welcome"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9</span> Helpful ggplot2 Extensions Cheatsheet<a class="anchor" aria-label="anchor" href="#helpful-ggplot2-extensions-cheatsheet"><i class="fas fa-link"></i></a>
 </h1>
-<p>Let’s add some content to the welcome page.</p>
-<p>Submit a pull request to do so.</p>
-<div class="figure">
-<img src="under_construction.jpg" alt=""><p class="caption">Under construction</p>
-</div>
+<p>Frank Li and Liang Zhuang</p>
+<p>Currently, there are a total of 117 ggplot2 extensions and those extensions add additional features to ggplot2 and make it more powerful. This cheatsheet includes useful information for four of the ggplot2 extensions: ggbump, ggradar, ggpol, and treemapify.</p>
+<p>ggbump: it creates varies bump charts in ggplot. Bump charts are good to plot the path between nodes that have no statistical significance.</p>
+<p>ggradar: it creates radar charts. Radar charts are useful for data values with multiple common variables and is widely used for performance analysis.</p>
+<p>ggpol: it adds additional features to ggplot2 including GeomArcbar, GeomParliament, GeomCircle, GeomTshignlight, FacetShare, GeomBartext, and GeomBoxjitter. More details here: <a href="https://erocoar.github.io/ggpol/" class="uri">https://erocoar.github.io/ggpol/</a>.</p>
+<p>treemapify: it creates tree maps in ggplot2. It is useful for
+data with hierarchy, such as country GDP and company’s stock market share.</p>
+<p>for more extensions, use this link: <a href="https://exts.ggplot2.tidyverse.org/gallery/" class="uri">https://exts.ggplot2.tidyverse.org/gallery/</a></p>
+<p>The cheatsheet is available here: <a href="https://github.com/leolisticierism/EDAV_Community_Contribution/blob/main/EDAV%20Community%20Contribution%20Cheat%20Sheet.pdf" class="uri">https://github.com/leolisticierism/EDAV_Community_Contribution/blob/main/EDAV%20Community%20Contribution%20Cheat%20Sheet.pdf</a></p>
 
 </div>
   <div class="chapter-nav">
-<div class="empty"></div>
-<div class="next"><a href="community-contribution.html"><span class="header-section-number">2</span> Community Contribution</a></div>
+<div class="prev"><a href="rmd-chunk-option-cheat-sheet.html"><span class="header-section-number">8</span> Rmd chunk option cheat sheet</a></div>
+<div class="next"><a href="preprocessing-and-visualization-of-time-series-data.html"><span class="header-section-number">11</span> Preprocessing and Visualization of Time Series Data</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#welcome"><span class="header-section-number">1</span> Welcome!</a></li></ul>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#helpful-ggplot2-extensions-cheatsheet"><span class="header-section-number">9</span> Helpful ggplot2 Extensions Cheatsheet</a></li></ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/jtr13/cc22tt/blob/main/index.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/jtr13/cc22tt/edit/main/index.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+<li><a id="book-source" href="https://github.com/jtr13/cc22tt/blob/main/helpful_ggplot2_extensions_cheatsheet.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/jtr13/cc22tt/edit/main/helpful_ggplot2_extensions_cheatsheet.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>
