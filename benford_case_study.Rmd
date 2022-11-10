@@ -42,7 +42,7 @@ Below is a distribution that shows the expected occurrence of leading digits acc
 However, there are a few caveats regarding the application of Benford's Law:
 
 1) Benford's Law works better with larger sets of data. While the law has been shown to hold true for data sets containing as few as 50 to 100 numbers, most experts believe data sets of 500 or more numbers are better suited for this type of analysis. 
-(https://www.journalofaccountancy.com/issues/2017/apr/excel-and-benfords-law-to-detect-fraud.html#:~:text=Briefly%20explained%2C%20Benford's%20Law%20maintains,leading%20digit%20with%20decreasing%20frequency)
+(https://tinyurl.com/2p97fsvn)
 
 2) To conform with the law, the data set you use must contain data in which each number 1 through 9 has an equal chance of occurring as the leading digit. Otherwise, Benford's Law doesn't apply. For example, consider a listing of the heights of current NBA players. Since NBA players range in height from 5 feet 10 inches to 7 feet 3 inches, there are no player heights that begin with a 1, 2, 3, 4, 8, or 9; Clearly those digits have no chance of being the first digit in such a listing, making Benford's Law inapplicable.
 
