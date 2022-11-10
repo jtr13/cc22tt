@@ -1,0 +1,7732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 12 googleVis in R | Community Contributions for EDAV Fall 2022 Tues/Thurs</title>
+<meta name="description" content="Sushant Prabhu and Kiyan Mohebbizadeh  12.1 Introducing googleVis  GoogleVis is a package in R that allows users of R to use the Google Charts API. The interface between R and Google Charts allows...">
+<meta name="generator" content="bookdown 0.30 with bs4_book()">
+<meta property="og:title" content="Chapter 12 googleVis in R | Community Contributions for EDAV Fall 2022 Tues/Thurs">
+<meta property="og:type" content="book">
+<meta property="og:description" content="Sushant Prabhu and Kiyan Mohebbizadeh  12.1 Introducing googleVis  GoogleVis is a package in R that allows users of R to use the Google Charts API. The interface between R and Google Charts allows...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 12 googleVis in R | Community Contributions for EDAV Fall 2022 Tues/Thurs">
+<meta name="twitter:description" content="Sushant Prabhu and Kiyan Mohebbizadeh  12.1 Introducing googleVis  GoogleVis is a package in R that allows users of R to use the Google Charts API. The interface between R and Google Charts allows...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.1/transition.js"></script><script src="libs/bs3compat-0.4.1/tabs.js"></script><script src="libs/bs3compat-0.4.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Community Contributions for EDAV Fall 2022 Tues/Thurs</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Welcome!</a></li>
+<li><a class="" href="community-contribution.html"><span class="header-section-number">2</span> Community Contribution</a></li>
+<li><a class="" href="github-submission-instructions.html"><span class="header-section-number">3</span> GitHub submission instructions</a></li>
+<li><a class="" href="sample-project.html"><span class="header-section-number">4</span> Sample project</a></li>
+<li class="book-part">Cheatsheets</li>
+<li><a class="" href="r-window-functions-cheatsheet.html"><span class="header-section-number">6</span> R window functions cheatsheet</a></li>
+<li><a class="" href="rmd-chunk-option-cheat-sheet.html"><span class="header-section-number">7</span> Rmd chunk option cheat sheet</a></li>
+<li><a class="" href="helpful-ggplot2-extensions-cheatsheet.html"><span class="header-section-number">8</span> Helpful ggplot2 Extensions Cheatsheet</a></li>
+<li class="book-part">Tutorials</li>
+<li><a class="" href="preprocessing-and-visualization-of-time-series-data.html"><span class="header-section-number">10</span> Preprocessing and Visualization of Time Series Data</a></li>
+<li><a class="" href="how-to-use-sqldf.html"><span class="header-section-number">11</span> How to use sqldf</a></li>
+<li><a class="active" href="googlevis-in-r.html"><span class="header-section-number">12</span> googleVis in R</a></li>
+<li class="book-part">Interview Prep</li>
+<li><a class="" href="ten-interview-questions-and-answers.html"><span class="header-section-number">14</span> Ten interview questions and answers</a></li>
+<li class="book-part">Appendices</li>
+<li><a class="" href="github-initial-setup.html"><span class="header-section-number">15</span> Github initial setup</a></li>
+<li><a class="" href="tutorial-for-pull-request-mergers.html"><span class="header-section-number">16</span> Tutorial for pull request mergers</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/jtr13/cc22tt">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="googlevis-in-r" class="section level1">
+<h1>
+<span class="header-section-number">12</span> googleVis in R<a class="anchor" aria-label="anchor" href="#googlevis-in-r"><i class="fas fa-link"></i></a>
+</h1>
+<p>Sushant Prabhu and Kiyan Mohebbizadeh</p>
+<div id="introducing-googlevis" class="section level2">
+<h2>
+<span class="header-section-number">12.1</span> Introducing googleVis<a class="anchor" aria-label="anchor" href="#introducing-googlevis"><i class="fas fa-link"></i></a>
+</h2>
+<blockquote>
+<p>GoogleVis is a package in R that allows users of R to use the Google Charts API.</p>
+</blockquote>
+<p>The interface between R and Google Charts allows users to access Google Charts’ interactive charts. <code>googleVis</code> allows users to use the data in R data frames to create Google Charts without uploading the data onto Google.</p>
+<p>Demonstrating using <code>googleVis</code> Library - Installation and Usage</p>
+<pre><code>install.packages('googleVis')</code></pre>
+<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://mages.github.io/googleVis/">googleVis</a></span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="why-use-googlevis" class="section level2">
+<h2>
+<span class="header-section-number">12.2</span> Why use googleVis ?<a class="anchor" aria-label="anchor" href="#why-use-googlevis"><i class="fas fa-link"></i></a>
+</h2>
+<blockquote>
+<p><code>googleVis</code> package allows users to create interactive visualizations which R’s most popular visualization package (ggplot) does not allow.</p>
+</blockquote>
+<ul>
+<li>Although there are packages that work in conjunction with ggplot to make interactive visualizations, <code>googleVis</code> offers a holistic package that allows for some unique and interactive visualizations.</li>
+<li>By using Google Charts, one is able to create a wide variety of visualizations ranging from typical bar and line graphs to mapping and timeline charts all from one package.</li>
+<li>The visualizations created by <code>googleVis</code> add a level of interest to the consumer due to their interactive layer and viewers are able to gather specific bits of information by hovering over and clicking values in the visualizations. This not only allows for increased aesthetics, but also more information being transferred to the viewers.</li>
+</ul>
+</div>
+<div id="googlevis-rendering-interaction" class="section level2">
+<h2>
+<span class="header-section-number">12.3</span> googleVis Rendering &amp; Interaction<a class="anchor" aria-label="anchor" href="#googlevis-rendering-interaction"><i class="fas fa-link"></i></a>
+</h2>
+<blockquote>
+<p>The output of <code>googleVis</code> can either be embedded into an HTML file or read dynamically. These visualizations are most often rendered online and in a web format. Therefore, a browser and internet connection are required to view the interactive version of the output compared to <code>ggplot</code></p>
+</blockquote>
+<ul>
+<li>For use in R, <code>googleVis</code> allows a user to render as a <em>Shiny</em> file that then allows a preview with interaction within R. This is used to preview a chart before a final render.</li>
+<li>
+<code>googleVis</code> is a package in R that allows users of R to use the Google Charts API.</li>
+<li>The interface between R and Google Charts allows users to access Google Charts’ interactive charts.</li>
+<li>
+<code>googleVis</code> allows users to use the data in R data frames to create Google Charts without uploading the data onto Google.</li>
+</ul>
+<div id="basic-graphs-line-bar-combo" class="section level3">
+<h3>
+<span class="header-section-number">12.3.1</span> Basic Graphs (Line, Bar, Combo)<a class="anchor" aria-label="anchor" href="#basic-graphs-line-bar-combo"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>pet<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'cat'</span>, <span class="st">'dog'</span>, <span class="st">'hamster'</span>, <span class="st">'snake'</span><span class="op">)</span>,</span>
+<span>                food_cost_monthly<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">100</span>, <span class="fl">10</span>, <span class="fl">40</span><span class="op">)</span>,</span>
+<span>                medical_cost_monthly<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">30</span>, <span class="fl">60</span>, <span class="fl">5</span>, <span class="fl">50</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">Line</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisLineChart.html">gvisLineChart</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">Bar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisBarChart.html">gvisBarChart</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">Column</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisColumnChart.html">gvisColumnChart</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">SteppedArea</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisSteppedAreaChart.html">gvisSteppedAreaChart</a></span><span class="op">(</span><span class="va">df</span>, xvar<span class="op">=</span><span class="st">"pet"</span>, </span>
+<span>                                    yvar<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"food_cost_monthly"</span>, <span class="st">"medical_cost_monthly"</span><span class="op">)</span>,</span>
+<span>                                    options<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span>isStacked<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">Combo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisComboChart.html">gvisComboChart</a></span><span class="op">(</span><span class="va">df</span>, xvar<span class="op">=</span><span class="st">"pet"</span>,</span>
+<span>                        yvar<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"food_cost_monthly"</span>, <span class="st">"medical_cost_monthly"</span><span class="op">)</span>,</span>
+<span>                        options<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span>seriesType<span class="op">=</span><span class="st">"bars"</span>,</span>
+<span>                                     series<span class="op">=</span><span class="st">'{1: {type:"line"}}'</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Line</span><span class="op">)</span></span></code></pre></div>
+<!-- LineChart generated in R 4.2.2 by googleVis 0.7.0 package -->
+<!-- Thu Nov 10 22:01:12 2022 -->
+<!-- jsHeader -->
+<script type="text/javascript">
+ 
+// jsData 
+function gvisDataLineChartID2d686bad7cfd () {
+var data = new google.visualization.DataTable();
+var datajson =
+[
+ [
+"cat",
+50,
+30
+],
+[
+"dog",
+100,
+60
+],
+[
+"hamster",
+10,
+5
+],
+[
+"snake",
+40,
+50
+] 
+];
+data.addColumn('string','pet');
+data.addColumn('number','food_cost_monthly');
+data.addColumn('number','medical_cost_monthly');
+data.addRows(datajson);
+return(data);
+}
+ 
+// jsDrawChart
+function drawChartLineChartID2d686bad7cfd() {
+var data = gvisDataLineChartID2d686bad7cfd();
+var options = {};
+options["allowHtml"] = true;
+
+    var chart = new google.visualization.LineChart(
+    document.getElementById('LineChartID2d686bad7cfd')
+    );
+    chart.draw(data,options);
+    
+
+}
+  
+ 
+// jsDisplayChart
+(function() {
+var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+var chartid = "corechart";
+  
+// Manually see if chartid is in pkgs (not all browsers support Array.indexOf)
+var i, newPackage = true;
+for (i = 0; newPackage && i < pkgs.length; i++) {
+if (pkgs[i] === chartid)
+newPackage = false;
+}
+if (newPackage)
+  pkgs.push(chartid);
+  
+// Add the drawChart function to the global list of callbacks
+callbacks.push(drawChartLineChartID2d686bad7cfd);
+})();
+function displayChartLineChartID2d686bad7cfd() {
+  var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+  var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+  window.clearTimeout(window.__gvisLoad);
+  // The timeout is set to 100 because otherwise the container div we are
+  // targeting might not be part of the document yet
+  window.__gvisLoad = setTimeout(function() {
+  var pkgCount = pkgs.length;
+  google.load("visualization", "1", { packages:pkgs, callback: function() {
+  if (pkgCount != pkgs.length) {
+  // Race condition where another setTimeout call snuck in after us; if
+  // that call added a package, we must not shift its callback
+  return;
+}
+while (callbacks.length > 0)
+callbacks.shift()();
+} });
+}, 100);
+}
+ 
+// jsFooter
+</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartLineChartID2d686bad7cfd"></script><!-- divChart --><div id="LineChartID2d686bad7cfd" style="width: 500; height: automatic;">
+
+</div>
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Bar</span><span class="op">)</span></span></code></pre></div>
+<!-- BarChart generated in R 4.2.2 by googleVis 0.7.0 package -->
+<!-- Thu Nov 10 22:01:12 2022 -->
+<!-- jsHeader -->
+<script type="text/javascript">
+ 
+// jsData 
+function gvisDataBarChartID2d682cc40f3e () {
+var data = new google.visualization.DataTable();
+var datajson =
+[
+ [
+"cat",
+50,
+30
+],
+[
+"dog",
+100,
+60
+],
+[
+"hamster",
+10,
+5
+],
+[
+"snake",
+40,
+50
+] 
+];
+data.addColumn('string','pet');
+data.addColumn('number','food_cost_monthly');
+data.addColumn('number','medical_cost_monthly');
+data.addRows(datajson);
+return(data);
+}
+ 
+// jsDrawChart
+function drawChartBarChartID2d682cc40f3e() {
+var data = gvisDataBarChartID2d682cc40f3e();
+var options = {};
+options["allowHtml"] = true;
+
+    var chart = new google.visualization.BarChart(
+    document.getElementById('BarChartID2d682cc40f3e')
+    );
+    chart.draw(data,options);
+    
+
+}
+  
+ 
+// jsDisplayChart
+(function() {
+var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+var chartid = "corechart";
+  
+// Manually see if chartid is in pkgs (not all browsers support Array.indexOf)
+var i, newPackage = true;
+for (i = 0; newPackage && i < pkgs.length; i++) {
+if (pkgs[i] === chartid)
+newPackage = false;
+}
+if (newPackage)
+  pkgs.push(chartid);
+  
+// Add the drawChart function to the global list of callbacks
+callbacks.push(drawChartBarChartID2d682cc40f3e);
+})();
+function displayChartBarChartID2d682cc40f3e() {
+  var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+  var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+  window.clearTimeout(window.__gvisLoad);
+  // The timeout is set to 100 because otherwise the container div we are
+  // targeting might not be part of the document yet
+  window.__gvisLoad = setTimeout(function() {
+  var pkgCount = pkgs.length;
+  google.load("visualization", "1", { packages:pkgs, callback: function() {
+  if (pkgCount != pkgs.length) {
+  // Race condition where another setTimeout call snuck in after us; if
+  // that call added a package, we must not shift its callback
+  return;
+}
+while (callbacks.length > 0)
+callbacks.shift()();
+} });
+}, 100);
+}
+ 
+// jsFooter
+</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartBarChartID2d682cc40f3e"></script><!-- divChart --><div id="BarChartID2d682cc40f3e" style="width: 500; height: automatic;">
+
+</div>
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Column</span><span class="op">)</span></span></code></pre></div>
+<!-- ColumnChart generated in R 4.2.2 by googleVis 0.7.0 package -->
+<!-- Thu Nov 10 22:01:12 2022 -->
+<!-- jsHeader -->
+<script type="text/javascript">
+ 
+// jsData 
+function gvisDataColumnChartID2d6815640c23 () {
+var data = new google.visualization.DataTable();
+var datajson =
+[
+ [
+"cat",
+50,
+30
+],
+[
+"dog",
+100,
+60
+],
+[
+"hamster",
+10,
+5
+],
+[
+"snake",
+40,
+50
+] 
+];
+data.addColumn('string','pet');
+data.addColumn('number','food_cost_monthly');
+data.addColumn('number','medical_cost_monthly');
+data.addRows(datajson);
+return(data);
+}
+ 
+// jsDrawChart
+function drawChartColumnChartID2d6815640c23() {
+var data = gvisDataColumnChartID2d6815640c23();
+var options = {};
+options["allowHtml"] = true;
+
+    var chart = new google.visualization.ColumnChart(
+    document.getElementById('ColumnChartID2d6815640c23')
+    );
+    chart.draw(data,options);
+    
+
+}
+  
+ 
+// jsDisplayChart
+(function() {
+var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+var chartid = "corechart";
+  
+// Manually see if chartid is in pkgs (not all browsers support Array.indexOf)
+var i, newPackage = true;
+for (i = 0; newPackage && i < pkgs.length; i++) {
+if (pkgs[i] === chartid)
+newPackage = false;
+}
+if (newPackage)
+  pkgs.push(chartid);
+  
+// Add the drawChart function to the global list of callbacks
+callbacks.push(drawChartColumnChartID2d6815640c23);
+})();
+function displayChartColumnChartID2d6815640c23() {
+  var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+  var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+  window.clearTimeout(window.__gvisLoad);
+  // The timeout is set to 100 because otherwise the container div we are
+  // targeting might not be part of the document yet
+  window.__gvisLoad = setTimeout(function() {
+  var pkgCount = pkgs.length;
+  google.load("visualization", "1", { packages:pkgs, callback: function() {
+  if (pkgCount != pkgs.length) {
+  // Race condition where another setTimeout call snuck in after us; if
+  // that call added a package, we must not shift its callback
+  return;
+}
+while (callbacks.length > 0)
+callbacks.shift()();
+} });
+}, 100);
+}
+ 
+// jsFooter
+</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartColumnChartID2d6815640c23"></script><!-- divChart --><div id="ColumnChartID2d6815640c23" style="width: 500; height: automatic;">
+
+</div>
+<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">SteppedArea</span><span class="op">)</span></span></code></pre></div>
+<!-- SteppedAreaChart generated in R 4.2.2 by googleVis 0.7.0 package -->
+<!-- Thu Nov 10 22:01:12 2022 -->
+<!-- jsHeader -->
+<script type="text/javascript">
+ 
+// jsData 
+function gvisDataSteppedAreaChartID2d6860a0c8ad () {
+var data = new google.visualization.DataTable();
+var datajson =
+[
+ [
+"cat",
+50,
+30
+],
+[
+"dog",
+100,
+60
+],
+[
+"hamster",
+10,
+5
+],
+[
+"snake",
+40,
+50
+] 
+];
+data.addColumn('string','pet');
+data.addColumn('number','food_cost_monthly');
+data.addColumn('number','medical_cost_monthly');
+data.addRows(datajson);
+return(data);
+}
+ 
+// jsDrawChart
+function drawChartSteppedAreaChartID2d6860a0c8ad() {
+var data = gvisDataSteppedAreaChartID2d6860a0c8ad();
+var options = {};
+options["allowHtml"] = true;
+options["isStacked"] = true;
+
+    var chart = new google.visualization.SteppedAreaChart(
+    document.getElementById('SteppedAreaChartID2d6860a0c8ad')
+    );
+    chart.draw(data,options);
+    
+
+}
+  
+ 
+// jsDisplayChart
+(function() {
+var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+var chartid = "corechart";
+  
+// Manually see if chartid is in pkgs (not all browsers support Array.indexOf)
+var i, newPackage = true;
+for (i = 0; newPackage && i < pkgs.length; i++) {
+if (pkgs[i] === chartid)
+newPackage = false;
+}
+if (newPackage)
+  pkgs.push(chartid);
+  
+// Add the drawChart function to the global list of callbacks
+callbacks.push(drawChartSteppedAreaChartID2d6860a0c8ad);
+})();
+function displayChartSteppedAreaChartID2d6860a0c8ad() {
+  var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+  var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+  window.clearTimeout(window.__gvisLoad);
+  // The timeout is set to 100 because otherwise the container div we are
+  // targeting might not be part of the document yet
+  window.__gvisLoad = setTimeout(function() {
+  var pkgCount = pkgs.length;
+  google.load("visualization", "1", { packages:pkgs, callback: function() {
+  if (pkgCount != pkgs.length) {
+  // Race condition where another setTimeout call snuck in after us; if
+  // that call added a package, we must not shift its callback
+  return;
+}
+while (callbacks.length > 0)
+callbacks.shift()();
+} });
+}, 100);
+}
+ 
+// jsFooter
+</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartSteppedAreaChartID2d6860a0c8ad"></script><!-- divChart --><div id="SteppedAreaChartID2d6860a0c8ad" style="width: 500; height: automatic;">
+
+</div>
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Combo</span><span class="op">)</span></span></code></pre></div>
+<!-- ComboChart generated in R 4.2.2 by googleVis 0.7.0 package -->
+<!-- Thu Nov 10 22:01:12 2022 -->
+<!-- jsHeader -->
+<script type="text/javascript">
+ 
+// jsData 
+function gvisDataComboChartID2d684156a9a () {
+var data = new google.visualization.DataTable();
+var datajson =
+[
+ [
+"cat",
+50,
+30
+],
+[
+"dog",
+100,
+60
+],
+[
+"hamster",
+10,
+5
+],
+[
+"snake",
+40,
+50
+] 
+];
+data.addColumn('string','pet');
+data.addColumn('number','food_cost_monthly');
+data.addColumn('number','medical_cost_monthly');
+data.addRows(datajson);
+return(data);
+}
+ 
+// jsDrawChart
+function drawChartComboChartID2d684156a9a() {
+var data = gvisDataComboChartID2d684156a9a();
+var options = {};
+options["allowHtml"] = true;
+options["seriesType"] = "bars";
+options["series"] = {1: {type:"line"}};
+
+    var chart = new google.visualization.ComboChart(
+    document.getElementById('ComboChartID2d684156a9a')
+    );
+    chart.draw(data,options);
+    
+
+}
+  
+ 
+// jsDisplayChart
+(function() {
+var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+var chartid = "corechart";
+  
+// Manually see if chartid is in pkgs (not all browsers support Array.indexOf)
+var i, newPackage = true;
+for (i = 0; newPackage && i < pkgs.length; i++) {
+if (pkgs[i] === chartid)
+newPackage = false;
+}
+if (newPackage)
+  pkgs.push(chartid);
+  
+// Add the drawChart function to the global list of callbacks
+callbacks.push(drawChartComboChartID2d684156a9a);
+})();
+function displayChartComboChartID2d684156a9a() {
+  var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+  var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+  window.clearTimeout(window.__gvisLoad);
+  // The timeout is set to 100 because otherwise the container div we are
+  // targeting might not be part of the document yet
+  window.__gvisLoad = setTimeout(function() {
+  var pkgCount = pkgs.length;
+  google.load("visualization", "1", { packages:pkgs, callback: function() {
+  if (pkgCount != pkgs.length) {
+  // Race condition where another setTimeout call snuck in after us; if
+  // that call added a package, we must not shift its callback
+  return;
+}
+while (callbacks.length > 0)
+callbacks.shift()();
+} });
+}, 100);
+}
+ 
+// jsFooter
+</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartComboChartID2d684156a9a"></script><!-- divChart --><div id="ComboChartID2d684156a9a" style="width: 500; height: automatic;">
+
+</div>
+<p>The above charts are best used in comparisons between groups. As seen in the examples, there are comparisons between costs of owning different pets.</p>
+<ul>
+<li>The line graph shows how different variables flow within and among groups. The audience is able to determine within group trends by seeing where lines intersect within each group. Showing the up and down trends of these variables with lines between groups allows us to make comparisons among the various groups with clarity.By organizing the variables in a certain way, one is able to get a sense of population trends.</li>
+<li>The bar and column chart are essentially the same just rotated on an axis. They allow for great in group comparisons as well as comparisons among groups. However, These charts are best used for in-group comparisons.</li>
+<li>Combo charts are great for multiple variable comparisons and allow the user to get the best of both worlds. by carefully selecting which variables are represented in bars and which ones are lines, the user is able to best show the relationship within groups and trends of the population.</li>
+</ul>
+</div>
+<div id="googlevis-histogram-chart" class="section level3">
+<h3>
+<span class="header-section-number">12.3.2</span> googleVis Histogram Chart<a class="anchor" aria-label="anchor" href="#googlevis-histogram-chart"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">iris</span></span>
+<span><span class="va">Histogram</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisHistogram.html">gvisHistogram</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>Sepal_Width <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">Sepal.Width</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Histogram</span><span class="op">)</span></span></code></pre></div>
+<!-- Histogram generated in R 4.2.2 by googleVis 0.7.0 package -->
+<!-- Thu Nov 10 22:01:12 2022 -->
+<!-- jsHeader -->
+<script type="text/javascript">
+ 
+// jsData 
+function gvisDataHistogramID2d686a5efc01 () {
+var data = new google.visualization.DataTable();
+var datajson =
+[
+ [
+3.5
+],
+[
+3
+],
+[
+3.2
+],
+[
+3.1
+],
+[
+3.6
+],
+[
+3.9
+],
+[
+3.4
+],
+[
+3.4
+],
+[
+2.9
+],
+[
+3.1
+],
+[
+3.7
+],
+[
+3.4
+],
+[
+3
+],
+[
+3
+],
+[
+4
+],
+[
+4.4
+],
+[
+3.9
+],
+[
+3.5
+],
+[
+3.8
+],
+[
+3.8
+],
+[
+3.4
+],
+[
+3.7
+],
+[
+3.6
+],
+[
+3.3
+],
+[
+3.4
+],
+[
+3
+],
+[
+3.4
+],
+[
+3.5
+],
+[
+3.4
+],
+[
+3.2
+],
+[
+3.1
+],
+[
+3.4
+],
+[
+4.1
+],
+[
+4.2
+],
+[
+3.1
+],
+[
+3.2
+],
+[
+3.5
+],
+[
+3.6
+],
+[
+3
+],
+[
+3.4
+],
+[
+3.5
+],
+[
+2.3
+],
+[
+3.2
+],
+[
+3.5
+],
+[
+3.8
+],
+[
+3
+],
+[
+3.8
+],
+[
+3.2
+],
+[
+3.7
+],
+[
+3.3
+],
+[
+3.2
+],
+[
+3.2
+],
+[
+3.1
+],
+[
+2.3
+],
+[
+2.8
+],
+[
+2.8
+],
+[
+3.3
+],
+[
+2.4
+],
+[
+2.9
+],
+[
+2.7
+],
+[
+2
+],
+[
+3
+],
+[
+2.2
+],
+[
+2.9
+],
+[
+2.9
+],
+[
+3.1
+],
+[
+3
+],
+[
+2.7
+],
+[
+2.2
+],
+[
+2.5
+],
+[
+3.2
+],
+[
+2.8
+],
+[
+2.5
+],
+[
+2.8
+],
+[
+2.9
+],
+[
+3
+],
+[
+2.8
+],
+[
+3
+],
+[
+2.9
+],
+[
+2.6
+],
+[
+2.4
+],
+[
+2.4
+],
+[
+2.7
+],
+[
+2.7
+],
+[
+3
+],
+[
+3.4
+],
+[
+3.1
+],
+[
+2.3
+],
+[
+3
+],
+[
+2.5
+],
+[
+2.6
+],
+[
+3
+],
+[
+2.6
+],
+[
+2.3
+],
+[
+2.7
+],
+[
+3
+],
+[
+2.9
+],
+[
+2.9
+],
+[
+2.5
+],
+[
+2.8
+],
+[
+3.3
+],
+[
+2.7
+],
+[
+3
+],
+[
+2.9
+],
+[
+3
+],
+[
+3
+],
+[
+2.5
+],
+[
+2.9
+],
+[
+2.5
+],
+[
+3.6
+],
+[
+3.2
+],
+[
+2.7
+],
+[
+3
+],
+[
+2.5
+],
+[
+2.8
+],
+[
+3.2
+],
+[
+3
+],
+[
+3.8
+],
+[
+2.6
+],
+[
+2.2
+],
+[
+3.2
+],
+[
+2.8
+],
+[
+2.8
+],
+[
+2.7
+],
+[
+3.3
+],
+[
+3.2
+],
+[
+2.8
+],
+[
+3
+],
+[
+2.8
+],
+[
+3
+],
+[
+2.8
+],
+[
+3.8
+],
+[
+2.8
+],
+[
+2.8
+],
+[
+2.6
+],
+[
+3
+],
+[
+3.4
+],
+[
+3.1
+],
+[
+3
+],
+[
+3.1
+],
+[
+3.1
+],
+[
+3.1
+],
+[
+2.7
+],
+[
+3.2
+],
+[
+3.3
+],
+[
+3
+],
+[
+2.5
+],
+[
+3
+],
+[
+3.4
+],
+[
+3
+] 
+];
+data.addColumn('number','Sepal_Width');
+data.addRows(datajson);
+return(data);
+}
+ 
+// jsDrawChart
+function drawChartHistogramID2d686a5efc01() {
+var data = gvisDataHistogramID2d686a5efc01();
+var options = {};
+options["allowHtml"] = true;
+
+    var chart = new google.visualization.Histogram(
+    document.getElementById('HistogramID2d686a5efc01')
+    );
+    chart.draw(data,options);
+    
+
+}
+  
+ 
+// jsDisplayChart
+(function() {
+var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+var chartid = "corechart";
+  
+// Manually see if chartid is in pkgs (not all browsers support Array.indexOf)
+var i, newPackage = true;
+for (i = 0; newPackage && i < pkgs.length; i++) {
+if (pkgs[i] === chartid)
+newPackage = false;
+}
+if (newPackage)
+  pkgs.push(chartid);
+  
+// Add the drawChart function to the global list of callbacks
+callbacks.push(drawChartHistogramID2d686a5efc01);
+})();
+function displayChartHistogramID2d686a5efc01() {
+  var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+  var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+  window.clearTimeout(window.__gvisLoad);
+  // The timeout is set to 100 because otherwise the container div we are
+  // targeting might not be part of the document yet
+  window.__gvisLoad = setTimeout(function() {
+  var pkgCount = pkgs.length;
+  google.load("visualization", "1", { packages:pkgs, callback: function() {
+  if (pkgCount != pkgs.length) {
+  // Race condition where another setTimeout call snuck in after us; if
+  // that call added a package, we must not shift its callback
+  return;
+}
+while (callbacks.length > 0)
+callbacks.shift()();
+} });
+}, 100);
+}
+ 
+// jsFooter
+</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartHistogramID2d686a5efc01"></script><!-- divChart --><div id="HistogramID2d686a5efc01" style="width: 500; height: automatic;">
+
+</div>
+<p>The histogram allows users to represent the distribution of one particular group or variable by showing the frequency of the particular group or variable within a range. The charts by <code>googleVis</code> have an advantage over regular histograms because almost no histogram allows or recommends specific information regarding the counts at different points in the visualization, however, with <code>googleVis</code> the audience can not only look at the distribution but access specific metrics through interaction as well.</p>
+</div>
+<div id="googlevis-alluvialsankey-chart" class="section level3">
+<h3>
+<span class="header-section-number">12.3.3</span> googleVis Alluvial/Sankey Chart<a class="anchor" aria-label="anchor" href="#googlevis-alluvialsankey-chart"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>From<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"Math"</span>,<span class="fl">3</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"Science"</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>                    To<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Lunch'</span>, <span class="st">'Art'</span>, <span class="st">'Music'</span><span class="op">)</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>                    Weight<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">17</span>,<span class="fl">15</span>,<span class="fl">13</span>,<span class="fl">5</span>,<span class="fl">12</span>,<span class="fl">8</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">Alluvial</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisSankey.html">gvisSankey</a></span><span class="op">(</span><span class="va">df</span>, from<span class="op">=</span><span class="st">"From"</span>, to<span class="op">=</span><span class="st">"To"</span>, weight<span class="op">=</span><span class="st">"Weight"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Alluvial</span><span class="op">)</span></span></code></pre></div>
+<!-- Sankey generated in R 4.2.2 by googleVis 0.7.0 package -->
+<!-- Thu Nov 10 22:01:12 2022 -->
+<!-- jsHeader -->
+<script type="text/javascript">
+ 
+// jsData 
+function gvisDataSankeyID2d6825e6315d () {
+var data = new google.visualization.DataTable();
+var datajson =
+[
+ [
+"Math",
+"Lunch",
+17
+],
+[
+"Math",
+"Art",
+15
+],
+[
+"Math",
+"Music",
+13
+],
+[
+"Science",
+"Lunch",
+5
+],
+[
+"Science",
+"Art",
+12
+],
+[
+"Science",
+"Music",
+8
+] 
+];
+data.addColumn('string','From');
+data.addColumn('string','To');
+data.addColumn('number','Weight');
+data.addRows(datajson);
+return(data);
+}
+ 
+// jsDrawChart
+function drawChartSankeyID2d6825e6315d() {
+var data = gvisDataSankeyID2d6825e6315d();
+var options = {};
+options["width"] = 400;
+options["height"] = 400;
+
+    var chart = new google.visualization.Sankey(
+    document.getElementById('SankeyID2d6825e6315d')
+    );
+    chart.draw(data,options);
+    
+
+}
+  
+ 
+// jsDisplayChart
+(function() {
+var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+var chartid = "sankey";
+  
+// Manually see if chartid is in pkgs (not all browsers support Array.indexOf)
+var i, newPackage = true;
+for (i = 0; newPackage && i < pkgs.length; i++) {
+if (pkgs[i] === chartid)
+newPackage = false;
+}
+if (newPackage)
+  pkgs.push(chartid);
+  
+// Add the drawChart function to the global list of callbacks
+callbacks.push(drawChartSankeyID2d6825e6315d);
+})();
+function displayChartSankeyID2d6825e6315d() {
+  var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+  var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+  window.clearTimeout(window.__gvisLoad);
+  // The timeout is set to 100 because otherwise the container div we are
+  // targeting might not be part of the document yet
+  window.__gvisLoad = setTimeout(function() {
+  var pkgCount = pkgs.length;
+  google.load("visualization", "1", { packages:pkgs, callback: function() {
+  if (pkgCount != pkgs.length) {
+  // Race condition where another setTimeout call snuck in after us; if
+  // that call added a package, we must not shift its callback
+  return;
+}
+while (callbacks.length > 0)
+callbacks.shift()();
+} });
+}, 100);
+}
+ 
+// jsFooter
+</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartSankeyID2d6825e6315d"></script><!-- divChart --><div id="SankeyID2d6825e6315d" style="width: 400; height: 400;">
+
+</div>
+<p>Alluvial charts best show the movement of the sample or population among different variables. In the example above the movement of students within a school from class to class is represented. This visualization can be helpful with data that has an ordinal and timeline specific values. With <code>googleVis</code>, the audience is exposed to the general trends with a clean looking chart as well as the specifics of the graph through interaction.</p>
+</div>
+<div id="googlevis-geographic-chart" class="section level3">
+<h3>
+<span class="header-section-number">12.3.4</span> googleVis Geographic Chart<a class="anchor" aria-label="anchor" href="#googlevis-geographic-chart"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>country<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'US'</span>, <span class="st">'CN'</span>, <span class="st">'BR'</span>, <span class="st">'IS'</span>, <span class="st">'RU'</span>, <span class="st">'TH'</span>, <span class="st">'TR'</span>, <span class="st">'ID'</span>, <span class="st">'MX'</span>, <span class="st">'IR'</span> <span class="op">)</span>,</span>
+<span>                incarceration_rate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2068800</span>, <span class="fl">1690000</span>, <span class="fl">811707</span>, <span class="fl">478600</span>, <span class="fl">471490</span>, <span class="fl">309282</span>, <span class="fl">291198</span>, <span class="fl">266259</span>, <span class="fl">220866</span>, <span class="fl">189000</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">G</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisGeoChart.html">gvisGeoChart</a></span><span class="op">(</span><span class="va">df</span>, locationvar <span class="op">=</span> <span class="st">"country"</span>, colorvar <span class="op">=</span> <span class="st">"incarceration_rate"</span>,</span>
+<span>                  options<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span></span>
+<span>                         gvis.editor<span class="op">=</span><span class="st">"Edit the Geo Chart !"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">G</span><span class="op">)</span></span></code></pre></div>
+<!-- GeoChart generated in R 4.2.2 by googleVis 0.7.0 package -->
+<!-- Thu Nov 10 22:01:12 2022 -->
+<!-- jsHeader -->
+<script type="text/javascript">
+ 
+// jsData 
+function gvisDataGeoChartID2d6825be6165 () {
+var data = new google.visualization.DataTable();
+var datajson =
+[
+ [
+"US",
+2068800
+],
+[
+"CN",
+1690000
+],
+[
+"BR",
+811707
+],
+[
+"IS",
+478600
+],
+[
+"RU",
+471490
+],
+[
+"TH",
+309282
+],
+[
+"TR",
+291198
+],
+[
+"ID",
+266259
+],
+[
+"MX",
+220866
+],
+[
+"IR",
+189000
+] 
+];
+data.addColumn('string','country');
+data.addColumn('number','incarceration_rate');
+data.addRows(datajson);
+return(data);
+}
+ 
+// jsDrawChart
+function drawChartGeoChartID2d6825be6165() {
+var data = gvisDataGeoChartID2d6825be6165();
+var options = {};
+options["width"] = 556;
+options["height"] = 347;
+
+    chartGeoChartID2d6825be6165 = new google.visualization.ChartWrapper({
+    dataTable: data,       
+    chartType: 'GeoChart',
+    containerId: 'GeoChartID2d6825be6165',
+    options: options
+    });
+    chartGeoChartID2d6825be6165.draw();
+    
+
+}
+
+  function openEditorGeoChartID2d6825be6165() {
+  var editor = new google.visualization.ChartEditor();
+  google.visualization.events.addListener(editor, 'ok',
+  function() { 
+  chartGeoChartID2d6825be6165 = editor.getChartWrapper();  
+  chartGeoChartID2d6825be6165.draw(document.getElementById('GeoChartID2d6825be6165')); 
+  }); 
+  editor.openDialog(chartGeoChartID2d6825be6165);
+  }
+    
+ 
+// jsDisplayChart
+(function() {
+var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+var chartid = "charteditor";
+  
+// Manually see if chartid is in pkgs (not all browsers support Array.indexOf)
+var i, newPackage = true;
+for (i = 0; newPackage && i < pkgs.length; i++) {
+if (pkgs[i] === chartid)
+newPackage = false;
+}
+if (newPackage)
+  pkgs.push(chartid);
+  
+// Add the drawChart function to the global list of callbacks
+callbacks.push(drawChartGeoChartID2d6825be6165);
+})();
+function displayChartGeoChartID2d6825be6165() {
+  var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+  var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+  window.clearTimeout(window.__gvisLoad);
+  // The timeout is set to 100 because otherwise the container div we are
+  // targeting might not be part of the document yet
+  window.__gvisLoad = setTimeout(function() {
+  var pkgCount = pkgs.length;
+  google.load("visualization", "1", { packages:pkgs, callback: function() {
+  if (pkgCount != pkgs.length) {
+  // Race condition where another setTimeout call snuck in after us; if
+  // that call added a package, we must not shift its callback
+  return;
+}
+while (callbacks.length > 0)
+callbacks.shift()();
+} });
+}, 100);
+}
+ 
+// jsFooter
+</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartGeoChartID2d6825be6165"></script><!-- divChart --><input type="button" onclick="openEditorGeoChartID2d6825be6165()" value="Edit the Geo Chart !"><br><div id="GeoChartID2d6825be6165" style="width: 556; height: 347;">
+
+</div>
+<p>Map visualizations by <code>googleVis</code> are incredibly easy to create and manipulate. They are useful for comparing different geographic areas to each other. <code>googleVis</code> automatically color scales the values and the interaction allows the map to be simple and clean, but get specific values when hovering over a particular geographic area.</p>
+</div>
+<div id="googlevis-gauge-chart" class="section level3">
+<h3>
+<span class="header-section-number">12.3.5</span> googleVis Gauge Chart<a class="anchor" aria-label="anchor" href="#googlevis-gauge-chart"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">temperature</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>city<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Las Vegas'</span>, <span class="st">'Los Angeles'</span>, <span class="st">'Pheonix'</span>, <span class="st">'Dallas'</span>, <span class="st">'Houston'</span>, <span class="st">'Miami'</span><span class="op">)</span>,</span>
+<span>                          temp<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">115</span>, <span class="fl">103</span>, <span class="fl">120</span>, <span class="fl">110</span>, <span class="fl">112</span>, <span class="fl">101</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">Gauge</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisGauge.html">gvisGauge</a></span><span class="op">(</span><span class="va">temperature</span>, </span>
+<span>                    options<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span>min<span class="op">=</span><span class="fl">0</span>, max<span class="op">=</span><span class="fl">150</span>, greenFrom<span class="op">=</span><span class="fl">0</span>,</span>
+<span>                                 greenTo<span class="op">=</span><span class="fl">50</span>, yellowFrom<span class="op">=</span><span class="fl">50</span>, yellowTo<span class="op">=</span><span class="fl">100</span>,</span>
+<span>                                 redFrom<span class="op">=</span><span class="fl">100</span>, redTo<span class="op">=</span><span class="fl">150</span>, width<span class="op">=</span><span class="fl">400</span>, height<span class="op">=</span><span class="fl">300</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Gauge</span><span class="op">)</span></span></code></pre></div>
+<!-- Gauge generated in R 4.2.2 by googleVis 0.7.0 package -->
+<!-- Thu Nov 10 22:01:12 2022 -->
+<!-- jsHeader -->
+<script type="text/javascript">
+ 
+// jsData 
+function gvisDataGaugeID2d6845923570 () {
+var data = new google.visualization.DataTable();
+var datajson =
+[
+ [
+"Las Vegas",
+115
+],
+[
+"Los Angeles",
+103
+],
+[
+"Pheonix",
+120
+],
+[
+"Dallas",
+110
+],
+[
+"Houston",
+112
+],
+[
+"Miami",
+101
+] 
+];
+data.addColumn('string','city');
+data.addColumn('number','temp');
+data.addRows(datajson);
+return(data);
+}
+ 
+// jsDrawChart
+function drawChartGaugeID2d6845923570() {
+var data = gvisDataGaugeID2d6845923570();
+var options = {};
+options["allowHtml"] = true;
+options["min"] = 0;
+options["max"] = 150;
+options["greenFrom"] = 0;
+options["greenTo"] = 50;
+options["yellowFrom"] = 50;
+options["yellowTo"] = 100;
+options["redFrom"] = 100;
+options["redTo"] = 150;
+options["width"] = 400;
+options["height"] = 300;
+
+    var chart = new google.visualization.Gauge(
+    document.getElementById('GaugeID2d6845923570')
+    );
+    chart.draw(data,options);
+    
+
+}
+  
+ 
+// jsDisplayChart
+(function() {
+var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+var chartid = "gauge";
+  
+// Manually see if chartid is in pkgs (not all browsers support Array.indexOf)
+var i, newPackage = true;
+for (i = 0; newPackage && i < pkgs.length; i++) {
+if (pkgs[i] === chartid)
+newPackage = false;
+}
+if (newPackage)
+  pkgs.push(chartid);
+  
+// Add the drawChart function to the global list of callbacks
+callbacks.push(drawChartGaugeID2d6845923570);
+})();
+function displayChartGaugeID2d6845923570() {
+  var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+  var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+  window.clearTimeout(window.__gvisLoad);
+  // The timeout is set to 100 because otherwise the container div we are
+  // targeting might not be part of the document yet
+  window.__gvisLoad = setTimeout(function() {
+  var pkgCount = pkgs.length;
+  google.load("visualization", "1", { packages:pkgs, callback: function() {
+  if (pkgCount != pkgs.length) {
+  // Race condition where another setTimeout call snuck in after us; if
+  // that call added a package, we must not shift its callback
+  return;
+}
+while (callbacks.length > 0)
+callbacks.shift()();
+} });
+}, 100);
+}
+ 
+// jsFooter
+</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartGaugeID2d6845923570"></script><!-- divChart --><div id="GaugeID2d6845923570" style="width: 400; height: 300;">
+
+</div>
+<p>The gauge charts are not interactive, however they do offer a unique way to model data that is always within a certain range. For example, temperatures, speeds, pressure, etc. This chart allows for quick comparison between groups and aesthetic value to any presentation.</p>
+</div>
+<div id="googlevis-tabular-chart" class="section level3">
+<h3>
+<span class="header-section-number">12.3.6</span> googleVis Tabular Chart<a class="anchor" aria-label="anchor" href="#googlevis-tabular-chart"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Tabular Data Un-Paged</span></span>
+<span><span class="va">Population_Tabular_Unpaged</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisTable.html">gvisTable</a></span><span class="op">(</span><span class="va">Population</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">30</span>,<span class="op">]</span>,</span>
+<span>                                        formats<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span>Population<span class="op">=</span><span class="st">"#,###"</span>,<span class="st">'% of World Population'</span><span class="op">=</span><span class="st">'#.#%'</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Population_Tabular_Unpaged</span><span class="op">)</span></span></code></pre></div>
+<!-- Table generated in R 4.2.2 by googleVis 0.7.0 package -->
+<!-- Thu Nov 10 22:01:12 2022 -->
+<!-- jsHeader -->
+<script type="text/javascript">
+ 
+// jsData 
+function gvisDataTableID2d685266a6c9 () {
+var data = new google.visualization.DataTable();
+var datajson =
+[
+ [
+"1",
+"China",
+1339940000,
+0.195,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_the_People%27s_Republic_of_China.svg/22px-Flag_of_the_People%27s_Republic_of_China.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"2",
+"India",
+1188650000,
+0.173,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Flag_of_India.svg/22px-Flag_of_India.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"3",
+"United States",
+310438000,
+0.0452,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Flag_of_the_United_States.svg/22px-Flag_of_the_United_States.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"4",
+"Indonesia",
+237556363,
+0.0346,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Flag_of_Indonesia.svg/22px-Flag_of_Indonesia.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"5",
+"Brazil",
+193626000,
+0.0282,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Brazil.svg/22px-Flag_of_Brazil.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"6",
+"Pakistan",
+170745000,
+0.0248,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Flag_of_Pakistan.svg/22px-Flag_of_Pakistan.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"7",
+"Bangladesh",
+164425000,
+0.0239,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Flag_of_Bangladesh.svg/22px-Flag_of_Bangladesh.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"8",
+"Nigeria",
+158259000,
+0.023,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Flag_of_Nigeria.svg/22px-Flag_of_Nigeria.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"9",
+"Russia",
+141927297,
+0.0206,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Flag_of_Russia.svg/22px-Flag_of_Russia.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"10",
+"Japan",
+127390000,
+0.0185,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Flag_of_Japan.svg/22px-Flag_of_Japan.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"11",
+"Mexico",
+108396211,
+0.0158,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Flag_of_Mexico.svg/22px-Flag_of_Mexico.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"12",
+"Philippines",
+94013200,
+0.0137,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Flag_of_the_Philippines.svg/22px-Flag_of_the_Philippines.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"13",
+"Vietnam",
+85846997,
+0.0125,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/22px-Flag_of_Vietnam.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"14",
+"Ethiopia",
+84976000,
+0.0124,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Flag_of_Ethiopia.svg/22px-Flag_of_Ethiopia.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"15",
+"Germany",
+81802257,
+0.0119,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Flag_of_Germany.svg/22px-Flag_of_Germany.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"16",
+"Egypt",
+79135000,
+0.0115,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Flag_of_Egypt.svg/22px-Flag_of_Egypt.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"17",
+"Iran",
+75078000,
+0.0109,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Flag_of_Iran.svg/22px-Flag_of_Iran.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"18",
+"Turkey",
+72561312,
+0.0106,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Flag_of_Turkey.svg/22px-Flag_of_Turkey.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"19",
+"Dem. Rep. of Congo",
+67827000,
+0.0099,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Flag_of_the_Democratic_Republic_of_the_Congo.svg/22px-Flag_of_the_Democratic_Republic_of_the_Congo.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"20",
+"Thailand",
+67070000,
+0.01,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Flag_of_Thailand.svg/22px-Flag_of_Thailand.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"21",
+"France",
+65447374,
+0.0095,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Flag_of_France.svg/22px-Flag_of_France.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"22",
+"United Kingdom",
+62008049,
+0.009,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Flag_of_the_United_Kingdom.svg/22px-Flag_of_the_United_Kingdom.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"23",
+"Italy",
+60402499,
+0.0088,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Flag_of_Italy.svg/22px-Flag_of_Italy.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"24",
+"Myanmar",
+50496000,
+0.0073,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Flag_of_Myanmar.svg/22px-Flag_of_Myanmar.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"25",
+"South Africa",
+49991300,
+0.0073,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Flag_of_South_Africa.svg/22px-Flag_of_South_Africa.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"26",
+"South Korea",
+49773145,
+0.0072,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Flag_of_South_Korea.svg/22px-Flag_of_South_Korea.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"27",
+"Spain",
+46072834,
+0.0067,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Flag_of_Spain.svg/22px-Flag_of_Spain.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"28",
+"Ukraine",
+45871738,
+0.0067,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/22px-Flag_of_Ukraine.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"29",
+"Colombia",
+45655000,
+0.0066,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Colombia.svg/22px-Flag_of_Colombia.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"30",
+"Tanzania",
+45040000,
+0.0066,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Flag_of_Tanzania.svg/22px-Flag_of_Tanzania.svg.png\">",
+true,
+new Date(2010,9,9)
+] 
+];
+data.addColumn('string','Rank');
+data.addColumn('string','Country');
+data.addColumn('number','Population');
+data.addColumn('number','% of World Population');
+data.addColumn('string','Flag');
+data.addColumn('boolean','Mode');
+data.addColumn('date','Date');
+data.addRows(datajson);
+return(data);
+}
+ 
+// jsDrawChart
+function drawChartTableID2d685266a6c9() {
+var data = gvisDataTableID2d685266a6c9();
+var options = {};
+options["allowHtml"] = true;
+
+  var dataFormat1 = new google.visualization.NumberFormat({pattern:"#,###"});
+  dataFormat1.format(data, 2);
+  var dataFormat2 = new google.visualization.NumberFormat({pattern:"#.#%"});
+  dataFormat2.format(data, 3);
+
+    var chart = new google.visualization.Table(
+    document.getElementById('TableID2d685266a6c9')
+    );
+    chart.draw(data,options);
+    
+
+}
+  
+ 
+// jsDisplayChart
+(function() {
+var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+var chartid = "table";
+  
+// Manually see if chartid is in pkgs (not all browsers support Array.indexOf)
+var i, newPackage = true;
+for (i = 0; newPackage && i < pkgs.length; i++) {
+if (pkgs[i] === chartid)
+newPackage = false;
+}
+if (newPackage)
+  pkgs.push(chartid);
+  
+// Add the drawChart function to the global list of callbacks
+callbacks.push(drawChartTableID2d685266a6c9);
+})();
+function displayChartTableID2d685266a6c9() {
+  var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+  var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+  window.clearTimeout(window.__gvisLoad);
+  // The timeout is set to 100 because otherwise the container div we are
+  // targeting might not be part of the document yet
+  window.__gvisLoad = setTimeout(function() {
+  var pkgCount = pkgs.length;
+  google.load("visualization", "1", { packages:pkgs, callback: function() {
+  if (pkgCount != pkgs.length) {
+  // Race condition where another setTimeout call snuck in after us; if
+  // that call added a package, we must not shift its callback
+  return;
+}
+while (callbacks.length > 0)
+callbacks.shift()();
+} });
+}, 100);
+}
+ 
+// jsFooter
+</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartTableID2d685266a6c9"></script><!-- divChart --><div id="TableID2d685266a6c9" style="width: 500; height: automatic;">
+
+</div>
+<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## Tabular Data Paged</span></span>
+<span><span class="va">Population_Tabular_paged</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisTable.html">gvisTable</a></span><span class="op">(</span><span class="va">Population</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">30</span>,<span class="op">]</span>, </span>
+<span>                                      formats<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span>Population<span class="op">=</span><span class="st">"#,###"</span>,<span class="st">'% of World Population'</span><span class="op">=</span><span class="st">'#.#%'</span><span class="op">)</span>,</span>
+<span>                                      options<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span>page<span class="op">=</span><span class="st">'enable'</span>,</span>
+<span>                                                   height<span class="op">=</span><span class="st">'automatic'</span>,</span>
+<span>                                                   width<span class="op">=</span><span class="st">'automatic'</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Population_Tabular_paged</span><span class="op">)</span></span></code></pre></div>
+<!-- Table generated in R 4.2.2 by googleVis 0.7.0 package -->
+<!-- Thu Nov 10 22:01:12 2022 -->
+<!-- jsHeader -->
+<script type="text/javascript">
+ 
+// jsData 
+function gvisDataTableID2d6857044f4a () {
+var data = new google.visualization.DataTable();
+var datajson =
+[
+ [
+"1",
+"China",
+1339940000,
+0.195,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_the_People%27s_Republic_of_China.svg/22px-Flag_of_the_People%27s_Republic_of_China.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"2",
+"India",
+1188650000,
+0.173,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Flag_of_India.svg/22px-Flag_of_India.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"3",
+"United States",
+310438000,
+0.0452,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Flag_of_the_United_States.svg/22px-Flag_of_the_United_States.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"4",
+"Indonesia",
+237556363,
+0.0346,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Flag_of_Indonesia.svg/22px-Flag_of_Indonesia.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"5",
+"Brazil",
+193626000,
+0.0282,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Brazil.svg/22px-Flag_of_Brazil.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"6",
+"Pakistan",
+170745000,
+0.0248,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Flag_of_Pakistan.svg/22px-Flag_of_Pakistan.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"7",
+"Bangladesh",
+164425000,
+0.0239,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Flag_of_Bangladesh.svg/22px-Flag_of_Bangladesh.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"8",
+"Nigeria",
+158259000,
+0.023,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Flag_of_Nigeria.svg/22px-Flag_of_Nigeria.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"9",
+"Russia",
+141927297,
+0.0206,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Flag_of_Russia.svg/22px-Flag_of_Russia.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"10",
+"Japan",
+127390000,
+0.0185,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Flag_of_Japan.svg/22px-Flag_of_Japan.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"11",
+"Mexico",
+108396211,
+0.0158,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Flag_of_Mexico.svg/22px-Flag_of_Mexico.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"12",
+"Philippines",
+94013200,
+0.0137,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Flag_of_the_Philippines.svg/22px-Flag_of_the_Philippines.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"13",
+"Vietnam",
+85846997,
+0.0125,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/22px-Flag_of_Vietnam.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"14",
+"Ethiopia",
+84976000,
+0.0124,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Flag_of_Ethiopia.svg/22px-Flag_of_Ethiopia.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"15",
+"Germany",
+81802257,
+0.0119,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Flag_of_Germany.svg/22px-Flag_of_Germany.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"16",
+"Egypt",
+79135000,
+0.0115,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Flag_of_Egypt.svg/22px-Flag_of_Egypt.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"17",
+"Iran",
+75078000,
+0.0109,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Flag_of_Iran.svg/22px-Flag_of_Iran.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"18",
+"Turkey",
+72561312,
+0.0106,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Flag_of_Turkey.svg/22px-Flag_of_Turkey.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"19",
+"Dem. Rep. of Congo",
+67827000,
+0.0099,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Flag_of_the_Democratic_Republic_of_the_Congo.svg/22px-Flag_of_the_Democratic_Republic_of_the_Congo.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"20",
+"Thailand",
+67070000,
+0.01,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Flag_of_Thailand.svg/22px-Flag_of_Thailand.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"21",
+"France",
+65447374,
+0.0095,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Flag_of_France.svg/22px-Flag_of_France.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"22",
+"United Kingdom",
+62008049,
+0.009,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Flag_of_the_United_Kingdom.svg/22px-Flag_of_the_United_Kingdom.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"23",
+"Italy",
+60402499,
+0.0088,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Flag_of_Italy.svg/22px-Flag_of_Italy.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"24",
+"Myanmar",
+50496000,
+0.0073,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Flag_of_Myanmar.svg/22px-Flag_of_Myanmar.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"25",
+"South Africa",
+49991300,
+0.0073,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Flag_of_South_Africa.svg/22px-Flag_of_South_Africa.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"26",
+"South Korea",
+49773145,
+0.0072,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Flag_of_South_Korea.svg/22px-Flag_of_South_Korea.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"27",
+"Spain",
+46072834,
+0.0067,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Flag_of_Spain.svg/22px-Flag_of_Spain.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"28",
+"Ukraine",
+45871738,
+0.0067,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Flag_of_Ukraine.svg/22px-Flag_of_Ukraine.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"29",
+"Colombia",
+45655000,
+0.0066,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Colombia.svg/22px-Flag_of_Colombia.svg.png\">",
+true,
+new Date(2010,9,9)
+],
+[
+"30",
+"Tanzania",
+45040000,
+0.0066,
+"<img src=\"http://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Flag_of_Tanzania.svg/22px-Flag_of_Tanzania.svg.png\">",
+true,
+new Date(2010,9,9)
+] 
+];
+data.addColumn('string','Rank');
+data.addColumn('string','Country');
+data.addColumn('number','Population');
+data.addColumn('number','% of World Population');
+data.addColumn('string','Flag');
+data.addColumn('boolean','Mode');
+data.addColumn('date','Date');
+data.addRows(datajson);
+return(data);
+}
+ 
+// jsDrawChart
+function drawChartTableID2d6857044f4a() {
+var data = gvisDataTableID2d6857044f4a();
+var options = {};
+options["allowHtml"] = true;
+options["page"] = "enable";
+
+  var dataFormat1 = new google.visualization.NumberFormat({pattern:"#,###"});
+  dataFormat1.format(data, 2);
+  var dataFormat2 = new google.visualization.NumberFormat({pattern:"#.#%"});
+  dataFormat2.format(data, 3);
+
+    var chart = new google.visualization.Table(
+    document.getElementById('TableID2d6857044f4a')
+    );
+    chart.draw(data,options);
+    
+
+}
+  
+ 
+// jsDisplayChart
+(function() {
+var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+var chartid = "table";
+  
+// Manually see if chartid is in pkgs (not all browsers support Array.indexOf)
+var i, newPackage = true;
+for (i = 0; newPackage && i < pkgs.length; i++) {
+if (pkgs[i] === chartid)
+newPackage = false;
+}
+if (newPackage)
+  pkgs.push(chartid);
+  
+// Add the drawChart function to the global list of callbacks
+callbacks.push(drawChartTableID2d6857044f4a);
+})();
+function displayChartTableID2d6857044f4a() {
+  var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+  var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+  window.clearTimeout(window.__gvisLoad);
+  // The timeout is set to 100 because otherwise the container div we are
+  // targeting might not be part of the document yet
+  window.__gvisLoad = setTimeout(function() {
+  var pkgCount = pkgs.length;
+  google.load("visualization", "1", { packages:pkgs, callback: function() {
+  if (pkgCount != pkgs.length) {
+  // Race condition where another setTimeout call snuck in after us; if
+  // that call added a package, we must not shift its callback
+  return;
+}
+while (callbacks.length > 0)
+callbacks.shift()();
+} });
+}, 100);
+}
+ 
+// jsFooter
+</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartTableID2d6857044f4a"></script><!-- divChart --><div id="TableID2d6857044f4a" style="width: automatic; height: automatic;">
+
+</div>
+<p>The data formatted as a table can be paged and sorted. It has a flexible option to select single rows either with the keyboard or the mouse. It also powers sorting on rows across all dimensions in the columns of the dataset. The navigation through paged tabular information is smooth and simple.</p>
+</div>
+<div id="googlevis-tree-map-chart" class="section level3">
+<h3>
+<span class="header-section-number">12.3.7</span> googleVis Tree Map Chart<a class="anchor" aria-label="anchor" href="#googlevis-tree-map-chart"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Country_Tree</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisTreeMap.html">gvisTreeMap</a></span><span class="op">(</span><span class="va">Regions</span>, <span class="st">"Region"</span>, <span class="st">"Parent"</span>, <span class="st">"Val"</span>, <span class="st">"Fac"</span>, </span>
+<span>                     options<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span>width<span class="op">=</span><span class="fl">800</span>, height<span class="op">=</span><span class="fl">500</span>, fontSize<span class="op">=</span><span class="fl">15</span>,</span>
+<span>                                  minColor<span class="op">=</span><span class="st">'#cfe2f3'</span>,midColor<span class="op">=</span><span class="st">'#6fa8dc'</span>,maxColor<span class="op">=</span><span class="st">'#0b5394'</span>,</span>
+<span>                                  headerHeight<span class="op">=</span><span class="fl">10</span>,fontColor<span class="op">=</span><span class="st">'black'</span>,showScale<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Country_Tree</span><span class="op">)</span></span></code></pre></div>
+<!-- TreeMap generated in R 4.2.2 by googleVis 0.7.0 package -->
+<!-- Thu Nov 10 22:01:12 2022 -->
+<!-- jsHeader -->
+<script type="text/javascript">
+ 
+// jsData 
+function gvisDataTreeMapID2d686d4565cd () {
+var data = new google.visualization.DataTable();
+var datajson =
+[
+ [
+"Global",
+null,
+10,
+2
+],
+[
+"America",
+"Global",
+2,
+4
+],
+[
+"Europe",
+"Global",
+99,
+11
+],
+[
+"Asia",
+"Global",
+10,
+8
+],
+[
+"France",
+"Europe",
+71,
+2
+],
+[
+"Sweden",
+"Europe",
+89,
+3
+],
+[
+"Germany",
+"Europe",
+58,
+10
+],
+[
+"Mexico",
+"America",
+2,
+9
+],
+[
+"USA",
+"America",
+38,
+11
+],
+[
+"China",
+"Asia",
+5,
+1
+],
+[
+"Japan",
+"Asia",
+48,
+11
+] 
+];
+data.addColumn('string','Region');
+data.addColumn('string','Parent');
+data.addColumn('number','Val');
+data.addColumn('number','Fac');
+data.addRows(datajson);
+return(data);
+}
+ 
+// jsDrawChart
+function drawChartTreeMapID2d686d4565cd() {
+var data = gvisDataTreeMapID2d686d4565cd();
+var options = {};
+options["width"] = 800;
+options["height"] = 500;
+options["fontSize"] = 15;
+options["minColor"] = "#cfe2f3";
+options["midColor"] = "#6fa8dc";
+options["maxColor"] = "#0b5394";
+options["headerHeight"] = 10;
+options["fontColor"] = "black";
+options["showScale"] = true;
+
+    var chart = new google.visualization.TreeMap(
+    document.getElementById('TreeMapID2d686d4565cd')
+    );
+    chart.draw(data,options);
+    
+
+}
+  
+ 
+// jsDisplayChart
+(function() {
+var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+var chartid = "treemap";
+  
+// Manually see if chartid is in pkgs (not all browsers support Array.indexOf)
+var i, newPackage = true;
+for (i = 0; newPackage && i < pkgs.length; i++) {
+if (pkgs[i] === chartid)
+newPackage = false;
+}
+if (newPackage)
+  pkgs.push(chartid);
+  
+// Add the drawChart function to the global list of callbacks
+callbacks.push(drawChartTreeMapID2d686d4565cd);
+})();
+function displayChartTreeMapID2d686d4565cd() {
+  var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+  var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+  window.clearTimeout(window.__gvisLoad);
+  // The timeout is set to 100 because otherwise the container div we are
+  // targeting might not be part of the document yet
+  window.__gvisLoad = setTimeout(function() {
+  var pkgCount = pkgs.length;
+  google.load("visualization", "1", { packages:pkgs, callback: function() {
+  if (pkgCount != pkgs.length) {
+  // Race condition where another setTimeout call snuck in after us; if
+  // that call added a package, we must not shift its callback
+  return;
+}
+while (callbacks.length > 0)
+callbacks.shift()();
+} });
+}, 100);
+}
+ 
+// jsFooter
+</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartTreeMapID2d686d4565cd"></script><!-- divChart --><div id="TreeMapID2d686d4565cd" style="width: 800; height: 500;">
+
+</div>
+<p>The <code>googleVis</code> tree map is a visual representation of a data tree, where each node has 0 or more children, and 1 parent barring the root node. One can specify how many levels to display simultaneously, and optionally to display deeper levels. One can move down the tree when the person left-clicks a node, and moves back up the tree when the person right-clicks the graph.The total size of the graph is determined by the size of the elements contained in the graph.</p>
+<p>This <code>googleVis</code> tree map chart captures the relative sizes of data categories, that helps for quick insight of the datapoints that are bigger contributors to each category. Color helps scrutinize datapoints that are underperforming / overperforming) compared to their siblings from the same category.</p>
+</div>
+<div id="googlevis-annotation-chart" class="section level3">
+<h3>
+<span class="header-section-number">12.3.8</span> googleVis Annotation Chart<a class="anchor" aria-label="anchor" href="#googlevis-annotation-chart"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Stock_Annotation</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisAnnotationChart.html">gvisAnnotationChart</a></span><span class="op">(</span><span class="va">Stock</span>, datevar<span class="op">=</span><span class="st">"Date"</span>,numvar<span class="op">=</span><span class="st">"Value"</span>, idvar<span class="op">=</span><span class="st">"Device"</span>, titlevar<span class="op">=</span><span class="st">"Title"</span>,</span>
+<span>                                        annotationvar<span class="op">=</span><span class="st">"Annotation"</span>,</span>
+<span>                                        options<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span>displayAnnotations<span class="op">=</span><span class="cn">TRUE</span>,</span>
+<span>                                        chart<span class="op">=</span><span class="st">"{chartArea:{backgroundColor:'#ebf0f7'}}"</span>,</span>
+<span>                                        legendPosition<span class="op">=</span><span class="st">'newRow'</span>,width<span class="op">=</span><span class="fl">800</span>, height<span class="op">=</span><span class="fl">450</span>,</span>
+<span>                                        scaleColumns<span class="op">=</span><span class="st">'[0,1]'</span>,scaleType<span class="op">=</span><span class="st">'allmaximized'</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Stock_Annotation</span><span class="op">)</span></span></code></pre></div>
+<!-- AnnotationChart generated in R 4.2.2 by googleVis 0.7.0 package -->
+<!-- Thu Nov 10 22:01:12 2022 -->
+<!-- jsHeader -->
+<script type="text/javascript">
+ 
+// jsData 
+function gvisDataAnnotationChartID2d6827d802b8 () {
+var data = new google.visualization.DataTable();
+var datajson =
+[
+ [
+new Date(2008,0,1),
+3000,
+null,
+null,
+40645,
+null,
+null
+],
+[
+new Date(2008,0,2),
+14045,
+null,
+null,
+20374,
+null,
+null
+],
+[
+new Date(2008,0,3),
+5502,
+null,
+null,
+50766,
+null,
+null
+],
+[
+new Date(2008,0,4),
+75284,
+null,
+null,
+14334,
+"Out of stock",
+"Ran out of stock of pens at 4pm"
+],
+[
+new Date(2008,0,5),
+41476,
+"Bought pencils",
+"Bought 200k pencils",
+66467,
+null,
+null
+],
+[
+new Date(2008,0,6),
+333222,
+null,
+null,
+39463,
+null,
+null
+] 
+];
+data.addColumn('date','Date');
+data.addColumn('number','Pencils');
+data.addColumn('string','Title.Pencils');
+data.addColumn('string','Annotation.Pencils');
+data.addColumn('number','Pens');
+data.addColumn('string','Title.Pens');
+data.addColumn('string','Annotation.Pens');
+data.addRows(datajson);
+return(data);
+}
+ 
+// jsDrawChart
+function drawChartAnnotationChartID2d6827d802b8() {
+var data = gvisDataAnnotationChartID2d6827d802b8();
+var options = {};
+options["width"] = 800;
+options["height"] = 450;
+options["displayAnnotations"] = true;
+options["chart"] = {chartArea:{backgroundColor:'#ebf0f7'}};
+options["legendPosition"] = "newRow";
+options["scaleColumns"] = [0,1];
+options["scaleType"] = "allmaximized";
+
+    var chart = new google.visualization.AnnotationChart(
+    document.getElementById('AnnotationChartID2d6827d802b8')
+    );
+    chart.draw(data,options);
+    
+
+}
+  
+ 
+// jsDisplayChart
+(function() {
+var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+var chartid = "annotationchart";
+  
+// Manually see if chartid is in pkgs (not all browsers support Array.indexOf)
+var i, newPackage = true;
+for (i = 0; newPackage && i < pkgs.length; i++) {
+if (pkgs[i] === chartid)
+newPackage = false;
+}
+if (newPackage)
+  pkgs.push(chartid);
+  
+// Add the drawChart function to the global list of callbacks
+callbacks.push(drawChartAnnotationChartID2d6827d802b8);
+})();
+function displayChartAnnotationChartID2d6827d802b8() {
+  var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+  var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+  window.clearTimeout(window.__gvisLoad);
+  // The timeout is set to 100 because otherwise the container div we are
+  // targeting might not be part of the document yet
+  window.__gvisLoad = setTimeout(function() {
+  var pkgCount = pkgs.length;
+  google.load("visualization", "1", { packages:pkgs, callback: function() {
+  if (pkgCount != pkgs.length) {
+  // Race condition where another setTimeout call snuck in after us; if
+  // that call added a package, we must not shift its callback
+  return;
+}
+while (callbacks.length > 0)
+callbacks.shift()();
+} });
+}, 100);
+}
+ 
+// jsFooter
+</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartAnnotationChartID2d6827d802b8"></script><!-- divChart --><div id="AnnotationChartID2d6827d802b8" style="width: 800; height: 450;">
+
+</div>
+<p>Annotation charts are useful, interactive time series like line charts that enable annotations.These annotated charts are leveraged to highlight specific data or value-add the contextual notes within the visualization.</p>
+<p>To answer the “so what ?” kind of questions, such well defined annotations highlight the significance of data in the chart, with keen detail in the textual description / annotation.</p>
+<p>One can also slice through the interactive timeline chart to look for a snapshot of data which is aesthetically pleasing and also provides great detail insights within the same visualization. These annotation charts are SVG (scalable vector graphics) /VML (vector graphics rendering ).</p>
+</div>
+<div id="googlevis-calendar-chart" class="section level3">
+<h3>
+<span class="header-section-number">12.3.9</span> googleVis Calendar Chart<a class="anchor" aria-label="anchor" href="#googlevis-calendar-chart"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Calendar_Temp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisCalendar.html">gvisCalendar</a></span><span class="op">(</span><span class="va">Cairo</span>, datevar<span class="op">=</span><span class="st">"Date"</span>, numvar<span class="op">=</span><span class="st">"Temp"</span>,</span>
+<span>                    options<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span>title<span class="op">=</span><span class="st">"Cairo's variation in Daily</span></span>
+<span><span class="st">                                 temperature"</span>,height<span class="op">=</span><span class="fl">400</span>,width<span class="op">=</span><span class="fl">1000</span>,</span>
+<span>                                 calendar<span class="op">=</span><span class="st">"{yearLabel: { fontName:'sans-serif',</span></span>
+<span><span class="st">                                 fontSize: 20, color: 'black', bold: true},</span></span>
+<span><span class="st">                                 cellSize: 10,cellColor:{stroke: 'black', strokeOpacity: 0.2},</span></span>
+<span><span class="st">                                 focusedCellColor: {stroke:'red'}}"</span><span class="op">)</span>, chartid<span class="op">=</span><span class="st">"Calendar"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Calendar_Temp</span><span class="op">)</span></span></code></pre></div>
+<!-- Calendar generated in R 4.2.2 by googleVis 0.7.0 package -->
+<!-- Thu Nov 10 22:01:12 2022 -->
+<!-- jsHeader -->
+<script type="text/javascript">
+ 
+// jsData 
+function gvisDataCalendar () {
+var data = new google.visualization.DataTable();
+var datajson =
+[
+ [
+new Date(2002,0,1),
+13.61111111
+],
+[
+new Date(2002,0,2),
+15.16666667
+],
+[
+new Date(2002,0,3),
+12
+],
+[
+new Date(2002,0,4),
+12
+],
+[
+new Date(2002,0,5),
+13.05555556
+],
+[
+new Date(2002,0,6),
+10.05555556
+],
+[
+new Date(2002,0,7),
+9.277777778
+],
+[
+new Date(2002,0,8),
+10.5
+],
+[
+new Date(2002,0,9),
+9.888888889
+],
+[
+new Date(2002,0,10),
+8.666666667
+],
+[
+new Date(2002,0,11),
+10.83333333
+],
+[
+new Date(2002,0,12),
+10.94444444
+],
+[
+new Date(2002,0,13),
+11.72222222
+],
+[
+new Date(2002,0,14),
+11.44444444
+],
+[
+new Date(2002,0,15),
+13.16666667
+],
+[
+new Date(2002,0,16),
+12.88888889
+],
+[
+new Date(2002,0,17),
+12.88888889
+],
+[
+new Date(2002,0,18),
+13
+],
+[
+new Date(2002,0,19),
+13.66666667
+],
+[
+new Date(2002,0,20),
+13.5
+],
+[
+new Date(2002,0,21),
+13.66666667
+],
+[
+new Date(2002,0,22),
+13.66666667
+],
+[
+new Date(2002,0,23),
+13.83333333
+],
+[
+new Date(2002,0,24),
+13
+],
+[
+new Date(2002,0,25),
+13.27777778
+],
+[
+new Date(2002,0,26),
+13.77777778
+],
+[
+new Date(2002,0,27),
+13.33333333
+],
+[
+new Date(2002,0,28),
+14.66666667
+],
+[
+new Date(2002,0,29),
+14.5
+],
+[
+new Date(2002,0,30),
+14.33333333
+],
+[
+new Date(2002,0,31),
+14.05555556
+],
+[
+new Date(2002,1,1),
+14.11111111
+],
+[
+new Date(2002,1,2),
+15.16666667
+],
+[
+new Date(2002,1,3),
+15.66666667
+],
+[
+new Date(2002,1,4),
+16.16666667
+],
+[
+new Date(2002,1,5),
+16
+],
+[
+new Date(2002,1,6),
+14.55555556
+],
+[
+new Date(2002,1,7),
+16.33333333
+],
+[
+new Date(2002,1,8),
+16.55555556
+],
+[
+new Date(2002,1,9),
+18.22222222
+],
+[
+new Date(2002,1,10),
+15.88888889
+],
+[
+new Date(2002,1,11),
+14.05555556
+],
+[
+new Date(2002,1,12),
+15.16666667
+],
+[
+new Date(2002,1,13),
+15.33333333
+],
+[
+new Date(2002,1,14),
+15.38888889
+],
+[
+new Date(2002,1,15),
+16.05555556
+],
+[
+new Date(2002,1,16),
+16
+],
+[
+new Date(2002,1,17),
+15.83333333
+],
+[
+new Date(2002,1,18),
+15.44444444
+],
+[
+new Date(2002,1,19),
+15.05555556
+],
+[
+new Date(2002,1,20),
+15.88888889
+],
+[
+new Date(2002,1,21),
+18.22222222
+],
+[
+new Date(2002,1,22),
+18.77777778
+],
+[
+new Date(2002,1,23),
+23.27777778
+],
+[
+new Date(2002,1,24),
+17.27777778
+],
+[
+new Date(2002,1,25),
+17.88888889
+],
+[
+new Date(2002,1,26),
+15.77777778
+],
+[
+new Date(2002,1,27),
+14.5
+],
+[
+new Date(2002,1,28),
+15
+],
+[
+new Date(2002,2,1),
+15.94444444
+],
+[
+new Date(2002,2,2),
+16.5
+],
+[
+new Date(2002,2,3),
+17.27777778
+],
+[
+new Date(2002,2,4),
+18.11111111
+],
+[
+new Date(2002,2,5),
+17.55555556
+],
+[
+new Date(2002,2,6),
+19.72222222
+],
+[
+new Date(2002,2,7),
+22.83333333
+],
+[
+new Date(2002,2,8),
+22.94444444
+],
+[
+new Date(2002,2,9),
+22.66666667
+],
+[
+new Date(2002,2,10),
+24
+],
+[
+new Date(2002,2,11),
+24.55555556
+],
+[
+new Date(2002,2,12),
+20.22222222
+],
+[
+new Date(2002,2,13),
+18.44444444
+],
+[
+new Date(2002,2,14),
+17.5
+],
+[
+new Date(2002,2,15),
+17.55555556
+],
+[
+new Date(2002,2,16),
+17.11111111
+],
+[
+new Date(2002,2,17),
+17.33333333
+],
+[
+new Date(2002,2,18),
+19.44444444
+],
+[
+new Date(2002,2,19),
+18.27777778
+],
+[
+new Date(2002,2,20),
+17.44444444
+],
+[
+new Date(2002,2,21),
+19.05555556
+],
+[
+new Date(2002,2,22),
+19.88888889
+],
+[
+new Date(2002,2,23),
+22.61111111
+],
+[
+new Date(2002,2,24),
+23.72222222
+],
+[
+new Date(2002,2,25),
+19.22222222
+],
+[
+new Date(2002,2,26),
+16.16666667
+],
+[
+new Date(2002,2,27),
+16.33333333
+],
+[
+new Date(2002,2,28),
+15.88888889
+],
+[
+new Date(2002,2,29),
+15.72222222
+],
+[
+new Date(2002,2,30),
+18.55555556
+],
+[
+new Date(2002,2,31),
+20.38888889
+],
+[
+new Date(2002,3,1),
+17.94444444
+],
+[
+new Date(2002,3,2),
+15.83333333
+],
+[
+new Date(2002,3,3),
+17.88888889
+],
+[
+new Date(2002,3,4),
+22.05555556
+],
+[
+new Date(2002,3,5),
+27.83333333
+],
+[
+new Date(2002,3,6),
+24.16666667
+],
+[
+new Date(2002,3,7),
+19.33333333
+],
+[
+new Date(2002,3,8),
+18.5
+],
+[
+new Date(2002,3,9),
+18.88888889
+],
+[
+new Date(2002,3,10),
+19.33333333
+],
+[
+new Date(2002,3,11),
+20.66666667
+],
+[
+new Date(2002,3,12),
+22.55555556
+],
+[
+new Date(2002,3,13),
+26.5
+],
+[
+new Date(2002,3,14),
+31.38888889
+],
+[
+new Date(2002,3,15),
+30.83333333
+],
+[
+new Date(2002,3,16),
+25.61111111
+],
+[
+new Date(2002,3,17),
+21
+],
+[
+new Date(2002,3,18),
+19.16666667
+],
+[
+new Date(2002,3,19),
+19.33333333
+],
+[
+new Date(2002,3,20),
+19.05555556
+],
+[
+new Date(2002,3,21),
+19.27777778
+],
+[
+new Date(2002,3,22),
+19.88888889
+],
+[
+new Date(2002,3,23),
+22.22222222
+],
+[
+new Date(2002,3,24),
+20.16666667
+],
+[
+new Date(2002,3,25),
+19.61111111
+],
+[
+new Date(2002,3,26),
+18.72222222
+],
+[
+new Date(2002,3,27),
+18.94444444
+],
+[
+new Date(2002,3,28),
+19.5
+],
+[
+new Date(2002,3,29),
+19.27777778
+],
+[
+new Date(2002,3,30),
+20.22222222
+],
+[
+new Date(2002,4,1),
+21.44444444
+],
+[
+new Date(2002,4,2),
+21.16666667
+],
+[
+new Date(2002,4,3),
+21.66666667
+],
+[
+new Date(2002,4,4),
+23.27777778
+],
+[
+new Date(2002,4,5),
+25.88888889
+],
+[
+new Date(2002,4,6),
+25.66666667
+],
+[
+new Date(2002,4,7),
+24.33333333
+],
+[
+new Date(2002,4,8),
+24.88888889
+],
+[
+new Date(2002,4,9),
+26
+],
+[
+new Date(2002,4,10),
+27.33333333
+],
+[
+new Date(2002,4,11),
+24.83333333
+],
+[
+new Date(2002,4,12),
+27.77777778
+],
+[
+new Date(2002,4,13),
+29.72222222
+],
+[
+new Date(2002,4,14),
+22.88888889
+],
+[
+new Date(2002,4,15),
+22.27777778
+],
+[
+new Date(2002,4,16),
+22.61111111
+],
+[
+new Date(2002,4,17),
+22.55555556
+],
+[
+new Date(2002,4,18),
+23.22222222
+],
+[
+new Date(2002,4,19),
+23.16666667
+],
+[
+new Date(2002,4,20),
+24.22222222
+],
+[
+new Date(2002,4,21),
+27.72222222
+],
+[
+new Date(2002,4,22),
+24
+],
+[
+new Date(2002,4,23),
+24.83333333
+],
+[
+new Date(2002,4,24),
+24.44444444
+],
+[
+new Date(2002,4,25),
+25.5
+],
+[
+new Date(2002,4,26),
+27.66666667
+],
+[
+new Date(2002,4,27),
+26.61111111
+],
+[
+new Date(2002,4,28),
+24.94444444
+],
+[
+new Date(2002,4,29),
+26.05555556
+],
+[
+new Date(2002,4,30),
+29.33333333
+],
+[
+new Date(2002,4,31),
+25.44444444
+],
+[
+new Date(2002,5,1),
+24.66666667
+],
+[
+new Date(2002,5,2),
+24.83333333
+],
+[
+new Date(2002,5,3),
+25.44444444
+],
+[
+new Date(2002,5,4),
+25.77777778
+],
+[
+new Date(2002,5,5),
+25.05555556
+],
+[
+new Date(2002,5,6),
+25.66666667
+],
+[
+new Date(2002,5,7),
+26.88888889
+],
+[
+new Date(2002,5,8),
+29.88888889
+],
+[
+new Date(2002,5,9),
+30.88888889
+],
+[
+new Date(2002,5,10),
+31.5
+],
+[
+new Date(2002,5,11),
+28.22222222
+],
+[
+new Date(2002,5,12),
+25.77777778
+],
+[
+new Date(2002,5,13),
+25.66666667
+],
+[
+new Date(2002,5,14),
+26.44444444
+],
+[
+new Date(2002,5,15),
+26.88888889
+],
+[
+new Date(2002,5,16),
+26.88888889
+],
+[
+new Date(2002,5,17),
+27.66666667
+],
+[
+new Date(2002,5,22),
+27.44444444
+],
+[
+new Date(2002,5,23),
+27.5
+],
+[
+new Date(2002,5,24),
+28.11111111
+],
+[
+new Date(2002,5,25),
+28.72222222
+],
+[
+new Date(2002,5,26),
+28.44444444
+],
+[
+new Date(2002,5,27),
+28.16666667
+],
+[
+new Date(2002,5,28),
+27.11111111
+],
+[
+new Date(2002,5,29),
+27.16666667
+],
+[
+new Date(2002,5,30),
+28.27777778
+],
+[
+new Date(2002,6,1),
+29
+],
+[
+new Date(2002,6,2),
+28.5
+],
+[
+new Date(2002,6,3),
+27.61111111
+],
+[
+new Date(2002,6,4),
+28.5
+],
+[
+new Date(2002,6,5),
+30.33333333
+],
+[
+new Date(2002,6,6),
+29.66666667
+],
+[
+new Date(2002,6,7),
+29.5
+],
+[
+new Date(2002,6,8),
+28.77777778
+],
+[
+new Date(2002,6,9),
+32.33333333
+],
+[
+new Date(2002,6,10),
+29.05555556
+],
+[
+new Date(2002,6,11),
+28.66666667
+],
+[
+new Date(2002,6,12),
+29.88888889
+],
+[
+new Date(2002,6,13),
+31
+],
+[
+new Date(2002,6,14),
+30.66666667
+],
+[
+new Date(2002,6,15),
+29.5
+],
+[
+new Date(2002,6,16),
+30.72222222
+],
+[
+new Date(2002,6,17),
+31.61111111
+],
+[
+new Date(2002,6,18),
+31.33333333
+],
+[
+new Date(2002,6,19),
+30.27777778
+],
+[
+new Date(2002,6,20),
+29.44444444
+],
+[
+new Date(2002,6,21),
+28.44444444
+],
+[
+new Date(2002,6,22),
+28.27777778
+],
+[
+new Date(2002,6,23),
+29.27777778
+],
+[
+new Date(2002,6,24),
+29.66666667
+],
+[
+new Date(2002,6,25),
+29.11111111
+],
+[
+new Date(2002,6,26),
+31.94444444
+],
+[
+new Date(2002,6,27),
+34
+],
+[
+new Date(2002,6,28),
+33.77777778
+],
+[
+new Date(2002,6,29),
+36.55555556
+],
+[
+new Date(2002,6,30),
+35.44444444
+],
+[
+new Date(2002,6,31),
+33.22222222
+],
+[
+new Date(2002,7,1),
+31
+],
+[
+new Date(2002,7,2),
+29
+],
+[
+new Date(2002,7,3),
+28.77777778
+],
+[
+new Date(2002,7,4),
+29.66666667
+],
+[
+new Date(2002,7,5),
+30.16666667
+],
+[
+new Date(2002,7,6),
+30.44444444
+],
+[
+new Date(2002,7,7),
+30.5
+],
+[
+new Date(2002,7,8),
+31.61111111
+],
+[
+new Date(2002,7,9),
+29.05555556
+],
+[
+new Date(2002,7,10),
+28.83333333
+],
+[
+new Date(2002,7,11),
+29.33333333
+],
+[
+new Date(2002,7,12),
+31.77777778
+],
+[
+new Date(2002,7,13),
+31.83333333
+],
+[
+new Date(2002,7,14),
+29.66666667
+],
+[
+new Date(2002,7,15),
+28.94444444
+],
+[
+new Date(2002,7,16),
+28.77777778
+],
+[
+new Date(2002,7,17),
+28.55555556
+],
+[
+new Date(2002,7,18),
+28.61111111
+],
+[
+new Date(2002,7,19),
+28.38888889
+],
+[
+new Date(2002,7,20),
+28.88888889
+],
+[
+new Date(2002,7,21),
+28.83333333
+],
+[
+new Date(2002,7,22),
+28.27777778
+],
+[
+new Date(2002,7,23),
+27.55555556
+],
+[
+new Date(2002,7,24),
+27.55555556
+],
+[
+new Date(2002,7,25),
+27.77777778
+],
+[
+new Date(2002,7,26),
+28.5
+],
+[
+new Date(2002,7,27),
+29
+],
+[
+new Date(2002,7,28),
+28.66666667
+],
+[
+new Date(2002,7,29),
+28.11111111
+],
+[
+new Date(2002,7,30),
+28.22222222
+],
+[
+new Date(2002,7,31),
+29.5
+],
+[
+new Date(2002,8,1),
+31.77777778
+],
+[
+new Date(2002,8,2),
+27.33333333
+],
+[
+new Date(2002,8,3),
+29.77777778
+],
+[
+new Date(2002,8,4),
+28.61111111
+],
+[
+new Date(2002,8,5),
+27.38888889
+],
+[
+new Date(2002,8,6),
+27.44444444
+],
+[
+new Date(2002,8,7),
+27.88888889
+],
+[
+new Date(2002,8,8),
+28.05555556
+],
+[
+new Date(2002,8,9),
+29.27777778
+],
+[
+new Date(2002,8,10),
+31.22222222
+],
+[
+new Date(2002,8,11),
+27.72222222
+],
+[
+new Date(2002,8,12),
+28.22222222
+],
+[
+new Date(2002,8,13),
+28.83333333
+],
+[
+new Date(2002,8,14),
+28.11111111
+],
+[
+new Date(2002,8,15),
+29.94444444
+],
+[
+new Date(2002,8,16),
+33.66666667
+],
+[
+new Date(2002,8,17),
+34.55555556
+],
+[
+new Date(2002,8,18),
+27.94444444
+],
+[
+new Date(2002,8,19),
+26.22222222
+],
+[
+new Date(2002,8,20),
+25.27777778
+],
+[
+new Date(2002,8,21),
+25.55555556
+],
+[
+new Date(2002,8,22),
+26.38888889
+],
+[
+new Date(2002,8,23),
+26.05555556
+],
+[
+new Date(2002,8,24),
+26.61111111
+],
+[
+new Date(2002,8,25),
+26.05555556
+],
+[
+new Date(2002,8,26),
+28
+],
+[
+new Date(2002,8,27),
+29
+],
+[
+new Date(2002,8,28),
+28.44444444
+],
+[
+new Date(2002,8,29),
+30
+],
+[
+new Date(2002,8,30),
+29.16666667
+],
+[
+new Date(2002,9,1),
+28.5
+],
+[
+new Date(2002,9,2),
+26
+],
+[
+new Date(2002,9,3),
+23.33333333
+],
+[
+new Date(2002,9,4),
+23.77777778
+],
+[
+new Date(2002,9,5),
+23.83333333
+],
+[
+new Date(2002,9,6),
+24.11111111
+],
+[
+new Date(2002,9,7),
+25.16666667
+],
+[
+new Date(2002,9,8),
+25.94444444
+],
+[
+new Date(2002,9,9),
+24.88888889
+],
+[
+new Date(2002,9,10),
+24.66666667
+],
+[
+new Date(2002,9,11),
+25
+],
+[
+new Date(2002,9,12),
+26.11111111
+],
+[
+new Date(2002,9,13),
+27.05555556
+],
+[
+new Date(2002,9,14),
+26.66666667
+],
+[
+new Date(2002,9,15),
+25
+],
+[
+new Date(2002,9,16),
+22.83333333
+],
+[
+new Date(2002,9,17),
+24.05555556
+],
+[
+new Date(2002,9,18),
+24.27777778
+],
+[
+new Date(2002,9,19),
+24.5
+],
+[
+new Date(2002,9,20),
+24.05555556
+],
+[
+new Date(2002,9,21),
+23.88888889
+],
+[
+new Date(2002,9,22),
+22.66666667
+],
+[
+new Date(2002,9,23),
+22.88888889
+],
+[
+new Date(2002,9,24),
+23.55555556
+],
+[
+new Date(2002,9,25),
+24.05555556
+],
+[
+new Date(2002,9,26),
+25.22222222
+],
+[
+new Date(2002,9,27),
+23.44444444
+],
+[
+new Date(2002,9,28),
+22.44444444
+],
+[
+new Date(2002,9,29),
+22.11111111
+],
+[
+new Date(2002,9,30),
+21.83333333
+],
+[
+new Date(2002,9,31),
+21.66666667
+],
+[
+new Date(2002,10,1),
+21.44444444
+],
+[
+new Date(2002,10,2),
+21.61111111
+],
+[
+new Date(2002,10,3),
+22.33333333
+],
+[
+new Date(2002,10,4),
+22.61111111
+],
+[
+new Date(2002,10,5),
+22.27777778
+],
+[
+new Date(2002,10,6),
+21.55555556
+],
+[
+new Date(2002,10,7),
+21.44444444
+],
+[
+new Date(2002,10,8),
+24.22222222
+],
+[
+new Date(2002,10,9),
+22.5
+],
+[
+new Date(2002,10,10),
+20.61111111
+],
+[
+new Date(2002,10,11),
+20.16666667
+],
+[
+new Date(2002,10,12),
+20.33333333
+],
+[
+new Date(2002,10,13),
+19.44444444
+],
+[
+new Date(2002,10,14),
+19.72222222
+],
+[
+new Date(2002,10,15),
+19.55555556
+],
+[
+new Date(2002,10,16),
+20.83333333
+],
+[
+new Date(2002,10,17),
+20.66666667
+],
+[
+new Date(2002,10,18),
+19.72222222
+],
+[
+new Date(2002,10,19),
+18.44444444
+],
+[
+new Date(2002,10,20),
+18.22222222
+],
+[
+new Date(2002,10,21),
+19.44444444
+],
+[
+new Date(2002,10,22),
+19.88888889
+],
+[
+new Date(2002,10,23),
+19.72222222
+],
+[
+new Date(2002,10,24),
+19.61111111
+],
+[
+new Date(2002,10,25),
+18.83333333
+],
+[
+new Date(2002,10,26),
+17.88888889
+],
+[
+new Date(2002,10,27),
+18.11111111
+],
+[
+new Date(2002,10,28),
+16.72222222
+],
+[
+new Date(2002,10,29),
+19.05555556
+],
+[
+new Date(2002,10,30),
+18.33333333
+],
+[
+new Date(2002,11,1),
+17.94444444
+],
+[
+new Date(2002,11,2),
+18.61111111
+],
+[
+new Date(2002,11,3),
+17.88888889
+],
+[
+new Date(2002,11,4),
+16.61111111
+],
+[
+new Date(2002,11,5),
+18.16666667
+],
+[
+new Date(2002,11,6),
+18.83333333
+],
+[
+new Date(2002,11,7),
+18.27777778
+],
+[
+new Date(2002,11,8),
+20.61111111
+],
+[
+new Date(2002,11,9),
+17.66666667
+],
+[
+new Date(2002,11,10),
+16.11111111
+],
+[
+new Date(2002,11,11),
+16.16666667
+],
+[
+new Date(2002,11,12),
+15.72222222
+],
+[
+new Date(2002,11,13),
+15.11111111
+],
+[
+new Date(2002,11,14),
+15.05555556
+],
+[
+new Date(2002,11,15),
+16.66666667
+],
+[
+new Date(2002,11,16),
+16.88888889
+],
+[
+new Date(2002,11,17),
+16.5
+],
+[
+new Date(2002,11,18),
+16.66666667
+],
+[
+new Date(2002,11,19),
+17.05555556
+],
+[
+new Date(2002,11,20),
+13.94444444
+],
+[
+new Date(2002,11,21),
+11.83333333
+],
+[
+new Date(2002,11,22),
+12.27777778
+],
+[
+new Date(2002,11,23),
+13.16666667
+],
+[
+new Date(2002,11,24),
+14.88888889
+],
+[
+new Date(2002,11,25),
+15.5
+],
+[
+new Date(2002,11,26),
+17.27777778
+],
+[
+new Date(2002,11,27),
+16.38888889
+],
+[
+new Date(2002,11,28),
+15.5
+],
+[
+new Date(2002,11,29),
+15.88888889
+],
+[
+new Date(2002,11,30),
+16.44444444
+],
+[
+new Date(2002,11,31),
+16.22222222
+],
+[
+new Date(2003,0,1),
+16.5
+],
+[
+new Date(2003,0,2),
+16.11111111
+],
+[
+new Date(2003,0,3),
+16.22222222
+],
+[
+new Date(2003,0,4),
+17.05555556
+],
+[
+new Date(2003,0,5),
+17.88888889
+],
+[
+new Date(2003,0,6),
+19.44444444
+],
+[
+new Date(2003,0,7),
+18.16666667
+],
+[
+new Date(2003,0,8),
+17.61111111
+],
+[
+new Date(2003,0,9),
+16.11111111
+],
+[
+new Date(2003,0,10),
+16.27777778
+],
+[
+new Date(2003,0,11),
+16.94444444
+],
+[
+new Date(2003,0,12),
+20.44444444
+],
+[
+new Date(2003,0,13),
+16.55555556
+],
+[
+new Date(2003,0,14),
+16.11111111
+],
+[
+new Date(2003,0,15),
+14.44444444
+],
+[
+new Date(2003,0,16),
+14.83333333
+],
+[
+new Date(2003,0,17),
+14.94444444
+],
+[
+new Date(2003,0,18),
+15.27777778
+],
+[
+new Date(2003,0,19),
+14.33333333
+],
+[
+new Date(2003,0,20),
+15.22222222
+],
+[
+new Date(2003,0,21),
+15.5
+],
+[
+new Date(2003,0,22),
+15.83333333
+],
+[
+new Date(2003,0,23),
+15.66666667
+],
+[
+new Date(2003,0,24),
+15.94444444
+],
+[
+new Date(2003,0,25),
+15.77777778
+],
+[
+new Date(2003,0,26),
+17.27777778
+],
+[
+new Date(2003,0,27),
+15.55555556
+],
+[
+new Date(2003,0,28),
+14.61111111
+],
+[
+new Date(2003,0,29),
+15.38888889
+],
+[
+new Date(2003,0,30),
+15.61111111
+],
+[
+new Date(2003,0,31),
+15.72222222
+],
+[
+new Date(2003,1,1),
+17.66666667
+],
+[
+new Date(2003,1,2),
+16.61111111
+],
+[
+new Date(2003,1,3),
+14.22222222
+],
+[
+new Date(2003,1,4),
+14.16666667
+],
+[
+new Date(2003,1,5),
+14.22222222
+],
+[
+new Date(2003,1,6),
+15.27777778
+],
+[
+new Date(2003,1,7),
+18.55555556
+],
+[
+new Date(2003,1,8),
+13.66666667
+],
+[
+new Date(2003,1,9),
+13.27777778
+],
+[
+new Date(2003,1,10),
+13.05555556
+],
+[
+new Date(2003,1,11),
+14
+],
+[
+new Date(2003,1,12),
+15.5
+],
+[
+new Date(2003,1,13),
+13.83333333
+],
+[
+new Date(2003,1,14),
+13.83333333
+],
+[
+new Date(2003,1,15),
+14.05555556
+],
+[
+new Date(2003,1,16),
+14.88888889
+],
+[
+new Date(2003,1,17),
+19.72222222
+],
+[
+new Date(2003,1,18),
+21.5
+],
+[
+new Date(2003,1,19),
+15.83333333
+],
+[
+new Date(2003,1,20),
+14.55555556
+],
+[
+new Date(2003,1,21),
+15.66666667
+],
+[
+new Date(2003,1,22),
+13.61111111
+],
+[
+new Date(2003,1,23),
+15.11111111
+],
+[
+new Date(2003,1,24),
+10.83333333
+],
+[
+new Date(2003,1,25),
+10.44444444
+],
+[
+new Date(2003,1,26),
+11.27777778
+],
+[
+new Date(2003,1,27),
+12.38888889
+],
+[
+new Date(2003,1,28),
+13.33333333
+],
+[
+new Date(2003,2,1),
+16.83333333
+],
+[
+new Date(2003,2,2),
+20.44444444
+],
+[
+new Date(2003,2,3),
+16.5
+],
+[
+new Date(2003,2,4),
+16.66666667
+],
+[
+new Date(2003,2,5),
+18.94444444
+],
+[
+new Date(2003,2,6),
+15.94444444
+],
+[
+new Date(2003,2,7),
+15.77777778
+],
+[
+new Date(2003,2,8),
+15.5
+],
+[
+new Date(2003,2,9),
+16.22222222
+],
+[
+new Date(2003,2,10),
+15.72222222
+],
+[
+new Date(2003,2,11),
+14.11111111
+],
+[
+new Date(2003,2,12),
+14
+],
+[
+new Date(2003,2,13),
+15.94444444
+],
+[
+new Date(2003,2,14),
+18.5
+],
+[
+new Date(2003,2,15),
+18.16666667
+],
+[
+new Date(2003,2,16),
+16.61111111
+],
+[
+new Date(2003,2,17),
+19.38888889
+],
+[
+new Date(2003,2,18),
+16.05555556
+],
+[
+new Date(2003,2,19),
+14.88888889
+],
+[
+new Date(2003,2,20),
+14.72222222
+],
+[
+new Date(2003,2,21),
+14.38888889
+],
+[
+new Date(2003,2,22),
+15.16666667
+],
+[
+new Date(2003,2,23),
+15.44444444
+],
+[
+new Date(2003,2,24),
+12.11111111
+],
+[
+new Date(2003,2,25),
+8.777777778
+],
+[
+new Date(2003,2,26),
+14.16666667
+],
+[
+new Date(2003,2,27),
+16.38888889
+],
+[
+new Date(2003,2,28),
+16.16666667
+],
+[
+new Date(2003,2,29),
+16.05555556
+],
+[
+new Date(2003,2,30),
+16.72222222
+],
+[
+new Date(2003,2,31),
+19.55555556
+],
+[
+new Date(2003,3,1),
+21.38888889
+],
+[
+new Date(2003,3,2),
+28.33333333
+],
+[
+new Date(2003,3,3),
+25.05555556
+],
+[
+new Date(2003,3,5),
+31.55555556
+],
+[
+new Date(2003,3,6),
+22.11111111
+],
+[
+new Date(2003,3,7),
+21
+],
+[
+new Date(2003,3,8),
+20.5
+],
+[
+new Date(2003,3,9),
+19.27777778
+],
+[
+new Date(2003,3,10),
+18
+],
+[
+new Date(2003,3,11),
+18.11111111
+],
+[
+new Date(2003,3,12),
+19.66666667
+],
+[
+new Date(2003,3,13),
+19.61111111
+],
+[
+new Date(2003,3,14),
+20.22222222
+],
+[
+new Date(2003,3,15),
+18.61111111
+],
+[
+new Date(2003,3,16),
+19.05555556
+],
+[
+new Date(2003,3,17),
+23.88888889
+],
+[
+new Date(2003,3,18),
+26.44444444
+],
+[
+new Date(2003,3,19),
+21.83333333
+],
+[
+new Date(2003,3,20),
+18.61111111
+],
+[
+new Date(2003,3,21),
+17.77777778
+],
+[
+new Date(2003,3,22),
+18.72222222
+],
+[
+new Date(2003,3,23),
+26.38888889
+],
+[
+new Date(2003,3,24),
+31.77777778
+],
+[
+new Date(2003,3,25),
+23.22222222
+],
+[
+new Date(2003,3,26),
+18.5
+],
+[
+new Date(2003,3,27),
+18.22222222
+],
+[
+new Date(2003,3,28),
+19.27777778
+],
+[
+new Date(2003,3,29),
+20.16666667
+],
+[
+new Date(2003,3,30),
+20.05555556
+],
+[
+new Date(2003,4,1),
+21.05555556
+],
+[
+new Date(2003,4,2),
+23.27777778
+],
+[
+new Date(2003,4,3),
+25.11111111
+],
+[
+new Date(2003,4,4),
+26.05555556
+],
+[
+new Date(2003,4,5),
+25.77777778
+],
+[
+new Date(2003,4,6),
+24.38888889
+],
+[
+new Date(2003,4,7),
+24
+],
+[
+new Date(2003,4,8),
+25.55555556
+],
+[
+new Date(2003,4,9),
+25.27777778
+],
+[
+new Date(2003,4,10),
+24.38888889
+],
+[
+new Date(2003,4,11),
+24.77777778
+],
+[
+new Date(2003,4,12),
+26.27777778
+],
+[
+new Date(2003,4,13),
+27.66666667
+],
+[
+new Date(2003,4,14),
+28.11111111
+],
+[
+new Date(2003,4,15),
+31.27777778
+],
+[
+new Date(2003,4,16),
+29.11111111
+],
+[
+new Date(2003,4,17),
+26.27777778
+],
+[
+new Date(2003,4,18),
+27.5
+],
+[
+new Date(2003,4,19),
+27.83333333
+],
+[
+new Date(2003,4,20),
+26.44444444
+],
+[
+new Date(2003,4,21),
+27.44444444
+],
+[
+new Date(2003,4,22),
+27.66666667
+],
+[
+new Date(2003,4,23),
+30.11111111
+],
+[
+new Date(2003,4,24),
+27.66666667
+],
+[
+new Date(2003,4,25),
+27
+],
+[
+new Date(2003,4,26),
+26.38888889
+],
+[
+new Date(2003,4,27),
+25.38888889
+],
+[
+new Date(2003,4,28),
+30.88888889
+],
+[
+new Date(2003,4,29),
+34.38888889
+],
+[
+new Date(2003,4,30),
+27.33333333
+],
+[
+new Date(2003,4,31),
+26.27777778
+],
+[
+new Date(2003,5,1),
+25.44444444
+],
+[
+new Date(2003,5,2),
+26.72222222
+],
+[
+new Date(2003,5,3),
+26.38888889
+],
+[
+new Date(2003,5,4),
+25.61111111
+],
+[
+new Date(2003,5,5),
+27
+],
+[
+new Date(2003,5,6),
+28.05555556
+],
+[
+new Date(2003,5,7),
+28.94444444
+],
+[
+new Date(2003,5,8),
+27.72222222
+],
+[
+new Date(2003,5,9),
+27.72222222
+],
+[
+new Date(2003,5,10),
+28
+],
+[
+new Date(2003,5,11),
+27.27777778
+],
+[
+new Date(2003,5,12),
+27.83333333
+],
+[
+new Date(2003,5,13),
+28.05555556
+],
+[
+new Date(2003,5,14),
+28.66666667
+],
+[
+new Date(2003,5,15),
+30.44444444
+],
+[
+new Date(2003,5,16),
+32.5
+],
+[
+new Date(2003,5,17),
+31.72222222
+],
+[
+new Date(2003,5,18),
+28.83333333
+],
+[
+new Date(2003,5,19),
+28.61111111
+],
+[
+new Date(2003,5,20),
+28.5
+],
+[
+new Date(2003,5,21),
+29.77777778
+],
+[
+new Date(2003,5,22),
+29.94444444
+],
+[
+new Date(2003,5,23),
+28.72222222
+],
+[
+new Date(2003,5,24),
+28.77777778
+],
+[
+new Date(2003,5,25),
+29.27777778
+],
+[
+new Date(2003,5,26),
+29.33333333
+],
+[
+new Date(2003,5,27),
+28.72222222
+],
+[
+new Date(2003,5,28),
+29.27777778
+],
+[
+new Date(2003,5,29),
+28.94444444
+],
+[
+new Date(2003,5,30),
+29.44444444
+],
+[
+new Date(2003,6,1),
+29.38888889
+],
+[
+new Date(2003,6,2),
+29.5
+],
+[
+new Date(2003,6,3),
+30.83333333
+],
+[
+new Date(2003,6,4),
+30.94444444
+],
+[
+new Date(2003,6,5),
+30.05555556
+],
+[
+new Date(2003,6,6),
+31.77777778
+],
+[
+new Date(2003,6,7),
+28.88888889
+],
+[
+new Date(2003,6,8),
+27.77777778
+],
+[
+new Date(2003,6,9),
+27.22222222
+],
+[
+new Date(2003,6,10),
+26.77777778
+],
+[
+new Date(2003,6,11),
+26.88888889
+],
+[
+new Date(2003,6,12),
+27.22222222
+],
+[
+new Date(2003,6,13),
+27.72222222
+],
+[
+new Date(2003,6,14),
+27
+],
+[
+new Date(2003,6,15),
+27.33333333
+],
+[
+new Date(2003,6,16),
+27.77777778
+],
+[
+new Date(2003,6,17),
+28.16666667
+],
+[
+new Date(2003,6,18),
+29.33333333
+],
+[
+new Date(2003,6,19),
+30.38888889
+],
+[
+new Date(2003,6,20),
+30.38888889
+],
+[
+new Date(2003,6,21),
+28.16666667
+],
+[
+new Date(2003,6,22),
+27.77777778
+],
+[
+new Date(2003,6,23),
+28.77777778
+],
+[
+new Date(2003,6,24),
+28.44444444
+],
+[
+new Date(2003,6,25),
+28.61111111
+],
+[
+new Date(2003,6,26),
+29.38888889
+],
+[
+new Date(2003,6,27),
+28.61111111
+],
+[
+new Date(2003,6,28),
+28.33333333
+],
+[
+new Date(2003,6,29),
+28.72222222
+],
+[
+new Date(2003,6,30),
+28.72222222
+],
+[
+new Date(2003,6,31),
+29.05555556
+],
+[
+new Date(2003,7,1),
+29.44444444
+],
+[
+new Date(2003,7,2),
+30.27777778
+],
+[
+new Date(2003,7,3),
+30.61111111
+],
+[
+new Date(2003,7,4),
+29.83333333
+],
+[
+new Date(2003,7,5),
+28.88888889
+],
+[
+new Date(2003,7,6),
+29
+],
+[
+new Date(2003,7,7),
+28.38888889
+],
+[
+new Date(2003,7,8),
+28.94444444
+],
+[
+new Date(2003,7,9),
+28.83333333
+],
+[
+new Date(2003,7,10),
+28.5
+],
+[
+new Date(2003,7,11),
+27.27777778
+],
+[
+new Date(2003,7,12),
+27.38888889
+],
+[
+new Date(2003,7,13),
+28.11111111
+],
+[
+new Date(2003,7,14),
+27.77777778
+],
+[
+new Date(2003,7,15),
+27.94444444
+],
+[
+new Date(2003,7,16),
+28.38888889
+],
+[
+new Date(2003,7,17),
+29.05555556
+],
+[
+new Date(2003,7,18),
+29
+],
+[
+new Date(2003,7,19),
+29.66666667
+],
+[
+new Date(2003,7,20),
+29.83333333
+],
+[
+new Date(2003,7,21),
+29.16666667
+],
+[
+new Date(2003,7,22),
+29.22222222
+],
+[
+new Date(2003,7,23),
+28.88888889
+],
+[
+new Date(2003,7,24),
+28.88888889
+],
+[
+new Date(2003,7,25),
+29.22222222
+],
+[
+new Date(2003,7,26),
+28.94444444
+],
+[
+new Date(2003,7,27),
+28.94444444
+],
+[
+new Date(2003,7,28),
+30.44444444
+],
+[
+new Date(2003,7,29),
+29.5
+],
+[
+new Date(2003,7,30),
+29.05555556
+],
+[
+new Date(2003,7,31),
+29
+],
+[
+new Date(2003,8,1),
+29.66666667
+],
+[
+new Date(2003,8,2),
+31.27777778
+],
+[
+new Date(2003,8,3),
+30.11111111
+],
+[
+new Date(2003,8,4),
+29.27777778
+],
+[
+new Date(2003,8,5),
+26.66666667
+],
+[
+new Date(2003,8,6),
+25
+],
+[
+new Date(2003,8,7),
+25.33333333
+],
+[
+new Date(2003,8,8),
+26.27777778
+],
+[
+new Date(2003,8,9),
+25.44444444
+],
+[
+new Date(2003,8,10),
+28.83333333
+],
+[
+new Date(2003,8,11),
+31.66666667
+],
+[
+new Date(2003,8,12),
+28.22222222
+],
+[
+new Date(2003,8,13),
+27.27777778
+],
+[
+new Date(2003,8,14),
+27.05555556
+],
+[
+new Date(2003,8,15),
+26.77777778
+],
+[
+new Date(2003,8,16),
+27.27777778
+],
+[
+new Date(2003,8,17),
+30.44444444
+],
+[
+new Date(2003,8,18),
+28.05555556
+],
+[
+new Date(2003,8,19),
+25.72222222
+],
+[
+new Date(2003,8,20),
+25.66666667
+],
+[
+new Date(2003,8,21),
+26.05555556
+],
+[
+new Date(2003,8,22),
+25.44444444
+],
+[
+new Date(2003,8,23),
+25.83333333
+],
+[
+new Date(2003,8,24),
+26.22222222
+],
+[
+new Date(2003,8,25),
+25.11111111
+],
+[
+new Date(2003,8,26),
+25.05555556
+],
+[
+new Date(2003,8,27),
+24.88888889
+],
+[
+new Date(2003,8,28),
+24.16666667
+],
+[
+new Date(2003,8,29),
+24.22222222
+],
+[
+new Date(2003,8,30),
+26.11111111
+],
+[
+new Date(2003,9,1),
+26.11111111
+],
+[
+new Date(2003,9,2),
+24.88888889
+],
+[
+new Date(2003,9,3),
+25.05555556
+],
+[
+new Date(2003,9,4),
+25.27777778
+],
+[
+new Date(2003,9,5),
+25.38888889
+],
+[
+new Date(2003,9,6),
+26.16666667
+],
+[
+new Date(2003,9,7),
+26
+],
+[
+new Date(2003,9,8),
+25.77777778
+],
+[
+new Date(2003,9,9),
+26
+],
+[
+new Date(2003,9,10),
+25.72222222
+],
+[
+new Date(2003,9,11),
+23.05555556
+],
+[
+new Date(2003,9,12),
+21.72222222
+],
+[
+new Date(2003,9,13),
+22.55555556
+],
+[
+new Date(2003,9,14),
+23
+],
+[
+new Date(2003,9,15),
+22.55555556
+],
+[
+new Date(2003,9,16),
+22.55555556
+],
+[
+new Date(2003,9,17),
+22.66666667
+],
+[
+new Date(2003,9,18),
+24.11111111
+],
+[
+new Date(2003,9,19),
+23.55555556
+],
+[
+new Date(2003,9,20),
+24.5
+],
+[
+new Date(2003,9,21),
+26
+],
+[
+new Date(2003,9,22),
+26.61111111
+],
+[
+new Date(2003,9,23),
+26.5
+],
+[
+new Date(2003,9,24),
+26.88888889
+],
+[
+new Date(2003,9,25),
+25.05555556
+],
+[
+new Date(2003,9,26),
+26.16666667
+],
+[
+new Date(2003,9,27),
+23.77777778
+],
+[
+new Date(2003,9,28),
+24.44444444
+],
+[
+new Date(2003,9,29),
+21.5
+],
+[
+new Date(2003,9,30),
+20.33333333
+],
+[
+new Date(2003,9,31),
+24.5
+],
+[
+new Date(2003,10,1),
+28
+],
+[
+new Date(2003,10,2),
+25.66666667
+],
+[
+new Date(2003,10,3),
+24.44444444
+],
+[
+new Date(2003,10,4),
+24.27777778
+],
+[
+new Date(2003,10,5),
+22.66666667
+],
+[
+new Date(2003,10,6),
+23.55555556
+],
+[
+new Date(2003,10,7),
+23.05555556
+],
+[
+new Date(2003,10,8),
+21.16666667
+],
+[
+new Date(2003,10,9),
+20.27777778
+],
+[
+new Date(2003,10,10),
+18.38888889
+],
+[
+new Date(2003,10,11),
+17.83333333
+],
+[
+new Date(2003,10,12),
+17.5
+],
+[
+new Date(2003,10,13),
+17.77777778
+],
+[
+new Date(2003,10,14),
+18.61111111
+],
+[
+new Date(2003,10,15),
+18.83333333
+],
+[
+new Date(2003,10,16),
+18.88888889
+],
+[
+new Date(2003,10,17),
+18.83333333
+],
+[
+new Date(2003,10,18),
+19.22222222
+],
+[
+new Date(2003,10,19),
+18.77777778
+],
+[
+new Date(2003,10,20),
+19.22222222
+],
+[
+new Date(2003,10,21),
+19.11111111
+],
+[
+new Date(2003,10,22),
+19.66666667
+],
+[
+new Date(2003,10,23),
+19.72222222
+],
+[
+new Date(2003,10,24),
+19.27777778
+],
+[
+new Date(2003,10,25),
+19.27777778
+],
+[
+new Date(2003,10,26),
+18.61111111
+],
+[
+new Date(2003,10,27),
+17.77777778
+],
+[
+new Date(2003,10,28),
+17.5
+],
+[
+new Date(2003,10,29),
+17.72222222
+],
+[
+new Date(2003,10,30),
+17.66666667
+],
+[
+new Date(2003,11,1),
+17.72222222
+],
+[
+new Date(2003,11,2),
+17.11111111
+],
+[
+new Date(2003,11,3),
+17.11111111
+],
+[
+new Date(2003,11,4),
+15.27777778
+],
+[
+new Date(2003,11,5),
+15.77777778
+],
+[
+new Date(2003,11,6),
+16.22222222
+],
+[
+new Date(2003,11,7),
+16.38888889
+],
+[
+new Date(2003,11,8),
+16.44444444
+],
+[
+new Date(2003,11,9),
+18.33333333
+],
+[
+new Date(2003,11,10),
+16.94444444
+],
+[
+new Date(2003,11,11),
+17.44444444
+],
+[
+new Date(2003,11,12),
+18.11111111
+],
+[
+new Date(2003,11,13),
+18.38888889
+],
+[
+new Date(2003,11,14),
+18.88888889
+],
+[
+new Date(2003,11,15),
+18.61111111
+],
+[
+new Date(2003,11,16),
+18
+],
+[
+new Date(2003,11,17),
+17.38888889
+],
+[
+new Date(2003,11,18),
+12.5
+],
+[
+new Date(2003,11,19),
+12.88888889
+],
+[
+new Date(2003,11,20),
+12.77777778
+],
+[
+new Date(2003,11,21),
+12.5
+],
+[
+new Date(2003,11,22),
+12.38888889
+],
+[
+new Date(2003,11,23),
+13.33333333
+],
+[
+new Date(2003,11,24),
+12.72222222
+],
+[
+new Date(2003,11,25),
+13.38888889
+],
+[
+new Date(2003,11,26),
+12
+],
+[
+new Date(2003,11,27),
+11.94444444
+],
+[
+new Date(2003,11,28),
+13.72222222
+],
+[
+new Date(2003,11,29),
+13.88888889
+],
+[
+new Date(2003,11,30),
+13.27777778
+],
+[
+new Date(2003,11,31),
+13.88888889
+],
+[
+new Date(2004,0,1),
+14.94444444
+],
+[
+new Date(2004,0,2),
+15.94444444
+],
+[
+new Date(2004,0,3),
+13.83333333
+],
+[
+new Date(2004,0,4),
+15.94444444
+],
+[
+new Date(2004,0,5),
+15.77777778
+],
+[
+new Date(2004,0,6),
+14.66666667
+],
+[
+new Date(2004,0,7),
+13.27777778
+],
+[
+new Date(2004,0,8),
+11.77777778
+],
+[
+new Date(2004,0,9),
+13.22222222
+],
+[
+new Date(2004,0,10),
+13.83333333
+],
+[
+new Date(2004,0,11),
+15.72222222
+],
+[
+new Date(2004,0,12),
+12.16666667
+],
+[
+new Date(2004,0,13),
+14.05555556
+],
+[
+new Date(2004,0,14),
+15
+],
+[
+new Date(2004,0,15),
+16.72222222
+],
+[
+new Date(2004,0,16),
+17
+],
+[
+new Date(2004,0,17),
+15.38888889
+],
+[
+new Date(2004,0,18),
+13.94444444
+],
+[
+new Date(2004,0,19),
+13.38888889
+],
+[
+new Date(2004,0,20),
+15
+],
+[
+new Date(2004,0,21),
+16.94444444
+],
+[
+new Date(2004,0,22),
+17.44444444
+],
+[
+new Date(2004,0,23),
+12.61111111
+],
+[
+new Date(2004,0,24),
+12.05555556
+],
+[
+new Date(2004,0,25),
+14.22222222
+],
+[
+new Date(2004,0,26),
+12.72222222
+],
+[
+new Date(2004,0,27),
+14.55555556
+],
+[
+new Date(2004,0,28),
+14.33333333
+],
+[
+new Date(2004,0,29),
+16
+],
+[
+new Date(2004,0,30),
+17.16666667
+],
+[
+new Date(2004,0,31),
+14.55555556
+],
+[
+new Date(2004,1,1),
+13.61111111
+],
+[
+new Date(2004,1,2),
+14.05555556
+],
+[
+new Date(2004,1,3),
+13.66666667
+],
+[
+new Date(2004,1,4),
+12.38888889
+],
+[
+new Date(2004,1,5),
+13
+],
+[
+new Date(2004,1,6),
+13.72222222
+],
+[
+new Date(2004,1,7),
+15.16666667
+],
+[
+new Date(2004,1,8),
+15.88888889
+],
+[
+new Date(2004,1,9),
+15.05555556
+],
+[
+new Date(2004,1,10),
+15.44444444
+],
+[
+new Date(2004,1,11),
+14.77777778
+],
+[
+new Date(2004,1,12),
+16.38888889
+],
+[
+new Date(2004,1,13),
+15.94444444
+],
+[
+new Date(2004,1,14),
+10.05555556
+],
+[
+new Date(2004,1,15),
+11.5
+],
+[
+new Date(2004,1,16),
+13.94444444
+],
+[
+new Date(2004,1,17),
+15.16666667
+],
+[
+new Date(2004,1,18),
+15.61111111
+],
+[
+new Date(2004,1,19),
+13.16666667
+],
+[
+new Date(2004,1,20),
+13.33333333
+],
+[
+new Date(2004,1,21),
+14.33333333
+],
+[
+new Date(2004,1,22),
+13.05555556
+],
+[
+new Date(2004,1,23),
+14.16666667
+],
+[
+new Date(2004,1,24),
+20.83333333
+],
+[
+new Date(2004,1,25),
+19.38888889
+],
+[
+new Date(2004,1,26),
+21
+],
+[
+new Date(2004,1,27),
+22.66666667
+],
+[
+new Date(2004,1,28),
+24.88888889
+],
+[
+new Date(2004,1,29),
+26.44444444
+],
+[
+new Date(2004,2,1),
+21.22222222
+],
+[
+new Date(2004,2,2),
+20.61111111
+],
+[
+new Date(2004,2,3),
+25.38888889
+],
+[
+new Date(2004,2,4),
+31.44444444
+],
+[
+new Date(2004,2,5),
+20.77777778
+],
+[
+new Date(2004,2,6),
+15.88888889
+],
+[
+new Date(2004,2,7),
+13.22222222
+],
+[
+new Date(2004,2,8),
+13.27777778
+],
+[
+new Date(2004,2,9),
+14.61111111
+],
+[
+new Date(2004,2,10),
+17.88888889
+],
+[
+new Date(2004,2,11),
+18.05555556
+],
+[
+new Date(2004,2,12),
+16.83333333
+],
+[
+new Date(2004,2,13),
+16.16666667
+],
+[
+new Date(2004,2,14),
+15.55555556
+],
+[
+new Date(2004,2,15),
+15.05555556
+],
+[
+new Date(2004,2,16),
+14.83333333
+],
+[
+new Date(2004,2,17),
+15
+],
+[
+new Date(2004,2,18),
+16
+],
+[
+new Date(2004,2,19),
+16.61111111
+],
+[
+new Date(2004,2,20),
+16.33333333
+],
+[
+new Date(2004,2,21),
+16.55555556
+],
+[
+new Date(2004,2,22),
+18
+],
+[
+new Date(2004,2,23),
+19.05555556
+],
+[
+new Date(2004,2,24),
+19
+],
+[
+new Date(2004,2,25),
+18.94444444
+],
+[
+new Date(2004,2,26),
+17.61111111
+],
+[
+new Date(2004,2,27),
+18.11111111
+],
+[
+new Date(2004,2,28),
+20.33333333
+],
+[
+new Date(2004,2,29),
+23.77777778
+],
+[
+new Date(2004,2,30),
+23.66666667
+],
+[
+new Date(2004,2,31),
+23.05555556
+],
+[
+new Date(2004,3,1),
+27.33333333
+],
+[
+new Date(2004,3,2),
+21.72222222
+],
+[
+new Date(2004,3,3),
+18.11111111
+],
+[
+new Date(2004,3,4),
+18.44444444
+],
+[
+new Date(2004,3,5),
+17.77777778
+],
+[
+new Date(2004,3,6),
+16.77777778
+],
+[
+new Date(2004,3,7),
+17.22222222
+],
+[
+new Date(2004,3,8),
+17.61111111
+],
+[
+new Date(2004,3,9),
+18
+],
+[
+new Date(2004,3,10),
+19.94444444
+],
+[
+new Date(2004,3,11),
+22.27777778
+],
+[
+new Date(2004,3,12),
+23.27777778
+],
+[
+new Date(2004,3,13),
+24.44444444
+],
+[
+new Date(2004,3,14),
+25.05555556
+],
+[
+new Date(2004,3,15),
+20.61111111
+],
+[
+new Date(2004,3,16),
+18.16666667
+],
+[
+new Date(2004,3,17),
+19.94444444
+],
+[
+new Date(2004,3,18),
+25.05555556
+],
+[
+new Date(2004,3,19),
+22.05555556
+],
+[
+new Date(2004,3,20),
+25.11111111
+],
+[
+new Date(2004,3,21),
+21.61111111
+],
+[
+new Date(2004,3,22),
+20.55555556
+],
+[
+new Date(2004,3,23),
+19.22222222
+],
+[
+new Date(2004,3,24),
+19.94444444
+],
+[
+new Date(2004,3,25),
+21.88888889
+],
+[
+new Date(2004,3,26),
+25.88888889
+],
+[
+new Date(2004,3,27),
+25.66666667
+],
+[
+new Date(2004,3,28),
+26
+],
+[
+new Date(2004,3,29),
+21.22222222
+],
+[
+new Date(2004,3,30),
+21.38888889
+],
+[
+new Date(2004,4,1),
+24.38888889
+],
+[
+new Date(2004,4,2),
+23.83333333
+],
+[
+new Date(2004,4,3),
+21.66666667
+],
+[
+new Date(2004,4,4),
+22.05555556
+],
+[
+new Date(2004,4,5),
+26
+],
+[
+new Date(2004,4,6),
+30.83333333
+],
+[
+new Date(2004,4,7),
+27.55555556
+],
+[
+new Date(2004,4,8),
+27.11111111
+],
+[
+new Date(2004,4,9),
+30.33333333
+],
+[
+new Date(2004,4,10),
+30.38888889
+],
+[
+new Date(2004,4,11),
+23.27777778
+],
+[
+new Date(2004,4,12),
+22.33333333
+],
+[
+new Date(2004,4,13),
+26.61111111
+],
+[
+new Date(2004,4,14),
+29.16666667
+],
+[
+new Date(2004,4,15),
+22.55555556
+],
+[
+new Date(2004,4,16),
+22.27777778
+],
+[
+new Date(2004,4,17),
+24.5
+],
+[
+new Date(2004,4,18),
+26.77777778
+],
+[
+new Date(2004,4,19),
+26.11111111
+],
+[
+new Date(2004,4,20),
+22.38888889
+],
+[
+new Date(2004,4,21),
+22
+],
+[
+new Date(2004,4,22),
+23.11111111
+],
+[
+new Date(2004,4,23),
+22.83333333
+],
+[
+new Date(2004,4,24),
+23.44444444
+],
+[
+new Date(2004,4,25),
+24.22222222
+],
+[
+new Date(2004,4,26),
+24.94444444
+],
+[
+new Date(2004,4,27),
+26.72222222
+],
+[
+new Date(2004,4,28),
+25.33333333
+],
+[
+new Date(2004,4,29),
+28.5
+],
+[
+new Date(2004,4,30),
+30.11111111
+],
+[
+new Date(2004,4,31),
+24.77777778
+],
+[
+new Date(2004,5,1),
+23.5
+],
+[
+new Date(2004,5,2),
+23.72222222
+],
+[
+new Date(2004,5,3),
+24.05555556
+],
+[
+new Date(2004,5,4),
+24.66666667
+],
+[
+new Date(2004,5,5),
+25.55555556
+],
+[
+new Date(2004,5,6),
+28.55555556
+],
+[
+new Date(2004,5,7),
+31.27777778
+],
+[
+new Date(2004,5,8),
+26.72222222
+],
+[
+new Date(2004,5,9),
+24.61111111
+],
+[
+new Date(2004,5,10),
+25.05555556
+],
+[
+new Date(2004,5,11),
+26.33333333
+],
+[
+new Date(2004,5,12),
+27.27777778
+],
+[
+new Date(2004,5,13),
+27.72222222
+],
+[
+new Date(2004,5,14),
+27.5
+],
+[
+new Date(2004,5,15),
+28.72222222
+],
+[
+new Date(2004,5,16),
+28.27777778
+],
+[
+new Date(2004,5,17),
+28.5
+],
+[
+new Date(2004,5,18),
+30.55555556
+],
+[
+new Date(2004,5,19),
+32.05555556
+],
+[
+new Date(2004,5,20),
+27.05555556
+],
+[
+new Date(2004,5,21),
+27.05555556
+],
+[
+new Date(2004,5,22),
+27.38888889
+],
+[
+new Date(2004,5,23),
+27.66666667
+],
+[
+new Date(2004,5,24),
+27.22222222
+],
+[
+new Date(2004,5,25),
+26.66666667
+],
+[
+new Date(2004,5,26),
+27.5
+],
+[
+new Date(2004,5,27),
+28.38888889
+],
+[
+new Date(2004,5,28),
+28
+],
+[
+new Date(2004,5,29),
+28
+],
+[
+new Date(2004,5,30),
+29.22222222
+],
+[
+new Date(2004,6,1),
+29.11111111
+],
+[
+new Date(2004,6,2),
+27.16666667
+],
+[
+new Date(2004,6,3),
+27.5
+],
+[
+new Date(2004,6,4),
+28.11111111
+],
+[
+new Date(2004,6,5),
+29.5
+],
+[
+new Date(2004,6,6),
+29.88888889
+],
+[
+new Date(2004,6,7),
+29.55555556
+],
+[
+new Date(2004,6,8),
+28.77777778
+],
+[
+new Date(2004,6,9),
+28.61111111
+],
+[
+new Date(2004,6,10),
+29.5
+],
+[
+new Date(2004,6,11),
+29.44444444
+],
+[
+new Date(2004,6,12),
+30.11111111
+],
+[
+new Date(2004,6,13),
+31.38888889
+],
+[
+new Date(2004,6,14),
+33.27777778
+],
+[
+new Date(2004,6,15),
+30.44444444
+],
+[
+new Date(2004,6,16),
+28.55555556
+],
+[
+new Date(2004,6,17),
+27.05555556
+],
+[
+new Date(2004,6,18),
+26.94444444
+],
+[
+new Date(2004,6,19),
+27.66666667
+],
+[
+new Date(2004,6,20),
+27.27777778
+],
+[
+new Date(2004,6,21),
+27.44444444
+],
+[
+new Date(2004,6,22),
+28.16666667
+],
+[
+new Date(2004,6,23),
+28.44444444
+],
+[
+new Date(2004,6,24),
+28.66666667
+],
+[
+new Date(2004,6,25),
+29.22222222
+],
+[
+new Date(2004,6,26),
+30.5
+],
+[
+new Date(2004,6,27),
+30.83333333
+],
+[
+new Date(2004,6,28),
+30.61111111
+],
+[
+new Date(2004,6,29),
+31.33333333
+],
+[
+new Date(2004,6,30),
+31.11111111
+],
+[
+new Date(2004,6,31),
+29.05555556
+],
+[
+new Date(2004,7,1),
+27.61111111
+],
+[
+new Date(2004,7,2),
+27.44444444
+],
+[
+new Date(2004,7,3),
+28.11111111
+],
+[
+new Date(2004,7,4),
+28.33333333
+],
+[
+new Date(2004,7,5),
+28.22222222
+],
+[
+new Date(2004,7,6),
+29.22222222
+],
+[
+new Date(2004,7,7),
+29.22222222
+],
+[
+new Date(2004,7,8),
+30.94444444
+],
+[
+new Date(2004,7,9),
+29.94444444
+],
+[
+new Date(2004,7,10),
+28.66666667
+],
+[
+new Date(2004,7,11),
+29.55555556
+],
+[
+new Date(2004,7,12),
+28.22222222
+],
+[
+new Date(2004,7,13),
+28.72222222
+],
+[
+new Date(2004,7,14),
+29.22222222
+],
+[
+new Date(2004,7,15),
+29.66666667
+],
+[
+new Date(2004,7,16),
+30.94444444
+],
+[
+new Date(2004,7,17),
+30.22222222
+],
+[
+new Date(2004,7,18),
+27.94444444
+],
+[
+new Date(2004,7,19),
+26.83333333
+],
+[
+new Date(2004,7,20),
+27.5
+],
+[
+new Date(2004,7,21),
+29.22222222
+],
+[
+new Date(2004,7,22),
+29.94444444
+],
+[
+new Date(2004,7,23),
+29.44444444
+],
+[
+new Date(2004,7,24),
+28.88888889
+],
+[
+new Date(2004,7,25),
+28.05555556
+],
+[
+new Date(2004,7,26),
+27.33333333
+],
+[
+new Date(2004,7,27),
+28.05555556
+],
+[
+new Date(2004,7,28),
+29.77777778
+],
+[
+new Date(2004,7,29),
+28
+],
+[
+new Date(2004,7,30),
+26.61111111
+],
+[
+new Date(2004,7,31),
+26.83333333
+],
+[
+new Date(2004,8,1),
+26.94444444
+],
+[
+new Date(2004,8,2),
+27.94444444
+],
+[
+new Date(2004,8,3),
+27.77777778
+],
+[
+new Date(2004,8,4),
+28
+],
+[
+new Date(2004,8,5),
+28.61111111
+],
+[
+new Date(2004,8,6),
+28.55555556
+],
+[
+new Date(2004,8,7),
+28.44444444
+],
+[
+new Date(2004,8,8),
+27.83333333
+],
+[
+new Date(2004,8,9),
+26.22222222
+],
+[
+new Date(2004,8,10),
+25.61111111
+],
+[
+new Date(2004,8,11),
+25
+],
+[
+new Date(2004,8,12),
+24.44444444
+],
+[
+new Date(2004,8,13),
+24.83333333
+],
+[
+new Date(2004,8,14),
+24.66666667
+],
+[
+new Date(2004,8,15),
+24.61111111
+],
+[
+new Date(2004,8,16),
+24.33333333
+],
+[
+new Date(2004,8,17),
+25.38888889
+],
+[
+new Date(2004,8,18),
+25.61111111
+],
+[
+new Date(2004,8,19),
+26.38888889
+],
+[
+new Date(2004,8,20),
+27.61111111
+],
+[
+new Date(2004,8,21),
+26.61111111
+],
+[
+new Date(2004,8,22),
+26.22222222
+],
+[
+new Date(2004,8,23),
+26.27777778
+],
+[
+new Date(2004,8,24),
+25.61111111
+],
+[
+new Date(2004,8,25),
+27.11111111
+],
+[
+new Date(2004,8,26),
+28.83333333
+],
+[
+new Date(2004,8,27),
+27.61111111
+],
+[
+new Date(2004,8,28),
+28.05555556
+],
+[
+new Date(2004,8,29),
+28.77777778
+],
+[
+new Date(2004,8,30),
+28.88888889
+],
+[
+new Date(2004,9,1),
+27.66666667
+],
+[
+new Date(2004,9,2),
+26.44444444
+],
+[
+new Date(2004,9,3),
+25.27777778
+],
+[
+new Date(2004,9,4),
+25.22222222
+],
+[
+new Date(2004,9,5),
+24.77777778
+],
+[
+new Date(2004,9,6),
+24.44444444
+],
+[
+new Date(2004,9,7),
+24
+],
+[
+new Date(2004,9,8),
+23.55555556
+],
+[
+new Date(2004,9,9),
+23.16666667
+],
+[
+new Date(2004,9,10),
+23.11111111
+],
+[
+new Date(2004,9,11),
+22.94444444
+],
+[
+new Date(2004,9,12),
+23.44444444
+],
+[
+new Date(2004,9,13),
+23.83333333
+],
+[
+new Date(2004,9,14),
+23.77777778
+],
+[
+new Date(2004,9,15),
+24.11111111
+],
+[
+new Date(2004,9,16),
+24.88888889
+],
+[
+new Date(2004,9,17),
+25.55555556
+],
+[
+new Date(2004,9,18),
+26.22222222
+],
+[
+new Date(2004,9,19),
+26.55555556
+],
+[
+new Date(2004,9,20),
+25.44444444
+],
+[
+new Date(2004,9,21),
+25.44444444
+],
+[
+new Date(2004,9,22),
+25.38888889
+],
+[
+new Date(2004,9,23),
+25.27777778
+],
+[
+new Date(2004,9,24),
+24.5
+],
+[
+new Date(2004,9,25),
+25.11111111
+],
+[
+new Date(2004,9,26),
+25.27777778
+],
+[
+new Date(2004,9,27),
+24.27777778
+],
+[
+new Date(2004,9,28),
+23.61111111
+],
+[
+new Date(2004,9,29),
+23.55555556
+],
+[
+new Date(2004,9,30),
+25.5
+],
+[
+new Date(2004,9,31),
+24.05555556
+],
+[
+new Date(2004,10,1),
+23.83333333
+],
+[
+new Date(2004,10,2),
+24.55555556
+],
+[
+new Date(2004,10,3),
+25.11111111
+],
+[
+new Date(2004,10,4),
+24.55555556
+],
+[
+new Date(2004,10,5),
+24.55555556
+],
+[
+new Date(2004,10,6),
+24.33333333
+],
+[
+new Date(2004,10,7),
+23
+],
+[
+new Date(2004,10,8),
+24.38888889
+],
+[
+new Date(2004,10,9),
+24.38888889
+],
+[
+new Date(2004,10,10),
+24.33333333
+],
+[
+new Date(2004,10,11),
+24.05555556
+],
+[
+new Date(2004,10,12),
+23.33333333
+],
+[
+new Date(2004,10,13),
+22.11111111
+],
+[
+new Date(2004,10,14),
+22.11111111
+],
+[
+new Date(2004,10,15),
+24.61111111
+],
+[
+new Date(2004,10,16),
+23.33333333
+],
+[
+new Date(2004,10,17),
+21.16666667
+],
+[
+new Date(2004,10,18),
+19.27777778
+],
+[
+new Date(2004,10,19),
+18.61111111
+],
+[
+new Date(2004,10,20),
+19
+],
+[
+new Date(2004,10,21),
+19.94444444
+],
+[
+new Date(2004,10,22),
+15.27777778
+],
+[
+new Date(2004,10,23),
+13.33333333
+],
+[
+new Date(2004,10,24),
+15.05555556
+],
+[
+new Date(2004,10,25),
+17
+],
+[
+new Date(2004,10,26),
+14.66666667
+],
+[
+new Date(2004,10,27),
+13.94444444
+],
+[
+new Date(2004,10,28),
+14.72222222
+],
+[
+new Date(2004,10,29),
+16
+],
+[
+new Date(2004,10,30),
+16.11111111
+],
+[
+new Date(2004,11,1),
+16.11111111
+],
+[
+new Date(2004,11,2),
+16.38888889
+],
+[
+new Date(2004,11,3),
+16.44444444
+],
+[
+new Date(2004,11,4),
+15.72222222
+],
+[
+new Date(2004,11,5),
+16.05555556
+],
+[
+new Date(2004,11,6),
+16.83333333
+],
+[
+new Date(2004,11,7),
+17.11111111
+],
+[
+new Date(2004,11,8),
+17
+],
+[
+new Date(2004,11,9),
+15.38888889
+],
+[
+new Date(2004,11,10),
+15.33333333
+],
+[
+new Date(2004,11,11),
+16
+],
+[
+new Date(2004,11,12),
+15.66666667
+],
+[
+new Date(2004,11,13),
+14.94444444
+],
+[
+new Date(2004,11,14),
+14.44444444
+],
+[
+new Date(2004,11,15),
+14.88888889
+],
+[
+new Date(2004,11,16),
+13.61111111
+],
+[
+new Date(2004,11,17),
+12.11111111
+],
+[
+new Date(2004,11,18),
+12.38888889
+],
+[
+new Date(2004,11,19),
+15.38888889
+],
+[
+new Date(2004,11,20),
+15.33333333
+],
+[
+new Date(2004,11,21),
+15.27777778
+],
+[
+new Date(2004,11,22),
+14.83333333
+],
+[
+new Date(2004,11,23),
+15.22222222
+],
+[
+new Date(2004,11,24),
+15
+],
+[
+new Date(2004,11,25),
+13.27777778
+],
+[
+new Date(2004,11,26),
+14.22222222
+],
+[
+new Date(2004,11,27),
+14.27777778
+],
+[
+new Date(2004,11,28),
+14.55555556
+],
+[
+new Date(2004,11,29),
+16.16666667
+],
+[
+new Date(2004,11,30),
+16.83333333
+],
+[
+new Date(2004,11,31),
+18.33333333
+] 
+];
+data.addColumn('date','Date');
+data.addColumn('number','Temp');
+data.addRows(datajson);
+return(data);
+}
+ 
+// jsDrawChart
+function drawChartCalendar() {
+var data = gvisDataCalendar();
+var options = {};
+options["width"] = 1000;
+options["height"] = 400;
+options["title"] = "Cairo's variation in Daily\n                                 temperature";
+options["calendar"] = {yearLabel: { fontName:'sans-serif',
+                                 fontSize: 20, color: 'black', bold: true},
+                                 cellSize: 10,cellColor:{stroke: 'black', strokeOpacity: 0.2},
+                                 focusedCellColor: {stroke:'red'}};
+
+    var chart = new google.visualization.Calendar(
+    document.getElementById('Calendar')
+    );
+    chart.draw(data,options);
+    
+
+}
+  
+ 
+// jsDisplayChart
+(function() {
+var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+var chartid = "calendar";
+  
+// Manually see if chartid is in pkgs (not all browsers support Array.indexOf)
+var i, newPackage = true;
+for (i = 0; newPackage && i < pkgs.length; i++) {
+if (pkgs[i] === chartid)
+newPackage = false;
+}
+if (newPackage)
+  pkgs.push(chartid);
+  
+// Add the drawChart function to the global list of callbacks
+callbacks.push(drawChartCalendar);
+})();
+function displayChartCalendar() {
+  var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+  var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+  window.clearTimeout(window.__gvisLoad);
+  // The timeout is set to 100 because otherwise the container div we are
+  // targeting might not be part of the document yet
+  window.__gvisLoad = setTimeout(function() {
+  var pkgCount = pkgs.length;
+  google.load("visualization", "1", { packages:pkgs, callback: function() {
+  if (pkgCount != pkgs.length) {
+  // Race condition where another setTimeout call snuck in after us; if
+  // that call added a package, we must not shift its callback
+  return;
+}
+while (callbacks.length > 0)
+callbacks.shift()();
+} });
+}, 100);
+}
+ 
+// jsFooter
+</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartCalendar"></script><!-- divChart --><div id="Calendar" style="width: 1000; height: 400;">
+
+</div>
+<p>The <code>googleVis</code> calendar chart is a definitive visualization that can be used to show activity over the course of a longer duration of time, example in months or years or decades. One can illustrate the variation of 1 quantity depending on the days of the given week, or trends over the timeline period.</p>
+<p>Such calendar charts demonstrate data records, or events, on a daily, weekly, monthly, yearly calendar. It is highly interactive and one can view the value on hovering on any particular time of the entire timeperiod.</p>
+</div>
+<div id="googlevis-timeline-chart" class="section level3">
+<h3>
+<span class="header-section-number">12.3.10</span> googleVis Timeline Chart<a class="anchor" aria-label="anchor" href="#googlevis-timeline-chart"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Position_Timeline_Data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>Position<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"President"</span>, <span class="fl">4</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"Vice"</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>                    Name<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"William Clinton"</span>,<span class="st">"George Bush"</span>, <span class="st">"Barack Obama"</span>, <span class="st">"   Donald Trump"</span>,</span>
+<span>                          <span class="st">" Albert Gore"</span>,<span class="st">"Dick Cheney"</span>, <span class="st">"Biden, Jr."</span>, <span class="st">"Michael Pence"</span><span class="op">)</span>,</span>
+<span>                    start<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span>x<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1993-01-20"</span>,<span class="st">"2001-01-20"</span>, <span class="st">"2009-01-20"</span>,<span class="st">"2017-01-20"</span><span class="op">)</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>                    end<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span>x<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"2001-01-20"</span>,<span class="st">"2009-01-20"</span>, <span class="st">"2017-01-20"</span>, <span class="st">"2021-01-20"</span><span class="op">)</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">Timeline</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisTimeline.html">gvisTimeline</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">Position_Timeline_Data</span>, </span>
+<span>                         rowlabel<span class="op">=</span><span class="st">"Name"</span>,</span>
+<span>                         barlabel<span class="op">=</span><span class="st">"Position"</span>,</span>
+<span>                         start<span class="op">=</span><span class="st">"start"</span>, </span>
+<span>                         end<span class="op">=</span><span class="st">"end"</span>,</span>
+<span>                         options<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span>timeline<span class="op">=</span><span class="st">"{groupByRowLabel:false}"</span>,</span>
+<span>                                      backgroundColor<span class="op">=</span><span class="st">'#e3f4ff'</span>, </span>
+<span>                                      height<span class="op">=</span><span class="fl">400</span>,colors<span class="op">=</span><span class="st">"['#0e407d', '#78b2ff', '#3737ab']"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Timeline</span><span class="op">)</span></span></code></pre></div>
+<!-- Timeline generated in R 4.2.2 by googleVis 0.7.0 package -->
+<!-- Thu Nov 10 22:01:13 2022 -->
+<!-- jsHeader -->
+<script type="text/javascript">
+ 
+// jsData 
+function gvisDataTimelineID2d685e32a57 () {
+var data = new google.visualization.DataTable();
+var datajson =
+[
+ [
+"William Clinton",
+"President",
+new Date(1993,0,20),
+new Date(2001,0,20)
+],
+[
+"George Bush",
+"President",
+new Date(2001,0,20),
+new Date(2009,0,20)
+],
+[
+"Barack Obama",
+"President",
+new Date(2009,0,20),
+new Date(2017,0,20)
+],
+[
+"   Donald Trump",
+"President",
+new Date(2017,0,20),
+new Date(2021,0,20)
+],
+[
+"   Albert Gore",
+"Vice",
+new Date(1993,0,20),
+new Date(2001,0,20)
+],
+[
+"Dick Cheney",
+"Vice",
+new Date(2001,0,20),
+new Date(2009,0,20)
+],
+[
+"Biden, Jr.",
+"Vice",
+new Date(2009,0,20),
+new Date(2017,0,20)
+],
+[
+"Michael Pence",
+"Vice",
+new Date(2017,0,20),
+new Date(2021,0,20)
+] 
+];
+data.addColumn('string','Name');
+data.addColumn('string','Position');
+data.addColumn('date','start');
+data.addColumn('date','end');
+data.addRows(datajson);
+return(data);
+}
+ 
+// jsDrawChart
+function drawChartTimelineID2d685e32a57() {
+var data = gvisDataTimelineID2d685e32a57();
+var options = {};
+options["width"] = 600;
+options["height"] = 400;
+options["timeline"] = {groupByRowLabel:false};
+options["backgroundColor"] = "#e3f4ff";
+options["colors"] = ['#0e407d', '#78b2ff', '#3737ab'];
+
+    var chart = new google.visualization.Timeline(
+    document.getElementById('TimelineID2d685e32a57')
+    );
+    chart.draw(data,options);
+    
+
+}
+  
+ 
+// jsDisplayChart
+(function() {
+var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+var chartid = "timeline";
+  
+// Manually see if chartid is in pkgs (not all browsers support Array.indexOf)
+var i, newPackage = true;
+for (i = 0; newPackage && i < pkgs.length; i++) {
+if (pkgs[i] === chartid)
+newPackage = false;
+}
+if (newPackage)
+  pkgs.push(chartid);
+  
+// Add the drawChart function to the global list of callbacks
+callbacks.push(drawChartTimelineID2d685e32a57);
+})();
+function displayChartTimelineID2d685e32a57() {
+  var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+  var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+  window.clearTimeout(window.__gvisLoad);
+  // The timeout is set to 100 because otherwise the container div we are
+  // targeting might not be part of the document yet
+  window.__gvisLoad = setTimeout(function() {
+  var pkgCount = pkgs.length;
+  google.load("visualization", "1", { packages:pkgs, callback: function() {
+  if (pkgCount != pkgs.length) {
+  // Race condition where another setTimeout call snuck in after us; if
+  // that call added a package, we must not shift its callback
+  return;
+}
+while (callbacks.length > 0)
+callbacks.shift()();
+} });
+}, 100);
+}
+ 
+// jsFooter
+</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartTimelineID2d685e32a57"></script><!-- divChart --><div id="TimelineID2d685e32a57" style="width: 600; height: 400;">
+
+</div>
+<p>This <code>googleVis</code> Timeline chart is a great and fascinating way of visualizing the different dates / events. Here is an example, showing duration of Presidents &amp; Vice Presidents / Sessions of Congress over the timeline period. The exact times and durations are given when one interactively hovers over the bars.</p>
+<p>These timeline charts are versatile visuals for illustrating a sequence of events chronologically. It provides an amazing aid to conceptualize event sequences / processes to gain valuable insights, sometimes maybe summarize historical events, or time frame of minutes, hours, years or datewise.</p>
+</div>
+<div id="googlevis-gantt-chart" class="section level3">
+<h3>
+<span class="header-section-number">12.3.11</span> googleVis Gantt Chart<a class="anchor" aria-label="anchor" href="#googlevis-gantt-chart"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">daysToMilliseconds</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">days</span><span class="op">)</span><span class="op">{</span><span class="va">days</span> <span class="op">*</span> <span class="fl">24</span> <span class="op">*</span> <span class="fl">60</span> <span class="op">*</span> <span class="fl">60</span> <span class="op">*</span> <span class="fl">1000</span><span class="op">}</span></span>
+<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>taskID <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"PS"</span>, <span class="st">"EDA"</span>, <span class="st">"R"</span>, <span class="st">"ML"</span>, <span class="st">"DP"</span><span class="op">)</span>,</span>
+<span>                 taskName <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Identify Problem Statement"</span>, <span class="st">"EDA Analysis"</span>, <span class="st">"Research"</span>,</span>
+<span>                              <span class="st">"Machine Learning Modelling"</span>, <span class="st">"Data Preprocessing"</span><span class="op">)</span>,</span>
+<span>                 resource <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="st">"write"</span>, <span class="st">"write"</span>, <span class="st">"complete"</span>, <span class="st">"write"</span><span class="op">)</span>,</span>
+<span>                 start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"2022-10-01"</span><span class="op">)</span>, <span class="cn">NA</span>, <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"2022-10-02"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"2022-10-08"</span><span class="op">)</span>, <span class="cn">NA</span><span class="op">)</span>,</span>
+<span>                 end <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"2022-10-04"</span>, <span class="st">"2022-10-08"</span>, <span class="st">"2022-10-08"</span>,</span>
+<span>                                 <span class="st">"2022-10-13"</span>, <span class="st">"2022-10-05"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>                 duration <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fu">daysToMilliseconds</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>                 percentComplete <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">25</span>, <span class="fl">20</span>, <span class="fl">0</span>, <span class="fl">100</span><span class="op">)</span>,</span>
+<span>                 dependencies <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="st">"PS, DP"</span>, <span class="cn">NA</span>,</span>
+<span>                 <span class="st">"EDA"</span>, <span class="st">"PS"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">Gantt_Tasks</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisGantt.html">gvisGantt</a></span><span class="op">(</span><span class="va">dat</span>, taskID <span class="op">=</span> <span class="st">"taskID"</span>,taskName <span class="op">=</span> <span class="st">"taskName"</span>,resource <span class="op">=</span> <span class="st">"resource"</span>,</span>
+<span>                         start <span class="op">=</span> <span class="st">"start"</span>,end <span class="op">=</span> <span class="st">"end"</span>,duration <span class="op">=</span> <span class="st">"duration"</span>,percentComplete <span class="op">=</span> <span class="st">"percentComplete"</span>,</span>
+<span>                         dependencies <span class="op">=</span> <span class="st">"dependencies"</span>,</span>
+<span>                         options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span>height <span class="op">=</span> <span class="fl">300</span>,</span>
+<span>                         gantt <span class="op">=</span> <span class="st">"{criticalPathEnabled:true,innerGridHorizLine: {</span></span>
+<span><span class="st">                         stroke: '#e3f4ff',strokeWidth: 2},innerGridTrack: {fill: '#e8f3fa'},innerGridDarkTrack:</span></span>
+<span><span class="st">                         {fill: '#c7e9ff'},labelStyle: {fontName: 'sans-serif',fontSize: 16}}"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Gantt_Tasks</span><span class="op">)</span></span></code></pre></div>
+<!-- Gantt generated in R 4.2.2 by googleVis 0.7.0 package -->
+<!-- Thu Nov 10 22:01:13 2022 -->
+<!-- jsHeader -->
+<script type="text/javascript">
+ 
+// jsData 
+function gvisDataGanttID2d6832c630b9 () {
+var data = new google.visualization.DataTable();
+var datajson =
+[
+ [
+"PS",
+"Identify Problem Statement",
+null,
+new Date(2022,9,1),
+new Date(2022,9,4),
+null,
+100,
+null
+],
+[
+"EDA",
+"EDA Analysis",
+"write",
+null,
+new Date(2022,9,8),
+259200000,
+25,
+"PS, DP"
+],
+[
+"R",
+"Research",
+"write",
+new Date(2022,9,2),
+new Date(2022,9,8),
+86400000,
+20,
+null
+],
+[
+"ML",
+"Machine Learning Modelling",
+"complete",
+new Date(2022,9,8),
+new Date(2022,9,13),
+86400000,
+0,
+"EDA"
+],
+[
+"DP",
+"Data Preprocessing",
+"write",
+null,
+new Date(2022,9,5),
+86400000,
+100,
+"PS"
+] 
+];
+data.addColumn('string','taskID');
+data.addColumn('string','taskName');
+data.addColumn('string','resource');
+data.addColumn('date','start');
+data.addColumn('date','end');
+data.addColumn('number','duration');
+data.addColumn('number','percentComplete');
+data.addColumn('string','dependencies');
+data.addRows(datajson);
+return(data);
+}
+ 
+// jsDrawChart
+function drawChartGanttID2d6832c630b9() {
+var data = gvisDataGanttID2d6832c630b9();
+var options = {};
+options["width"] = 600;
+options["height"] = 300;
+options["gantt"] = {criticalPathEnabled:true,innerGridHorizLine: {
+                         stroke: '#e3f4ff',strokeWidth: 2},innerGridTrack: {fill: '#e8f3fa'},innerGridDarkTrack:
+                         {fill: '#c7e9ff'},labelStyle: {fontName: 'sans-serif',fontSize: 16}};
+
+    var chart = new google.visualization.Gantt(
+    document.getElementById('GanttID2d6832c630b9')
+    );
+    chart.draw(data,options);
+    
+
+}
+  
+ 
+// jsDisplayChart
+(function() {
+var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+var chartid = "gantt";
+  
+// Manually see if chartid is in pkgs (not all browsers support Array.indexOf)
+var i, newPackage = true;
+for (i = 0; newPackage && i < pkgs.length; i++) {
+if (pkgs[i] === chartid)
+newPackage = false;
+}
+if (newPackage)
+  pkgs.push(chartid);
+  
+// Add the drawChart function to the global list of callbacks
+callbacks.push(drawChartGanttID2d6832c630b9);
+})();
+function displayChartGanttID2d6832c630b9() {
+  var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+  var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+  window.clearTimeout(window.__gvisLoad);
+  // The timeout is set to 100 because otherwise the container div we are
+  // targeting might not be part of the document yet
+  window.__gvisLoad = setTimeout(function() {
+  var pkgCount = pkgs.length;
+  google.load("visualization", "1", { packages:pkgs, callback: function() {
+  if (pkgCount != pkgs.length) {
+  // Race condition where another setTimeout call snuck in after us; if
+  // that call added a package, we must not shift its callback
+  return;
+}
+while (callbacks.length > 0)
+callbacks.shift()();
+} });
+}, 100);
+}
+ 
+// jsFooter
+</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartGanttID2d6832c630b9"></script><!-- divChart --><div id="GanttID2d6832c630b9" style="width: 600; height: 300;">
+
+</div>
+<p><code>googleVis</code> Gantt charts would help teams to plan work around deadlines and allocate resources efficiently.</p>
+<p>Project planners also leverage Gantt charts to maintain a bird’s eye high level view of projects and track them. These depict the relationship between the start and end dates of tasks, milestones, and dependent tasks for each of them over the entire timeline of the project. This Gantt chart illustrates the breakdown of a project into its component tasks very effectively.</p>
+</div>
+<div id="googlevis-merging-charts" class="section level3">
+<h3>
+<span class="header-section-number">12.3.12</span> googleVis Merging Charts<a class="anchor" aria-label="anchor" href="#googlevis-merging-charts"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Geographic</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisGeoChart.html">gvisGeoChart</a></span><span class="op">(</span><span class="va">Exports</span>,</span>
+<span>                           locationvar<span class="op">=</span><span class="st">"Country"</span>,colorvar<span class="op">=</span><span class="st">"Profit"</span>,</span>
+<span>                           options<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span>width<span class="op">=</span><span class="fl">400</span>, height<span class="op">=</span><span class="fl">200</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">Tabular</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisTable.html">gvisTable</a></span><span class="op">(</span><span class="va">Exports</span>,</span>
+<span>                     options<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span>width<span class="op">=</span><span class="fl">400</span>, height<span class="op">=</span><span class="fl">400</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">Merged_Charts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisMerge.html">gvisMerge</a></span><span class="op">(</span><span class="va">Geographic</span>, <span class="va">Tabular</span>, horizontal<span class="op">=</span><span class="cn">FALSE</span>, tableOptions<span class="op">=</span><span class="st">"bgcolor=\"#7cdeb5\""</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Merged_Charts</span><span class="op">)</span></span></code></pre></div>
+<!-- GeoChart generated in R 4.2.2 by googleVis 0.7.0 package -->
+<!-- Thu Nov 10 22:01:13 2022 -->
+<!-- jsHeader -->
+<script type="text/javascript">
+ 
+// jsData 
+function gvisDataGeoChartID2d6833747aea () {
+var data = new google.visualization.DataTable();
+var datajson =
+[
+ [
+"Germany",
+3
+],
+[
+"Brazil",
+4
+],
+[
+"United States",
+5
+],
+[
+"France",
+4
+],
+[
+"Hungary",
+3
+],
+[
+"India",
+2
+],
+[
+"Iceland",
+1
+],
+[
+"Norway",
+4
+],
+[
+"Spain",
+5
+],
+[
+"Turkey",
+1
+] 
+];
+data.addColumn('string','Country');
+data.addColumn('number','Profit');
+data.addRows(datajson);
+return(data);
+}
+
+
+// jsData 
+function gvisDataTableID2d684dad8a91 () {
+var data = new google.visualization.DataTable();
+var datajson =
+[
+ [
+"Germany",
+3,
+true
+],
+[
+"Brazil",
+4,
+false
+],
+[
+"United States",
+5,
+true
+],
+[
+"France",
+4,
+true
+],
+[
+"Hungary",
+3,
+false
+],
+[
+"India",
+2,
+true
+],
+[
+"Iceland",
+1,
+false
+],
+[
+"Norway",
+4,
+true
+],
+[
+"Spain",
+5,
+true
+],
+[
+"Turkey",
+1,
+false
+] 
+];
+data.addColumn('string','Country');
+data.addColumn('number','Profit');
+data.addColumn('boolean','Online');
+data.addRows(datajson);
+return(data);
+}
+ 
+// jsDrawChart
+function drawChartGeoChartID2d6833747aea() {
+var data = gvisDataGeoChartID2d6833747aea();
+var options = {};
+options["width"] = 400;
+options["height"] = 200;
+
+    var chart = new google.visualization.GeoChart(
+    document.getElementById('GeoChartID2d6833747aea')
+    );
+    chart.draw(data,options);
+    
+
+}
+  
+
+
+// jsDrawChart
+function drawChartTableID2d684dad8a91() {
+var data = gvisDataTableID2d684dad8a91();
+var options = {};
+options["allowHtml"] = true;
+options["width"] = 400;
+options["height"] = 400;
+
+    var chart = new google.visualization.Table(
+    document.getElementById('TableID2d684dad8a91')
+    );
+    chart.draw(data,options);
+    
+
+}
+  
+ 
+// jsDisplayChart
+(function() {
+var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+var chartid = "geochart";
+  
+// Manually see if chartid is in pkgs (not all browsers support Array.indexOf)
+var i, newPackage = true;
+for (i = 0; newPackage && i < pkgs.length; i++) {
+if (pkgs[i] === chartid)
+newPackage = false;
+}
+if (newPackage)
+  pkgs.push(chartid);
+  
+// Add the drawChart function to the global list of callbacks
+callbacks.push(drawChartGeoChartID2d6833747aea);
+})();
+function displayChartGeoChartID2d6833747aea() {
+  var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+  var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+  window.clearTimeout(window.__gvisLoad);
+  // The timeout is set to 100 because otherwise the container div we are
+  // targeting might not be part of the document yet
+  window.__gvisLoad = setTimeout(function() {
+  var pkgCount = pkgs.length;
+  google.load("visualization", "1", { packages:pkgs, callback: function() {
+  if (pkgCount != pkgs.length) {
+  // Race condition where another setTimeout call snuck in after us; if
+  // that call added a package, we must not shift its callback
+  return;
+}
+while (callbacks.length > 0)
+callbacks.shift()();
+} });
+}, 100);
+}
+
+
+// jsDisplayChart
+(function() {
+var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+var chartid = "table";
+  
+// Manually see if chartid is in pkgs (not all browsers support Array.indexOf)
+var i, newPackage = true;
+for (i = 0; newPackage && i < pkgs.length; i++) {
+if (pkgs[i] === chartid)
+newPackage = false;
+}
+if (newPackage)
+  pkgs.push(chartid);
+  
+// Add the drawChart function to the global list of callbacks
+callbacks.push(drawChartTableID2d684dad8a91);
+})();
+function displayChartTableID2d684dad8a91() {
+  var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+  var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+  window.clearTimeout(window.__gvisLoad);
+  // The timeout is set to 100 because otherwise the container div we are
+  // targeting might not be part of the document yet
+  window.__gvisLoad = setTimeout(function() {
+  var pkgCount = pkgs.length;
+  google.load("visualization", "1", { packages:pkgs, callback: function() {
+  if (pkgCount != pkgs.length) {
+  // Race condition where another setTimeout call snuck in after us; if
+  // that call added a package, we must not shift its callback
+  return;
+}
+while (callbacks.length > 0)
+callbacks.shift()();
+} });
+}, 100);
+}
+ 
+// jsFooter
+</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartGeoChartID2d6833747aea"></script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartTableID2d684dad8a91"></script><div class="inline-table"><table bgcolor="#7cdeb5" class="table table-sm">
+<tr>
+<td>
+<!-- divChart -->
+<div id="GeoChartID2d6833747aea" style="width: 400; height: 200;">
+
+</div>
+</td>
+</tr>
+<tr>
+<td>
+<!-- divChart -->
+<div id="TableID2d684dad8a91" style="width: 400; height: 400;">
+
+</div>
+</td>
+</tr>
+</table></div>
+<p><code>googleVis</code> Merge chart provides the flexibility of merging two gvis-objects, either next or below each other into one gvis-object. These objects are arranged in a HTML table format.</p>
+<p>The multiples charts view allows to split up the individual charts Bar, Column, Line or Geographic, Tabular etc. charts into multiple charts, separated. There are numerous use cases like showing your product sales per region and then providing more information about it. It gives a lot of flexibility in the report creation and delivery aesthetically.</p>
+</div>
+</div>
+<div id="use-googlevis-in-rstudio" class="section level2">
+<h2>
+<span class="header-section-number">12.4</span> Use googleVis in RStudio<a class="anchor" aria-label="anchor" href="#use-googlevis-in-rstudio"><i class="fas fa-link"></i></a>
+</h2>
+<p>Using googleVis in RStudio is straightforward. By default, the RStudio renders the charts in a new webpage -</p>
+<pre><code>plot(Chart)</code></pre>
+<p>On the other hand, to view it within RStudio,
+&gt; To View in RStudio Viewer just use to view it locally</p>
+<pre><code>plot(Chart, browser=rstudioapi::viewer)</code></pre>
+<blockquote>
+<p>To Knit the Rmd Markdown file to HTML, to perform the following command set the Chunk option results to <code>asis</code> with <code>{r ChartExample, results='asis', tidy=FALSE}</code> and <code>plot(Chart, 'chart')</code></p>
+</blockquote>
+<div id="googlevis-references" class="section level3">
+<h3>
+<span class="header-section-number">12.4.1</span> googleVis References<a class="anchor" aria-label="anchor" href="#googlevis-references"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li><a href="https://mages.github.io/googleVis/">Documentation</a></li>
+<li><a href="https://developers.google.com/chart/interactive/docs/quick_start">Google Charts</a></li>
+<li><a href="https://cran.r-project.org/web/packages/googleVis/vignettes/googleVis_examples.html">Demo</a></li>
+<li><a href="https://journal.r-project.org/archive/2011-2/RJournal_2011-2_Gesmann+de~Castillo.pdf">Paper</a></li>
+<li><a href="https://cran.r-project.org/web/packages/googleVis/index.html">CRAN-Stable Version</a></li>
+</ul>
+<blockquote>
+<p>Thank you for learning <code>googleVis</code> with us !</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="how-to-use-sqldf.html"><span class="header-section-number">11</span> How to use sqldf</a></div>
+<div class="next"><a href="ten-interview-questions-and-answers.html"><span class="header-section-number">14</span> Ten interview questions and answers</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#googlevis-in-r"><span class="header-section-number">12</span> googleVis in R</a></li>
+<li><a class="nav-link" href="#introducing-googlevis"><span class="header-section-number">12.1</span> Introducing googleVis</a></li>
+<li><a class="nav-link" href="#why-use-googlevis"><span class="header-section-number">12.2</span> Why use googleVis ?</a></li>
+<li>
+<a class="nav-link" href="#googlevis-rendering-interaction"><span class="header-section-number">12.3</span> googleVis Rendering &amp; Interaction</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#basic-graphs-line-bar-combo"><span class="header-section-number">12.3.1</span> Basic Graphs (Line, Bar, Combo)</a></li>
+<li><a class="nav-link" href="#googlevis-histogram-chart"><span class="header-section-number">12.3.2</span> googleVis Histogram Chart</a></li>
+<li><a class="nav-link" href="#googlevis-alluvialsankey-chart"><span class="header-section-number">12.3.3</span> googleVis Alluvial/Sankey Chart</a></li>
+<li><a class="nav-link" href="#googlevis-geographic-chart"><span class="header-section-number">12.3.4</span> googleVis Geographic Chart</a></li>
+<li><a class="nav-link" href="#googlevis-gauge-chart"><span class="header-section-number">12.3.5</span> googleVis Gauge Chart</a></li>
+<li><a class="nav-link" href="#googlevis-tabular-chart"><span class="header-section-number">12.3.6</span> googleVis Tabular Chart</a></li>
+<li><a class="nav-link" href="#googlevis-tree-map-chart"><span class="header-section-number">12.3.7</span> googleVis Tree Map Chart</a></li>
+<li><a class="nav-link" href="#googlevis-annotation-chart"><span class="header-section-number">12.3.8</span> googleVis Annotation Chart</a></li>
+<li><a class="nav-link" href="#googlevis-calendar-chart"><span class="header-section-number">12.3.9</span> googleVis Calendar Chart</a></li>
+<li><a class="nav-link" href="#googlevis-timeline-chart"><span class="header-section-number">12.3.10</span> googleVis Timeline Chart</a></li>
+<li><a class="nav-link" href="#googlevis-gantt-chart"><span class="header-section-number">12.3.11</span> googleVis Gantt Chart</a></li>
+<li><a class="nav-link" href="#googlevis-merging-charts"><span class="header-section-number">12.3.12</span> googleVis Merging Charts</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#use-googlevis-in-rstudio"><span class="header-section-number">12.4</span> Use googleVis in RStudio</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#googlevis-references"><span class="header-section-number">12.4.1</span> googleVis References</a></li></ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/jtr13/cc22tt/blob/main/googleVis.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/jtr13/cc22tt/edit/main/googleVis.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Community Contributions for EDAV Fall 2022 Tues/Thurs</strong>" was written by . It was last built on 2022-11-10.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>
