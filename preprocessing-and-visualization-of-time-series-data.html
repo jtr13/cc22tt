@@ -4,14 +4,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 11 Preprocessing and Visualization of Time Series Data | Community Contributions for EDAV Fall 2022 Tues/Thurs</title>
+<title>Chapter 12 Preprocessing and Visualization of Time Series Data | Community Contributions for EDAV Fall 2022 Tues/Thurs</title>
 <meta name="description" content="Siyuan Ding In this tutorial, we will learn how to visualize a time series data. When reaching a time series data, it is always not as organized as we want, so we need to do some preprocessing...">
 <meta name="generator" content="bookdown 0.30 with bs4_book()">
-<meta property="og:title" content="Chapter 11 Preprocessing and Visualization of Time Series Data | Community Contributions for EDAV Fall 2022 Tues/Thurs">
+<meta property="og:title" content="Chapter 12 Preprocessing and Visualization of Time Series Data | Community Contributions for EDAV Fall 2022 Tues/Thurs">
 <meta property="og:type" content="book">
 <meta property="og:description" content="Siyuan Ding In this tutorial, we will learn how to visualize a time series data. When reaching a time series data, it is always not as organized as we want, so we need to do some preprocessing...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 11 Preprocessing and Visualization of Time Series Data | Community Contributions for EDAV Fall 2022 Tues/Thurs">
+<meta name="twitter:title" content="Chapter 12 Preprocessing and Visualization of Time Series Data | Community Contributions for EDAV Fall 2022 Tues/Thurs">
 <meta name="twitter:description" content="Siyuan Ding In this tutorial, we will learn how to visualize a time series data. When reaching a time series data, it is always not as organized as we want, so we need to do some preprocessing...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -49,15 +49,16 @@
 <li><a class="" href="r-window-functions-cheatsheet.html"><span class="header-section-number">6</span> R window functions cheatsheet</a></li>
 <li class="book-part">Cheatsheets</li>
 <li><a class="" href="rmd-chunk-option-cheat-sheet.html"><span class="header-section-number">8</span> Rmd chunk option cheat sheet</a></li>
-<li><a class="" href="helpful-ggplot2-extensions-cheatsheet.html"><span class="header-section-number">9</span> Helpful ggplot2 Extensions Cheatsheet</a></li>
+<li class="book-part">Cheatsheets</li>
+<li><a class="" href="helpful-ggplot2-extensions-cheatsheet.html"><span class="header-section-number">10</span> Helpful ggplot2 Extensions Cheatsheet</a></li>
 <li class="book-part">Tutorials</li>
-<li><a class="active" href="preprocessing-and-visualization-of-time-series-data.html"><span class="header-section-number">11</span> Preprocessing and Visualization of Time Series Data</a></li>
-<li><a class="" href="how-to-use-sqldf.html"><span class="header-section-number">12</span> How to use sqldf</a></li>
+<li><a class="active" href="preprocessing-and-visualization-of-time-series-data.html"><span class="header-section-number">12</span> Preprocessing and Visualization of Time Series Data</a></li>
+<li><a class="" href="how-to-use-sqldf.html"><span class="header-section-number">13</span> How to use sqldf</a></li>
 <li class="book-part">Interview Prep</li>
-<li><a class="" href="ten-interview-questions-and-answers.html"><span class="header-section-number">14</span> Ten interview questions and answers</a></li>
+<li><a class="" href="ten-interview-questions-and-answers.html"><span class="header-section-number">15</span> Ten interview questions and answers</a></li>
 <li class="book-part">Appendices</li>
-<li><a class="" href="github-initial-setup.html"><span class="header-section-number">15</span> Github initial setup</a></li>
-<li><a class="" href="tutorial-for-pull-request-mergers.html"><span class="header-section-number">16</span> Tutorial for pull request mergers</a></li>
+<li><a class="" href="github-initial-setup.html"><span class="header-section-number">16</span> Github initial setup</a></li>
+<li><a class="" href="tutorial-for-pull-request-mergers.html"><span class="header-section-number">17</span> Tutorial for pull request mergers</a></li>
 </ul>
 
         <div class="book-extra">
@@ -67,7 +68,7 @@
 </div>
   </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="preprocessing-and-visualization-of-time-series-data" class="section level1">
 <h1>
-<span class="header-section-number">11</span> Preprocessing and Visualization of Time Series Data<a class="anchor" aria-label="anchor" href="#preprocessing-and-visualization-of-time-series-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12</span> Preprocessing and Visualization of Time Series Data<a class="anchor" aria-label="anchor" href="#preprocessing-and-visualization-of-time-series-data"><i class="fas fa-link"></i></a>
 </h1>
 <p>Siyuan Ding</p>
 <p>In this tutorial, we will learn how to visualize a time series data. When reaching a time series data, it is always not as organized as we want, so we need to do some preprocessing first before visualize it. We will use a time series dataset on Covid-19 vaccination from 2020-12-14 to 2022-10-30 as our example in this tutorial, the dataset is available on <a href="https://raw.githubusercontent.com/govex/COVID-19/master/data_tables/vaccine_data/us_data/time_series/time_series_covid19_vaccine_doses_admin_US.csv" class="uri">https://raw.githubusercontent.com/govex/COVID-19/master/data_tables/vaccine_data/us_data/time_series/time_series_covid19_vaccine_doses_admin_US.csv</a> and our goal is to visualize the relationship between vaccinated doses for each state in 2022, that is from 2022-01-01.</p>
@@ -80,12 +81,12 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org">tidyr</a></span><span class="op">)</span></span></code></pre></div>
 <div id="preprocess-on-a-time-series-data" class="section level2">
 <h2>
-<span class="header-section-number">11.1</span> Preprocess on a Time Series Data<a class="anchor" aria-label="anchor" href="#preprocess-on-a-time-series-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.1</span> Preprocess on a Time Series Data<a class="anchor" aria-label="anchor" href="#preprocess-on-a-time-series-data"><i class="fas fa-link"></i></a>
 </h2>
 <p>In this part, we will first work on transforming the original data downloaded online to a data frame that we could work with. Then we will look into the data to see whether there are any problem data points with discipline of Time Series Data. And Finally we will deal with the missing values. With all these preprocessings done, our data would be good to visualize and analyze.</p>
 <div id="transform-dataset" class="section level3">
 <h3>
-<span class="header-section-number">11.1.1</span> Transform DataSet<a class="anchor" aria-label="anchor" href="#transform-dataset"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.1.1</span> Transform DataSet<a class="anchor" aria-label="anchor" href="#transform-dataset"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># load data</span></span>
@@ -187,7 +188,7 @@
 </div>
 <div id="deal-with-missing-values" class="section level3">
 <h3>
-<span class="header-section-number">11.1.2</span> Deal with Missing Values<a class="anchor" aria-label="anchor" href="#deal-with-missing-values"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.1.2</span> Deal with Missing Values<a class="anchor" aria-label="anchor" href="#deal-with-missing-values"><i class="fas fa-link"></i></a>
 </h3>
 <p>Before moving on, we first check on the missing values.</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
@@ -199,7 +200,7 @@
 </div>
 <div id="deal-with-problematic-data-points" class="section level3">
 <h3>
-<span class="header-section-number">11.1.3</span> Deal with Problematic Data Points<a class="anchor" aria-label="anchor" href="#deal-with-problematic-data-points"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.1.3</span> Deal with Problematic Data Points<a class="anchor" aria-label="anchor" href="#deal-with-problematic-data-points"><i class="fas fa-link"></i></a>
 </h3>
 <p>Before moving further on visualization or analysis, we need to be very careful on whether the data is cumulative or not! If the data is cumulative, then the value most be monotonically, in our example case, since the data is the vaccination doses for each state at each day, then the vaccinated doses in day 2 cannot be less than the value in day 1. So we need to check whether there are data that at day 2 has smaller value than at day 1, if so we assign the value at day 2 by the value at day 1.</p>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
@@ -216,7 +217,7 @@
 </div>
 <div id="visualize-a-time-series-data" class="section level2">
 <h2>
-<span class="header-section-number">11.2</span> Visualize a Time Series Data<a class="anchor" aria-label="anchor" href="#visualize-a-time-series-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.2</span> Visualize a Time Series Data<a class="anchor" aria-label="anchor" href="#visualize-a-time-series-data"><i class="fas fa-link"></i></a>
 </h2>
 <p>When visualize a time series data, we mainly focus on the trend. That is we want to see how the data changes over time, so we would like to <code>geom_line</code> in <code>ggplot2</code> to show the changes over time in each state.</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
@@ -254,28 +255,28 @@
 </div>
 <div id="conclusion" class="section level2">
 <h2>
-<span class="header-section-number">11.3</span> Conclusion<a class="anchor" aria-label="anchor" href="#conclusion"><i class="fas fa-link"></i></a>
+<span class="header-section-number">12.3</span> Conclusion<a class="anchor" aria-label="anchor" href="#conclusion"><i class="fas fa-link"></i></a>
 </h2>
 <p>In conclusion, when dealing with a time series data, we need to spend time on preprocessing, including transforming date into usable dataframe using <code>dplyr</code> and <code>tidyr</code>package, dealing with the missing values, and the problematic data. And when transforming data, it is important to watch the date type! We need it to be as date class instead of character, so that we can order it when visualizing, the date format can be converted by functions in <code>lubridate</code> package. After finish theses preprocessing works, we can start our visualization part using <code>ggplot2</code>, and we should try to remove potential affecting factors in order to get a clear look at the data trend over time.</p>
 
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="helpful-ggplot2-extensions-cheatsheet.html"><span class="header-section-number">9</span> Helpful ggplot2 Extensions Cheatsheet</a></div>
-<div class="next"><a href="how-to-use-sqldf.html"><span class="header-section-number">12</span> How to use sqldf</a></div>
+<div class="prev"><a href="helpful-ggplot2-extensions-cheatsheet.html"><span class="header-section-number">10</span> Helpful ggplot2 Extensions Cheatsheet</a></div>
+<div class="next"><a href="how-to-use-sqldf.html"><span class="header-section-number">13</span> How to use sqldf</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#preprocessing-and-visualization-of-time-series-data"><span class="header-section-number">11</span> Preprocessing and Visualization of Time Series Data</a></li>
+<li><a class="nav-link" href="#preprocessing-and-visualization-of-time-series-data"><span class="header-section-number">12</span> Preprocessing and Visualization of Time Series Data</a></li>
 <li>
-<a class="nav-link" href="#preprocess-on-a-time-series-data"><span class="header-section-number">11.1</span> Preprocess on a Time Series Data</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#transform-dataset"><span class="header-section-number">11.1.1</span> Transform DataSet</a></li>
-<li><a class="nav-link" href="#deal-with-missing-values"><span class="header-section-number">11.1.2</span> Deal with Missing Values</a></li>
-<li><a class="nav-link" href="#deal-with-problematic-data-points"><span class="header-section-number">11.1.3</span> Deal with Problematic Data Points</a></li>
+<a class="nav-link" href="#preprocess-on-a-time-series-data"><span class="header-section-number">12.1</span> Preprocess on a Time Series Data</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#transform-dataset"><span class="header-section-number">12.1.1</span> Transform DataSet</a></li>
+<li><a class="nav-link" href="#deal-with-missing-values"><span class="header-section-number">12.1.2</span> Deal with Missing Values</a></li>
+<li><a class="nav-link" href="#deal-with-problematic-data-points"><span class="header-section-number">12.1.3</span> Deal with Problematic Data Points</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#visualize-a-time-series-data"><span class="header-section-number">11.2</span> Visualize a Time Series Data</a></li>
-<li><a class="nav-link" href="#conclusion"><span class="header-section-number">11.3</span> Conclusion</a></li>
+<li><a class="nav-link" href="#visualize-a-time-series-data"><span class="header-section-number">12.2</span> Visualize a Time Series Data</a></li>
+<li><a class="nav-link" href="#conclusion"><span class="header-section-number">12.3</span> Conclusion</a></li>
 </ul>
 
       <div class="book-extra">
