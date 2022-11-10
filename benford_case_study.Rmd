@@ -238,7 +238,6 @@ An important thing to note is that Benford's law does not have a strict mathemat
 
 
 ## Sources
---[FORMAT Sources in standard way?]
 
 Benford, F. “The Law of Anomalous Numbers,” Proceedings of the American Philosophical Society, 78, 551–572. 1938.
 
