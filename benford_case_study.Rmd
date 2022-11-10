@@ -35,7 +35,7 @@ where $d$ is the leading digit (a number from 1 to 9)
 
 Below is a distribution that shows the expected occurrence of leading digits according to Benford's Law.
 
-![Benfords Law Distribution.](/resources/benford_case_study/b1.jpeg)
+![Benfords Law Distribution.](./resources/benford_case_study/b1.jpeg)
 
 However, there are a few caveats regarding the application of Benford's Law:
 
