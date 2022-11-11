@@ -45,7 +45,10 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 # loading required packages
 library(tidyverse)
 library(openintro)
+library(descriptr)
+library(assertable)
 library(gapminder)
+library(stringr)
 library(patchwork)
 library(gcookbook)
 ```
@@ -498,7 +501,7 @@ for vector fields to have 3 dimensions. While it is tempting to try building 3D
 plots for these vector fields, we strongly recommend against as they are confusing. As
 shown in the plot below, which had been taken from [this page.](https://stackoverflow.com/questions/7130474/3d-vector-field-in-matplotlib)
 
-![](Images/3DVF.png)
+![](resources/vector_field_tutorial//3DVF.png)
 
 Therefore, the first thing to consider when plotting 3D vector
 fields should be: *Do I actually need to plot in 3 dimensions?*
@@ -513,7 +516,7 @@ example, flow in a cylindrical is symmetric in any radial direction; in other wo
 if we say the flow is in the z-direction, cross-sectional flows will be identical 
 in the z-x and z-y plots, see graph below for visual explanation.
 
-![](Images/Pipe.png)
+![](resources/vector_field_tutorial/Pipe.png)
 
 If it is not possible to remove one axis due to its small contribution, or symmetry 
 in the vector field, we recommend plotting 3 cross-sectional vector fields in the 
@@ -621,7 +624,7 @@ these environments, we can plot vector fields of the system and understand the
 nature of fixed points in the system (ie are the fixed points, stable, unstable,
 etc...). The figure below illustrates several types of fixed points:
 
-![](Images/FP.png)
+![](resources/vector_field_tutorial/FP.png)
 
 [Source: https://www.sciencedirect.com/science/article/pii/S0021929018302239](https://www.sciencedirect.com/science/article/pii/S0021929018302239)
 
