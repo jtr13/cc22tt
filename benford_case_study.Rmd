@@ -11,6 +11,7 @@ library(plotly)
 library(tidyverse)
 ```
 
+
 ## Contents
 In this tutorial, we will introduce a numeric property called Benford's Law and illustrate its applications in fraud detection. We will be using the benford_analysis package in R along with an example case study. 
 
@@ -24,7 +25,6 @@ Sections:
 
 
 ## Introduction
-
   There is a niche area of the consulting industry called forensic analytics in which analysts try to identify risks and quantify wrongdoing using an array of statistical and data techniques. For example, imagine a whistleblower notifies a company's general counsel that there has been some collusion between sales and finance representatives to artificially create invoices. The company may hire forensic analysts to extract and determine what is happening. There are many quantitative and qualitative methods to perform before concluding anything and they will need to be specific to the context of the project. One such heuristic is Benford's Law. 
 
 ### What is Benford's Law?
@@ -54,7 +54,7 @@ While Benford's Law is not applicable to all datasets, it is generally applicabl
 5) Mathematical tables, like logarithms.
 6) River drainage rates.
 7) Scientific data.
-
+Benford, F (1938)
 
 ### Applications in Fraud Detection
 One primary and practical use for Benford’s Law is fraud and error detection. It is expected that a large set of numbers will follow the law, so accountants, auditors, economists and tax professionals have a benchmark for what the normal levels of any particular number in a set are. Below are some famously documented examples of Benford's Law being applied towards fraud detection (Frunza, 2015):
@@ -65,7 +65,6 @@ One primary and practical use for Benford’s Law is fraud and error detection. 
 
 
 ## Benford Package in R
-
 The Benford Analysis (benford.analysis) package provides tools that make it easier to validate data using Benford’s Law. The main purpose of the package is to identify suspicious data that may need further verification.
 
 Documentation on the package can be found here:
@@ -78,7 +77,6 @@ You can install the package from CRAN by running the following (uncommented):
 ```
 
 The package comes with 6 real datasets from Mark Nigrini’s book Benford’s Law: Applications for Forensic Accounting, Auditing, and Fraud Detection.
-
 
 ### Example Usage of benford.analysis
 In this section we will give an example using 189,470 records from the corporate payments dataset which is provided with the package.
@@ -116,7 +114,6 @@ suspects
 
 
 ## Randomized Case Study
-
 In the prior section we saw that when data is manipulated with static values, clearly the first digit rule is broken. But what about when data is randomly manipulated?
 
 Let us try an experiment to see if we can use Benford's Law to detect potential data manipulation where a bad actor randomly generated fake sales. For this experiment, our baseline will be also be using random data to highlight a point in the conclusion below. Let us pretend a company has sales data comprised of prices and quantities of items that they have sold. This code chunck sets up a data frame where one row is an recorded sale of a number of items sold at a set price. 
@@ -221,7 +218,6 @@ Skewness    	0
 
 From a glance, it is evident that the statistics corresponding to the original df are much closer to the expected statistics than those from df2. In particular, the Ex.Kurtosis and Skewness differ significantly in df2 from the expected values. These are all indicators that the set of values deviate from the expected distribution corresponding to Benford's Law.
 
-
 ### Findings
 So what does this show us? If both sets were randomly generated, why would one not conform to Benford's Law? One reason is that data that is the product of many random variables tends to exhibit a log-normal distribution which fits well with the first digit rule. However, by adding values in a static way, we change the data to be more uniform and distort the decaying curve. 
 
@@ -233,7 +229,6 @@ An important thing to note is that Benford's law does not have a strict mathemat
 
 
 ## Sources
-
 Benford, F. “The Law of Anomalous Numbers,” Proceedings of the American Philosophical Society, 78, 551–572. 1938.
 
 Frunza, M. (2015). Solving Modern Crime in Financial Markets: Analytics and Case Studies. Academic Press.
