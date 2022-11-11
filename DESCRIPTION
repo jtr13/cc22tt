@@ -12,6 +12,8 @@ Suggests:
     googleVis,
     sqldf,
     withr,
-    xml2
+    xml2,
+    benford.analysis,
+    plotly
 Remotes:
     hadley/emo

@@ -29,6 +29,9 @@ rmd_files: [
   # Part: Interview Prep
   'ten_interview_questions.Rmd',
   
+  # Part: Case Studies
+  'benford_case_study.Rmd',
+  
   # Part: Workshops
   
   # Part: Appendices
