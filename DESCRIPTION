@@ -15,6 +15,7 @@ Suggests:
     xml2,
     benford.analysis,
     plotly,
-    openintro
+    openintro,
+    descriptr
 Remotes:
     hadley/emo
