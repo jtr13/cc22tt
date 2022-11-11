@@ -16,6 +16,7 @@ Suggests:
     benford.analysis,
     plotly,
     openintro,
-    descriptr
+    descriptr,
+    assertable
 Remotes:
     hadley/emo
