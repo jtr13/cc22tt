@@ -26,7 +26,6 @@ Sections:
 
 
 ## Introduction
-
   There is a niche area of the consulting industry called forensic analytics in which analysts try to identify risks and quantify wrongdoing using an array of statistical and data techniques. For example, imagine a whistleblower notifies a company's general counsel that there has been some collusion between sales and finance representatives to artificially create invoices. The company may hire forensic analysts to extract and determine what is happening. There are many quantitative and qualitative methods to perform before concluding anything and they will need to be specific to the context of the project. One such heuristic is Benford's Law. 
 
 ### What is Benford's Law?
@@ -56,8 +55,7 @@ While Benford's Law is not applicable to all datasets, it is generally applicabl
 5) Mathematical tables, like logarithms.
 6) River drainage rates.
 7) Scientific data.
-(Benford, F)
-
+Benford, F (1938)
 
 ### Applications in Fraud Detection
 One primary and practical use for Benford’s Law is fraud and error detection. It is expected that a large set of numbers will follow the law, so accountants, auditors, economists and tax professionals have a benchmark for what the normal levels of any particular number in a set are. Below are some famously documented examples of Benford's Law being applied towards fraud detection (Frunza, 2015):
@@ -67,8 +65,7 @@ One primary and practical use for Benford’s Law is fraud and error detection. 
 3) Ponzi schemes can be detected using the law. Unrealistic returns, such as those purported by the Maddoff scam, fall far from the expected Benford probability distribution .
 
 
-## benford.analysis package in r
-
+## Benford Package in R
 The Benford Analysis (benford.analysis) package provides tools that make it easier to validate data using Benford’s Law. The main purpose of the package is to identify suspicious data that may need further verification.
 
 Documentation on the package can be found here:
@@ -82,7 +79,6 @@ You can install the package from CRAN by running the following (uncommented):
 ```
 
 The package comes with 6 real datasets from Mark Nigrini’s book Benford’s Law: Applications for Forensic Accounting, Auditing, and Fraud Detection.
-
 
 ### Example Usage of benford.analysis
 In this section we will give an example using 189,470 records from the corporate payments dataset which is provided with the package.
@@ -198,7 +194,6 @@ suspects
 
 
 ## Randomized Case Study
-### Baseline Data*
 In the prior section we saw that when data is manipulated with static values, clearly the first digit rule is broken. But what about when data is randomly manipulated?
 
 Let us try an experiment to see if we can use Benford's Law to detect potential data manipulation where a bad actor randomly generated fake sales. For this experiment, our baseline will be also be using random data to highlight a point in the conclusion below. Let us pretend a company has sales data comprised of prices and quantities of items that they have sold. This code chunck sets up a data frame where one row is an recorded sale of a number of items sold at a set price. 
@@ -265,32 +260,22 @@ df2 <- data.frame(price,quantity) %>%
 df_group2 <- df2 %>% group_by(digit) %>% summarise(count = n()) %>%
     mutate(count_percent = count/sum(count))
 
-p2 <- ggplot(data=df_group2, aes(x=digit, y=count_percent)) +
-  geom_bar(stat="identity", fill='lightblue') + 
-  geom_point(aes(x=base_benford$digit, y=base_benford$percent))
-p2
-```
-
-<img src="benford_case_study_files/figure-html/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" />
-
-```r
-#gridExtra::grid.arrange(p1,p2, ncol=2)
-
 df_group_combined <- data.frame(df_group$digit,df_group$count_percent,df_group2$count_percent) 
 colnames(df_group_combined) <- c('digit','Original','Manipulated')
 df_group_combined <- df_group_combined %>% pivot_longer(cols=c('Original','Manipulated'))
 colnames(df_group_combined) <- c('digit','Dataset','count_percent')
 
-ggplot(data=df_group_combined, aes(x=digit, y=count_percent, fill=Dataset)) +
+ggplot(data=df_group_combined, aes(x=digit, y=count_percent, fill=fct_rev(as.factor(Dataset)) )) +
   geom_bar(stat="identity", position='dodge') +
   scale_y_continuous(labels = scales::percent) +
   labs(title = "First Digit of Manipulated Sales",
               subtitle = "Original Data vs Manipulated Data",
               x = "First Digit", y = "% Occurance",
+              fill="Dataset"
               ) +  theme(legend.position="bottom")
 ```
 
-<img src="benford_case_study_files/figure-html/unnamed-chunk-9-2.png" width="672" style="display: block; margin: auto;" />
+<img src="benford_case_study_files/figure-html/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" />
 
 From here we can see that adding sales randomly does change the distribution (when enough of them are added). But can we quantify this change? Let us use the benford package to cacluate some statistics. The following
 
@@ -304,7 +289,7 @@ bfd_2 <- benford(df2$value)
 ```
 Printing the benford object creates verbose output so we have copied the main statistics below between the two dataframes:
 
-1) df (original)
+bfd_1 (df - original)
 Statistic     Value
 Mean          0.526
 Var           0.073
@@ -312,7 +297,7 @@ Ex.Kurtosis  -1.048
 Skewness     -0.145
 
 
-2) df2 (manipulated)
+bfd_1 (df2 - manipulated)
 Statistic     Value
 Mean          0.65
 Var           0.07
@@ -329,7 +314,6 @@ Skewness    	0
 
 From a glance, it is evident that the statistics corresponding to the original df are much closer to the expected statistics than those from df2. In particular, the Ex.Kurtosis and Skewness differ significantly in df2 from the expected values. These are all indicators that the set of values deviate from the expected distribution corresponding to Benford's Law.
 
-
 ### Findings
 So what does this show us? If both sets were randomly generated, why would one not conform to Benford's Law? One reason is that data that is the product of many random variables tends to exhibit a log-normal distribution which fits well with the first digit rule. However, by adding values in a static way, we change the data to be more uniform and distort the decaying curve. 
 
@@ -341,14 +325,13 @@ An important thing to note is that Benford's law does not have a strict mathemat
 
 
 ## Sources
-
 Benford, F. “The Law of Anomalous Numbers,” Proceedings of the American Philosophical Society, 78, 551–572. 1938.
+
+Frunza, M. (2015). Solving Modern Crime in Financial Markets: Analytics and Case Studies. Academic Press.
 
 https://cran.r-project.org/web/packages/benford.analysis/benford.analysis.pdf
 
 https://www.statisticshowto.com/benfords-law/
-
-Frunza, M. (2015). Solving Modern Crime in Financial Markets: Analytics and Case Studies. Academic Press.
 
 https://tinyurl.com/2p97fsvn
 
