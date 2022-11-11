@@ -17,6 +17,10 @@ Suggests:
     plotly,
     openintro,
     descriptr,
-    assertable
+    assertable,
+    gapminder,
+    stringr,
+    patchwork,
+    gcookbook,
 Remotes:
     hadley/emo
