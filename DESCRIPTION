@@ -32,9 +32,15 @@ Suggests:
     visNetwork,
     withr,
     xml2,
+    rgl,
+    chorddiag,
+    circlepackeR,
+    streamgraph,
+    d3heatmap
 Remotes:
     hadley/emo,
     dmurdoch/rgl,
     mattflor/chorddiag,
     jeromefroe/circlepackeR,
     hrbrmstr/streamgraph,
+    talgalili/d3heatmap
