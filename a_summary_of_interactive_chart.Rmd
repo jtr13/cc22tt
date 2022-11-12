@@ -16,7 +16,7 @@ library(igraph)
 library(networkD3)
 library(tibble)
 library(visNetwork)
-# remotes::install_github("rstudio/d3heatmap")
+# remotes::install_github("talgalili/d3heatmap")
 library(d3heatmap) # must be installed from source
 library(threejs)
 # remotes::install_github("dmurdoch/rgl")
