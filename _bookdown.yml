@@ -14,7 +14,6 @@ rmd_files: [
   'assignment.Rmd',
   'instructions.Rmd',
   'sample_project.Rmd',
-  'a_summary_of_interactive_chart.Rmd',
 
   # Part: Cheatsheets
   'r_window_functions_cheatsheet.Rmd',
@@ -28,6 +27,7 @@ rmd_files: [
   'how_to_use_sqldf.Rmd',
   'googleVis.Rmd',
   'vector_field_tutorial.Rmd',
+  'a_summary_of_interactive_chart.Rmd',
   
   # Part: Interview Prep
   'ten_interview_questions.Rmd',
