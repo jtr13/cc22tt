@@ -9,7 +9,9 @@ Suggests:
     bookdown,
     bslib,
     downlit,
+    DT,
     googleVis,
+    igraph
     sqldf,
     withr,
     xml2,
@@ -22,5 +24,18 @@ Suggests:
     stringr,
     patchwork,
     gcookbook,
+    networkD3,
+    dygraphs,
+    visNetwork,
+    d3heatmap,
+    threejs,
+    maptools,
+    maps,
+    leaflet,
+    collapsibleTree
 Remotes:
-    hadley/emo
+    hadley/emo,
+    dmurdoch/rgl,
+    mattflor/chorddiag,
+    jeromefroe/circlepackeR,
+    hrbrmstr/streamgraph
