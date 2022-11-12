@@ -21,6 +21,7 @@ r-window-functions-cheatsheet
 rmd-chunk-option-cheat-sheet
 helpful-ggplot2-extensions-cheatsheet
 commonly-used-graph-cheatcheet
+git-and-version-control
 part-tutorials
 preprocessing-and-visualization-of-time-series-data
 preprocess-on-a-time-series-data
