@@ -27,7 +27,6 @@ Suggests:
     networkD3,
     dygraphs,
     visNetwork,
-    d3heatmap,
     threejs,
     maptools,
     maps,
@@ -38,4 +37,5 @@ Remotes:
     dmurdoch/rgl,
     mattflor/chorddiag,
     jeromefroe/circlepackeR,
-    hrbrmstr/streamgraph
+    hrbrmstr/streamgraph,
+    rstudio/d3heatmap
