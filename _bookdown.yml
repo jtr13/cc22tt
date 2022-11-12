@@ -14,6 +14,7 @@ rmd_files: [
   'assignment.Rmd',
   'instructions.Rmd',
   'sample_project.Rmd',
+  'a_summary_of_interactive_chart.Rmd',
 
   # Part: Cheatsheets
   'r_window_functions_cheatsheet.Rmd',
