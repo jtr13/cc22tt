@@ -11,7 +11,7 @@ Suggests:
     downlit,
     DT,
     googleVis,
-    igraph
+    igraph,
     sqldf,
     withr,
     xml2,
