@@ -10,7 +10,7 @@ Suggests:
     benford.analysis,
     bookdown,
     bslib,
-    collapsibleTree
+    collapsibleTree,
     descriptr,
     downlit,
     DT,
