@@ -1,0 +1,260 @@
+# Mapview tutorial in R
+
+Jingtian Wang and Ji Qi
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+```
+
+```{r}
+library(mapview) # This is the package taught in this tutorial.
+library(tigris)  # This package is used to provide the map data in the following example.
+# Other packages needed for data manipulation
+library(dplyr)
+library(sf)
+library(leaflet)
+library(leafpop)
+library(lattice)
+library(sp)
+library(leafsync)
+```
+
+# 1. Load dataset
+
+## 1.1 Data included in mapview
+In `mapview` package, 3 vector type data sets are included initially:  
+· `breweries`: a selection of breweries in Franconia, Bravaria.  
+· `trails`: selected hiking trails in Franconia.  
+· `franconia`: administrative regions of Franconia at the district level.
+
+## 1.2 Make your own dataset
+The demo below shows how to create a data consisting of the map for 50 states in the United States and their population changes by states in the past 20 years. The following tutorial is also based on this data set.
+
+```{r}
+us_map <- tigris::states(cb = TRUE, resolution = '20m') # Download a GIS file defining state polygon borders.
+pop_data <- readr::read_csv("resources/mapview_tutorial_data/state_population_data.csv") # Read a .csv file of state populations in 2000, 2010 and 2020.
+
+all_data <- inner_join(us_map, pop_data, by = c("GEOID" = "GEOID")) # Join 2 datasets.
+```
+  
+# 2. mapview basics
+
+## 2.1 View the spatial data
+With only one line of code, we have completed the visualization of our data.  
+As you can see, the default interactive map includes:  
+1) a zoom control button  
+2) a layer control button which can be used to adjust different background maps and data shown  
+3) Attribute values when you click a state  
+4) a scale bar
+```{r}
+mapview(all_data)
+```
+  
+## 2.2 Control attribute columns
+If we just want certain columns of the attribute shown in the plotting, the argument `zcol` can be used. When doing this, each column will be rendered as a separate layer. Each object is also colored according to the value of the selected attribute.  
+If we just want the population in 2000, 2010 and 2020 of each state shown in the plottig, we can have the following code:  
+```{r}
+mapview(all_data, zcol = c("Pop2000", "Pop2010", "Pop2020"))
+```
+  
+## 2.3 Control attribue columns while keep all the attributes in the viewer window
+After using the argument `zcol`, we can only see the chosen attribute in the viewer window. If we still want all the attributes shown in the viewer window, we can set `legend` to be TRUE, which is set `FALSE` by default.  
+
+```{r}
+mapview(all_data, zcol = c("Pop2000"), legend = TRUE)
+```
+  
+## 2.4 Adjust line color and width
+We can line color (by `color`), region color (by `col.regions`) and width of those state polygon borders (by `lwd`).  
+
+```{r}
+mapview(all_data, color = "red", col.regions = "green", lwd = 3)
+```
+
+# 3. mapview advanced controls
+  
+In order to have a finer control of the visualization, we could set more arguments in the mapview( ) function.
+
+Below are all types of arguments could be set up.
+
+**All types**
+
+- map - the leaflet or mapview map to use -> default NULL
+- col.regions - the color palette for colouring raster, polygon and point areas (points are essentially circles) -> default hcl.colors with palette "Inferno" for raster data and palette "viridis" for vector data
+- at - breakpoints used for the colouring -> default NULL meaning they are calculated automatically for the range of data
+- na.color - the color for NA values -> default #BEBEBE80
+- map.types - the types of the background maps -> default CartoDB.Positron, CartoDB.DarkMatter, OpenStreetMap, Esri.WorldImagery, OpenTopoMap see here for available map types
+- alpha.regions - the opacity of raster, polygon and point fills -> default 0.8 for raster, 0.6 for polygons and 0.9 for points
+- legend - whether to add a legend to the plot -> default FALSE
+- legend.opacity - opacity of the legend -> default 1
+- verbose - whether to print additional information to the console during the rendering -> default FALSE
+- layer.name - the layer name to be used for plotting -> default depends on call. For a single object the name of the object; if zcol is supplied a combination of object name and column name; for raster stack/bricks the layer names
+- … - further arguments to be passed on to respective leaflet functions such as addRasterImage or adCircleMarkers
+  
+Here are some frequently used arguments in the mapview() function
+
+## 3.1 Adjusting color, col.regions & at
+Generally speaking, the argument `col.regions` and `at` can be used for finer control of the coloring. `col.regions` could help us select the specific color palette for the mapview. `at` argument could be used to bin the dataset with the help from `seq()`function. The plot shown below is the population in 2000 of each state with the bin size around 5,000,000.
+
+```{r}
+pal = mapviewPalette("mapviewVectorColors")
+
+mapview(all_data, zcol = c("Pop2000"), col.regions = pal, at = seq(500000, 50000000, 5000000), lwd = 3)
+```
+
+## 3.2 Changing map.types
+For a different background map, use argument map.types
+See here for available maps: http://leaflet-extras.github.io/leaflet-providers/preview/
+```{r}
+mapview(all_data, zcol = c("Pop2000"), map.types = c("Esri.WorldStreetMap"))
+```
+
+## 3.3 Using burst
+When burst argument used together with zcol, it will produce one layer for all unique values of zcol. 
+```{r}
+mapview(all_data, zcol = c("State"), burst = TRUE)
+```
+
+
+## 3.4 Visualize points with mapview 
+
+To use latitude and longitude data for GIS work in R, We turn the data frame into a spatial object. The sf package’s st_as_sf( ) function helps us do the data transformation. Below is the plot we used the percentage change of population from 2000 to 2010.
+```{r}
+
+capitals <- readr::read_csv("resources/mapview_tutorial_data/us-state-capitals.csv")
+
+capitals_geo <- st_as_sf(capitals, coords = c("longitude", "latitude"), 
+                crs = 4326)
+
+mapview(all_data, zcol = "PctChange00_10") + mapview(capitals_geo)
+```
+  
+  
+# 4. mapview options
+
+## 4.1 Veiw plotting parameters
+Before making any adjustment to plotting parameters, you may like to see the option for each parameter first and you can do this with `mapviewOptions()`.  If you only want to get the option for a certain parameter, you can use `mapviewGetOption()`.
+
+```{r}
+mapviewOptions()
+mapviewGetOption("legend") # Get the option for "legend" argument
+```
+  
+## 4.2 Set plotting parameters globally
+If you do not want to set plotting parameters for each graph over and over again, you can use `mapviewOptions()` to set several plotting parameters globally. The change will be available until the session is inactive.  
+```{r}
+# mapvewOptions(basemaps = c("OpenStreetMap.DE"),
+#               layers.control.pos = "topright")
+```
+If you want to revert those parameters to default, you can use:  
+```{r}
+# mapviewOptions(default = TRUE)
+```
+  
+# 5. mapview popups
+
+## 5.1 Attribute table popups
+
+`popupTable` is the standard popup function. It provides a static table displaying of all attributes of the individual features.
+
+```{r}
+mapview(all_data, popup = popupTable(all_data,
+                                     zcol = c("State",
+                                               "Pop2000",
+                                               "Pop2010",
+                                               "Pop2020")), 
+                                     map.types = c("Esri.WorldStreetMap"))
+```
+
+## 5.2 Graph popups
+
+`popupGraph` includes static or interactive (htmlwidgets) plots in popups. In the following, we will use a scatterplot of PctChange00_10 ~ PctChange10_20 for each state.
+```{r}
+a <- xyplot(PctChange00_10 ~ PctChange10_20, data = all_data, pch = 20, cex = 2)
+
+a <- mget(rep("a", nrow(all_data)))
+
+clr <- rep("blue", nrow(all_data))
+
+a <- lapply(1:length(a), function(i) {
+  clr[i] <- "red"
+  update(a[[i]], col = clr)
+})
+
+
+mapview(all_data,
+        zcol = c("PctChange10_20"),
+        popup = popupGraph(a)) + mapview(capitals_geo)
+```
+
+
+## 5.3  Image popups
+`popupImage` can be applied to include images in popups. Both local (file) and remote (web url) images can be used. Below is the topographical map of Sacramento Capitol House with the point that shows the acutal building image of Sacramento Capitol House.
+```{r}
+
+pnt <- data.frame(x = -121.4936, y = 38.57667)
+pnt <- st_as_sf(pnt, coords = c("x", "y"), crs = 4326)
+
+img <- "https://en.wikipedia.org/wiki/California_State_Capitol#/media/File:Sacramento,-California---State-Capitol.jpg"
+
+mapview(pnt, map.types = "Esri.WorldImagery",
+        popup = popupImage(img))
+```  
+  
+# 6. Extra funtionality
+
+## 6.1 Sync
+`sync` is a handy function to use when we want to compare multiple attributes of the same feature geometry sey. For instance, if we want to compare the population in each state in 2000, 2010 and 2020, `sync` can plot those 3 graphs together and they are synchronised. Specifically, what we do in one plot (including zoom in/out, change the mouse position, etc) is also synced to all other panels.  Remember that loading `leafsync` package is required.  
+
+```{r}
+# The map for population in 2000
+map1 <- mapview(all_data, zcol = ("Pop2000"))
+# The map for population in 2010
+map2 <- mapview(all_data, zcol = ("Pop2010"))
+# The map for population in 2020
+map3 <- mapview(all_data, zcol = ("Pop2020"))
+
+# Synchronise map1, map2 and map3 together
+sync(map1, map2, map3)
+```
+  
+  
+If you want to change the position of each panel, you can adjust the `sync` argument. For example, if I want to switch map3 to the top right and map2 to the bottom left, I can:  
+```{r}
+sync(list(map1, map2, map3),
+    sync = list(c(1,3),
+                c(2)))
+```
+  
+You can also control the panel position by setting the number of columns.  
+```{r}
+sync(list(map1, map2, map3), ncol = 1)
+```
+
+## 6.2 latticeView
+`latticeView` can plot multiple graphs together without synchronising.  
+```{r}
+latticeView(map1, map2)
+```
+
+# 7. Leaflet provides extra functionality
+
+Package `leafem` provides a few extra functions for use with `mapview`.  
+
+## 7.1 addMouseCoordinates
+This function tells us position and zoom level information of mouse. By default, only `lon`, `lat` and `zoom` are shown. If you also want to know `epsg code` and `proj4tring`, you can press and hold Ctrl.  
+```{r}
+m <- mapview(all_data)
+leafem::addMouseCoordinates(m)
+```
+  
+## 7.2 addHomeButton
+This can be used to add "zoom-to-layer" button to a map. You can change its position using argument `position`.  
+```{r}
+leafem::addHomeButton(m, position = "bottomright")
+```
+
+# Reference
+mapview official website: https://r-spatial.github.io/mapview/index.html
+
+
