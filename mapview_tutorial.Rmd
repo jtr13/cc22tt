@@ -195,7 +195,7 @@ mapview(all_data,
 pnt <- data.frame(x = -121.4936, y = 38.57667)
 pnt <- st_as_sf(pnt, coords = c("x", "y"), crs = 4326)
 
-img <- "https://en.wikipedia.org/wiki/California_State_Capitol#/media/File:Sacramento,-California---State-Capitol.jpg"
+img <- "https://upload.wikimedia.org/wikipedia/commons/1/11/Sacramento_Capitol.jpg"
 
 mapview(pnt, map.types = "Esri.WorldImagery",
         popup = popupImage(img))
