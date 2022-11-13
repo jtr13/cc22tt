@@ -1,4 +1,3 @@
-
 # Color in R, Python, and JS/HTML/CSS
 
 Shujie Hu
