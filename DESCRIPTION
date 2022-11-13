@@ -14,6 +14,19 @@ Suggests:
     withr,
     xml2,
     benford.analysis,
-    plotly
+    plotly,
+    openintro,
+    descriptr,
+    assertable,
+    gapminder,
+    stringr,
+    patchwork,
+    gcookbook,
+    mapview,
+    sp,
+    sf,
+    tigris,
+    leafsync,
+    imputeTS,
 Remotes:
     hadley/emo
