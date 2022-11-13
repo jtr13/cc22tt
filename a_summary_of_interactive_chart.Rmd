@@ -4,7 +4,7 @@ Yihan Chen
 
 
 ```{r, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 ```
 
 
@@ -16,7 +16,8 @@ library(igraph)
 library(networkD3)
 library(tibble)
 library(visNetwork)
-library(d3heatmap)
+# remotes::install_github("talgalili/d3heatmap")
+library(d3heatmap) # must be installed from source
 library(threejs)
 # remotes::install_github("dmurdoch/rgl")
 library(rgl) # must be installed from source
@@ -113,6 +114,7 @@ edges <- data.frame(from = 1:5, to = c(5, 4, 6, 3, 3))
 visNetwork(nodes, edges) %>%
   visOptions(highlightNearest = TRUE, nodesIdSelection = TRUE)
 ```
+
 ### Heatmaps
 
 we can also draw an interactive heatmap using `d3heatmap`. Here is an example, when you hover over data, it will show the row and column it belongs to and also the value of it. You can also select a rectangle of data to dive deeper into the data set. Besides, when you click on one column/row name, it will highlight the corresponding column/name.
