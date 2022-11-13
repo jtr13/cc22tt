@@ -189,7 +189,7 @@ mapview(all_data,
 
 
 ## 5.3  Image popups
-`popupImage` can be applied to include images in popups. Both local (file) and remote (web url) images can be used. Below is the topographical map of Sacramento Capitol House with the point that shows the acutal building image of Sacramento Capitol House.
+`popupImage` can be applied to include images in the popups. Both local (file) and remote (web url) images can be used. Below is the topographical map of Sacramento Capitol House with the point that shows the acutal building image of Sacramento Capitol House.
 ```{r}
 
 pnt <- data.frame(x = -121.4936, y = 38.57667)
