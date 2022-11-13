@@ -1,5 +1,5 @@
 book_filename: "cc22"
-new_session: true
+new_session: false # true
 before_chapter_script: _common.R
 delete_merged_file: true
 language:
@@ -21,12 +21,15 @@ rmd_files: [
   'helpful_ggplot2_extensions_cheatsheet.Rmd',
   'EDAV_Commonly_Used_Graph_Cheatsheet.Rmd',
   'git_cheatsheet.Rmd',
+  'plots_for_bioinfo_cheatsheet.Rmd',
 
   # Part: Tutorials
   'time_series_visualization_project.Rmd',  
   'how_to_use_sqldf.Rmd',
   'googleVis.Rmd',
   'vector_field_tutorial.Rmd',
+  'a_summary_of_interactive_chart.Rmd',
+  # 'mapview_tutorial.Rmd',
   
   # Part: Interview Prep
   'ten_interview_questions.Rmd',
