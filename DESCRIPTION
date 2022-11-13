@@ -27,5 +27,6 @@ Suggests:
     sf,
     tigris,
     leafsync,
+    imputeTS,
 Remotes:
     hadley/emo
