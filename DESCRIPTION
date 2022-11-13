@@ -5,11 +5,6 @@ Version: 0.0.0.9000
 Imports:
     emo,
     tidyverse,
-    rgl,
-    chorddiag,
-    circlepackeR,
-    streamgraph,
-    d3heatmap
 Suggests:
     assertable,
     benford.analysis,
@@ -44,9 +39,4 @@ Suggests:
     xml2,
 Remotes:
     hadley/emo,
-    dmurdoch/rgl,
-    mattflor/chorddiag,
-    jeromefroe/circlepackeR,
-    hrbrmstr/streamgraph,
-    talgalili/d3heatmap
 
