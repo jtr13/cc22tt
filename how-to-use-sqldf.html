@@ -16,7 +16,7 @@
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.1/transition.js"></script><script src="libs/bs3compat-0.4.1/tabs.js"></script><script src="libs/bs3compat-0.4.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -71,7 +71,7 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="how-to-use-sqldf" class="section level1">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="how-to-use-sqldf" class="section level1" number="14">
 <h1>
 <span class="header-section-number">14</span> How to use <code>sqldf</code><a class="anchor" aria-label="anchor" href="#how-to-use-sqldf"><i class="fas fa-link"></i></a>
 </h1>
@@ -79,7 +79,7 @@
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ggrothendieck/sqldf">sqldf</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code></pre></div>
-<div id="motivation" class="section level2">
+<div id="motivation" class="section level2" number="14.1">
 <h2>
 <span class="header-section-number">14.1</span> Motivation<a class="anchor" aria-label="anchor" href="#motivation"><i class="fas fa-link"></i></a>
 </h2>
@@ -94,11 +94,11 @@
 <li>This approach is a significant improvement over something like <code>dbplyr</code> and the <code>knitr</code> SQL engine. Such an approach still requires manual management of connections and tables. Additionally, <code>knitr</code> is hardly suited for non-report-style work in R. <code>sqldf</code> is usable in a wider variety of scenarios.</li>
 </ul>
 </div>
-<div id="usage" class="section level2">
+<div id="usage" class="section level2" number="14.2">
 <h2>
 <span class="header-section-number">14.2</span> Usage<a class="anchor" aria-label="anchor" href="#usage"><i class="fas fa-link"></i></a>
 </h2>
-<div id="basics" class="section level3">
+<div id="basics" class="section level3" number="14.2.1">
 <h3>
 <span class="header-section-number">14.2.1</span> Basics<a class="anchor" aria-label="anchor" href="#basics"><i class="fas fa-link"></i></a>
 </h3>
@@ -139,7 +139,7 @@
 ## 1 versicolor            16.5262
 ## 2  virginica            19.6846</code></pre>
 </div>
-<div id="more-advanced-sql-tasks" class="section level3">
+<div id="more-advanced-sql-tasks" class="section level3" number="14.2.2">
 <h3>
 <span class="header-section-number">14.2.2</span> More advanced SQL tasks<a class="anchor" aria-label="anchor" href="#more-advanced-sql-tasks"><i class="fas fa-link"></i></a>
 </h3>
@@ -176,7 +176,7 @@
 ## 6  setosa     5.600000</code></pre>
 <p>These are unique tasks where it might even be preferable to just use SQL rather than the R dataframe manipulation. Which is fine; not every tool can do everything prefectly – SQL excels at very specific things.</p>
 </div>
-<div id="alternate-data-sources" class="section level3">
+<div id="alternate-data-sources" class="section level3" number="14.2.3">
 <h3>
 <span class="header-section-number">14.2.3</span> Alternate data sources<a class="anchor" aria-label="anchor" href="#alternate-data-sources"><i class="fas fa-link"></i></a>
 </h3>
@@ -206,7 +206,7 @@
 ## 6          5.7         2.8          4.5         1.3 "Versicolor"</code></pre>
 <p>Hopefully you can see why these options are powerful. Although <code>iris</code> is small, sometimes our data is very large, and we may not want to deal with loading many millions of rows into R if we are going to filter it down anyway. There is an example of this later under <a href="how-to-use-sqldf.html#performance">the Performance section</a>.</p>
 </div>
-<div id="advanced-database-usage" class="section level3">
+<div id="advanced-database-usage" class="section level3" number="14.2.4">
 <h3>
 <span class="header-section-number">14.2.4</span> Advanced database usage<a class="anchor" aria-label="anchor" href="#advanced-database-usage"><i class="fas fa-link"></i></a>
 </h3>
@@ -232,7 +232,7 @@
 <p>You can also just pass any database administrative command to the above function as well. For example, you could manage the entire database (create new schemas, tables, adjust permissions) if you really wanted to. Although doing so in a more appropriate tool might be worth considering.</p>
 </div>
 </div>
-<div id="performance" class="section level2">
+<div id="performance" class="section level2" number="14.3">
 <h2>
 <span class="header-section-number">14.3</span> Performance<a class="anchor" aria-label="anchor" href="#performance"><i class="fas fa-link"></i></a>
 </h2>
@@ -274,7 +274,7 @@
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>This difference becomes more meaningful as your dataset’s size increases relative to your machine’s memory. Once the file is several GB, preprocessing in a temporary database table becomes increasingly more efficient relative to pure R. We observed a marginal version of this optimization above. This functionality is especially useful if we know we will never need to refer back to the full file (meaning we will only use e.g. the transformed version as above).</p>
 </div>
-<div id="combining-with-ggplot" class="section level2">
+<div id="combining-with-ggplot" class="section level2" number="14.4">
 <h2>
 <span class="header-section-number">14.4</span> Combining with ggplot<a class="anchor" aria-label="anchor" href="#combining-with-ggplot"><i class="fas fa-link"></i></a>
 </h2>
@@ -289,16 +289,16 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>stat<span class="op">=</span><span class="st">'identity'</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_flip.html">coord_flip</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">'Species'</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="how_to_use_sqldf_files/figure-html/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="how_to_use_sqldf_files/figure-html/unnamed-chunk-15-1.png" width="80%" style="display: block; margin: auto;"></div>
 </div>
-<div id="conclusion-1" class="section level2">
+<div id="conclusion-1" class="section level2" number="14.5">
 <h2>
 <span class="header-section-number">14.5</span> Conclusion<a class="anchor" aria-label="anchor" href="#conclusion-1"><i class="fas fa-link"></i></a>
 </h2>
 <p><code>sqldf</code> is an important option to have available when manipulating data. To be clear, it is not a replacement for knowing how to use R in general. One should restrict themselves to using <code>sqldf</code> only when doing so is uniquely advantageous to SQL-style work, or if they don’t want to deal with writing perfect R. The above guide should be useful to anyone new to the library as to exactly which scenarios one might opt to use it in.</p>
 <p>Personally, I’m glad I chose to do a deep dive into this library and create this guide. It was educational in many ways, like: learning more about databases, understanding how R can blend with SQL, and elucidating the things that R vs. SQL each excel at. I will certainly be be referring back to this document, as I think it makes it easy to review exactly how to quickly use the library, without getting too in-the-weeds of all its nuts and bolts (as much of its existing documentation does, in my opinion). One thing I’d like to dedicate more effort to next time is exactly replicating complex SQL commands in R; knowing how to do so will likely be useful at some point, even if not practical right now. Finally, I wish I had known about this library sooner, as I know that it will for sure optimize parts of my workflow going foward.</p>
 </div>
-<div id="references" class="section level2">
+<div id="references" class="section level2" number="14.6">
 <h2>
 <span class="header-section-number">14.6</span> References<a class="anchor" aria-label="anchor" href="#references"><i class="fas fa-link"></i></a>
 </h2>

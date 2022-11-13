@@ -16,7 +16,7 @@
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.1/transition.js"></script><script src="libs/bs3compat-0.4.1/tabs.js"></script><script src="libs/bs3compat-0.4.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -71,7 +71,7 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="tutorial-for-vector-fields-in-r" class="section level1">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="tutorial-for-vector-fields-in-r" class="section level1" number="16">
 <h1>
 <span class="header-section-number">16</span> Tutorial for vector fields in r<a class="anchor" aria-label="anchor" href="#tutorial-for-vector-fields-in-r"><i class="fas fa-link"></i></a>
 </h1>
@@ -112,7 +112,7 @@ pre { /* Code block - determines code spacing between lines */
     font-size: 12px;
 }
 </style>
-<div id="getting-started-with-vector-fields" class="section level2">
+<div id="getting-started-with-vector-fields" class="section level2" number="16.1">
 <h2>
 <span class="header-section-number">16.1</span> Getting Started with Vector Fields<a class="anchor" aria-label="anchor" href="#getting-started-with-vector-fields"><i class="fas fa-link"></i></a>
 </h2>
@@ -162,7 +162,7 @@ values to the x_axis and y_axis columns.</p>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">10</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_segment.html">geom_segment</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>xend <span class="op">=</span> <span class="va">x_axis</span><span class="op">+</span><span class="op">(</span><span class="fl">0.05</span><span class="op">)</span>, yend <span class="op">=</span> <span class="va">y_axis</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html">coord_fixed</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="vector_field_tutorial_files/figure-html/unnamed-chunk-2-1.png" width="672" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="vector_field_tutorial_files/figure-html/unnamed-chunk-2-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>In graphing the plot, we’ve assigned the x_axis and y_axis values as the axis values
 of the entire chart, again, as the columns place each arrow. The geom_segment
 function plots the lines, we’ve added an endpoint of 0.05 to the x_axis so that
@@ -192,7 +192,7 @@ arrows are being pulled in an upward direction.</p>
 <span>                     yend <span class="op">=</span> <span class="va">y_axis</span> <span class="op">+</span> <span class="op">(</span><span class="va">y_pull</span><span class="op">)</span><span class="op">)</span>, </span>
 <span>                 arrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/arrow.html">arrow</a></span><span class="op">(</span>length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="st">"cm"</span><span class="op">)</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">0.25</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html">coord_fixed</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="vector_field_tutorial_files/figure-html/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="vector_field_tutorial_files/figure-html/unnamed-chunk-3-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>Conversely, if I set only the x_pull equal to 0.5, you’ll notice that all of the
 arrows are being pulled to the right direction.</p>
 <div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
@@ -207,7 +207,7 @@ arrows are being pulled to the right direction.</p>
 <span>                     yend <span class="op">=</span> <span class="va">y_axis</span> <span class="op">+</span> <span class="op">(</span><span class="va">y_pull</span><span class="op">)</span><span class="op">)</span>, </span>
 <span>                 arrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/arrow.html">arrow</a></span><span class="op">(</span>length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="st">"cm"</span><span class="op">)</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">0.25</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html">coord_fixed</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="vector_field_tutorial_files/figure-html/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="vector_field_tutorial_files/figure-html/unnamed-chunk-4-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>If we set both x_pull and y_pull equal to 0.5, then the x and y forces are
 offsetting, and the arrows point in a 45 degree angle.</p>
 <div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
@@ -221,7 +221,7 @@ offsetting, and the arrows point in a 45 degree angle.</p>
 <span>                     yend <span class="op">=</span> <span class="va">y_axis</span> <span class="op">+</span> <span class="op">(</span><span class="va">y_pull</span><span class="op">)</span><span class="op">)</span>, </span>
 <span>                     arrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/arrow.html">arrow</a></span><span class="op">(</span>length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="st">"cm"</span><span class="op">)</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">0.25</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html">coord_fixed</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="vector_field_tutorial_files/figure-html/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="vector_field_tutorial_files/figure-html/unnamed-chunk-5-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>To provide another example, we’ve input random numbers into x_pull and y_pull
 values, to show that the format is completely flexible and doesn’t require
 consistent value changes to the x_pull and y_pull variables.</p>
@@ -236,15 +236,15 @@ consistent value changes to the x_pull and y_pull variables.</p>
 <span>                     yend <span class="op">=</span> <span class="va">y_axis</span> <span class="op">+</span> <span class="op">(</span><span class="va">y_pull</span><span class="op">)</span><span class="op">)</span>, </span>
 <span>                     arrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/arrow.html">arrow</a></span><span class="op">(</span>length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="st">"cm"</span><span class="op">)</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">0.25</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html">coord_fixed</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="vector_field_tutorial_files/figure-html/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="vector_field_tutorial_files/figure-html/unnamed-chunk-6-1.png" width="80%" style="display: block; margin: auto;"></div>
 </div>
-<div id="tips-and-tricks-to-plotting-vector-fields" class="section level2">
+<div id="tips-and-tricks-to-plotting-vector-fields" class="section level2" number="16.2">
 <h2>
 <span class="header-section-number">16.2</span> Tips and Tricks to Plotting Vector Fields<a class="anchor" aria-label="anchor" href="#tips-and-tricks-to-plotting-vector-fields"><i class="fas fa-link"></i></a>
 </h2>
 <p>Now that we’ve covered the basics, we’ll provide guidance on how to make
 high-quality vector field graphs.</p>
-<div id="understanding-arrow-options" class="section level3">
+<div id="understanding-arrow-options" class="section level3" number="16.2.1">
 <h3>
 <span class="header-section-number">16.2.1</span> Understanding arrow options<a class="anchor" aria-label="anchor" href="#understanding-arrow-options"><i class="fas fa-link"></i></a>
 </h3>
@@ -269,11 +269,11 @@ in the following line:</p>
 <span>                     yend <span class="op">=</span> <span class="va">y_axis</span> <span class="op">+</span> <span class="op">(</span><span class="va">y_pull</span><span class="op">)</span><span class="op">)</span>, </span>
 <span>                     arrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/arrow.html">arrow</a></span><span class="op">(</span>length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span><span class="op">(</span><span class="fl">1</span>, <span class="st">"cm"</span><span class="op">)</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html">coord_fixed</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="vector_field_tutorial_files/figure-html/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="vector_field_tutorial_files/figure-html/unnamed-chunk-7-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>These arrow adjustments produce a low-quality plot, but they do highlight the options
 one has to represent arrows in vector fields.</p>
 </div>
-<div id="axis-scaling" class="section level3">
+<div id="axis-scaling" class="section level3" number="16.2.2">
 <h3>
 <span class="header-section-number">16.2.2</span> Axis Scaling<a class="anchor" aria-label="anchor" href="#axis-scaling"><i class="fas fa-link"></i></a>
 </h3>
@@ -298,7 +298,7 @@ and preserves an accurate relationship between the x and y axes.</p>
 <span>                  yend <span class="op">=</span> <span class="va">y_axis</span> <span class="op">+</span> <span class="op">(</span><span class="va">y_pull</span><span class="op">)</span><span class="op">)</span>, </span>
 <span>                  arrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/arrow.html">arrow</a></span><span class="op">(</span>length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="st">"cm"</span><span class="op">)</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">0.25</span><span class="op">)</span>  <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"Distorted plot without coord_fixed()"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="vector_field_tutorial_files/figure-html/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="vector_field_tutorial_files/figure-html/unnamed-chunk-8-1.png" width="80%" style="display: block; margin: auto;"></div>
 <div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#Coord_fixed</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">data_frame</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x_axis</span>, y <span class="op">=</span> <span class="va">y_axis</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -309,9 +309,9 @@ and preserves an accurate relationship between the x and y axes.</p>
 <span>                        arrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/arrow.html">arrow</a></span><span class="op">(</span>length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="st">"cm"</span><span class="op">)</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">0.25</span><span class="op">)</span> <span class="op">+</span></span>
 <span>        <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html">coord_fixed</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>        <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"High-quality plot with coord_fixed()"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="vector_field_tutorial_files/figure-html/unnamed-chunk-8-2.png" width="672" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="vector_field_tutorial_files/figure-html/unnamed-chunk-8-2.png" width="80%" style="display: block; margin: auto;"></div>
 </div>
-<div id="arrow-length" class="section level3">
+<div id="arrow-length" class="section level3" number="16.2.3">
 <h3>
 <span class="header-section-number">16.2.3</span> Arrow Length<a class="anchor" aria-label="anchor" href="#arrow-length"><i class="fas fa-link"></i></a>
 </h3>
@@ -330,7 +330,7 @@ input data may cause arrows to overlap, making the plot difficult to interpret
 <span>                     yend <span class="op">=</span> <span class="va">y_axis</span> <span class="op">+</span> <span class="op">(</span><span class="va">y_pull</span><span class="op">)</span><span class="op">)</span>, </span>
 <span>                 arrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/arrow.html">arrow</a></span><span class="op">(</span>length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="st">"cm"</span><span class="op">)</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">0.25</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html">coord_fixed</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="vector_field_tutorial_files/figure-html/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="vector_field_tutorial_files/figure-html/unnamed-chunk-9-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>As you can see, even with a simple plot that has all vectors pointing in the same
 direction, overlapping arrows makes it impossible to see the origin point of
 arrows in the middle. Therefore, we recommend scaling down the x_pull and y_pull vectors,
@@ -353,9 +353,9 @@ amount).</p>
 <span>                     yend <span class="op">=</span> <span class="va">y_axis</span> <span class="op">+</span> <span class="op">(</span><span class="va">y_pull</span><span class="op">)</span><span class="op">)</span>, </span>
 <span>                 arrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/arrow.html">arrow</a></span><span class="op">(</span>length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="st">"cm"</span><span class="op">)</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">0.25</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html">coord_fixed</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="vector_field_tutorial_files/figure-html/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="vector_field_tutorial_files/figure-html/unnamed-chunk-10-1.png" width="80%" style="display: block; margin: auto;"></div>
 </div>
-<div id="arrow-color" class="section level3">
+<div id="arrow-color" class="section level3" number="16.2.4">
 <h3>
 <span class="header-section-number">16.2.4</span> Arrow Color<a class="anchor" aria-label="anchor" href="#arrow-color"><i class="fas fa-link"></i></a>
 </h3>
@@ -390,7 +390,7 @@ and y_axis values ranging from -10 to 10.</p>
 <span>                     arrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/arrow.html">arrow</a></span><span class="op">(</span>length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="st">"cm"</span><span class="op">)</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">0.25</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept<span class="op">=</span><span class="fl">0</span>, size<span class="op">=</span><span class="fl">0.15</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline</a></span><span class="op">(</span>yintercept<span class="op">=</span><span class="fl">0</span>, size<span class="op">=</span><span class="fl">0.15</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html">coord_fixed</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="vector_field_tutorial_files/figure-html/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="vector_field_tutorial_files/figure-html/unnamed-chunk-11-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>In the following plot, we have changed the arrow color to be based on the x_pull
 value, rather than magnitude. This could be useful if the flow in one direction
 is more important than the other.</p>
@@ -417,10 +417,10 @@ is more important than the other.</p>
 <span>                     arrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/arrow.html">arrow</a></span><span class="op">(</span>length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="st">"cm"</span><span class="op">)</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">0.25</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept<span class="op">=</span><span class="fl">0</span>, size<span class="op">=</span><span class="fl">0.15</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline</a></span><span class="op">(</span>yintercept<span class="op">=</span><span class="fl">0</span>, size<span class="op">=</span><span class="fl">0.15</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html">coord_fixed</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="vector_field_tutorial_files/figure-html/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="vector_field_tutorial_files/figure-html/unnamed-chunk-12-1.png" width="80%" style="display: block; margin: auto;"></div>
 </div>
 </div>
-<div id="spacing" class="section level2">
+<div id="spacing" class="section level2" number="16.3">
 <h2>
 <span class="header-section-number">16.3</span> Spacing<a class="anchor" aria-label="anchor" href="#spacing"><i class="fas fa-link"></i></a>
 </h2>
@@ -479,7 +479,7 @@ On the other hand if, don’t down-sample enough, the vector field becomes clutt
 <span>        <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html">coord_fixed</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">p1</span> <span class="op">+</span> <span class="va">p2</span></span></code></pre></div>
-<div class="inline-figure"><img src="vector_field_tutorial_files/figure-html/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="vector_field_tutorial_files/figure-html/unnamed-chunk-13-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>As shown above, at the extremes of spacing, vector fields are difficult to interpret.
 Hence, there must be an optimal spacing between the two. As illustrated below, this
 optimal spacing also depends on arrow length because closer spacing requires shorter
@@ -537,9 +537,9 @@ there is a trade-off between vector spacing and vector length.</p>
 <span>        <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html">coord_fixed</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">p1</span> <span class="op">+</span> <span class="va">p2</span></span></code></pre></div>
-<div class="inline-figure"><img src="vector_field_tutorial_files/figure-html/unnamed-chunk-14-1.png" width="672" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="vector_field_tutorial_files/figure-html/unnamed-chunk-14-1.png" width="80%" style="display: block; margin: auto;"></div>
 </div>
-<div id="dealing-with-3d" class="section level2">
+<div id="dealing-with-3d" class="section level2" number="16.4">
 <h2>
 <span class="header-section-number">16.4</span> Dealing with 3D<a class="anchor" aria-label="anchor" href="#dealing-with-3d"><i class="fas fa-link"></i></a>
 </h2>
@@ -633,7 +633,7 @@ of each axis, and plot vector fields at the cross-sections of these midpoints.</
 <span>        <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>text<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size<span class="op">=</span><span class="fl">8</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">xy</span> <span class="op">+</span> <span class="va">xz</span> <span class="op">+</span> <span class="va">yz</span> <span class="op">+</span> <span class="fu">plot_layout</span><span class="op">(</span>ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="vector_field_tutorial_files/figure-html/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="vector_field_tutorial_files/figure-html/unnamed-chunk-15-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>In summary, when visualizing 3D vector fields, you should avoid plotting in 3D.
 Instead, you should consider if one dimension has a small contribution and, if so,
 eliminate it from the plot. You should also think about whether symmetries in the
@@ -641,13 +641,13 @@ vector field allow you to exclude a dimension from the plot. If neither option i
 possible, you should take cross-sections at the midpoints of the axes and plot the
 flows in 2D.</p>
 </div>
-<div id="application" class="section level2">
+<div id="application" class="section level2" number="16.5">
 <h2>
 <span class="header-section-number">16.5</span> Application<a class="anchor" aria-label="anchor" href="#application"><i class="fas fa-link"></i></a>
 </h2>
 <p>Now that we’ve covered the fundamentals of plotting vector fields, we will briefly
 discuss some of their applications.</p>
-<div id="flow" class="section level3">
+<div id="flow" class="section level3" number="16.5.1">
 <h3>
 <span class="header-section-number">16.5.1</span> Flow<a class="anchor" aria-label="anchor" href="#flow"><i class="fas fa-link"></i></a>
 </h3>
@@ -659,7 +659,7 @@ Examples of its application include:</p>
 <li>Modelling flow through blood vessels with stents</li>
 </ol>
 </div>
-<div id="stability-analysis" class="section level3">
+<div id="stability-analysis" class="section level3" number="16.5.2">
 <h3>
 <span class="header-section-number">16.5.2</span> Stability Analysis<a class="anchor" aria-label="anchor" href="#stability-analysis"><i class="fas fa-link"></i></a>
 </h3>
@@ -681,7 +681,7 @@ a data frame with the vectors at points in the environment. Then, using the skil
 learnt in this tutorial we can plot the vector fields, find the fixed points and
 determine their nature.</p>
 </div>
-<div id="conclusion-2" class="section level3">
+<div id="conclusion-2" class="section level3" number="16.5.3">
 <h3>
 <span class="header-section-number">16.5.3</span> Conclusion<a class="anchor" aria-label="anchor" href="#conclusion-2"><i class="fas fa-link"></i></a>
 </h3>
@@ -696,7 +696,7 @@ determine their nature.</p>
 construct vector fields, elements to consider when creating high-quality vector
 fields and where they could be applied in the real-world.</p>
 </div>
-<div id="reflection" class="section level3">
+<div id="reflection" class="section level3" number="16.5.4">
 <h3>
 <span class="header-section-number">16.5.4</span> Reflection<a class="anchor" aria-label="anchor" href="#reflection"><i class="fas fa-link"></i></a>
 </h3>
@@ -723,7 +723,7 @@ these additions as the analyses of these applications requires a deep knowledge 
 the topic, which could confuse the reader and fall into the trap of other tutorials
 that dive “too deep too quick”.</p>
 </div>
-<div id="extra" class="section level3">
+<div id="extra" class="section level3" number="16.5.5">
 <h3>
 <span class="header-section-number">16.5.5</span> Extra<a class="anchor" aria-label="anchor" href="#extra"><i class="fas fa-link"></i></a>
 </h3>

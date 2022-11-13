@@ -16,7 +16,7 @@
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.1/transition.js"></script><script src="libs/bs3compat-0.4.1/tabs.js"></script><script src="libs/bs3compat-0.4.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -71,7 +71,7 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="preprocessing-and-visualization-of-time-series-data" class="section level1">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="preprocessing-and-visualization-of-time-series-data" class="section level1" number="13">
 <h1>
 <span class="header-section-number">13</span> Preprocessing and Visualization of Time Series Data<a class="anchor" aria-label="anchor" href="#preprocessing-and-visualization-of-time-series-data"><i class="fas fa-link"></i></a>
 </h1>
@@ -84,12 +84,12 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://lubridate.tidyverse.org">lubridate</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org">tidyr</a></span><span class="op">)</span></span></code></pre></div>
-<div id="preprocess-on-a-time-series-data" class="section level2">
+<div id="preprocess-on-a-time-series-data" class="section level2" number="13.1">
 <h2>
 <span class="header-section-number">13.1</span> Preprocess on a Time Series Data<a class="anchor" aria-label="anchor" href="#preprocess-on-a-time-series-data"><i class="fas fa-link"></i></a>
 </h2>
 <p>In this part, we will first work on transforming the original data downloaded online to a data frame that we could work with. Then we will look into the data to see whether there are any problem data points with discipline of Time Series Data. And Finally we will deal with the missing values. With all these preprocessings done, our data would be good to visualize and analyze.</p>
-<div id="transform-dataset" class="section level3">
+<div id="transform-dataset" class="section level3" number="13.1.1">
 <h3>
 <span class="header-section-number">13.1.1</span> Transform DataSet<a class="anchor" aria-label="anchor" href="#transform-dataset"><i class="fas fa-link"></i></a>
 </h3>
@@ -103,8 +103,8 @@
 ## [13] "X2020.12.14"    "X2020.12.15"    "X2020.12.16"</code></pre>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">vaccination_all</span><span class="op">)</span><span class="op">[</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">vaccination_all</span><span class="op">)</span><span class="op">-</span><span class="fl">5</span><span class="op">)</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">vaccination_all</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
-<pre><code>## [1] "X2022.10.26" "X2022.10.27" "X2022.10.28" "X2022.10.29" "X2022.10.30"
-## [6] "X2022.10.31"</code></pre>
+<pre><code>## [1] "X2022.11.07" "X2022.11.08" "X2022.11.09" "X2022.11.10" "X2022.11.11"
+## [6] "X2022.11.12"</code></pre>
 <p>We first load and get a overall look of the dataset, and find the data has 61 rows with 698 columns. To visualize the relationship between vaccinated doses for each state, we only need three things: state name, state population and state vaccination population for each day. To achieve this, we can use <code>select</code> in <code>dplyr</code> package in r. We will focus on the data in 2022 as our example here.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">vaccination_df</span> <span class="op">&lt;-</span> <span class="va">vaccination_all</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">Province_State</span>, <span class="va">Population</span>, <span class="va">`X2022.01.01`</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">vaccination_all</span><span class="op">)</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
@@ -115,8 +115,8 @@
 ## [13] "X2022.01.11"    "X2022.01.12"    "X2022.01.13"</code></pre>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">vaccination_df</span><span class="op">)</span><span class="op">[</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">vaccination_df</span><span class="op">)</span><span class="op">-</span><span class="fl">5</span><span class="op">)</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">vaccination_df</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
-<pre><code>## [1] "X2022.10.26" "X2022.10.27" "X2022.10.28" "X2022.10.29" "X2022.10.30"
-## [6] "X2022.10.31"</code></pre>
+<pre><code>## [1] "X2022.11.07" "X2022.11.08" "X2022.11.09" "X2022.11.10" "X2022.11.11"
+## [6] "X2022.11.12"</code></pre>
 <p>Now, we have a table with 305 columns, and to make the dataframe works better, we woule like there only be four columns as <code>Province_State</code>, <code>Population</code>, <code>Date</code>, and <code>Vaccination_Doses</code> where <code>Date</code> comes from the colnames of the table and the <code>Vaccination_Doses</code> which is the number of population for each state at each date comes from the original entries of the date columns. To achieve this, we can temporarily ignore the <code>Population</code> column since it is identical to each state, so we can just full join it later and work on the vaccination population first. Then we will duplicate the state name for number of dates times, and build a matrix to store value for the vaccination dose for each state at each day by extracting them from original dataset using <code>subset</code> in <code>dplyr</code> and transform the dataframe by putting them together.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">vaccination_df</span> <span class="op">&lt;-</span> <span class="va">vaccination_df</span><span class="op">[</span>,<span class="op">-</span><span class="fl">2</span><span class="op">]</span></span>
@@ -191,7 +191,7 @@
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">Vac_DF</span><span class="op">$</span><span class="va">Date</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "Date"</code></pre>
 </div>
-<div id="deal-with-missing-values" class="section level3">
+<div id="deal-with-missing-values" class="section level3" number="13.1.2">
 <h3>
 <span class="header-section-number">13.1.2</span> Deal with Missing Values<a class="anchor" aria-label="anchor" href="#deal-with-missing-values"><i class="fas fa-link"></i></a>
 </h3>
@@ -203,7 +203,7 @@
 <p>If we have missing values in our example case, we would have two choices, either impute the missing values or remove them. And to make our future analysis more accurate, we would better try to impute them. Since our data is a time series data, then the vaccinated doses at day 1 cannot be greater than the the doses at day 2, conversely, the vaccinated doses at day 2 cannot be less than the doses at day 1, so we could impute our missing value by the closest non missing value, and this could be achieve by <code>fill</code> function in <code>tidyr</code> package. This function will impute the missing value by its previous or next value, and there is an argument <code>.direction</code> by which we can define in which direction to impute.</p>
 <p>Since we do not have missing values, we can move on to deal with problematic data.</p>
 </div>
-<div id="deal-with-problematic-data-points" class="section level3">
+<div id="deal-with-problematic-data-points" class="section level3" number="13.1.3">
 <h3>
 <span class="header-section-number">13.1.3</span> Deal with Problematic Data Points<a class="anchor" aria-label="anchor" href="#deal-with-problematic-data-points"><i class="fas fa-link"></i></a>
 </h3>
@@ -220,7 +220,7 @@
 <p>Now we have finished our preprocessings. In brief conclusion, when we find a dataset online, we first load it and transform it into a usable dataframe. This usually requires functions in <code>dplyr</code> and when working on a time series data, we will also need functions in <code>lubridate</code> to make our date as a date type variable instead of character so that we can order it later for visualization. And when imputing the missing values, <code>tidyr</code> is a popular package to use since it could impute the missing value by the value nearest to that date. Then we need look into the data points, deal with the problematic data points according to the dataset itself, for example in our case, we are working on vaccinated doses along time, so this must be a monotonically increasing variable. After finishing these steps, we could move on visualizing our data.</p>
 </div>
 </div>
-<div id="visualize-a-time-series-data" class="section level2">
+<div id="visualize-a-time-series-data" class="section level2" number="13.2">
 <h2>
 <span class="header-section-number">13.2</span> Visualize a Time Series Data<a class="anchor" aria-label="anchor" href="#visualize-a-time-series-data"><i class="fas fa-link"></i></a>
 </h2>
@@ -229,25 +229,25 @@
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">Vac_DF</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Date</span>, y <span class="op">=</span> <span class="va">`Vaccinated Doses`</span>, group <span class="op">=</span> <span class="va">State</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"Vaccinated Doses V.S. Date"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="time_series_visualization_project_files/figure-html/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="time_series_visualization_project_files/figure-html/unnamed-chunk-12-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>The graph does not give us much informaiton because we cannot tell the state, so we could make the graph varries in color according to states with command <code>color = State</code>.</p>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">Vac_DF</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Date</span>, y <span class="op">=</span> <span class="va">`Vaccinated Doses`</span>, group <span class="op">=</span> <span class="va">State</span>, color <span class="op">=</span> <span class="va">State</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"Vaccinated Doses V.S. Date"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="time_series_visualization_project_files/figure-html/unnamed-chunk-13-1.png" width="1728" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="time_series_visualization_project_files/figure-html/unnamed-chunk-13-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>The graph looks much better now because we can find the line corresponded for each state by the color. And we can easily find the state with highest vaccinated doses is California. But since California has too large vaccinated doses, the range of the plot is great and make the trend not so clear. So we may want to check about the states’ population. To get a deeper insight, we can visualize the population for each state using <code>geom_bar</code>.</p>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">Vac_DF</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span> <span class="va">Population</span>, y <span class="op">=</span> <span class="va">State</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>stat<span class="op">=</span><span class="st">"identity"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="time_series_visualization_project_files/figure-html/unnamed-chunk-14-1.png" width="672" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="time_series_visualization_project_files/figure-html/unnamed-chunk-14-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>This bar plot cannot give much insights without ordering, in order to easily find the populatioin order for each state, we can order the plot using <code><a href="https://rdrr.io/r/base/factor.html">factor()</a></code>.</p>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">order</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">Vac_DF</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">Population</span>, <span class="va">State</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">Population</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>State <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">State</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">Pop_Order_DF</span> <span class="op">&lt;-</span> <span class="va">Vac_DF</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>State <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">State</span>, levels <span class="op">=</span> <span class="va">order</span><span class="op">$</span><span class="va">State</span>, ordered <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">Pop_Order_DF</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span> <span class="va">Population</span>, y <span class="op">=</span> <span class="va">State</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>stat<span class="op">=</span><span class="st">"identity"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="time_series_visualization_project_files/figure-html/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="time_series_visualization_project_files/figure-html/unnamed-chunk-15-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>After ordering the barplot, we find the California is with highest population among all the states so the result that the vaccinated doses has greatest amount in California does not give much information because California has great population itself. So in order to get a deeper insights, we can visualize the vaccinated doses rate, that is divide the vaccinated doses by population. Since we would like to see the trends over time and difference between each state, we could use <code><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line()</a></code> again and <code>color</code> by state.</p>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Vac_Rate_DF</span> <span class="op">&lt;-</span> <span class="va">Vac_DF</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>`Vaccinated Doses Rate` <span class="op">=</span> <span class="va">`Vaccinated Doses`</span><span class="op">/</span><span class="va">Population</span><span class="op">)</span></span>
@@ -255,10 +255,10 @@
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">Vac_Rate_DF</span>, mapping <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Date</span>, y <span class="op">=</span> <span class="va">`Vaccinated Doses Rate`</span>, group <span class="op">=</span> <span class="va">State</span>, color <span class="op">=</span> <span class="va">State</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"Vaccinated Doses Rate V.S. Date"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="time_series_visualization_project_files/figure-html/unnamed-chunk-16-1.png" width="1728" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="time_series_visualization_project_files/figure-html/unnamed-chunk-16-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>Now we can get a better look and find District of Columbia has highest vaccinated doses rate and this proves that it is important for us to look into the vaccinated doses rate instead of absolute vaccinated doses since population does affect the results.Now we have got a great visualization of this time series data.</p>
 </div>
-<div id="conclusion" class="section level2">
+<div id="conclusion" class="section level2" number="13.3">
 <h2>
 <span class="header-section-number">13.3</span> Conclusion<a class="anchor" aria-label="anchor" href="#conclusion"><i class="fas fa-link"></i></a>
 </h2>

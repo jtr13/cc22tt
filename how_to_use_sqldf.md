@@ -271,7 +271,7 @@ sqldf('
   xlab('Species')
 ```
 
-<img src="how_to_use_sqldf_files/figure-html/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;" />
+<img src="how_to_use_sqldf_files/figure-html/unnamed-chunk-15-1.png" width="80%" style="display: block; margin: auto;" />
 
 ## Conclusion
 `sqldf` is an important option to have available when manipulating data. To be clear, it is not a replacement for knowing how to use R in general. One should restrict themselves to using `sqldf` only when doing so is uniquely advantageous to SQL-style work, or if they don't want to deal with writing perfect R. The above guide should be useful to anyone new to the library as to exactly which scenarios one might opt to use it in.

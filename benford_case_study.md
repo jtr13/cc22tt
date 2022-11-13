@@ -163,7 +163,7 @@ Lets plot the bfd and observe the trends. Note that we running this analysis usi
 plot(bfd)
 ```
 
-<img src="benford_case_study_files/figure-html/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" />
+<img src="benford_case_study_files/figure-html/unnamed-chunk-5-1.png" width="80%" style="display: block; margin: auto;" />
 
 The original data is in blue and the expected frequency according to Benford’s law is in red. 
 In this example, the first plot shows that the data do have a tendency to follow Benford’s law.
@@ -212,12 +212,12 @@ head(df)
 
 ```
 ##   price quantity   value digit
-## 1   171     9692 1657332     1
-## 2   453      731  331143     3
-## 3   974     3108 3027192     3
-## 4   361     9287 3352607     3
-## 5   269     5177 1392613     1
-## 6   704     2207 1553728     1
+## 1    62     2991  185442     1
+## 2   273     9674 2641002     2
+## 3    29     9264  268656     2
+## 4   567     9654 5473818     5
+## 5   584     6927 4045368     4
+## 6   126     7954 1002204     1
 ```
 
 Now let us set up and see if this dataset exhibits the expected pattern for the first digit. 
@@ -241,7 +241,7 @@ ggplot(data=df_group, aes(x=digit, y=count_percent, fill="blue")) +
               ) +  theme(legend.position="none")
 ```
 
-<img src="benford_case_study_files/figure-html/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" />
+<img src="benford_case_study_files/figure-html/unnamed-chunk-8-1.png" width="80%" style="display: block; margin: auto;" />
 
 The [value] of the sales exhibits some commonality with Benford's Law but it is not exact as we see the first digit is not quite 30%. However there is still that decreasing probability of the leading digit. We will address some limitation in the next section. For now, let us try manipulating the data to see if any patterns change. 
 
@@ -275,7 +275,7 @@ ggplot(data=df_group_combined, aes(x=digit, y=count_percent, fill=fct_rev(as.fac
               ) +  theme(legend.position="bottom")
 ```
 
-<img src="benford_case_study_files/figure-html/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" />
+<img src="benford_case_study_files/figure-html/unnamed-chunk-9-1.png" width="80%" style="display: block; margin: auto;" />
 
 From here we can see that adding sales randomly does change the distribution (when enough of them are added). But can we quantify this change? Let us use the benford package to cacluate some statistics. The following
 

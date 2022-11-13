@@ -94,7 +94,7 @@ ggplot(data_frame, aes(x = x_axis, y = y_axis)) +
     coord_fixed()
 ```
 
-<img src="vector_field_tutorial_files/figure-html/unnamed-chunk-2-1.png" width="672" style="display: block; margin: auto;" />
+<img src="vector_field_tutorial_files/figure-html/unnamed-chunk-2-1.png" width="80%" style="display: block; margin: auto;" />
 
 In graphing the plot, we've assigned the x_axis and y_axis values as the axis values
 of the entire chart, again, as the columns place each arrow. The geom_segment
@@ -132,7 +132,7 @@ ggplot(data_frame, aes(x = x_axis, y = y_axis)) +
     coord_fixed()
 ```
 
-<img src="vector_field_tutorial_files/figure-html/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" />
+<img src="vector_field_tutorial_files/figure-html/unnamed-chunk-3-1.png" width="80%" style="display: block; margin: auto;" />
 
 Conversely, if I set only the x_pull equal to 0.5, you'll notice that all of the 
 arrows are being pulled to the right direction.
@@ -152,7 +152,7 @@ ggplot(data_frame, aes(x = x_axis, y = y_axis)) +
     coord_fixed()
 ```
 
-<img src="vector_field_tutorial_files/figure-html/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" />
+<img src="vector_field_tutorial_files/figure-html/unnamed-chunk-4-1.png" width="80%" style="display: block; margin: auto;" />
 
 If we set both x_pull and y_pull equal to 0.5, then the x and y forces are
 offsetting, and the arrows point in a 45 degree angle. 
@@ -171,7 +171,7 @@ ggplot(data_frame, aes(x = x_axis, y = y_axis)) +
     coord_fixed()
 ```
 
-<img src="vector_field_tutorial_files/figure-html/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" />
+<img src="vector_field_tutorial_files/figure-html/unnamed-chunk-5-1.png" width="80%" style="display: block; margin: auto;" />
 
 To provide another example, we've input random numbers into x_pull and y_pull 
 values, to show that the format is completely flexible and doesn't require 
@@ -191,7 +191,7 @@ ggplot(data_frame, aes(x = x_axis, y = y_axis)) +
     coord_fixed()
 ```
 
-<img src="vector_field_tutorial_files/figure-html/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" />
+<img src="vector_field_tutorial_files/figure-html/unnamed-chunk-6-1.png" width="80%" style="display: block; margin: auto;" />
 
 ## Tips and Tricks to Plotting Vector Fields
 Now that we've covered the basics, we'll provide guidance on how to make
@@ -224,7 +224,7 @@ ggplot(data_frame, aes(x = x_axis, y = y_axis)) +
     coord_fixed()
 ```
 
-<img src="vector_field_tutorial_files/figure-html/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" />
+<img src="vector_field_tutorial_files/figure-html/unnamed-chunk-7-1.png" width="80%" style="display: block; margin: auto;" />
 
 These arrow adjustments produce a low-quality plot, but they do highlight the options
 one has to represent arrows in vector fields.
@@ -259,7 +259,7 @@ ggplot(data_frame, aes(x = x_axis, y = y_axis)) +
   ggtitle("Distorted plot without coord_fixed()")
 ```
 
-<img src="vector_field_tutorial_files/figure-html/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" />
+<img src="vector_field_tutorial_files/figure-html/unnamed-chunk-8-1.png" width="80%" style="display: block; margin: auto;" />
 
 ```r
 #Coord_fixed
@@ -273,7 +273,7 @@ ggplot(data_frame, aes(x = x_axis, y = y_axis)) +
         ggtitle("High-quality plot with coord_fixed()")
 ```
 
-<img src="vector_field_tutorial_files/figure-html/unnamed-chunk-8-2.png" width="672" style="display: block; margin: auto;" />
+<img src="vector_field_tutorial_files/figure-html/unnamed-chunk-8-2.png" width="80%" style="display: block; margin: auto;" />
 
 
 ### Arrow Length
@@ -296,7 +296,7 @@ ggplot(data_frame, aes(x = x_axis, y = y_axis)) +
     coord_fixed()
 ```
 
-<img src="vector_field_tutorial_files/figure-html/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" />
+<img src="vector_field_tutorial_files/figure-html/unnamed-chunk-9-1.png" width="80%" style="display: block; margin: auto;" />
 
 As you can see, even with a simple plot that has all vectors pointing in  the same
 direction, overlapping arrows makes it impossible to see the origin point of 
@@ -324,7 +324,7 @@ ggplot(data_frame, aes(x = x_axis, y = y_axis)) +
     coord_fixed()
 ```
 
-<img src="vector_field_tutorial_files/figure-html/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" />
+<img src="vector_field_tutorial_files/figure-html/unnamed-chunk-10-1.png" width="80%" style="display: block; margin: auto;" />
 
 ### Arrow Color
 When scaling down the arrows, the absolute length of the arrows loses meaning,
@@ -362,7 +362,7 @@ ggplot(vector_frame, aes(x = x_axis, y = y_axis, colour=mag) )+
     coord_fixed()
 ```
 
-<img src="vector_field_tutorial_files/figure-html/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;" />
+<img src="vector_field_tutorial_files/figure-html/unnamed-chunk-11-1.png" width="80%" style="display: block; margin: auto;" />
 
 In the following plot, we have changed the arrow color to be based on the x_pull
 value, rather than magnitude. This could be useful if the flow in one direction 
@@ -394,7 +394,7 @@ ggplot(vector_frame, aes(x = x_axis, y = y_axis, colour=x_pull) )+
     coord_fixed()
 ```
 
-<img src="vector_field_tutorial_files/figure-html/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" />
+<img src="vector_field_tutorial_files/figure-html/unnamed-chunk-12-1.png" width="80%" style="display: block; margin: auto;" />
 
 ## Spacing
 Vector fields often describe flows in continuous space, which means there could
@@ -456,7 +456,7 @@ p2 <- ggplot(vector_frame2, aes(x = x_axis, y = y_axis) )+
 p1 + p2
 ```
 
-<img src="vector_field_tutorial_files/figure-html/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" />
+<img src="vector_field_tutorial_files/figure-html/unnamed-chunk-13-1.png" width="80%" style="display: block; margin: auto;" />
 
 As shown above, at the extremes of spacing, vector fields are difficult to interpret.
 Hence, there must be an optimal spacing between the two. As illustrated below, this 
@@ -519,7 +519,7 @@ p2 <- ggplot(vector_frame2, aes(x = x_axis, y = y_axis) )+
 p1 + p2
 ```
 
-<img src="vector_field_tutorial_files/figure-html/unnamed-chunk-14-1.png" width="672" style="display: block; margin: auto;" />
+<img src="vector_field_tutorial_files/figure-html/unnamed-chunk-14-1.png" width="80%" style="display: block; margin: auto;" />
 
 ## Dealing with 3D
 So far we have looked at vector fields in 2 dimensions. However, it is common to 
@@ -622,7 +622,7 @@ yz <- ggplot(yz_plot, aes(x = y_axis, y = z_axis) )+
 xy + xz + yz + plot_layout(ncol=2)
 ```
 
-<img src="vector_field_tutorial_files/figure-html/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;" />
+<img src="vector_field_tutorial_files/figure-html/unnamed-chunk-15-1.png" width="80%" style="display: block; margin: auto;" />
 
 In summary, when visualizing 3D vector fields, you should avoid plotting in 3D. 
 Instead, you should consider if one dimension has a small contribution and, if so,

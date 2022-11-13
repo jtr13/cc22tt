@@ -16,7 +16,7 @@
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.1/transition.js"></script><script src="libs/bs3compat-0.4.1/tabs.js"></script><script src="libs/bs3compat-0.4.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -71,7 +71,7 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="benford-case-study" class="section level1">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="benford-case-study" class="section level1" number="20">
 <h1>
 <span class="header-section-number">20</span> Benford Case Study<a class="anchor" aria-label="anchor" href="#benford-case-study"><i class="fas fa-link"></i></a>
 </h1>
@@ -81,7 +81,7 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://plotly-r.com">plotly</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code></pre></div>
-<div id="contents" class="section level2">
+<div id="contents" class="section level2" number="20.1">
 <h2>
 <span class="header-section-number">20.1</span> Contents<a class="anchor" aria-label="anchor" href="#contents"><i class="fas fa-link"></i></a>
 </h2>
@@ -95,12 +95,12 @@
 <li>Sources</li>
 </ol>
 </div>
-<div id="introduction" class="section level2">
+<div id="introduction" class="section level2" number="20.2">
 <h2>
 <span class="header-section-number">20.2</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction"><i class="fas fa-link"></i></a>
 </h2>
 <p>There is a niche area of the consulting industry called forensic analytics in which analysts try to identify risks and quantify wrongdoing using an array of statistical and data techniques. For example, imagine a whistleblower notifies a company’s general counsel that there has been some collusion between sales and finance representatives to artificially create invoices. The company may hire forensic analysts to extract and determine what is happening. There are many quantitative and qualitative methods to perform before concluding anything and they will need to be specific to the context of the project. One such heuristic is Benford’s Law.</p>
-<div id="what-is-benfords-law" class="section level3">
+<div id="what-is-benfords-law" class="section level3" number="20.2.1">
 <h3>
 <span class="header-section-number">20.2.1</span> What is Benford’s Law?<a class="anchor" aria-label="anchor" href="#what-is-benfords-law"><i class="fas fa-link"></i></a>
 </h3>
@@ -130,7 +130,7 @@ where <span class="math inline">\(d\)</span> is the leading digit (a number from
 Benford, F (1938)</li>
 </ol>
 </div>
-<div id="applications-in-fraud-detection" class="section level3">
+<div id="applications-in-fraud-detection" class="section level3" number="20.2.2">
 <h3>
 <span class="header-section-number">20.2.2</span> Applications in Fraud Detection<a class="anchor" aria-label="anchor" href="#applications-in-fraud-detection"><i class="fas fa-link"></i></a>
 </h3>
@@ -142,7 +142,7 @@ Benford, F (1938)</li>
 </ol>
 </div>
 </div>
-<div id="benford-package-in-r" class="section level2">
+<div id="benford-package-in-r" class="section level2" number="20.3">
 <h2>
 <span class="header-section-number">20.3</span> Benford Package in R<a class="anchor" aria-label="anchor" href="#benford-package-in-r"><i class="fas fa-link"></i></a>
 </h2>
@@ -153,7 +153,7 @@ Benford, F (1938)</li>
 <div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#install.packages("benford.analysis")</span></span></code></pre></div>
 <p>The package comes with 6 real datasets from Mark Nigrini’s book Benford’s Law: Applications for Forensic Accounting, Auditing, and Fraud Detection.</p>
-<div id="example-usage-of-benford.analysis" class="section level3">
+<div id="example-usage-of-benford.analysis" class="section level3" number="20.3.1">
 <h3>
 <span class="header-section-number">20.3.1</span> Example Usage of benford.analysis<a class="anchor" aria-label="anchor" href="#example-usage-of-benford.analysis"><i class="fas fa-link"></i></a>
 </h3>
@@ -223,7 +223,7 @@ Benford, F (1938)</li>
 <p>Lets plot the bfd and observe the trends. Note that we running this analysis using the default parameters, i.e., no.of.digits = 2. This parameter can be modified if we only want to analyze the first digit .</p>
 <div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">bfd</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="benford_case_study_files/figure-html/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="benford_case_study_files/figure-html/unnamed-chunk-5-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>The original data is in blue and the expected frequency according to Benford’s law is in red.
 In this example, the first plot shows that the data do have a tendency to follow Benford’s law.
 There is also a clear outlier at 50.</p>
@@ -245,7 +245,7 @@ There is also a clear outlier at 50.</p>
 ## 17856:     52934 2010-02-01 271745237617   11.88</code></pre>
 </div>
 </div>
-<div id="randomized-case-study" class="section level2">
+<div id="randomized-case-study" class="section level2" number="20.4">
 <h2>
 <span class="header-section-number">20.4</span> Randomized Case Study<a class="anchor" aria-label="anchor" href="#randomized-case-study"><i class="fas fa-link"></i></a>
 </h2>
@@ -260,12 +260,12 @@ There is also a clear outlier at 50.</p>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##   price quantity   value digit
-## 1   171     9692 1657332     1
-## 2   453      731  331143     3
-## 3   974     3108 3027192     3
-## 4   361     9287 3352607     3
-## 5   269     5177 1392613     1
-## 6   704     2207 1553728     1</code></pre>
+## 1    62     2991  185442     1
+## 2   273     9674 2641002     2
+## 3    29     9264  268656     2
+## 4   567     9654 5473818     5
+## 5   584     6927 4045368     4
+## 6   126     7954 1002204     1</code></pre>
 <p>Now let us set up and see if this dataset exhibits the expected pattern for the first digit.</p>
 <div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_group</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">digit</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>count <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
@@ -284,9 +284,9 @@ There is also a clear outlier at 50.</p>
 <span>              x <span class="op">=</span> <span class="st">"First Digit"</span>, y <span class="op">=</span> <span class="st">"% Occurance"</span>,</span>
 <span>              <span class="co">#tag = "A"</span></span>
 <span>              <span class="op">)</span> <span class="op">+</span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position<span class="op">=</span><span class="st">"none"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="benford_case_study_files/figure-html/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="benford_case_study_files/figure-html/unnamed-chunk-8-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>The [value] of the sales exhibits some commonality with Benford’s Law but it is not exact as we see the first digit is not quite 30%. However there is still that decreasing probability of the leading digit. We will address some limitation in the next section. For now, let us try manipulating the data to see if any patterns change.</p>
-<div id="manipulated-data" class="section level3">
+<div id="manipulated-data" class="section level3" number="20.4.1">
 <h3>
 <span class="header-section-number">20.4.1</span> Manipulated Data<a class="anchor" aria-label="anchor" href="#manipulated-data"><i class="fas fa-link"></i></a>
 </h3>
@@ -316,7 +316,7 @@ There is also a clear outlier at 50.</p>
 <span>              x <span class="op">=</span> <span class="st">"First Digit"</span>, y <span class="op">=</span> <span class="st">"% Occurance"</span>,</span>
 <span>              fill<span class="op">=</span><span class="st">"Dataset"</span></span>
 <span>              <span class="op">)</span> <span class="op">+</span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position<span class="op">=</span><span class="st">"bottom"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="benford_case_study_files/figure-html/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;"></div>
+<div class="inline-figure"><img src="benford_case_study_files/figure-html/unnamed-chunk-9-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>From here we can see that adding sales randomly does change the distribution (when enough of them are added). But can we quantify this change? Let us use the benford package to cacluate some statistics. The following</p>
 <div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bfd_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/benford.analysis/man/benford.html">benford</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">value</span><span class="op">)</span></span>
@@ -345,7 +345,7 @@ Ex.Kurtosis -1.2
 Skewness 0</p>
 <p>From a glance, it is evident that the statistics corresponding to the original df are much closer to the expected statistics than those from df2. In particular, the Ex.Kurtosis and Skewness differ significantly in df2 from the expected values. These are all indicators that the set of values deviate from the expected distribution corresponding to Benford’s Law.</p>
 </div>
-<div id="findings" class="section level3">
+<div id="findings" class="section level3" number="20.4.2">
 <h3>
 <span class="header-section-number">20.4.2</span> Findings<a class="anchor" aria-label="anchor" href="#findings"><i class="fas fa-link"></i></a>
 </h3>
@@ -353,13 +353,13 @@ Skewness 0</p>
 <p>Now it is important to understand that 1) this case is an extreme example to highlight a point, and 2) that Benford’s Law and its statistics do not prove anything - they only provide some guidance on areas that may look strange. In reality, forensic testing would be done on specific segments or accounts, people would be interviewed, systems and logs analyzed, etc. Similarly, even when Benford’s Law holds true, it does not mean there is no fraud; a bad actor that understands fraud detection methods will likely hide better.</p>
 </div>
 </div>
-<div id="conclusion-3" class="section level2">
+<div id="conclusion-3" class="section level2" number="20.5">
 <h2>
 <span class="header-section-number">20.5</span> Conclusion<a class="anchor" aria-label="anchor" href="#conclusion-3"><i class="fas fa-link"></i></a>
 </h2>
 <p>An important thing to note is that Benford’s law does not have a strict mathematical proof, and is simply a heuristic. It is a broad guideline which helps with the investigation of large data sets to see if they conform with the observed trends. A feature of a dataset that conforms with Benford’s Law is not proof of validity or vice versa. For this reason, a Benford analysis is usually conducted as a primary investigatory exercise, following which a more thorough investigation as described in the previous section is conducted.</p>
 </div>
-<div id="sources" class="section level2">
+<div id="sources" class="section level2" number="20.6">
 <h2>
 <span class="header-section-number">20.6</span> Sources<a class="anchor" aria-label="anchor" href="#sources"><i class="fas fa-link"></i></a>
 </h2>

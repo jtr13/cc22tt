@@ -44,8 +44,8 @@ colnames(vaccination_all)[(ncol(vaccination_all)-5):ncol(vaccination_all)]
 ```
 
 ```
-## [1] "X2022.10.26" "X2022.10.27" "X2022.10.28" "X2022.10.29" "X2022.10.30"
-## [6] "X2022.10.31"
+## [1] "X2022.11.07" "X2022.11.08" "X2022.11.09" "X2022.11.10" "X2022.11.11"
+## [6] "X2022.11.12"
 ```
 
 We first load and get a overall look of the dataset, and find the data has 61 rows with 698 columns. To visualize the relationship between vaccinated doses for each state, we only need three things: state name, state population and state vaccination population for each day. To achieve this, we can use `select` in `dplyr` package in r. We will focus on the data in 2022 as our example here.
@@ -68,8 +68,8 @@ colnames(vaccination_df)[(ncol(vaccination_df)-5):ncol(vaccination_df)]
 ```
 
 ```
-## [1] "X2022.10.26" "X2022.10.27" "X2022.10.28" "X2022.10.29" "X2022.10.30"
-## [6] "X2022.10.31"
+## [1] "X2022.11.07" "X2022.11.08" "X2022.11.09" "X2022.11.10" "X2022.11.11"
+## [6] "X2022.11.12"
 ```
 
 Now, we have a table with 305 columns, and to make the dataframe works better, we woule like there only be four columns as `Province_State`, `Population`, `Date`, and `Vaccination_Doses` where `Date` comes from the colnames of the table and the `Vaccination_Doses` which is the number of population for each state at each date comes from the original entries of the date columns. To achieve this, we can temporarily ignore the `Population` column since it is identical to each state, so we can just full join it later and work on the vaccination population first. Then we will duplicate the state name for number of dates times, and build a matrix to store value for the vaccination dose for each state at each day by extracting them from original dataset using `subset` in `dplyr` and transform the dataframe by putting them together.
@@ -230,7 +230,7 @@ ggplot(data = Vac_DF, mapping = aes(x = Date, y = `Vaccinated Doses`, group = St
   ggtitle("Vaccinated Doses V.S. Date")
 ```
 
-<img src="time_series_visualization_project_files/figure-html/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" />
+<img src="time_series_visualization_project_files/figure-html/unnamed-chunk-12-1.png" width="80%" style="display: block; margin: auto;" />
 
 The graph does not give us much informaiton because we cannot tell the state, so we could make the graph varries in color according to states with command `color = State`.
 
@@ -241,7 +241,7 @@ ggplot(data = Vac_DF, mapping = aes(x = Date, y = `Vaccinated Doses`, group = St
   ggtitle("Vaccinated Doses V.S. Date")
 ```
 
-<img src="time_series_visualization_project_files/figure-html/unnamed-chunk-13-1.png" width="1728" style="display: block; margin: auto;" />
+<img src="time_series_visualization_project_files/figure-html/unnamed-chunk-13-1.png" width="80%" style="display: block; margin: auto;" />
 
 The graph looks much better now because we can find the line corresponded for each state by the color. And we can easily find the state with highest vaccinated doses is California. But since California has too large vaccinated doses, the range of the plot is great and make the trend not so clear. So we may want to check about the states' population. To get a deeper insight, we can visualize the population for each state using `geom_bar`.
 
@@ -251,7 +251,7 @@ ggplot(data = Vac_DF, mapping = aes(x= Population, y = State)) +
   geom_bar(stat="identity")
 ```
 
-<img src="time_series_visualization_project_files/figure-html/unnamed-chunk-14-1.png" width="672" style="display: block; margin: auto;" />
+<img src="time_series_visualization_project_files/figure-html/unnamed-chunk-14-1.png" width="80%" style="display: block; margin: auto;" />
 
 This bar plot cannot give much insights without ordering, in order to easily find the populatioin order for each state, we can order the plot using `factor()`.
 
@@ -263,7 +263,7 @@ ggplot(data = Pop_Order_DF, mapping = aes(x= Population, y = State)) +
   geom_bar(stat="identity")
 ```
 
-<img src="time_series_visualization_project_files/figure-html/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;" />
+<img src="time_series_visualization_project_files/figure-html/unnamed-chunk-15-1.png" width="80%" style="display: block; margin: auto;" />
 
 After ordering the barplot, we find the California is with highest population among all the states so the result that the vaccinated doses has greatest amount in California does not give much information because California has great population itself. So in order to get a deeper insights, we can visualize the vaccinated doses rate, that is divide the vaccinated doses by population. Since we would like to see the trends over time and difference between each state, we could use `geom_line()` again and `color` by state.
 
@@ -276,7 +276,7 @@ ggplot(data = Vac_Rate_DF, mapping = aes(x = Date, y = `Vaccinated Doses Rate`, 
   ggtitle("Vaccinated Doses Rate V.S. Date")
 ```
 
-<img src="time_series_visualization_project_files/figure-html/unnamed-chunk-16-1.png" width="1728" style="display: block; margin: auto;" />
+<img src="time_series_visualization_project_files/figure-html/unnamed-chunk-16-1.png" width="80%" style="display: block; margin: auto;" />
 
 Now we can get a better look and find District of Columbia has highest vaccinated doses rate and this proves that it is important for us to look into the vaccinated doses rate instead of absolute vaccinated doses since population does affect the results.Now we have got a great visualization of this time series data. 
 
