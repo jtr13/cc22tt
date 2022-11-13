@@ -244,7 +244,13 @@ p
 
 Circle packing is a kind of graph that help you learn more about the composition of the data. For example, how many of the students are taking math class, and among them, what is the distribution of sex.
 
-**Note** that it may be no graph shown in html file, but it should be fine when seen in rmd file.
+**Note that it may be no interactive graph shown in html file, but it should be fine when seen in rmd file.**
+
+So I add a static graph here for reference.
+
+![Interactive Circle Packing](resources/a_summary_of_interactive_chart/interactive_circle_packing.png){width=500px}
+
+
 ```{r}
 # create a nested data frame giving the info of a nested dataset:
 data <- data.frame(
@@ -270,7 +276,12 @@ p
 
 `streamgraph` is a great tool to create interactive streamgraph. You can select a specific class to ocserve. Zooming, hovering, minimaps and much more also effective here.
 
-**Note** that it may be no graph shown in html file, but it should be fine when seen in rmd file.
+**Note that it may be no interactive graph shown in html file, but it should be fine when seen in rmd file.**
+
+So I add a static graph here for reference.
+
+![Interactive Streamgraph](resources/a_summary_of_interactive_chart/interactive_streamgraph.png)
+
 ```{r}
 # Create data:
 data <- data.frame(
