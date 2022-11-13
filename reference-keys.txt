@@ -22,6 +22,7 @@ rmd-chunk-option-cheat-sheet
 helpful-ggplot2-extensions-cheatsheet
 commonly-used-graph-cheatcheet
 git-and-version-control
+useful-plots-for-bioinfomatics-in-r
 part-tutorials
 preprocessing-and-visualization-of-time-series-data
 preprocess-on-a-time-series-data
