@@ -8,7 +8,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Introduction
 
-Shiny is an R package from R studio that makes it easy to build interactive web apps straight with R. Shhiny allows you to create highly effective data reports and visualization where user can explore the data set by specifying data subset.
+Shiny is an R package from R studio that makes it easy to build interactive web apps straight with R. Shiny allows you to create highly effective data reports and visualization where user can explore the data set by specifying data subset.
 
 ## How to host
 
@@ -97,7 +97,7 @@ We can also add control widgets to provide a way for users to send messages to t
 Next I will introduce a common input function `selectInput()` that shows a box with choices to select from. 
 
 `selectInput()` has 3 required arguments:
-inputId: The input name to access the value (for internal ues)  
+inputId: The input name to access the value (for internal use)  
 label: Label shown in the UI,  NULL for no label.  
 choices: List of values to select from.
 
@@ -112,7 +112,7 @@ selectInput(inputID='ycol', label='Y Variable',
 Here I include the select widget that allows the user to select the y variable of out plot. I also define the variables to choose from are attributes from the feature set, and set the default choice to be 'Sepal.Width'. Similarly, we can define the selection box for x variable and a numeric Input box that user can define cluster numbers.
 
 ### Output functions
-To display output, we add output function to fluidPage() with an *Output() function. Below is a list of output functions that turn R objects into a specific type of output  
+To display output, we add output function to fluidPage() with an `*Output()` function. Below is a list of output functions that turn R objects into a specific type of output  
 
 Output            function	Creates  
 -------           ----------------
