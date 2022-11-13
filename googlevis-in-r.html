@@ -4,19 +4,372 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 16 googleVis in R | Community Contributions for EDAV Fall 2022 Tues/Thurs</title>
-<meta name="description" content="Sushant Prabhu and Kiyan Mohebbizadeh  16.1 Introducing googleVis  GoogleVis is a package in R that allows users of R to use the Google Charts API. The interface between R and Google Charts allows...">
+<title>Chapter 15 googleVis in R | Community Contributions for EDAV Fall 2022 Tues/Thurs</title>
+<meta name="description" content="Sushant Prabhu and Kiyan Mohebbizadeh  15.1 Introducing googleVis  GoogleVis is a package in R that allows users of R to use the Google Charts API. The interface between R and Google Charts allows...">
 <meta name="generator" content="bookdown 0.30 with bs4_book()">
-<meta property="og:title" content="Chapter 16 googleVis in R | Community Contributions for EDAV Fall 2022 Tues/Thurs">
+<meta property="og:title" content="Chapter 15 googleVis in R | Community Contributions for EDAV Fall 2022 Tues/Thurs">
 <meta property="og:type" content="book">
-<meta property="og:description" content="Sushant Prabhu and Kiyan Mohebbizadeh  16.1 Introducing googleVis  GoogleVis is a package in R that allows users of R to use the Google Charts API. The interface between R and Google Charts allows...">
+<meta property="og:description" content="Sushant Prabhu and Kiyan Mohebbizadeh  15.1 Introducing googleVis  GoogleVis is a package in R that allows users of R to use the Google Charts API. The interface between R and Google Charts allows...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 16 googleVis in R | Community Contributions for EDAV Fall 2022 Tues/Thurs">
-<meta name="twitter:description" content="Sushant Prabhu and Kiyan Mohebbizadeh  16.1 Introducing googleVis  GoogleVis is a package in R that allows users of R to use the Google Charts API. The interface between R and Google Charts allows...">
+<meta name="twitter:title" content="Chapter 15 googleVis in R | Community Contributions for EDAV Fall 2022 Tues/Thurs">
+<meta name="twitter:description" content="Sushant Prabhu and Kiyan Mohebbizadeh  15.1 Introducing googleVis  GoogleVis is a package in R that allows users of R to use the Google Charts API. The interface between R and Google Charts allows...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.1/transition.js"></script><script src="libs/bs3compat-0.4.1/tabs.js"></script><script src="libs/bs3compat-0.4.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="libs/datatables-binding-0.26/datatables.js"></script><link href="libs/dt-core-1.12.1/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="libs/dt-core-1.12.1/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="libs/dt-core-1.12.1/js/jquery.dataTables.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><link href="libs/dygraphs-1.1.1/dygraph.css" rel="stylesheet">
+<script src="libs/dygraphs-1.1.1/dygraph-combined.js"></script><script src="libs/dygraphs-1.1.1/shapes.js"></script><script src="libs/moment-2.8.4/moment.js"></script><script src="libs/moment-timezone-0.2.5/moment-timezone-with-data.js"></script><script src="libs/moment-fquarter-1.0.0/moment-fquarter.min.js"></script><script src="libs/dygraphs-binding-1.1.1.6/dygraphs.js"></script><script src="libs/plotly-binding-4.10.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script><script src="libs/d3-4.13.0/d3.min.js"></script><script src="libs/forceNetwork-binding-0.4/forceNetwork.js"></script><link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet">
+<script src="libs/vis-9.1.0/vis-network.min.js"></script><script src="libs/visNetwork-binding-2.1.2/visNetwork.js"></script><script src="libs/d3v3-3.5.3/./d3v3.min.js"></script><link href="libs/d3heatmapcore-0.0.0/heatmapcore.css" rel="stylesheet">
+<script src="libs/d3heatmapcore-0.0.0/heatmapcore.js"></script><script src="libs/d3v3-tip-0.6.6/index.js"></script><script src="libs/d3heatmap-binding-0.9.0/d3heatmap.js"></script><script src="libs/threejs-111/three.min.js"></script><script src="libs/threejs-111/Detector.js"></script><script src="libs/threejs-111/Projector.js"></script><script src="libs/threejs-111/CanvasRenderer.js"></script><script src="libs/threejs-111/TrackballControls.js"></script><script src="libs/threejs-111/StateOrbitControls.js"></script><script src="libs/scatterplotThree-binding-0.3.3/scatterplotThree.js"></script><script src="libs/rglWebGL-binding-0.110.2/rglWebGL.js"></script><link href="libs/rglwidgetClass-0.110.2/rgl.css" rel="stylesheet">
+<script src="libs/rglwidgetClass-0.110.2/rglClass.src.js"></script><script src="libs/rglwidgetClass-0.110.2/utils.src.js"></script><script src="libs/rglwidgetClass-0.110.2/buffer.src.js"></script><script src="libs/rglwidgetClass-0.110.2/subscenes.src.js"></script><script src="libs/rglwidgetClass-0.110.2/shaders.src.js"></script><script src="libs/rglwidgetClass-0.110.2/textures.src.js"></script><script src="libs/rglwidgetClass-0.110.2/projection.src.js"></script><script src="libs/rglwidgetClass-0.110.2/mouse.src.js"></script><script src="libs/rglwidgetClass-0.110.2/init.src.js"></script><script src="libs/rglwidgetClass-0.110.2/pieces.src.js"></script><script src="libs/rglwidgetClass-0.110.2/draw.src.js"></script><script src="libs/rglwidgetClass-0.110.2/controls.src.js"></script><script src="libs/rglwidgetClass-0.110.2/selection.src.js"></script><script src="libs/rglwidgetClass-0.110.2/rglTimer.src.js"></script><script src="libs/rglwidgetClass-0.110.2/pretty.src.js"></script><script src="libs/rglwidgetClass-0.110.2/axes.src.js"></script><script src="libs/rglwidgetClass-0.110.2/animation.src.js"></script><!--html_preserve--><script type="text/plain" id="rgl-vertex-shader">
+    #line 2 1
+    // File 1 is the vertex shader
+    #ifdef GL_ES
+    #ifdef GL_FRAGMENT_PRECISION_HIGH
+    precision highp float;
+    #else
+    precision mediump float;
+    #endif
+    #endif
+
+    attribute vec3 aPos;
+    attribute vec4 aCol;
+    uniform mat4 mvMatrix;
+    uniform mat4 prMatrix;
+    varying vec4 vCol;
+    varying vec4 vPosition;
+
+    #ifdef NEEDS_VNORMAL
+    attribute vec3 aNorm;
+    uniform mat4 normMatrix;
+    varying vec4 vNormal;
+    #endif
+
+    #if defined(HAS_TEXTURE) || defined (IS_TEXT)
+    attribute vec2 aTexcoord;
+    varying vec2 vTexcoord;
+    #endif
+
+    #ifdef FIXED_SIZE
+    uniform vec3 textScale;
+    #endif
+
+    #ifdef FIXED_QUADS
+    attribute vec3 aOfs;
+    #endif
+
+    #ifdef IS_TWOSIDED
+    #ifdef HAS_NORMALS
+    varying float normz;
+    uniform mat4 invPrMatrix;
+    #else
+    attribute vec3 aPos1;
+    attribute vec3 aPos2;
+    varying float normz;
+    #endif
+    #endif // IS_TWOSIDED
+
+    #ifdef FAT_LINES
+    attribute vec3 aNext;
+    attribute vec2 aPoint;
+    varying vec2 vPoint;
+    varying float vLength;
+    uniform float uAspect;
+    uniform float uLwd;
+    #endif
+
+
+    void main(void) {
+      
+    #ifndef IS_BRUSH
+    #if defined(NCLIPPLANES) || !defined(FIXED_QUADS) || defined(HAS_FOG)
+      vPosition = mvMatrix * vec4(aPos, 1.);
+    #endif
+      
+    #ifndef FIXED_QUADS
+      gl_Position = prMatrix * vPosition;
+    #endif
+    #endif // !IS_BRUSH
+      
+    #ifdef IS_POINTS
+      gl_PointSize = POINTSIZE;
+    #endif
+      
+      vCol = aCol;
+      
+    #ifdef NEEDS_VNORMAL
+      vNormal = normMatrix * vec4(-aNorm, dot(aNorm, aPos));
+    #endif
+      
+    #ifdef IS_TWOSIDED
+    #ifdef HAS_NORMALS
+      /* normz should be calculated *after* projection */
+      normz = (invPrMatrix*vNormal).z;
+    #else
+      vec4 pos1 = prMatrix*(mvMatrix*vec4(aPos1, 1.));
+      pos1 = pos1/pos1.w - gl_Position/gl_Position.w;
+      vec4 pos2 = prMatrix*(mvMatrix*vec4(aPos2, 1.));
+      pos2 = pos2/pos2.w - gl_Position/gl_Position.w;
+      normz = pos1.x*pos2.y - pos1.y*pos2.x;
+    #endif
+    #endif // IS_TWOSIDED
+      
+    #ifdef NEEDS_VNORMAL
+      vNormal = vec4(normalize(vNormal.xyz/vNormal.w), 1);
+    #endif
+      
+    #if defined(HAS_TEXTURE) || defined(IS_TEXT)
+      vTexcoord = aTexcoord;
+    #endif
+      
+    #if defined(FIXED_SIZE) && !defined(ROTATING)
+      vec4 pos = prMatrix * mvMatrix * vec4(aPos, 1.);
+      pos = pos/pos.w;
+      gl_Position = pos + vec4(aOfs*textScale, 0.);
+    #endif
+      
+    #if defined(IS_SPRITES) && !defined(FIXED_SIZE)
+      vec4 pos = mvMatrix * vec4(aPos, 1.);
+      pos = pos/pos.w + vec4(aOfs,  0.);
+      gl_Position = prMatrix*pos;
+    #endif
+      
+    #ifdef FAT_LINES
+      /* This code was inspired by Matt Deslauriers' code in 
+       https://mattdesl.svbtle.com/drawing-lines-is-hard */
+      vec2 aspectVec = vec2(uAspect, 1.0);
+      mat4 projViewModel = prMatrix * mvMatrix;
+      vec4 currentProjected = projViewModel * vec4(aPos, 1.0);
+      currentProjected = currentProjected/currentProjected.w;
+      vec4 nextProjected = projViewModel * vec4(aNext, 1.0);
+      vec2 currentScreen = currentProjected.xy * aspectVec;
+      vec2 nextScreen = (nextProjected.xy / nextProjected.w) * aspectVec;
+      float len = uLwd;
+      vec2 dir = vec2(1.0, 0.0);
+      vPoint = aPoint;
+      vLength = length(nextScreen - currentScreen)/2.0;
+      vLength = vLength/(vLength + len);
+      if (vLength > 0.0) {
+        dir = normalize(nextScreen - currentScreen);
+      }
+      vec2 normal = vec2(-dir.y, dir.x);
+      dir.x /= uAspect;
+      normal.x /= uAspect;
+      vec4 offset = vec4(len*(normal*aPoint.x*aPoint.y - dir), 0.0, 0.0);
+      gl_Position = currentProjected + offset;
+    #endif
+      
+    #ifdef IS_BRUSH
+      gl_Position = vec4(aPos, 1.);
+    #endif
+    }
+    </script><script type="text/plain" id="rgl-fragment-shader">
+    #line 2 2
+    // File 2 is the fragment shader
+    #ifdef GL_ES
+    #ifdef GL_FRAGMENT_PRECISION_HIGH
+    precision highp float;
+    #else
+    precision mediump float;
+    #endif
+    #endif
+    varying vec4 vCol; // carries alpha
+    varying vec4 vPosition;
+    #if defined(HAS_TEXTURE) || defined (IS_TEXT)
+    varying vec2 vTexcoord;
+    uniform sampler2D uSampler;
+    #endif
+
+    #ifdef HAS_FOG
+    uniform int uFogMode;
+    uniform vec3 uFogColor;
+    uniform vec4 uFogParms;
+    #endif
+
+    #if defined(IS_LIT) && !defined(FIXED_QUADS)
+    varying vec4 vNormal;
+    #endif
+
+    #if NCLIPPLANES > 0
+    uniform vec4 vClipplane[NCLIPPLANES];
+    #endif
+
+    #if NLIGHTS > 0
+    uniform mat4 mvMatrix;
+    #endif
+
+    #ifdef IS_LIT
+    uniform vec3 emission;
+    uniform float shininess;
+    #if NLIGHTS > 0
+    uniform vec3 ambient[NLIGHTS];
+    uniform vec3 specular[NLIGHTS]; // light*material
+    uniform vec3 diffuse[NLIGHTS];
+    uniform vec3 lightDir[NLIGHTS];
+    uniform bool viewpoint[NLIGHTS];
+    uniform bool finite[NLIGHTS];
+    #endif
+    #endif // IS_LIT
+
+    #ifdef IS_TWOSIDED
+    uniform bool front;
+    varying float normz;
+    #endif
+
+    #ifdef FAT_LINES
+    varying vec2 vPoint;
+    varying float vLength;
+    #endif
+
+    void main(void) {
+      vec4 fragColor;
+    #ifdef FAT_LINES
+      vec2 point = vPoint;
+      bool neg = point.y < 0.0;
+      point.y = neg ? (point.y + vLength)/(1.0 - vLength) :
+                     -(point.y - vLength)/(1.0 - vLength);
+    #if defined(IS_TRANSPARENT) && defined(IS_LINESTRIP)
+      if (neg && length(point) <= 1.0) discard;
+    #endif
+      point.y = min(point.y, 0.0);
+      if (length(point) > 1.0) discard;
+    #endif // FAT_LINES
+      
+    #ifdef ROUND_POINTS
+      vec2 coord = gl_PointCoord - vec2(0.5);
+      if (length(coord) > 0.5) discard;
+    #endif
+      
+    #if NCLIPPLANES > 0
+      for (int i = 0; i < NCLIPPLANES; i++)
+        if (dot(vPosition, vClipplane[i]) < 0.0) discard;
+    #endif
+        
+    #ifdef FIXED_QUADS
+        vec3 n = vec3(0., 0., 1.);
+    #elif defined(IS_LIT)
+        vec3 n = normalize(vNormal.xyz);
+    #endif
+        
+    #ifdef IS_TWOSIDED
+        if ((normz <= 0.) != front) discard;
+    #endif
+        
+    #ifdef IS_LIT
+        vec3 eye = normalize(-vPosition.xyz/vPosition.w);
+        vec3 lightdir;
+        vec4 colDiff;
+        vec3 halfVec;
+        vec4 lighteffect = vec4(emission, 0.);
+        vec3 col;
+        float nDotL;
+    #ifdef FIXED_QUADS
+        n = -faceforward(n, n, eye);
+    #endif
+        
+    #if NLIGHTS > 0
+        for (int i=0;i<NLIGHTS;i++) {
+          colDiff = vec4(vCol.rgb * diffuse[i], vCol.a);
+          lightdir = lightDir[i];
+          if (!viewpoint[i])
+            lightdir = (mvMatrix * vec4(lightdir, 1.)).xyz;
+          if (!finite[i]) {
+            halfVec = normalize(lightdir + eye);
+          } else {
+            lightdir = normalize(lightdir - vPosition.xyz/vPosition.w);
+            halfVec = normalize(lightdir + eye);
+          }
+          col = ambient[i];
+          nDotL = dot(n, lightdir);
+          col = col + max(nDotL, 0.) * colDiff.rgb;
+          col = col + pow(max(dot(halfVec, n), 0.), shininess) * specular[i];
+          lighteffect = lighteffect + vec4(col, colDiff.a);
+        }
+    #endif
+        
+    #else // not IS_LIT
+        vec4 colDiff = vCol;
+        vec4 lighteffect = colDiff;
+    #endif
+        
+    #ifdef IS_TEXT
+        vec4 textureColor = lighteffect*texture2D(uSampler, vTexcoord);
+    #endif
+        
+    #ifdef HAS_TEXTURE
+    #ifdef TEXTURE_rgb
+        vec4 textureColor = lighteffect*vec4(texture2D(uSampler, vTexcoord).rgb, 1.);
+    #endif
+        
+    #ifdef TEXTURE_rgba
+        vec4 textureColor = lighteffect*texture2D(uSampler, vTexcoord);
+    #endif
+        
+    #ifdef TEXTURE_alpha
+        vec4 textureColor = texture2D(uSampler, vTexcoord);
+        float luminance = dot(vec3(1.,1.,1.), textureColor.rgb)/3.;
+        textureColor =  vec4(lighteffect.rgb, lighteffect.a*luminance);
+    #endif
+        
+    #ifdef TEXTURE_luminance
+        vec4 textureColor = vec4(lighteffect.rgb*dot(texture2D(uSampler, vTexcoord).rgb, vec3(1.,1.,1.))/3., lighteffect.a);
+    #endif
+        
+    #ifdef TEXTURE_luminance_alpha
+        vec4 textureColor = texture2D(uSampler, vTexcoord);
+        float luminance = dot(vec3(1.,1.,1.),textureColor.rgb)/3.;
+        textureColor = vec4(lighteffect.rgb*luminance, lighteffect.a*textureColor.a);
+    #endif
+        
+        fragColor = textureColor;
+
+    #elif defined(IS_TEXT)
+        if (textureColor.a < 0.1)
+          discard;
+        else
+          fragColor = textureColor;
+    #else
+        fragColor = lighteffect;
+    #endif // HAS_TEXTURE
+        
+    #ifdef HAS_FOG
+        // uFogParms elements: x = near, y = far, z = fogscale, w = (1-sin(FOV/2))/(1+sin(FOV/2))
+        // In Exp and Exp2: use density = density/far
+        // fogF will be the proportion of fog
+        // Initialize it to the linear value
+        float fogF;
+        if (uFogMode > 0) {
+          fogF = (uFogParms.y - vPosition.z/vPosition.w)/(uFogParms.y - uFogParms.x);
+          if (uFogMode > 1)
+            fogF = mix(uFogParms.w, 1.0, fogF);
+          fogF = fogF*uFogParms.z;
+          if (uFogMode == 2)
+            fogF = 1.0 - exp(-fogF);
+          // Docs are wrong: use (density*c)^2, not density*c^2
+          // https://gitlab.freedesktop.org/mesa/mesa/-/blob/master/src/mesa/swrast/s_fog.c#L58
+          else if (uFogMode == 3)
+            fogF = 1.0 - exp(-fogF*fogF);
+          fogF = clamp(fogF, 0.0, 1.0);
+          gl_FragColor = vec4(mix(fragColor.rgb, uFogColor, fogF), fragColor.a);
+        } else gl_FragColor = fragColor;
+    #else
+        gl_FragColor = fragColor;
+    #endif // HAS_FOG
+        
+    }
+    </script><!--/html_preserve--><script src="libs/CanvasMatrix4-0.110.2/CanvasMatrix.src.js"></script><script src="libs/globe-binding-0.3.3/globe.js"></script><link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
+<script src="libs/leaflet-1.3.1/leaflet.js"></script><link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
+<script src="libs/proj4-2.6.2/proj4.min.js"></script><script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script><link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
+<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script><script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script><script src="libs/leaflet-providers-plugin-2.1.1/leaflet-providers-plugin.js"></script><script src="libs/d3-tip-0.8.1/index.js"></script><link href="libs/chorddiag-0.1.2.9000/chorddiag.css" rel="stylesheet">
+<script src="libs/chorddiag-0.1.2.9000/chorddiag.js"></script><link href="libs/collapsibleTree-0.1.6/collapsibleTree.css" rel="stylesheet">
+<script src="libs/collapsibleTree-binding-0.1.7/collapsibleTree.js"></script><link href="libs/circlepackeR-0.1/./style.css" rel="stylesheet">
+<script src="libs/circlepackeR-binding-0.0.0.9000/circlepackeR.js"></script><link href="libs/colorbrewer-1/colorbrewer.css" rel="stylesheet">
+<script src="libs/colorbrewer-1/colorbrewer.js"></script><link href="libs/streamgraph-1/streamgraph.css" rel="stylesheet">
+<script src="libs/streamgraph-binding-0.9.0/streamgraph.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -52,20 +405,19 @@
 <li><a class="" href="commonly-used-graph-cheatcheet.html"><span class="header-section-number">9</span> Commonly-used graph cheatcheet</a></li>
 <li><a class="" href="git-and-version-control.html"><span class="header-section-number">10</span> Git and version control</a></li>
 <li><a class="" href="useful-plots-for-bioinfomatics-in-r.html"><span class="header-section-number">11</span> Useful plots for Bioinfomatics in R</a></li>
-<li><a class="" href="different-ways-to-create-world-map-in-r.html"><span class="header-section-number">12</span> Different ways to create world map in R</a></li>
 <li class="book-part">Tutorials</li>
-<li><a class="" href="preprocessing-and-visualization-of-time-series-data.html"><span class="header-section-number">14</span> Preprocessing and Visualization of Time Series Data</a></li>
-<li><a class="" href="how-to-use-sqldf.html"><span class="header-section-number">15</span> How to use sqldf</a></li>
-<li><a class="active" href="googlevis-in-r.html"><span class="header-section-number">16</span> googleVis in R</a></li>
-<li><a class="" href="tutorial-for-vector-fields-in-r.html"><span class="header-section-number">17</span> Tutorial for vector fields in r</a></li>
-<li><a class="" href="data-cleaning-with-r.html"><span class="header-section-number">18</span> Data cleaning with r</a></li>
+<li><a class="" href="preprocessing-and-visualization-of-time-series-data.html"><span class="header-section-number">13</span> Preprocessing and Visualization of Time Series Data</a></li>
+<li><a class="" href="how-to-use-sqldf.html"><span class="header-section-number">14</span> How to use sqldf</a></li>
+<li><a class="active" href="googlevis-in-r.html"><span class="header-section-number">15</span> googleVis in R</a></li>
+<li><a class="" href="tutorial-for-vector-fields-in-r.html"><span class="header-section-number">16</span> Tutorial for vector fields in r</a></li>
+<li><a class="" href="a-summary-of-interactive-chart.html"><span class="header-section-number">17</span> A Summary of Interactive Chart</a></li>
 <li class="book-part">Interview Prep</li>
-<li><a class="" href="ten-interview-questions-and-answers.html"><span class="header-section-number">20</span> Ten interview questions and answers</a></li>
+<li><a class="" href="ten-interview-questions-and-answers.html"><span class="header-section-number">19</span> Ten interview questions and answers</a></li>
 <li class="book-part">Case Studies</li>
-<li><a class="" href="benford-case-study.html"><span class="header-section-number">22</span> Benford Case Study</a></li>
+<li><a class="" href="benford-case-study.html"><span class="header-section-number">21</span> Benford Case Study</a></li>
 <li class="book-part">Appendices</li>
-<li><a class="" href="github-initial-setup.html"><span class="header-section-number">23</span> Github initial setup</a></li>
-<li><a class="" href="tutorial-for-pull-request-mergers.html"><span class="header-section-number">24</span> Tutorial for pull request mergers</a></li>
+<li><a class="" href="github-initial-setup.html"><span class="header-section-number">22</span> Github initial setup</a></li>
+<li><a class="" href="tutorial-for-pull-request-mergers.html"><span class="header-section-number">23</span> Tutorial for pull request mergers</a></li>
 </ul>
 
         <div class="book-extra">
@@ -73,14 +425,14 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="googlevis-in-r" class="section level1" number="16">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="googlevis-in-r" class="section level1" number="15">
 <h1>
-<span class="header-section-number">16</span> googleVis in R<a class="anchor" aria-label="anchor" href="#googlevis-in-r"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15</span> googleVis in R<a class="anchor" aria-label="anchor" href="#googlevis-in-r"><i class="fas fa-link"></i></a>
 </h1>
 <p>Sushant Prabhu and Kiyan Mohebbizadeh</p>
-<div id="introducing-googlevis" class="section level2" number="16.1">
+<div id="introducing-googlevis" class="section level2" number="15.1">
 <h2>
-<span class="header-section-number">16.1</span> Introducing googleVis<a class="anchor" aria-label="anchor" href="#introducing-googlevis"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.1</span> Introducing googleVis<a class="anchor" aria-label="anchor" href="#introducing-googlevis"><i class="fas fa-link"></i></a>
 </h2>
 <blockquote>
 <p>GoogleVis is a package in R that allows users of R to use the Google Charts API.</p>
@@ -91,9 +443,9 @@
 <div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://mages.github.io/googleVis/">googleVis</a></span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="why-use-googlevis" class="section level2" number="16.2">
+<div id="why-use-googlevis" class="section level2" number="15.2">
 <h2>
-<span class="header-section-number">16.2</span> Why use googleVis ?<a class="anchor" aria-label="anchor" href="#why-use-googlevis"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.2</span> Why use googleVis ?<a class="anchor" aria-label="anchor" href="#why-use-googlevis"><i class="fas fa-link"></i></a>
 </h2>
 <blockquote>
 <p><code>googleVis</code> package allows users to create interactive visualizations which R’s most popular visualization package (ggplot) does not allow.</p>
@@ -104,9 +456,9 @@
 <li>The visualizations created by <code>googleVis</code> add a level of interest to the consumer due to their interactive layer and viewers are able to gather specific bits of information by hovering over and clicking values in the visualizations. This not only allows for increased aesthetics, but also more information being transferred to the viewers.</li>
 </ul>
 </div>
-<div id="googlevis-rendering-interaction" class="section level2" number="16.3">
+<div id="googlevis-rendering-interaction" class="section level2" number="15.3">
 <h2>
-<span class="header-section-number">16.3</span> googleVis Rendering &amp; Interaction<a class="anchor" aria-label="anchor" href="#googlevis-rendering-interaction"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.3</span> googleVis Rendering &amp; Interaction<a class="anchor" aria-label="anchor" href="#googlevis-rendering-interaction"><i class="fas fa-link"></i></a>
 </h2>
 <blockquote>
 <p>The output of <code>googleVis</code> can either be embedded into an HTML file or read dynamically. These visualizations are most often rendered online and in a web format. Therefore, a browser and internet connection are required to view the interactive version of the output compared to <code>ggplot</code></p>
@@ -119,9 +471,9 @@
 <li>
 <code>googleVis</code> allows users to use the data in R data frames to create Google Charts without uploading the data onto Google.</li>
 </ul>
-<div id="basic-graphs-line-bar-combo" class="section level3" number="16.3.1">
+<div id="basic-graphs-line-bar-combo" class="section level3" number="15.3.1">
 <h3>
-<span class="header-section-number">16.3.1</span> Basic Graphs (Line, Bar, Combo)<a class="anchor" aria-label="anchor" href="#basic-graphs-line-bar-combo"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.3.1</span> Basic Graphs (Line, Bar, Combo)<a class="anchor" aria-label="anchor" href="#basic-graphs-line-bar-combo"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>pet<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'cat'</span>, <span class="st">'dog'</span>, <span class="st">'hamster'</span>, <span class="st">'snake'</span><span class="op">)</span>,</span>
@@ -143,12 +495,12 @@
 <span>                                     series<span class="op">=</span><span class="st">'{1: {type:"line"}}'</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Line</span><span class="op">)</span></span></code></pre></div>
 <!-- LineChart generated in R 4.2.2 by googleVis 0.7.0 package -->
-<!-- Sun Nov 13 17:55:30 2022 -->
+<!-- Sun Nov 13 19:57:06 2022 -->
 <!-- jsHeader -->
 <script type="text/javascript">
  
 // jsData 
-function gvisDataLineChartID2c3b1d127e2c () {
+function gvisDataLineChartID3fe43ef21136 () {
 var data = new google.visualization.DataTable();
 var datajson =
 [
@@ -181,13 +533,13 @@ return(data);
 }
  
 // jsDrawChart
-function drawChartLineChartID2c3b1d127e2c() {
-var data = gvisDataLineChartID2c3b1d127e2c();
+function drawChartLineChartID3fe43ef21136() {
+var data = gvisDataLineChartID3fe43ef21136();
 var options = {};
 options["allowHtml"] = true;
 
     var chart = new google.visualization.LineChart(
-    document.getElementById('LineChartID2c3b1d127e2c')
+    document.getElementById('LineChartID3fe43ef21136')
     );
     chart.draw(data,options);
     
@@ -211,9 +563,9 @@ if (newPackage)
   pkgs.push(chartid);
   
 // Add the drawChart function to the global list of callbacks
-callbacks.push(drawChartLineChartID2c3b1d127e2c);
+callbacks.push(drawChartLineChartID3fe43ef21136);
 })();
-function displayChartLineChartID2c3b1d127e2c() {
+function displayChartLineChartID3fe43ef21136() {
   var pkgs = window.__gvisPackages = window.__gvisPackages || [];
   var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
   window.clearTimeout(window.__gvisLoad);
@@ -234,18 +586,18 @@ callbacks.shift()();
 }
  
 // jsFooter
-</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartLineChartID2c3b1d127e2c"></script><!-- divChart --><div id="LineChartID2c3b1d127e2c" style="width: 500; height: automatic;">
+</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartLineChartID3fe43ef21136"></script><!-- divChart --><div id="LineChartID3fe43ef21136" style="width: 500; height: automatic;">
 
 </div>
 <div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Bar</span><span class="op">)</span></span></code></pre></div>
 <!-- BarChart generated in R 4.2.2 by googleVis 0.7.0 package -->
-<!-- Sun Nov 13 17:55:30 2022 -->
+<!-- Sun Nov 13 19:57:06 2022 -->
 <!-- jsHeader -->
 <script type="text/javascript">
  
 // jsData 
-function gvisDataBarChartID2c3b41397d1a () {
+function gvisDataBarChartID3fe41ccfd805 () {
 var data = new google.visualization.DataTable();
 var datajson =
 [
@@ -278,13 +630,13 @@ return(data);
 }
  
 // jsDrawChart
-function drawChartBarChartID2c3b41397d1a() {
-var data = gvisDataBarChartID2c3b41397d1a();
+function drawChartBarChartID3fe41ccfd805() {
+var data = gvisDataBarChartID3fe41ccfd805();
 var options = {};
 options["allowHtml"] = true;
 
     var chart = new google.visualization.BarChart(
-    document.getElementById('BarChartID2c3b41397d1a')
+    document.getElementById('BarChartID3fe41ccfd805')
     );
     chart.draw(data,options);
     
@@ -308,9 +660,9 @@ if (newPackage)
   pkgs.push(chartid);
   
 // Add the drawChart function to the global list of callbacks
-callbacks.push(drawChartBarChartID2c3b41397d1a);
+callbacks.push(drawChartBarChartID3fe41ccfd805);
 })();
-function displayChartBarChartID2c3b41397d1a() {
+function displayChartBarChartID3fe41ccfd805() {
   var pkgs = window.__gvisPackages = window.__gvisPackages || [];
   var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
   window.clearTimeout(window.__gvisLoad);
@@ -331,18 +683,18 @@ callbacks.shift()();
 }
  
 // jsFooter
-</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartBarChartID2c3b41397d1a"></script><!-- divChart --><div id="BarChartID2c3b41397d1a" style="width: 500; height: automatic;">
+</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartBarChartID3fe41ccfd805"></script><!-- divChart --><div id="BarChartID3fe41ccfd805" style="width: 500; height: automatic;">
 
 </div>
 <div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Column</span><span class="op">)</span></span></code></pre></div>
 <!-- ColumnChart generated in R 4.2.2 by googleVis 0.7.0 package -->
-<!-- Sun Nov 13 17:55:30 2022 -->
+<!-- Sun Nov 13 19:57:07 2022 -->
 <!-- jsHeader -->
 <script type="text/javascript">
  
 // jsData 
-function gvisDataColumnChartID2c3b1d0c19e7 () {
+function gvisDataColumnChartID3fe49486252 () {
 var data = new google.visualization.DataTable();
 var datajson =
 [
@@ -375,13 +727,13 @@ return(data);
 }
  
 // jsDrawChart
-function drawChartColumnChartID2c3b1d0c19e7() {
-var data = gvisDataColumnChartID2c3b1d0c19e7();
+function drawChartColumnChartID3fe49486252() {
+var data = gvisDataColumnChartID3fe49486252();
 var options = {};
 options["allowHtml"] = true;
 
     var chart = new google.visualization.ColumnChart(
-    document.getElementById('ColumnChartID2c3b1d0c19e7')
+    document.getElementById('ColumnChartID3fe49486252')
     );
     chart.draw(data,options);
     
@@ -405,9 +757,9 @@ if (newPackage)
   pkgs.push(chartid);
   
 // Add the drawChart function to the global list of callbacks
-callbacks.push(drawChartColumnChartID2c3b1d0c19e7);
+callbacks.push(drawChartColumnChartID3fe49486252);
 })();
-function displayChartColumnChartID2c3b1d0c19e7() {
+function displayChartColumnChartID3fe49486252() {
   var pkgs = window.__gvisPackages = window.__gvisPackages || [];
   var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
   window.clearTimeout(window.__gvisLoad);
@@ -428,18 +780,18 @@ callbacks.shift()();
 }
  
 // jsFooter
-</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartColumnChartID2c3b1d0c19e7"></script><!-- divChart --><div id="ColumnChartID2c3b1d0c19e7" style="width: 500; height: automatic;">
+</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartColumnChartID3fe49486252"></script><!-- divChart --><div id="ColumnChartID3fe49486252" style="width: 500; height: automatic;">
 
 </div>
 <div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">SteppedArea</span><span class="op">)</span></span></code></pre></div>
 <!-- SteppedAreaChart generated in R 4.2.2 by googleVis 0.7.0 package -->
-<!-- Sun Nov 13 17:55:30 2022 -->
+<!-- Sun Nov 13 19:57:07 2022 -->
 <!-- jsHeader -->
 <script type="text/javascript">
  
 // jsData 
-function gvisDataSteppedAreaChartID2c3b20deb8db () {
+function gvisDataSteppedAreaChartID3fe44d5c45f6 () {
 var data = new google.visualization.DataTable();
 var datajson =
 [
@@ -472,14 +824,14 @@ return(data);
 }
  
 // jsDrawChart
-function drawChartSteppedAreaChartID2c3b20deb8db() {
-var data = gvisDataSteppedAreaChartID2c3b20deb8db();
+function drawChartSteppedAreaChartID3fe44d5c45f6() {
+var data = gvisDataSteppedAreaChartID3fe44d5c45f6();
 var options = {};
 options["allowHtml"] = true;
 options["isStacked"] = true;
 
     var chart = new google.visualization.SteppedAreaChart(
-    document.getElementById('SteppedAreaChartID2c3b20deb8db')
+    document.getElementById('SteppedAreaChartID3fe44d5c45f6')
     );
     chart.draw(data,options);
     
@@ -503,9 +855,9 @@ if (newPackage)
   pkgs.push(chartid);
   
 // Add the drawChart function to the global list of callbacks
-callbacks.push(drawChartSteppedAreaChartID2c3b20deb8db);
+callbacks.push(drawChartSteppedAreaChartID3fe44d5c45f6);
 })();
-function displayChartSteppedAreaChartID2c3b20deb8db() {
+function displayChartSteppedAreaChartID3fe44d5c45f6() {
   var pkgs = window.__gvisPackages = window.__gvisPackages || [];
   var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
   window.clearTimeout(window.__gvisLoad);
@@ -526,18 +878,18 @@ callbacks.shift()();
 }
  
 // jsFooter
-</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartSteppedAreaChartID2c3b20deb8db"></script><!-- divChart --><div id="SteppedAreaChartID2c3b20deb8db" style="width: 500; height: automatic;">
+</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartSteppedAreaChartID3fe44d5c45f6"></script><!-- divChart --><div id="SteppedAreaChartID3fe44d5c45f6" style="width: 500; height: automatic;">
 
 </div>
 <div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Combo</span><span class="op">)</span></span></code></pre></div>
 <!-- ComboChart generated in R 4.2.2 by googleVis 0.7.0 package -->
-<!-- Sun Nov 13 17:55:30 2022 -->
+<!-- Sun Nov 13 19:57:07 2022 -->
 <!-- jsHeader -->
 <script type="text/javascript">
  
 // jsData 
-function gvisDataComboChartID2c3b2fd02d28 () {
+function gvisDataComboChartID3fe46d77e2ba () {
 var data = new google.visualization.DataTable();
 var datajson =
 [
@@ -570,15 +922,15 @@ return(data);
 }
  
 // jsDrawChart
-function drawChartComboChartID2c3b2fd02d28() {
-var data = gvisDataComboChartID2c3b2fd02d28();
+function drawChartComboChartID3fe46d77e2ba() {
+var data = gvisDataComboChartID3fe46d77e2ba();
 var options = {};
 options["allowHtml"] = true;
 options["seriesType"] = "bars";
 options["series"] = {1: {type:"line"}};
 
     var chart = new google.visualization.ComboChart(
-    document.getElementById('ComboChartID2c3b2fd02d28')
+    document.getElementById('ComboChartID3fe46d77e2ba')
     );
     chart.draw(data,options);
     
@@ -602,9 +954,9 @@ if (newPackage)
   pkgs.push(chartid);
   
 // Add the drawChart function to the global list of callbacks
-callbacks.push(drawChartComboChartID2c3b2fd02d28);
+callbacks.push(drawChartComboChartID3fe46d77e2ba);
 })();
-function displayChartComboChartID2c3b2fd02d28() {
+function displayChartComboChartID3fe46d77e2ba() {
   var pkgs = window.__gvisPackages = window.__gvisPackages || [];
   var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
   window.clearTimeout(window.__gvisLoad);
@@ -625,7 +977,7 @@ callbacks.shift()();
 }
  
 // jsFooter
-</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartComboChartID2c3b2fd02d28"></script><!-- divChart --><div id="ComboChartID2c3b2fd02d28" style="width: 500; height: automatic;">
+</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartComboChartID3fe46d77e2ba"></script><!-- divChart --><div id="ComboChartID3fe46d77e2ba" style="width: 500; height: automatic;">
 
 </div>
 <p>The above charts are best used in comparisons between groups. As seen in the examples, there are comparisons between costs of owning different pets.</p>
@@ -635,9 +987,9 @@ callbacks.shift()();
 <li>Combo charts are great for multiple variable comparisons and allow the user to get the best of both worlds. by carefully selecting which variables are represented in bars and which ones are lines, the user is able to best show the relationship within groups and trends of the population.</li>
 </ul>
 </div>
-<div id="googlevis-histogram-chart" class="section level3" number="16.3.2">
+<div id="googlevis-histogram-chart" class="section level3" number="15.3.2">
 <h3>
-<span class="header-section-number">16.3.2</span> googleVis Histogram Chart<a class="anchor" aria-label="anchor" href="#googlevis-histogram-chart"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.3.2</span> googleVis Histogram Chart<a class="anchor" aria-label="anchor" href="#googlevis-histogram-chart"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">iris</span></span>
@@ -645,12 +997,12 @@ callbacks.shift()();
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Histogram</span><span class="op">)</span></span></code></pre></div>
 <!-- Histogram generated in R 4.2.2 by googleVis 0.7.0 package -->
-<!-- Sun Nov 13 17:55:30 2022 -->
+<!-- Sun Nov 13 19:57:07 2022 -->
 <!-- jsHeader -->
 <script type="text/javascript">
  
 // jsData 
-function gvisDataHistogramID2c3b7542f4f2 () {
+function gvisDataHistogramID3fe4317b24e3 () {
 var data = new google.visualization.DataTable();
 var datajson =
 [
@@ -1111,13 +1463,13 @@ return(data);
 }
  
 // jsDrawChart
-function drawChartHistogramID2c3b7542f4f2() {
-var data = gvisDataHistogramID2c3b7542f4f2();
+function drawChartHistogramID3fe4317b24e3() {
+var data = gvisDataHistogramID3fe4317b24e3();
 var options = {};
 options["allowHtml"] = true;
 
     var chart = new google.visualization.Histogram(
-    document.getElementById('HistogramID2c3b7542f4f2')
+    document.getElementById('HistogramID3fe4317b24e3')
     );
     chart.draw(data,options);
     
@@ -1141,9 +1493,9 @@ if (newPackage)
   pkgs.push(chartid);
   
 // Add the drawChart function to the global list of callbacks
-callbacks.push(drawChartHistogramID2c3b7542f4f2);
+callbacks.push(drawChartHistogramID3fe4317b24e3);
 })();
-function displayChartHistogramID2c3b7542f4f2() {
+function displayChartHistogramID3fe4317b24e3() {
   var pkgs = window.__gvisPackages = window.__gvisPackages || [];
   var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
   window.clearTimeout(window.__gvisLoad);
@@ -1164,14 +1516,14 @@ callbacks.shift()();
 }
  
 // jsFooter
-</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartHistogramID2c3b7542f4f2"></script><!-- divChart --><div id="HistogramID2c3b7542f4f2" style="width: 500; height: automatic;">
+</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartHistogramID3fe4317b24e3"></script><!-- divChart --><div id="HistogramID3fe4317b24e3" style="width: 500; height: automatic;">
 
 </div>
 <p>The histogram allows users to represent the distribution of one particular group or variable by showing the frequency of the particular group or variable within a range. The charts by <code>googleVis</code> have an advantage over regular histograms because almost no histogram allows or recommends specific information regarding the counts at different points in the visualization, however, with <code>googleVis</code> the audience can not only look at the distribution but access specific metrics through interaction as well.</p>
 </div>
-<div id="googlevis-alluvialsankey-chart" class="section level3" number="16.3.3">
+<div id="googlevis-alluvialsankey-chart" class="section level3" number="15.3.3">
 <h3>
-<span class="header-section-number">16.3.3</span> googleVis Alluvial/Sankey Chart<a class="anchor" aria-label="anchor" href="#googlevis-alluvialsankey-chart"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.3.3</span> googleVis Alluvial/Sankey Chart<a class="anchor" aria-label="anchor" href="#googlevis-alluvialsankey-chart"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>From<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"Math"</span>,<span class="fl">3</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"Science"</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>,</span>
@@ -1182,12 +1534,12 @@ callbacks.shift()();
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Alluvial</span><span class="op">)</span></span></code></pre></div>
 <!-- Sankey generated in R 4.2.2 by googleVis 0.7.0 package -->
-<!-- Sun Nov 13 17:55:30 2022 -->
+<!-- Sun Nov 13 19:57:07 2022 -->
 <!-- jsHeader -->
 <script type="text/javascript">
  
 // jsData 
-function gvisDataSankeyID2c3b57914baa () {
+function gvisDataSankeyID3fe44a17bc7c () {
 var data = new google.visualization.DataTable();
 var datajson =
 [
@@ -1230,14 +1582,14 @@ return(data);
 }
  
 // jsDrawChart
-function drawChartSankeyID2c3b57914baa() {
-var data = gvisDataSankeyID2c3b57914baa();
+function drawChartSankeyID3fe44a17bc7c() {
+var data = gvisDataSankeyID3fe44a17bc7c();
 var options = {};
 options["width"] = 400;
 options["height"] = 400;
 
     var chart = new google.visualization.Sankey(
-    document.getElementById('SankeyID2c3b57914baa')
+    document.getElementById('SankeyID3fe44a17bc7c')
     );
     chart.draw(data,options);
     
@@ -1261,9 +1613,9 @@ if (newPackage)
   pkgs.push(chartid);
   
 // Add the drawChart function to the global list of callbacks
-callbacks.push(drawChartSankeyID2c3b57914baa);
+callbacks.push(drawChartSankeyID3fe44a17bc7c);
 })();
-function displayChartSankeyID2c3b57914baa() {
+function displayChartSankeyID3fe44a17bc7c() {
   var pkgs = window.__gvisPackages = window.__gvisPackages || [];
   var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
   window.clearTimeout(window.__gvisLoad);
@@ -1284,14 +1636,14 @@ callbacks.shift()();
 }
  
 // jsFooter
-</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartSankeyID2c3b57914baa"></script><!-- divChart --><div id="SankeyID2c3b57914baa" style="width: 400; height: 400;">
+</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartSankeyID3fe44a17bc7c"></script><!-- divChart --><div id="SankeyID3fe44a17bc7c" style="width: 400; height: 400;">
 
 </div>
 <p>Alluvial charts best show the movement of the sample or population among different variables. In the example above the movement of students within a school from class to class is represented. This visualization can be helpful with data that has an ordinal and timeline specific values. With <code>googleVis</code>, the audience is exposed to the general trends with a clean looking chart as well as the specifics of the graph through interaction.</p>
 </div>
-<div id="googlevis-geographic-chart" class="section level3" number="16.3.4">
+<div id="googlevis-geographic-chart" class="section level3" number="15.3.4">
 <h3>
-<span class="header-section-number">16.3.4</span> googleVis Geographic Chart<a class="anchor" aria-label="anchor" href="#googlevis-geographic-chart"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.3.4</span> googleVis Geographic Chart<a class="anchor" aria-label="anchor" href="#googlevis-geographic-chart"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>country<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'US'</span>, <span class="st">'CN'</span>, <span class="st">'BR'</span>, <span class="st">'IS'</span>, <span class="st">'RU'</span>, <span class="st">'TH'</span>, <span class="st">'TR'</span>, <span class="st">'ID'</span>, <span class="st">'MX'</span>, <span class="st">'IR'</span> <span class="op">)</span>,</span>
@@ -1303,12 +1655,12 @@ callbacks.shift()();
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">G</span><span class="op">)</span></span></code></pre></div>
 <!-- GeoChart generated in R 4.2.2 by googleVis 0.7.0 package -->
-<!-- Sun Nov 13 17:55:30 2022 -->
+<!-- Sun Nov 13 19:57:07 2022 -->
 <!-- jsHeader -->
 <script type="text/javascript">
  
 // jsData 
-function gvisDataGeoChartID2c3b571b9634 () {
+function gvisDataGeoChartID3fe469740fb9 () {
 var data = new google.visualization.DataTable();
 var datajson =
 [
@@ -1360,31 +1712,31 @@ return(data);
 }
  
 // jsDrawChart
-function drawChartGeoChartID2c3b571b9634() {
-var data = gvisDataGeoChartID2c3b571b9634();
+function drawChartGeoChartID3fe469740fb9() {
+var data = gvisDataGeoChartID3fe469740fb9();
 var options = {};
 options["width"] = 556;
 options["height"] = 347;
 
-    chartGeoChartID2c3b571b9634 = new google.visualization.ChartWrapper({
+    chartGeoChartID3fe469740fb9 = new google.visualization.ChartWrapper({
     dataTable: data,       
     chartType: 'GeoChart',
-    containerId: 'GeoChartID2c3b571b9634',
+    containerId: 'GeoChartID3fe469740fb9',
     options: options
     });
-    chartGeoChartID2c3b571b9634.draw();
+    chartGeoChartID3fe469740fb9.draw();
     
 
 }
 
-  function openEditorGeoChartID2c3b571b9634() {
+  function openEditorGeoChartID3fe469740fb9() {
   var editor = new google.visualization.ChartEditor();
   google.visualization.events.addListener(editor, 'ok',
   function() { 
-  chartGeoChartID2c3b571b9634 = editor.getChartWrapper();  
-  chartGeoChartID2c3b571b9634.draw(document.getElementById('GeoChartID2c3b571b9634')); 
+  chartGeoChartID3fe469740fb9 = editor.getChartWrapper();  
+  chartGeoChartID3fe469740fb9.draw(document.getElementById('GeoChartID3fe469740fb9')); 
   }); 
-  editor.openDialog(chartGeoChartID2c3b571b9634);
+  editor.openDialog(chartGeoChartID3fe469740fb9);
   }
     
  
@@ -1404,9 +1756,9 @@ if (newPackage)
   pkgs.push(chartid);
   
 // Add the drawChart function to the global list of callbacks
-callbacks.push(drawChartGeoChartID2c3b571b9634);
+callbacks.push(drawChartGeoChartID3fe469740fb9);
 })();
-function displayChartGeoChartID2c3b571b9634() {
+function displayChartGeoChartID3fe469740fb9() {
   var pkgs = window.__gvisPackages = window.__gvisPackages || [];
   var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
   window.clearTimeout(window.__gvisLoad);
@@ -1427,14 +1779,14 @@ callbacks.shift()();
 }
  
 // jsFooter
-</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartGeoChartID2c3b571b9634"></script><!-- divChart --><input type="button" onclick="openEditorGeoChartID2c3b571b9634()" value="Edit the Geo Chart !"><br><div id="GeoChartID2c3b571b9634" style="width: 556; height: 347;">
+</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartGeoChartID3fe469740fb9"></script><!-- divChart --><input type="button" onclick="openEditorGeoChartID3fe469740fb9()" value="Edit the Geo Chart !"><br><div id="GeoChartID3fe469740fb9" style="width: 556; height: 347;">
 
 </div>
 <p>Map visualizations by <code>googleVis</code> are incredibly easy to create and manipulate. They are useful for comparing different geographic areas to each other. <code>googleVis</code> automatically color scales the values and the interaction allows the map to be simple and clean, but get specific values when hovering over a particular geographic area.</p>
 </div>
-<div id="googlevis-gauge-chart" class="section level3" number="16.3.5">
+<div id="googlevis-gauge-chart" class="section level3" number="15.3.5">
 <h3>
-<span class="header-section-number">16.3.5</span> googleVis Gauge Chart<a class="anchor" aria-label="anchor" href="#googlevis-gauge-chart"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.3.5</span> googleVis Gauge Chart<a class="anchor" aria-label="anchor" href="#googlevis-gauge-chart"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">temperature</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>city<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Las Vegas'</span>, <span class="st">'Los Angeles'</span>, <span class="st">'Pheonix'</span>, <span class="st">'Dallas'</span>, <span class="st">'Houston'</span>, <span class="st">'Miami'</span><span class="op">)</span>,</span>
@@ -1446,12 +1798,12 @@ callbacks.shift()();
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Gauge</span><span class="op">)</span></span></code></pre></div>
 <!-- Gauge generated in R 4.2.2 by googleVis 0.7.0 package -->
-<!-- Sun Nov 13 17:55:30 2022 -->
+<!-- Sun Nov 13 19:57:07 2022 -->
 <!-- jsHeader -->
 <script type="text/javascript">
  
 // jsData 
-function gvisDataGaugeID2c3b1fc1984f () {
+function gvisDataGaugeID3fe476b35cb9 () {
 var data = new google.visualization.DataTable();
 var datajson =
 [
@@ -1487,8 +1839,8 @@ return(data);
 }
  
 // jsDrawChart
-function drawChartGaugeID2c3b1fc1984f() {
-var data = gvisDataGaugeID2c3b1fc1984f();
+function drawChartGaugeID3fe476b35cb9() {
+var data = gvisDataGaugeID3fe476b35cb9();
 var options = {};
 options["allowHtml"] = true;
 options["min"] = 0;
@@ -1503,7 +1855,7 @@ options["width"] = 400;
 options["height"] = 300;
 
     var chart = new google.visualization.Gauge(
-    document.getElementById('GaugeID2c3b1fc1984f')
+    document.getElementById('GaugeID3fe476b35cb9')
     );
     chart.draw(data,options);
     
@@ -1527,9 +1879,9 @@ if (newPackage)
   pkgs.push(chartid);
   
 // Add the drawChart function to the global list of callbacks
-callbacks.push(drawChartGaugeID2c3b1fc1984f);
+callbacks.push(drawChartGaugeID3fe476b35cb9);
 })();
-function displayChartGaugeID2c3b1fc1984f() {
+function displayChartGaugeID3fe476b35cb9() {
   var pkgs = window.__gvisPackages = window.__gvisPackages || [];
   var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
   window.clearTimeout(window.__gvisLoad);
@@ -1550,14 +1902,14 @@ callbacks.shift()();
 }
  
 // jsFooter
-</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartGaugeID2c3b1fc1984f"></script><!-- divChart --><div id="GaugeID2c3b1fc1984f" style="width: 400; height: 300;">
+</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartGaugeID3fe476b35cb9"></script><!-- divChart --><div id="GaugeID3fe476b35cb9" style="width: 400; height: 300;">
 
 </div>
 <p>The gauge charts are not interactive, however they do offer a unique way to model data that is always within a certain range. For example, temperatures, speeds, pressure, etc. This chart allows for quick comparison between groups and aesthetic value to any presentation.</p>
 </div>
-<div id="googlevis-tabular-chart" class="section level3" number="16.3.6">
+<div id="googlevis-tabular-chart" class="section level3" number="15.3.6">
 <h3>
-<span class="header-section-number">16.3.6</span> googleVis Tabular Chart<a class="anchor" aria-label="anchor" href="#googlevis-tabular-chart"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.3.6</span> googleVis Tabular Chart<a class="anchor" aria-label="anchor" href="#googlevis-tabular-chart"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Tabular Data Un-Paged</span></span>
@@ -1566,12 +1918,12 @@ callbacks.shift()();
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Population_Tabular_Unpaged</span><span class="op">)</span></span></code></pre></div>
 <!-- Table generated in R 4.2.2 by googleVis 0.7.0 package -->
-<!-- Sun Nov 13 17:55:30 2022 -->
+<!-- Sun Nov 13 19:57:07 2022 -->
 <!-- jsHeader -->
 <script type="text/javascript">
  
 // jsData 
-function gvisDataTableID2c3b7585a3f5 () {
+function gvisDataTableID3fe45f7d823d () {
 var data = new google.visualization.DataTable();
 var datajson =
 [
@@ -1858,8 +2210,8 @@ return(data);
 }
  
 // jsDrawChart
-function drawChartTableID2c3b7585a3f5() {
-var data = gvisDataTableID2c3b7585a3f5();
+function drawChartTableID3fe45f7d823d() {
+var data = gvisDataTableID3fe45f7d823d();
 var options = {};
 options["allowHtml"] = true;
 
@@ -1869,7 +2221,7 @@ options["allowHtml"] = true;
   dataFormat2.format(data, 3);
 
     var chart = new google.visualization.Table(
-    document.getElementById('TableID2c3b7585a3f5')
+    document.getElementById('TableID3fe45f7d823d')
     );
     chart.draw(data,options);
     
@@ -1893,9 +2245,9 @@ if (newPackage)
   pkgs.push(chartid);
   
 // Add the drawChart function to the global list of callbacks
-callbacks.push(drawChartTableID2c3b7585a3f5);
+callbacks.push(drawChartTableID3fe45f7d823d);
 })();
-function displayChartTableID2c3b7585a3f5() {
+function displayChartTableID3fe45f7d823d() {
   var pkgs = window.__gvisPackages = window.__gvisPackages || [];
   var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
   window.clearTimeout(window.__gvisLoad);
@@ -1916,7 +2268,7 @@ callbacks.shift()();
 }
  
 // jsFooter
-</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartTableID2c3b7585a3f5"></script><!-- divChart --><div id="TableID2c3b7585a3f5" style="width: 500; height: automatic;">
+</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartTableID3fe45f7d823d"></script><!-- divChart --><div id="TableID3fe45f7d823d" style="width: 500; height: automatic;">
 
 </div>
 <div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
@@ -1929,12 +2281,12 @@ callbacks.shift()();
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Population_Tabular_paged</span><span class="op">)</span></span></code></pre></div>
 <!-- Table generated in R 4.2.2 by googleVis 0.7.0 package -->
-<!-- Sun Nov 13 17:55:30 2022 -->
+<!-- Sun Nov 13 19:57:07 2022 -->
 <!-- jsHeader -->
 <script type="text/javascript">
  
 // jsData 
-function gvisDataTableID2c3b7085a0ce () {
+function gvisDataTableID3fe4957c46b () {
 var data = new google.visualization.DataTable();
 var datajson =
 [
@@ -2221,8 +2573,8 @@ return(data);
 }
  
 // jsDrawChart
-function drawChartTableID2c3b7085a0ce() {
-var data = gvisDataTableID2c3b7085a0ce();
+function drawChartTableID3fe4957c46b() {
+var data = gvisDataTableID3fe4957c46b();
 var options = {};
 options["allowHtml"] = true;
 options["page"] = "enable";
@@ -2233,7 +2585,7 @@ options["page"] = "enable";
   dataFormat2.format(data, 3);
 
     var chart = new google.visualization.Table(
-    document.getElementById('TableID2c3b7085a0ce')
+    document.getElementById('TableID3fe4957c46b')
     );
     chart.draw(data,options);
     
@@ -2257,9 +2609,9 @@ if (newPackage)
   pkgs.push(chartid);
   
 // Add the drawChart function to the global list of callbacks
-callbacks.push(drawChartTableID2c3b7085a0ce);
+callbacks.push(drawChartTableID3fe4957c46b);
 })();
-function displayChartTableID2c3b7085a0ce() {
+function displayChartTableID3fe4957c46b() {
   var pkgs = window.__gvisPackages = window.__gvisPackages || [];
   var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
   window.clearTimeout(window.__gvisLoad);
@@ -2280,14 +2632,14 @@ callbacks.shift()();
 }
  
 // jsFooter
-</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartTableID2c3b7085a0ce"></script><!-- divChart --><div id="TableID2c3b7085a0ce" style="width: automatic; height: automatic;">
+</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartTableID3fe4957c46b"></script><!-- divChart --><div id="TableID3fe4957c46b" style="width: automatic; height: automatic;">
 
 </div>
 <p>The data formatted as a table can be paged and sorted. It has a flexible option to select single rows either with the keyboard or the mouse. It also powers sorting on rows across all dimensions in the columns of the dataset. The navigation through paged tabular information is smooth and simple.</p>
 </div>
-<div id="googlevis-tree-map-chart" class="section level3" number="16.3.7">
+<div id="googlevis-tree-map-chart" class="section level3" number="15.3.7">
 <h3>
-<span class="header-section-number">16.3.7</span> googleVis Tree Map Chart<a class="anchor" aria-label="anchor" href="#googlevis-tree-map-chart"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.3.7</span> googleVis Tree Map Chart<a class="anchor" aria-label="anchor" href="#googlevis-tree-map-chart"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Country_Tree</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisTreeMap.html">gvisTreeMap</a></span><span class="op">(</span><span class="va">Regions</span>, <span class="st">"Region"</span>, <span class="st">"Parent"</span>, <span class="st">"Val"</span>, <span class="st">"Fac"</span>, </span>
@@ -2297,12 +2649,12 @@ callbacks.shift()();
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Country_Tree</span><span class="op">)</span></span></code></pre></div>
 <!-- TreeMap generated in R 4.2.2 by googleVis 0.7.0 package -->
-<!-- Sun Nov 13 17:55:30 2022 -->
+<!-- Sun Nov 13 19:57:07 2022 -->
 <!-- jsHeader -->
 <script type="text/javascript">
  
 // jsData 
-function gvisDataTreeMapID2c3b160a80b3 () {
+function gvisDataTreeMapID3fe436877a8c () {
 var data = new google.visualization.DataTable();
 var datajson =
 [
@@ -2382,8 +2734,8 @@ return(data);
 }
  
 // jsDrawChart
-function drawChartTreeMapID2c3b160a80b3() {
-var data = gvisDataTreeMapID2c3b160a80b3();
+function drawChartTreeMapID3fe436877a8c() {
+var data = gvisDataTreeMapID3fe436877a8c();
 var options = {};
 options["width"] = 800;
 options["height"] = 500;
@@ -2396,7 +2748,7 @@ options["fontColor"] = "black";
 options["showScale"] = true;
 
     var chart = new google.visualization.TreeMap(
-    document.getElementById('TreeMapID2c3b160a80b3')
+    document.getElementById('TreeMapID3fe436877a8c')
     );
     chart.draw(data,options);
     
@@ -2420,9 +2772,9 @@ if (newPackage)
   pkgs.push(chartid);
   
 // Add the drawChart function to the global list of callbacks
-callbacks.push(drawChartTreeMapID2c3b160a80b3);
+callbacks.push(drawChartTreeMapID3fe436877a8c);
 })();
-function displayChartTreeMapID2c3b160a80b3() {
+function displayChartTreeMapID3fe436877a8c() {
   var pkgs = window.__gvisPackages = window.__gvisPackages || [];
   var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
   window.clearTimeout(window.__gvisLoad);
@@ -2443,15 +2795,15 @@ callbacks.shift()();
 }
  
 // jsFooter
-</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartTreeMapID2c3b160a80b3"></script><!-- divChart --><div id="TreeMapID2c3b160a80b3" style="width: 800; height: 500;">
+</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartTreeMapID3fe436877a8c"></script><!-- divChart --><div id="TreeMapID3fe436877a8c" style="width: 800; height: 500;">
 
 </div>
 <p>The <code>googleVis</code> tree map is a visual representation of a data tree, where each node has 0 or more children, and 1 parent barring the root node. One can specify how many levels to display simultaneously, and optionally to display deeper levels. One can move down the tree when the person left-clicks a node, and moves back up the tree when the person right-clicks the graph.The total size of the graph is determined by the size of the elements contained in the graph.</p>
 <p>This <code>googleVis</code> tree map chart captures the relative sizes of data categories, that helps for quick insight of the datapoints that are bigger contributors to each category. Color helps scrutinize datapoints that are underperforming / overperforming) compared to their siblings from the same category.</p>
 </div>
-<div id="googlevis-annotation-chart" class="section level3" number="16.3.8">
+<div id="googlevis-annotation-chart" class="section level3" number="15.3.8">
 <h3>
-<span class="header-section-number">16.3.8</span> googleVis Annotation Chart<a class="anchor" aria-label="anchor" href="#googlevis-annotation-chart"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.3.8</span> googleVis Annotation Chart<a class="anchor" aria-label="anchor" href="#googlevis-annotation-chart"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Stock_Annotation</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisAnnotationChart.html">gvisAnnotationChart</a></span><span class="op">(</span><span class="va">Stock</span>, datevar<span class="op">=</span><span class="st">"Date"</span>,numvar<span class="op">=</span><span class="st">"Value"</span>, idvar<span class="op">=</span><span class="st">"Device"</span>, titlevar<span class="op">=</span><span class="st">"Title"</span>,</span>
@@ -2463,12 +2815,12 @@ callbacks.shift()();
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Stock_Annotation</span><span class="op">)</span></span></code></pre></div>
 <!-- AnnotationChart generated in R 4.2.2 by googleVis 0.7.0 package -->
-<!-- Sun Nov 13 17:55:30 2022 -->
+<!-- Sun Nov 13 19:57:07 2022 -->
 <!-- jsHeader -->
 <script type="text/javascript">
  
 // jsData 
-function gvisDataAnnotationChartID2c3b1b351bce () {
+function gvisDataAnnotationChartID3fe43f806496 () {
 var data = new google.visualization.DataTable();
 var datajson =
 [
@@ -2539,8 +2891,8 @@ return(data);
 }
  
 // jsDrawChart
-function drawChartAnnotationChartID2c3b1b351bce() {
-var data = gvisDataAnnotationChartID2c3b1b351bce();
+function drawChartAnnotationChartID3fe43f806496() {
+var data = gvisDataAnnotationChartID3fe43f806496();
 var options = {};
 options["width"] = 800;
 options["height"] = 450;
@@ -2551,7 +2903,7 @@ options["scaleColumns"] = [0,1];
 options["scaleType"] = "allmaximized";
 
     var chart = new google.visualization.AnnotationChart(
-    document.getElementById('AnnotationChartID2c3b1b351bce')
+    document.getElementById('AnnotationChartID3fe43f806496')
     );
     chart.draw(data,options);
     
@@ -2575,9 +2927,9 @@ if (newPackage)
   pkgs.push(chartid);
   
 // Add the drawChart function to the global list of callbacks
-callbacks.push(drawChartAnnotationChartID2c3b1b351bce);
+callbacks.push(drawChartAnnotationChartID3fe43f806496);
 })();
-function displayChartAnnotationChartID2c3b1b351bce() {
+function displayChartAnnotationChartID3fe43f806496() {
   var pkgs = window.__gvisPackages = window.__gvisPackages || [];
   var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
   window.clearTimeout(window.__gvisLoad);
@@ -2598,16 +2950,16 @@ callbacks.shift()();
 }
  
 // jsFooter
-</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartAnnotationChartID2c3b1b351bce"></script><!-- divChart --><div id="AnnotationChartID2c3b1b351bce" style="width: 800; height: 450;">
+</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartAnnotationChartID3fe43f806496"></script><!-- divChart --><div id="AnnotationChartID3fe43f806496" style="width: 800; height: 450;">
 
 </div>
 <p>Annotation charts are useful, interactive time series like line charts that enable annotations.These annotated charts are leveraged to highlight specific data or value-add the contextual notes within the visualization.</p>
 <p>To answer the “so what ?” kind of questions, such well defined annotations highlight the significance of data in the chart, with keen detail in the textual description / annotation.</p>
 <p>One can also slice through the interactive timeline chart to look for a snapshot of data which is aesthetically pleasing and also provides great detail insights within the same visualization. These annotation charts are SVG (scalable vector graphics) /VML (vector graphics rendering ).</p>
 </div>
-<div id="googlevis-calendar-chart" class="section level3" number="16.3.9">
+<div id="googlevis-calendar-chart" class="section level3" number="15.3.9">
 <h3>
-<span class="header-section-number">16.3.9</span> googleVis Calendar Chart<a class="anchor" aria-label="anchor" href="#googlevis-calendar-chart"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.3.9</span> googleVis Calendar Chart<a class="anchor" aria-label="anchor" href="#googlevis-calendar-chart"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Calendar_Temp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisCalendar.html">gvisCalendar</a></span><span class="op">(</span><span class="va">Cairo</span>, datevar<span class="op">=</span><span class="st">"Date"</span>, numvar<span class="op">=</span><span class="st">"Temp"</span>,</span>
@@ -2620,7 +2972,7 @@ callbacks.shift()();
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Calendar_Temp</span><span class="op">)</span></span></code></pre></div>
 <!-- Calendar generated in R 4.2.2 by googleVis 0.7.0 package -->
-<!-- Sun Nov 13 17:55:30 2022 -->
+<!-- Sun Nov 13 19:57:07 2022 -->
 <!-- jsHeader -->
 <script type="text/javascript">
  
@@ -7066,9 +7418,9 @@ callbacks.shift()();
 <p>The <code>googleVis</code> calendar chart is a definitive visualization that can be used to show activity over the course of a longer duration of time, example in months or years or decades. One can illustrate the variation of 1 quantity depending on the days of the given week, or trends over the timeline period.</p>
 <p>Such calendar charts demonstrate data records, or events, on a daily, weekly, monthly, yearly calendar. It is highly interactive and one can view the value on hovering on any particular time of the entire timeperiod.</p>
 </div>
-<div id="googlevis-timeline-chart" class="section level3" number="16.3.10">
+<div id="googlevis-timeline-chart" class="section level3" number="15.3.10">
 <h3>
-<span class="header-section-number">16.3.10</span> googleVis Timeline Chart<a class="anchor" aria-label="anchor" href="#googlevis-timeline-chart"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.3.10</span> googleVis Timeline Chart<a class="anchor" aria-label="anchor" href="#googlevis-timeline-chart"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Position_Timeline_Data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>Position<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"President"</span>, <span class="fl">4</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"Vice"</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span>,</span>
@@ -7088,12 +7440,12 @@ callbacks.shift()();
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Timeline</span><span class="op">)</span></span></code></pre></div>
 <!-- Timeline generated in R 4.2.2 by googleVis 0.7.0 package -->
-<!-- Sun Nov 13 17:55:30 2022 -->
+<!-- Sun Nov 13 19:57:07 2022 -->
 <!-- jsHeader -->
 <script type="text/javascript">
  
 // jsData 
-function gvisDataTimelineID2c3b42963882 () {
+function gvisDataTimelineID3fe42fd3169f () {
 var data = new google.visualization.DataTable();
 var datajson =
 [
@@ -7155,8 +7507,8 @@ return(data);
 }
  
 // jsDrawChart
-function drawChartTimelineID2c3b42963882() {
-var data = gvisDataTimelineID2c3b42963882();
+function drawChartTimelineID3fe42fd3169f() {
+var data = gvisDataTimelineID3fe42fd3169f();
 var options = {};
 options["width"] = 600;
 options["height"] = 400;
@@ -7165,7 +7517,7 @@ options["backgroundColor"] = "#e3f4ff";
 options["colors"] = ['#0e407d', '#78b2ff', '#3737ab'];
 
     var chart = new google.visualization.Timeline(
-    document.getElementById('TimelineID2c3b42963882')
+    document.getElementById('TimelineID3fe42fd3169f')
     );
     chart.draw(data,options);
     
@@ -7189,9 +7541,9 @@ if (newPackage)
   pkgs.push(chartid);
   
 // Add the drawChart function to the global list of callbacks
-callbacks.push(drawChartTimelineID2c3b42963882);
+callbacks.push(drawChartTimelineID3fe42fd3169f);
 })();
-function displayChartTimelineID2c3b42963882() {
+function displayChartTimelineID3fe42fd3169f() {
   var pkgs = window.__gvisPackages = window.__gvisPackages || [];
   var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
   window.clearTimeout(window.__gvisLoad);
@@ -7212,15 +7564,15 @@ callbacks.shift()();
 }
  
 // jsFooter
-</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartTimelineID2c3b42963882"></script><!-- divChart --><div id="TimelineID2c3b42963882" style="width: 600; height: 400;">
+</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartTimelineID3fe42fd3169f"></script><!-- divChart --><div id="TimelineID3fe42fd3169f" style="width: 600; height: 400;">
 
 </div>
 <p>This <code>googleVis</code> Timeline chart is a great and fascinating way of visualizing the different dates / events. Here is an example, showing duration of Presidents &amp; Vice Presidents / Sessions of Congress over the timeline period. The exact times and durations are given when one interactively hovers over the bars.</p>
 <p>These timeline charts are versatile visuals for illustrating a sequence of events chronologically. It provides an amazing aid to conceptualize event sequences / processes to gain valuable insights, sometimes maybe summarize historical events, or time frame of minutes, hours, years or datewise.</p>
 </div>
-<div id="googlevis-gantt-chart" class="section level3" number="16.3.11">
+<div id="googlevis-gantt-chart" class="section level3" number="15.3.11">
 <h3>
-<span class="header-section-number">16.3.11</span> googleVis Gantt Chart<a class="anchor" aria-label="anchor" href="#googlevis-gantt-chart"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.3.11</span> googleVis Gantt Chart<a class="anchor" aria-label="anchor" href="#googlevis-gantt-chart"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">daysToMilliseconds</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">days</span><span class="op">)</span><span class="op">{</span><span class="va">days</span> <span class="op">*</span> <span class="fl">24</span> <span class="op">*</span> <span class="fl">60</span> <span class="op">*</span> <span class="fl">60</span> <span class="op">*</span> <span class="fl">1000</span><span class="op">}</span></span>
@@ -7246,12 +7598,12 @@ callbacks.shift()();
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Gantt_Tasks</span><span class="op">)</span></span></code></pre></div>
 <!-- Gantt generated in R 4.2.2 by googleVis 0.7.0 package -->
-<!-- Sun Nov 13 17:55:30 2022 -->
+<!-- Sun Nov 13 19:57:07 2022 -->
 <!-- jsHeader -->
 <script type="text/javascript">
  
 // jsData 
-function gvisDataGanttID2c3bc5240eb () {
+function gvisDataGanttID3fe46f21a98f () {
 var data = new google.visualization.DataTable();
 var datajson =
 [
@@ -7319,8 +7671,8 @@ return(data);
 }
  
 // jsDrawChart
-function drawChartGanttID2c3bc5240eb() {
-var data = gvisDataGanttID2c3bc5240eb();
+function drawChartGanttID3fe46f21a98f() {
+var data = gvisDataGanttID3fe46f21a98f();
 var options = {};
 options["width"] = 600;
 options["height"] = 300;
@@ -7329,7 +7681,7 @@ options["gantt"] = {criticalPathEnabled:true,innerGridHorizLine: {
                          {fill: '#c7e9ff'},labelStyle: {fontName: 'sans-serif',fontSize: 16}};
 
     var chart = new google.visualization.Gantt(
-    document.getElementById('GanttID2c3bc5240eb')
+    document.getElementById('GanttID3fe46f21a98f')
     );
     chart.draw(data,options);
     
@@ -7353,9 +7705,9 @@ if (newPackage)
   pkgs.push(chartid);
   
 // Add the drawChart function to the global list of callbacks
-callbacks.push(drawChartGanttID2c3bc5240eb);
+callbacks.push(drawChartGanttID3fe46f21a98f);
 })();
-function displayChartGanttID2c3bc5240eb() {
+function displayChartGanttID3fe46f21a98f() {
   var pkgs = window.__gvisPackages = window.__gvisPackages || [];
   var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
   window.clearTimeout(window.__gvisLoad);
@@ -7376,15 +7728,15 @@ callbacks.shift()();
 }
  
 // jsFooter
-</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartGanttID2c3bc5240eb"></script><!-- divChart --><div id="GanttID2c3bc5240eb" style="width: 600; height: 300;">
+</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartGanttID3fe46f21a98f"></script><!-- divChart --><div id="GanttID3fe46f21a98f" style="width: 600; height: 300;">
 
 </div>
 <p><code>googleVis</code> Gantt charts would help teams to plan work around deadlines and allocate resources efficiently.</p>
 <p>Project planners also leverage Gantt charts to maintain a bird’s eye high level view of projects and track them. These depict the relationship between the start and end dates of tasks, milestones, and dependent tasks for each of them over the entire timeline of the project. This Gantt chart illustrates the breakdown of a project into its component tasks very effectively.</p>
 </div>
-<div id="googlevis-merging-charts" class="section level3" number="16.3.12">
+<div id="googlevis-merging-charts" class="section level3" number="15.3.12">
 <h3>
-<span class="header-section-number">16.3.12</span> googleVis Merging Charts<a class="anchor" aria-label="anchor" href="#googlevis-merging-charts"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.3.12</span> googleVis Merging Charts<a class="anchor" aria-label="anchor" href="#googlevis-merging-charts"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Geographic</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisGeoChart.html">gvisGeoChart</a></span><span class="op">(</span><span class="va">Exports</span>,</span>
@@ -7398,12 +7750,12 @@ callbacks.shift()();
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Merged_Charts</span><span class="op">)</span></span></code></pre></div>
 <!-- GeoChart generated in R 4.2.2 by googleVis 0.7.0 package -->
-<!-- Sun Nov 13 17:55:31 2022 -->
+<!-- Sun Nov 13 19:57:07 2022 -->
 <!-- jsHeader -->
 <script type="text/javascript">
  
 // jsData 
-function gvisDataGeoChartID2c3b1b91787d () {
+function gvisDataGeoChartID3fe462255a32 () {
 var data = new google.visualization.DataTable();
 var datajson =
 [
@@ -7456,7 +7808,7 @@ return(data);
 
 
 // jsData 
-function gvisDataTableID2c3b262c0c69 () {
+function gvisDataTableID3fe44b0cef6b () {
 var data = new google.visualization.DataTable();
 var datajson =
 [
@@ -7519,14 +7871,14 @@ return(data);
 }
  
 // jsDrawChart
-function drawChartGeoChartID2c3b1b91787d() {
-var data = gvisDataGeoChartID2c3b1b91787d();
+function drawChartGeoChartID3fe462255a32() {
+var data = gvisDataGeoChartID3fe462255a32();
 var options = {};
 options["width"] = 400;
 options["height"] = 200;
 
     var chart = new google.visualization.GeoChart(
-    document.getElementById('GeoChartID2c3b1b91787d')
+    document.getElementById('GeoChartID3fe462255a32')
     );
     chart.draw(data,options);
     
@@ -7536,15 +7888,15 @@ options["height"] = 200;
 
 
 // jsDrawChart
-function drawChartTableID2c3b262c0c69() {
-var data = gvisDataTableID2c3b262c0c69();
+function drawChartTableID3fe44b0cef6b() {
+var data = gvisDataTableID3fe44b0cef6b();
 var options = {};
 options["allowHtml"] = true;
 options["width"] = 400;
 options["height"] = 400;
 
     var chart = new google.visualization.Table(
-    document.getElementById('TableID2c3b262c0c69')
+    document.getElementById('TableID3fe44b0cef6b')
     );
     chart.draw(data,options);
     
@@ -7568,9 +7920,9 @@ if (newPackage)
   pkgs.push(chartid);
   
 // Add the drawChart function to the global list of callbacks
-callbacks.push(drawChartGeoChartID2c3b1b91787d);
+callbacks.push(drawChartGeoChartID3fe462255a32);
 })();
-function displayChartGeoChartID2c3b1b91787d() {
+function displayChartGeoChartID3fe462255a32() {
   var pkgs = window.__gvisPackages = window.__gvisPackages || [];
   var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
   window.clearTimeout(window.__gvisLoad);
@@ -7607,9 +7959,9 @@ if (newPackage)
   pkgs.push(chartid);
   
 // Add the drawChart function to the global list of callbacks
-callbacks.push(drawChartTableID2c3b262c0c69);
+callbacks.push(drawChartTableID3fe44b0cef6b);
 })();
-function displayChartTableID2c3b262c0c69() {
+function displayChartTableID3fe44b0cef6b() {
   var pkgs = window.__gvisPackages = window.__gvisPackages || [];
   var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
   window.clearTimeout(window.__gvisLoad);
@@ -7630,11 +7982,11 @@ callbacks.shift()();
 }
  
 // jsFooter
-</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartGeoChartID2c3b1b91787d"></script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartTableID2c3b262c0c69"></script><div class="inline-table"><table bgcolor="#7cdeb5" class="table table-sm">
+</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartGeoChartID3fe462255a32"></script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartTableID3fe44b0cef6b"></script><div class="inline-table"><table bgcolor="#7cdeb5" class="table table-sm">
 <tr>
 <td>
 <!-- divChart -->
-<div id="GeoChartID2c3b1b91787d" style="width: 400; height: 200;">
+<div id="GeoChartID3fe462255a32" style="width: 400; height: 200;">
 
 </div>
 </td>
@@ -7642,7 +7994,7 @@ callbacks.shift()();
 <tr>
 <td>
 <!-- divChart -->
-<div id="TableID2c3b262c0c69" style="width: 400; height: 400;">
+<div id="TableID3fe44b0cef6b" style="width: 400; height: 400;">
 
 </div>
 </td>
@@ -7652,9 +8004,9 @@ callbacks.shift()();
 <p>The multiples charts view allows to split up the individual charts Bar, Column, Line or Geographic, Tabular etc. charts into multiple charts, separated. There are numerous use cases like showing your product sales per region and then providing more information about it. It gives a lot of flexibility in the report creation and delivery aesthetically.</p>
 </div>
 </div>
-<div id="use-googlevis-in-rstudio" class="section level2" number="16.4">
+<div id="use-googlevis-in-rstudio" class="section level2" number="15.4">
 <h2>
-<span class="header-section-number">16.4</span> Use googleVis in RStudio<a class="anchor" aria-label="anchor" href="#use-googlevis-in-rstudio"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.4</span> Use googleVis in RStudio<a class="anchor" aria-label="anchor" href="#use-googlevis-in-rstudio"><i class="fas fa-link"></i></a>
 </h2>
 <p>Using googleVis in RStudio is straightforward. By default, the RStudio renders the charts in a new webpage -</p>
 <pre><code>plot(Chart)</code></pre>
@@ -7664,9 +8016,9 @@ callbacks.shift()();
 <blockquote>
 <p>To Knit the Rmd Markdown file to HTML, to perform the following command set the Chunk option results to <code>asis</code> with <code>{r ChartExample, results='asis', tidy=FALSE}</code> and <code>plot(Chart, 'chart')</code></p>
 </blockquote>
-<div id="googlevis-references" class="section level3" number="16.4.1">
+<div id="googlevis-references" class="section level3" number="15.4.1">
 <h3>
-<span class="header-section-number">16.4.1</span> googleVis References<a class="anchor" aria-label="anchor" href="#googlevis-references"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.4.1</span> googleVis References<a class="anchor" aria-label="anchor" href="#googlevis-references"><i class="fas fa-link"></i></a>
 </h3>
 <ul>
 <li><a href="https://mages.github.io/googleVis/">Documentation</a></li>
@@ -7683,32 +8035,32 @@ callbacks.shift()();
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="how-to-use-sqldf.html"><span class="header-section-number">15</span> How to use sqldf</a></div>
-<div class="next"><a href="tutorial-for-vector-fields-in-r.html"><span class="header-section-number">17</span> Tutorial for vector fields in r</a></div>
+<div class="prev"><a href="how-to-use-sqldf.html"><span class="header-section-number">14</span> How to use sqldf</a></div>
+<div class="next"><a href="tutorial-for-vector-fields-in-r.html"><span class="header-section-number">16</span> Tutorial for vector fields in r</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#googlevis-in-r"><span class="header-section-number">16</span> googleVis in R</a></li>
-<li><a class="nav-link" href="#introducing-googlevis"><span class="header-section-number">16.1</span> Introducing googleVis</a></li>
-<li><a class="nav-link" href="#why-use-googlevis"><span class="header-section-number">16.2</span> Why use googleVis ?</a></li>
+<li><a class="nav-link" href="#googlevis-in-r"><span class="header-section-number">15</span> googleVis in R</a></li>
+<li><a class="nav-link" href="#introducing-googlevis"><span class="header-section-number">15.1</span> Introducing googleVis</a></li>
+<li><a class="nav-link" href="#why-use-googlevis"><span class="header-section-number">15.2</span> Why use googleVis ?</a></li>
 <li>
-<a class="nav-link" href="#googlevis-rendering-interaction"><span class="header-section-number">16.3</span> googleVis Rendering &amp; Interaction</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#basic-graphs-line-bar-combo"><span class="header-section-number">16.3.1</span> Basic Graphs (Line, Bar, Combo)</a></li>
-<li><a class="nav-link" href="#googlevis-histogram-chart"><span class="header-section-number">16.3.2</span> googleVis Histogram Chart</a></li>
-<li><a class="nav-link" href="#googlevis-alluvialsankey-chart"><span class="header-section-number">16.3.3</span> googleVis Alluvial/Sankey Chart</a></li>
-<li><a class="nav-link" href="#googlevis-geographic-chart"><span class="header-section-number">16.3.4</span> googleVis Geographic Chart</a></li>
-<li><a class="nav-link" href="#googlevis-gauge-chart"><span class="header-section-number">16.3.5</span> googleVis Gauge Chart</a></li>
-<li><a class="nav-link" href="#googlevis-tabular-chart"><span class="header-section-number">16.3.6</span> googleVis Tabular Chart</a></li>
-<li><a class="nav-link" href="#googlevis-tree-map-chart"><span class="header-section-number">16.3.7</span> googleVis Tree Map Chart</a></li>
-<li><a class="nav-link" href="#googlevis-annotation-chart"><span class="header-section-number">16.3.8</span> googleVis Annotation Chart</a></li>
-<li><a class="nav-link" href="#googlevis-calendar-chart"><span class="header-section-number">16.3.9</span> googleVis Calendar Chart</a></li>
-<li><a class="nav-link" href="#googlevis-timeline-chart"><span class="header-section-number">16.3.10</span> googleVis Timeline Chart</a></li>
-<li><a class="nav-link" href="#googlevis-gantt-chart"><span class="header-section-number">16.3.11</span> googleVis Gantt Chart</a></li>
-<li><a class="nav-link" href="#googlevis-merging-charts"><span class="header-section-number">16.3.12</span> googleVis Merging Charts</a></li>
+<a class="nav-link" href="#googlevis-rendering-interaction"><span class="header-section-number">15.3</span> googleVis Rendering &amp; Interaction</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#basic-graphs-line-bar-combo"><span class="header-section-number">15.3.1</span> Basic Graphs (Line, Bar, Combo)</a></li>
+<li><a class="nav-link" href="#googlevis-histogram-chart"><span class="header-section-number">15.3.2</span> googleVis Histogram Chart</a></li>
+<li><a class="nav-link" href="#googlevis-alluvialsankey-chart"><span class="header-section-number">15.3.3</span> googleVis Alluvial/Sankey Chart</a></li>
+<li><a class="nav-link" href="#googlevis-geographic-chart"><span class="header-section-number">15.3.4</span> googleVis Geographic Chart</a></li>
+<li><a class="nav-link" href="#googlevis-gauge-chart"><span class="header-section-number">15.3.5</span> googleVis Gauge Chart</a></li>
+<li><a class="nav-link" href="#googlevis-tabular-chart"><span class="header-section-number">15.3.6</span> googleVis Tabular Chart</a></li>
+<li><a class="nav-link" href="#googlevis-tree-map-chart"><span class="header-section-number">15.3.7</span> googleVis Tree Map Chart</a></li>
+<li><a class="nav-link" href="#googlevis-annotation-chart"><span class="header-section-number">15.3.8</span> googleVis Annotation Chart</a></li>
+<li><a class="nav-link" href="#googlevis-calendar-chart"><span class="header-section-number">15.3.9</span> googleVis Calendar Chart</a></li>
+<li><a class="nav-link" href="#googlevis-timeline-chart"><span class="header-section-number">15.3.10</span> googleVis Timeline Chart</a></li>
+<li><a class="nav-link" href="#googlevis-gantt-chart"><span class="header-section-number">15.3.11</span> googleVis Gantt Chart</a></li>
+<li><a class="nav-link" href="#googlevis-merging-charts"><span class="header-section-number">15.3.12</span> googleVis Merging Charts</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#use-googlevis-in-rstudio"><span class="header-section-number">16.4</span> Use googleVis in RStudio</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#googlevis-references"><span class="header-section-number">16.4.1</span> googleVis References</a></li></ul>
+<a class="nav-link" href="#use-googlevis-in-rstudio"><span class="header-section-number">15.4</span> Use googleVis in RStudio</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#googlevis-references"><span class="header-section-number">15.4.1</span> googleVis References</a></li></ul>
 </li>
 </ul>
 
