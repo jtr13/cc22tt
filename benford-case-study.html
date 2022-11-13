@@ -260,12 +260,12 @@ There is also a clear outlier at 50.</p>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##   price quantity   value digit
-## 1    62     2991  185442     1
-## 2   273     9674 2641002     2
-## 3    29     9264  268656     2
-## 4   567     9654 5473818     5
-## 5   584     6927 4045368     4
-## 6   126     7954 1002204     1</code></pre>
+## 1   382     2174  830468     8
+## 2   754     7813 5891002     5
+## 3    26     5486  142636     1
+## 4   209     9865 2061785     2
+## 5   499     8341 4162159     4
+## 6   526     4060 2135560     2</code></pre>
 <p>Now let us set up and see if this dataset exhibits the expected pattern for the first digit.</p>
 <div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df_group</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">digit</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>count <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
