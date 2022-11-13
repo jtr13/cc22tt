@@ -4,7 +4,12 @@ Title: Does not matter
 Version: 0.0.0.9000
 Imports:
     emo,
-    tidyverse
+    tidyverse,
+    rgl,
+    chorddiag,
+    circlepackeR,
+    streamgraph,
+    d3heatmap
 Suggests:
     assertable,
     benford.analysis,
@@ -32,11 +37,6 @@ Suggests:
     visNetwork,
     withr,
     xml2,
-    rgl,
-    chorddiag,
-    circlepackeR,
-    streamgraph,
-    d3heatmap
 Remotes:
     hadley/emo,
     dmurdoch/rgl,
