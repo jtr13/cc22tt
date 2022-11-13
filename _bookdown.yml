@@ -23,6 +23,7 @@ rmd_files: [
   'git_cheatsheet.Rmd',
   'plots_for_bioinfo_cheatsheet.Rmd',
   'worldMapCheatSheet.Rmd',
+  'color_r_python_css.Rmd',
 
   # Part: Tutorials
   'time_series_visualization_project.Rmd',  
