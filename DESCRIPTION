@@ -26,5 +26,6 @@ Suggests:
     sp,
     sf,
     tigris,
+    leafsync,
 Remotes:
     hadley/emo
