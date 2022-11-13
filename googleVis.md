@@ -1,149 +1,69 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 16 googleVis in R | Community Contributions for EDAV Fall 2022 Tues/Thurs</title>
-<meta name="description" content="Sushant Prabhu and Kiyan Mohebbizadeh  16.1 Introducing googleVis  GoogleVis is a package in R that allows users of R to use the Google Charts API. The interface between R and Google Charts allows...">
-<meta name="generator" content="bookdown 0.30 with bs4_book()">
-<meta property="og:title" content="Chapter 16 googleVis in R | Community Contributions for EDAV Fall 2022 Tues/Thurs">
-<meta property="og:type" content="book">
-<meta property="og:description" content="Sushant Prabhu and Kiyan Mohebbizadeh  16.1 Introducing googleVis  GoogleVis is a package in R that allows users of R to use the Google Charts API. The interface between R and Google Charts allows...">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 16 googleVis in R | Community Contributions for EDAV Fall 2022 Tues/Thurs">
-<meta name="twitter:description" content="Sushant Prabhu and Kiyan Mohebbizadeh  16.1 Introducing googleVis  GoogleVis is a package in R that allows users of R to use the Google Charts API. The interface between R and Google Charts allows...">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.1/transition.js"></script><script src="libs/bs3compat-0.4.1/tabs.js"></script><script src="libs/bs3compat-0.4.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
-    
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  </style>
-</head>
-<body data-spy="scroll" data-target="#toc">
+# googleVis in R
 
-<div class="container-fluid">
-<div class="row">
-  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+Sushant Prabhu and Kiyan Mohebbizadeh
 
-    <div class="d-flex align-items-start justify-content-between">
-      <h1>
-        <a href="index.html" title="">Community Contributions for EDAV Fall 2022 Tues/Thurs</a>
-      </h1>
-      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
-    </div>
 
-    <div id="main-nav" class="collapse-lg">
-      <form role="search">
-        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
-</form>
+## Introducing googleVis
 
-      <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html"><span class="header-section-number">1</span> Welcome!</a></li>
-<li><a class="" href="community-contribution.html"><span class="header-section-number">2</span> Community Contribution</a></li>
-<li><a class="" href="github-submission-instructions.html"><span class="header-section-number">3</span> GitHub submission instructions</a></li>
-<li><a class="" href="sample-project.html"><span class="header-section-number">4</span> Sample project</a></li>
-<li class="book-part">Cheatsheets</li>
-<li><a class="" href="r-window-functions-cheatsheet.html"><span class="header-section-number">6</span> R window functions cheatsheet</a></li>
-<li><a class="" href="rmd-chunk-option-cheat-sheet.html"><span class="header-section-number">7</span> Rmd chunk option cheat sheet</a></li>
-<li><a class="" href="helpful-ggplot2-extensions-cheatsheet.html"><span class="header-section-number">8</span> Helpful ggplot2 Extensions Cheatsheet</a></li>
-<li><a class="" href="commonly-used-graph-cheatcheet.html"><span class="header-section-number">9</span> Commonly-used graph cheatcheet</a></li>
-<li><a class="" href="git-and-version-control.html"><span class="header-section-number">10</span> Git and version control</a></li>
-<li><a class="" href="useful-plots-for-bioinfomatics-in-r.html"><span class="header-section-number">11</span> Useful plots for Bioinfomatics in R</a></li>
-<li><a class="" href="different-ways-to-create-world-map-in-r.html"><span class="header-section-number">12</span> Different ways to create world map in R</a></li>
-<li class="book-part">Tutorials</li>
-<li><a class="" href="preprocessing-and-visualization-of-time-series-data.html"><span class="header-section-number">14</span> Preprocessing and Visualization of Time Series Data</a></li>
-<li><a class="" href="how-to-use-sqldf.html"><span class="header-section-number">15</span> How to use sqldf</a></li>
-<li><a class="active" href="googlevis-in-r.html"><span class="header-section-number">16</span> googleVis in R</a></li>
-<li><a class="" href="tutorial-for-vector-fields-in-r.html"><span class="header-section-number">17</span> Tutorial for vector fields in r</a></li>
-<li><a class="" href="data-cleaning-with-r.html"><span class="header-section-number">18</span> Data cleaning with r</a></li>
-<li class="book-part">Interview Prep</li>
-<li><a class="" href="ten-interview-questions-and-answers.html"><span class="header-section-number">20</span> Ten interview questions and answers</a></li>
-<li class="book-part">Case Studies</li>
-<li><a class="" href="benford-case-study.html"><span class="header-section-number">22</span> Benford Case Study</a></li>
-<li class="book-part">Appendices</li>
-<li><a class="" href="github-initial-setup.html"><span class="header-section-number">23</span> Github initial setup</a></li>
-<li><a class="" href="tutorial-for-pull-request-mergers.html"><span class="header-section-number">24</span> Tutorial for pull request mergers</a></li>
-</ul>
+> GoogleVis is a package in R that allows users of R to use the Google Charts API. 
 
-        <div class="book-extra">
-          <p><a id="book-repo" href="https://github.com/jtr13/cc22tt">View book source <i class="fab fa-github"></i></a></p>
-        </div>
-      </nav>
-</div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="googlevis-in-r" class="section level1" number="16">
-<h1>
-<span class="header-section-number">16</span> googleVis in R<a class="anchor" aria-label="anchor" href="#googlevis-in-r"><i class="fas fa-link"></i></a>
-</h1>
-<p>Sushant Prabhu and Kiyan Mohebbizadeh</p>
-<div id="introducing-googlevis" class="section level2" number="16.1">
-<h2>
-<span class="header-section-number">16.1</span> Introducing googleVis<a class="anchor" aria-label="anchor" href="#introducing-googlevis"><i class="fas fa-link"></i></a>
-</h2>
-<blockquote>
-<p>GoogleVis is a package in R that allows users of R to use the Google Charts API.</p>
-</blockquote>
-<p>The interface between R and Google Charts allows users to access Google Charts’ interactive charts. <code>googleVis</code> allows users to use the data in R data frames to create Google Charts without uploading the data onto Google.</p>
-<p>Demonstrating using <code>googleVis</code> Library - Installation and Usage</p>
-<pre><code>install.packages('googleVis')</code></pre>
-<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://mages.github.io/googleVis/">googleVis</a></span><span class="op">)</span></span></code></pre></div>
-</div>
-<div id="why-use-googlevis" class="section level2" number="16.2">
-<h2>
-<span class="header-section-number">16.2</span> Why use googleVis ?<a class="anchor" aria-label="anchor" href="#why-use-googlevis"><i class="fas fa-link"></i></a>
-</h2>
-<blockquote>
-<p><code>googleVis</code> package allows users to create interactive visualizations which R’s most popular visualization package (ggplot) does not allow.</p>
-</blockquote>
-<ul>
-<li>Although there are packages that work in conjunction with ggplot to make interactive visualizations, <code>googleVis</code> offers a holistic package that allows for some unique and interactive visualizations.</li>
-<li>By using Google Charts, one is able to create a wide variety of visualizations ranging from typical bar and line graphs to mapping and timeline charts all from one package.</li>
-<li>The visualizations created by <code>googleVis</code> add a level of interest to the consumer due to their interactive layer and viewers are able to gather specific bits of information by hovering over and clicking values in the visualizations. This not only allows for increased aesthetics, but also more information being transferred to the viewers.</li>
-</ul>
-</div>
-<div id="googlevis-rendering-interaction" class="section level2" number="16.3">
-<h2>
-<span class="header-section-number">16.3</span> googleVis Rendering &amp; Interaction<a class="anchor" aria-label="anchor" href="#googlevis-rendering-interaction"><i class="fas fa-link"></i></a>
-</h2>
-<blockquote>
-<p>The output of <code>googleVis</code> can either be embedded into an HTML file or read dynamically. These visualizations are most often rendered online and in a web format. Therefore, a browser and internet connection are required to view the interactive version of the output compared to <code>ggplot</code></p>
-</blockquote>
-<ul>
-<li>For use in R, <code>googleVis</code> allows a user to render as a <em>Shiny</em> file that then allows a preview with interaction within R. This is used to preview a chart before a final render.</li>
-<li>
-<code>googleVis</code> is a package in R that allows users of R to use the Google Charts API.</li>
-<li>The interface between R and Google Charts allows users to access Google Charts’ interactive charts.</li>
-<li>
-<code>googleVis</code> allows users to use the data in R data frames to create Google Charts without uploading the data onto Google.</li>
-</ul>
-<div id="basic-graphs-line-bar-combo" class="section level3" number="16.3.1">
-<h3>
-<span class="header-section-number">16.3.1</span> Basic Graphs (Line, Bar, Combo)<a class="anchor" aria-label="anchor" href="#basic-graphs-line-bar-combo"><i class="fas fa-link"></i></a>
-</h3>
-<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">df</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>pet<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'cat'</span>, <span class="st">'dog'</span>, <span class="st">'hamster'</span>, <span class="st">'snake'</span><span class="op">)</span>,</span>
-<span>                food_cost_monthly<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">100</span>, <span class="fl">10</span>, <span class="fl">40</span><span class="op">)</span>,</span>
-<span>                medical_cost_monthly<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">30</span>, <span class="fl">60</span>, <span class="fl">5</span>, <span class="fl">50</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">Line</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisLineChart.html">gvisLineChart</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">Bar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisBarChart.html">gvisBarChart</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">Column</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisColumnChart.html">gvisColumnChart</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">SteppedArea</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisSteppedAreaChart.html">gvisSteppedAreaChart</a></span><span class="op">(</span><span class="va">df</span>, xvar<span class="op">=</span><span class="st">"pet"</span>, </span>
-<span>                                    yvar<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"food_cost_monthly"</span>, <span class="st">"medical_cost_monthly"</span><span class="op">)</span>,</span>
-<span>                                    options<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span>isStacked<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">Combo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisComboChart.html">gvisComboChart</a></span><span class="op">(</span><span class="va">df</span>, xvar<span class="op">=</span><span class="st">"pet"</span>,</span>
-<span>                        yvar<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"food_cost_monthly"</span>, <span class="st">"medical_cost_monthly"</span><span class="op">)</span>,</span>
-<span>                        options<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span>seriesType<span class="op">=</span><span class="st">"bars"</span>,</span>
-<span>                                     series<span class="op">=</span><span class="st">'{1: {type:"line"}}'</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Line</span><span class="op">)</span></span></code></pre></div>
+The interface between R and Google Charts allows users to access Google Charts' interactive charts. `googleVis` allows users to use the data in R data frames to create Google Charts without uploading the data onto Google. 
+
+Demonstrating using `googleVis` Library - Installation and Usage
+```
+install.packages('googleVis')
+```
+
+```r
+library(googleVis)
+```
+
+## Why use googleVis ?
+
+> `googleVis` package allows users to create interactive visualizations which R's most popular visualization package (ggplot) does not allow.
+
+- Although there are packages that work in conjunction with ggplot to make interactive visualizations, `googleVis` offers a holistic package that allows for some unique and interactive visualizations.
+- By using Google Charts, one is able to create a wide variety of visualizations ranging from typical bar and line graphs to mapping and timeline charts all from one package. 
+- The visualizations created by `googleVis` add a level of interest to the consumer due to their interactive layer and viewers are able to gather specific bits of information by hovering over and clicking values in the visualizations. This not only allows for increased aesthetics, but also more information being transferred to the viewers.
+
+
+## googleVis Rendering & Interaction
+
+> The output of `googleVis` can either be embedded into an HTML file or read dynamically. These visualizations are most often rendered online and in a web format. Therefore, a browser and internet connection are required to view the interactive version of the output compared to `ggplot`
+
+- For use in R, `googleVis` allows a user to render as a *Shiny* file that then allows a preview with interaction within R. This is used to preview a chart before a final render.
+- `googleVis` is a package in R that allows users of R to use the Google Charts API.
+- The interface between R and Google Charts allows users to access Google Charts' interactive charts.
+- `googleVis` allows users to use the data in R data frames to create Google Charts without uploading the data onto Google.
+
+### Basic Graphs (Line, Bar, Combo)
+
+
+```r
+df = data.frame(pet=c('cat', 'dog', 'hamster', 'snake'),
+                food_cost_monthly=c(50, 100, 10, 40),
+                medical_cost_monthly=c(30, 60, 5, 50))
+Line <- gvisLineChart(df)
+
+Bar <- gvisBarChart(df)
+
+Column <- gvisColumnChart(df)
+
+SteppedArea <- gvisSteppedAreaChart(df, xvar="pet", 
+                                    yvar=c("food_cost_monthly", "medical_cost_monthly"),
+                                    options=list(isStacked=TRUE))
+
+Combo <- gvisComboChart(df, xvar="pet",
+                        yvar=c("food_cost_monthly", "medical_cost_monthly"),
+                        options=list(seriesType="bars",
+                                     series='{1: {type:"line"}}'))
+plot(Line)
+```
+
 <!-- LineChart generated in R 4.2.2 by googleVis 0.7.0 package -->
 <!-- Sun Nov 13 17:55:30 2022 -->
+
+
 <!-- jsHeader -->
 <script type="text/javascript">
  
@@ -234,13 +154,25 @@ callbacks.shift()();
 }
  
 // jsFooter
-</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartLineChartID2c3b1d127e2c"></script><!-- divChart --><div id="LineChartID2c3b1d127e2c" style="width: 500; height: automatic;">
-
+</script>
+ 
+<!-- jsChart -->  
+<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartLineChartID2c3b1d127e2c"></script>
+ 
+<!-- divChart -->
+  
+<div id="LineChartID2c3b1d127e2c" 
+  style="width: 500; height: automatic;">
 </div>
-<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Bar</span><span class="op">)</span></span></code></pre></div>
+
+```r
+plot(Bar)
+```
+
 <!-- BarChart generated in R 4.2.2 by googleVis 0.7.0 package -->
 <!-- Sun Nov 13 17:55:30 2022 -->
+
+
 <!-- jsHeader -->
 <script type="text/javascript">
  
@@ -331,13 +263,25 @@ callbacks.shift()();
 }
  
 // jsFooter
-</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartBarChartID2c3b41397d1a"></script><!-- divChart --><div id="BarChartID2c3b41397d1a" style="width: 500; height: automatic;">
-
+</script>
+ 
+<!-- jsChart -->  
+<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartBarChartID2c3b41397d1a"></script>
+ 
+<!-- divChart -->
+  
+<div id="BarChartID2c3b41397d1a" 
+  style="width: 500; height: automatic;">
 </div>
-<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Column</span><span class="op">)</span></span></code></pre></div>
+
+```r
+plot(Column)
+```
+
 <!-- ColumnChart generated in R 4.2.2 by googleVis 0.7.0 package -->
 <!-- Sun Nov 13 17:55:30 2022 -->
+
+
 <!-- jsHeader -->
 <script type="text/javascript">
  
@@ -428,13 +372,25 @@ callbacks.shift()();
 }
  
 // jsFooter
-</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartColumnChartID2c3b1d0c19e7"></script><!-- divChart --><div id="ColumnChartID2c3b1d0c19e7" style="width: 500; height: automatic;">
-
+</script>
+ 
+<!-- jsChart -->  
+<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartColumnChartID2c3b1d0c19e7"></script>
+ 
+<!-- divChart -->
+  
+<div id="ColumnChartID2c3b1d0c19e7" 
+  style="width: 500; height: automatic;">
 </div>
-<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">SteppedArea</span><span class="op">)</span></span></code></pre></div>
+
+```r
+plot(SteppedArea)
+```
+
 <!-- SteppedAreaChart generated in R 4.2.2 by googleVis 0.7.0 package -->
 <!-- Sun Nov 13 17:55:30 2022 -->
+
+
 <!-- jsHeader -->
 <script type="text/javascript">
  
@@ -526,13 +482,25 @@ callbacks.shift()();
 }
  
 // jsFooter
-</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartSteppedAreaChartID2c3b20deb8db"></script><!-- divChart --><div id="SteppedAreaChartID2c3b20deb8db" style="width: 500; height: automatic;">
-
+</script>
+ 
+<!-- jsChart -->  
+<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartSteppedAreaChartID2c3b20deb8db"></script>
+ 
+<!-- divChart -->
+  
+<div id="SteppedAreaChartID2c3b20deb8db" 
+  style="width: 500; height: automatic;">
 </div>
-<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Combo</span><span class="op">)</span></span></code></pre></div>
+
+```r
+plot(Combo)
+```
+
 <!-- ComboChart generated in R 4.2.2 by googleVis 0.7.0 package -->
 <!-- Sun Nov 13 17:55:30 2022 -->
+
+
 <!-- jsHeader -->
 <script type="text/javascript">
  
@@ -625,27 +593,37 @@ callbacks.shift()();
 }
  
 // jsFooter
-</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartComboChartID2c3b2fd02d28"></script><!-- divChart --><div id="ComboChartID2c3b2fd02d28" style="width: 500; height: automatic;">
+</script>
+ 
+<!-- jsChart -->  
+<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartComboChartID2c3b2fd02d28"></script>
+ 
+<!-- divChart -->
+  
+<div id="ComboChartID2c3b2fd02d28" 
+  style="width: 500; height: automatic;">
+</div>
 
-</div>
-<p>The above charts are best used in comparisons between groups. As seen in the examples, there are comparisons between costs of owning different pets.</p>
-<ul>
-<li>The line graph shows how different variables flow within and among groups. The audience is able to determine within group trends by seeing where lines intersect within each group. Showing the up and down trends of these variables with lines between groups allows us to make comparisons among the various groups with clarity.By organizing the variables in a certain way, one is able to get a sense of population trends.</li>
-<li>The bar and column chart are essentially the same just rotated on an axis. They allow for great in group comparisons as well as comparisons among groups. However, These charts are best used for in-group comparisons.</li>
-<li>Combo charts are great for multiple variable comparisons and allow the user to get the best of both worlds. by carefully selecting which variables are represented in bars and which ones are lines, the user is able to best show the relationship within groups and trends of the population.</li>
-</ul>
-</div>
-<div id="googlevis-histogram-chart" class="section level3" number="16.3.2">
-<h3>
-<span class="header-section-number">16.3.2</span> googleVis Histogram Chart<a class="anchor" aria-label="anchor" href="#googlevis-histogram-chart"><i class="fas fa-link"></i></a>
-</h3>
-<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">iris</span></span>
-<span><span class="va">Histogram</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisHistogram.html">gvisHistogram</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>Sepal_Width <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">Sepal.Width</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Histogram</span><span class="op">)</span></span></code></pre></div>
+The above charts are best used in comparisons between groups. As seen in the examples, there are comparisons between costs of owning different pets.
+
+- The line graph shows how different variables flow within and among groups. The audience is able to determine within group trends by seeing where lines intersect within each group. Showing the up and down trends of these variables with lines between groups allows us to make comparisons among the various groups with clarity.By organizing the variables in a certain way, one is able to get a sense of population trends.
+- The bar and column chart are essentially the same just rotated on an axis. They allow for great in group comparisons as well as comparisons among groups. However, These charts are best used for in-group comparisons.
+- Combo charts are great for multiple variable comparisons and allow the user to get the best of both worlds. by carefully selecting which variables are represented in bars and which ones are lines, the user is able to best show the relationship within groups and trends of the population.
+
+### googleVis Histogram Chart
+
+
+```r
+df <- iris
+Histogram <- gvisHistogram(data.frame(Sepal_Width = df$Sepal.Width))
+
+plot(Histogram)
+```
+
 <!-- Histogram generated in R 4.2.2 by googleVis 0.7.0 package -->
 <!-- Sun Nov 13 17:55:30 2022 -->
+
+
 <!-- jsHeader -->
 <script type="text/javascript">
  
@@ -1164,25 +1142,36 @@ callbacks.shift()();
 }
  
 // jsFooter
-</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartHistogramID2c3b7542f4f2"></script><!-- divChart --><div id="HistogramID2c3b7542f4f2" style="width: 500; height: automatic;">
+</script>
+ 
+<!-- jsChart -->  
+<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartHistogramID2c3b7542f4f2"></script>
+ 
+<!-- divChart -->
+  
+<div id="HistogramID2c3b7542f4f2" 
+  style="width: 500; height: automatic;">
+</div>
 
-</div>
-<p>The histogram allows users to represent the distribution of one particular group or variable by showing the frequency of the particular group or variable within a range. The charts by <code>googleVis</code> have an advantage over regular histograms because almost no histogram allows or recommends specific information regarding the counts at different points in the visualization, however, with <code>googleVis</code> the audience can not only look at the distribution but access specific metrics through interaction as well.</p>
-</div>
-<div id="googlevis-alluvialsankey-chart" class="section level3" number="16.3.3">
-<h3>
-<span class="header-section-number">16.3.3</span> googleVis Alluvial/Sankey Chart<a class="anchor" aria-label="anchor" href="#googlevis-alluvialsankey-chart"><i class="fas fa-link"></i></a>
-</h3>
-<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>From<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"Math"</span>,<span class="fl">3</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"Science"</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>                    To<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Lunch'</span>, <span class="st">'Art'</span>, <span class="st">'Music'</span><span class="op">)</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>                    Weight<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">17</span>,<span class="fl">15</span>,<span class="fl">13</span>,<span class="fl">5</span>,<span class="fl">12</span>,<span class="fl">8</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">Alluvial</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisSankey.html">gvisSankey</a></span><span class="op">(</span><span class="va">df</span>, from<span class="op">=</span><span class="st">"From"</span>, to<span class="op">=</span><span class="st">"To"</span>, weight<span class="op">=</span><span class="st">"Weight"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Alluvial</span><span class="op">)</span></span></code></pre></div>
+The histogram allows users to represent the distribution of one particular group or variable by showing the frequency of the particular group or variable within a range. The charts by `googleVis` have an advantage over regular histograms because almost no histogram allows or recommends specific information regarding the counts at different points in the visualization, however, with `googleVis` the audience can not only look at the distribution but access specific metrics through interaction as well.
+
+### googleVis Alluvial/Sankey Chart
+
+
+```r
+df <- data.frame(From=c(rep("Math",3), rep("Science", 3)),
+                    To=c(rep(c('Lunch', 'Art', 'Music'),2)),
+                    Weight=c(17,15,13,5,12,8))
+
+Alluvial <- gvisSankey(df, from="From", to="To", weight="Weight")
+
+plot(Alluvial)
+```
+
 <!-- Sankey generated in R 4.2.2 by googleVis 0.7.0 package -->
 <!-- Sun Nov 13 17:55:30 2022 -->
+
+
 <!-- jsHeader -->
 <script type="text/javascript">
  
@@ -1284,26 +1273,38 @@ callbacks.shift()();
 }
  
 // jsFooter
-</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartSankeyID2c3b57914baa"></script><!-- divChart --><div id="SankeyID2c3b57914baa" style="width: 400; height: 400;">
+</script>
+ 
+<!-- jsChart -->  
+<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartSankeyID2c3b57914baa"></script>
+ 
+<!-- divChart -->
+  
+<div id="SankeyID2c3b57914baa" 
+  style="width: 400; height: 400;">
+</div>
 
-</div>
-<p>Alluvial charts best show the movement of the sample or population among different variables. In the example above the movement of students within a school from class to class is represented. This visualization can be helpful with data that has an ordinal and timeline specific values. With <code>googleVis</code>, the audience is exposed to the general trends with a clean looking chart as well as the specifics of the graph through interaction.</p>
-</div>
-<div id="googlevis-geographic-chart" class="section level3" number="16.3.4">
-<h3>
-<span class="header-section-number">16.3.4</span> googleVis Geographic Chart<a class="anchor" aria-label="anchor" href="#googlevis-geographic-chart"><i class="fas fa-link"></i></a>
-</h3>
-<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">df</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>country<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'US'</span>, <span class="st">'CN'</span>, <span class="st">'BR'</span>, <span class="st">'IS'</span>, <span class="st">'RU'</span>, <span class="st">'TH'</span>, <span class="st">'TR'</span>, <span class="st">'ID'</span>, <span class="st">'MX'</span>, <span class="st">'IR'</span> <span class="op">)</span>,</span>
-<span>                incarceration_rate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2068800</span>, <span class="fl">1690000</span>, <span class="fl">811707</span>, <span class="fl">478600</span>, <span class="fl">471490</span>, <span class="fl">309282</span>, <span class="fl">291198</span>, <span class="fl">266259</span>, <span class="fl">220866</span>, <span class="fl">189000</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">G</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisGeoChart.html">gvisGeoChart</a></span><span class="op">(</span><span class="va">df</span>, locationvar <span class="op">=</span> <span class="st">"country"</span>, colorvar <span class="op">=</span> <span class="st">"incarceration_rate"</span>,</span>
-<span>                  options<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span></span>
-<span>                         gvis.editor<span class="op">=</span><span class="st">"Edit the Geo Chart !"</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">G</span><span class="op">)</span></span></code></pre></div>
+Alluvial charts best show the movement of the sample or population among different variables. In the example above the movement of students within a school from class to class is represented. This visualization can be helpful with data that has an ordinal and timeline specific values. With `googleVis`, the audience is exposed to the general trends with a clean looking chart as well as the specifics of the graph through interaction.
+
+
+### googleVis Geographic Chart
+
+
+```r
+df = data.frame(country=c('US', 'CN', 'BR', 'IS', 'RU', 'TH', 'TR', 'ID', 'MX', 'IR' ),
+                incarceration_rate = c(2068800, 1690000, 811707, 478600, 471490, 309282, 291198, 266259, 220866, 189000))
+
+G <- gvisGeoChart(df, locationvar = "country", colorvar = "incarceration_rate",
+                  options=list(
+                         gvis.editor="Edit the Geo Chart !"))
+
+plot(G)
+```
+
 <!-- GeoChart generated in R 4.2.2 by googleVis 0.7.0 package -->
 <!-- Sun Nov 13 17:55:30 2022 -->
+
+
 <!-- jsHeader -->
 <script type="text/javascript">
  
@@ -1427,26 +1428,38 @@ callbacks.shift()();
 }
  
 // jsFooter
-</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartGeoChartID2c3b571b9634"></script><!-- divChart --><input type="button" onclick="openEditorGeoChartID2c3b571b9634()" value="Edit the Geo Chart !"><br><div id="GeoChartID2c3b571b9634" style="width: 556; height: 347;">
+</script>
+ 
+<!-- jsChart -->  
+<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartGeoChartID2c3b571b9634"></script>
+ 
+<!-- divChart -->
+<input type='button' onclick='openEditorGeoChartID2c3b571b9634()' value='Edit the Geo Chart !'/>  
+<div id="GeoChartID2c3b571b9634" 
+  style="width: 556; height: 347;">
+</div>
 
-</div>
-<p>Map visualizations by <code>googleVis</code> are incredibly easy to create and manipulate. They are useful for comparing different geographic areas to each other. <code>googleVis</code> automatically color scales the values and the interaction allows the map to be simple and clean, but get specific values when hovering over a particular geographic area.</p>
-</div>
-<div id="googlevis-gauge-chart" class="section level3" number="16.3.5">
-<h3>
-<span class="header-section-number">16.3.5</span> googleVis Gauge Chart<a class="anchor" aria-label="anchor" href="#googlevis-gauge-chart"><i class="fas fa-link"></i></a>
-</h3>
-<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">temperature</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>city<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Las Vegas'</span>, <span class="st">'Los Angeles'</span>, <span class="st">'Pheonix'</span>, <span class="st">'Dallas'</span>, <span class="st">'Houston'</span>, <span class="st">'Miami'</span><span class="op">)</span>,</span>
-<span>                          temp<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">115</span>, <span class="fl">103</span>, <span class="fl">120</span>, <span class="fl">110</span>, <span class="fl">112</span>, <span class="fl">101</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">Gauge</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisGauge.html">gvisGauge</a></span><span class="op">(</span><span class="va">temperature</span>, </span>
-<span>                    options<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span>min<span class="op">=</span><span class="fl">0</span>, max<span class="op">=</span><span class="fl">150</span>, greenFrom<span class="op">=</span><span class="fl">0</span>,</span>
-<span>                                 greenTo<span class="op">=</span><span class="fl">50</span>, yellowFrom<span class="op">=</span><span class="fl">50</span>, yellowTo<span class="op">=</span><span class="fl">100</span>,</span>
-<span>                                 redFrom<span class="op">=</span><span class="fl">100</span>, redTo<span class="op">=</span><span class="fl">150</span>, width<span class="op">=</span><span class="fl">400</span>, height<span class="op">=</span><span class="fl">300</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Gauge</span><span class="op">)</span></span></code></pre></div>
+Map visualizations by `googleVis` are incredibly easy to create and manipulate. They are useful for comparing different geographic areas to each other. `googleVis` automatically color scales the values and the interaction allows the map to be simple and clean, but get specific values when hovering over a particular geographic area. 
+
+
+### googleVis Gauge Chart
+
+
+```r
+temperature <- data.frame(city=c('Las Vegas', 'Los Angeles', 'Pheonix', 'Dallas', 'Houston', 'Miami'),
+                          temp=c(115, 103, 120, 110, 112, 101))
+Gauge <-  gvisGauge(temperature, 
+                    options=list(min=0, max=150, greenFrom=0,
+                                 greenTo=50, yellowFrom=50, yellowTo=100,
+                                 redFrom=100, redTo=150, width=400, height=300))
+
+plot(Gauge)
+```
+
 <!-- Gauge generated in R 4.2.2 by googleVis 0.7.0 package -->
 <!-- Sun Nov 13 17:55:30 2022 -->
+
+
 <!-- jsHeader -->
 <script type="text/javascript">
  
@@ -1550,23 +1563,35 @@ callbacks.shift()();
 }
  
 // jsFooter
-</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartGaugeID2c3b1fc1984f"></script><!-- divChart --><div id="GaugeID2c3b1fc1984f" style="width: 400; height: 300;">
+</script>
+ 
+<!-- jsChart -->  
+<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartGaugeID2c3b1fc1984f"></script>
+ 
+<!-- divChart -->
+  
+<div id="GaugeID2c3b1fc1984f" 
+  style="width: 400; height: 300;">
+</div>
 
-</div>
-<p>The gauge charts are not interactive, however they do offer a unique way to model data that is always within a certain range. For example, temperatures, speeds, pressure, etc. This chart allows for quick comparison between groups and aesthetic value to any presentation.</p>
-</div>
-<div id="googlevis-tabular-chart" class="section level3" number="16.3.6">
-<h3>
-<span class="header-section-number">16.3.6</span> googleVis Tabular Chart<a class="anchor" aria-label="anchor" href="#googlevis-tabular-chart"><i class="fas fa-link"></i></a>
-</h3>
-<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">## Tabular Data Un-Paged</span></span>
-<span><span class="va">Population_Tabular_Unpaged</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisTable.html">gvisTable</a></span><span class="op">(</span><span class="va">Population</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">30</span>,<span class="op">]</span>,</span>
-<span>                                        formats<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span>Population<span class="op">=</span><span class="st">"#,###"</span>,<span class="st">'% of World Population'</span><span class="op">=</span><span class="st">'#.#%'</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Population_Tabular_Unpaged</span><span class="op">)</span></span></code></pre></div>
+The gauge charts are not interactive, however they do offer a unique way to model data that is always within a certain range. For example, temperatures, speeds, pressure, etc. This chart allows for quick comparison between groups and aesthetic value to any presentation.
+
+
+### googleVis Tabular Chart
+
+
+```r
+## Tabular Data Un-Paged
+Population_Tabular_Unpaged <- gvisTable(Population[1:30,],
+                                        formats=list(Population="#,###",'% of World Population'='#.#%'))
+
+plot(Population_Tabular_Unpaged)
+```
+
 <!-- Table generated in R 4.2.2 by googleVis 0.7.0 package -->
 <!-- Sun Nov 13 17:55:30 2022 -->
+
+
 <!-- jsHeader -->
 <script type="text/javascript">
  
@@ -1916,20 +1941,32 @@ callbacks.shift()();
 }
  
 // jsFooter
-</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartTableID2c3b7585a3f5"></script><!-- divChart --><div id="TableID2c3b7585a3f5" style="width: 500; height: automatic;">
-
+</script>
+ 
+<!-- jsChart -->  
+<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartTableID2c3b7585a3f5"></script>
+ 
+<!-- divChart -->
+  
+<div id="TableID2c3b7585a3f5" 
+  style="width: 500; height: automatic;">
 </div>
-<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">## Tabular Data Paged</span></span>
-<span><span class="va">Population_Tabular_paged</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisTable.html">gvisTable</a></span><span class="op">(</span><span class="va">Population</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">30</span>,<span class="op">]</span>, </span>
-<span>                                      formats<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span>Population<span class="op">=</span><span class="st">"#,###"</span>,<span class="st">'% of World Population'</span><span class="op">=</span><span class="st">'#.#%'</span><span class="op">)</span>,</span>
-<span>                                      options<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span>page<span class="op">=</span><span class="st">'enable'</span>,</span>
-<span>                                                   height<span class="op">=</span><span class="st">'automatic'</span>,</span>
-<span>                                                   width<span class="op">=</span><span class="st">'automatic'</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Population_Tabular_paged</span><span class="op">)</span></span></code></pre></div>
+
+```r
+## Tabular Data Paged
+Population_Tabular_paged <- gvisTable(Population[1:30,], 
+                                      formats=list(Population="#,###",'% of World Population'='#.#%'),
+                                      options=list(page='enable',
+                                                   height='automatic',
+                                                   width='automatic'))
+
+plot(Population_Tabular_paged)
+```
+
 <!-- Table generated in R 4.2.2 by googleVis 0.7.0 package -->
 <!-- Sun Nov 13 17:55:30 2022 -->
+
+
 <!-- jsHeader -->
 <script type="text/javascript">
  
@@ -2280,24 +2317,36 @@ callbacks.shift()();
 }
  
 // jsFooter
-</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartTableID2c3b7085a0ce"></script><!-- divChart --><div id="TableID2c3b7085a0ce" style="width: automatic; height: automatic;">
+</script>
+ 
+<!-- jsChart -->  
+<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartTableID2c3b7085a0ce"></script>
+ 
+<!-- divChart -->
+  
+<div id="TableID2c3b7085a0ce" 
+  style="width: automatic; height: automatic;">
+</div>
 
-</div>
-<p>The data formatted as a table can be paged and sorted. It has a flexible option to select single rows either with the keyboard or the mouse. It also powers sorting on rows across all dimensions in the columns of the dataset. The navigation through paged tabular information is smooth and simple.</p>
-</div>
-<div id="googlevis-tree-map-chart" class="section level3" number="16.3.7">
-<h3>
-<span class="header-section-number">16.3.7</span> googleVis Tree Map Chart<a class="anchor" aria-label="anchor" href="#googlevis-tree-map-chart"><i class="fas fa-link"></i></a>
-</h3>
-<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">Country_Tree</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisTreeMap.html">gvisTreeMap</a></span><span class="op">(</span><span class="va">Regions</span>, <span class="st">"Region"</span>, <span class="st">"Parent"</span>, <span class="st">"Val"</span>, <span class="st">"Fac"</span>, </span>
-<span>                     options<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span>width<span class="op">=</span><span class="fl">800</span>, height<span class="op">=</span><span class="fl">500</span>, fontSize<span class="op">=</span><span class="fl">15</span>,</span>
-<span>                                  minColor<span class="op">=</span><span class="st">'#cfe2f3'</span>,midColor<span class="op">=</span><span class="st">'#6fa8dc'</span>,maxColor<span class="op">=</span><span class="st">'#0b5394'</span>,</span>
-<span>                                  headerHeight<span class="op">=</span><span class="fl">10</span>,fontColor<span class="op">=</span><span class="st">'black'</span>,showScale<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Country_Tree</span><span class="op">)</span></span></code></pre></div>
+The data formatted as a table can be paged and sorted. It has a flexible option to select single rows either with the keyboard or the mouse. It also powers sorting on rows across all dimensions in the columns of the dataset. The navigation through paged tabular information is smooth and simple.
+
+
+### googleVis Tree Map Chart
+
+
+```r
+Country_Tree <- gvisTreeMap(Regions, "Region", "Parent", "Val", "Fac", 
+                     options=list(width=800, height=500, fontSize=15,
+                                  minColor='#cfe2f3',midColor='#6fa8dc',maxColor='#0b5394',
+                                  headerHeight=10,fontColor='black',showScale=TRUE))
+
+plot(Country_Tree)
+```
+
 <!-- TreeMap generated in R 4.2.2 by googleVis 0.7.0 package -->
 <!-- Sun Nov 13 17:55:30 2022 -->
+
+
 <!-- jsHeader -->
 <script type="text/javascript">
  
@@ -2443,27 +2492,40 @@ callbacks.shift()();
 }
  
 // jsFooter
-</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartTreeMapID2c3b160a80b3"></script><!-- divChart --><div id="TreeMapID2c3b160a80b3" style="width: 800; height: 500;">
+</script>
+ 
+<!-- jsChart -->  
+<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartTreeMapID2c3b160a80b3"></script>
+ 
+<!-- divChart -->
+  
+<div id="TreeMapID2c3b160a80b3" 
+  style="width: 800; height: 500;">
+</div>
 
-</div>
-<p>The <code>googleVis</code> tree map is a visual representation of a data tree, where each node has 0 or more children, and 1 parent barring the root node. One can specify how many levels to display simultaneously, and optionally to display deeper levels. One can move down the tree when the person left-clicks a node, and moves back up the tree when the person right-clicks the graph.The total size of the graph is determined by the size of the elements contained in the graph.</p>
-<p>This <code>googleVis</code> tree map chart captures the relative sizes of data categories, that helps for quick insight of the datapoints that are bigger contributors to each category. Color helps scrutinize datapoints that are underperforming / overperforming) compared to their siblings from the same category.</p>
-</div>
-<div id="googlevis-annotation-chart" class="section level3" number="16.3.8">
-<h3>
-<span class="header-section-number">16.3.8</span> googleVis Annotation Chart<a class="anchor" aria-label="anchor" href="#googlevis-annotation-chart"><i class="fas fa-link"></i></a>
-</h3>
-<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">Stock_Annotation</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisAnnotationChart.html">gvisAnnotationChart</a></span><span class="op">(</span><span class="va">Stock</span>, datevar<span class="op">=</span><span class="st">"Date"</span>,numvar<span class="op">=</span><span class="st">"Value"</span>, idvar<span class="op">=</span><span class="st">"Device"</span>, titlevar<span class="op">=</span><span class="st">"Title"</span>,</span>
-<span>                                        annotationvar<span class="op">=</span><span class="st">"Annotation"</span>,</span>
-<span>                                        options<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span>displayAnnotations<span class="op">=</span><span class="cn">TRUE</span>,</span>
-<span>                                        chart<span class="op">=</span><span class="st">"{chartArea:{backgroundColor:'#ebf0f7'}}"</span>,</span>
-<span>                                        legendPosition<span class="op">=</span><span class="st">'newRow'</span>,width<span class="op">=</span><span class="fl">800</span>, height<span class="op">=</span><span class="fl">450</span>,</span>
-<span>                                        scaleColumns<span class="op">=</span><span class="st">'[0,1]'</span>,scaleType<span class="op">=</span><span class="st">'allmaximized'</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Stock_Annotation</span><span class="op">)</span></span></code></pre></div>
+The `googleVis` tree map is a visual representation of a data tree, where each node has 0 or more children, and 1 parent barring the root node. One can specify how many levels to display simultaneously, and optionally to display deeper levels. One can move down the tree when the person left-clicks a node, and moves back up the tree when the person right-clicks the graph.The total size of the graph is determined by the size of the elements contained in the graph.
+
+This `googleVis` tree map chart captures the relative sizes of data categories, that helps for quick insight of the datapoints that are bigger contributors to each category. Color helps scrutinize datapoints that are underperforming / overperforming) compared to their siblings from the same category.
+
+
+### googleVis Annotation Chart
+
+
+```r
+Stock_Annotation <- gvisAnnotationChart(Stock, datevar="Date",numvar="Value", idvar="Device", titlevar="Title",
+                                        annotationvar="Annotation",
+                                        options=list(displayAnnotations=TRUE,
+                                        chart="{chartArea:{backgroundColor:'#ebf0f7'}}",
+                                        legendPosition='newRow',width=800, height=450,
+                                        scaleColumns='[0,1]',scaleType='allmaximized'))
+
+plot(Stock_Annotation)
+```
+
 <!-- AnnotationChart generated in R 4.2.2 by googleVis 0.7.0 package -->
 <!-- Sun Nov 13 17:55:30 2022 -->
+
+
 <!-- jsHeader -->
 <script type="text/javascript">
  
@@ -2598,29 +2660,43 @@ callbacks.shift()();
 }
  
 // jsFooter
-</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartAnnotationChartID2c3b1b351bce"></script><!-- divChart --><div id="AnnotationChartID2c3b1b351bce" style="width: 800; height: 450;">
+</script>
+ 
+<!-- jsChart -->  
+<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartAnnotationChartID2c3b1b351bce"></script>
+ 
+<!-- divChart -->
+  
+<div id="AnnotationChartID2c3b1b351bce" 
+  style="width: 800; height: 450;">
+</div>
 
-</div>
-<p>Annotation charts are useful, interactive time series like line charts that enable annotations.These annotated charts are leveraged to highlight specific data or value-add the contextual notes within the visualization.</p>
-<p>To answer the “so what ?” kind of questions, such well defined annotations highlight the significance of data in the chart, with keen detail in the textual description / annotation.</p>
-<p>One can also slice through the interactive timeline chart to look for a snapshot of data which is aesthetically pleasing and also provides great detail insights within the same visualization. These annotation charts are SVG (scalable vector graphics) /VML (vector graphics rendering ).</p>
-</div>
-<div id="googlevis-calendar-chart" class="section level3" number="16.3.9">
-<h3>
-<span class="header-section-number">16.3.9</span> googleVis Calendar Chart<a class="anchor" aria-label="anchor" href="#googlevis-calendar-chart"><i class="fas fa-link"></i></a>
-</h3>
-<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">Calendar_Temp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisCalendar.html">gvisCalendar</a></span><span class="op">(</span><span class="va">Cairo</span>, datevar<span class="op">=</span><span class="st">"Date"</span>, numvar<span class="op">=</span><span class="st">"Temp"</span>,</span>
-<span>                    options<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span>title<span class="op">=</span><span class="st">"Cairo's variation in Daily</span></span>
-<span><span class="st">                                 temperature"</span>,height<span class="op">=</span><span class="fl">400</span>,width<span class="op">=</span><span class="fl">1000</span>,</span>
-<span>                                 calendar<span class="op">=</span><span class="st">"{yearLabel: { fontName:'sans-serif',</span></span>
-<span><span class="st">                                 fontSize: 20, color: 'black', bold: true},</span></span>
-<span><span class="st">                                 cellSize: 10,cellColor:{stroke: 'black', strokeOpacity: 0.2},</span></span>
-<span><span class="st">                                 focusedCellColor: {stroke:'red'}}"</span><span class="op">)</span>, chartid<span class="op">=</span><span class="st">"Calendar"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Calendar_Temp</span><span class="op">)</span></span></code></pre></div>
+Annotation charts are useful, interactive time series like line charts that enable annotations.These annotated charts are leveraged to highlight specific data or value-add the contextual notes within the visualization.
+
+To answer the "so what ?" kind of questions, such well defined annotations highlight the significance of data in the chart, with keen detail in the textual description / annotation.
+
+One can also slice through the interactive timeline chart to look for a snapshot of data which is aesthetically pleasing and also provides great detail insights within the same visualization. These annotation charts are SVG (scalable vector graphics) /VML (vector graphics rendering ).
+
+
+### googleVis Calendar Chart
+
+
+```r
+Calendar_Temp <- gvisCalendar(Cairo, datevar="Date", numvar="Temp",
+                    options=list(title="Cairo's variation in Daily
+                                 temperature",height=400,width=1000,
+                                 calendar="{yearLabel: { fontName:'sans-serif',
+                                 fontSize: 20, color: 'black', bold: true},
+                                 cellSize: 10,cellColor:{stroke: 'black', strokeOpacity: 0.2},
+                                 focusedCellColor: {stroke:'red'}}"), chartid="Calendar")
+
+plot(Calendar_Temp)
+```
+
 <!-- Calendar generated in R 4.2.2 by googleVis 0.7.0 package -->
 <!-- Sun Nov 13 17:55:30 2022 -->
+
+
 <!-- jsHeader -->
 <script type="text/javascript">
  
@@ -7060,35 +7136,48 @@ callbacks.shift()();
 }
  
 // jsFooter
-</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartCalendar"></script><!-- divChart --><div id="Calendar" style="width: 1000; height: 400;">
+</script>
+ 
+<!-- jsChart -->  
+<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartCalendar"></script>
+ 
+<!-- divChart -->
+  
+<div id="Calendar" 
+  style="width: 1000; height: 400;">
+</div>
 
-</div>
-<p>The <code>googleVis</code> calendar chart is a definitive visualization that can be used to show activity over the course of a longer duration of time, example in months or years or decades. One can illustrate the variation of 1 quantity depending on the days of the given week, or trends over the timeline period.</p>
-<p>Such calendar charts demonstrate data records, or events, on a daily, weekly, monthly, yearly calendar. It is highly interactive and one can view the value on hovering on any particular time of the entire timeperiod.</p>
-</div>
-<div id="googlevis-timeline-chart" class="section level3" number="16.3.10">
-<h3>
-<span class="header-section-number">16.3.10</span> googleVis Timeline Chart<a class="anchor" aria-label="anchor" href="#googlevis-timeline-chart"><i class="fas fa-link"></i></a>
-</h3>
-<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">Position_Timeline_Data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>Position<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"President"</span>, <span class="fl">4</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"Vice"</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>                    Name<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"William Clinton"</span>,<span class="st">"George Bush"</span>, <span class="st">"Barack Obama"</span>, <span class="st">"   Donald Trump"</span>,</span>
-<span>                          <span class="st">" Albert Gore"</span>,<span class="st">"Dick Cheney"</span>, <span class="st">"Biden, Jr."</span>, <span class="st">"Michael Pence"</span><span class="op">)</span>,</span>
-<span>                    start<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span>x<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1993-01-20"</span>,<span class="st">"2001-01-20"</span>, <span class="st">"2009-01-20"</span>,<span class="st">"2017-01-20"</span><span class="op">)</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>                    end<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span>x<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"2001-01-20"</span>,<span class="st">"2009-01-20"</span>, <span class="st">"2017-01-20"</span>, <span class="st">"2021-01-20"</span><span class="op">)</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">Timeline</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisTimeline.html">gvisTimeline</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">Position_Timeline_Data</span>, </span>
-<span>                         rowlabel<span class="op">=</span><span class="st">"Name"</span>,</span>
-<span>                         barlabel<span class="op">=</span><span class="st">"Position"</span>,</span>
-<span>                         start<span class="op">=</span><span class="st">"start"</span>, </span>
-<span>                         end<span class="op">=</span><span class="st">"end"</span>,</span>
-<span>                         options<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span>timeline<span class="op">=</span><span class="st">"{groupByRowLabel:false}"</span>,</span>
-<span>                                      backgroundColor<span class="op">=</span><span class="st">'#e3f4ff'</span>, </span>
-<span>                                      height<span class="op">=</span><span class="fl">400</span>,colors<span class="op">=</span><span class="st">"['#0e407d', '#78b2ff', '#3737ab']"</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Timeline</span><span class="op">)</span></span></code></pre></div>
+The `googleVis` calendar chart is a definitive visualization that can be used to show activity over the course of a longer duration of time, example in months or years or decades. One can illustrate the variation of 1 quantity depending on the days of the given week, or trends over the timeline period.
+
+Such calendar charts demonstrate data records, or events, on a daily, weekly, monthly, yearly calendar. It is highly interactive and one can view the value on hovering on any particular time of the entire timeperiod.
+
+
+### googleVis Timeline Chart
+
+
+```r
+Position_Timeline_Data <- data.frame(Position=c(rep("President", 4), rep("Vice", 4)),
+                    Name=c("William Clinton","George Bush", "Barack Obama", "	Donald Trump",
+                          "	Albert Gore","Dick Cheney", "Biden, Jr.", "Michael Pence"),
+                    start=as.Date(x=rep(c("1993-01-20","2001-01-20", "2009-01-20","2017-01-20"),2)),
+                    end=as.Date(x=rep(c("2001-01-20","2009-01-20", "2017-01-20", "2021-01-20"),2)))
+
+Timeline <- gvisTimeline(data=Position_Timeline_Data, 
+                         rowlabel="Name",
+                         barlabel="Position",
+                         start="start", 
+                         end="end",
+                         options=list(timeline="{groupByRowLabel:false}",
+                                      backgroundColor='#e3f4ff', 
+                                      height=400,colors="['#0e407d', '#78b2ff', '#3737ab']"))
+
+plot(Timeline)
+```
+
 <!-- Timeline generated in R 4.2.2 by googleVis 0.7.0 package -->
 <!-- Sun Nov 13 17:55:30 2022 -->
+
+
 <!-- jsHeader -->
 <script type="text/javascript">
  
@@ -7116,13 +7205,13 @@ new Date(2009,0,20),
 new Date(2017,0,20)
 ],
 [
-"   Donald Trump",
+"	Donald Trump",
 "President",
 new Date(2017,0,20),
 new Date(2021,0,20)
 ],
 [
-"   Albert Gore",
+"	Albert Gore",
 "Vice",
 new Date(1993,0,20),
 new Date(2001,0,20)
@@ -7212,41 +7301,54 @@ callbacks.shift()();
 }
  
 // jsFooter
-</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartTimelineID2c3b42963882"></script><!-- divChart --><div id="TimelineID2c3b42963882" style="width: 600; height: 400;">
+</script>
+ 
+<!-- jsChart -->  
+<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartTimelineID2c3b42963882"></script>
+ 
+<!-- divChart -->
+  
+<div id="TimelineID2c3b42963882" 
+  style="width: 600; height: 400;">
+</div>
 
-</div>
-<p>This <code>googleVis</code> Timeline chart is a great and fascinating way of visualizing the different dates / events. Here is an example, showing duration of Presidents &amp; Vice Presidents / Sessions of Congress over the timeline period. The exact times and durations are given when one interactively hovers over the bars.</p>
-<p>These timeline charts are versatile visuals for illustrating a sequence of events chronologically. It provides an amazing aid to conceptualize event sequences / processes to gain valuable insights, sometimes maybe summarize historical events, or time frame of minutes, hours, years or datewise.</p>
-</div>
-<div id="googlevis-gantt-chart" class="section level3" number="16.3.11">
-<h3>
-<span class="header-section-number">16.3.11</span> googleVis Gantt Chart<a class="anchor" aria-label="anchor" href="#googlevis-gantt-chart"><i class="fas fa-link"></i></a>
-</h3>
-<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">daysToMilliseconds</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">days</span><span class="op">)</span><span class="op">{</span><span class="va">days</span> <span class="op">*</span> <span class="fl">24</span> <span class="op">*</span> <span class="fl">60</span> <span class="op">*</span> <span class="fl">60</span> <span class="op">*</span> <span class="fl">1000</span><span class="op">}</span></span>
-<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>taskID <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"PS"</span>, <span class="st">"EDA"</span>, <span class="st">"R"</span>, <span class="st">"ML"</span>, <span class="st">"DP"</span><span class="op">)</span>,</span>
-<span>                 taskName <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Identify Problem Statement"</span>, <span class="st">"EDA Analysis"</span>, <span class="st">"Research"</span>,</span>
-<span>                              <span class="st">"Machine Learning Modelling"</span>, <span class="st">"Data Preprocessing"</span><span class="op">)</span>,</span>
-<span>                 resource <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="st">"write"</span>, <span class="st">"write"</span>, <span class="st">"complete"</span>, <span class="st">"write"</span><span class="op">)</span>,</span>
-<span>                 start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"2022-10-01"</span><span class="op">)</span>, <span class="cn">NA</span>, <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"2022-10-02"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"2022-10-08"</span><span class="op">)</span>, <span class="cn">NA</span><span class="op">)</span>,</span>
-<span>                 end <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"2022-10-04"</span>, <span class="st">"2022-10-08"</span>, <span class="st">"2022-10-08"</span>,</span>
-<span>                                 <span class="st">"2022-10-13"</span>, <span class="st">"2022-10-05"</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>                 duration <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fu">daysToMilliseconds</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>                 percentComplete <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">25</span>, <span class="fl">20</span>, <span class="fl">0</span>, <span class="fl">100</span><span class="op">)</span>,</span>
-<span>                 dependencies <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="st">"PS, DP"</span>, <span class="cn">NA</span>,</span>
-<span>                 <span class="st">"EDA"</span>, <span class="st">"PS"</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">Gantt_Tasks</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisGantt.html">gvisGantt</a></span><span class="op">(</span><span class="va">dat</span>, taskID <span class="op">=</span> <span class="st">"taskID"</span>,taskName <span class="op">=</span> <span class="st">"taskName"</span>,resource <span class="op">=</span> <span class="st">"resource"</span>,</span>
-<span>                         start <span class="op">=</span> <span class="st">"start"</span>,end <span class="op">=</span> <span class="st">"end"</span>,duration <span class="op">=</span> <span class="st">"duration"</span>,percentComplete <span class="op">=</span> <span class="st">"percentComplete"</span>,</span>
-<span>                         dependencies <span class="op">=</span> <span class="st">"dependencies"</span>,</span>
-<span>                         options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span>height <span class="op">=</span> <span class="fl">300</span>,</span>
-<span>                         gantt <span class="op">=</span> <span class="st">"{criticalPathEnabled:true,innerGridHorizLine: {</span></span>
-<span><span class="st">                         stroke: '#e3f4ff',strokeWidth: 2},innerGridTrack: {fill: '#e8f3fa'},innerGridDarkTrack:</span></span>
-<span><span class="st">                         {fill: '#c7e9ff'},labelStyle: {fontName: 'sans-serif',fontSize: 16}}"</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Gantt_Tasks</span><span class="op">)</span></span></code></pre></div>
+This `googleVis` Timeline chart is a great and fascinating way of visualizing the different dates / events. Here is an example, showing duration of Presidents & Vice Presidents / Sessions of Congress over the timeline period. The exact times and durations are given when one interactively hovers over the bars.
+
+These timeline charts are versatile visuals for illustrating a sequence of events chronologically. It provides an amazing aid to conceptualize event sequences / processes to gain valuable insights, sometimes maybe summarize historical events, or time frame of minutes, hours, years or datewise.
+
+
+### googleVis Gantt Chart
+
+
+```r
+daysToMilliseconds <- function(days){days * 24 * 60 * 60 * 1000}
+dat <- data.frame(taskID = c("PS", "EDA", "R", "ML", "DP"),
+                 taskName = c("Identify Problem Statement", "EDA Analysis", "Research",
+                              "Machine Learning Modelling", "Data Preprocessing"),
+                 resource = c(NA, "write", "write", "complete", "write"),
+                 start = c(as.Date("2022-10-01"), NA, as.Date("2022-10-02"), as.Date("2022-10-08"), NA),
+                 end = as.Date(c("2022-10-04", "2022-10-08", "2022-10-08",
+                                 "2022-10-13", "2022-10-05")),
+                 duration = c(NA, daysToMilliseconds(c(3, 1, 1, 1))),
+                 percentComplete = c(100, 25, 20, 0, 100),
+                 dependencies = c(NA, "PS, DP", NA,
+                 "EDA", "PS"))
+
+Gantt_Tasks <- gvisGantt(dat, taskID = "taskID",taskName = "taskName",resource = "resource",
+                         start = "start",end = "end",duration = "duration",percentComplete = "percentComplete",
+                         dependencies = "dependencies",
+                         options = list(height = 300,
+                         gantt = "{criticalPathEnabled:true,innerGridHorizLine: {
+                         stroke: '#e3f4ff',strokeWidth: 2},innerGridTrack: {fill: '#e8f3fa'},innerGridDarkTrack:
+                         {fill: '#c7e9ff'},labelStyle: {fontName: 'sans-serif',fontSize: 16}}"))
+
+plot(Gantt_Tasks)
+```
+
 <!-- Gantt generated in R 4.2.2 by googleVis 0.7.0 package -->
 <!-- Sun Nov 13 17:55:30 2022 -->
+
+
 <!-- jsHeader -->
 <script type="text/javascript">
  
@@ -7376,29 +7478,42 @@ callbacks.shift()();
 }
  
 // jsFooter
-</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartGanttID2c3bc5240eb"></script><!-- divChart --><div id="GanttID2c3bc5240eb" style="width: 600; height: 300;">
+</script>
+ 
+<!-- jsChart -->  
+<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartGanttID2c3bc5240eb"></script>
+ 
+<!-- divChart -->
+  
+<div id="GanttID2c3bc5240eb" 
+  style="width: 600; height: 300;">
+</div>
 
-</div>
-<p><code>googleVis</code> Gantt charts would help teams to plan work around deadlines and allocate resources efficiently.</p>
-<p>Project planners also leverage Gantt charts to maintain a bird’s eye high level view of projects and track them. These depict the relationship between the start and end dates of tasks, milestones, and dependent tasks for each of them over the entire timeline of the project. This Gantt chart illustrates the breakdown of a project into its component tasks very effectively.</p>
-</div>
-<div id="googlevis-merging-charts" class="section level3" number="16.3.12">
-<h3>
-<span class="header-section-number">16.3.12</span> googleVis Merging Charts<a class="anchor" aria-label="anchor" href="#googlevis-merging-charts"><i class="fas fa-link"></i></a>
-</h3>
-<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">Geographic</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisGeoChart.html">gvisGeoChart</a></span><span class="op">(</span><span class="va">Exports</span>,</span>
-<span>                           locationvar<span class="op">=</span><span class="st">"Country"</span>,colorvar<span class="op">=</span><span class="st">"Profit"</span>,</span>
-<span>                           options<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span>width<span class="op">=</span><span class="fl">400</span>, height<span class="op">=</span><span class="fl">200</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">Tabular</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisTable.html">gvisTable</a></span><span class="op">(</span><span class="va">Exports</span>,</span>
-<span>                     options<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span>width<span class="op">=</span><span class="fl">400</span>, height<span class="op">=</span><span class="fl">400</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">Merged_Charts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisMerge.html">gvisMerge</a></span><span class="op">(</span><span class="va">Geographic</span>, <span class="va">Tabular</span>, horizontal<span class="op">=</span><span class="cn">FALSE</span>, tableOptions<span class="op">=</span><span class="st">"bgcolor=\"#7cdeb5\""</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Merged_Charts</span><span class="op">)</span></span></code></pre></div>
+`googleVis` Gantt charts would help teams to plan work around deadlines and allocate resources efficiently. 
+
+Project planners also leverage Gantt charts to maintain a bird's eye high level view of projects and track them. These depict the relationship between the start and end dates of tasks, milestones, and dependent tasks for each of them over the entire timeline of the project. This Gantt chart illustrates the breakdown of a project into its component tasks very effectively.
+
+
+### googleVis Merging Charts
+
+
+```r
+Geographic <- gvisGeoChart(Exports,
+                           locationvar="Country",colorvar="Profit",
+                           options=list(width=400, height=200))
+
+Tabular <- gvisTable(Exports,
+                     options=list(width=400, height=400))
+
+Merged_Charts <- gvisMerge(Geographic, Tabular, horizontal=FALSE, tableOptions="bgcolor=\"#7cdeb5\"")
+
+plot(Merged_Charts)
+```
+
 <!-- GeoChart generated in R 4.2.2 by googleVis 0.7.0 package -->
 <!-- Sun Nov 13 17:55:31 2022 -->
+
+
 <!-- jsHeader -->
 <script type="text/javascript">
  
@@ -7630,139 +7745,67 @@ callbacks.shift()();
 }
  
 // jsFooter
-</script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartGeoChartID2c3b1b91787d"></script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartTableID2c3b262c0c69"></script><div class="inline-table"><table bgcolor="#7cdeb5" class="table table-sm">
-<tr>
-<td>
-<!-- divChart -->
-<div id="GeoChartID2c3b1b91787d" style="width: 400; height: 200;">
-
-</div>
-</td>
-</tr>
-<tr>
-<td>
-<!-- divChart -->
-<div id="TableID2c3b262c0c69" style="width: 400; height: 400;">
-
-</div>
-</td>
-</tr>
-</table></div>
-<p><code>googleVis</code> Merge chart provides the flexibility of merging two gvis-objects, either next or below each other into one gvis-object. These objects are arranged in a HTML table format.</p>
-<p>The multiples charts view allows to split up the individual charts Bar, Column, Line or Geographic, Tabular etc. charts into multiple charts, separated. There are numerous use cases like showing your product sales per region and then providing more information about it. It gives a lot of flexibility in the report creation and delivery aesthetically.</p>
-</div>
-</div>
-<div id="use-googlevis-in-rstudio" class="section level2" number="16.4">
-<h2>
-<span class="header-section-number">16.4</span> Use googleVis in RStudio<a class="anchor" aria-label="anchor" href="#use-googlevis-in-rstudio"><i class="fas fa-link"></i></a>
-</h2>
-<p>Using googleVis in RStudio is straightforward. By default, the RStudio renders the charts in a new webpage -</p>
-<pre><code>plot(Chart)</code></pre>
-<p>On the other hand, to view it within RStudio,
-&gt; To View in RStudio Viewer just use to view it locally</p>
-<pre><code>plot(Chart, browser=rstudioapi::viewer)</code></pre>
-<blockquote>
-<p>To Knit the Rmd Markdown file to HTML, to perform the following command set the Chunk option results to <code>asis</code> with <code>{r ChartExample, results='asis', tidy=FALSE}</code> and <code>plot(Chart, 'chart')</code></p>
-</blockquote>
-<div id="googlevis-references" class="section level3" number="16.4.1">
-<h3>
-<span class="header-section-number">16.4.1</span> googleVis References<a class="anchor" aria-label="anchor" href="#googlevis-references"><i class="fas fa-link"></i></a>
-</h3>
-<ul>
-<li><a href="https://mages.github.io/googleVis/">Documentation</a></li>
-<li><a href="https://developers.google.com/chart/interactive/docs/quick_start">Google Charts</a></li>
-<li><a href="https://cran.r-project.org/web/packages/googleVis/vignettes/googleVis_examples.html">Demo</a></li>
-<li><a href="https://journal.r-project.org/archive/2011-2/RJournal_2011-2_Gesmann+de~Castillo.pdf">Paper</a></li>
-<li><a href="https://cran.r-project.org/web/packages/googleVis/index.html">CRAN-Stable Version</a></li>
-</ul>
-<blockquote>
-<p>Thank you for learning <code>googleVis</code> with us !</p>
-</blockquote>
-
-</div>
-</div>
-</div>
-  <div class="chapter-nav">
-<div class="prev"><a href="how-to-use-sqldf.html"><span class="header-section-number">15</span> How to use sqldf</a></div>
-<div class="next"><a href="tutorial-for-vector-fields-in-r.html"><span class="header-section-number">17</span> Tutorial for vector fields in r</a></div>
-</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#googlevis-in-r"><span class="header-section-number">16</span> googleVis in R</a></li>
-<li><a class="nav-link" href="#introducing-googlevis"><span class="header-section-number">16.1</span> Introducing googleVis</a></li>
-<li><a class="nav-link" href="#why-use-googlevis"><span class="header-section-number">16.2</span> Why use googleVis ?</a></li>
-<li>
-<a class="nav-link" href="#googlevis-rendering-interaction"><span class="header-section-number">16.3</span> googleVis Rendering &amp; Interaction</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#basic-graphs-line-bar-combo"><span class="header-section-number">16.3.1</span> Basic Graphs (Line, Bar, Combo)</a></li>
-<li><a class="nav-link" href="#googlevis-histogram-chart"><span class="header-section-number">16.3.2</span> googleVis Histogram Chart</a></li>
-<li><a class="nav-link" href="#googlevis-alluvialsankey-chart"><span class="header-section-number">16.3.3</span> googleVis Alluvial/Sankey Chart</a></li>
-<li><a class="nav-link" href="#googlevis-geographic-chart"><span class="header-section-number">16.3.4</span> googleVis Geographic Chart</a></li>
-<li><a class="nav-link" href="#googlevis-gauge-chart"><span class="header-section-number">16.3.5</span> googleVis Gauge Chart</a></li>
-<li><a class="nav-link" href="#googlevis-tabular-chart"><span class="header-section-number">16.3.6</span> googleVis Tabular Chart</a></li>
-<li><a class="nav-link" href="#googlevis-tree-map-chart"><span class="header-section-number">16.3.7</span> googleVis Tree Map Chart</a></li>
-<li><a class="nav-link" href="#googlevis-annotation-chart"><span class="header-section-number">16.3.8</span> googleVis Annotation Chart</a></li>
-<li><a class="nav-link" href="#googlevis-calendar-chart"><span class="header-section-number">16.3.9</span> googleVis Calendar Chart</a></li>
-<li><a class="nav-link" href="#googlevis-timeline-chart"><span class="header-section-number">16.3.10</span> googleVis Timeline Chart</a></li>
-<li><a class="nav-link" href="#googlevis-gantt-chart"><span class="header-section-number">16.3.11</span> googleVis Gantt Chart</a></li>
-<li><a class="nav-link" href="#googlevis-merging-charts"><span class="header-section-number">16.3.12</span> googleVis Merging Charts</a></li>
-</ul>
-</li>
-<li>
-<a class="nav-link" href="#use-googlevis-in-rstudio"><span class="header-section-number">16.4</span> Use googleVis in RStudio</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#googlevis-references"><span class="header-section-number">16.4.1</span> googleVis References</a></li></ul>
-</li>
-</ul>
-
-      <div class="book-extra">
-        <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/jtr13/cc22tt/blob/main/googleVis.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/jtr13/cc22tt/edit/main/googleVis.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
-        </ul>
-</div>
-    </nav>
-</div>
-
-</div>
-</div> <!-- .container -->
-
-<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Community Contributions for EDAV Fall 2022 Tues/Thurs</strong>" was written by . It was last built on 2022-11-13.</p>
-  </div>
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
-  </div>
-
-</div></div>
-</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
-for (let popover of popovers) {
-  const div = document.createElement('div');
-  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
-  div.innerHTML = popover.getAttribute('data-content');
-
-  var has_math = div.querySelector("span.math");
-  if (has_math) {
-    document.body.appendChild(div);
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
-    MathJax.Hub.Queue(function() {
-      popover.setAttribute('data-content', div.innerHTML);
-      document.body.removeChild(div);
-    })
-  }
-}
 </script>
-</body>
-</html>
+ 
+<!-- jsChart -->  
+<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartGeoChartID2c3b1b91787d"></script>
+
+
+<!-- jsChart -->  
+<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartTableID2c3b262c0c69"></script>
+ 
+<table bgcolor="#7cdeb5">
+<tr>
+<td>
+
+<!-- divChart -->
+  
+<div id="GeoChartID2c3b1b91787d" 
+  style="width: 400; height: 200;">
+</div>
+
+</td>
+</tr>
+<tr>
+<td>
+
+<!-- divChart -->
+  
+<div id="TableID2c3b262c0c69" 
+  style="width: 400; height: 400;">
+</div>
+
+</td>
+</tr>
+</table>
+
+`googleVis` Merge chart provides the flexibility of merging two gvis-objects, either next or below each other into one gvis-object. These objects are arranged in a HTML table format.
+
+The multiples charts view allows to split up the individual charts Bar, Column, Line or Geographic, Tabular etc. charts into multiple charts, separated. There are numerous use cases like showing your product sales per region and then providing more information about it. It gives a lot of flexibility in the report creation and delivery aesthetically.
+
+
+## Use googleVis in RStudio
+
+Using googleVis in RStudio is straightforward. By default, the RStudio renders the charts in a new webpage -
+
+```
+plot(Chart)
+```
+On the other hand, to view it within RStudio,
+> To View in RStudio Viewer just use to view it locally
+
+```
+plot(Chart, browser=rstudioapi::viewer)
+```
+
+> To Knit the Rmd Markdown file to HTML, to perform the following command set the Chunk option results to `asis` with `{r ChartExample, results='asis', tidy=FALSE}` and `plot(Chart, 'chart')`
+
+### googleVis References
+
+* [Documentation](https://mages.github.io/googleVis/)
+* [Google Charts](https://developers.google.com/chart/interactive/docs/quick_start)
+* [Demo](https://cran.r-project.org/web/packages/googleVis/vignettes/googleVis_examples.html)
+* [Paper](https://journal.r-project.org/archive/2011-2/RJournal_2011-2_Gesmann+de~Castillo.pdf)
+* [CRAN-Stable Version](https://cran.r-project.org/web/packages/googleVis/index.html)
+
+> Thank you for learning `googleVis` with us !
