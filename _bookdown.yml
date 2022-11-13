@@ -20,12 +20,14 @@ rmd_files: [
   'chunk_option_cheatsheet.Rmd',
   'helpful_ggplot2_extensions_cheatsheet.Rmd',
   'EDAV_Commonly_Used_Graph_Cheatsheet.Rmd',
+  'git_cheatsheet.Rmd',
 
   # Part: Tutorials
   'time_series_visualization_project.Rmd',  
   'how_to_use_sqldf.Rmd',
   'googleVis.Rmd',
   'vector_field_tutorial.Rmd',
+  #'a_summary_of_interactive_chart.Rmd',
   
   # Part: Interview Prep
   'ten_interview_questions.Rmd',
