@@ -2,6 +2,7 @@
 knitr::opts_chunk$set(
   cache = TRUE,
   fig.align = 'center',
+  out.width = '80%',
   message = FALSE,
   warning = FALSE
 )
