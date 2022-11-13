@@ -22,6 +22,7 @@ rmd_files: [
   'EDAV_Commonly_Used_Graph_Cheatsheet.Rmd',
   'git_cheatsheet.Rmd',
   'plots_for_bioinfo_cheatsheet.Rmd',
+  'worldMapCheatSheet.Rmd',
 
   # Part: Tutorials
   'time_series_visualization_project.Rmd',  
