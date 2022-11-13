@@ -25,5 +25,6 @@ Suggests:
     mapview,
     sp,
     sf,
+    tigris,
 Remotes:
     hadley/emo
