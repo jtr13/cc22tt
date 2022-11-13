@@ -22,5 +22,10 @@ Suggests:
     stringr,
     patchwork,
     gcookbook,
+    mapview,
+    sp,
+    sf,
+    tigris,
+    leafsync,
 Remotes:
     hadley/emo
