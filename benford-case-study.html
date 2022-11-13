@@ -4,372 +4,19 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 21 Benford Case Study | Community Contributions for EDAV Fall 2022 Tues/Thurs</title>
-<meta name="description" content="Abhiram Gaddam, Devan Samant  21.1 Contents In this tutorial, we will introduce a numeric property called Benford’s Law and illustrate its applications in fraud detection. We will be using the...">
+<title>Chapter 20 Benford Case Study | Community Contributions for EDAV Fall 2022 Tues/Thurs</title>
+<meta name="description" content='Abhiram Gaddam, Devan Samant library(benford.analysis) #install.packages("benford.analysis") library(dplyr) library(plotly) library(tidyverse)  20.1 Contents In this tutorial, we will introduce a...'>
 <meta name="generator" content="bookdown 0.30 with bs4_book()">
-<meta property="og:title" content="Chapter 21 Benford Case Study | Community Contributions for EDAV Fall 2022 Tues/Thurs">
+<meta property="og:title" content="Chapter 20 Benford Case Study | Community Contributions for EDAV Fall 2022 Tues/Thurs">
 <meta property="og:type" content="book">
-<meta property="og:description" content="Abhiram Gaddam, Devan Samant  21.1 Contents In this tutorial, we will introduce a numeric property called Benford’s Law and illustrate its applications in fraud detection. We will be using the...">
+<meta property="og:description" content='Abhiram Gaddam, Devan Samant library(benford.analysis) #install.packages("benford.analysis") library(dplyr) library(plotly) library(tidyverse)  20.1 Contents In this tutorial, we will introduce a...'>
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 21 Benford Case Study | Community Contributions for EDAV Fall 2022 Tues/Thurs">
-<meta name="twitter:description" content="Abhiram Gaddam, Devan Samant  21.1 Contents In this tutorial, we will introduce a numeric property called Benford’s Law and illustrate its applications in fraud detection. We will be using the...">
+<meta name="twitter:title" content="Chapter 20 Benford Case Study | Community Contributions for EDAV Fall 2022 Tues/Thurs">
+<meta name="twitter:description" content='Abhiram Gaddam, Devan Samant library(benford.analysis) #install.packages("benford.analysis") library(dplyr) library(plotly) library(tidyverse)  20.1 Contents In this tutorial, we will introduce a...'>
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.1/transition.js"></script><script src="libs/bs3compat-0.4.1/tabs.js"></script><script src="libs/bs3compat-0.4.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="libs/datatables-binding-0.26/datatables.js"></script><link href="libs/dt-core-1.12.1/css/jquery.dataTables.min.css" rel="stylesheet">
-<link href="libs/dt-core-1.12.1/css/jquery.dataTables.extra.css" rel="stylesheet">
-<script src="libs/dt-core-1.12.1/js/jquery.dataTables.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
-<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><link href="libs/dygraphs-1.1.1/dygraph.css" rel="stylesheet">
-<script src="libs/dygraphs-1.1.1/dygraph-combined.js"></script><script src="libs/dygraphs-1.1.1/shapes.js"></script><script src="libs/moment-2.8.4/moment.js"></script><script src="libs/moment-timezone-0.2.5/moment-timezone-with-data.js"></script><script src="libs/moment-fquarter-1.0.0/moment-fquarter.min.js"></script><script src="libs/dygraphs-binding-1.1.1.6/dygraphs.js"></script><script src="libs/plotly-binding-4.10.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
-<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script><script src="libs/d3-4.13.0/d3.min.js"></script><script src="libs/forceNetwork-binding-0.4/forceNetwork.js"></script><link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet">
-<script src="libs/vis-9.1.0/vis-network.min.js"></script><script src="libs/visNetwork-binding-2.1.2/visNetwork.js"></script><script src="libs/d3v3-3.5.3/./d3v3.min.js"></script><link href="libs/d3heatmapcore-0.0.0/heatmapcore.css" rel="stylesheet">
-<script src="libs/d3heatmapcore-0.0.0/heatmapcore.js"></script><script src="libs/d3v3-tip-0.6.6/index.js"></script><script src="libs/d3heatmap-binding-0.9.0/d3heatmap.js"></script><script src="libs/threejs-111/three.min.js"></script><script src="libs/threejs-111/Detector.js"></script><script src="libs/threejs-111/Projector.js"></script><script src="libs/threejs-111/CanvasRenderer.js"></script><script src="libs/threejs-111/TrackballControls.js"></script><script src="libs/threejs-111/StateOrbitControls.js"></script><script src="libs/scatterplotThree-binding-0.3.3/scatterplotThree.js"></script><script src="libs/rglWebGL-binding-0.110.2/rglWebGL.js"></script><link href="libs/rglwidgetClass-0.110.2/rgl.css" rel="stylesheet">
-<script src="libs/rglwidgetClass-0.110.2/rglClass.src.js"></script><script src="libs/rglwidgetClass-0.110.2/utils.src.js"></script><script src="libs/rglwidgetClass-0.110.2/buffer.src.js"></script><script src="libs/rglwidgetClass-0.110.2/subscenes.src.js"></script><script src="libs/rglwidgetClass-0.110.2/shaders.src.js"></script><script src="libs/rglwidgetClass-0.110.2/textures.src.js"></script><script src="libs/rglwidgetClass-0.110.2/projection.src.js"></script><script src="libs/rglwidgetClass-0.110.2/mouse.src.js"></script><script src="libs/rglwidgetClass-0.110.2/init.src.js"></script><script src="libs/rglwidgetClass-0.110.2/pieces.src.js"></script><script src="libs/rglwidgetClass-0.110.2/draw.src.js"></script><script src="libs/rglwidgetClass-0.110.2/controls.src.js"></script><script src="libs/rglwidgetClass-0.110.2/selection.src.js"></script><script src="libs/rglwidgetClass-0.110.2/rglTimer.src.js"></script><script src="libs/rglwidgetClass-0.110.2/pretty.src.js"></script><script src="libs/rglwidgetClass-0.110.2/axes.src.js"></script><script src="libs/rglwidgetClass-0.110.2/animation.src.js"></script><!--html_preserve--><script type="text/plain" id="rgl-vertex-shader">
-    #line 2 1
-    // File 1 is the vertex shader
-    #ifdef GL_ES
-    #ifdef GL_FRAGMENT_PRECISION_HIGH
-    precision highp float;
-    #else
-    precision mediump float;
-    #endif
-    #endif
-
-    attribute vec3 aPos;
-    attribute vec4 aCol;
-    uniform mat4 mvMatrix;
-    uniform mat4 prMatrix;
-    varying vec4 vCol;
-    varying vec4 vPosition;
-
-    #ifdef NEEDS_VNORMAL
-    attribute vec3 aNorm;
-    uniform mat4 normMatrix;
-    varying vec4 vNormal;
-    #endif
-
-    #if defined(HAS_TEXTURE) || defined (IS_TEXT)
-    attribute vec2 aTexcoord;
-    varying vec2 vTexcoord;
-    #endif
-
-    #ifdef FIXED_SIZE
-    uniform vec3 textScale;
-    #endif
-
-    #ifdef FIXED_QUADS
-    attribute vec3 aOfs;
-    #endif
-
-    #ifdef IS_TWOSIDED
-    #ifdef HAS_NORMALS
-    varying float normz;
-    uniform mat4 invPrMatrix;
-    #else
-    attribute vec3 aPos1;
-    attribute vec3 aPos2;
-    varying float normz;
-    #endif
-    #endif // IS_TWOSIDED
-
-    #ifdef FAT_LINES
-    attribute vec3 aNext;
-    attribute vec2 aPoint;
-    varying vec2 vPoint;
-    varying float vLength;
-    uniform float uAspect;
-    uniform float uLwd;
-    #endif
-
-
-    void main(void) {
-      
-    #ifndef IS_BRUSH
-    #if defined(NCLIPPLANES) || !defined(FIXED_QUADS) || defined(HAS_FOG)
-      vPosition = mvMatrix * vec4(aPos, 1.);
-    #endif
-      
-    #ifndef FIXED_QUADS
-      gl_Position = prMatrix * vPosition;
-    #endif
-    #endif // !IS_BRUSH
-      
-    #ifdef IS_POINTS
-      gl_PointSize = POINTSIZE;
-    #endif
-      
-      vCol = aCol;
-      
-    #ifdef NEEDS_VNORMAL
-      vNormal = normMatrix * vec4(-aNorm, dot(aNorm, aPos));
-    #endif
-      
-    #ifdef IS_TWOSIDED
-    #ifdef HAS_NORMALS
-      /* normz should be calculated *after* projection */
-      normz = (invPrMatrix*vNormal).z;
-    #else
-      vec4 pos1 = prMatrix*(mvMatrix*vec4(aPos1, 1.));
-      pos1 = pos1/pos1.w - gl_Position/gl_Position.w;
-      vec4 pos2 = prMatrix*(mvMatrix*vec4(aPos2, 1.));
-      pos2 = pos2/pos2.w - gl_Position/gl_Position.w;
-      normz = pos1.x*pos2.y - pos1.y*pos2.x;
-    #endif
-    #endif // IS_TWOSIDED
-      
-    #ifdef NEEDS_VNORMAL
-      vNormal = vec4(normalize(vNormal.xyz/vNormal.w), 1);
-    #endif
-      
-    #if defined(HAS_TEXTURE) || defined(IS_TEXT)
-      vTexcoord = aTexcoord;
-    #endif
-      
-    #if defined(FIXED_SIZE) && !defined(ROTATING)
-      vec4 pos = prMatrix * mvMatrix * vec4(aPos, 1.);
-      pos = pos/pos.w;
-      gl_Position = pos + vec4(aOfs*textScale, 0.);
-    #endif
-      
-    #if defined(IS_SPRITES) && !defined(FIXED_SIZE)
-      vec4 pos = mvMatrix * vec4(aPos, 1.);
-      pos = pos/pos.w + vec4(aOfs,  0.);
-      gl_Position = prMatrix*pos;
-    #endif
-      
-    #ifdef FAT_LINES
-      /* This code was inspired by Matt Deslauriers' code in 
-       https://mattdesl.svbtle.com/drawing-lines-is-hard */
-      vec2 aspectVec = vec2(uAspect, 1.0);
-      mat4 projViewModel = prMatrix * mvMatrix;
-      vec4 currentProjected = projViewModel * vec4(aPos, 1.0);
-      currentProjected = currentProjected/currentProjected.w;
-      vec4 nextProjected = projViewModel * vec4(aNext, 1.0);
-      vec2 currentScreen = currentProjected.xy * aspectVec;
-      vec2 nextScreen = (nextProjected.xy / nextProjected.w) * aspectVec;
-      float len = uLwd;
-      vec2 dir = vec2(1.0, 0.0);
-      vPoint = aPoint;
-      vLength = length(nextScreen - currentScreen)/2.0;
-      vLength = vLength/(vLength + len);
-      if (vLength > 0.0) {
-        dir = normalize(nextScreen - currentScreen);
-      }
-      vec2 normal = vec2(-dir.y, dir.x);
-      dir.x /= uAspect;
-      normal.x /= uAspect;
-      vec4 offset = vec4(len*(normal*aPoint.x*aPoint.y - dir), 0.0, 0.0);
-      gl_Position = currentProjected + offset;
-    #endif
-      
-    #ifdef IS_BRUSH
-      gl_Position = vec4(aPos, 1.);
-    #endif
-    }
-    </script><script type="text/plain" id="rgl-fragment-shader">
-    #line 2 2
-    // File 2 is the fragment shader
-    #ifdef GL_ES
-    #ifdef GL_FRAGMENT_PRECISION_HIGH
-    precision highp float;
-    #else
-    precision mediump float;
-    #endif
-    #endif
-    varying vec4 vCol; // carries alpha
-    varying vec4 vPosition;
-    #if defined(HAS_TEXTURE) || defined (IS_TEXT)
-    varying vec2 vTexcoord;
-    uniform sampler2D uSampler;
-    #endif
-
-    #ifdef HAS_FOG
-    uniform int uFogMode;
-    uniform vec3 uFogColor;
-    uniform vec4 uFogParms;
-    #endif
-
-    #if defined(IS_LIT) && !defined(FIXED_QUADS)
-    varying vec4 vNormal;
-    #endif
-
-    #if NCLIPPLANES > 0
-    uniform vec4 vClipplane[NCLIPPLANES];
-    #endif
-
-    #if NLIGHTS > 0
-    uniform mat4 mvMatrix;
-    #endif
-
-    #ifdef IS_LIT
-    uniform vec3 emission;
-    uniform float shininess;
-    #if NLIGHTS > 0
-    uniform vec3 ambient[NLIGHTS];
-    uniform vec3 specular[NLIGHTS]; // light*material
-    uniform vec3 diffuse[NLIGHTS];
-    uniform vec3 lightDir[NLIGHTS];
-    uniform bool viewpoint[NLIGHTS];
-    uniform bool finite[NLIGHTS];
-    #endif
-    #endif // IS_LIT
-
-    #ifdef IS_TWOSIDED
-    uniform bool front;
-    varying float normz;
-    #endif
-
-    #ifdef FAT_LINES
-    varying vec2 vPoint;
-    varying float vLength;
-    #endif
-
-    void main(void) {
-      vec4 fragColor;
-    #ifdef FAT_LINES
-      vec2 point = vPoint;
-      bool neg = point.y < 0.0;
-      point.y = neg ? (point.y + vLength)/(1.0 - vLength) :
-                     -(point.y - vLength)/(1.0 - vLength);
-    #if defined(IS_TRANSPARENT) && defined(IS_LINESTRIP)
-      if (neg && length(point) <= 1.0) discard;
-    #endif
-      point.y = min(point.y, 0.0);
-      if (length(point) > 1.0) discard;
-    #endif // FAT_LINES
-      
-    #ifdef ROUND_POINTS
-      vec2 coord = gl_PointCoord - vec2(0.5);
-      if (length(coord) > 0.5) discard;
-    #endif
-      
-    #if NCLIPPLANES > 0
-      for (int i = 0; i < NCLIPPLANES; i++)
-        if (dot(vPosition, vClipplane[i]) < 0.0) discard;
-    #endif
-        
-    #ifdef FIXED_QUADS
-        vec3 n = vec3(0., 0., 1.);
-    #elif defined(IS_LIT)
-        vec3 n = normalize(vNormal.xyz);
-    #endif
-        
-    #ifdef IS_TWOSIDED
-        if ((normz <= 0.) != front) discard;
-    #endif
-        
-    #ifdef IS_LIT
-        vec3 eye = normalize(-vPosition.xyz/vPosition.w);
-        vec3 lightdir;
-        vec4 colDiff;
-        vec3 halfVec;
-        vec4 lighteffect = vec4(emission, 0.);
-        vec3 col;
-        float nDotL;
-    #ifdef FIXED_QUADS
-        n = -faceforward(n, n, eye);
-    #endif
-        
-    #if NLIGHTS > 0
-        for (int i=0;i<NLIGHTS;i++) {
-          colDiff = vec4(vCol.rgb * diffuse[i], vCol.a);
-          lightdir = lightDir[i];
-          if (!viewpoint[i])
-            lightdir = (mvMatrix * vec4(lightdir, 1.)).xyz;
-          if (!finite[i]) {
-            halfVec = normalize(lightdir + eye);
-          } else {
-            lightdir = normalize(lightdir - vPosition.xyz/vPosition.w);
-            halfVec = normalize(lightdir + eye);
-          }
-          col = ambient[i];
-          nDotL = dot(n, lightdir);
-          col = col + max(nDotL, 0.) * colDiff.rgb;
-          col = col + pow(max(dot(halfVec, n), 0.), shininess) * specular[i];
-          lighteffect = lighteffect + vec4(col, colDiff.a);
-        }
-    #endif
-        
-    #else // not IS_LIT
-        vec4 colDiff = vCol;
-        vec4 lighteffect = colDiff;
-    #endif
-        
-    #ifdef IS_TEXT
-        vec4 textureColor = lighteffect*texture2D(uSampler, vTexcoord);
-    #endif
-        
-    #ifdef HAS_TEXTURE
-    #ifdef TEXTURE_rgb
-        vec4 textureColor = lighteffect*vec4(texture2D(uSampler, vTexcoord).rgb, 1.);
-    #endif
-        
-    #ifdef TEXTURE_rgba
-        vec4 textureColor = lighteffect*texture2D(uSampler, vTexcoord);
-    #endif
-        
-    #ifdef TEXTURE_alpha
-        vec4 textureColor = texture2D(uSampler, vTexcoord);
-        float luminance = dot(vec3(1.,1.,1.), textureColor.rgb)/3.;
-        textureColor =  vec4(lighteffect.rgb, lighteffect.a*luminance);
-    #endif
-        
-    #ifdef TEXTURE_luminance
-        vec4 textureColor = vec4(lighteffect.rgb*dot(texture2D(uSampler, vTexcoord).rgb, vec3(1.,1.,1.))/3., lighteffect.a);
-    #endif
-        
-    #ifdef TEXTURE_luminance_alpha
-        vec4 textureColor = texture2D(uSampler, vTexcoord);
-        float luminance = dot(vec3(1.,1.,1.),textureColor.rgb)/3.;
-        textureColor = vec4(lighteffect.rgb*luminance, lighteffect.a*textureColor.a);
-    #endif
-        
-        fragColor = textureColor;
-
-    #elif defined(IS_TEXT)
-        if (textureColor.a < 0.1)
-          discard;
-        else
-          fragColor = textureColor;
-    #else
-        fragColor = lighteffect;
-    #endif // HAS_TEXTURE
-        
-    #ifdef HAS_FOG
-        // uFogParms elements: x = near, y = far, z = fogscale, w = (1-sin(FOV/2))/(1+sin(FOV/2))
-        // In Exp and Exp2: use density = density/far
-        // fogF will be the proportion of fog
-        // Initialize it to the linear value
-        float fogF;
-        if (uFogMode > 0) {
-          fogF = (uFogParms.y - vPosition.z/vPosition.w)/(uFogParms.y - uFogParms.x);
-          if (uFogMode > 1)
-            fogF = mix(uFogParms.w, 1.0, fogF);
-          fogF = fogF*uFogParms.z;
-          if (uFogMode == 2)
-            fogF = 1.0 - exp(-fogF);
-          // Docs are wrong: use (density*c)^2, not density*c^2
-          // https://gitlab.freedesktop.org/mesa/mesa/-/blob/master/src/mesa/swrast/s_fog.c#L58
-          else if (uFogMode == 3)
-            fogF = 1.0 - exp(-fogF*fogF);
-          fogF = clamp(fogF, 0.0, 1.0);
-          gl_FragColor = vec4(mix(fragColor.rgb, uFogColor, fogF), fragColor.a);
-        } else gl_FragColor = fragColor;
-    #else
-        gl_FragColor = fragColor;
-    #endif // HAS_FOG
-        
-    }
-    </script><!--/html_preserve--><script src="libs/CanvasMatrix4-0.110.2/CanvasMatrix.src.js"></script><script src="libs/globe-binding-0.3.3/globe.js"></script><link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
-<script src="libs/leaflet-1.3.1/leaflet.js"></script><link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
-<script src="libs/proj4-2.6.2/proj4.min.js"></script><script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script><link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
-<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script><script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script><script src="libs/leaflet-providers-plugin-2.1.1/leaflet-providers-plugin.js"></script><script src="libs/d3-tip-0.8.1/index.js"></script><link href="libs/chorddiag-0.1.2.9000/chorddiag.css" rel="stylesheet">
-<script src="libs/chorddiag-0.1.2.9000/chorddiag.js"></script><link href="libs/collapsibleTree-0.1.6/collapsibleTree.css" rel="stylesheet">
-<script src="libs/collapsibleTree-binding-0.1.7/collapsibleTree.js"></script><link href="libs/circlepackeR-0.1/./style.css" rel="stylesheet">
-<script src="libs/circlepackeR-binding-0.0.0.9000/circlepackeR.js"></script><link href="libs/colorbrewer-1/colorbrewer.css" rel="stylesheet">
-<script src="libs/colorbrewer-1/colorbrewer.js"></script><link href="libs/streamgraph-1/streamgraph.css" rel="stylesheet">
-<script src="libs/streamgraph-binding-0.9.0/streamgraph.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -410,14 +57,13 @@
 <li><a class="" href="how-to-use-sqldf.html"><span class="header-section-number">14</span> How to use sqldf</a></li>
 <li><a class="" href="googlevis-in-r.html"><span class="header-section-number">15</span> googleVis in R</a></li>
 <li><a class="" href="tutorial-for-vector-fields-in-r.html"><span class="header-section-number">16</span> Tutorial for vector fields in r</a></li>
-<li><a class="" href="a-summary-of-interactive-chart.html"><span class="header-section-number">17</span> A Summary of Interactive Chart</a></li>
 <li class="book-part">Interview Prep</li>
-<li><a class="" href="ten-interview-questions-and-answers.html"><span class="header-section-number">19</span> Ten interview questions and answers</a></li>
+<li><a class="" href="ten-interview-questions-and-answers.html"><span class="header-section-number">18</span> Ten interview questions and answers</a></li>
 <li class="book-part">Case Studies</li>
-<li><a class="active" href="benford-case-study.html"><span class="header-section-number">21</span> Benford Case Study</a></li>
+<li><a class="active" href="benford-case-study.html"><span class="header-section-number">20</span> Benford Case Study</a></li>
 <li class="book-part">Appendices</li>
-<li><a class="" href="github-initial-setup.html"><span class="header-section-number">22</span> Github initial setup</a></li>
-<li><a class="" href="tutorial-for-pull-request-mergers.html"><span class="header-section-number">23</span> Tutorial for pull request mergers</a></li>
+<li><a class="" href="github-initial-setup.html"><span class="header-section-number">21</span> Github initial setup</a></li>
+<li><a class="" href="tutorial-for-pull-request-mergers.html"><span class="header-section-number">22</span> Tutorial for pull request mergers</a></li>
 </ul>
 
         <div class="book-extra">
@@ -425,14 +71,19 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="benford-case-study" class="section level1" number="21">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="benford-case-study" class="section level1" number="20">
 <h1>
-<span class="header-section-number">21</span> Benford Case Study<a class="anchor" aria-label="anchor" href="#benford-case-study"><i class="fas fa-link"></i></a>
+<span class="header-section-number">20</span> Benford Case Study<a class="anchor" aria-label="anchor" href="#benford-case-study"><i class="fas fa-link"></i></a>
 </h1>
 <p>Abhiram Gaddam, Devan Samant</p>
-<div id="contents" class="section level2" number="21.1">
+<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://github.com/carloscinelli/benford.analysis">benford.analysis</a></span><span class="op">)</span>  <span class="co">#install.packages("benford.analysis")</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://plotly-r.com">plotly</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code></pre></div>
+<div id="contents" class="section level2" number="20.1">
 <h2>
-<span class="header-section-number">21.1</span> Contents<a class="anchor" aria-label="anchor" href="#contents"><i class="fas fa-link"></i></a>
+<span class="header-section-number">20.1</span> Contents<a class="anchor" aria-label="anchor" href="#contents"><i class="fas fa-link"></i></a>
 </h2>
 <p>In this tutorial, we will introduce a numeric property called Benford’s Law and illustrate its applications in fraud detection. We will be using the benford_analysis package in R along with an example case study.</p>
 <p>Sections:</p>
@@ -444,14 +95,14 @@
 <li>Sources</li>
 </ol>
 </div>
-<div id="introduction-1" class="section level2" number="21.2">
+<div id="introduction" class="section level2" number="20.2">
 <h2>
-<span class="header-section-number">21.2</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">20.2</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction"><i class="fas fa-link"></i></a>
 </h2>
 <p>There is a niche area of the consulting industry called forensic analytics in which analysts try to identify risks and quantify wrongdoing using an array of statistical and data techniques. For example, imagine a whistleblower notifies a company’s general counsel that there has been some collusion between sales and finance representatives to artificially create invoices. The company may hire forensic analysts to extract and determine what is happening. There are many quantitative and qualitative methods to perform before concluding anything and they will need to be specific to the context of the project. One such heuristic is Benford’s Law.</p>
-<div id="what-is-benfords-law" class="section level3" number="21.2.1">
+<div id="what-is-benfords-law" class="section level3" number="20.2.1">
 <h3>
-<span class="header-section-number">21.2.1</span> What is Benford’s Law?<a class="anchor" aria-label="anchor" href="#what-is-benfords-law"><i class="fas fa-link"></i></a>
+<span class="header-section-number">20.2.1</span> What is Benford’s Law?<a class="anchor" aria-label="anchor" href="#what-is-benfords-law"><i class="fas fa-link"></i></a>
 </h3>
 <p>Benford’s law (also known as the first digit law) states that the leading digits in many data sets are probably going to be small. For example, most numbers in a set (about 30%) will have a leading digit of 1, when one might expect the probability to be 11.1% (one out of nine digits). After one, the second most common leading digit is 2 at about 17.5%. And so forth for 3 and onward. To put it simply, Benford’s law is a probability distribution for the likelihood of the first digit in a set of numbers (Frunza, 2015). This pattern is not an intuitive phenomenon but holds true for many naturally occurring datasets (ex. height of mountains around the world) as well as man-made ones such as a company’s general ledger.</p>
 <p>The formula for Benford’s Law is:
@@ -479,9 +130,9 @@ where <span class="math inline">\(d\)</span> is the leading digit (a number from
 Benford, F (1938)</li>
 </ol>
 </div>
-<div id="applications-in-fraud-detection" class="section level3" number="21.2.2">
+<div id="applications-in-fraud-detection" class="section level3" number="20.2.2">
 <h3>
-<span class="header-section-number">21.2.2</span> Applications in Fraud Detection<a class="anchor" aria-label="anchor" href="#applications-in-fraud-detection"><i class="fas fa-link"></i></a>
+<span class="header-section-number">20.2.2</span> Applications in Fraud Detection<a class="anchor" aria-label="anchor" href="#applications-in-fraud-detection"><i class="fas fa-link"></i></a>
 </h3>
 <p>One primary and practical use for Benford’s Law is fraud and error detection. It is expected that a large set of numbers will follow the law, so accountants, auditors, economists and tax professionals have a benchmark for what the normal levels of any particular number in a set are. Below are some famously documented examples of Benford’s Law being applied towards fraud detection (Frunza, 2015):</p>
 <ol style="list-style-type: decimal">
@@ -491,21 +142,28 @@ Benford, F (1938)</li>
 </ol>
 </div>
 </div>
-<div id="benford-package-in-r" class="section level2" number="21.3">
+<div id="benford-package-in-r" class="section level2" number="20.3">
 <h2>
-<span class="header-section-number">21.3</span> Benford Package in R<a class="anchor" aria-label="anchor" href="#benford-package-in-r"><i class="fas fa-link"></i></a>
+<span class="header-section-number">20.3</span> Benford Package in R<a class="anchor" aria-label="anchor" href="#benford-package-in-r"><i class="fas fa-link"></i></a>
 </h2>
 <p>The Benford Analysis (benford.analysis) package provides tools that make it easier to validate data using Benford’s Law. The main purpose of the package is to identify suspicious data that may need further verification.</p>
 <p>Documentation on the package can be found here:
 <a href="https://cran.r-project.org/web/packages/benford.analysis/benford.analysis.pdf" class="uri">https://cran.r-project.org/web/packages/benford.analysis/benford.analysis.pdf</a></p>
 <p>You can install the package from CRAN by running the following (uncommented):</p>
+<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#install.packages("benford.analysis")</span></span></code></pre></div>
 <p>The package comes with 6 real datasets from Mark Nigrini’s book Benford’s Law: Applications for Forensic Accounting, Auditing, and Fraud Detection.</p>
-<div id="example-usage-of-benford.analysis" class="section level3" number="21.3.1">
+<div id="example-usage-of-benford.analysis" class="section level3" number="20.3.1">
 <h3>
-<span class="header-section-number">21.3.1</span> Example Usage of benford.analysis<a class="anchor" aria-label="anchor" href="#example-usage-of-benford.analysis"><i class="fas fa-link"></i></a>
+<span class="header-section-number">20.3.1</span> Example Usage of benford.analysis<a class="anchor" aria-label="anchor" href="#example-usage-of-benford.analysis"><i class="fas fa-link"></i></a>
 </h3>
 <p>In this section we will give an example using 189,470 records from the corporate payments dataset which is provided with the package.</p>
 <p>Load the package and data</p>
+<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">corporate.payment</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">corporate.payment</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##   VendorNum       Date  InvNum Amount
 ## 1      2001 2010-01-02 0496J10  36.08
 ## 2      2001 2010-01-02 1726J10  77.80
@@ -514,6 +172,9 @@ Benford, F (1938)</li>
 ## 5      2001 2010-01-02 3281J10  59.56
 ## 6      2001 2010-01-02 3822J10  50.38</code></pre>
 <p>To validate the data against Benford’s law you simply use the function “benford” on the appropriate column:</p>
+<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">bfd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/benford.analysis/man/benford.html">benford</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Amount</span><span class="op">)</span></span>
+<span><span class="va">bfd</span></span></code></pre></div>
 <pre><code>## 
 ## Benford object:
 ##  
@@ -559,13 +220,17 @@ Benford, F (1938)</li>
 ## 
 ## Remember: Real data will never conform perfectly to Benford's Law. You should not focus on p-values!</code></pre>
 <p>This creates an object of class “Benford” with the results for the analysis using the first two significant digits by default.</p>
-<div class="inline-figure">Lets plot the bfd and observe the trends. Note that we running this analysis using the default parameters, i.e., no.of.digits = 2. This parameter can be modified if we only want to analyze the first digit .
-<img src="cc22_files/figure-html/unnamed-chunk-89-1.png" width="80%" style="display: block; margin: auto;">
-</div>
+<p>Lets plot the bfd and observe the trends. Note that we running this analysis using the default parameters, i.e., no.of.digits = 2. This parameter can be modified if we only want to analyze the first digit .</p>
+<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">bfd</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="benford_case_study_files/figure-html/unnamed-chunk-5-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>The original data is in blue and the expected frequency according to Benford’s law is in red.
 In this example, the first plot shows that the data do have a tendency to follow Benford’s law.
 There is also a clear outlier at 50.</p>
 <p>The package also provides some helper functions to further investigate the data. For example, you can easily extract the observations with the largest discrepancies by using the “getSuspects” function.</p>
+<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">suspects</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/benford.analysis/man/getSuspects.html">getSuspects</a></span><span class="op">(</span><span class="va">bfd</span>, <span class="va">df</span><span class="op">)</span></span>
+<span><span class="va">suspects</span></span></code></pre></div>
 <pre><code>##        VendorNum       Date       InvNum  Amount
 ##     1:      2001 2010-01-02      3822J10   50.38
 ##     2:      2001 2010-01-07     100107-2 1166.29
@@ -580,29 +245,85 @@ There is also a clear outlier at 50.</p>
 ## 17856:     52934 2010-02-01 271745237617   11.88</code></pre>
 </div>
 </div>
-<div id="randomized-case-study" class="section level2" number="21.4">
+<div id="randomized-case-study" class="section level2" number="20.4">
 <h2>
-<span class="header-section-number">21.4</span> Randomized Case Study<a class="anchor" aria-label="anchor" href="#randomized-case-study"><i class="fas fa-link"></i></a>
+<span class="header-section-number">20.4</span> Randomized Case Study<a class="anchor" aria-label="anchor" href="#randomized-case-study"><i class="fas fa-link"></i></a>
 </h2>
 <p>In the prior section we saw that when data is manipulated with static values, clearly the first digit rule is broken. But what about when data is randomly manipulated?</p>
 <p>Let us try an experiment to see if we can use Benford’s Law to detect potential data manipulation where a bad actor randomly generated fake sales. For this experiment, our baseline will be also be using random data to highlight a point in the conclusion below. Let us pretend a company has sales data comprised of prices and quantities of items that they have sold. This code chunck sets up a data frame where one row is an recorded sale of a number of items sold at a set price.</p>
+<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">price</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">1e3</span>, size <span class="op">=</span> <span class="fl">1e5</span>, replace<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">quantity</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">1e4</span>, size <span class="op">=</span> <span class="fl">1e5</span>, replace<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">price</span>,<span class="va">quantity</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>value <span class="op">=</span> <span class="va">price</span><span class="op">*</span><span class="va">quantity</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>digit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/substr.html">substr</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##   price quantity   value digit
-## 1   560     6660 3729600     3
-## 2   611     8553 5225883     5
-## 3   247      181   44707     4
-## 4   335     3903 1307505     1
-## 5   411     3994 1641534     1
-## 6   334     7393 2469262     2</code></pre>
-<div class="inline-figure">Now let us set up and see if this dataset exhibits the expected pattern for the first digit.
-<img src="cc22_files/figure-html/unnamed-chunk-92-1.png" width="80%" style="display: block; margin: auto;">
-</div>
+## 1   382     2174  830468     8
+## 2   754     7813 5891002     5
+## 3    26     5486  142636     1
+## 4   209     9865 2061785     2
+## 5   499     8341 4162159     4
+## 6   526     4060 2135560     2</code></pre>
+<p>Now let us set up and see if this dataset exhibits the expected pattern for the first digit.</p>
+<div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df_group</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">digit</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>count <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>count_percent <span class="op">=</span> <span class="va">count</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">count</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">base_benford</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span>,<span class="fl">7</span>,<span class="fl">8</span>,<span class="fl">9</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.31</span>,<span class="fl">.176</span>,<span class="fl">.125</span>,<span class="fl">.097</span>,<span class="fl">.079</span>,<span class="fl">.067</span>,<span class="fl">.058</span>,<span class="fl">.051</span>,<span class="fl">.046</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">base_benford</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'digit'</span>,<span class="st">'percent'</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">df_group</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">digit</span>, y<span class="op">=</span><span class="va">count_percent</span>, fill<span class="op">=</span><span class="st">"blue"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>stat<span class="op">=</span><span class="st">"identity"</span>, fill<span class="op">=</span><span class="st">'lightblue'</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">base_benford</span><span class="op">$</span><span class="va">digit</span>, y<span class="op">=</span><span class="va">base_benford</span><span class="op">$</span><span class="va">percent</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/percent_format.html">percent</a></span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"First Digit of Randomized Sales"</span>,</span>
+<span>              subtitle <span class="op">=</span> <span class="st">"Original Data (bar) vs Expected Benford (point)"</span>,</span>
+<span>              <span class="co">#caption = "TBD",</span></span>
+<span>              x <span class="op">=</span> <span class="st">"First Digit"</span>, y <span class="op">=</span> <span class="st">"% Occurance"</span>,</span>
+<span>              <span class="co">#tag = "A"</span></span>
+<span>              <span class="op">)</span> <span class="op">+</span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position<span class="op">=</span><span class="st">"none"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="benford_case_study_files/figure-html/unnamed-chunk-8-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>The [value] of the sales exhibits some commonality with Benford’s Law but it is not exact as we see the first digit is not quite 30%. However there is still that decreasing probability of the leading digit. We will address some limitation in the next section. For now, let us try manipulating the data to see if any patterns change.</p>
-<div id="manipulated-data" class="section level3" number="21.4.1">
+<div id="manipulated-data" class="section level3" number="20.4.1">
 <h3>
-<span class="header-section-number">21.4.1</span> Manipulated Data<a class="anchor" aria-label="anchor" href="#manipulated-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">20.4.1</span> Manipulated Data<a class="anchor" aria-label="anchor" href="#manipulated-data"><i class="fas fa-link"></i></a>
 </h3>
-<p>In this next piece of code, we can pretend someone has entered in additional sales “randomly” by adding lots of relatively smaller sales under 100k.<br><img src="cc22_files/figure-html/unnamed-chunk-93-1.png" width="80%" style="display: block; margin: auto;"></p>
+<p>In this next piece of code, we can pretend someone has entered in additional sales “randomly” by adding lots of relatively smaller sales under 100k.</p>
+<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">value2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">1e6</span>, size <span class="op">=</span> <span class="fl">4e5</span>, replace<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">df_extra_sales</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="va">value2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">df_extra_sales</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'price'</span>,<span class="st">'quantity'</span>,<span class="st">'value'</span><span class="op">)</span></span>
+<span><span class="va">df2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">price</span>,<span class="va">quantity</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>value <span class="op">=</span> <span class="va">price</span><span class="op">*</span><span class="op">(</span><span class="va">quantity</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">df_extra_sales</span><span class="op">)</span>  <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>digit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/substr.html">substr</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">df_group2</span> <span class="op">&lt;-</span> <span class="va">df2</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">digit</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>count <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>count_percent <span class="op">=</span> <span class="va">count</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">count</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">df_group_combined</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">df_group</span><span class="op">$</span><span class="va">digit</span>,<span class="va">df_group</span><span class="op">$</span><span class="va">count_percent</span>,<span class="va">df_group2</span><span class="op">$</span><span class="va">count_percent</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">df_group_combined</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'digit'</span>,<span class="st">'Original'</span>,<span class="st">'Manipulated'</span><span class="op">)</span></span>
+<span><span class="va">df_group_combined</span> <span class="op">&lt;-</span> <span class="va">df_group_combined</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>cols<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Original'</span>,<span class="st">'Manipulated'</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">df_group_combined</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'digit'</span>,<span class="st">'Dataset'</span>,<span class="st">'count_percent'</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">df_group_combined</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">digit</span>, y<span class="op">=</span><span class="va">count_percent</span>, fill<span class="op">=</span><span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_rev.html">fct_rev</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">Dataset</span><span class="op">)</span><span class="op">)</span> <span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>stat<span class="op">=</span><span class="st">"identity"</span>, position<span class="op">=</span><span class="st">'dodge'</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/percent_format.html">percent</a></span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"First Digit of Manipulated Sales"</span>,</span>
+<span>              subtitle <span class="op">=</span> <span class="st">"Original Data vs Manipulated Data"</span>,</span>
+<span>              x <span class="op">=</span> <span class="st">"First Digit"</span>, y <span class="op">=</span> <span class="st">"% Occurance"</span>,</span>
+<span>              fill<span class="op">=</span><span class="st">"Dataset"</span></span>
+<span>              <span class="op">)</span> <span class="op">+</span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position<span class="op">=</span><span class="st">"bottom"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="benford_case_study_files/figure-html/unnamed-chunk-9-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>From here we can see that adding sales randomly does change the distribution (when enough of them are added). But can we quantify this change? Let us use the benford package to cacluate some statistics. The following</p>
+<div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">bfd_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/benford.analysis/man/benford.html">benford</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">value</span><span class="op">)</span></span>
+<span><span class="co">#bfd_1</span></span>
+<span></span>
+<span><span class="va">bfd_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/benford.analysis/man/benford.html">benford</a></span><span class="op">(</span><span class="va">df2</span><span class="op">$</span><span class="va">value</span><span class="op">)</span></span>
+<span><span class="co">#bfd_2</span></span></code></pre></div>
 <p>Printing the benford object creates verbose output so we have copied the main statistics below between the two dataframes:</p>
 <p>bfd_1 (df - original)
 Statistic Value
@@ -624,23 +345,23 @@ Ex.Kurtosis -1.2
 Skewness 0</p>
 <p>From a glance, it is evident that the statistics corresponding to the original df are much closer to the expected statistics than those from df2. In particular, the Ex.Kurtosis and Skewness differ significantly in df2 from the expected values. These are all indicators that the set of values deviate from the expected distribution corresponding to Benford’s Law.</p>
 </div>
-<div id="findings" class="section level3" number="21.4.2">
+<div id="findings" class="section level3" number="20.4.2">
 <h3>
-<span class="header-section-number">21.4.2</span> Findings<a class="anchor" aria-label="anchor" href="#findings"><i class="fas fa-link"></i></a>
+<span class="header-section-number">20.4.2</span> Findings<a class="anchor" aria-label="anchor" href="#findings"><i class="fas fa-link"></i></a>
 </h3>
 <p>So what does this show us? If both sets were randomly generated, why would one not conform to Benford’s Law? One reason is that data that is the product of many random variables tends to exhibit a log-normal distribution which fits well with the first digit rule. However, by adding values in a static way, we change the data to be more uniform and distort the decaying curve.</p>
 <p>Now it is important to understand that 1) this case is an extreme example to highlight a point, and 2) that Benford’s Law and its statistics do not prove anything - they only provide some guidance on areas that may look strange. In reality, forensic testing would be done on specific segments or accounts, people would be interviewed, systems and logs analyzed, etc. Similarly, even when Benford’s Law holds true, it does not mean there is no fraud; a bad actor that understands fraud detection methods will likely hide better.</p>
 </div>
 </div>
-<div id="conclusion-3" class="section level2" number="21.5">
+<div id="conclusion-3" class="section level2" number="20.5">
 <h2>
-<span class="header-section-number">21.5</span> Conclusion<a class="anchor" aria-label="anchor" href="#conclusion-3"><i class="fas fa-link"></i></a>
+<span class="header-section-number">20.5</span> Conclusion<a class="anchor" aria-label="anchor" href="#conclusion-3"><i class="fas fa-link"></i></a>
 </h2>
 <p>An important thing to note is that Benford’s law does not have a strict mathematical proof, and is simply a heuristic. It is a broad guideline which helps with the investigation of large data sets to see if they conform with the observed trends. A feature of a dataset that conforms with Benford’s Law is not proof of validity or vice versa. For this reason, a Benford analysis is usually conducted as a primary investigatory exercise, following which a more thorough investigation as described in the previous section is conducted.</p>
 </div>
-<div id="sources" class="section level2" number="21.6">
+<div id="sources" class="section level2" number="20.6">
 <h2>
-<span class="header-section-number">21.6</span> Sources<a class="anchor" aria-label="anchor" href="#sources"><i class="fas fa-link"></i></a>
+<span class="header-section-number">20.6</span> Sources<a class="anchor" aria-label="anchor" href="#sources"><i class="fas fa-link"></i></a>
 </h2>
 <p>Benford, F. “The Law of Anomalous Numbers,” Proceedings of the American Philosophical Society, 78, 551–572. 1938.</p>
 <p>Frunza, M. (2015). Solving Modern Crime in Financial Markets: Analytics and Case Studies. Academic Press.</p>
@@ -654,30 +375,30 @@ Skewness 0</p>
 
 
 <div class="chapter-nav">
-<div class="prev"><a href="ten-interview-questions-and-answers.html"><span class="header-section-number">19</span> Ten interview questions and answers</a></div>
-<div class="next"><a href="github-initial-setup.html"><span class="header-section-number">22</span> Github initial setup</a></div>
+<div class="prev"><a href="ten-interview-questions-and-answers.html"><span class="header-section-number">18</span> Ten interview questions and answers</a></div>
+<div class="next"><a href="github-initial-setup.html"><span class="header-section-number">21</span> Github initial setup</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#benford-case-study"><span class="header-section-number">21</span> Benford Case Study</a></li>
-<li><a class="nav-link" href="#contents"><span class="header-section-number">21.1</span> Contents</a></li>
+<li><a class="nav-link" href="#benford-case-study"><span class="header-section-number">20</span> Benford Case Study</a></li>
+<li><a class="nav-link" href="#contents"><span class="header-section-number">20.1</span> Contents</a></li>
 <li>
-<a class="nav-link" href="#introduction-1"><span class="header-section-number">21.2</span> Introduction</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#what-is-benfords-law"><span class="header-section-number">21.2.1</span> What is Benford’s Law?</a></li>
-<li><a class="nav-link" href="#applications-in-fraud-detection"><span class="header-section-number">21.2.2</span> Applications in Fraud Detection</a></li>
+<a class="nav-link" href="#introduction"><span class="header-section-number">20.2</span> Introduction</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#what-is-benfords-law"><span class="header-section-number">20.2.1</span> What is Benford’s Law?</a></li>
+<li><a class="nav-link" href="#applications-in-fraud-detection"><span class="header-section-number">20.2.2</span> Applications in Fraud Detection</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#benford-package-in-r"><span class="header-section-number">21.3</span> Benford Package in R</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#example-usage-of-benford.analysis"><span class="header-section-number">21.3.1</span> Example Usage of benford.analysis</a></li></ul>
+<a class="nav-link" href="#benford-package-in-r"><span class="header-section-number">20.3</span> Benford Package in R</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#example-usage-of-benford.analysis"><span class="header-section-number">20.3.1</span> Example Usage of benford.analysis</a></li></ul>
 </li>
 <li>
-<a class="nav-link" href="#randomized-case-study"><span class="header-section-number">21.4</span> Randomized Case Study</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#manipulated-data"><span class="header-section-number">21.4.1</span> Manipulated Data</a></li>
-<li><a class="nav-link" href="#findings"><span class="header-section-number">21.4.2</span> Findings</a></li>
+<a class="nav-link" href="#randomized-case-study"><span class="header-section-number">20.4</span> Randomized Case Study</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#manipulated-data"><span class="header-section-number">20.4.1</span> Manipulated Data</a></li>
+<li><a class="nav-link" href="#findings"><span class="header-section-number">20.4.2</span> Findings</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#conclusion-3"><span class="header-section-number">21.5</span> Conclusion</a></li>
-<li><a class="nav-link" href="#sources"><span class="header-section-number">21.6</span> Sources</a></li>
+<li><a class="nav-link" href="#conclusion-3"><span class="header-section-number">20.5</span> Conclusion</a></li>
+<li><a class="nav-link" href="#sources"><span class="header-section-number">20.6</span> Sources</a></li>
 </ul>
 
       <div class="book-extra">
