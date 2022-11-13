@@ -1,5 +1,5 @@
 book_filename: "cc22"
-new_session: false # true
+new_session: true
 before_chapter_script: _common.R
 delete_merged_file: true
 language:
