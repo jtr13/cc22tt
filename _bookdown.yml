@@ -1,5 +1,5 @@
 book_filename: "cc22"
-new_session: true
+new_session: false # true
 before_chapter_script: _common.R
 delete_merged_file: true
 language:
@@ -28,7 +28,7 @@ rmd_files: [
   'how_to_use_sqldf.Rmd',
   'googleVis.Rmd',
   'vector_field_tutorial.Rmd',
-  #'a_summary_of_interactive_chart.Rmd',
+  'a_summary_of_interactive_chart.Rmd',
   #'mapview_tutorial.Rmd',
   
   # Part: Interview Prep
