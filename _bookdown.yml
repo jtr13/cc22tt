@@ -29,6 +29,7 @@ rmd_files: [
   'googleVis.Rmd',
   'vector_field_tutorial.Rmd',
   #'a_summary_of_interactive_chart.Rmd',
+  'mapview_tutorial.Rmd',
   
   # Part: Interview Prep
   'ten_interview_questions.Rmd',
