@@ -1,0 +1,306 @@
+# A Summary of Interactive Chart
+
+Yihan Chen
+
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+
+```{r}
+library(DT)
+library(dygraphs)
+library(plotly)
+library(igraph)
+library(networkD3)
+library(tibble)
+library(visNetwork)
+# remotes::install_github("talgalili/d3heatmap")
+library(d3heatmap) # must be installed from source
+library(threejs)
+# remotes::install_github("dmurdoch/rgl")
+library(rgl) # must be installed from source
+library(maptools)
+library(maps)
+library(leaflet)
+# remotes::install_github("mattflor/chorddiag")
+library(chorddiag) # must be installed from source
+library(collapsibleTree) 
+# remotes::install_github("jeromefroe/circlepackeR") 
+library(circlepackeR) # must be installed from source
+# remotes::install_github("hrbrmstr/streamgraph")
+library(streamgraph) # must be installed from source
+ 
+```
+
+
+
+## Introduction
+
+This is a cheat sheet to help you find the proper interactive visualization with your purpose using R. In this document, I included several visualization examples about how to creating an interactive table, scatter plots, network, maps, etc.
+
+## Interactive Table
+
+As shown below, we can create a interactive table with the help of package `DT`. In this interactive table, you can easily search certain data, sort data in one variable, show different number of rows.
+```{r}
+datatable(iris, options = list(pageLength = 5))
+```
+
+## Interactive Graph
+
+### Time Series
+
+The `dygraph` package offers zooming, hovering, minimaps and much more. You can also pull down the timeline below to select and view the data for specified times.
+
+```{r}
+dygraph(nhtemp, main = "New Haven Temperatures") %>% 
+  dyRangeSelector(dateWindow = c("1920-01-01", "1960-01-01"))
+```
+### Histograph
+
+`plotly` can help us create interactive histogram. When hovering over the histogram, we can see information such as the category and quantity of that data. Similarly, we can also select parts of the graph to look deeper.
+```{r}
+p <- ggplot(data = diamonds, aes(x = cut, fill = clarity)) +
+  geom_bar(position = "dodge")
+ggplotly(p)
+```
+
+### Scatter and Bubble Plots
+
+`plotly` can also be used to create scatter and bubble plots. Here is an example. The same interaction can be realized here.
+
+```{r}
+data <- read.csv("https://raw.githubusercontent.com/plotly/datasets/master/school_earnings.csv")
+
+data$State <- as.factor(c('Massachusetts', 'California', 'Massachusetts', 'Pennsylvania', 'New Jersey', 'Illinois', 'Washington DC',
+                          'Massachusetts', 'Connecticut', 'New York', 'North Carolina', 'New Hampshire', 'New York', 'Indiana',
+                          'New York', 'Michigan', 'Rhode Island', 'California', 'Georgia', 'California', 'California'))
+
+fig <- plot_ly(data, x = ~Women, y = ~Men, text = ~School, type = 'scatter', mode = 'markers', size = ~Gap, color = ~State, colors = 'Paired',
+        #Choosing the range of the bubbles' sizes:
+        sizes = c(10, 50),
+        marker = list(opacity = 0.5, sizemode = 'diameter'))
+fig <- fig %>% layout(title = 'Gender Gap in Earnings per University',
+         xaxis = list(showgrid = FALSE),
+         yaxis = list(showgrid = FALSE),
+         showlegend = FALSE)
+
+fig
+```
+
+
+
+### Interactive Network Graph
+
+We can also create interactive network graph. For example, if you can't see one node clearly, you can just move that node, and that node and the nodes who connect with it will change accordingly, just as you moved it in the physical world! `networkD3` and `visNetwork` can both realize this function. The difference is that you can selected nodes by id in the network drawn by `visNetwork`.
+
+```{r}
+# create a dataset:
+data <- tibble(
+  from=c("A", "A", "B", "D", "C", "D", "E", "B", "C", "D", "K", "A", "M"),
+  to=c("B", "E", "F", "A", "C", "A", "B", "Z", "A", "C", "A", "B", "K")
+)
+
+# Plot
+simpleNetwork(data, height="100px", width="100px")
+```
+
+```{r}
+nodes <- data.frame(id = 1:6, title = paste("node", 1:6), 
+                    shape = c("dot", "square"),
+                    size = 10:15, color = c("darkgreen", "darkred"))
+edges <- data.frame(from = 1:5, to = c(5, 4, 6, 3, 3))
+visNetwork(nodes, edges) %>%
+  visOptions(highlightNearest = TRUE, nodesIdSelection = TRUE)
+```
+### Heatmaps
+
+we can also draw an interactive heatmap using `d3heatmap`. Here is an example, when you hover over data, it will show the row and column it belongs to and also the value of it. You can also select a rectangle of data to dive deeper into the data set. Besides, when you click on one column/row name, it will highlight the corresponding column/name.
+```{r}
+d3heatmap(mtcars, scale="column", colors="Blues")
+```
+ 
+### 3D Scatterplots
+
+`threejs` and `rgl` provides a way to show scatterplots in 3D. Typically, the input should be 3 vectors with same length representing x, y, z coordinate. You can drag the image to see the data from different angles.
+
+```{r}
+z <- seq(-10, 10, 0.1)
+x <- cos(z)
+y <- sin(z)
+scatterplot3js(x, y, z, color=rainbow(length(z)))
+```
+
+```{r}
+# This is to output a rgl plot in a rmarkdown document.
+setupKnitr()
+
+# Data: the iris data is provided by R
+data <- iris
+
+# Add a new column with color
+mycolors <- c('royalblue1', 'darkcyan', 'oldlace')
+data$color <- mycolors[ as.numeric(data$Species) ]
+
+# Plot
+plot3d( 
+  x=data$`Sepal.Length`, y=data$`Sepal.Width`, z=data$`Petal.Length`, 
+  col = data$color, 
+  type = 's', 
+  radius = .1,
+  xlab="Sepal Length", ylab="Sepal Width", zlab="Petal Length")
+
+# To display in an R Markdown document:
+rglwidget()
+
+
+```
+
+### Globe Plots
+
+With the help of `threejs`, we can also create globe plots. It is an interesting way to view data on globe way.
+```{r}
+data(world.cities, package="maps")
+cities <- world.cities[order(world.cities$pop,decreasing=TRUE)[1:1000],]
+value  <- 100 * cities$pop / max(cities$pop)
+
+globejs(bg="black", lat=cities$lat,     long=cities$long, value=value, 
+        rotationlat=-0.34,     rotationlong=-0.38, fov=30)
+```
+### Interactive Maps
+
+We can create interactive maps to observe data related to geographic distribution. It also offers zooming, hovering, minimaps and much more.
+```{r}
+# load example data (Fiji Earthquakes) + keep only 100 first lines
+data(quakes)
+quakes <-  head(quakes, 100)
+
+# Create a color palette with handmade bins.
+mybins <- seq(4, 6.5, by=0.5)
+mypalette <- colorBin( palette="RdYlBu", domain=quakes$mag, na.color="transparent", bins=mybins)
+
+# Prepare the text for the tooltip:
+mytext <- paste(
+   "Depth: ", quakes$depth, "<br/>", 
+   "Stations: ", quakes$stations, "<br/>", 
+   "Magnitude: ", quakes$mag, sep="") %>%
+  lapply(htmltools::HTML)
+
+# Final Map
+m <- leaflet(quakes) %>% 
+  addTiles()  %>% 
+  setView( lat=-27, lng=170 , zoom=4) %>%
+  addProviderTiles("Esri.WorldImagery") %>%
+  addCircleMarkers(~long, ~lat, 
+    fillColor = ~mypalette(mag), fillOpacity = 0.7, color="white", radius=8, stroke=FALSE,
+    label = mytext,
+    labelOptions = labelOptions( style = list("font-weight" = "normal", padding = "3px 8px"), textsize = "13px", direction = "auto")
+  ) %>%
+  addLegend( pal=mypalette, values=~mag, opacity=0.9, title = "Magnitude", position = "bottomright" )
+
+m 
+```
+
+
+
+### Interactive Chord Diagram
+
+Chord diagram can be interactive too! When hovering on specific part of the diagram, the detailed information of that part will pop up and also it will hight the related part for you to observe more clearly.
+
+```{r}
+# Create dummy data
+m <- matrix(c(10000,  5871, 6732, 2868,
+              1951, 5800, 2060, 6171,
+              8010, 7856, 8090, 7865,
+              1013,   990,  940, 4427),
+            byrow = TRUE,
+            nrow = 4, ncol = 4)
+
+# A vector of 4 colors for 4 groups
+haircolors <- c("black", "blonde", "brown", "red")
+dimnames(m) <- list(have = haircolors,
+                    prefer = haircolors)
+groupColors <- c("#000000", "#FFDA89", "#953844", "#F24723")
+
+# Build the chord diagram:
+p <- chorddiag(m, groupColors = groupColors, groupnamePadding = 40)
+p
+```
+
+
+
+###  Interactive Collapsible Reingold-Tilford Tree Diagrams
+
+Collapsible Reingold-Tilford Tree Diagram is another interesting interactive graph. When you click a node, its children will be expanded so you can get more detailed information. When you don't want to see in detail, you can also collapse the lower level nodes.
+
+```{r}
+# Represent this tree:
+p <- collapsibleTree( warpbreaks, c("wool", "tension", "breaks"))
+p
+```
+### Interactive Circle Packing
+
+Circle packing is a kind of graph that help you learn more about the composition of the data. For example, how many of the students are taking math class, and among them, what is the distribution of sex.
+
+**Note** that it may be no graph shown in html file, but it should be fine when seen in rmd file.
+```{r}
+# create a nested data frame giving the info of a nested dataset:
+data <- data.frame(
+  root=rep("root", 30),
+  group=c(rep("Math",13), rep("Physics",7), rep("Engineering",2), rep("Literature", 8)), 
+  subgroup= rep(letters[1:5], each=6),
+  subsubgroup=rep(letters[1:3], 10),
+  value=sample(seq(1:15), 15)
+)
+
+
+# Change the format. This use the data.tree library. This library needs a column that looks like root/group/subgroup/..., so I build it
+# install.packages("data.tree")
+library(data.tree)
+data$pathString <- paste("world", data$group, data$subgroup, data$subsubgroup, sep = "/")
+population <- as.Node(data)
+
+p <- circlepackeR(population, size = "value")
+p
+```
+
+### Interactive Streamgraph
+
+`streamgraph` is a great tool to create interactive streamgraph. You can select a specific class to ocserve. Zooming, hovering, minimaps and much more also effective here.
+
+**Note** that it may be no graph shown in html file, but it should be fine when seen in rmd file.
+```{r}
+# Create data:
+data <- data.frame(
+  year=rep(seq(1993,2022) , each=10),
+  name=rep(letters[1:10] , 30),
+  value=sample( seq(0,1,0.0001) , 300)
+)
+ 
+# Stream graph with a legend
+a = streamgraph(data, key="name", value="value", date="year", height="300px", width="1000px") %>%
+  sg_legend(show=TRUE, label="names: ") %>%
+  sg_fill_brewer("PuOr")
+a
+```
+
+## Reference
+
+- https://r-graph-gallery.com/bubble-map.html
+- https://plotly.com/r/
+- https://bwlewis.github.io/rthreejs/
+- https://rstudio.github.io/leaflet/
+- http://christophergandrud.github.io/networkD3/
+- https://r-graph-gallery.com/3d_scatter_plot.html
+- https://github.com/hrbrmstr/streamgraph
+- https://r-graph-gallery.com/streamgraph.html
+- https://cran.r-project.org/web/packages/rgl/vignettes/rgl.html
+- https://r-graph-gallery.com/chord-diagram.html
+- https://github.com/mattflor/chorddiag
+- https://github.com/AdeelK93/collapsibleTree
+- https://r-graph-gallery.com/network-interactive.html
+
+
+
+
