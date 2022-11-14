@@ -4,15 +4,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 9 Commonly-used graph cheatcheet | Community Contributions for EDAV Fall 2022 Tues/Thurs</title>
-<meta name="description" content="Wangtao Zheng, UNI:wz2618 During the R coding exercises in the EDAV homework, I realized the necessity of creating a R code library/cheatsheet which include most of the codes that are used to draw...">
+<title>Chapter 23 Data Explorer Tutorial and Automation | Community Contributions for EDAV Fall 2022 Tues/Thurs</title>
+<meta name="description" content="Akshay Iyengar I created a video tutorial on a shortcut known as data explorer. While this package is not talked about in class, it is emphasized to be a useful and fast data exploration package....">
 <meta name="generator" content="bookdown 0.30 with bs4_book()">
-<meta property="og:title" content="Chapter 9 Commonly-used graph cheatcheet | Community Contributions for EDAV Fall 2022 Tues/Thurs">
+<meta property="og:title" content="Chapter 23 Data Explorer Tutorial and Automation | Community Contributions for EDAV Fall 2022 Tues/Thurs">
 <meta property="og:type" content="book">
-<meta property="og:description" content="Wangtao Zheng, UNI:wz2618 During the R coding exercises in the EDAV homework, I realized the necessity of creating a R code library/cheatsheet which include most of the codes that are used to draw...">
+<meta property="og:description" content="Akshay Iyengar I created a video tutorial on a shortcut known as data explorer. While this package is not talked about in class, it is emphasized to be a useful and fast data exploration package....">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 9 Commonly-used graph cheatcheet | Community Contributions for EDAV Fall 2022 Tues/Thurs">
-<meta name="twitter:description" content="Wangtao Zheng, UNI:wz2618 During the R coding exercises in the EDAV homework, I realized the necessity of creating a R code library/cheatsheet which include most of the codes that are used to draw...">
+<meta name="twitter:title" content="Chapter 23 Data Explorer Tutorial and Automation | Community Contributions for EDAV Fall 2022 Tues/Thurs">
+<meta name="twitter:description" content="Akshay Iyengar I created a video tutorial on a shortcut known as data explorer. While this package is not talked about in class, it is emphasized to be a useful and fast data exploration package....">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.1/transition.js"></script><script src="libs/bs3compat-0.4.1/tabs.js"></script><script src="libs/bs3compat-0.4.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -49,7 +49,7 @@
 <li><a class="" href="r-window-functions-cheatsheet.html"><span class="header-section-number">6</span> R window functions cheatsheet</a></li>
 <li><a class="" href="rmd-chunk-option-cheat-sheet.html"><span class="header-section-number">7</span> Rmd chunk option cheat sheet</a></li>
 <li><a class="" href="helpful-ggplot2-extensions-cheatsheet.html"><span class="header-section-number">8</span> Helpful ggplot2 Extensions Cheatsheet</a></li>
-<li><a class="active" href="commonly-used-graph-cheatcheet.html"><span class="header-section-number">9</span> Commonly-used graph cheatcheet</a></li>
+<li><a class="" href="commonly-used-graph-cheatcheet.html"><span class="header-section-number">9</span> Commonly-used graph cheatcheet</a></li>
 <li><a class="" href="git-and-version-control.html"><span class="header-section-number">10</span> Git and version control</a></li>
 <li><a class="" href="useful-plots-for-bioinfomatics-in-r.html"><span class="header-section-number">11</span> Useful plots for Bioinfomatics in R</a></li>
 <li><a class="" href="different-ways-to-create-world-map-in-r.html"><span class="header-section-number">12</span> Different ways to create world map in R</a></li>
@@ -63,7 +63,7 @@
 <li><a class="" href="data-cleaning-with-r.html"><span class="header-section-number">20</span> Data cleaning with r</a></li>
 <li><a class="" href="introduction-to-shiny-web-apps.html"><span class="header-section-number">21</span> Introduction to Shiny Web Apps</a></li>
 <li><a class="" href="python-missingno-library-tutorial.html"><span class="header-section-number">22</span> Python missingno library tutorial</a></li>
-<li><a class="" href="data-explorer-tutorial-and-automation.html"><span class="header-section-number">23</span> Data Explorer Tutorial and Automation</a></li>
+<li><a class="active" href="data-explorer-tutorial-and-automation.html"><span class="header-section-number">23</span> Data Explorer Tutorial and Automation</a></li>
 <li class="book-part">Interview Prep</li>
 <li><a class="" href="ten-interview-questions-and-answers.html"><span class="header-section-number">25</span> Ten interview questions and answers</a></li>
 <li class="book-part">Case Studies</li>
@@ -78,28 +78,29 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="commonly-used-graph-cheatcheet" class="section level1" number="9">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="data-explorer-tutorial-and-automation" class="section level1" number="23">
 <h1>
-<span class="header-section-number">9</span> Commonly-used graph cheatcheet<a class="anchor" aria-label="anchor" href="#commonly-used-graph-cheatcheet"><i class="fas fa-link"></i></a>
+<span class="header-section-number">23</span> Data Explorer Tutorial and Automation<a class="anchor" aria-label="anchor" href="#data-explorer-tutorial-and-automation"><i class="fas fa-link"></i></a>
 </h1>
-<p>Wangtao Zheng, UNI:wz2618</p>
-<p>During the R coding exercises in the EDAV homework, I realized the necessity of creating a R code library/cheatsheet which include most of the codes that are used to draw commonly-applied graphs in data visualization. In this way, one would not need to memorize all the code used for drawing different graphs, which saves time.</p>
-<p>R codes that are used to draw commonly-used graphs are thus included in this cheatsheet. Graphs that are useful in most data visualization projects, such as scatterplot, boxplot, bar plot, histogram, etc., are included in this cheatsheet. I also included the coding methods for various modifications of these graphs for convenience reasons, so that my cheatsheet can help members of our community under different circumstances.</p>
-<p>You can find the cheatsheet here:<a href="https://github.com/zwt950715/EDAV-Fall-2022-Community-Contribution/blob/main/A%20Useful%20Cheatsheet%20For%20Data%20Visualization.pdf" class="uri">https://github.com/zwt950715/EDAV-Fall-2022-Community-Contribution/blob/main/A%20Useful%20Cheatsheet%20For%20Data%20Visualization.pdf</a></p>
-<p>This cheatsheet covers materials in the first two problem sets of the EDAV course fall 2022. Thus, more types of graphs and more coding method can be added to this cheatsheet to make it more useful in R programming for EDAV purposes. Hope this cheatsheet can help with learning, and I am looking forward to more valuable advices!</p>
+<p>Akshay Iyengar</p>
+<p>I created a video tutorial on a shortcut known as data explorer. While this package is not talked about in class, it is emphasized to be a useful and fast data exploration package. My video will teach my classmates on how automation can be both useful and not useful at the same time.This especially is one of the many packages that does help with creating general visualizations for data scientists.</p>
+<p><a href="https://youtu.be/_JXlDjyajAQ">Youtube Link</a></p>
+<p>Sources:</p>
+<p><a href="https://cran.r-project.org/web/packages/DataExplorer/vignettes/dataexplorer-intro.html">CRAN</a>
+<a href="https://rpubs.com/mark_sch7/DataExplorerPackage">Rpubs</a></p>
 
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="helpful-ggplot2-extensions-cheatsheet.html"><span class="header-section-number">8</span> Helpful ggplot2 Extensions Cheatsheet</a></div>
-<div class="next"><a href="git-and-version-control.html"><span class="header-section-number">10</span> Git and version control</a></div>
+<div class="prev"><a href="python-missingno-library-tutorial.html"><span class="header-section-number">22</span> Python missingno library tutorial</a></div>
+<div class="next"><a href="ten-interview-questions-and-answers.html"><span class="header-section-number">25</span> Ten interview questions and answers</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#commonly-used-graph-cheatcheet"><span class="header-section-number">9</span> Commonly-used graph cheatcheet</a></li></ul>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#data-explorer-tutorial-and-automation"><span class="header-section-number">23</span> Data Explorer Tutorial and Automation</a></li></ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/jtr13/cc22tt/blob/main/EDAV_Commonly_Used_Graph_Cheatsheet.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/jtr13/cc22tt/edit/main/EDAV_Commonly_Used_Graph_Cheatsheet.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+<li><a id="book-source" href="https://github.com/jtr13/cc22tt/blob/main/data_explorer_tutorial.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/jtr13/cc22tt/edit/main/data_explorer_tutorial.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>
