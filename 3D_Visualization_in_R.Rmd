@@ -4,12 +4,29 @@ Tianyu Han and Shijia Huang
 
 ```{r, include=FALSE}
 knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = TRUE)
+
+#Installation Instructions 
+#install.packages('plotly')
+#install.packages('HSAUR2')
+#install.packages('scatterplot3d')
+#install.packages('mlbench')
+#install.packages('plot3D')
+#If working on a mac machine, xquartz x11 might need to be installed from the web in order to use plot3D 
+library(scatterplot3d)
+library('mlbench')
+library(plot3D)
+library(plotly)
+data("household",package = "HSAUR2")
 ```
+
+
 ## Motivation
 
 As an important part of data visualization, 3D plotting makes the data exploration part easier for users and allow a visual display of datasets.By plotting data points on three axes, 3D plots describe the relationship between these three variables and are useful to identify underlying patterns and interactions that are not shown on 2D graphs.
 
-In this tutorial, we will introduce different packages for 3D plots, including package Scatterplot3D, package plot3D, and also plotly. 
+In this tutorial, we will introduce different packages for 3D plots, including package Scatterplot3D, package plot3D, and also plotly. By the end of the tutorial, one will be able to choose the most suitable package for his/her project. 
+
+What we can learn from this project is that there are always different ways to tackle the same problem using different R libraries and packages. It will require extensive research and trials in order to determine which one works best in the given scenario. 
 
 
 ## Scatterplot3D
@@ -21,8 +38,6 @@ We use the preloaded dataset USArrests as an example to show what information ca
 
 
 ```{r}
-#install.packages('scatterplot3d')
-library(scatterplot3d)
 data("USArrests")
 head(USArrests)
 ```
@@ -88,8 +103,6 @@ We use the preloaded data "Glass" to perform the principal component analysis an
 
 ### Load Package "mlbench" and use the Glass dataset.
 ```{r}
-#install.packages('mlbench')
-library('mlbench')
 data(Glass)
 head(Glass)
 ```
@@ -114,7 +127,6 @@ pca.result$Type <- (Glass$Type)
 ### Define color and shape parameter. 
 
 ```{r}
-
 ## choose 6 colors for 6 glass types
 colors <- c("#E69F00", "#56B4E9","#B2182B","#D1E5F0","#92C5DE","#2166AC")
 colors <- colors[as.numeric(pca.result$Type)]
@@ -146,7 +158,6 @@ Sometimes it is hard to imagine the relationship between two functions or graph,
 
 Here is a simple example of how we could graph the interaction of cos and sin function. 
 ```{r}
-
 z <- seq(-15, 15, 0.05)
 x <- cos(z)
 y <- sin(z)
@@ -158,9 +169,6 @@ scatterplot3d(x, y, z, highlight.3d=TRUE, col.axis ="blue",col.grid ="lightblue"
 If we were to generate a histogram in 3d, we can use the plot 3D package. We first initiate the x-axis and the y-axis. Then, we need to create z as matrix that has the dimension |x| * |y|. We can then use hist3D function in the package to help us generate the 3D histogram that we need. 
 
 ```{r}
-#install.packages('plot3D')
-library(plot3D)
-
 x = c(1, 2)
 y = c(1, 2)
 z = c(1, 2, 2, 3)
@@ -184,10 +192,6 @@ Service: money(usd) spent on service
 Gender: female or male
 
 ```{r}
-#install.packages('plotly')
-#install.packages('HSAUR2')
-library(plotly)
-data("household",package = "HSAUR2")
 household
 ```
 
