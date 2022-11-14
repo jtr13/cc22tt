@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 24 3D Visualization in R | Community Contributions for EDAV Fall 2022 Tues/Thurs</title>
+<meta name="description" content="Tianyu Han and Shijia Huang  24.1 Motivation As an important part of data visualization, 3D plotting makes the data exploration part easier for users and allow a visual display of datasets.By...">
+<meta name="generator" content="bookdown 0.30 with bs4_book()">
+<meta property="og:title" content="Chapter 24 3D Visualization in R | Community Contributions for EDAV Fall 2022 Tues/Thurs">
+<meta property="og:type" content="book">
+<meta property="og:description" content="Tianyu Han and Shijia Huang  24.1 Motivation As an important part of data visualization, 3D plotting makes the data exploration part easier for users and allow a visual display of datasets.By...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 24 3D Visualization in R | Community Contributions for EDAV Fall 2022 Tues/Thurs">
+<meta name="twitter:description" content="Tianyu Han and Shijia Huang  24.1 Motivation As an important part of data visualization, 3D plotting makes the data exploration part easier for users and allow a visual display of datasets.By...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.1/transition.js"></script><script src="libs/bs3compat-0.4.1/tabs.js"></script><script src="libs/bs3compat-0.4.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><script src="libs/plotly-binding-4.10.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Community Contributions for EDAV Fall 2022 Tues/Thurs</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Welcome!</a></li>
+<li><a class="" href="community-contribution.html"><span class="header-section-number">2</span> Community Contribution</a></li>
+<li><a class="" href="github-submission-instructions.html"><span class="header-section-number">3</span> GitHub submission instructions</a></li>
+<li><a class="" href="sample-project.html"><span class="header-section-number">4</span> Sample project</a></li>
+<li class="book-part">Cheatsheets</li>
+<li><a class="" href="r-window-functions-cheatsheet.html"><span class="header-section-number">6</span> R window functions cheatsheet</a></li>
+<li><a class="" href="rmd-chunk-option-cheat-sheet.html"><span class="header-section-number">7</span> Rmd chunk option cheat sheet</a></li>
+<li><a class="" href="helpful-ggplot2-extensions-cheatsheet.html"><span class="header-section-number">8</span> Helpful ggplot2 Extensions Cheatsheet</a></li>
+<li><a class="" href="commonly-used-graph-cheatcheet.html"><span class="header-section-number">9</span> Commonly-used graph cheatcheet</a></li>
+<li><a class="" href="git-and-version-control.html"><span class="header-section-number">10</span> Git and version control</a></li>
+<li><a class="" href="useful-plots-for-bioinfomatics-in-r.html"><span class="header-section-number">11</span> Useful plots for Bioinfomatics in R</a></li>
+<li><a class="" href="different-ways-to-create-world-map-in-r.html"><span class="header-section-number">12</span> Different ways to create world map in R</a></li>
+<li><a class="" href="color-in-r-python-and-jshtmlcss.html"><span class="header-section-number">13</span> Color in R, Python, and JS/HTML/CSS</a></li>
+<li><a class="" href="color-palettes-for-data-visualization.html"><span class="header-section-number">14</span> Color Palettes for Data Visualization</a></li>
+<li class="book-part">Tutorials</li>
+<li><a class="" href="preprocessing-and-visualization-of-time-series-data.html"><span class="header-section-number">16</span> Preprocessing and Visualization of Time Series Data</a></li>
+<li><a class="" href="how-to-use-sqldf.html"><span class="header-section-number">17</span> How to use sqldf</a></li>
+<li><a class="" href="googlevis-in-r.html"><span class="header-section-number">18</span> googleVis in R</a></li>
+<li><a class="" href="tutorial-for-vector-fields-in-r.html"><span class="header-section-number">19</span> Tutorial for vector fields in r</a></li>
+<li><a class="" href="data-cleaning-with-r.html"><span class="header-section-number">20</span> Data cleaning with r</a></li>
+<li><a class="" href="introduction-to-shiny-web-apps.html"><span class="header-section-number">21</span> Introduction to Shiny Web Apps</a></li>
+<li><a class="" href="python-missingno-library-tutorial.html"><span class="header-section-number">22</span> Python missingno library tutorial</a></li>
+<li><a class="" href="data-explorer-tutorial-and-automation.html"><span class="header-section-number">23</span> Data Explorer Tutorial and Automation</a></li>
+<li><a class="active" href="d-visualization-in-r.html"><span class="header-section-number">24</span> 3D Visualization in R</a></li>
+<li class="book-part">Interview Prep</li>
+<li><a class="" href="ten-interview-questions-and-answers.html"><span class="header-section-number">26</span> Ten interview questions and answers</a></li>
+<li class="book-part">Case Studies</li>
+<li><a class="" href="benford-case-study.html"><span class="header-section-number">28</span> Benford Case Study</a></li>
+<li class="book-part">Appendices</li>
+<li><a class="" href="github-initial-setup.html"><span class="header-section-number">29</span> Github initial setup</a></li>
+<li><a class="" href="tutorial-for-pull-request-mergers.html"><span class="header-section-number">30</span> Tutorial for pull request mergers</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/jtr13/cc22tt">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="d-visualization-in-r" class="section level1" number="24">
+<h1>
+<span class="header-section-number">24</span> 3D Visualization in R<a class="anchor" aria-label="anchor" href="#d-visualization-in-r"><i class="fas fa-link"></i></a>
+</h1>
+<p>Tianyu Han and Shijia Huang</p>
+<div id="motivation-2" class="section level2" number="24.1">
+<h2>
+<span class="header-section-number">24.1</span> Motivation<a class="anchor" aria-label="anchor" href="#motivation-2"><i class="fas fa-link"></i></a>
+</h2>
+<p>As an important part of data visualization, 3D plotting makes the data exploration part easier for users and allow a visual display of datasets.By plotting data points on three axes, 3D plots describe the relationship between these three variables and are useful to identify underlying patterns and interactions that are not shown on 2D graphs.</p>
+<p>In this tutorial, we will introduce different packages for 3D plots, including package Scatterplot3D, package plot3D, and also plotly. By the end of the tutorial, one will be able to choose the most suitable package for his/her project.</p>
+<p>What we can learn from this project is that there are always different ways to tackle the same problem using different R libraries and packages. It will require extensive research and trials in order to determine which one works best in the given scenario.</p>
+</div>
+<div id="scatterplot3d" class="section level2" number="24.2">
+<h2>
+<span class="header-section-number">24.2</span> Scatterplot3D<a class="anchor" aria-label="anchor" href="#scatterplot3d"><i class="fas fa-link"></i></a>
+</h2>
+<p>Scatterplot3d is an R package that displays multidimensional data in 3D space.There is only one function scatterplot3d() in this package.The usage of scatterplot3d() will be discussed with examples as below.</p>
+<div id="load-data" class="section level3" number="24.2.1">
+<h3>
+<span class="header-section-number">24.2.1</span> Load Data<a class="anchor" aria-label="anchor" href="#load-data"><i class="fas fa-link"></i></a>
+</h3>
+<p>We use the preloaded dataset USArrests as an example to show what information can be draw from 3D plot using scatterplot3d.</p>
+<div class="sourceCode" id="cb289"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"USArrests"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">USArrests</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##            Murder Assault UrbanPop Rape
+## Alabama      13.2     236       58 21.2
+## Alaska       10.0     263       48 44.5
+## Arizona       8.1     294       80 31.0
+## Arkansas      8.8     190       50 19.5
+## California    9.0     276       91 40.6
+## Colorado      7.9     204       78 38.7</code></pre>
+</div>
+<div id="create-matrix" class="section level3" number="24.2.2">
+<h3>
+<span class="header-section-number">24.2.2</span> Create matrix<a class="anchor" aria-label="anchor" href="#create-matrix"><i class="fas fa-link"></i></a>
+</h3>
+<p>For Scatterplot3d, the dataframe provided must be converted into a matrix. Here we select Assault, Urban Population, and Rape as our three axes.</p>
+<div class="sourceCode" id="cb291"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">USArrestsMatrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">USArrests</span><span class="op">)</span></span>
+<span><span class="va">x1</span> <span class="op">&lt;-</span> <span class="va">USArrestsMatrix</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span> <span class="co">## Assault</span></span>
+<span><span class="va">y1</span> <span class="op">&lt;-</span> <span class="va">USArrestsMatrix</span><span class="op">[</span>,<span class="fl">3</span><span class="op">]</span> <span class="co">## Urban Population</span></span>
+<span><span class="va">z1</span> <span class="op">&lt;-</span> <span class="va">USArrestsMatrix</span><span class="op">[</span>,<span class="fl">4</span><span class="op">]</span> <span class="co">## Rape</span></span></code></pre></div>
+</div>
+<div id="generate-3d-scatter-plot" class="section level3" number="24.2.3">
+<h3>
+<span class="header-section-number">24.2.3</span> Generate 3d scatter plot<a class="anchor" aria-label="anchor" href="#generate-3d-scatter-plot"><i class="fas fa-link"></i></a>
+</h3>
+<p>Creating a graph using scatterplot3d. “highlight” gives a color scale that enables users to understand the relative position of each data point. “pch” specifies a plotting shape, here we set pch = 16, which is a small dot.</p>
+<div class="sourceCode" id="cb292"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">sp1</span> <span class="op">&lt;-</span> <span class="fu">scatterplot3d</span><span class="op">(</span><span class="va">x1</span>,<span class="va">y1</span>,<span class="va">z1</span>, highlight.3d <span class="op">=</span> <span class="cn">TRUE</span>, pch <span class="op">=</span> <span class="fl">16</span>, angle <span class="op">=</span> <span class="fl">45</span>,</span>
+<span>                     xlab <span class="op">=</span> <span class="st">"Assault"</span>,</span>
+<span>                     ylab <span class="op">=</span> <span class="st">"Urban Population"</span>,</span>
+<span>                     zlab <span class="op">=</span> <span class="st">"Rape"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="3d_visualization_in_r_files/figure-html/unnamed-chunk-4-1.png" width="80%" style="display: block; margin: auto;"></div>
+<p>We can also remove the box (or grid) of the graph and change the color of the points. Note that when setting color, the “highlight.3d” argument should be specified as FALSE</p>
+<div class="sourceCode" id="cb293"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">sp2</span> <span class="op">&lt;-</span> <span class="fu">scatterplot3d</span><span class="op">(</span><span class="va">x1</span>,<span class="va">y1</span>,<span class="va">z1</span>,  pch <span class="op">=</span> <span class="fl">16</span>, angle <span class="op">=</span> <span class="fl">45</span>,highlight.3d <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>                     xlab <span class="op">=</span> <span class="st">"Assault"</span>,</span>
+<span>                     ylab <span class="op">=</span> <span class="st">"Urban Population"</span>,</span>
+<span>                     zlab <span class="op">=</span> <span class="st">"Rape"</span>,</span>
+<span>                     grid <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                     box <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>                     color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"pink"</span><span class="op">)</span><span class="op">)</span> </span></code></pre></div>
+<div class="inline-figure"><img src="3d_visualization_in_r_files/figure-html/unnamed-chunk-5-1.png" width="80%" style="display: block; margin: auto;"></div>
+<p>Adding labels to the graph, “cex” specifies the font size.</p>
+<div class="sourceCode" id="cb294"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">sp3</span> <span class="op">&lt;-</span> <span class="fu">scatterplot3d</span><span class="op">(</span><span class="va">x1</span>,<span class="va">y1</span>,<span class="va">z1</span>, highlight.3d <span class="op">=</span> <span class="cn">TRUE</span>, pch <span class="op">=</span> <span class="fl">18</span>, angle <span class="op">=</span> <span class="fl">45</span>,</span>
+<span>                     xlab <span class="op">=</span> <span class="st">"Assault"</span>,</span>
+<span>                     ylab <span class="op">=</span> <span class="st">"Urban Population"</span>,</span>
+<span>                     zlab <span class="op">=</span> <span class="st">"Rape"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/text.html">text</a></span><span class="op">(</span><span class="va">sp3</span><span class="op">$</span><span class="fu">xyz.convert</span><span class="op">(</span><span class="va">USArrests</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span>,labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">USArrests</span><span class="op">)</span>, cex <span class="op">=</span> <span class="fl">0.5</span>, color <span class="op">=</span> <span class="st">'pink'</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="3d_visualization_in_r_files/figure-html/unnamed-chunk-6-1.png" width="80%" style="display: block; margin: auto;"></div>
+</div>
+<div id="d-scatter-plot-with-x-y-plane-position" class="section level3" number="24.2.4">
+<h3>
+<span class="header-section-number">24.2.4</span> 3D scatter plot with x-y plane position<a class="anchor" aria-label="anchor" href="#d-scatter-plot-with-x-y-plane-position"><i class="fas fa-link"></i></a>
+</h3>
+<p>Use the “Type = ‘h’” to create vertical lines between each data point and the x-y plane.</p>
+<div class="sourceCode" id="cb295"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">sp4</span> <span class="op">&lt;-</span> <span class="fu">scatterplot3d</span><span class="op">(</span><span class="va">x1</span>,<span class="va">y1</span>,<span class="va">z1</span>, highlight.3d <span class="op">=</span> <span class="cn">TRUE</span>, pch <span class="op">=</span> <span class="fl">18</span>, angle <span class="op">=</span> <span class="fl">45</span>,</span>
+<span>                     xlab <span class="op">=</span> <span class="st">"Assault"</span>,</span>
+<span>                     ylab <span class="op">=</span> <span class="st">"Urban Population"</span>,</span>
+<span>                     zlab <span class="op">=</span> <span class="st">"Rape"</span>,</span>
+<span>                     type <span class="op">=</span> <span class="st">"h"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="3d_visualization_in_r_files/figure-html/unnamed-chunk-7-1.png" width="80%" style="display: block; margin: auto;"></div>
+</div>
+</div>
+<div id="d-plot-and-pca" class="section level2" number="24.3">
+<h2>
+<span class="header-section-number">24.3</span> 3D plot and PCA<a class="anchor" aria-label="anchor" href="#d-plot-and-pca"><i class="fas fa-link"></i></a>
+</h2>
+<p>In data science, 3D plot can also be used for machine learning steps. For example, by plotting principal components in a 3D space, we could efficiently observe the interaction between the important vectors of an input data.</p>
+<p>We use the preloaded data “Glass” to perform the principal component analysis and 3D visualization of components.</p>
+<div id="load-package-mlbench-and-use-the-glass-dataset." class="section level3" number="24.3.1">
+<h3>
+<span class="header-section-number">24.3.1</span> Load Package “mlbench” and use the Glass dataset.<a class="anchor" aria-label="anchor" href="#load-package-mlbench-and-use-the-glass-dataset."><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb296"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">Glass</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">Glass</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##        RI    Na   Mg   Al    Si    K   Ca Ba   Fe Type
+## 1 1.52101 13.64 4.49 1.10 71.78 0.06 8.75  0 0.00    1
+## 2 1.51761 13.89 3.60 1.36 72.73 0.48 7.83  0 0.00    1
+## 3 1.51618 13.53 3.55 1.54 72.99 0.39 7.78  0 0.00    1
+## 4 1.51766 13.21 3.69 1.29 72.61 0.57 8.22  0 0.00    1
+## 5 1.51742 13.27 3.62 1.24 73.08 0.55 8.07  0 0.00    1
+## 6 1.51596 12.79 3.61 1.62 72.97 0.64 8.07  0 0.26    1</code></pre>
+</div>
+<div id="data-cleaning" class="section level3" number="24.3.2">
+<h3>
+<span class="header-section-number">24.3.2</span> Data Cleaning<a class="anchor" aria-label="anchor" href="#data-cleaning"><i class="fas fa-link"></i></a>
+</h3>
+<p>Perform PCA on the dataset and convert the pca result into a dataframe. Here we plot three components of the PCA results.Specify three colors for them.”shape” specifies three different shapes for each component.</p>
+<div class="sourceCode" id="cb298"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span><span class="va">Glass</span><span class="op">[</span>,<span class="fl">2</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>, scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">results</span><span class="op">$</span><span class="va">rotation</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">1</span><span class="op">*</span><span class="va">results</span><span class="op">$</span><span class="va">rotation</span></span>
+<span><span class="va">results</span><span class="op">$</span><span class="va">rotation</span></span></code></pre></div>
+<pre><code>##           PC1        PC2       PC3
+## Na  0.4381565 -0.8763587 0.2000358
+## Mg -0.6582364 -0.1612544 0.7353380
+## Al  0.6121632  0.4538639 0.6475058</code></pre>
+<div class="sourceCode" id="cb300"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">results</span><span class="op">$</span><span class="va">x</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">1</span><span class="op">*</span><span class="va">results</span><span class="op">$</span><span class="va">x</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">results</span><span class="op">$</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##          PC1         PC2       PC3
+## 1 -1.1222507 -0.76451910 0.5299814
+## 2 -0.2631728 -0.69696062 0.4746961
+## 3 -0.2128159 -0.14139775 0.5944634
+## 4 -0.7549327 -0.04089696 0.2632213
+## 5 -0.7521008 -0.14291459 0.1773877
+## 6 -0.5391614  0.71876865 0.5475329</code></pre>
+<div class="sourceCode" id="cb302"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">pca.result</span> <span class="op">&lt;-</span> <span class="va">results</span><span class="op">$</span><span class="va">x</span></span>
+<span><span class="va">pca.result</span> <span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">pca.result</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">pca.result</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##          PC1         PC2       PC3
+## 1 -1.1222507 -0.76451910 0.5299814
+## 2 -0.2631728 -0.69696062 0.4746961
+## 3 -0.2128159 -0.14139775 0.5944634
+## 4 -0.7549327 -0.04089696 0.2632213
+## 5 -0.7521008 -0.14291459 0.1773877
+## 6 -0.5391614  0.71876865 0.5475329</code></pre>
+<div class="sourceCode" id="cb304"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">pca.result</span><span class="op">$</span><span class="va">Type</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">Glass</span><span class="op">$</span><span class="va">Type</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="define-color-and-shape-parameter." class="section level3" number="24.3.3">
+<h3>
+<span class="header-section-number">24.3.3</span> Define color and shape parameter.<a class="anchor" aria-label="anchor" href="#define-color-and-shape-parameter."><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb305"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">## choose 6 colors for 6 glass types</span></span>
+<span><span class="va">colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#E69F00"</span>, <span class="st">"#56B4E9"</span>,<span class="st">"#B2182B"</span>,<span class="st">"#D1E5F0"</span>,<span class="st">"#92C5DE"</span>,<span class="st">"#2166AC"</span><span class="op">)</span></span>
+<span><span class="va">colors</span> <span class="op">&lt;-</span> <span class="va">colors</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">pca.result</span><span class="op">$</span><span class="va">Type</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="co">## choose 6 shapes for 6 glass types</span></span>
+<span><span class="va">shape</span><span class="op">&lt;-</span><span class="fl">10</span><span class="op">:</span><span class="fl">15</span></span>
+<span><span class="va">shape</span><span class="op">&lt;-</span><span class="va">shape</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">pca.result</span><span class="op">$</span><span class="va">Type</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
+</div>
+<div id="generate-graph" class="section level3" number="24.3.4">
+<h3>
+<span class="header-section-number">24.3.4</span> Generate graph<a class="anchor" aria-label="anchor" href="#generate-graph"><i class="fas fa-link"></i></a>
+</h3>
+<p>Plot the result of our PCA analysis following the step in the previous part. Adjust angle for best visualization. Below is an example of how a 3D plot can help us see the contribution of each component in classifying types of glass.</p>
+<div class="sourceCode" id="cb306"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">PCA3D</span> <span class="op">&lt;-</span> <span class="fu">scatterplot3d</span><span class="op">(</span><span class="va">pca.result</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>,</span>
+<span>                     color<span class="op">=</span><span class="va">colors</span>,</span>
+<span>                     pch <span class="op">=</span> <span class="va">shape</span>, </span>
+<span>                     cex.symbols <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>                     angle <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"top"</span>, legend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">pca.result</span><span class="op">$</span><span class="va">Type</span><span class="op">)</span>,</span>
+<span>       col <span class="op">=</span>   <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#E69F00"</span>, <span class="st">"#56B4E9"</span>,<span class="st">"#B2182B"</span>,<span class="st">"#D1E5F0"</span>,<span class="st">"#92C5DE"</span>,<span class="st">"#2166AC"</span><span class="op">)</span>,</span>
+<span>       pch <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">11</span>,<span class="fl">12</span>,<span class="fl">13</span>,<span class="fl">14</span><span class="op">)</span>, </span>
+<span>       inset <span class="op">=</span> <span class="op">-</span><span class="fl">0.1</span>, xpd <span class="op">=</span> <span class="cn">TRUE</span>, horiz <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="3d_visualization_in_r_files/figure-html/unnamed-chunk-11-1.png" width="80%" style="display: block; margin: auto;"></div>
+</div>
+</div>
+<div id="other-usage-of-the-scatterplot3d-function" class="section level2" number="24.4">
+<h2>
+<span class="header-section-number">24.4</span> Other usage of the scatterplot3d function<a class="anchor" aria-label="anchor" href="#other-usage-of-the-scatterplot3d-function"><i class="fas fa-link"></i></a>
+</h2>
+<p>Sometimes it is hard to imagine the relationship between two functions or graph, by plotting them on a 3D space, we could visualize the interaction on a dynamic environment.</p>
+<p>Here is a simple example of how we could graph the interaction of cos and sin function.</p>
+<div class="sourceCode" id="cb307"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">15</span>, <span class="fl">15</span>, <span class="fl">0.05</span><span class="op">)</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">cos</a></span><span class="op">(</span><span class="va">z</span><span class="op">)</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">sin</a></span><span class="op">(</span><span class="va">z</span><span class="op">)</span></span>
+<span><span class="fu">scatterplot3d</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, <span class="va">z</span>, highlight.3d<span class="op">=</span><span class="cn">TRUE</span>, col.axis <span class="op">=</span><span class="st">"blue"</span>,col.grid <span class="op">=</span><span class="st">"lightblue"</span>, main<span class="op">=</span><span class="st">"an example of cosine and sine interaction"</span>, pch<span class="op">=</span><span class="fl">20</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="3d_visualization_in_r_files/figure-html/unnamed-chunk-12-1.png" width="80%" style="display: block; margin: auto;"></div>
+</div>
+<div id="d-histogram" class="section level2" number="24.5">
+<h2>
+<span class="header-section-number">24.5</span> 3D Histogram<a class="anchor" aria-label="anchor" href="#d-histogram"><i class="fas fa-link"></i></a>
+</h2>
+<p>If we were to generate a histogram in 3d, we can use the plot 3D package. We first initiate the x-axis and the y-axis. Then, we need to create z as matrix that has the dimension |x| * |y|. We can then use hist3D function in the package to help us generate the 3D histogram that we need.</p>
+<div class="sourceCode" id="cb308"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="va">y</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="va">z</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="va">mat1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="va">z</span>,nrow<span class="op">=</span><span class="fl">2</span>,ncol<span class="op">=</span><span class="fl">2</span>,byrow<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu">hist3D</span><span class="op">(</span>z<span class="op">=</span><span class="va">mat1</span>, x <span class="op">=</span> <span class="va">x</span>, y<span class="op">=</span> <span class="va">y</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="3d_visualization_in_r_files/figure-html/unnamed-chunk-13-1.png" width="80%" style="display: block; margin: auto;"></div>
+</div>
+<div id="d-scatter-plot-using-plotly" class="section level2" number="24.6">
+<h2>
+<span class="header-section-number">24.6</span> 3D scatter plot using plotly<a class="anchor" aria-label="anchor" href="#d-scatter-plot-using-plotly"><i class="fas fa-link"></i></a>
+</h2>
+<div id="demo-data" class="section level3" number="24.6.1">
+<h3>
+<span class="header-section-number">24.6.1</span> Demo Data<a class="anchor" aria-label="anchor" href="#demo-data"><i class="fas fa-link"></i></a>
+</h3>
+<p>In order to better demonstrate the different features of plotly 3D Scatterplot, we selected a sample data which includes 40 observations on household expenditure for single men and women. There are 5 variables for each observation:</p>
+<p>Housing: money(usd) spent on housing</p>
+<p>Food: money(usd) spent on food</p>
+<p>Goods: money(usd) spent on goods</p>
+<p>Service: money(usd) spent on service</p>
+<p>Gender: female or male</p>
+<div class="sourceCode" id="cb309"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">household</span></span></code></pre></div>
+<pre><code>##    housing food goods service gender
+## 1      820  114   183     154 female
+## 2      184   74     6      20 female
+## 3      921   66  1686     455 female
+## 4      488   80   103     115 female
+## 5      721   83   176     104 female
+## 6      614   55   441     193 female
+## 7      801   56   357     214 female
+## 8      396   59    61      80 female
+## 9      864   65  1618     352 female
+## 10     845   64  1935     414 female
+## 11     404   97    33      47 female
+## 12     781   47  1906     452 female
+## 13     457  103   136     108 female
+## 14    1029   71   244     189 female
+## 15    1047   90   653     298 female
+## 16     552   91   185     158 female
+## 17     718  104   583     304 female
+## 18     495  114    65      74 female
+## 19     382   77   230     147 female
+## 20    1090   59   313     177 female
+## 21     497  591   153     291   male
+## 22     839  942   302     365   male
+## 23     798 1308   668     584   male
+## 24     892  842   287     395   male
+## 25    1585  781  2476    1740   male
+## 26     755  764   428     438   male
+## 27     388  655   153     233   male
+## 28     617  879   757     719   male
+## 29     248  438    22      65   male
+## 30    1641  440  6471    2063   male
+## 31    1180 1243   768     813   male
+## 32     619  684    99     204   male
+## 33     253  422    15      48   male
+## 34     661  739    71     188   male
+## 35    1981  869  1489    1032   male
+## 36    1746  746  2662    1594   male
+## 37    1865  915  5184    1767   male
+## 38     238  522    29      75   male
+## 39    1199 1095   261     344   male
+## 40    1524  964  1739    1410   male</code></pre>
+</div>
+<div id="the-classic-3d-scatterplot" class="section level3" number="24.6.2">
+<h3>
+<span class="header-section-number">24.6.2</span> The classic 3D Scatterplot<a class="anchor" aria-label="anchor" href="#the-classic-3d-scatterplot"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb311"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">fig</span> <span class="op">&lt;-</span> <span class="fu">plot_ly</span><span class="op">(</span><span class="va">household</span>, x <span class="op">=</span> <span class="op">~</span><span class="va">housing</span>, y <span class="op">=</span> <span class="op">~</span><span class="va">food</span>, z <span class="op">=</span> <span class="op">~</span><span class="va">goods</span> <span class="op">+</span> <span class="va">service</span><span class="op">)</span></span>
+<span><span class="va">fig</span> <span class="op">&lt;-</span> <span class="va">fig</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/graphics/layout.html">layout</a></span><span class="op">(</span>scene <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span>xaxis <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">'housing'</span><span class="op">)</span>,</span>
+<span>                                   yaxis <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">'food'</span><span class="op">)</span>,</span>
+<span>                                   zaxis <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">'goods and services'</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">fig</span></span></code></pre></div>
+<div id="htmlwidget-89087dc6b652a3434340" style="width:80%;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-89087dc6b652a3434340">{"x":{"visdat":{"3e616c0ba4de":["function () ","plotlyVisDat"]},"cur_data":"3e616c0ba4de","attrs":{"3e616c0ba4de":{"x":{},"y":{},"z":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20]}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"xaxis":{"title":"housing"},"yaxis":{"title":"food"},"zaxis":{"title":"goods and services"}},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[820,184,921,488,721,614,801,396,864,845,404,781,457,1029,1047,552,718,495,382,1090,497,839,798,892,1585,755,388,617,248,1641,1180,619,253,661,1981,1746,1865,238,1199,1524],"y":[114,74,66,80,83,55,56,59,65,64,97,47,103,71,90,91,104,114,77,59,591,942,1308,842,781,764,655,879,438,440,1243,684,422,739,869,746,915,522,1095,964],"z":[337,26,2141,218,280,634,571,141,1970,2349,80,2358,244,433,951,343,887,139,377,490,444,667,1252,682,4216,866,386,1476,87,8534,1581,303,63,259,2521,4256,6951,104,605,3149],"type":"scatter3d","mode":"markers","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="adding-colors-to-3d-scatterplot" class="section level3" number="24.6.3">
+<h3>
+<span class="header-section-number">24.6.3</span> Adding colors to 3D Scatterplot<a class="anchor" aria-label="anchor" href="#adding-colors-to-3d-scatterplot"><i class="fas fa-link"></i></a>
+</h3>
+<p>In order differentiate the observations of opposite genders, we will need to add colors to our 3D scatter plot. It is done as followed:</p>
+<div class="sourceCode" id="cb312"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">fig</span> <span class="op">&lt;-</span> <span class="fu">plot_ly</span><span class="op">(</span><span class="va">household</span>, x <span class="op">=</span> <span class="op">~</span><span class="va">housing</span>, y <span class="op">=</span> <span class="op">~</span><span class="va">food</span>, z <span class="op">=</span> <span class="op">~</span><span class="va">goods</span> <span class="op">+</span> <span class="va">service</span>,</span>
+<span>               color <span class="op">=</span> <span class="op">~</span><span class="va">gender</span>, colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'#17becf'</span>, <span class="st">'#d62728'</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">fig</span> <span class="op">&lt;-</span> <span class="va">fig</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">add_markers</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">fig</span> <span class="op">&lt;-</span> <span class="va">fig</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/graphics/layout.html">layout</a></span><span class="op">(</span>scene <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span>xaxis <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">'housing'</span><span class="op">)</span>,</span>
+<span>                                   yaxis <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">'food'</span><span class="op">)</span>,</span>
+<span>                                   zaxis <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">'goods and services'</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">fig</span></span></code></pre></div>
+<div id="htmlwidget-2f48a94652080ed3d729" style="width:80%;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2f48a94652080ed3d729">{"x":{"visdat":{"3e61a2a4980":["function () ","plotlyVisDat"]},"cur_data":"3e61a2a4980","attrs":{"3e61a2a4980":{"x":{},"y":{},"z":{},"color":{},"colors":["#17becf","#d62728"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter3d","mode":"markers","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"xaxis":{"title":"housing"},"yaxis":{"title":"food"},"zaxis":{"title":"goods and services"}},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[820,184,921,488,721,614,801,396,864,845,404,781,457,1029,1047,552,718,495,382,1090],"y":[114,74,66,80,83,55,56,59,65,64,97,47,103,71,90,91,104,114,77,59],"z":[337,26,2141,218,280,634,571,141,1970,2349,80,2358,244,433,951,343,887,139,377,490],"type":"scatter3d","mode":"markers","name":"female","marker":{"color":"rgba(23,190,207,1)","line":{"color":"rgba(23,190,207,1)"}},"textfont":{"color":"rgba(23,190,207,1)"},"error_y":{"color":"rgba(23,190,207,1)"},"error_x":{"color":"rgba(23,190,207,1)"},"line":{"color":"rgba(23,190,207,1)"},"frame":null},{"x":[497,839,798,892,1585,755,388,617,248,1641,1180,619,253,661,1981,1746,1865,238,1199,1524],"y":[591,942,1308,842,781,764,655,879,438,440,1243,684,422,739,869,746,915,522,1095,964],"z":[444,667,1252,682,4216,866,386,1476,87,8534,1581,303,63,259,2521,4256,6951,104,605,3149],"type":"scatter3d","mode":"markers","name":"male","marker":{"color":"rgba(214,39,40,1)","line":{"color":"rgba(214,39,40,1)"}},"textfont":{"color":"rgba(214,39,40,1)"},"error_y":{"color":"rgba(214,39,40,1)"},"error_x":{"color":"rgba(214,39,40,1)"},"line":{"color":"rgba(214,39,40,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="adding-sizes-to-3d-scatterplot" class="section level3" number="24.6.4">
+<h3>
+<span class="header-section-number">24.6.4</span> Adding sizes to 3D Scatterplot<a class="anchor" aria-label="anchor" href="#adding-sizes-to-3d-scatterplot"><i class="fas fa-link"></i></a>
+</h3>
+<p>It is interesting to note that size is available as a fifth parameter if it helps us plot our findings. In our example, we used size to plot the overall expenditure of the household. It help us visualize the overall trend better.</p>
+<div class="sourceCode" id="cb313"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">fig</span> <span class="op">&lt;-</span> <span class="fu">plot_ly</span><span class="op">(</span><span class="va">household</span>, x <span class="op">=</span> <span class="op">~</span><span class="va">housing</span>, y <span class="op">=</span> <span class="op">~</span><span class="va">food</span>, z <span class="op">=</span> <span class="op">~</span><span class="va">goods</span> <span class="op">+</span> <span class="va">service</span>,</span>
+<span>               color <span class="op">=</span> <span class="op">~</span><span class="va">gender</span>, colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'#2ca02c'</span>, <span class="st">'#8c564b'</span><span class="op">)</span>, size <span class="op">=</span> <span class="op">~</span> <span class="va">housing</span> <span class="op">+</span> <span class="va">food</span> <span class="op">+</span> <span class="va">goods</span> <span class="op">+</span> <span class="va">service</span>, sizes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">500</span>, <span class="fl">5000</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">fig</span> <span class="op">&lt;-</span> <span class="va">fig</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">add_markers</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">fig</span> <span class="op">&lt;-</span> <span class="va">fig</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/graphics/layout.html">layout</a></span><span class="op">(</span>scene <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span>xaxis <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">'housing'</span><span class="op">)</span>,</span>
+<span>                                   yaxis <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">'food'</span><span class="op">)</span>,</span>
+<span>                                   zaxis <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">'goods and services'</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">fig</span></span></code></pre></div>
+<div id="htmlwidget-0f4e2257d1613a8018d1" style="width:80%;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-0f4e2257d1613a8018d1">{"x":{"visdat":{"3e61490edcdb":["function () ","plotlyVisDat"]},"cur_data":"3e61490edcdb","attrs":{"3e61490edcdb":{"x":{},"y":{},"z":{},"color":{},"size":{},"colors":["#2ca02c","#8c564b"],"alpha_stroke":1,"sizes":[500,5000],"spans":[1,20],"type":"scatter3d","mode":"markers","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"xaxis":{"title":"housing"},"yaxis":{"title":"food"},"zaxis":{"title":"goods and services"}},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[820,184,921,488,721,614,801,396,864,845,404,781,457,1029,1047,552,718,495,382,1090],"y":[114,74,66,80,83,55,56,59,65,64,97,47,103,71,90,91,104,114,77,59],"z":[337,26,2141,218,280,634,571,141,1970,2349,80,2358,244,433,951,343,887,139,377,490],"type":"scatter3d","mode":"markers","name":"female","marker":{"color":"rgba(44,160,44,1)","size":[929.919659277901,500,1738.79585712903,718.662278579034,848.46578259607,943.858290581744,998.30606911238,635.901655212467,1639.0475268609,1795.42154680089,629.367921788791,1764.05962636724,726.502758687446,1044.04220307811,1285.79033975414,805.778724228051,1120.70467524925,702.110153905721,740.441389991288,1090.21391927209],"sizemode":"area","line":{"color":"rgba(44,160,44,1)"}},"textfont":{"color":"rgba(44,160,44,1)","size":[929.919659277901,500,1738.79585712903,718.662278579034,848.46578259607,943.858290581744,998.30606911238,635.901655212467,1639.0475268609,1795.42154680089,629.367921788791,1764.05962636724,726.502758687446,1044.04220307811,1285.79033975414,805.778724228051,1120.70467524925,702.110153905721,740.441389991288,1090.21391927209]},"error_y":{"color":"rgba(44,160,44,1)","width":[]},"error_x":{"color":"rgba(44,160,44,1)","width":[]},"line":{"color":"rgba(44,160,44,1)"},"frame":null},{"x":[497,839,798,892,1585,755,388,617,248,1641,1180,619,253,661,1981,1746,1865,238,1199,1524],"y":[591,942,1308,842,781,764,655,879,438,440,1243,684,422,739,869,746,915,522,1095,964],"z":[444,667,1252,682,4216,866,386,1476,87,8534,1581,303,63,259,2521,4256,6951,104,605,3149],"type":"scatter3d","mode":"markers","name":"male","marker":{"color":"rgba(140,86,75,1)","size":[1043.60662084987,1442.59994192237,1838.9797696254,1428.66131061853,3243.29687348756,1415.15826154293,998.741651340625,1670.8450295228,712.999709611848,5000,2120.36588907173,1075.83970574001,697.75433162327,1098.925563837,2715.80679508276,3315.60352337625,4614.94531023134,752.637692382151,1639.0475268609,2831.67166779595],"sizemode":"area","line":{"color":"rgba(140,86,75,1)"}},"textfont":{"color":"rgba(140,86,75,1)","size":[1043.60662084987,1442.59994192237,1838.9797696254,1428.66131061853,3243.29687348756,1415.15826154293,998.741651340625,1670.8450295228,712.999709611848,5000,2120.36588907173,1075.83970574001,697.75433162327,1098.925563837,2715.80679508276,3315.60352337625,4614.94531023134,752.637692382151,1639.0475268609,2831.67166779595]},"error_y":{"color":"rgba(140,86,75,1)","width":[]},"error_x":{"color":"rgba(140,86,75,1)","width":[]},"line":{"color":"rgba(140,86,75,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div id="conclusion-4" class="section level2" number="24.7">
+<h2>
+<span class="header-section-number">24.7</span> Conclusion<a class="anchor" aria-label="anchor" href="#conclusion-4"><i class="fas fa-link"></i></a>
+</h2>
+<p>In our tutorial, we have introduced scatterplot3d, plot3d, and also plotly. They each have their respective advantages. If you need a more interactive graph that allows zooming in and rotating, plotly would be your better choice. However, if you were to perform principal component analysis and better visualize your results, it would be easier to use scatterplot3d.</p>
+</div>
+<div id="works-cited" class="section level2" number="24.8">
+<h2>
+<span class="header-section-number">24.8</span> Works Cited<a class="anchor" aria-label="anchor" href="#works-cited"><i class="fas fa-link"></i></a>
+</h2>
+<p>Ligges, Uwe, and Martin Mächler. “Scatterplot3d - an R Package for Visualizing Multivariate Data.” Journal of Statistical Software, vol. 8, no. 11, Foundation for Open Access Statistic, 2003, <a href="https://doi.org/10.18637/jss.v008.i11" class="uri">https://doi.org/10.18637/jss.v008.i11</a>.</p>
+<p><a href="http://www.sthda.com/english/wiki/scatterplot3d-3d-graphics-r-software-and-data-visualization" class="uri">http://www.sthda.com/english/wiki/scatterplot3d-3d-graphics-r-software-and-data-visualization</a></p>
+<p><a href="http://www.sthda.com/english/wiki/colors-in-r#" class="uri">http://www.sthda.com/english/wiki/colors-in-r#</a>:~:text=In%20R%2C%20colors%20can%20be,taken%20from%20the%20RColorBrewer%20package.</p>
+<p><a href="https://www.statology.org/principal-components-analysis-in-r/" class="uri">https://www.statology.org/principal-components-analysis-in-r/</a></p>
+<p><a href="https://plotly.com/r/3d-scatter-plots/" class="uri">https://plotly.com/r/3d-scatter-plots/</a></p>
+<p><a href="http://www.countbio.com/web_pages/left_object/R_for_biology/R_fundamentals/3D_histograms_R.html" class="uri">http://www.countbio.com/web_pages/left_object/R_for_biology/R_fundamentals/3D_histograms_R.html</a></p>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="data-explorer-tutorial-and-automation.html"><span class="header-section-number">23</span> Data Explorer Tutorial and Automation</a></div>
+<div class="next"><a href="ten-interview-questions-and-answers.html"><span class="header-section-number">26</span> Ten interview questions and answers</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#d-visualization-in-r"><span class="header-section-number">24</span> 3D Visualization in R</a></li>
+<li><a class="nav-link" href="#motivation-2"><span class="header-section-number">24.1</span> Motivation</a></li>
+<li>
+<a class="nav-link" href="#scatterplot3d"><span class="header-section-number">24.2</span> Scatterplot3D</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#load-data"><span class="header-section-number">24.2.1</span> Load Data</a></li>
+<li><a class="nav-link" href="#create-matrix"><span class="header-section-number">24.2.2</span> Create matrix</a></li>
+<li><a class="nav-link" href="#generate-3d-scatter-plot"><span class="header-section-number">24.2.3</span> Generate 3d scatter plot</a></li>
+<li><a class="nav-link" href="#d-scatter-plot-with-x-y-plane-position"><span class="header-section-number">24.2.4</span> 3D scatter plot with x-y plane position</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#d-plot-and-pca"><span class="header-section-number">24.3</span> 3D plot and PCA</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#load-package-mlbench-and-use-the-glass-dataset."><span class="header-section-number">24.3.1</span> Load Package “mlbench” and use the Glass dataset.</a></li>
+<li><a class="nav-link" href="#data-cleaning"><span class="header-section-number">24.3.2</span> Data Cleaning</a></li>
+<li><a class="nav-link" href="#define-color-and-shape-parameter."><span class="header-section-number">24.3.3</span> Define color and shape parameter.</a></li>
+<li><a class="nav-link" href="#generate-graph"><span class="header-section-number">24.3.4</span> Generate graph</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#other-usage-of-the-scatterplot3d-function"><span class="header-section-number">24.4</span> Other usage of the scatterplot3d function</a></li>
+<li><a class="nav-link" href="#d-histogram"><span class="header-section-number">24.5</span> 3D Histogram</a></li>
+<li>
+<a class="nav-link" href="#d-scatter-plot-using-plotly"><span class="header-section-number">24.6</span> 3D scatter plot using plotly</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#demo-data"><span class="header-section-number">24.6.1</span> Demo Data</a></li>
+<li><a class="nav-link" href="#the-classic-3d-scatterplot"><span class="header-section-number">24.6.2</span> The classic 3D Scatterplot</a></li>
+<li><a class="nav-link" href="#adding-colors-to-3d-scatterplot"><span class="header-section-number">24.6.3</span> Adding colors to 3D Scatterplot</a></li>
+<li><a class="nav-link" href="#adding-sizes-to-3d-scatterplot"><span class="header-section-number">24.6.4</span> Adding sizes to 3D Scatterplot</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#conclusion-4"><span class="header-section-number">24.7</span> Conclusion</a></li>
+<li><a class="nav-link" href="#works-cited"><span class="header-section-number">24.8</span> Works Cited</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/jtr13/cc22tt/blob/main/3d_visualization_in_r.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/jtr13/cc22tt/edit/main/3d_visualization_in_r.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Community Contributions for EDAV Fall 2022 Tues/Thurs</strong>" was written by . It was last built on 2022-11-14.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
