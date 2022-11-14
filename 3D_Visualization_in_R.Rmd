@@ -12,6 +12,7 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = TRUE)
 #install.packages('mlbench')
 #install.packages('plot3D')
 #If working on a mac machine, xquartz x11 might need to be installed from the web in order to use plot3D 
+
 library(scatterplot3d)
 library('mlbench')
 library(plot3D)
