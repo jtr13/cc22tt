@@ -26,6 +26,8 @@ useful-plots-for-bioinfomatics-in-r
 different-ways-to-create-world-map-in-r
 explanation-of-motivation
 color-in-r-python-and-jshtmlcss
+color-palettes-for-data-visualization
+explanation-of-the-motivation
 part-tutorials
 preprocessing-and-visualization-of-time-series-data
 preprocess-on-a-time-series-data
