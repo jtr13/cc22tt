@@ -35,6 +35,7 @@ rmd_files: [
   # 'mapview_tutorial.Rmd',
   'r_data_cleaning.Rmd',
   'shiny_app_intro.Rmd',
+  'python_missingno_tutorial.Rmd',
   
   # Part: Interview Prep
   'ten_interview_questions.Rmd',
