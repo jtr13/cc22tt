@@ -1,0 +1,372 @@
+# How to write music in R
+
+Alexandra Jalali
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r packages, message=FALSE}
+library(gm)
+library(tidyverse) 
+```
+
+## Music Programming and the GM Package
+
+Musical Programming is producing music from scratch using different software and equipment. It can be implemented as a library, computer application, web application, or a loadable kernel module.
+
+The GM package in R is an intuitive language that can help you create musical scores easily. It shows musical scores and audiofiles in R markdown documents, R Jupyter Notebooks and RStudio. GM stands for "grammar of music" or "generate music". This package uses R's basic data structures, such as vectors and lists, to represent music. GM has a straightforward process to add components to your score, such as musical lines, and is the best package to use for musical programming in R.
+
+This is an example of an arrangement of the first few lines of "Let it Be" by the Beatles using the gm package. Throughout the remainder of this document, we will break this score down and show how we used the gm package to construct it.
+
+```{r}
+melodyhigh <- Line(
+  pitches = list(NA,NA,NA,NA,"G5","G5","G5","G5", "A5", "C6","G5","G5","C6","D6","E6","E6","E6","D6","D6","C6","C6", "E6","E6","F6","E6","E6","D6","E6","D6","C6","C6"),
+  durations = list("q","q","q","8", "16", "16", "8", "16","8.","8","8","8","16","8.","16","16","q","16","8","16","q.","8","8","8","16","8","q","16","16","16","w"),
+   tie = list(30)
+)
+
+melody <- Line(
+  pitches = list(NA,NA,NA,NA,"G4","G4","G4","G4", "A4", "C5","G4","G4","C5","D5","E5","E5","E5","D5","D5","C5","C5", "E5","E5","F5","E5","E5","D5","E5","D5","C5","C5"),
+  durations = list("q","q","q","8", "16", "16", "8", "16","8.","8","8","8","16","8.","16","16","q","16","8","16","q.","8","8","8","16","8","q","16","16","16","w"),
+   tie = list(30)
+)
+
+harmony <-Line(
+  pitches = list(NA,NA,NA,NA,"E4","E4","E4","E4", "F4", "G4","E4","E4","G4","B4","C5","C5","C5","B4","B4","A4","A4", "C5","C5","D5","C5","C5","B4","C5","B4","G4","G4"),
+  durations = list("q","q","q","8", "16", "16", "8", "16","8.","8","8","8","16","8.","16","16","q","16","8","16","q.","8","8","8","16","8","q","16","16","16","w"),
+   tie = list(30)
+)
+
+chords <- Line(
+  pitches = list(c("D4","C4","G3"),"G2",c("D4","C4","G3"),"G2",c("D4","B3","G3"),"G2",c("D4","B3","G3"),"G2",c("C4","G3","E3"),"C2",c("C4","G3","E3"),"C2",c("B3","G3","D3"),"G2",c("B3","G3","D3"),"G2",c("C4","A3","E3"),"A2",c("C4","A3","E3"),c("B3","G3","D3"),c("A3","F3","C3"),"F2",c("A3","F3","C3"),"F2",c("C4","G3","E3"),"C2",c("C4","G3","E3"),"C2",c("B3","G3","D3"),"G2",c("B3","G3","D3"),"G2",c("A4","F4","C4","C3","F3"),c("G4","E4","B3","B2","E3"),c("F3","D4","A3","D3"),c("E3","C4","G2","C3")),
+  durations = list("8","8","8","8","8","8","8","8","8","8","8","8","8","8","8","8","8","8","8","8","8","8","8","8","8","8","8","8","8","8","8","8","q","8","8","h")
+)
+
+m <- Music()+
+  Meter(4,4)+
+  Tempo(70)+
+  Key(0)+
+  melodyhigh+
+  harmony+
+  melody+
+  chords
+
+show(m, t=c("score","audio"))
+```
+
+## Installation
+
+There are two ways to install the gm package onto Rstudio:
+
+1. Installing gm from Cran:
+```{r, eval=FALSE}
+install.packages("gm")
+```
+2. Installing the developmental version from github:
+```{r, eval=FALSE}
+devtools::install_github("flujoo/gm")
+```
+
+We also need to install the application MusicScore, an open source and free notation software that gm uses internally. There are two ways to do this:
+
+1. Download and install directly from the source (easiest method): https://musescore.org/en
+
+2. Configuration:
++ Open .Renviron file
+```{r, eval=FALSE}
+usethis::edit_r_environ()
+```
++ Add an environment variable
+```{r, eval=FALSE}
+MUSESCORE_PATH=<path to MuseScore executable>
+```
++ Restart R session to activate the change.
+
+Once gm and MusicScore are installed and downloaded, you can start using the gm package in R.
+
+## Objects
+
+### Music Objects
+
+The Music( ) object in gm is used to represent music. To create a score, you first initialize an empty Music( ) object and then add other components.
+
+In our example after initializing an empty Music( ) object, we added time signature, tempo, key, 2 melody lines, a harmony, and a rhythmic component with chords. This grammar is similar to ggplot2.
+```{r}
+m <- Music() + #initializing an empty Music() object
+  Meter(4,4) + #adding in a 4/4 time signature
+  Tempo(70) + #changing the tempo to 70bpm
+  Key(0) + #indicating that we are in the key of C
+  melodyhigh + #upper melody
+  harmony + #harmony
+  melody + #lower melody that is one octave lower than melodyhigh
+  chords #chords and rhythm
+```
+Then using the show function we converted 'm' to musical score and an audio file.
+```{r, eval=FALSE}
+show(m, t=c("score","audio"))
+```
+
+
+### Line Objects
+
+The Line( ) object represents each staff, or the set of 5 horizontal lines and four spaces that each represent a different musical pitch. A line can be created using the Line( ) function and saved into a variable. It is then added to the Music( ) object to convert to musical score. In our example, the lines we have for the entire score are 'melodyhigh','harmony','melody',and 'chords'. 
+
+To actually create music within each staff, we have to add arguments.
+
+#### Pitch Argument
+
+The pitch argument represents the pitches of the notes that are added to each line as a list. The components of this list can be:
+
+1. Pitch as notation (ie 'C4' to represent middle C)
+
+2. Pitch as a MIDI note (ie 60 to represent middle C)
+
+3. Rest as 'NA'
+
+4. Chords as vectors (ie c("C4","E4","G4") to represent a middle C chord)
+
+In our example, the pitches and rests for the first 2 measures of the melody are NA,NA,NA,NA,"G4","G4","G4","G4", "A4","C5","G4","G4","C5","D5".
+
+However, if we just add this to the Line( ) object, we will receive an error because we also need to specify how long each pitch and rest needs to be using the durations argument.
+
+#### Durations Argument
+
+The durations argument represents the duration that each pitch, rest, or chord is to be played for. The number of members in durations must equal the number of members in pitch. The duration types and their abbreviations are:
+
++ "maxima" or "m"
++ "long" or "l"
++ "breve" or "b"
++ "whole" or "w"
++ "half" or "h"
++ "quarter" or "q"
++ "eighth" or "8"
++ "16th" or "16"
++ "32nd" or "32"
++ "64th" or "64"
++ "128th" or "128"
++ "256th" or "256"
++ "512th" or "512"
++ "1024th" or "1024"
+
+We can see how rests, pitches, and the duration of each rest and pitch are displayed from the first 2 measures of the melody and chords of our example, saved into variables 'melody' and 'chords'.
+```{r}
+melody <- Line(
+  pitches = list(NA,NA,NA,NA,"G4","G4","G4","G4", "A4", "C5","G4","G4","C5","D5"), #pitches in the melody
+  durations = list("q","q","q","8", "16", "16", "8", "16","8.","8","8","8","16","8.")) #duration of each note in the melody
+
+chords <- Line(
+  pitches = list(c("D4","C4","G3"),"G2",c("D4","C4","G3"),"G2",c("D4","B3","G3"),"G2",c("D4","B3","G3"),"G2",c("C4","G3","E3"),"C2",c("C4","G3","E3"),"C2",c("B3","G3","D3"),"G2",c("B3","G3","D3"),"G2"), #pitches in the chords
+  durations = list("8","8","8","8","8","8","8","8","8","8","8","8","8","8","8","8")) #duration of the notes and chords
+
+m <- Music()+Meter(4,4)+Tempo(70)+Key(0)+melody+chords
+
+show(m, t=c("score","audio"))
+```
+Each member of pitches and duration respectively correlate. In the melody of our example, the first three rests (NA's) are quarter rests so their duration is "q". The fourth rest is an eighth rest so its duration is "8". Dotted notes are also able to be specified within the durations argument. In the third note of the second measure of the melody, A4 is a dotted eighth note, so its duration is indicated as "8.". 
+
+#### Tie Argument
+
+In musical notation, a tie is a curved line that connects two notes that are the same pitch, indicating that they are to be played as a single note with a duration equal to the sum of the individual notes' values. Gm will recognize when a tie is supposed to be in place based on the pitches and durations. However, sometimes it needs to be manually put in.
+
+Let us take a look at the last 2 measures of the score. The last note, "C5", is to be played at the end of the second to last measure and extended through the last measure. Without manually adding in a tie, this is how the score looks and sounds:
+
+```{r}
+melody <- Line(
+  pitches = list("E5","E5","F5","E5","E5","D5","E5","D5","C5"), 
+  durations = list("8","8","8","16","8","q","16","16","w"))
+
+chords <- Line(
+  pitches = list(c("C4","G3","E3"),"C2",c("C4","G3","E3"),"C2",c("B3","G3","D3"),"G2",c("B3","G3","D3"),"G2",c("A4","F4","C4","C3","F3"),c("G4","E4","B3","B2","E3"),c("F3","D4","A3","D3"),c("E3","C4","G2","C3")),
+  durations = list("8","8","8","8","8","8","8","8","q","8","8","h")
+)
+
+m <- Music()+Meter(4,4)+Tempo(70)+Key(0)+melody+chords
+
+show(m, t=c("score","audio"))
+```
+We can see in this example that there was an error on the last note. The final "C5" is played 4 times even though it is supposed to only be played once because in gm we need the durations of the notes, chords, and rests in each measure to equal the beats.  
+
+To fix this error, we need to add 2 "C5" pitches at the end of the melody line, one that is a 16th note (durations="16") and one that is a whole note (durations="w"). 
+
+However, we don't want to hear "C5" played twice. Therefore we must add in the tie argument to the first "C5" to indicate that we want to hold it out through the last measure. The second to last "C5" that is to be held out is the 9th note in the melody, so we will use the argument tie=list(9). 
+
+```{r}
+melody <- Line(
+  pitches = list("E5","E5","F5","E5","E5","D5","E5","D5","C5","C5"), 
+  durations = list("8","8","8","16","8","q","16","16","16","w"),
+  tie = list(9)) #tie argument to hold last note out through the last measure
+
+m <- Music()+Meter(4,4)+Tempo(70)+Key(0)+melody+chords
+
+show(m, t=c("score","audio"))
+```
+
+#### Offset Argument
+
+The offset argument allows you to insert a Line( ) object at whatever beat you want, as opposed to the first beat at the first measure. 
+
+In our melody, we manually placed 4 rests (pitches=list(NA,NA,NA,NA)) at the beginning so that we can start the melody halfway through the 4th beat of the measure:
+```{r}
+melody <- Line(pitches = list(NA,NA,NA,NA,"G4","G4","G4","G4", "A4", "C5","G4","G4","C5","D5"), #melody line with added rests (NA's)
+               durations = list("q","q","q","8", "16", "16", "8", "16","8.","8","8","8","16","8."))
+
+m <- Music()+Meter(4,4)+Tempo(70)+Key(0)+melody
+show(m, t=c("score","audio"))
+```
+
+However, we could have avoided manually adding in 4 rests by using the offset argument after the 3.5 beat: 
+```{r}
+melody <- Line(pitches = list("G4","G4","G4","G4", "A4", "C5","G4","G4","C5","D5"), #melody line with no added rests (NA's)
+               durations = list("16", "16", "8", "16","8.","8","8","8","16","8."),
+               offset=3.5) #offsetting the melody line to start at beat 3.5
+m <- Music()+Meter(4,4)+Tempo(70)+Key(0)+melody
+show(m, t=c("score","audio"))
+```
+Offset=3.5 in the second example is equivalent to pitches = list(NA,NA,NA,NA), durations = list("q","q","q","8") in the first example because the durations of the rests, which consist of 3 quarter rests and 1 eighth rest, is equivalent to offsetting the melody line to start after 3.5 beats. Using offset, gm automatically added these rests in as an eighth rest, quarter rest, and half rest. 
+
+#### Multiple Line Objects
+
+After creating different variables using the Line( ) object, you can add each variable to the Music( ) object to create a score with multiple staffs. This enables your score to have different melodies, harmonies, voicings, chords, etc. If you are writing a piano score, you can add 2 Line( ) objects to indicate a left hand staff and right hand staff. In our example, we used the Line( ) object to create 4 variables to make a score with 4 staffs: 2 melodies, a harmony, and chords. 
+
+```{r, include=FALSE}
+melody <- Line(
+  pitches = list(NA,NA,NA,NA,"G4","G4","G4","G4", "A4", "C5","G4","G4","C5","D5"), #pitches in the melody
+  durations = list("q","q","q","8", "16", "16", "8", "16","8.","8","8","8","16","8.")) #duration of each note in the melody
+
+chords <- Line(
+  pitches = list(c("D4","C4","G3"),"G2",c("D4","C4","G3"),"G2",c("D4","B3","G3"),"G2",c("D4","B3","G3"),"G2",c("C4","G3","E3"),"C2",c("C4","G3","E3"),"C2",c("B3","G3","D3"),"G2",c("B3","G3","D3"),"G2"), #pitches in the chords
+  durations = list("8","8","8","8","8","8","8","8","8","8","8","8","8","8","8","8")) #duration of the notes and chords
+```
+
+This is an example of part of our score with only one staff, the melody:
+```{r}
+m <- Music()+
+  Meter(4,4)+
+  Tempo(70)+
+  Key(0)+
+  #Music() object with only one staff for the melody
+  melody
+
+show(m)
+```
+To add the chords, all we need to do is add the chords variable to the Music( ) object:
+```{r}
+m <- Music()+
+  Meter(4,4)+
+  Tempo(70)+
+  Key(0)+
+  melody+
+  #adding in a second staff for the chords
+  chords
+show(m)
+```
+
+### Meter Objects
+
+The Meter( ) object assigns a time signature to your score. It is added to the Music( ) object. In our example, the time signature is 4/4 which is indicated by Meter(4,4). A 4/4 time signature states that there are 4 beats per measure, and every beat is indicated by a quarter note. 
+
+```{r, eval=FALSE}
+Music()+
+Meter(4,4)+ #using Meter() object to add in a 4/4 time signature
+Tempo(70)+
+Key(0)+ 
+melody+
+chords
+```
+
+### Key Objects
+
+The Key( ) object indicates the key signature of your score. 
+
+It ranges from -7 to 7, with -7 being C flat major and 7 being C sharp major. 
+
+```{r}
+for (key in -7:7) {
+  print(Key(key))
+}
+```
+
+Our arrangement is in the key of C, so we indicate that by adding Key(0) to the Music() object. 
+
+```{r, eval=FALSE}
+Music()+
+Meter(4,4)+
+Tempo(70)+
+Key(0)+ #using Key() object to indicate that the key of this piece is C
+melody+
+chords
+```
+
+However, it is important to note that Key(0) didn't actually need to be added to our score because it is the default. This is because in the key of C major/A minor, there are no accidentals (sharps or flats). 
+
+If we change the key of our score using the Key( ) object, it will only change the key signature. The actual notes of the score will not change. For example, let us change the key of our score to E major:
+
+```{r}
+m <- Music()+
+Meter(4,4)+
+Tempo(70)+
+Key(4)+ #changing the key to E major
+melody+
+chords
+
+show(m, t=c("score","audio"))
+```
+
+The Key(4) object added in the accidentals that are in the E major scale. However, it also added in natural signs (♮) so that the integrity of the score remains in tact. Although the score may not look the same as our original example, it will sound exactly the same. 
+
+### Clef Object
+
+The Clef( ) object adds in the clef of a line, which determines the pitch of the notes written on each individual line in a staff. GM will automatically assign a clef based on the pitches that are assigned. However, you can manually change it as well.
+
+In our example, let us change the clef of the melody from a treble clef to a bass clef:
+```{r}
+
+m <- Music()+
+Meter(4,4)+
+Tempo(70)+
+Key(0)+ 
+melody+
+Clef("F", to = 1) #forcing a bass clef instead of a treble clef
+
+show(m, t=c("score","audio"))
+```
+This is not necessary to keep in our score, as it makes more sense to use the treble clef with this melody line.
+
+### Tempo Object
+
+The Tempo( ) object allows us to assign a tempo, or the speed of which the score is played at. In our example, we set the tempo to 70bps. However, we can make the playback faster or slower by changing the bps.
+
+Let us speed up our arrangement by changing the tempo of the last 2 measures from 70bps to 110bps
+```{r, include=FALSE}
+melody <- Line(
+  pitches = list("E5","E5","F5","E5","E5","D5","E5","D5","C5","C5"), 
+  durations = list("8","8","8","16","8","q","16","16","16","w"),
+  tie=9)
+
+chords <- Line(
+  pitches = list(c("C4","G3","E3"),"C2",c("C4","G3","E3"),"C2",c("B3","G3","D3"),"G2",c("B3","G3","D3"),"G2",c("A4","F4","C4","C3","F3"),c("G4","E4","B3","B2","E3"),c("F3","D4","A3","D3"),c("E3","C4","G2","C3")),
+  durations = list("8","8","8","8","8","8","8","8","q","8","8","h")
+)
+```
+
+```{r}
+m <- Music()+
+  Meter(4,4)+
+  Tempo(110)+ #changing tempo to 110bps to make the song faster
+  Key(0)+
+  melody+
+  chords
+
+show(m, t=c("score","audio"))
+```
+
+## Conclusion
+
+The gm package uses R's basic data structures to represent musical data. Gm is simple, high level, and easy to use. In reality it isn't efficient to use R to create musical scores and arrangements. There exist many applications and notation software that are easier to use and more detail oriented. However, using R to create musical score is a fun way to create, visualize, and analyze musical data. 
+
+##### Citations
+
+Mao R (2021). _gm: Generate Music Easily and Show Them Anywhere_. R package version 1.0.2, <https://CRAN.R-project.org/package=gm>
+  
+Complete guide to GM. • gm. (n.d.). Retrieved November 14, 2022, from <https://flujoo.github.io/gm/articles/gm.html#music-objects>
