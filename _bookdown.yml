@@ -37,6 +37,7 @@ rmd_files: [
   'shiny_app_intro.Rmd',
   'python_missingno_tutorial.Rmd',
   'data_explorer_tutorial.Rmd',
+  '3d_visualization_in_r.Rmd',
   
   # Part: Interview Prep
   'ten_interview_questions.Rmd',
