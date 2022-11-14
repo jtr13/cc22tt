@@ -1,4 +1,4 @@
-igraph in r
+# igraph in r
 
 Mouwei Lin (lm3756) and Linhao Yu (ly2590)
 
