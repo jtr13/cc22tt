@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 27 igraph in r | Community Contributions for EDAV Fall 2022 Tues/Thurs</title>
+<meta name="description" content="Mouwei Lin (lm3756) and Linhao Yu (ly2590) This will be a very brief introduction about a R package called igraph, which is a complex network analysis tool in R. It will contain commonly used and...">
+<meta name="generator" content="bookdown 0.30 with bs4_book()">
+<meta property="og:title" content="Chapter 27 igraph in r | Community Contributions for EDAV Fall 2022 Tues/Thurs">
+<meta property="og:type" content="book">
+<meta property="og:description" content="Mouwei Lin (lm3756) and Linhao Yu (ly2590) This will be a very brief introduction about a R package called igraph, which is a complex network analysis tool in R. It will contain commonly used and...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 27 igraph in r | Community Contributions for EDAV Fall 2022 Tues/Thurs">
+<meta name="twitter:description" content="Mouwei Lin (lm3756) and Linhao Yu (ly2590) This will be a very brief introduction about a R package called igraph, which is a complex network analysis tool in R. It will contain commonly used and...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.1/transition.js"></script><script src="libs/bs3compat-0.4.1/tabs.js"></script><script src="libs/bs3compat-0.4.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><script src="libs/plotly-binding-4.10.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script><link href="libs/visjs-7.4.9/vis-timeline-graph2d.min.css" rel="stylesheet">
+<script src="libs/visjs-7.4.9/vis-timeline-graph2d.min.js"></script><link href="libs/timeline-0.4/timevis.css" rel="stylesheet">
+<script src="libs/timevis-binding-2.1.0/timevis.js"></script><link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
+<script src="libs/leaflet-1.3.1/leaflet.js"></script><link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
+<script src="libs/proj4-2.6.2/proj4.min.js"></script><script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script><link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
+<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Community Contributions for EDAV Fall 2022 Tues/Thurs</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Welcome!</a></li>
+<li><a class="" href="community-contribution.html"><span class="header-section-number">2</span> Community Contribution</a></li>
+<li><a class="" href="github-submission-instructions.html"><span class="header-section-number">3</span> GitHub submission instructions</a></li>
+<li><a class="" href="sample-project.html"><span class="header-section-number">4</span> Sample project</a></li>
+<li class="book-part">Cheatsheets</li>
+<li><a class="" href="r-window-functions-cheatsheet.html"><span class="header-section-number">6</span> R window functions cheatsheet</a></li>
+<li><a class="" href="rmd-chunk-option-cheat-sheet.html"><span class="header-section-number">7</span> Rmd chunk option cheat sheet</a></li>
+<li><a class="" href="helpful-ggplot2-extensions-cheatsheet.html"><span class="header-section-number">8</span> Helpful ggplot2 Extensions Cheatsheet</a></li>
+<li><a class="" href="commonly-used-graph-cheatcheet.html"><span class="header-section-number">9</span> Commonly-used graph cheatcheet</a></li>
+<li><a class="" href="git-and-version-control.html"><span class="header-section-number">10</span> Git and version control</a></li>
+<li><a class="" href="useful-plots-for-bioinfomatics-in-r.html"><span class="header-section-number">11</span> Useful plots for Bioinfomatics in R</a></li>
+<li><a class="" href="different-ways-to-create-world-map-in-r.html"><span class="header-section-number">12</span> Different ways to create world map in R</a></li>
+<li><a class="" href="color-in-r-python-and-jshtmlcss.html"><span class="header-section-number">13</span> Color in R, Python, and JS/HTML/CSS</a></li>
+<li><a class="" href="color-palettes-for-data-visualization.html"><span class="header-section-number">14</span> Color Palettes for Data Visualization</a></li>
+<li><a class="" href="data-visualization-using-seaborn.html"><span class="header-section-number">15</span> Data visualization using Seaborn</a></li>
+<li class="book-part">Tutorials</li>
+<li><a class="" href="preprocessing-and-visualization-of-time-series-data.html"><span class="header-section-number">17</span> Preprocessing and Visualization of Time Series Data</a></li>
+<li><a class="" href="how-to-use-sqldf.html"><span class="header-section-number">18</span> How to use sqldf</a></li>
+<li><a class="" href="googlevis-in-r.html"><span class="header-section-number">19</span> googleVis in R</a></li>
+<li><a class="" href="tutorial-for-vector-fields-in-r.html"><span class="header-section-number">20</span> Tutorial for vector fields in r</a></li>
+<li><a class="" href="data-cleaning-with-r.html"><span class="header-section-number">21</span> Data cleaning with r</a></li>
+<li class="book-part">tutorial</li>
+<li><a class="" href="introduction-to-shiny-web-apps.html"><span class="header-section-number">22</span> Introduction to Shiny Web Apps</a></li>
+<li><a class="" href="python-missingno-library-tutorial.html"><span class="header-section-number">23</span> Python missingno library tutorial</a></li>
+<li><a class="" href="data-explorer-tutorial-and-automation.html"><span class="header-section-number">24</span> Data Explorer Tutorial and Automation</a></li>
+<li><a class="" href="d-visualization-in-r.html"><span class="header-section-number">25</span> 3D Visualization in R</a></li>
+<li><a class="" href="visualizing-time-series-data.html"><span class="header-section-number">26</span> Visualizing Time Series Data</a></li>
+<li><a class="active" href="igraph-in-r.html"><span class="header-section-number">27</span> igraph in r</a></li>
+<li><a class="" href="geo-mapping-coordinate-extraction-using-api-calls.html"><span class="header-section-number">28</span> Geo-Mapping Coordinate Extraction Using API Calls</a></li>
+<li class="book-part">Interview Prep</li>
+<li><a class="" href="ten-interview-questions-and-answers.html"><span class="header-section-number">30</span> Ten interview questions and answers</a></li>
+<li class="book-part">Case Studies</li>
+<li><a class="" href="benford-case-study.html"><span class="header-section-number">32</span> Benford Case Study</a></li>
+<li class="book-part">Appendices</li>
+<li><a class="" href="github-initial-setup.html"><span class="header-section-number">33</span> Github initial setup</a></li>
+<li><a class="" href="tutorial-for-pull-request-mergers.html"><span class="header-section-number">34</span> Tutorial for pull request mergers</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/jtr13/cc22tt">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="igraph-in-r" class="section level1" number="27">
+<h1>
+<span class="header-section-number">27</span> igraph in r<a class="anchor" aria-label="anchor" href="#igraph-in-r"><i class="fas fa-link"></i></a>
+</h1>
+<p>Mouwei Lin (lm3756) and Linhao Yu (ly2590)</p>
+<p>This will be a very brief introduction about a R package called igraph, which is a complex network analysis tool in R. It will contain commonly used and important functions. We believe if you look at this cheat sheet, you can handle most of the network visualization problems.</p>
+<div id="igraph-basics" class="section level2" number="27.1">
+<h2>
+<span class="header-section-number">27.1</span> 1. igraph Basics<a class="anchor" aria-label="anchor" href="#igraph-basics"><i class="fas fa-link"></i></a>
+</h2>
+<p>First we download and install the package.</p>
+<div class="sourceCode" id="cb324"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#install.packages('igraph')</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://igraph.org">igraph</a></span><span class="op">)</span> <span class="co">#this is a must install package</span></span>
+<span></span>
+<span><span class="co">#install.packages('devtools')</span></span>
+<span><span class="co">#library(devtools) #this is a must install package</span></span>
+<span><span class="co">#install_github('kassambara/navdata') </span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">navdata</span><span class="op">)</span> <span class="co">#this is a must install package</span></span>
+<span></span>
+<span><span class="co">#install.packages('tidyverse')</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span> <span class="co">#this is a must install package</span></span>
+<span></span>
+<span><span class="co">#install.packages('igraphdata')</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://igraph.org">igraphdata</a></span><span class="op">)</span> <span class="co">#this is a must install package</span></span></code></pre></div>
+<p>We will use an open source data set named <strong>phone.call</strong> from <strong>navdata</strong>.</p>
+<div class="sourceCode" id="cb325"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"phone.call"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">phone.call</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 6 × 3
+##   source  destination n.call
+##   &lt;chr&gt;   &lt;chr&gt;        &lt;dbl&gt;
+## 1 France  Germany          9
+## 2 Belgium France           4
+## 3 France  Spain            3
+## 4 France  Italy            4
+## 5 France  Netherlands      2
+## 6 France  UK               3</code></pre>
+<div id="create-igraph-network-object" class="section level3" number="27.1.1">
+<h3>
+<span class="header-section-number">27.1.1</span> 1.1 Create igraph Network Object<a class="anchor" aria-label="anchor" href="#create-igraph-network-object"><i class="fas fa-link"></i></a>
+</h3>
+<p>igraph has its specific network (graph) object called ‘igraph’. The simplest way to create an ‘igraph’ object is to use <strong>graph.formula()</strong> and specify every node and edge individually.</p>
+<div class="sourceCode" id="cb327"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/graph_from_literal.html">graph.formula</a></span><span class="op">(</span><span class="va">A</span><span class="op">-</span><span class="va">B</span><span class="op">-</span><span class="va">C</span><span class="op">-</span><span class="va">D</span>,<span class="va">A</span><span class="op">-</span><span class="va">E</span><span class="op">-</span><span class="cn">F</span>,<span class="va">Z</span><span class="op">-</span><span class="va">D</span><span class="op">-</span><span class="va">X</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## IGRAPH 4392828 UN-- 8 7 -- 
+## + attr: name (v/c)
+## + edges from 4392828 (vertex names):
+## [1] A--B A--E B--C C--D D--Z D--X E--F</code></pre>
+<p>But in real world, we usually have a lot of data. Therefore, it is not a good idea to define every node and edge manually. More generally, we will use these two methods:</p>
+<div class="sourceCode" id="cb329"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># prepare the data</span></span>
+<span><span class="va">name</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">phone.call</span><span class="op">$</span><span class="va">source</span>,<span class="va">phone.call</span><span class="op">$</span><span class="va">destination</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">nodes</span><span class="op">&lt;-</span><span class="va">name</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>location<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"western"</span>,<span class="st">"western"</span>,<span class="st">"central"</span>,<span class="st">"nordic"</span>,<span class="st">"southeastern"</span>,</span>
+<span>     <span class="st">"southeastern"</span>,<span class="st">"southeastern"</span>,<span class="st">"southern"</span>,<span class="st">"sourthern"</span>,</span>
+<span>     <span class="st">"western"</span>,<span class="st">"western"</span>,<span class="st">"central"</span>,<span class="st">"central"</span>,<span class="st">"central"</span>,<span class="st">"central"</span>,<span class="st">"central"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">nodes</span><span class="op">)</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"label"</span>,<span class="st">"location"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">edges</span><span class="op">&lt;-</span><span class="va">phone.call</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>from<span class="op">=</span><span class="va">source</span>,to<span class="op">=</span><span class="va">destination</span>,weight<span class="op">=</span><span class="va">n.call</span><span class="op">)</span></span></code></pre></div>
+<div id="build-igraph-object-from-dataframe" class="section level4" number="27.1.1.1">
+<h4>
+<span class="header-section-number">27.1.1.1</span> (1) build igraph object from dataframe:<a class="anchor" aria-label="anchor" href="#build-igraph-object-from-dataframe"><i class="fas fa-link"></i></a>
+</h4>
+<p><strong>graph_from_data_frame()</strong>
+To use this method, we need two dataframes, one is edge frame, the other is vertices frame.</p>
+<div class="sourceCode" id="cb330"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">net_pc</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/graph_from_data_frame.html">graph_from_data_frame</a></span><span class="op">(</span></span>
+<span>   d<span class="op">=</span><span class="va">edges</span>,vertices<span class="op">=</span><span class="va">nodes</span>,</span>
+<span>   directed<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<p>we can see that the graph is created. We can use <strong>V()</strong> or <strong>E()</strong> to visit vertices or edges, and <strong>as_edgelist(net, names=T)</strong>, <strong>as_adjacency_matrix(net, attr=“weight”)</strong> to catch edges list and adjacent matrix:</p>
+<div class="sourceCode" id="cb331"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html">V</a></span><span class="op">(</span><span class="va">net_pc</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## + 16/16 vertices, named, from 6e93970:
+##  [1] France         Belgium        Germany        Danemark       Croatia       
+##  [6] Slovenia       Hungary        Spain          Italy          Netherlands   
+## [11] UK             Austria        Poland         Switzerland    Czech republic
+## [16] Slovania</code></pre>
+<div class="sourceCode" id="cb333"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html">V</a></span><span class="op">(</span><span class="va">net_pc</span><span class="op">)</span><span class="op">$</span><span class="va">location</span></span></code></pre></div>
+<pre><code>##  [1] "western"      "western"      "central"      "nordic"       "southeastern"
+##  [6] "southeastern" "southeastern" "southern"     "sourthern"    "western"     
+## [11] "western"      "central"      "central"      "central"      "central"     
+## [16] "central"</code></pre>
+<div class="sourceCode" id="cb335"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/E.html">E</a></span><span class="op">(</span><span class="va">net_pc</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## + 18/18 edges from 6e93970 (vertex names):
+##  [1] France  -&gt;Germany        Belgium -&gt;France         France  -&gt;Spain         
+##  [4] France  -&gt;Italy          France  -&gt;Netherlands    France  -&gt;UK            
+##  [7] Germany -&gt;Austria        Germany -&gt;Poland         Belgium -&gt;Germany       
+## [10] Germany -&gt;Switzerland    Germany -&gt;Czech republic Germany -&gt;Netherlands   
+## [13] Danemark-&gt;Germany        Croatia -&gt;Germany        Croatia -&gt;Slovania      
+## [16] Croatia -&gt;Hungary        Slovenia-&gt;Germany        Hungary -&gt;Slovania</code></pre>
+<div class="sourceCode" id="cb337"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/as_edgelist.html">as_edgelist</a></span><span class="op">(</span><span class="va">net_pc</span>, names<span class="op">=</span><span class="cn">T</span><span class="op">)</span> </span></code></pre></div>
+<pre><code>##       [,1]       [,2]            
+##  [1,] "France"   "Germany"       
+##  [2,] "Belgium"  "France"        
+##  [3,] "France"   "Spain"         
+##  [4,] "France"   "Italy"         
+##  [5,] "France"   "Netherlands"   
+##  [6,] "France"   "UK"            
+##  [7,] "Germany"  "Austria"       
+##  [8,] "Germany"  "Poland"        
+##  [9,] "Belgium"  "Germany"       
+## [10,] "Germany"  "Switzerland"   
+## [11,] "Germany"  "Czech republic"
+## [12,] "Germany"  "Netherlands"   
+## [13,] "Danemark" "Germany"       
+## [14,] "Croatia"  "Germany"       
+## [15,] "Croatia"  "Slovania"      
+## [16,] "Croatia"  "Hungary"       
+## [17,] "Slovenia" "Germany"       
+## [18,] "Hungary"  "Slovania"</code></pre>
+<div class="sourceCode" id="cb339"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/as_adjacency_matrix.html">as_adjacency_matrix</a></span><span class="op">(</span><span class="va">net_pc</span>, attr<span class="op">=</span><span class="st">"weight"</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 16 x 16 sparse Matrix of class "dgCMatrix"
+##                                                 
+## France         . . 9 . . . . 3 4 2 3 . . . . .  
+## Belgium        4 . 3 . . . . . . . . . . . . .  
+## Germany        . . . . . . . . . 2 . 2 2 2 2 .  
+## Danemark       . . 2 . . . . . . . . . . . . .  
+## Croatia        . . 2 . . . 2 . . . . . . . . 2.0
+## Slovenia       . . 2 . . . . . . . . . . . . .  
+## Hungary        . . . . . . . . . . . . . . . 2.5
+## Spain          . . . . . . . . . . . . . . . .  
+## Italy          . . . . . . . . . . . . . . . .  
+## Netherlands    . . . . . . . . . . . . . . . .  
+## UK             . . . . . . . . . . . . . . . .  
+## Austria        . . . . . . . . . . . . . . . .  
+## Poland         . . . . . . . . . . . . . . . .  
+## Switzerland    . . . . . . . . . . . . . . . .  
+## Czech republic . . . . . . . . . . . . . . . .  
+## Slovania       . . . . . . . . . . . . . . . .</code></pre>
+</div>
+<div id="build-igraph-object-from-adjacent-matrix" class="section level4" number="27.1.1.2">
+<h4>
+<span class="header-section-number">27.1.1.2</span> (2) build igraph object from adjacent matrix:<a class="anchor" aria-label="anchor" href="#build-igraph-object-from-adjacent-matrix"><i class="fas fa-link"></i></a>
+</h4>
+<p><strong>graph_from_adjacency_matrix()</strong>
+If the graph is using</p>
+<div class="sourceCode" id="cb341"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">adjacent_matrix</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/as_adjacency_matrix.html">as_adjacency_matrix</a></span><span class="op">(</span><span class="va">net_pc</span>, attr<span class="op">=</span><span class="st">"weight"</span><span class="op">)</span></span>
+<span><span class="va">net_am</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/graph_from_adjacency_matrix.html">graph_from_adjacency_matrix</a></span><span class="op">(</span><span class="va">adjacent_matrix</span><span class="op">)</span></span></code></pre></div>
+<p>now we simply plot it to take a look</p>
+<div class="sourceCode" id="cb342"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">net_pc</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="igraph-in-r_files/figure-html/unnamed-chunk-9-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="sourceCode" id="cb343"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">net_am</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="igraph-in-r_files/figure-html/unnamed-chunk-9-2.png" width="80%" style="display: block; margin: auto;"></div>
+</div>
+</div>
+<div id="basic-igraph-visualization-instructions" class="section level3" number="27.1.2">
+<h3>
+<span class="header-section-number">27.1.2</span> 1.2 Basic igraph Visualization Instructions<a class="anchor" aria-label="anchor" href="#basic-igraph-visualization-instructions"><i class="fas fa-link"></i></a>
+</h3>
+<p>The plot function in igraph is very strong and it has a lot of parameters to make the network beautiful and clear. In this section we will only give a general introduction to important visualization methods, we will have a more detailed introduction in the next section.</p>
+<p>A large number of parameters are used to display various properties of nodes, edges and graphs. The parameters related to nodes start with <strong>vertex.XXX</strong>, and the parameters related to edges start with <strong>edge.XXX</strong></p>
+<p>In addition to specifying the parameters of nodes and edges in <strong>plot()</strong>, you can also use the previously mentioned <strong>V()</strong> and <strong>E()</strong> to add the corresponding properties directly into the igraph object. The difference between the two methods is that the parameters specified in <strong>plot()</strong> do not change the properties of the plot. For example, we first specify the color of the node according to the position, and the width of the edge according to the weight (these two attributes will be saved in the net_pc object), and then specify the size of the node in the parameters of <strong>plot()</strong> (proportional to the degree of the node, The node degree is the number of edges connected to this node), the size and position of the node marker, the color of the edge, the size of the arrow, and the degree of curvature of the edge.</p>
+<div class="sourceCode" id="cb344"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Calculate node's degree</span></span>
+<span><span class="va">deg</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/degree.html">degree</a></span><span class="op">(</span><span class="va">net_pc</span>,mode<span class="op">=</span><span class="st">"all"</span><span class="op">)</span></span>
+<span><span class="co"># Set up the color</span></span>
+<span><span class="va">vcolor</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"orange"</span>,<span class="st">"red"</span>,<span class="st">"lightblue"</span>,<span class="st">"tomato"</span>,<span class="st">"yellow"</span><span class="op">)</span></span>
+<span><span class="co"># Set specific node's Color</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html">V</a></span><span class="op">(</span><span class="va">net_pc</span><span class="op">)</span><span class="op">$</span><span class="va">color</span><span class="op">&lt;-</span><span class="va">vcolor</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html">V</a></span><span class="op">(</span><span class="va">net_pc</span><span class="op">)</span><span class="op">$</span><span class="va">location</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="co"># Set specific edge's weight</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/E.html">E</a></span><span class="op">(</span><span class="va">net_pc</span><span class="op">)</span><span class="op">$</span><span class="va">width</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/E.html">E</a></span><span class="op">(</span><span class="va">net_pc</span><span class="op">)</span><span class="op">$</span><span class="va">weight</span><span class="op">/</span><span class="fl">2</span></span>
+<span></span>
+<span><span class="co"># Set up vertex.size, vertex.label.cex &amp; dist, edge color &amp; arrow size &amp; curve in graph</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">net_pc</span>,vertex.size<span class="op">=</span><span class="fl">3</span><span class="op">*</span><span class="va">deg</span>,</span>
+<span>     vertex.label.cex<span class="op">=</span><span class="fl">.7</span>,vertex.label.dist<span class="op">=</span><span class="fl">1</span>,</span>
+<span>     edge.color<span class="op">=</span><span class="st">"gray50"</span>,edge.arrow.size<span class="op">=</span><span class="fl">.4</span>, edge.curved<span class="op">=</span><span class="fl">.1</span><span class="op">)</span></span>
+<span><span class="co"># Add legend</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span>x<span class="op">=</span><span class="op">-</span><span class="fl">1.5</span>,y<span class="op">=</span><span class="fl">1.5</span>,<span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html">V</a></span><span class="op">(</span><span class="va">net_pc</span><span class="op">)</span><span class="op">$</span><span class="va">location</span><span class="op">)</span><span class="op">)</span>,pch<span class="op">=</span><span class="fl">21</span>,col<span class="op">=</span><span class="st">"#777777"</span>,pt.bg<span class="op">=</span><span class="va">vcolor</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="igraph-in-r_files/figure-html/unnamed-chunk-10-1.png" width="80%" style="display: block; margin: auto;"></div>
+</div>
+<div id="network-layout" class="section level3" number="27.1.3">
+<h3>
+<span class="header-section-number">27.1.3</span> 1.3 Network Layout<a class="anchor" aria-label="anchor" href="#network-layout"><i class="fas fa-link"></i></a>
+</h3>
+<p>Network layout refers to the method of determining the coordinates of each node in the network.</p>
+<p>A variety of layout algorithms are provided in igraph. Among them, Force-directed layout algorithms are the most useful. Force-directed layouts try to get an aesthetically pleasing graph where the edges are similar in length and cross as little as possible. They model graphics as a physical system. Nodes are “charged particles” that repel each other when they get too close. These edges act as springs, attracting connected nodes together. As a result, nodes are evenly distributed in the illustrated area, and the layout is intuitive as nodes that share more connections are closer to each other. The disadvantage of these algorithms is that they are slow and therefore less frequently used in graphs larger than <strong>1000</strong> vertices.</p>
+<p>When using force-directed layout, you can use the <strong>niter</strong> parameter to control the number of iterations to perform. The default setting is 500 iterations. For large graphs, you can lower this number to get results faster and check that they are reasonable.</p>
+<p><strong>Fruchterman-Reingold</strong> is the most widely used Force-directed layout method:</p>
+<div class="sourceCode" id="cb345"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Fruchterman-Reingold layout method</span></span>
+<span><span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/layout_with_fr.html">layout_with_fr</a></span><span class="op">(</span><span class="va">net_pc</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">net_pc</span>, layout<span class="op">=</span><span class="va">l</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="igraph-in-r_files/figure-html/unnamed-chunk-11-1.png" width="80%" style="display: block; margin: auto;"></div>
+<p>The Fruchterman Reingold layout is random and different every run will result in slightly different layout configurations. Saving the layout in the object l allows us to obtain the exact same result multiple times (it is also possible to specify a random state by setting seed <strong>seed()</strong>)</p>
+<div class="sourceCode" id="cb346"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># All the layout methods in igraph</span></span>
+<span><span class="va">layouts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="st">"^layout_"</span>, <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="st">"package:igraph"</span><span class="op">)</span>, value<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span></span>
+<span><span class="va">layouts</span></span></code></pre></div>
+<pre><code>##  [1] "layout_as_bipartite"  "layout_as_star"       "layout_as_tree"      
+##  [4] "layout_components"    "layout_in_circle"     "layout_nicely"       
+##  [7] "layout_on_grid"       "layout_on_sphere"     "layout_randomly"     
+## [10] "layout_with_dh"       "layout_with_drl"      "layout_with_fr"      
+## [13] "layout_with_gem"      "layout_with_graphopt" "layout_with_kk"      
+## [16] "layout_with_lgl"      "layout_with_mds"      "layout_with_sugiyama"</code></pre>
+<p>There are 18 methods of layout in igraph, we won’t go into detail for each layout method because most of them are not widely used except Fruchterman Reingold layout. However, we will give an example to show how those layouts look like:</p>
+<div class="sourceCode" id="cb348"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">layouts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="st">"^layout_"</span>, <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="st">"package:igraph"</span><span class="op">)</span>, value<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span></span>
+<span><span class="co"># Remove layouts that do not apply to our graph.</span></span>
+<span><span class="va">layouts</span> <span class="op">&lt;-</span> <span class="va">layouts</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span><span class="st">"bipartite|merge|norm|sugiyama|tree"</span>, <span class="va">layouts</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">3</span><span class="op">)</span>, mar<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span> </span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">layout</span> <span class="kw">in</span> <span class="va">layouts</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">layout</span><span class="op">)</span></span>
+<span>  <span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span><span class="op">(</span><span class="va">layout</span>, <span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span><span class="va">net_pc</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">net_pc</span>, vertex.label<span class="op">=</span><span class="st">""</span>,edge.arrow.mode<span class="op">=</span><span class="fl">0</span>,</span>
+<span>       layout<span class="op">=</span><span class="va">l</span>,main<span class="op">=</span><span class="va">layout</span><span class="op">)</span> <span class="op">}</span></span></code></pre></div>
+<pre><code>## [1] "layout_as_star"</code></pre>
+<pre><code>## [1] "layout_components"</code></pre>
+<pre><code>## [1] "layout_in_circle"</code></pre>
+<pre><code>## [1] "layout_nicely"</code></pre>
+<pre><code>## [1] "layout_on_grid"</code></pre>
+<pre><code>## [1] "layout_on_sphere"</code></pre>
+<pre><code>## [1] "layout_randomly"</code></pre>
+<pre><code>## [1] "layout_with_dh"</code></pre>
+<pre><code>## [1] "layout_with_drl"</code></pre>
+<pre><code>## [1] "layout_with_fr"</code></pre>
+<pre><code>## [1] "layout_with_gem"</code></pre>
+<pre><code>## [1] "layout_with_graphopt"</code></pre>
+<pre><code>## [1] "layout_with_kk"</code></pre>
+<pre><code>## [1] "layout_with_lgl"</code></pre>
+<pre><code>## [1] "layout_with_mds"</code></pre>
+<div class="inline-figure"><img src="igraph-in-r_files/figure-html/unnamed-chunk-13-1.png" width="80%" style="display: block; margin: auto;"></div>
+</div>
+<div id="decorating-igraph-visualizations" class="section level3" number="27.1.4">
+<h3>
+<span class="header-section-number">27.1.4</span> 2. Decorating igraph visualizations<a class="anchor" aria-label="anchor" href="#decorating-igraph-visualizations"><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="details-for-decorating-igraph-visualization" class="section level3" number="27.1.5">
+<h3>
+<span class="header-section-number">27.1.5</span> 2.1 Details for decorating igraph visualization<a class="anchor" aria-label="anchor" href="#details-for-decorating-igraph-visualization"><i class="fas fa-link"></i></a>
+</h3>
+<p>In this section, we still use the example above, but we customize several parameters to see their influence for visualization.<br></p>
+<p>First, we customize the nodes parameters.</p>
+<div class="sourceCode" id="cb364"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">111</span><span class="op">)</span></span>
+<span><span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/layout_with_fr.html">layout_with_fr</a></span><span class="op">(</span><span class="va">net_pc</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">net_pc</span>, </span>
+<span>     vertex.color <span class="op">=</span> <span class="st">'pink'</span>,                   <span class="co"># The color of nodes</span></span>
+<span>     vertex.frame.color <span class="op">=</span> <span class="st">'lightblue'</span>,        <span class="co"># The color of node frames</span></span>
+<span>     vertex.shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'circle'</span>,<span class="st">'rectangle'</span><span class="op">)</span>,  <span class="co"># The color of node shapes</span></span>
+<span>     vertex.size <span class="op">=</span> <span class="fl">25</span>,                        <span class="co"># The size of a node</span></span>
+<span>     vertex.size2 <span class="op">=</span> <span class="fl">15</span>,                       <span class="co"># For rectangle, we need two parameters to specify its shape</span></span>
+<span>     </span>
+<span>     layout <span class="op">=</span> <span class="va">l</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure">
+<img src="igraph-in-r_files/figure-html/unnamed-chunk-14-1.png" width="80%" style="display: block; margin: auto;">
+Next, we customize the node labels.</div>
+<div class="sourceCode" id="cb365"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">net_pc</span>, </span>
+<span>     vertex.color <span class="op">=</span> <span class="st">'pink'</span>,                    </span>
+<span>     vertex.frame.color <span class="op">=</span> <span class="st">'lightblue'</span>,        </span>
+<span>     vertex.shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'circle'</span>,<span class="st">'rectangle'</span><span class="op">)</span>,  </span>
+<span>     vertex.size <span class="op">=</span> <span class="fl">25</span>,                        </span>
+<span>     vertex.size2 <span class="op">=</span> <span class="fl">15</span>,                       </span>
+<span>     </span>
+<span>     vertex.label <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html">V</a></span><span class="op">(</span><span class="va">net_pc</span><span class="op">)</span><span class="op">)</span>, <span class="co"># Change labels to numbers</span></span>
+<span>     vertex.label.family <span class="op">=</span> <span class="st">'Helvetica'</span>,  <span class="co"># Change the font family of labels</span></span>
+<span>     vertex.label.font <span class="op">=</span> <span class="fl">3</span>,              <span class="co"># Change the font to italic</span></span>
+<span>     vertex.label.cex <span class="op">=</span> <span class="fl">0.8</span>,             <span class="co"># Change the size of labels</span></span>
+<span>     vertex.label.dist <span class="op">=</span> <span class="fl">0.5</span>,            <span class="co"># Change the distance between labels and node frames</span></span>
+<span>  </span>
+<span>     layout <span class="op">=</span> <span class="va">l</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure">
+<img src="igraph-in-r_files/figure-html/unnamed-chunk-15-1.png" width="80%" style="display: block; margin: auto;">
+Apart from nodes, we can also modify edge features while plotting.</div>
+<div class="sourceCode" id="cb366"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">net_pc</span>, </span>
+<span>     vertex.color <span class="op">=</span> <span class="st">'pink'</span>,                    </span>
+<span>     vertex.frame.color <span class="op">=</span> <span class="st">'lightblue'</span>,        </span>
+<span>     vertex.shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'circle'</span>,<span class="st">'rectangle'</span><span class="op">)</span>,  </span>
+<span>     vertex.size <span class="op">=</span> <span class="fl">25</span>,                        </span>
+<span>     vertex.size2 <span class="op">=</span> <span class="fl">15</span>,                       </span>
+<span>     </span>
+<span>     vertex.label <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html">V</a></span><span class="op">(</span><span class="va">net_pc</span><span class="op">)</span><span class="op">)</span>, </span>
+<span>     vertex.label.family <span class="op">=</span> <span class="st">'Helvetica'</span>,  </span>
+<span>     vertex.label.font <span class="op">=</span> <span class="fl">3</span>,              </span>
+<span>     vertex.label.cex <span class="op">=</span> <span class="fl">0.8</span>,             </span>
+<span>     vertex.label.dist <span class="op">=</span> <span class="fl">0.5</span>,   </span>
+<span>     </span>
+<span>     edge.color <span class="op">=</span> <span class="st">'lightblue'</span>,  <span class="co"># Color of edges</span></span>
+<span>     edge.width <span class="op">=</span> <span class="fl">3</span>,            <span class="co"># Width of edges</span></span>
+<span>     edge.arrow.size <span class="op">=</span> <span class="fl">0.8</span>,     <span class="co"># Size of arrows</span></span>
+<span>     edge.arrow.width <span class="op">=</span> <span class="fl">0.8</span>,    <span class="co"># Width of arrows</span></span>
+<span>     edge.lty <span class="op">=</span> <span class="fl">4</span>,              <span class="co"># Line types of edges (4: dot dash)</span></span>
+<span>     edge.curved <span class="op">=</span> <span class="fl">0.5</span>,         <span class="co"># Curvature of edges</span></span>
+<span>     </span>
+<span>     layout <span class="op">=</span> <span class="va">l</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="igraph-in-r_files/figure-html/unnamed-chunk-16-1.png" width="80%" style="display: block; margin: auto;"></div>
+</div>
+<div id="example-for-advanced-igraph-visualization" class="section level3" number="27.1.6">
+<h3>
+<span class="header-section-number">27.1.6</span> 2.2 Example for advanced igraph visualization<a class="anchor" aria-label="anchor" href="#example-for-advanced-igraph-visualization"><i class="fas fa-link"></i></a>
+</h3>
+<p>In this section, we introduce an advanced network visualization using Zachary’s karate club network dataset. This is a widely-used dataset for network analysis. In this dataset, every node represents a member of the karate club and edges represent members’ social connection. During Zachary’s study, the administrator “John. A.” and the coach “Mr. Hi” had a conflict which led to a split of the club. Now, we want to use igraph to visualize the social network of this karate club.<br></p>
+<p>First, we plot the network without further decoration.</p>
+<div class="sourceCode" id="cb367"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">111</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">karate</span><span class="op">)</span></span>
+<span><span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/layout_with_fr.html">layout_with_fr</a></span><span class="op">(</span><span class="va">karate</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/igraph_options.html">igraph.options</a></span><span class="op">(</span>vertex.size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">karate</span>,</span>
+<span>     layout <span class="op">=</span> <span class="va">l</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="igraph-in-r_files/figure-html/unnamed-chunk-17-1.png" width="80%" style="display: block; margin: auto;"></div>
+<p>Next, we highlight the two leaders (“John. A.” and “Mr. Hi”) in the network by using rectangles.</p>
+<div class="sourceCode" id="cb368"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Decoration</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html">V</a></span><span class="op">(</span><span class="va">karate</span><span class="op">)</span><span class="op">$</span><span class="va">label</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">sub</a></span><span class="op">(</span><span class="st">"Actor "</span>,<span class="st">""</span>, <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html">V</a></span><span class="op">(</span><span class="va">karate</span><span class="op">)</span><span class="op">$</span><span class="va">name</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Two leaders get shapes different from club members</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html">V</a></span><span class="op">(</span><span class="va">karate</span><span class="op">)</span><span class="op">$</span><span class="va">shape</span> <span class="op">&lt;-</span> <span class="st">"circle"</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html">V</a></span><span class="op">(</span><span class="va">karate</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Mr Hi"</span>, <span class="st">"John A"</span><span class="op">)</span><span class="op">]</span><span class="op">$</span><span class="va">shape</span> <span class="op">&lt;-</span> <span class="st">"rectangle"</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html">V</a></span><span class="op">(</span><span class="va">karate</span><span class="op">)</span><span class="op">$</span><span class="va">size</span>  <span class="op">&lt;-</span> <span class="fl">20</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html">V</a></span><span class="op">(</span><span class="va">karate</span><span class="op">)</span><span class="op">$</span><span class="va">size2</span> <span class="op">&lt;-</span> <span class="fl">15</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">karate</span>, </span>
+<span>     vertex.label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html">V</a></span><span class="op">(</span><span class="va">karate</span><span class="op">)</span><span class="op">$</span><span class="va">label</span>,</span>
+<span>     layout  <span class="op">=</span> <span class="va">l</span><span class="op">)</span></span></code></pre></div>
+<p><img src="igraph-in-r_files/figure-html/unnamed-chunk-18-1.png" width="80%" style="display: block; margin: auto;">
+Finally, we divide the edges into three categories and use different colors for them. Remember the karate club is split into two factions, so the edges can be divided into: edges inside faction 1, edges inside faction 2, and edges connecting both factions.<br>
+Besides, we also set up the edge width according to its weight.</p>
+<div class="sourceCode" id="cb369"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Define factions</span></span>
+<span><span class="va">F1</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html">V</a></span><span class="op">(</span><span class="va">karate</span><span class="op">)</span><span class="op">[</span><span class="va">Faction</span><span class="op">==</span><span class="fl">1</span><span class="op">]</span></span>
+<span><span class="va">F2</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html">V</a></span><span class="op">(</span><span class="va">karate</span><span class="op">)</span><span class="op">[</span><span class="va">Faction</span><span class="op">==</span><span class="fl">2</span><span class="op">]</span></span>
+<span></span>
+<span><span class="co"># Set up edge colors according to factions</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/E.html">E</a></span><span class="op">(</span><span class="va">karate</span><span class="op">)</span><span class="op">[</span><span class="va">F1</span> <span class="op"><a href="https://rdrr.io/pkg/igraph/man/igraph-es-indexing.html">%--%</a></span> <span class="va">F1</span><span class="op">]</span><span class="op">$</span><span class="va">color</span><span class="op">&lt;-</span><span class="st">"darkgoldenrod2"</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/E.html">E</a></span><span class="op">(</span><span class="va">karate</span><span class="op">)</span><span class="op">[</span><span class="va">F2</span> <span class="op"><a href="https://rdrr.io/pkg/igraph/man/igraph-es-indexing.html">%--%</a></span> <span class="va">F2</span><span class="op">]</span><span class="op">$</span><span class="va">color</span><span class="op">&lt;-</span><span class="st">"lightblue"</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/E.html">E</a></span><span class="op">(</span><span class="va">karate</span><span class="op">)</span><span class="op">[</span><span class="va">F1</span> <span class="op"><a href="https://rdrr.io/pkg/igraph/man/igraph-es-indexing.html">%--%</a></span> <span class="va">F2</span><span class="op">]</span><span class="op">$</span><span class="va">color</span><span class="op">&lt;-</span><span class="st">"brown"</span></span>
+<span></span>
+<span><span class="co"># Set up edge width according to weights</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/E.html">E</a></span><span class="op">(</span><span class="va">karate</span><span class="op">)</span><span class="op">$</span><span class="va">width</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/E.html">E</a></span><span class="op">(</span><span class="va">karate</span><span class="op">)</span><span class="op">$</span><span class="va">weight</span></span>
+<span></span>
+<span><span class="co"># Plot the decorated graph, using same layout.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">karate</span>,layout<span class="op">=</span><span class="va">l</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="igraph-in-r_files/figure-html/unnamed-chunk-19-1.png" width="80%" style="display: block; margin: auto;"></div>
+
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="visualizing-time-series-data.html"><span class="header-section-number">26</span> Visualizing Time Series Data</a></div>
+<div class="next"><a href="geo-mapping-coordinate-extraction-using-api-calls.html"><span class="header-section-number">28</span> Geo-Mapping Coordinate Extraction Using API Calls</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#igraph-in-r"><span class="header-section-number">27</span> igraph in r</a></li>
+<li>
+<a class="nav-link" href="#igraph-basics"><span class="header-section-number">27.1</span> 1. igraph Basics</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#create-igraph-network-object"><span class="header-section-number">27.1.1</span> 1.1 Create igraph Network Object</a></li>
+<li><a class="nav-link" href="#basic-igraph-visualization-instructions"><span class="header-section-number">27.1.2</span> 1.2 Basic igraph Visualization Instructions</a></li>
+<li><a class="nav-link" href="#network-layout"><span class="header-section-number">27.1.3</span> 1.3 Network Layout</a></li>
+<li><a class="nav-link" href="#decorating-igraph-visualizations"><span class="header-section-number">27.1.4</span> 2. Decorating igraph visualizations</a></li>
+<li><a class="nav-link" href="#details-for-decorating-igraph-visualization"><span class="header-section-number">27.1.5</span> 2.1 Details for decorating igraph visualization</a></li>
+<li><a class="nav-link" href="#example-for-advanced-igraph-visualization"><span class="header-section-number">27.1.6</span> 2.2 Example for advanced igraph visualization</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/jtr13/cc22tt/blob/main/igraph-in-r.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/jtr13/cc22tt/edit/main/igraph-in-r.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Community Contributions for EDAV Fall 2022 Tues/Thurs</strong>" was written by . It was last built on 2022-11-15.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

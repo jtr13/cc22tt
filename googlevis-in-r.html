@@ -4,15 +4,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 18 googleVis in R | Community Contributions for EDAV Fall 2022 Tues/Thurs</title>
-<meta name="description" content="Sushant Prabhu and Kiyan Mohebbizadeh  18.1 Introducing googleVis  GoogleVis is a package in R that allows users of R to use the Google Charts API. The interface between R and Google Charts allows...">
+<title>Chapter 19 googleVis in R | Community Contributions for EDAV Fall 2022 Tues/Thurs</title>
+<meta name="description" content="Sushant Prabhu and Kiyan Mohebbizadeh  19.1 Introducing googleVis  GoogleVis is a package in R that allows users of R to use the Google Charts API. The interface between R and Google Charts allows...">
 <meta name="generator" content="bookdown 0.30 with bs4_book()">
-<meta property="og:title" content="Chapter 18 googleVis in R | Community Contributions for EDAV Fall 2022 Tues/Thurs">
+<meta property="og:title" content="Chapter 19 googleVis in R | Community Contributions for EDAV Fall 2022 Tues/Thurs">
 <meta property="og:type" content="book">
-<meta property="og:description" content="Sushant Prabhu and Kiyan Mohebbizadeh  18.1 Introducing googleVis  GoogleVis is a package in R that allows users of R to use the Google Charts API. The interface between R and Google Charts allows...">
+<meta property="og:description" content="Sushant Prabhu and Kiyan Mohebbizadeh  19.1 Introducing googleVis  GoogleVis is a package in R that allows users of R to use the Google Charts API. The interface between R and Google Charts allows...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 18 googleVis in R | Community Contributions for EDAV Fall 2022 Tues/Thurs">
-<meta name="twitter:description" content="Sushant Prabhu and Kiyan Mohebbizadeh  18.1 Introducing googleVis  GoogleVis is a package in R that allows users of R to use the Google Charts API. The interface between R and Google Charts allows...">
+<meta name="twitter:title" content="Chapter 19 googleVis in R | Community Contributions for EDAV Fall 2022 Tues/Thurs">
+<meta name="twitter:description" content="Sushant Prabhu and Kiyan Mohebbizadeh  19.1 Introducing googleVis  GoogleVis is a package in R that allows users of R to use the Google Charts API. The interface between R and Google Charts allows...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.1/transition.js"></script><script src="libs/bs3compat-0.4.1/tabs.js"></script><script src="libs/bs3compat-0.4.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -20,7 +20,10 @@
 <script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
 <script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script><link href="libs/visjs-7.4.9/vis-timeline-graph2d.min.css" rel="stylesheet">
 <script src="libs/visjs-7.4.9/vis-timeline-graph2d.min.js"></script><link href="libs/timeline-0.4/timevis.css" rel="stylesheet">
-<script src="libs/timevis-binding-2.1.0/timevis.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+<script src="libs/timevis-binding-2.1.0/timevis.js"></script><link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
+<script src="libs/leaflet-1.3.1/leaflet.js"></script><link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
+<script src="libs/proj4-2.6.2/proj4.min.js"></script><script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script><link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
+<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -59,24 +62,28 @@
 <li><a class="" href="different-ways-to-create-world-map-in-r.html"><span class="header-section-number">12</span> Different ways to create world map in R</a></li>
 <li><a class="" href="color-in-r-python-and-jshtmlcss.html"><span class="header-section-number">13</span> Color in R, Python, and JS/HTML/CSS</a></li>
 <li><a class="" href="color-palettes-for-data-visualization.html"><span class="header-section-number">14</span> Color Palettes for Data Visualization</a></li>
+<li><a class="" href="data-visualization-using-seaborn.html"><span class="header-section-number">15</span> Data visualization using Seaborn</a></li>
 <li class="book-part">Tutorials</li>
-<li><a class="" href="preprocessing-and-visualization-of-time-series-data.html"><span class="header-section-number">16</span> Preprocessing and Visualization of Time Series Data</a></li>
-<li><a class="" href="how-to-use-sqldf.html"><span class="header-section-number">17</span> How to use sqldf</a></li>
-<li><a class="active" href="googlevis-in-r.html"><span class="header-section-number">18</span> googleVis in R</a></li>
-<li><a class="" href="tutorial-for-vector-fields-in-r.html"><span class="header-section-number">19</span> Tutorial for vector fields in r</a></li>
-<li><a class="" href="data-cleaning-with-r.html"><span class="header-section-number">20</span> Data cleaning with r</a></li>
-<li><a class="" href="introduction-to-shiny-web-apps.html"><span class="header-section-number">21</span> Introduction to Shiny Web Apps</a></li>
-<li><a class="" href="python-missingno-library-tutorial.html"><span class="header-section-number">22</span> Python missingno library tutorial</a></li>
-<li><a class="" href="data-explorer-tutorial-and-automation.html"><span class="header-section-number">23</span> Data Explorer Tutorial and Automation</a></li>
-<li><a class="" href="d-visualization-in-r.html"><span class="header-section-number">24</span> 3D Visualization in R</a></li>
-<li><a class="" href="visualizing-time-series-data.html"><span class="header-section-number">25</span> Visualizing Time Series Data</a></li>
+<li><a class="" href="preprocessing-and-visualization-of-time-series-data.html"><span class="header-section-number">17</span> Preprocessing and Visualization of Time Series Data</a></li>
+<li><a class="" href="how-to-use-sqldf.html"><span class="header-section-number">18</span> How to use sqldf</a></li>
+<li><a class="active" href="googlevis-in-r.html"><span class="header-section-number">19</span> googleVis in R</a></li>
+<li><a class="" href="tutorial-for-vector-fields-in-r.html"><span class="header-section-number">20</span> Tutorial for vector fields in r</a></li>
+<li><a class="" href="data-cleaning-with-r.html"><span class="header-section-number">21</span> Data cleaning with r</a></li>
+<li class="book-part">tutorial</li>
+<li><a class="" href="introduction-to-shiny-web-apps.html"><span class="header-section-number">22</span> Introduction to Shiny Web Apps</a></li>
+<li><a class="" href="python-missingno-library-tutorial.html"><span class="header-section-number">23</span> Python missingno library tutorial</a></li>
+<li><a class="" href="data-explorer-tutorial-and-automation.html"><span class="header-section-number">24</span> Data Explorer Tutorial and Automation</a></li>
+<li><a class="" href="d-visualization-in-r.html"><span class="header-section-number">25</span> 3D Visualization in R</a></li>
+<li><a class="" href="visualizing-time-series-data.html"><span class="header-section-number">26</span> Visualizing Time Series Data</a></li>
+<li><a class="" href="igraph-in-r.html"><span class="header-section-number">27</span> igraph in r</a></li>
+<li><a class="" href="geo-mapping-coordinate-extraction-using-api-calls.html"><span class="header-section-number">28</span> Geo-Mapping Coordinate Extraction Using API Calls</a></li>
 <li class="book-part">Interview Prep</li>
-<li><a class="" href="ten-interview-questions-and-answers.html"><span class="header-section-number">27</span> Ten interview questions and answers</a></li>
+<li><a class="" href="ten-interview-questions-and-answers.html"><span class="header-section-number">30</span> Ten interview questions and answers</a></li>
 <li class="book-part">Case Studies</li>
-<li><a class="" href="benford-case-study.html"><span class="header-section-number">29</span> Benford Case Study</a></li>
+<li><a class="" href="benford-case-study.html"><span class="header-section-number">32</span> Benford Case Study</a></li>
 <li class="book-part">Appendices</li>
-<li><a class="" href="github-initial-setup.html"><span class="header-section-number">30</span> Github initial setup</a></li>
-<li><a class="" href="tutorial-for-pull-request-mergers.html"><span class="header-section-number">31</span> Tutorial for pull request mergers</a></li>
+<li><a class="" href="github-initial-setup.html"><span class="header-section-number">33</span> Github initial setup</a></li>
+<li><a class="" href="tutorial-for-pull-request-mergers.html"><span class="header-section-number">34</span> Tutorial for pull request mergers</a></li>
 </ul>
 
         <div class="book-extra">
@@ -84,14 +91,14 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="googlevis-in-r" class="section level1" number="18">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="googlevis-in-r" class="section level1" number="19">
 <h1>
-<span class="header-section-number">18</span> googleVis in R<a class="anchor" aria-label="anchor" href="#googlevis-in-r"><i class="fas fa-link"></i></a>
+<span class="header-section-number">19</span> googleVis in R<a class="anchor" aria-label="anchor" href="#googlevis-in-r"><i class="fas fa-link"></i></a>
 </h1>
 <p>Sushant Prabhu and Kiyan Mohebbizadeh</p>
-<div id="introducing-googlevis" class="section level2" number="18.1">
+<div id="introducing-googlevis" class="section level2" number="19.1">
 <h2>
-<span class="header-section-number">18.1</span> Introducing googleVis<a class="anchor" aria-label="anchor" href="#introducing-googlevis"><i class="fas fa-link"></i></a>
+<span class="header-section-number">19.1</span> Introducing googleVis<a class="anchor" aria-label="anchor" href="#introducing-googlevis"><i class="fas fa-link"></i></a>
 </h2>
 <blockquote>
 <p>GoogleVis is a package in R that allows users of R to use the Google Charts API.</p>
@@ -102,9 +109,9 @@
 <div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://mages.github.io/googleVis/">googleVis</a></span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="why-use-googlevis" class="section level2" number="18.2">
+<div id="why-use-googlevis" class="section level2" number="19.2">
 <h2>
-<span class="header-section-number">18.2</span> Why use googleVis ?<a class="anchor" aria-label="anchor" href="#why-use-googlevis"><i class="fas fa-link"></i></a>
+<span class="header-section-number">19.2</span> Why use googleVis ?<a class="anchor" aria-label="anchor" href="#why-use-googlevis"><i class="fas fa-link"></i></a>
 </h2>
 <blockquote>
 <p><code>googleVis</code> package allows users to create interactive visualizations which R’s most popular visualization package (ggplot) does not allow.</p>
@@ -115,9 +122,9 @@
 <li>The visualizations created by <code>googleVis</code> add a level of interest to the consumer due to their interactive layer and viewers are able to gather specific bits of information by hovering over and clicking values in the visualizations. This not only allows for increased aesthetics, but also more information being transferred to the viewers.</li>
 </ul>
 </div>
-<div id="googlevis-rendering-interaction" class="section level2" number="18.3">
+<div id="googlevis-rendering-interaction" class="section level2" number="19.3">
 <h2>
-<span class="header-section-number">18.3</span> googleVis Rendering &amp; Interaction<a class="anchor" aria-label="anchor" href="#googlevis-rendering-interaction"><i class="fas fa-link"></i></a>
+<span class="header-section-number">19.3</span> googleVis Rendering &amp; Interaction<a class="anchor" aria-label="anchor" href="#googlevis-rendering-interaction"><i class="fas fa-link"></i></a>
 </h2>
 <blockquote>
 <p>The output of <code>googleVis</code> can either be embedded into an HTML file or read dynamically. These visualizations are most often rendered online and in a web format. Therefore, a browser and internet connection are required to view the interactive version of the output compared to <code>ggplot</code></p>
@@ -130,9 +137,9 @@
 <li>
 <code>googleVis</code> allows users to use the data in R data frames to create Google Charts without uploading the data onto Google.</li>
 </ul>
-<div id="basic-graphs-line-bar-combo" class="section level3" number="18.3.1">
+<div id="basic-graphs-line-bar-combo" class="section level3" number="19.3.1">
 <h3>
-<span class="header-section-number">18.3.1</span> Basic Graphs (Line, Bar, Combo)<a class="anchor" aria-label="anchor" href="#basic-graphs-line-bar-combo"><i class="fas fa-link"></i></a>
+<span class="header-section-number">19.3.1</span> Basic Graphs (Line, Bar, Combo)<a class="anchor" aria-label="anchor" href="#basic-graphs-line-bar-combo"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>pet<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'cat'</span>, <span class="st">'dog'</span>, <span class="st">'hamster'</span>, <span class="st">'snake'</span><span class="op">)</span>,</span>
@@ -646,9 +653,9 @@ callbacks.shift()();
 <li>Combo charts are great for multiple variable comparisons and allow the user to get the best of both worlds. by carefully selecting which variables are represented in bars and which ones are lines, the user is able to best show the relationship within groups and trends of the population.</li>
 </ul>
 </div>
-<div id="googlevis-histogram-chart" class="section level3" number="18.3.2">
+<div id="googlevis-histogram-chart" class="section level3" number="19.3.2">
 <h3>
-<span class="header-section-number">18.3.2</span> googleVis Histogram Chart<a class="anchor" aria-label="anchor" href="#googlevis-histogram-chart"><i class="fas fa-link"></i></a>
+<span class="header-section-number">19.3.2</span> googleVis Histogram Chart<a class="anchor" aria-label="anchor" href="#googlevis-histogram-chart"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">iris</span></span>
@@ -1180,9 +1187,9 @@ callbacks.shift()();
 </div>
 <p>The histogram allows users to represent the distribution of one particular group or variable by showing the frequency of the particular group or variable within a range. The charts by <code>googleVis</code> have an advantage over regular histograms because almost no histogram allows or recommends specific information regarding the counts at different points in the visualization, however, with <code>googleVis</code> the audience can not only look at the distribution but access specific metrics through interaction as well.</p>
 </div>
-<div id="googlevis-alluvialsankey-chart" class="section level3" number="18.3.3">
+<div id="googlevis-alluvialsankey-chart" class="section level3" number="19.3.3">
 <h3>
-<span class="header-section-number">18.3.3</span> googleVis Alluvial/Sankey Chart<a class="anchor" aria-label="anchor" href="#googlevis-alluvialsankey-chart"><i class="fas fa-link"></i></a>
+<span class="header-section-number">19.3.3</span> googleVis Alluvial/Sankey Chart<a class="anchor" aria-label="anchor" href="#googlevis-alluvialsankey-chart"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>From<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"Math"</span>,<span class="fl">3</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"Science"</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>,</span>
@@ -1300,9 +1307,9 @@ callbacks.shift()();
 </div>
 <p>Alluvial charts best show the movement of the sample or population among different variables. In the example above the movement of students within a school from class to class is represented. This visualization can be helpful with data that has an ordinal and timeline specific values. With <code>googleVis</code>, the audience is exposed to the general trends with a clean looking chart as well as the specifics of the graph through interaction.</p>
 </div>
-<div id="googlevis-geographic-chart" class="section level3" number="18.3.4">
+<div id="googlevis-geographic-chart" class="section level3" number="19.3.4">
 <h3>
-<span class="header-section-number">18.3.4</span> googleVis Geographic Chart<a class="anchor" aria-label="anchor" href="#googlevis-geographic-chart"><i class="fas fa-link"></i></a>
+<span class="header-section-number">19.3.4</span> googleVis Geographic Chart<a class="anchor" aria-label="anchor" href="#googlevis-geographic-chart"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>country<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'US'</span>, <span class="st">'CN'</span>, <span class="st">'BR'</span>, <span class="st">'IS'</span>, <span class="st">'RU'</span>, <span class="st">'TH'</span>, <span class="st">'TR'</span>, <span class="st">'ID'</span>, <span class="st">'MX'</span>, <span class="st">'IR'</span> <span class="op">)</span>,</span>
@@ -1443,9 +1450,9 @@ callbacks.shift()();
 </div>
 <p>Map visualizations by <code>googleVis</code> are incredibly easy to create and manipulate. They are useful for comparing different geographic areas to each other. <code>googleVis</code> automatically color scales the values and the interaction allows the map to be simple and clean, but get specific values when hovering over a particular geographic area.</p>
 </div>
-<div id="googlevis-gauge-chart" class="section level3" number="18.3.5">
+<div id="googlevis-gauge-chart" class="section level3" number="19.3.5">
 <h3>
-<span class="header-section-number">18.3.5</span> googleVis Gauge Chart<a class="anchor" aria-label="anchor" href="#googlevis-gauge-chart"><i class="fas fa-link"></i></a>
+<span class="header-section-number">19.3.5</span> googleVis Gauge Chart<a class="anchor" aria-label="anchor" href="#googlevis-gauge-chart"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">temperature</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>city<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Las Vegas'</span>, <span class="st">'Los Angeles'</span>, <span class="st">'Pheonix'</span>, <span class="st">'Dallas'</span>, <span class="st">'Houston'</span>, <span class="st">'Miami'</span><span class="op">)</span>,</span>
@@ -1566,9 +1573,9 @@ callbacks.shift()();
 </div>
 <p>The gauge charts are not interactive, however they do offer a unique way to model data that is always within a certain range. For example, temperatures, speeds, pressure, etc. This chart allows for quick comparison between groups and aesthetic value to any presentation.</p>
 </div>
-<div id="googlevis-tabular-chart" class="section level3" number="18.3.6">
+<div id="googlevis-tabular-chart" class="section level3" number="19.3.6">
 <h3>
-<span class="header-section-number">18.3.6</span> googleVis Tabular Chart<a class="anchor" aria-label="anchor" href="#googlevis-tabular-chart"><i class="fas fa-link"></i></a>
+<span class="header-section-number">19.3.6</span> googleVis Tabular Chart<a class="anchor" aria-label="anchor" href="#googlevis-tabular-chart"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Tabular Data Un-Paged</span></span>
@@ -2296,9 +2303,9 @@ callbacks.shift()();
 </div>
 <p>The data formatted as a table can be paged and sorted. It has a flexible option to select single rows either with the keyboard or the mouse. It also powers sorting on rows across all dimensions in the columns of the dataset. The navigation through paged tabular information is smooth and simple.</p>
 </div>
-<div id="googlevis-tree-map-chart" class="section level3" number="18.3.7">
+<div id="googlevis-tree-map-chart" class="section level3" number="19.3.7">
 <h3>
-<span class="header-section-number">18.3.7</span> googleVis Tree Map Chart<a class="anchor" aria-label="anchor" href="#googlevis-tree-map-chart"><i class="fas fa-link"></i></a>
+<span class="header-section-number">19.3.7</span> googleVis Tree Map Chart<a class="anchor" aria-label="anchor" href="#googlevis-tree-map-chart"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Country_Tree</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisTreeMap.html">gvisTreeMap</a></span><span class="op">(</span><span class="va">Regions</span>, <span class="st">"Region"</span>, <span class="st">"Parent"</span>, <span class="st">"Val"</span>, <span class="st">"Fac"</span>, </span>
@@ -2460,9 +2467,9 @@ callbacks.shift()();
 <p>The <code>googleVis</code> tree map is a visual representation of a data tree, where each node has 0 or more children, and 1 parent barring the root node. One can specify how many levels to display simultaneously, and optionally to display deeper levels. One can move down the tree when the person left-clicks a node, and moves back up the tree when the person right-clicks the graph.The total size of the graph is determined by the size of the elements contained in the graph.</p>
 <p>This <code>googleVis</code> tree map chart captures the relative sizes of data categories, that helps for quick insight of the datapoints that are bigger contributors to each category. Color helps scrutinize datapoints that are underperforming / overperforming) compared to their siblings from the same category.</p>
 </div>
-<div id="googlevis-annotation-chart" class="section level3" number="18.3.8">
+<div id="googlevis-annotation-chart" class="section level3" number="19.3.8">
 <h3>
-<span class="header-section-number">18.3.8</span> googleVis Annotation Chart<a class="anchor" aria-label="anchor" href="#googlevis-annotation-chart"><i class="fas fa-link"></i></a>
+<span class="header-section-number">19.3.8</span> googleVis Annotation Chart<a class="anchor" aria-label="anchor" href="#googlevis-annotation-chart"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Stock_Annotation</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisAnnotationChart.html">gvisAnnotationChart</a></span><span class="op">(</span><span class="va">Stock</span>, datevar<span class="op">=</span><span class="st">"Date"</span>,numvar<span class="op">=</span><span class="st">"Value"</span>, idvar<span class="op">=</span><span class="st">"Device"</span>, titlevar<span class="op">=</span><span class="st">"Title"</span>,</span>
@@ -2616,9 +2623,9 @@ callbacks.shift()();
 <p>To answer the “so what ?” kind of questions, such well defined annotations highlight the significance of data in the chart, with keen detail in the textual description / annotation.</p>
 <p>One can also slice through the interactive timeline chart to look for a snapshot of data which is aesthetically pleasing and also provides great detail insights within the same visualization. These annotation charts are SVG (scalable vector graphics) /VML (vector graphics rendering ).</p>
 </div>
-<div id="googlevis-calendar-chart" class="section level3" number="18.3.9">
+<div id="googlevis-calendar-chart" class="section level3" number="19.3.9">
 <h3>
-<span class="header-section-number">18.3.9</span> googleVis Calendar Chart<a class="anchor" aria-label="anchor" href="#googlevis-calendar-chart"><i class="fas fa-link"></i></a>
+<span class="header-section-number">19.3.9</span> googleVis Calendar Chart<a class="anchor" aria-label="anchor" href="#googlevis-calendar-chart"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Calendar_Temp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisCalendar.html">gvisCalendar</a></span><span class="op">(</span><span class="va">Cairo</span>, datevar<span class="op">=</span><span class="st">"Date"</span>, numvar<span class="op">=</span><span class="st">"Temp"</span>,</span>
@@ -7077,9 +7084,9 @@ callbacks.shift()();
 <p>The <code>googleVis</code> calendar chart is a definitive visualization that can be used to show activity over the course of a longer duration of time, example in months or years or decades. One can illustrate the variation of 1 quantity depending on the days of the given week, or trends over the timeline period.</p>
 <p>Such calendar charts demonstrate data records, or events, on a daily, weekly, monthly, yearly calendar. It is highly interactive and one can view the value on hovering on any particular time of the entire timeperiod.</p>
 </div>
-<div id="googlevis-timeline-chart" class="section level3" number="18.3.10">
+<div id="googlevis-timeline-chart" class="section level3" number="19.3.10">
 <h3>
-<span class="header-section-number">18.3.10</span> googleVis Timeline Chart<a class="anchor" aria-label="anchor" href="#googlevis-timeline-chart"><i class="fas fa-link"></i></a>
+<span class="header-section-number">19.3.10</span> googleVis Timeline Chart<a class="anchor" aria-label="anchor" href="#googlevis-timeline-chart"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Position_Timeline_Data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>Position<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"President"</span>, <span class="fl">4</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"Vice"</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span>,</span>
@@ -7229,9 +7236,9 @@ callbacks.shift()();
 <p>This <code>googleVis</code> Timeline chart is a great and fascinating way of visualizing the different dates / events. Here is an example, showing duration of Presidents &amp; Vice Presidents / Sessions of Congress over the timeline period. The exact times and durations are given when one interactively hovers over the bars.</p>
 <p>These timeline charts are versatile visuals for illustrating a sequence of events chronologically. It provides an amazing aid to conceptualize event sequences / processes to gain valuable insights, sometimes maybe summarize historical events, or time frame of minutes, hours, years or datewise.</p>
 </div>
-<div id="googlevis-gantt-chart" class="section level3" number="18.3.11">
+<div id="googlevis-gantt-chart" class="section level3" number="19.3.11">
 <h3>
-<span class="header-section-number">18.3.11</span> googleVis Gantt Chart<a class="anchor" aria-label="anchor" href="#googlevis-gantt-chart"><i class="fas fa-link"></i></a>
+<span class="header-section-number">19.3.11</span> googleVis Gantt Chart<a class="anchor" aria-label="anchor" href="#googlevis-gantt-chart"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">daysToMilliseconds</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">days</span><span class="op">)</span><span class="op">{</span><span class="va">days</span> <span class="op">*</span> <span class="fl">24</span> <span class="op">*</span> <span class="fl">60</span> <span class="op">*</span> <span class="fl">60</span> <span class="op">*</span> <span class="fl">1000</span><span class="op">}</span></span>
@@ -7393,9 +7400,9 @@ callbacks.shift()();
 <p><code>googleVis</code> Gantt charts would help teams to plan work around deadlines and allocate resources efficiently.</p>
 <p>Project planners also leverage Gantt charts to maintain a bird’s eye high level view of projects and track them. These depict the relationship between the start and end dates of tasks, milestones, and dependent tasks for each of them over the entire timeline of the project. This Gantt chart illustrates the breakdown of a project into its component tasks very effectively.</p>
 </div>
-<div id="googlevis-merging-charts" class="section level3" number="18.3.12">
+<div id="googlevis-merging-charts" class="section level3" number="19.3.12">
 <h3>
-<span class="header-section-number">18.3.12</span> googleVis Merging Charts<a class="anchor" aria-label="anchor" href="#googlevis-merging-charts"><i class="fas fa-link"></i></a>
+<span class="header-section-number">19.3.12</span> googleVis Merging Charts<a class="anchor" aria-label="anchor" href="#googlevis-merging-charts"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Geographic</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisGeoChart.html">gvisGeoChart</a></span><span class="op">(</span><span class="va">Exports</span>,</span>
@@ -7663,9 +7670,9 @@ callbacks.shift()();
 <p>The multiples charts view allows to split up the individual charts Bar, Column, Line or Geographic, Tabular etc. charts into multiple charts, separated. There are numerous use cases like showing your product sales per region and then providing more information about it. It gives a lot of flexibility in the report creation and delivery aesthetically.</p>
 </div>
 </div>
-<div id="use-googlevis-in-rstudio" class="section level2" number="18.4">
+<div id="use-googlevis-in-rstudio" class="section level2" number="19.4">
 <h2>
-<span class="header-section-number">18.4</span> Use googleVis in RStudio<a class="anchor" aria-label="anchor" href="#use-googlevis-in-rstudio"><i class="fas fa-link"></i></a>
+<span class="header-section-number">19.4</span> Use googleVis in RStudio<a class="anchor" aria-label="anchor" href="#use-googlevis-in-rstudio"><i class="fas fa-link"></i></a>
 </h2>
 <p>Using googleVis in RStudio is straightforward. By default, the RStudio renders the charts in a new webpage -</p>
 <pre><code>plot(Chart)</code></pre>
@@ -7675,9 +7682,9 @@ callbacks.shift()();
 <blockquote>
 <p>To Knit the Rmd Markdown file to HTML, to perform the following command set the Chunk option results to <code>asis</code> with <code>{r ChartExample, results='asis', tidy=FALSE}</code> and <code>plot(Chart, 'chart')</code></p>
 </blockquote>
-<div id="googlevis-references" class="section level3" number="18.4.1">
+<div id="googlevis-references" class="section level3" number="19.4.1">
 <h3>
-<span class="header-section-number">18.4.1</span> googleVis References<a class="anchor" aria-label="anchor" href="#googlevis-references"><i class="fas fa-link"></i></a>
+<span class="header-section-number">19.4.1</span> googleVis References<a class="anchor" aria-label="anchor" href="#googlevis-references"><i class="fas fa-link"></i></a>
 </h3>
 <ul>
 <li><a href="https://mages.github.io/googleVis/">Documentation</a></li>
@@ -7694,32 +7701,32 @@ callbacks.shift()();
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="how-to-use-sqldf.html"><span class="header-section-number">17</span> How to use sqldf</a></div>
-<div class="next"><a href="tutorial-for-vector-fields-in-r.html"><span class="header-section-number">19</span> Tutorial for vector fields in r</a></div>
+<div class="prev"><a href="how-to-use-sqldf.html"><span class="header-section-number">18</span> How to use sqldf</a></div>
+<div class="next"><a href="tutorial-for-vector-fields-in-r.html"><span class="header-section-number">20</span> Tutorial for vector fields in r</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#googlevis-in-r"><span class="header-section-number">18</span> googleVis in R</a></li>
-<li><a class="nav-link" href="#introducing-googlevis"><span class="header-section-number">18.1</span> Introducing googleVis</a></li>
-<li><a class="nav-link" href="#why-use-googlevis"><span class="header-section-number">18.2</span> Why use googleVis ?</a></li>
+<li><a class="nav-link" href="#googlevis-in-r"><span class="header-section-number">19</span> googleVis in R</a></li>
+<li><a class="nav-link" href="#introducing-googlevis"><span class="header-section-number">19.1</span> Introducing googleVis</a></li>
+<li><a class="nav-link" href="#why-use-googlevis"><span class="header-section-number">19.2</span> Why use googleVis ?</a></li>
 <li>
-<a class="nav-link" href="#googlevis-rendering-interaction"><span class="header-section-number">18.3</span> googleVis Rendering &amp; Interaction</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#basic-graphs-line-bar-combo"><span class="header-section-number">18.3.1</span> Basic Graphs (Line, Bar, Combo)</a></li>
-<li><a class="nav-link" href="#googlevis-histogram-chart"><span class="header-section-number">18.3.2</span> googleVis Histogram Chart</a></li>
-<li><a class="nav-link" href="#googlevis-alluvialsankey-chart"><span class="header-section-number">18.3.3</span> googleVis Alluvial/Sankey Chart</a></li>
-<li><a class="nav-link" href="#googlevis-geographic-chart"><span class="header-section-number">18.3.4</span> googleVis Geographic Chart</a></li>
-<li><a class="nav-link" href="#googlevis-gauge-chart"><span class="header-section-number">18.3.5</span> googleVis Gauge Chart</a></li>
-<li><a class="nav-link" href="#googlevis-tabular-chart"><span class="header-section-number">18.3.6</span> googleVis Tabular Chart</a></li>
-<li><a class="nav-link" href="#googlevis-tree-map-chart"><span class="header-section-number">18.3.7</span> googleVis Tree Map Chart</a></li>
-<li><a class="nav-link" href="#googlevis-annotation-chart"><span class="header-section-number">18.3.8</span> googleVis Annotation Chart</a></li>
-<li><a class="nav-link" href="#googlevis-calendar-chart"><span class="header-section-number">18.3.9</span> googleVis Calendar Chart</a></li>
-<li><a class="nav-link" href="#googlevis-timeline-chart"><span class="header-section-number">18.3.10</span> googleVis Timeline Chart</a></li>
-<li><a class="nav-link" href="#googlevis-gantt-chart"><span class="header-section-number">18.3.11</span> googleVis Gantt Chart</a></li>
-<li><a class="nav-link" href="#googlevis-merging-charts"><span class="header-section-number">18.3.12</span> googleVis Merging Charts</a></li>
+<a class="nav-link" href="#googlevis-rendering-interaction"><span class="header-section-number">19.3</span> googleVis Rendering &amp; Interaction</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#basic-graphs-line-bar-combo"><span class="header-section-number">19.3.1</span> Basic Graphs (Line, Bar, Combo)</a></li>
+<li><a class="nav-link" href="#googlevis-histogram-chart"><span class="header-section-number">19.3.2</span> googleVis Histogram Chart</a></li>
+<li><a class="nav-link" href="#googlevis-alluvialsankey-chart"><span class="header-section-number">19.3.3</span> googleVis Alluvial/Sankey Chart</a></li>
+<li><a class="nav-link" href="#googlevis-geographic-chart"><span class="header-section-number">19.3.4</span> googleVis Geographic Chart</a></li>
+<li><a class="nav-link" href="#googlevis-gauge-chart"><span class="header-section-number">19.3.5</span> googleVis Gauge Chart</a></li>
+<li><a class="nav-link" href="#googlevis-tabular-chart"><span class="header-section-number">19.3.6</span> googleVis Tabular Chart</a></li>
+<li><a class="nav-link" href="#googlevis-tree-map-chart"><span class="header-section-number">19.3.7</span> googleVis Tree Map Chart</a></li>
+<li><a class="nav-link" href="#googlevis-annotation-chart"><span class="header-section-number">19.3.8</span> googleVis Annotation Chart</a></li>
+<li><a class="nav-link" href="#googlevis-calendar-chart"><span class="header-section-number">19.3.9</span> googleVis Calendar Chart</a></li>
+<li><a class="nav-link" href="#googlevis-timeline-chart"><span class="header-section-number">19.3.10</span> googleVis Timeline Chart</a></li>
+<li><a class="nav-link" href="#googlevis-gantt-chart"><span class="header-section-number">19.3.11</span> googleVis Gantt Chart</a></li>
+<li><a class="nav-link" href="#googlevis-merging-charts"><span class="header-section-number">19.3.12</span> googleVis Merging Charts</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#use-googlevis-in-rstudio"><span class="header-section-number">18.4</span> Use googleVis in RStudio</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#googlevis-references"><span class="header-section-number">18.4.1</span> googleVis References</a></li></ul>
+<a class="nav-link" href="#use-googlevis-in-rstudio"><span class="header-section-number">19.4</span> Use googleVis in RStudio</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#googlevis-references"><span class="header-section-number">19.4.1</span> googleVis References</a></li></ul>
 </li>
 </ul>
 
