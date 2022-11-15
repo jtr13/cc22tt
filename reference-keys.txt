@@ -30,6 +30,8 @@ color-palettes-for-data-visualization
 explanation-of-the-motivation
 data-visualization-using-seaborn
 machine-learning-cheatsheet-for-r-and-python
+data-visualization-with-r-ggplot2-vs.-matlab
+reference
 part-tutorials
 preprocessing-and-visualization-of-time-series-data
 preprocess-on-a-time-series-data
@@ -121,7 +123,7 @@ min-max-scaling
 data-encoding
 ordinal-encoding
 one-hot-encoding-3
-reference
+reference-1
 introduction-to-shiny-web-apps
 motivation-1
 how-to-host
@@ -136,7 +138,7 @@ reactivity
 display-output-with-render
 conclusion-3
 evaluation
-reference-1
+reference-2
 python-missingno-library-tutorial
 data-explorer-tutorial-and-automation
 d-visualization-in-r
@@ -196,8 +198,6 @@ conclusion-5
 edav-garden
 how-to-explore-the-garden
 main-sections
-data-visualization-with-r-ggplot2-vs.-matlab
-reference-2
 using-raster-data-in-r
 introduction-to-rasters
 what-is-a-raster
