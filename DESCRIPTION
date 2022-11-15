@@ -39,8 +39,8 @@ Suggests:
     navdata,
     httr,
     leaflet,
-    assertthat
-    jsonlite
+    assertthat,
+    jsonlite,
 Remotes:
     hadley/emo,
     kassambara/navdata
