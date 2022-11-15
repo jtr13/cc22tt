@@ -44,6 +44,7 @@ rmd_files: [
   'igraph-in-r.Rmd',
   'geomap_api.Rmd',
   'edav_garden.Rmd',
+  'r_vs_matlab_graph.Rmd',
   
   # Part: Interview Prep
   'ten_interview_questions.Rmd',
