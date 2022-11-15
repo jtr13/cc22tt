@@ -15,8 +15,11 @@ library(tidyr)
 #install.packages(imputeTS)
 library(imputeTS)
 
+#install.packages(caret)
+library(caret)
 ```
-
+## Data cleaning with R
+In the real world, the data sets we are handling are often not data scientists can readily use. They might contain duplicate entries when entries are supposed to be unique. They might contain missing values, which is problematic for tasks such as training predicative modeling. The data features might be at vastly different scale, which both induces instability of float point arithmatics and inaccurate measurement of feature importance in training machine learning model. We will discuss how to use R to clean Data sets where situations above take place.
 
 
 ## Import data set
@@ -69,18 +72,22 @@ df1 <- data.frame (first_column  = c("value_1", "value_2", "value_3"),
 df2 <- data.frame (third_column  = c("value_7", "value_8", "value_9"),
                   fourth_column = c("value_10", "value_11", "value_12")
                   )
-# combine two dataframe by columns
-# order matters.
+```
+combine two dataframe by columns,order matters.
+
+```{r, echo=TRUE}
 bigger_df <- cbind(df1, df2)
 print(bigger_df)
-# combine two dataframe by rows
-# two DataFrames must have the same column name and order.
+```
+
+combine two dataframe by rows, two DataFrames must have the same column name and order.
+```{r, echo=TRUE}
+
 df3 <- data.frame (third_column = c("value_7", "value_8", "value_9"),
                   fourth_column = c("value_10", "value_11", "value_12")
                   )
 bigger_df2 <- rbind(df2,df3)
 print(bigger_df2)
-# order matters.
 ```
 ### adding/change row name
 ```{r, echo=TRUE}
@@ -146,7 +153,8 @@ output <- mutate(df_math,
 print(output)
 ```
 
-### joining two table **[1]**
+### joining two table **[2]**
+Bewaring that the order of dataframe in the merge function matters(right join left)
 ```{r, echo=TRUE}
 emp_df=data.frame(
   emp_id=c(1,2,3,4,5,6),
@@ -189,6 +197,7 @@ needs_pivoting %>% pivot_longer(cols=c('sparrow', 'eagle'), # the columns(featur
 ```
 
 #### binning using cut()
+This is also a good way to categorize feature
 ```{r, echo=TRUE}
 hour_df <- data.frame(shop_name=c('MAC', 'Tangro', 'cummington', 'Burger King', 'judgement', 'KFC', 'ye', 'Dungeon', 'Razer', 'yeah sir', 'Koban wife', 'string'),
                  operating_hours=c(2, 5, 4, 7, 7, 8, 5, 4, 5, 11, 13, 8),
@@ -231,8 +240,7 @@ student_result_wild[order(-student_result_wild$id),]
 student_result_wild[order(-student_result_wild$id, student_result_wild$science),]
 ```
 
-### reference
-[1] https://sparkbyexamples.com/r-programming/how-to-do-left-join-in-r/#:~:text=How%20to%20do%20left%20join%20on%20data%20frames%20in%20R,join%20data%20frames%20in%20R.
+
 
 
 
@@ -645,8 +653,7 @@ na_df[i1] <- lapply(na_df[i1], function(x)
 na_df
 ```
 
-### Reference
-[1]https://stackoverflow.com/questions/36377813/impute-most-frequent-categorical-value-in-all-columns-in-data-frame
+
 
 ## Data scaling
 Scaling is important for data analysis and exploration, Data without scaling can produce misleading result. Also scaling is beneficial for mathematics computation and machine learning.
@@ -678,5 +685,41 @@ scale_df %>% mutate_all(~(minmax(.) %>% as.vector)) %>% boxplot() # apply minmax
 ```
 
 
+## data encoding
+### ordinal encoding
+```{r, echo=TRUE}
+ordinal <- function(x, order= unique(x)) {
+  x <- as.numeric(factor(x, levels = order, exclude = NULL))
+  x
+}
+encode_df <- data.frame(A = c(1, 7, 8, 5, 3),
+                     B = c(4, 10, NA, 7, 4), 
+                    fantasy = c("sad", "we", NA, 'adf', 'NA'),
+                     C = c(1, 0, NA, 9, NA), 
+                     D = c("tangro", "ok", 'NA', 'yes', 'NA'))
+print('origin:')
+c(encode_df["D"])
+print('encoded:')
+ordinal(encode_df[["D"]])
+```
+### one-hot encoding **[3]**
+```{r, echo=TRUE}
+
+encode_df <- data.frame(A = c(1, 7, 8, 5, 3),
+                     B = c(4, 10, NA, 7, 4), 
+                    fantasy = c("sad", "we", "seaweed", 'adf', 'NA'),
+                     C = c(1, 0, NA, 9, NA), 
+                     D = c("tangro", "ok", 'NA', 'yes', 'NA'))
 
 
+dummy <- dummyVars(" ~ .", data=encode_df)
+newdata <- data.frame(predict(dummy, newdata = encode_df)) 
+newdata
+```
+## Reference
+
+[1] https://sparkbyexamples.com/r-programming/how-to-do-left-join-in-r/#:~:text=How%20to%20do%20left%20join%20on%20data%20frames%20in%20R,join%20data%20frames%20in%20R.
+
+[2]https://stackoverflow.com/questions/36377813/impute-most-frequent-categorical-value-in-all-columns-in-data-frame
+
+[3] https://datatricks.co.uk/one-hot-encoding-in-r-three-simple-methods
