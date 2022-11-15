@@ -5,7 +5,7 @@ Version: 0.0.0.9000
 Imports:
     emo,
     tidyverse,
-    kassambara/navdata
+    # kassambara/navdata
 Suggests:
     bookdown,
     bslib,
