@@ -15,8 +15,12 @@ library(tidyr)
 
 #install.packages(imputeTS)
 library(imputeTS)
-```
 
+#install.packages(caret)
+library(caret)
+```
+## Data cleaning with R
+In the real world, the data sets we are handling are often not data scientists can readily use. They might contain duplicate entries when entries are supposed to be unique. They might contain missing values, which is problematic for tasks such as training predicative modeling. The data features might be at vastly different scale, which both induces instability of float point arithmatics and inaccurate measurement of feature importance in training machine learning model. We will discuss how to use R to clean Data sets where situations above take place.
 
 
 ## Import data set
@@ -102,8 +106,11 @@ df1 <- data.frame (first_column  = c("value_1", "value_2", "value_3"),
 df2 <- data.frame (third_column  = c("value_7", "value_8", "value_9"),
                   fourth_column = c("value_10", "value_11", "value_12")
                   )
-# combine two dataframe by columns
-# order matters.
+```
+combine two dataframe by columns,order matters.
+
+
+```r
 bigger_df <- cbind(df1, df2)
 print(bigger_df)
 ```
@@ -115,9 +122,9 @@ print(bigger_df)
 ## 3      value_3       value_6      value_9      value_9      value_12
 ```
 
+combine two dataframe by rows, two DataFrames must have the same column name and order.
+
 ```r
-# combine two dataframe by rows
-# two DataFrames must have the same column name and order.
 df3 <- data.frame (third_column = c("value_7", "value_8", "value_9"),
                   fourth_column = c("value_10", "value_11", "value_12")
                   )
@@ -133,10 +140,6 @@ print(bigger_df2)
 ## 4      value_7      value_10
 ## 5      value_8      value_11
 ## 6      value_9      value_12
-```
-
-```r
-# order matters.
 ```
 ### adding/change row name
 
@@ -323,7 +326,8 @@ print(output)
 ## 3            3             6            No
 ```
 
-### joining two table **[1]**
+### joining two table **[2]**
+Bewaring that the order of dataframe in the merge function matters(right join left)
 
 ```r
 emp_df=data.frame(
@@ -468,6 +472,7 @@ needs_pivoting %>% pivot_longer(cols=c('sparrow', 'eagle'), # the columns(featur
 ```
 
 #### binning using cut()
+This is also a good way to categorize feature
 
 ```r
 hour_df <- data.frame(shop_name=c('MAC', 'Tangro', 'cummington', 'Burger King', 'judgement', 'KFC', 'ye', 'Dungeon', 'Razer', 'yeah sir', 'Koban wife', 'string'),
@@ -636,8 +641,7 @@ student_result_wild[order(-student_result_wild$id, student_result_wild$science),
 ## 6  Geeta     8       7       7  2
 ```
 
-### reference
-[1] https://sparkbyexamples.com/r-programming/how-to-do-left-join-in-r/#:~:text=How%20to%20do%20left%20join%20on%20data%20frames%20in%20R,join%20data%20frames%20in%20R.
+
 
 
 
@@ -687,11 +691,11 @@ data_duplicated_values[duplicated(data_duplicated_values),]
 
 ```
 ##     Ozone Solar.R Wind Temp Month Day
-## 154    NA     255 12.6   75     8  23
-## 155    12     120 11.5   73     6  19
-## 156     7      48 14.3   80     7  15
-## 157    96     167  6.9   91     9   1
-## 158    18     313 11.5   62     5   4
+## 154    NA     291 14.9   91     7  14
+## 155    36     118  8.0   72     5   2
+## 156    50     275  7.4   86     7  29
+## 157    NA     264 14.3   79     6   6
+## 158   118     225  2.3   94     8  29
 ```
 
 By adding "!" before "duplicated(df)", we can negate logics in "duplicated(df)" and access non duplicate rows as a data frame:
@@ -1022,10 +1026,10 @@ tail(airQuality_3NA_Inserted, 3)
 ```
 
 ```
-##     Ozone Solar.R  Wind Temp Month Day
-## 154    14     133  6.11   NA    NA   8
-## 155    24      21    NA   NA    NA  25
-## 156    23      NA 13.52   16    NA  10
+##     Ozone Solar.R Wind Temp Month Day
+## 154     2      NA 2.96   15    NA  23
+## 155    NA     103   NA   NA     9  29
+## 156    NA      NA 9.43    4    NA   8
 ```
 
 ```r
@@ -1044,7 +1048,7 @@ print(paste0("number of rows with at least 3 NA in airQuality_3NA_Inserted is ",
 ```
 
 ```
-## [1] "number of rows with at least 3 NA in airQuality_3NA_Inserted is 1"
+## [1] "number of rows with at least 3 NA in airQuality_3NA_Inserted is 2"
 ```
 Now we have 3 rows with at least 3 NA. We now drop rows with at least 3 NA from airQuality_3NA_Inserted by selecting rows with NA less than 3 and reset reference of airQuality_3NA_Inserted:
 
@@ -1055,7 +1059,7 @@ print(paste0("number of rows in airQuality_3NA_Inserted after dropping is ", nro
 ```
 
 ```
-## [1] "number of rows in airQuality_3NA_Inserted after dropping is 155"
+## [1] "number of rows in airQuality_3NA_Inserted after dropping is 154"
 ```
 We have drop all 3 rows with at least 3 NA, so the size of airQuality_3NA_Inserted drops from 156 to 153.
 
@@ -1456,8 +1460,7 @@ na_df
 ## 5  3  4      NA NA     NA
 ```
 
-### Reference
-[1]https://stackoverflow.com/questions/36377813/impute-most-frequent-categorical-value-in-all-columns-in-data-frame
+
 
 ## Data scaling
 Scaling is important for data analysis and exploration, Data without scaling can produce misleading result. Also scaling is beneficial for mathematics computation and machine learning.
@@ -1475,14 +1478,14 @@ scale_df = duke_forest_copy[, 2:5]
 boxplot(scale_df)
 ```
 
-<img src="r_data_cleaning_files/figure-html/unnamed-chunk-56-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="r_data_cleaning_files/figure-html/unnamed-chunk-58-1.png" width="80%" style="display: block; margin: auto;" />
 
 ```r
 # after scaling
 scale_df %>% mutate_all(~(scale(.) %>% as.vector)) %>% boxplot() # apply scale() to every column
 ```
 
-<img src="r_data_cleaning_files/figure-html/unnamed-chunk-56-2.png" width="80%" style="display: block; margin: auto;" />
+<img src="r_data_cleaning_files/figure-html/unnamed-chunk-58-2.png" width="80%" style="display: block; margin: auto;" />
 
 ### Min Max scaling 
 MINMAX scaling is good for svm, so don't hesistate to use it :)
@@ -1496,14 +1499,92 @@ scale_df = duke_forest_copy[, 2:5]
 boxplot(scale_df)
 ```
 
-<img src="r_data_cleaning_files/figure-html/unnamed-chunk-57-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="r_data_cleaning_files/figure-html/unnamed-chunk-59-1.png" width="80%" style="display: block; margin: auto;" />
 
 ```r
 scale_df %>% mutate_all(~(minmax(.) %>% as.vector)) %>% boxplot() # apply minmax() to every column
 ```
 
-<img src="r_data_cleaning_files/figure-html/unnamed-chunk-57-2.png" width="80%" style="display: block; margin: auto;" />
+<img src="r_data_cleaning_files/figure-html/unnamed-chunk-59-2.png" width="80%" style="display: block; margin: auto;" />
 
 
+## data encoding
+### ordinal encoding
+
+```r
+ordinal <- function(x, order= unique(x)) {
+  x <- as.numeric(factor(x, levels = order, exclude = NULL))
+  x
+}
+encode_df <- data.frame(A = c(1, 7, 8, 5, 3),
+                     B = c(4, 10, NA, 7, 4), 
+                    fantasy = c("sad", "we", NA, 'adf', 'NA'),
+                     C = c(1, 0, NA, 9, NA), 
+                     D = c("tangro", "ok", 'NA', 'yes', 'NA'))
+print('origin:')
+```
+
+```
+## [1] "origin:"
+```
+
+```r
+c(encode_df["D"])
+```
+
+```
+## $D
+## [1] "tangro" "ok"     "NA"     "yes"    "NA"
+```
+
+```r
+print('encoded:')
+```
+
+```
+## [1] "encoded:"
+```
+
+```r
+ordinal(encode_df[["D"]])
+```
+
+```
+## [1] 1 2 3 4 3
+```
+### one-hot encoding **[3]**
+
+```r
+encode_df <- data.frame(A = c(1, 7, 8, 5, 3),
+                     B = c(4, 10, NA, 7, 4), 
+                    fantasy = c("sad", "we", "seaweed", 'adf', 'NA'),
+                     C = c(1, 0, NA, 9, NA), 
+                     D = c("tangro", "ok", 'NA', 'yes', 'NA'))
 
 
+dummy <- dummyVars(" ~ .", data=encode_df)
+newdata <- data.frame(predict(dummy, newdata = encode_df)) 
+newdata
+```
+
+```
+##   A  B fantasyadf fantasyNA fantasysad fantasyseaweed fantasywe  C DNA Dok
+## 1 1  4          0         0          1              0         0  1   0   0
+## 2 7 10          0         0          0              0         1  0   0   1
+## 3 8 NA          0         0          0              1         0 NA   1   0
+## 4 5  7          1         0          0              0         0  9   0   0
+## 5 3  4          0         1          0              0         0 NA   1   0
+##   Dtangro Dyes
+## 1       1    0
+## 2       0    0
+## 3       0    0
+## 4       0    1
+## 5       0    0
+```
+## Reference
+
+[1] https://sparkbyexamples.com/r-programming/how-to-do-left-join-in-r/#:~:text=How%20to%20do%20left%20join%20on%20data%20frames%20in%20R,join%20data%20frames%20in%20R.
+
+[2]https://stackoverflow.com/questions/36377813/impute-most-frequent-categorical-value-in-all-columns-in-data-frame
+
+[3] https://datatricks.co.uk/one-hot-encoding-in-r-three-simple-methods

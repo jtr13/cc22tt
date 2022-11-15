@@ -110,7 +110,7 @@
 <span class="header-section-number">29.2</span> Motivation<a class="anchor" aria-label="anchor" href="#motivation-3"><i class="fas fa-link"></i></a>
 </h2>
 <p>Consider the following toy problem: we have the following population information and want to display it by outlining each country in the data frame, with each individual country’s population shown by its color on the map.</p>
-<div class="sourceCode" id="cb370"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb380"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">input_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'US'</span>, <span class="st">'UK'</span>, <span class="st">'China'</span>, <span class="st">'Japan'</span>, <span class="st">'Brazil'</span><span class="op">)</span></span>
 <span><span class="va">input_vals</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">329064917</span>,  <span class="fl">67508936</span>, <span class="fl">1425887337</span>, <span class="fl">128547854</span>, <span class="fl">215313498</span><span class="op">)</span></span>
 <span><span class="va">input_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>name<span class="op">=</span><span class="va">input_list</span>, val<span class="op">=</span><span class="va">input_vals</span><span class="op">)</span></span>
@@ -126,7 +126,7 @@
 <span class="header-section-number">29.2.1</span> Public Datasets<a class="anchor" aria-label="anchor" href="#public-datasets"><i class="fas fa-link"></i></a>
 </h3>
 <p>There are several open source datasets that contain Shapefiles/coordinates with geographical boundaries for countries. An example can be found <a href="https://public.opendatasoft.com/explore/dataset/world-administrative-boundaries/export/">here</a>. The challenge following downloading the data would be to integrate existing information (population in the above example) with the spatial coordinates in the Shapefiles, which one needs to manually filter through the dataset to obtain. Another significant challenge arises when the areas of interest are not located within the same dataset. Extracting coordinates from multiple sources becomes tedious. For example, the following comparison might need several disparate sources.</p>
-<div class="sourceCode" id="cb372"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb382"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">input_list_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'New York'</span>, <span class="st">'London'</span>, <span class="st">'Shanghai'</span>, <span class="st">'Tokyo'</span>, <span class="st">'Rio'</span><span class="op">)</span></span>
 <span><span class="va">input_vals_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">8467513</span>, <span class="fl">9541000</span>, <span class="fl">20217748</span>, <span class="fl">37274000</span>, <span class="fl">13634000</span><span class="op">)</span></span>
 <span><span class="va">input_df_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>name<span class="op">=</span><span class="va">input_list_2</span>, val<span class="op">=</span><span class="va">input_vals_2</span><span class="op">)</span></span>
@@ -166,7 +166,7 @@ The next section details the process to automate this search given only the inpu
 <span class="header-section-number">29.3</span> Code<a class="anchor" aria-label="anchor" href="#code"><i class="fas fa-link"></i></a>
 </h2>
 <p>The user has to specify the following input parameters:</p>
-<div class="sourceCode" id="cb374"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb384"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">input_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'US'</span>, <span class="st">'UK'</span>, <span class="st">'China'</span>, <span class="st">'Japan'</span>, <span class="st">'Brazil'</span><span class="op">)</span></span>
 <span><span class="va">input_vals</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">329064917</span>,  <span class="fl">67508936</span>,   <span class="fl">1425887337</span>, <span class="fl">128547854</span>, <span class="fl">215313498</span><span class="op">)</span></span>
 <span><span class="va">input_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>name<span class="op">=</span><span class="va">input_list</span>, val<span class="op">=</span><span class="va">input_vals</span><span class="op">)</span></span>
@@ -184,7 +184,7 @@ The next section details the process to automate this search given only the inpu
 <span class="header-section-number">29.3.1</span> Multipolygon<a class="anchor" aria-label="anchor" href="#multipolygon"><i class="fas fa-link"></i></a>
 </h3>
 <p>Main code to obtain longitude and latitudes of areas of interest:</p>
-<div class="sourceCode" id="cb375"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb385"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">input_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'US'</span>, <span class="st">'UK'</span>, <span class="st">'China'</span>, <span class="st">'Japan'</span>, <span class="st">'Brazil'</span><span class="op">)</span></span>
 <span><span class="va">input_vals</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">329064917</span>,  <span class="fl">67508936</span>,   <span class="fl">1425887337</span>, <span class="fl">128547854</span>, <span class="fl">215313498</span><span class="op">)</span></span>
 <span><span class="va">input_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>name<span class="op">=</span><span class="va">input_list</span>, val<span class="op">=</span><span class="va">input_vals</span><span class="op">)</span></span>
@@ -335,7 +335,7 @@ The next section details the process to automate this search given only the inpu
 <h4>
 <span class="header-section-number">29.3.1.1</span> Multipolygon Plots<a class="anchor" aria-label="anchor" href="#multipolygon-plots"><i class="fas fa-link"></i></a>
 </h4>
-<div class="sourceCode" id="cb376"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb386"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">input_colorP</span> <span class="op">&lt;-</span> <span class="st">"YlOrRd"</span></span>
 <span></span>
 <span><span class="fu">leaflet</span><span class="op">(</span><span class="va">mpoly_sf</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -352,7 +352,7 @@ The next section details the process to automate this search given only the inpu
 <h3>
 <span class="header-section-number">29.3.2</span> Points<a class="anchor" aria-label="anchor" href="#points"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb377"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb387"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">input_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'New York'</span>, <span class="st">'London'</span>, <span class="st">'Shanghai'</span>, <span class="st">'Tokyo'</span>, <span class="st">'Rio'</span><span class="op">)</span></span>
 <span><span class="va">input_vals</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">8467513</span>,    <span class="fl">9541000</span>,    <span class="fl">20217748</span>, <span class="fl">37274000</span>, <span class="fl">13634000</span><span class="op">)</span></span>
 <span><span class="va">input_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>name<span class="op">=</span><span class="va">input_list</span>, val<span class="op">=</span><span class="va">input_vals</span><span class="op">)</span></span>
@@ -504,7 +504,7 @@ The next section details the process to automate this search given only the inpu
 <h3>
 <span class="header-section-number">29.3.3</span> Single Marker Plots<a class="anchor" aria-label="anchor" href="#single-marker-plots"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb378"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb388"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">leaflet</span><span class="op">(</span><span class="va">mpoint_sf</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>    <span class="fu">addTiles</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>    <span class="fu">addMarkers</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -515,7 +515,7 @@ The next section details the process to automate this search given only the inpu
 <h3>
 <span class="header-section-number">29.3.4</span> Circle Plots<a class="anchor" aria-label="anchor" href="#circle-plots"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb379"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb389"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">leaflet</span><span class="op">(</span><span class="va">mpoint_sf</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>    <span class="fu">addTiles</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>    <span class="fu">addCircles</span><span class="op">(</span>radius<span class="op">=</span><span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">val</span><span class="op">)</span><span class="op">*</span><span class="fl">50</span><span class="op">)</span></span></code></pre></div>
