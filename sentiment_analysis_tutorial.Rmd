@@ -1,16 +1,10 @@
----
-title: "Sentiment Analysis Processing and Visualization Tutorial"
-author: "Lylybell Teran"
-output:
-  pdf_document:
-  html_document:
-    df_print: paged
----
+# Sentiment Analysis And Visualization Tutorial
+
+Lylybell Teran 
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(warning = FALSE, message = FALSE, tidy.opts = list(width.cutoff = 60), tidy = TRUE)
 ```
-# Sentiment Analysis Tutorial
 
 In this tutorial we will learn how to convert to tidy data, conduct sentiment analysis, and visualize results using R. The purpose of sentiment analysis model is to categorize words based on their sentiments such as positive, negative, and/or its magnitude. 
 
