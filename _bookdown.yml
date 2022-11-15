@@ -42,6 +42,7 @@ rmd_files: [
   'visualization_time_series.Rmd',
   'igraph-in-r.Rmd',
   'geomap_api.Rmd',
+  'edav_garden.Rmd',
   
   # Part: Interview Prep
   'ten_interview_questions.Rmd',
