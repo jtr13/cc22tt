@@ -48,10 +48,12 @@ rmd_files: [
   'edav_garden.Rmd',
   'raster_overview.Rmd',
   'make_geographical_maps_with_different_packages.Rmd',
+  'api_json_tutorial.Rmd',
   
   # Part: Interview Prep
   'ten_interview_questions.Rmd',
   'data_science_internship_search_guide.Rmd',
+  'data_visualization_interview_questions_sample.Rmd',
   
   # Part: Case Studies
   'benford_case_study.Rmd',

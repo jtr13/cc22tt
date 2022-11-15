@@ -1,6 +1,6 @@
 # Data cleaning with r
 
-Jinchen Liu and Yudu Chen
+Jincheng Liu and Yudu Chen
 
 ```{r, echo = TRUE}
 #install.packages(openintro)
