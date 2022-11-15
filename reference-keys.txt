@@ -197,6 +197,7 @@ edav-garden
 how-to-explore-the-garden
 main-sections
 data-visualization-with-r-ggplot2-vs.-matlab
+reference-2
 using-raster-data-in-r
 introduction-to-rasters
 what-is-a-raster
