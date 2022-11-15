@@ -61,7 +61,6 @@ Suggests:
     readr,
     osmextract,
     ggplot2,
-    
 Remotes:
     hadley/emo,
     kassambara/navdata,
