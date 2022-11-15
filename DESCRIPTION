@@ -57,7 +57,11 @@ Suggests:
     circlepackeR,
     streamgraph,
     caret,
-    terra
+    terra,
+    readr,
+    osmextract,
+    ggplot2,
+    
 Remotes:
     hadley/emo,
     kassambara/navdata,
