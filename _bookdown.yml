@@ -24,6 +24,11 @@ rmd_files: [
   'plots_for_bioinfo_cheatsheet.Rmd',
   'worldMapCheatSheet.Rmd',
   'color_r_python_css.Rmd',
+  'colorPalettesDV_cheatsheet.Rmd',
+  'python_seaborn_data_vis.Rmd',
+  'machine_learning_cheatsheet_for_r_and_python.Rmd',
+  'r_vs_matlab_graph.Rmd',
+  'ggplot2_to_python.Rmd',
 
   # Part: Tutorials
   'time_series_visualization_project.Rmd',  
@@ -33,9 +38,20 @@ rmd_files: [
   # 'a_summary_of_interactive_chart.Rmd',
   # 'mapview_tutorial.Rmd',
   'r_data_cleaning.Rmd',
+  'shiny_app_intro.Rmd',
+  'python_missingno_tutorial.Rmd',
+  'data_explorer_tutorial.Rmd',
+  '3d_visualization_in_r.Rmd',
+  'visualization_time_series.Rmd',
+  'igraph-in-r.Rmd',
+  'geomap_api.Rmd',
+  'edav_garden.Rmd',
+  'raster_overview.Rmd',
+  'make_geographical_maps_with_different_packages.Rmd',
   
   # Part: Interview Prep
   'ten_interview_questions.Rmd',
+  'data_science_internship_search_guide.Rmd',
   
   # Part: Case Studies
   'benford_case_study.Rmd',
