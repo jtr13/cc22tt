@@ -1,0 +1,58 @@
+# Ggplot2 plots in python cheat sheet tutorial
+
+Braden Huffman
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(magrittr)
+library(dplyr)
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+library(readxl)
+```
+
+## Motivation
+
+In R, ggplot2 is a powerful visualization tool that all data scientists should have knowledge of. Ggplot2 might even be the most useful visualization tool, but in the event that ggplot2 cannot be used, a data scientist needs to be able to visualize the data. I created a cheat sheet that provides documentation and examples to create some of the most popular R graphs according to http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html, and what their equivalents are in Python. I also included a couple of other graphs that we discussed in class.
+
+## Table
+
+```{r, include=FALSE}
+
+data <- read_excel("resources/ggplot2_to_python/ggplot2_to_python.xlsx")
+
+```
+```{r}
+data %>% 
+  kbl(caption = "Cheat sheet", width=10) %>% 
+  kable_material_dark(full_width=F, font_size=8)
+```
+## Example
+
+Consider the following time series data:
+
+x: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+
+y: 5, 4, 7, 6, 6, 19, 20, 15, 10, 8
+
+Imagine for a moment that your boss instructed you to create an Area Plot of the above data. You know how to do this easily. In fact, you can do it in five lines of code.
+
+```{r}
+x <- c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+y <- c(5, 4, 7, 6, 6, 19, 20, 15, 10, 8)
+df <- data.frame(x,y)
+
+ggplot(data = df) +
+  geom_area(mapping=aes(x,y))
+```
+
+You smile for a moment, knowing that you will actually be home for dinner with the family today. You keep smiling until he utters the words, "in Python." While area plots are a fairly popular type of graph, you realize that you don't even know if python has a way to create an area chart, so you decide to consult the above cheat sheet.
+
+The cheat sheet takes you to the following website https://www.python-graph-gallery.com/area-plot/. Fortune shine's down on you today. Creating an Area Plot in Python isn't as hard as you had thought it would have been.
+
+https://colab.research.google.com/drive/1DxD5UZolQxcphI44kvK8w4YR-RkZNYgc#scrollTo=UdOui0Fhk24e.
+
+You show your boss the graph linked in the above iPython notebook, and while he isn't impressed with your artistic ability, he is impressed by your speed.
+
+Clearly Area Plots aren't the worlds hardest graphs to create, and many of the graphs in the table are more difficult to find and create in Python. I hope this tutorial and cheat sheet make it easier to start creating your favorite ggplot2 graphs in Python.
