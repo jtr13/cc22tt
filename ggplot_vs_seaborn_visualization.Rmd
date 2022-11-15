@@ -1,0 +1,18 @@
+# Ggplot vs. seaborn for data visualization
+
+Yuqian Wang and Jackie Feng
+
+In this project, we made a cheatsheet for data visualization with ggplot in R vs Seaborn in Python. In the cheatsheet, we did a brief introduction to these two packages and compared their basic structure, functions for different kinds of visualization and the aesthetics aspects.
+
+The cheatsheet can be found here:
+https://github.com/jiaqifeng777/edav_community_contribution/blob/master/ggplot_vs_seaborn_cheatsheet.pdf
+
+R and Python are two useful programming languages for data analysis and visualization. In particular, ggplot2 in R and Searborn in Python are powerful tools for data visualization in our daily work. Our project aims to make a comparison between these two packages in order to provide a general idea about how they differ from each other. Besides, it could also provide a reference for those who are familiar with one of the two packages to quickly learn about the other.
+
+Working on this project gives us a chance to review what we have learnt from top to bottom, so we have a clearer idea and deeper understanding of ggplot and searborn packages and their application in data visualization. Next time maybe we will focus more on their pros and cons under various circumstances.
+
+Citation
+Seaborn: https://seaborn.pydata.org/index.html
+Ggplot2: https://ggplot2.tidyverse.org/index.html, 
+https://github.com/rstudio/cheatsheets/blob/main/data-visualization-2.1.pdf
+
