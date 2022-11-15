@@ -4,7 +4,8 @@ Title: Does not matter
 Version: 0.0.0.9000
 Imports:
     emo,
-    tidyverse
+    tidyverse,
+    kassambara/navdata
 Suggests:
     bookdown,
     bslib,
@@ -36,6 +37,8 @@ Suggests:
     timevis,
     igraph,
     igraphdata,
+    navdata
 Remotes:
-    hadley/emo
+    hadley/emo,
+    kassambara/navdata
     
