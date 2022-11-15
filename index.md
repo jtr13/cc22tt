@@ -13,3 +13,12 @@ Let's add some content to the welcome page.
 Submit a pull request to do so.
 
 ![Under construction](under_construction.jpg)
+
+![Under construction](under_construction.jpg) {width = 50%}
+
+
+```r
+knitr::include_graphics("under_construction.jpg")
+```
+
+<img src="under_construction.jpg" width="80%" style="display: block; margin: auto;" />

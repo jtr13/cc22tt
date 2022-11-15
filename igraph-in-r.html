@@ -109,7 +109,7 @@
 <span class="header-section-number">30.1</span> 1. igraph Basics<a class="anchor" aria-label="anchor" href="#igraph-basics"><i class="fas fa-link"></i></a>
 </h2>
 <p>First we download and install the package.</p>
-<div class="sourceCode" id="cb336"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb337"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#install.packages('igraph')</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://igraph.org">igraph</a></span><span class="op">)</span> <span class="co">#this is a must install package</span></span>
 <span></span>
@@ -124,7 +124,7 @@
 <span><span class="co">#install.packages('igraphdata')</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://igraph.org">igraphdata</a></span><span class="op">)</span> <span class="co">#this is a must install package</span></span></code></pre></div>
 <p>We will use an open source data set named <strong>phone.call</strong> from <strong>navdata</strong>.</p>
-<div class="sourceCode" id="cb337"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb338"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"phone.call"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">phone.call</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 6 × 3
@@ -141,14 +141,14 @@
 <span class="header-section-number">30.1.1</span> 1.1 Create igraph Network Object<a class="anchor" aria-label="anchor" href="#create-igraph-network-object"><i class="fas fa-link"></i></a>
 </h3>
 <p>igraph has its specific network (graph) object called ‘igraph’. The simplest way to create an ‘igraph’ object is to use <strong>graph.formula()</strong> and specify every node and edge individually.</p>
-<div class="sourceCode" id="cb339"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb340"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/graph_from_literal.html">graph.formula</a></span><span class="op">(</span><span class="va">A</span><span class="op">-</span><span class="va">B</span><span class="op">-</span><span class="va">C</span><span class="op">-</span><span class="va">D</span>,<span class="va">A</span><span class="op">-</span><span class="va">E</span><span class="op">-</span><span class="cn">F</span>,<span class="va">Z</span><span class="op">-</span><span class="va">D</span><span class="op">-</span><span class="va">X</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## IGRAPH 4392828 UN-- 8 7 -- 
 ## + attr: name (v/c)
 ## + edges from 4392828 (vertex names):
 ## [1] A--B A--E B--C C--D D--Z D--X E--F</code></pre>
 <p>But in real world, we usually have a lot of data. Therefore, it is not a good idea to define every node and edge manually. More generally, we will use these two methods:</p>
-<div class="sourceCode" id="cb341"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb342"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># prepare the data</span></span>
 <span><span class="va">name</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">phone.call</span><span class="op">$</span><span class="va">source</span>,<span class="va">phone.call</span><span class="op">$</span><span class="va">destination</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">nodes</span><span class="op">&lt;-</span><span class="va">name</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
@@ -166,25 +166,25 @@
 </h4>
 <p><strong>graph_from_data_frame()</strong>
 To use this method, we need two dataframes, one is edge frame, the other is vertices frame.</p>
-<div class="sourceCode" id="cb342"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb343"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">net_pc</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/graph_from_data_frame.html">graph_from_data_frame</a></span><span class="op">(</span></span>
 <span>   d<span class="op">=</span><span class="va">edges</span>,vertices<span class="op">=</span><span class="va">nodes</span>,</span>
 <span>   directed<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>we can see that the graph is created. We can use <strong>V()</strong> or <strong>E()</strong> to visit vertices or edges, and <strong>as_edgelist(net, names=T)</strong>, <strong>as_adjacency_matrix(net, attr=“weight”)</strong> to catch edges list and adjacent matrix:</p>
-<div class="sourceCode" id="cb343"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb344"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html">V</a></span><span class="op">(</span><span class="va">net_pc</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## + 16/16 vertices, named, from 6e93970:
 ##  [1] France         Belgium        Germany        Danemark       Croatia       
 ##  [6] Slovenia       Hungary        Spain          Italy          Netherlands   
 ## [11] UK             Austria        Poland         Switzerland    Czech republic
 ## [16] Slovania</code></pre>
-<div class="sourceCode" id="cb345"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb346"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html">V</a></span><span class="op">(</span><span class="va">net_pc</span><span class="op">)</span><span class="op">$</span><span class="va">location</span></span></code></pre></div>
 <pre><code>##  [1] "western"      "western"      "central"      "nordic"       "southeastern"
 ##  [6] "southeastern" "southeastern" "southern"     "sourthern"    "western"     
 ## [11] "western"      "central"      "central"      "central"      "central"     
 ## [16] "central"</code></pre>
-<div class="sourceCode" id="cb347"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb348"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/E.html">E</a></span><span class="op">(</span><span class="va">net_pc</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## + 18/18 edges from 6e93970 (vertex names):
 ##  [1] France  -&gt;Germany        Belgium -&gt;France         France  -&gt;Spain         
@@ -193,7 +193,7 @@ To use this method, we need two dataframes, one is edge frame, the other is vert
 ## [10] Germany -&gt;Switzerland    Germany -&gt;Czech republic Germany -&gt;Netherlands   
 ## [13] Danemark-&gt;Germany        Croatia -&gt;Germany        Croatia -&gt;Slovania      
 ## [16] Croatia -&gt;Hungary        Slovenia-&gt;Germany        Hungary -&gt;Slovania</code></pre>
-<div class="sourceCode" id="cb349"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb350"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/as_edgelist.html">as_edgelist</a></span><span class="op">(</span><span class="va">net_pc</span>, names<span class="op">=</span><span class="cn">T</span><span class="op">)</span> </span></code></pre></div>
 <pre><code>##       [,1]       [,2]            
 ##  [1,] "France"   "Germany"       
@@ -214,7 +214,7 @@ To use this method, we need two dataframes, one is edge frame, the other is vert
 ## [16,] "Croatia"  "Hungary"       
 ## [17,] "Slovenia" "Germany"       
 ## [18,] "Hungary"  "Slovania"</code></pre>
-<div class="sourceCode" id="cb351"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb352"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/as_adjacency_matrix.html">as_adjacency_matrix</a></span><span class="op">(</span><span class="va">net_pc</span>, attr<span class="op">=</span><span class="st">"weight"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 16 x 16 sparse Matrix of class "dgCMatrix"
 ##                                                 
@@ -241,14 +241,14 @@ To use this method, we need two dataframes, one is edge frame, the other is vert
 </h4>
 <p><strong>graph_from_adjacency_matrix()</strong>
 If the graph is using</p>
-<div class="sourceCode" id="cb353"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb354"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">adjacent_matrix</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/as_adjacency_matrix.html">as_adjacency_matrix</a></span><span class="op">(</span><span class="va">net_pc</span>, attr<span class="op">=</span><span class="st">"weight"</span><span class="op">)</span></span>
 <span><span class="va">net_am</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/graph_from_adjacency_matrix.html">graph_from_adjacency_matrix</a></span><span class="op">(</span><span class="va">adjacent_matrix</span><span class="op">)</span></span></code></pre></div>
 <p>now we simply plot it to take a look</p>
-<div class="sourceCode" id="cb354"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb355"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">net_pc</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="igraph-in-r_files/figure-html/unnamed-chunk-9-1.png" width="80%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb355"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb356"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">net_am</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="igraph-in-r_files/figure-html/unnamed-chunk-9-2.png" width="80%" style="display: block; margin: auto;"></div>
 </div>
@@ -260,7 +260,7 @@ If the graph is using</p>
 <p>The plot function in igraph is very strong and it has a lot of parameters to make the network beautiful and clear. In this section we will only give a general introduction to important visualization methods, we will have a more detailed introduction in the next section.</p>
 <p>A large number of parameters are used to display various properties of nodes, edges and graphs. The parameters related to nodes start with <strong>vertex.XXX</strong>, and the parameters related to edges start with <strong>edge.XXX</strong></p>
 <p>In addition to specifying the parameters of nodes and edges in <strong>plot()</strong>, you can also use the previously mentioned <strong>V()</strong> and <strong>E()</strong> to add the corresponding properties directly into the igraph object. The difference between the two methods is that the parameters specified in <strong>plot()</strong> do not change the properties of the plot. For example, we first specify the color of the node according to the position, and the width of the edge according to the weight (these two attributes will be saved in the net_pc object), and then specify the size of the node in the parameters of <strong>plot()</strong> (proportional to the degree of the node, The node degree is the number of edges connected to this node), the size and position of the node marker, the color of the edge, the size of the arrow, and the degree of curvature of the edge.</p>
-<div class="sourceCode" id="cb356"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb357"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Calculate node's degree</span></span>
 <span><span class="va">deg</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/degree.html">degree</a></span><span class="op">(</span><span class="va">net_pc</span>,mode<span class="op">=</span><span class="st">"all"</span><span class="op">)</span></span>
 <span><span class="co"># Set up the color</span></span>
@@ -286,13 +286,13 @@ If the graph is using</p>
 <p>A variety of layout algorithms are provided in igraph. Among them, Force-directed layout algorithms are the most useful. Force-directed layouts try to get an aesthetically pleasing graph where the edges are similar in length and cross as little as possible. They model graphics as a physical system. Nodes are “charged particles” that repel each other when they get too close. These edges act as springs, attracting connected nodes together. As a result, nodes are evenly distributed in the illustrated area, and the layout is intuitive as nodes that share more connections are closer to each other. The disadvantage of these algorithms is that they are slow and therefore less frequently used in graphs larger than <strong>1000</strong> vertices.</p>
 <p>When using force-directed layout, you can use the <strong>niter</strong> parameter to control the number of iterations to perform. The default setting is 500 iterations. For large graphs, you can lower this number to get results faster and check that they are reasonable.</p>
 <p><strong>Fruchterman-Reingold</strong> is the most widely used Force-directed layout method:</p>
-<div class="sourceCode" id="cb357"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb358"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Fruchterman-Reingold layout method</span></span>
 <span><span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/layout_with_fr.html">layout_with_fr</a></span><span class="op">(</span><span class="va">net_pc</span><span class="op">)</span> </span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">net_pc</span>, layout<span class="op">=</span><span class="va">l</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="igraph-in-r_files/figure-html/unnamed-chunk-11-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>The Fruchterman Reingold layout is random and different every run will result in slightly different layout configurations. Saving the layout in the object l allows us to obtain the exact same result multiple times (it is also possible to specify a random state by setting seed <strong>seed()</strong>)</p>
-<div class="sourceCode" id="cb358"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb359"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># All the layout methods in igraph</span></span>
 <span><span class="va">layouts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="st">"^layout_"</span>, <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="st">"package:igraph"</span><span class="op">)</span>, value<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span></span>
 <span><span class="va">layouts</span></span></code></pre></div>
@@ -303,7 +303,7 @@ If the graph is using</p>
 ## [13] "layout_with_gem"      "layout_with_graphopt" "layout_with_kk"      
 ## [16] "layout_with_lgl"      "layout_with_mds"      "layout_with_sugiyama"</code></pre>
 <p>There are 18 methods of layout in igraph, we won’t go into detail for each layout method because most of them are not widely used except Fruchterman Reingold layout. However, we will give an example to show how those layouts look like:</p>
-<div class="sourceCode" id="cb360"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb361"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">layouts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="st">"^layout_"</span>, <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="st">"package:igraph"</span><span class="op">)</span>, value<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span></span>
 <span><span class="co"># Remove layouts that do not apply to our graph.</span></span>
 <span><span class="va">layouts</span> <span class="op">&lt;-</span> <span class="va">layouts</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span><span class="st">"bipartite|merge|norm|sugiyama|tree"</span>, <span class="va">layouts</span><span class="op">)</span><span class="op">]</span></span>
@@ -341,7 +341,7 @@ If the graph is using</p>
 </h3>
 <p>In this section, we still use the example above, but we customize several parameters to see their influence for visualization.<br></p>
 <p>First, we customize the nodes parameters.</p>
-<div class="sourceCode" id="cb376"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb377"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">111</span><span class="op">)</span></span>
 <span><span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/layout_with_fr.html">layout_with_fr</a></span><span class="op">(</span><span class="va">net_pc</span><span class="op">)</span> </span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">net_pc</span>, </span>
@@ -355,7 +355,7 @@ If the graph is using</p>
 <div class="inline-figure">
 <img src="igraph-in-r_files/figure-html/unnamed-chunk-14-1.png" width="80%" style="display: block; margin: auto;">
 Next, we customize the node labels.</div>
-<div class="sourceCode" id="cb377"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb378"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">net_pc</span>, </span>
 <span>     vertex.color <span class="op">=</span> <span class="st">'pink'</span>,                    </span>
 <span>     vertex.frame.color <span class="op">=</span> <span class="st">'lightblue'</span>,        </span>
@@ -373,7 +373,7 @@ Next, we customize the node labels.</div>
 <div class="inline-figure">
 <img src="igraph-in-r_files/figure-html/unnamed-chunk-15-1.png" width="80%" style="display: block; margin: auto;">
 Apart from nodes, we can also modify edge features while plotting.</div>
-<div class="sourceCode" id="cb378"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb379"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">net_pc</span>, </span>
 <span>     vertex.color <span class="op">=</span> <span class="st">'pink'</span>,                    </span>
 <span>     vertex.frame.color <span class="op">=</span> <span class="st">'lightblue'</span>,        </span>
@@ -403,7 +403,7 @@ Apart from nodes, we can also modify edge features while plotting.</div>
 </h3>
 <p>In this section, we introduce an advanced network visualization using Zachary’s karate club network dataset. This is a widely-used dataset for network analysis. In this dataset, every node represents a member of the karate club and edges represent members’ social connection. During Zachary’s study, the administrator “John. A.” and the coach “Mr. Hi” had a conflict which led to a split of the club. Now, we want to use igraph to visualize the social network of this karate club.<br></p>
 <p>First, we plot the network without further decoration.</p>
-<div class="sourceCode" id="cb379"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb380"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">111</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">karate</span><span class="op">)</span></span>
 <span><span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/layout_with_fr.html">layout_with_fr</a></span><span class="op">(</span><span class="va">karate</span><span class="op">)</span> </span>
@@ -414,7 +414,7 @@ Apart from nodes, we can also modify edge features while plotting.</div>
 <span>     layout <span class="op">=</span> <span class="va">l</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="igraph-in-r_files/figure-html/unnamed-chunk-17-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>Next, we highlight the two leaders (“John. A.” and “Mr. Hi”) in the network by using rectangles.</p>
-<div class="sourceCode" id="cb380"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb381"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Decoration</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html">V</a></span><span class="op">(</span><span class="va">karate</span><span class="op">)</span><span class="op">$</span><span class="va">label</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">sub</a></span><span class="op">(</span><span class="st">"Actor "</span>,<span class="st">""</span>, <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html">V</a></span><span class="op">(</span><span class="va">karate</span><span class="op">)</span><span class="op">$</span><span class="va">name</span><span class="op">)</span></span>
 <span></span>
@@ -431,7 +431,7 @@ Apart from nodes, we can also modify edge features while plotting.</div>
 <p><img src="igraph-in-r_files/figure-html/unnamed-chunk-18-1.png" width="80%" style="display: block; margin: auto;">
 Finally, we divide the edges into three categories and use different colors for them. Remember the karate club is split into two factions, so the edges can be divided into: edges inside faction 1, edges inside faction 2, and edges connecting both factions.<br>
 Besides, we also set up the edge width according to its weight.</p>
-<div class="sourceCode" id="cb381"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb382"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Define factions</span></span>
 <span><span class="va">F1</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html">V</a></span><span class="op">(</span><span class="va">karate</span><span class="op">)</span><span class="op">[</span><span class="va">Faction</span><span class="op">==</span><span class="fl">1</span><span class="op">]</span></span>
 <span><span class="va">F2</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/igraph/man/V.html">V</a></span><span class="op">(</span><span class="va">karate</span><span class="op">)</span><span class="op">[</span><span class="va">Faction</span><span class="op">==</span><span class="fl">2</span><span class="op">]</span></span>

@@ -140,7 +140,7 @@ Your content starts here. </code></pre>
 </li>
 <li>
 <p>If your project requires libraries to be installed and included in the document, please adhere to the following conventions. Do not evaluate any <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code> statements in your document. Consumers of an <code>.Rmd</code> file won’t want packages to get installed when they knit your document. Include any <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> statements at the top of your <code>.Rmd</code> file, below the title, name, and <code>setup</code>, but above any content. If your chapter requires the installation of a package from source (is a GitHub installation), <strong>please add a comment identifying it as such. Please mention this as well in your PR.</strong> Here is an example <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> section with install statements that won’t be evaluated:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># remotes::install_github("twitter/AnomalyDetection")</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st">"AnomalyDetection"</span><span class="op">)</span> <span class="co"># must be installed from source</span></span></code></pre></div>
 </li>

@@ -171,7 +171,7 @@ starting point for each arrow on the graph.</p>
 <p>In the code below, we start building our example data set by placing the base
 of each vector on all positive integer values of a 10 X 10 grid, by assigning
 values to the x_axis and y_axis columns.</p>
-<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Creating a blank data frame with four required columns</span></span>
 <span><span class="va">data_frame</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x_axis <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="op">)</span>, y_axis <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
@@ -207,7 +207,7 @@ named ‘xend’ and ‘yend’. By altering the ‘xend’ and ‘yend’ value
 the coordinates of a vector’s endpoint.</p>
 <p>For example, if I set only the y_pull equal to 0.5, you’ll notice that all of the
 arrows are being pulled in an upward direction.</p>
-<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data_frame</span><span class="op">$</span><span class="va">x_pull</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
 <span><span class="va">data_frame</span><span class="op">$</span><span class="va">y_pull</span> <span class="op">&lt;-</span> <span class="fl">0.5</span></span>
 <span></span>
@@ -222,7 +222,7 @@ arrows are being pulled in an upward direction.</p>
 <div class="inline-figure"><img src="vector_field_tutorial_files/figure-html/unnamed-chunk-3-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>Conversely, if I set only the x_pull equal to 0.5, you’ll notice that all of the
 arrows are being pulled to the right direction.</p>
-<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data_frame</span><span class="op">$</span><span class="va">x_pull</span> <span class="op">&lt;-</span> <span class="fl">0.5</span></span>
 <span><span class="va">data_frame</span><span class="op">$</span><span class="va">y_pull</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
 <span></span>
@@ -237,7 +237,7 @@ arrows are being pulled to the right direction.</p>
 <div class="inline-figure"><img src="vector_field_tutorial_files/figure-html/unnamed-chunk-4-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>If we set both x_pull and y_pull equal to 0.5, then the x and y forces are
 offsetting, and the arrows point in a 45 degree angle.</p>
-<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data_frame</span><span class="op">$</span><span class="va">x_pull</span> <span class="op">&lt;-</span> <span class="fl">0.5</span></span>
 <span><span class="va">data_frame</span><span class="op">$</span><span class="va">y_pull</span> <span class="op">&lt;-</span> <span class="fl">0.5</span></span>
 <span></span>
@@ -252,7 +252,7 @@ offsetting, and the arrows point in a 45 degree angle.</p>
 <p>To provide another example, we’ve input random numbers into x_pull and y_pull
 values, to show that the format is completely flexible and doesn’t require
 consistent value changes to the x_pull and y_pull variables.</p>
-<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data_frame</span><span class="op">$</span><span class="va">x_pull</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">data_frame</span><span class="op">)</span>, min<span class="op">=</span><span class="op">-</span><span class="fl">0.5</span>, max<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span></span>
 <span><span class="va">data_frame</span><span class="op">$</span><span class="va">y_pull</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">data_frame</span><span class="op">)</span>, min<span class="op">=</span><span class="op">-</span><span class="fl">0.5</span>, max<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span></span>
 <span></span>
@@ -285,7 +285,7 @@ in the following line:</p>
 <em>size = 0.25 </em> defines arrow thickness</li>
 </ul>
 <p>For example, if we set both to 1, we get the following:</p>
-<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data_frame</span><span class="op">$</span><span class="va">x_pull</span> <span class="op">&lt;-</span> <span class="fl">0.5</span></span>
 <span><span class="va">data_frame</span><span class="op">$</span><span class="va">y_pull</span> <span class="op">&lt;-</span> <span class="fl">0.5</span></span>
 <span></span>
@@ -312,7 +312,7 @@ interpret. Therefore, the axis in ggplot must be fixed using the following code:
 <p>Below is an illustration of this discussion - note in both cases, all vectors have
 the form (0.5,0.5). While the distortion appears to be small, it is easily avoidable
 and preserves an accurate relationship between the x and y axes.</p>
-<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#Creating homogeneous vector field (1,1)</span></span>
 <span><span class="va">data_frame</span><span class="op">$</span><span class="va">x_pull</span> <span class="op">&lt;-</span> <span class="fl">0.5</span></span>
 <span><span class="va">data_frame</span><span class="op">$</span><span class="va">y_pull</span> <span class="op">&lt;-</span> <span class="fl">0.5</span></span>
@@ -326,7 +326,7 @@ and preserves an accurate relationship between the x and y axes.</p>
 <span>                  arrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/arrow.html">arrow</a></span><span class="op">(</span>length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="st">"cm"</span><span class="op">)</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">0.25</span><span class="op">)</span>  <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"Distorted plot without coord_fixed()"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="vector_field_tutorial_files/figure-html/unnamed-chunk-8-1.png" width="80%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#Coord_fixed</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">data_frame</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x_axis</span>, y <span class="op">=</span> <span class="va">y_axis</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>        <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">10</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
@@ -345,7 +345,7 @@ and preserves an accurate relationship between the x and y axes.</p>
 <p>It is important to consider the length of arrows when plotting vector fields, as
 input data may cause arrows to overlap, making the plot difficult to interpret
 (see example below).</p>
-<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data_frame</span><span class="op">$</span><span class="va">x_pull</span> <span class="op">&lt;-</span> <span class="fl">5</span></span>
 <span><span class="va">data_frame</span><span class="op">$</span><span class="va">y_pull</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
 <span></span>
@@ -363,7 +363,7 @@ direction, overlapping arrows makes it impossible to see the origin point of
 arrows in the middle. Therefore, we recommend scaling down the x_pull and y_pull vectors,
 as shown below (note it is good practice to scale the x_pull and y_pull by the same
 amount).</p>
-<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Assume this is the raw x_pull &amp; y_pull data</span></span>
 <span><span class="va">data_frame</span><span class="op">$</span><span class="va">x_pull</span> <span class="op">&lt;-</span> <span class="fl">5</span></span>
 <span><span class="va">data_frame</span><span class="op">$</span><span class="va">y_pull</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
@@ -393,7 +393,7 @@ possible to add color to arrows based on their magnitude - see below. Moreover,
 above the color bar we can add a title explaining the units that the colors
 represent (e.g. m/s). For this example, we’ll create a new data set with x_axis
 and y_axis values ranging from -10 to 10.</p>
-<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">vector_frame</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x_axis <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="op">)</span>, y_axis <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Generating evenly distributed values for x y coordinates</span></span>
@@ -421,7 +421,7 @@ and y_axis values ranging from -10 to 10.</p>
 <p>In the following plot, we have changed the arrow color to be based on the x_pull
 value, rather than magnitude. This could be useful if the flow in one direction
 is more important than the other.</p>
-<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">vector_frame</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x_axis <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="op">)</span>, y_axis <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Generating evenly distributed values for x y coordinates</span></span>
@@ -456,7 +456,7 @@ be an infinite number of vectors in the plot. To overcome this, we usually sampl
 uniformly spaced points in the field and plot their vectors. Choosing the point
 spacing is important because if we down-sample too much, we lose information.
 On the other hand if, don’t down-sample enough, the vector field becomes cluttered.</p>
-<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">vector_frame1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x_axis <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="op">)</span>, y_axis <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Generating a dense vector field</span></span>
@@ -512,7 +512,7 @@ Hence, there must be an optimal spacing between the two. As illustrated below, t
 optimal spacing also depends on arrow length because closer spacing requires shorter
 arrow lengths, while larger spacing allows longer arrow lengths. In other words,
 there is a trade-off between vector spacing and vector length.</p>
-<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">vector_frame1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x_axis <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="op">)</span>, y_axis <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Vector field with larger spacing and arrows</span></span>
@@ -593,7 +593,7 @@ cross-sections are taken from in the 3D space. We recommend cross-sections
 at the midpoint of each direction and adjusting the exact slices as appropriate.
 In the code below, we create a 3D vector field, show how to extract the midpoints
 of each axis, and plot vector fields at the cross-sections of these midpoints.</p>
-<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">vector_frame</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x_axis <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="op">)</span>, y_axis <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="op">)</span>, z_axis <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> </span>
 <span></span>
 <span><span class="co"># Generating a vector field in 3D space</span></span>

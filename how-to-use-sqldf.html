@@ -103,7 +103,7 @@
 <span class="header-section-number">21</span> How to use <code>sqldf</code><a class="anchor" aria-label="anchor" href="#how-to-use-sqldf"><i class="fas fa-link"></i></a>
 </h1>
 <p>Conor Ryan</p>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ggrothendieck/sqldf">sqldf</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code></pre></div>
 <div id="motivation-1" class="section level2" number="21.1">
@@ -130,7 +130,7 @@
 <span class="header-section-number">21.2.1</span> Basics<a class="anchor" aria-label="anchor" href="#basics"><i class="fas fa-link"></i></a>
 </h3>
 <p>Once you’ve installed the <code>sqldf</code>, it really is as easy as loading the library and writing some SQL:</p>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/sqldf/man/sqldf.html">sqldf</a></span><span class="op">(</span><span class="st">'select * from iris'</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 ## 1          5.1         3.5          1.4         0.2  setosa
@@ -141,7 +141,7 @@
 ## 6          5.4         3.9          1.7         0.4  setosa</code></pre>
 <p>We did not have to create any database, load our data to any table, or cleanup the table. The package handled it all behind the scenes.</p>
 <p>We can do some more realistic, basic manipulation. In R we might do:</p>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">iris</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">Petal.Length</span> <span class="op">&gt;</span> <span class="fl">2.0</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Sepal_Product <span class="op">=</span> <span class="va">Sepal.Length</span> <span class="op">*</span> <span class="va">Sepal.Width</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -154,7 +154,7 @@
 ## 1 versicolor               16.5
 ## 2 virginica                19.7</code></pre>
 <p>While in SQL we can do:</p>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/sqldf/man/sqldf.html">sqldf</a></span><span class="op">(</span><span class="st">'</span></span>
 <span><span class="st">  select Species, avg(`Sepal.Length` * `Sepal.Width`) as mean_sepal_product</span></span>
 <span><span class="st">  from iris</span></span>
@@ -171,7 +171,7 @@
 <span class="header-section-number">21.2.2</span> More advanced SQL tasks<a class="anchor" aria-label="anchor" href="#more-advanced-sql-tasks"><i class="fas fa-link"></i></a>
 </h3>
 <p>This library becomes more powerful as you use it to do things SQL is uniquely good at. For example, although a simple join on a <em>matching</em> column condition is relatively easy in R (and Python), the following sort of condition is more annoying to accomplish:</p>
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/sqldf/man/sqldf.html">sqldf</a></span><span class="op">(</span><span class="st">'</span></span>
 <span><span class="st">  select a.Species, b.Species, avg(a.`Sepal.Width`) as `a.Width.Avg`</span></span>
 <span><span class="st">  from iris a</span></span>
@@ -188,7 +188,7 @@
 ## 3  virginica     setosa    2.901931
 ## 4  virginica versicolor    2.737284</code></pre>
 <p>Similarly, window functions become far more accessible through this package:</p>
-<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/sqldf/man/sqldf.html">sqldf</a></span><span class="op">(</span><span class="st">'</span></span>
 <span><span class="st">  select Species, avg(`Sepal.Length`) over (partition by Species order by `Sepal.Length` desc rows between unbounded preceding and current row) as running_mean</span></span>
 <span><span class="st">  from iris</span></span>
@@ -208,17 +208,17 @@
 <span class="header-section-number">21.2.3</span> Alternate data sources<a class="anchor" aria-label="anchor" href="#alternate-data-sources"><i class="fas fa-link"></i></a>
 </h3>
 <p>We also don’t have to already have the dataframe in-memory to use this library. Suppose <code>iris</code> was in a .csv on our machine:</p>
-<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># disabled because we were asked to not write any data</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.table</a></span><span class="op">(</span><span class="va">iris</span>, <span class="st">'iris.csv'</span>, sep <span class="op">=</span> <span class="st">","</span>, quote <span class="op">=</span> <span class="cn">FALSE</span>, row.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p>and we wanted to immediately get it into memory with a few rows filtered out:</p>
-<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># disabled because we were asked to not write any data</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/sqldf/man/read.csv.sql.html">read.csv.sql</a></span><span class="op">(</span><span class="st">'iris.csv'</span>,  sql <span class="op">=</span> <span class="st">'select * from file where "Petal.Length" &gt; 2.0'</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>This is great because we didn’t ever have to have the “useless” version of the dataframe ever in our code; immediately we get this version that has some filtering done.</p>
 <p>Or, what if the data lives as a .csv on some remote host?</p>
-<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/sqldf/man/read.csv.sql.html">read.csv.sql</a></span><span class="op">(</span></span>
 <span>  <span class="st">'https://gist.githubusercontent.com/netj/8836201/raw/6f9306ad21398ea43cba4f7d537619d0e07d5ae3/iris.csv'</span>,</span>
 <span>  sql <span class="op">=</span> <span class="st">'select * from file where "Petal.Length" &gt; 2.0'</span></span>
@@ -238,12 +238,12 @@
 <span class="header-section-number">21.2.4</span> Advanced database usage<a class="anchor" aria-label="anchor" href="#advanced-database-usage"><i class="fas fa-link"></i></a>
 </h3>
 <p>Under the hood, <code>sqldf</code> actually loads each dataframe into a temporary database table. If we want, we can also manage the database more intelligently. This is a more contrived use case, but worth knowing. Suppose you’re dealing with a lot of data and plan to do two subsequent queries. It would be better to only read the dataframe into a table once and reuse that table. This can be accomplished via:</p>
-<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/sqldf/man/sqldf.html">sqldf</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># keep iris as a table in the db</span></span></code></pre></div>
 <pre><code>## &lt;SQLiteConnection&gt;
 ##   Path: :memory:
 ##   Extensions: TRUE</code></pre>
-<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/sqldf/man/sqldf.html">sqldf</a></span><span class="op">(</span><span class="st">'select * from iris'</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="co"># iris now loaded as a table. can reuse it.</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
@@ -253,7 +253,7 @@
 ## 4          4.6         3.1          1.5         0.2  setosa
 ## 5          5.0         3.6          1.4         0.2  setosa
 ## 6          5.4         3.9          1.7         0.4  setosa</code></pre>
-<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/sqldf/man/sqldf.html">sqldf</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># connection closed and iris table deleted</span></span></code></pre></div>
 <pre><code>## NULL</code></pre>
 <p>You can also just pass any database administrative command to the above function as well. For example, you could manage the entire database (create new schemas, tables, adjust permissions) if you really wanted to. Although doing so in a more appropriate tool might be worth considering.</p>
@@ -264,7 +264,7 @@
 <span class="header-section-number">21.3</span> Performance<a class="anchor" aria-label="anchor" href="#performance"><i class="fas fa-link"></i></a>
 </h2>
 <p>Certain tasks actually end up more optimal if done through <code>sqldf</code>. For example, the following arbitrarily large join, which fans out to nearly a billion rows, took roughly 30 seconds on my laptop to finish. (Although the below task is nonsense, in real data, one may come across a use case that actually needs to do something similar.)</p>
-<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/sqldf/man/sqldf.html">sqldf</a></span><span class="op">(</span><span class="st">'</span></span>
 <span><span class="st">  select count(*)</span></span>
 <span><span class="st">  from iris a</span></span>
@@ -276,7 +276,7 @@
 <pre><code>##    count(*)
 ## 1 937500000</code></pre>
 <p>The following R equivalent, which only does the third ‘join’, took longer than all four took in SQL. To preserve my computer, I did not attempt the fourth <code>merge</code> below (commented out).</p>
-<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/merge.html">merge</a></span><span class="op">(</span><span class="va">iris</span>, <span class="va">iris</span>, by<span class="op">=</span><span class="st">"Species"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/merge.html">merge</a></span><span class="op">(</span><span class="va">iris</span>, by<span class="op">=</span><span class="st">"Species"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/merge.html">merge</a></span><span class="op">(</span><span class="va">iris</span>, by<span class="op">=</span><span class="st">"Species"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -284,7 +284,7 @@
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 18750000</code></pre>
 <p>This library also becomes helpful when dealing with large datasets on disk. For example, the below arbitrary .csv was ~600MB (I did not include the file with this project, but feel free to try it with your own large file). Because the below does not require we load the entire file into R first, it finished in about 30 seconds.</p>
-<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># disabled because I cannot provide this (intentionally) large file</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/sqldf/man/read.csv.sql.html">read.csv.sql</a></span><span class="op">(</span></span>
 <span>  <span class="st">'~/Downloads/star2002-1.csv'</span>,</span>
@@ -292,7 +292,7 @@
 <span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>This is a worthwhile improvement; the below R equivalent completed in 45 seconds.</p>
-<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># disabled because I cannot provide this (intentionally) large file</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span>file <span class="op">=</span> <span class="st">'~/Downloads/star2002-1.csv'</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">X4518</span> <span class="op">&gt;</span> <span class="fl">5500</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -306,7 +306,7 @@
 <span class="header-section-number">21.4</span> Combining with ggplot<a class="anchor" aria-label="anchor" href="#combining-with-ggplot"><i class="fas fa-link"></i></a>
 </h2>
 <p>We can also combine <code>sqldf</code> manipulations with <code>ggplot</code> to easily make visualizations. When we use <code>sqldf</code> in the scenarios it excels at, as outlined above, this becomes powerful. There are infinite combinations here, so here is one simple illustrative example:</p>
-<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/sqldf/man/sqldf.html">sqldf</a></span><span class="op">(</span><span class="st">'</span></span>
 <span><span class="st">      select Species, avg(`Sepal.Width`) as avg_width</span></span>
 <span><span class="st">      from iris</span></span>

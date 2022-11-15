@@ -113,7 +113,7 @@
 <p>The interface between R and Google Charts allows users to access Google Charts’ interactive charts. <code>googleVis</code> allows users to use the data in R data frames to create Google Charts without uploading the data onto Google.</p>
 <p>Demonstrating using <code>googleVis</code> Library - Installation and Usage</p>
 <pre><code>install.packages('googleVis')</code></pre>
-<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://mages.github.io/googleVis/">googleVis</a></span><span class="op">)</span></span></code></pre></div>
 </div>
 <div id="why-use-googlevis" class="section level2" number="22.2">
@@ -148,7 +148,7 @@
 <h3>
 <span class="header-section-number">22.3.1</span> Basic Graphs (Line, Bar, Combo)<a class="anchor" aria-label="anchor" href="#basic-graphs-line-bar-combo"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>pet<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'cat'</span>, <span class="st">'dog'</span>, <span class="st">'hamster'</span>, <span class="st">'snake'</span><span class="op">)</span>,</span>
 <span>                food_cost_monthly<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">100</span>, <span class="fl">10</span>, <span class="fl">40</span><span class="op">)</span>,</span>
 <span>                medical_cost_monthly<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">30</span>, <span class="fl">60</span>, <span class="fl">5</span>, <span class="fl">50</span><span class="op">)</span><span class="op">)</span></span>
@@ -262,7 +262,7 @@ callbacks.shift()();
 </script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartLineChartID2c3b1d127e2c"></script><!-- divChart --><div id="LineChartID2c3b1d127e2c" style="width: 500; height: automatic;">
 
 </div>
-<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Bar</span><span class="op">)</span></span></code></pre></div>
 <!-- BarChart generated in R 4.2.2 by googleVis 0.7.0 package -->
 <!-- Sun Nov 13 17:55:30 2022 -->
@@ -359,7 +359,7 @@ callbacks.shift()();
 </script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartBarChartID2c3b41397d1a"></script><!-- divChart --><div id="BarChartID2c3b41397d1a" style="width: 500; height: automatic;">
 
 </div>
-<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Column</span><span class="op">)</span></span></code></pre></div>
 <!-- ColumnChart generated in R 4.2.2 by googleVis 0.7.0 package -->
 <!-- Sun Nov 13 17:55:30 2022 -->
@@ -456,7 +456,7 @@ callbacks.shift()();
 </script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartColumnChartID2c3b1d0c19e7"></script><!-- divChart --><div id="ColumnChartID2c3b1d0c19e7" style="width: 500; height: automatic;">
 
 </div>
-<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">SteppedArea</span><span class="op">)</span></span></code></pre></div>
 <!-- SteppedAreaChart generated in R 4.2.2 by googleVis 0.7.0 package -->
 <!-- Sun Nov 13 17:55:30 2022 -->
@@ -554,7 +554,7 @@ callbacks.shift()();
 </script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartSteppedAreaChartID2c3b20deb8db"></script><!-- divChart --><div id="SteppedAreaChartID2c3b20deb8db" style="width: 500; height: automatic;">
 
 </div>
-<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Combo</span><span class="op">)</span></span></code></pre></div>
 <!-- ComboChart generated in R 4.2.2 by googleVis 0.7.0 package -->
 <!-- Sun Nov 13 17:55:30 2022 -->
@@ -664,7 +664,7 @@ callbacks.shift()();
 <h3>
 <span class="header-section-number">22.3.2</span> googleVis Histogram Chart<a class="anchor" aria-label="anchor" href="#googlevis-histogram-chart"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">iris</span></span>
 <span><span class="va">Histogram</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisHistogram.html">gvisHistogram</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>Sepal_Width <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">Sepal.Width</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
@@ -1198,7 +1198,7 @@ callbacks.shift()();
 <h3>
 <span class="header-section-number">22.3.3</span> googleVis Alluvial/Sankey Chart<a class="anchor" aria-label="anchor" href="#googlevis-alluvialsankey-chart"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>From<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"Math"</span>,<span class="fl">3</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"Science"</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>                    To<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Lunch'</span>, <span class="st">'Art'</span>, <span class="st">'Music'</span><span class="op">)</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>                    Weight<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">17</span>,<span class="fl">15</span>,<span class="fl">13</span>,<span class="fl">5</span>,<span class="fl">12</span>,<span class="fl">8</span><span class="op">)</span><span class="op">)</span></span>
@@ -1318,7 +1318,7 @@ callbacks.shift()();
 <h3>
 <span class="header-section-number">22.3.4</span> googleVis Geographic Chart<a class="anchor" aria-label="anchor" href="#googlevis-geographic-chart"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>country<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'US'</span>, <span class="st">'CN'</span>, <span class="st">'BR'</span>, <span class="st">'IS'</span>, <span class="st">'RU'</span>, <span class="st">'TH'</span>, <span class="st">'TR'</span>, <span class="st">'ID'</span>, <span class="st">'MX'</span>, <span class="st">'IR'</span> <span class="op">)</span>,</span>
 <span>                incarceration_rate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2068800</span>, <span class="fl">1690000</span>, <span class="fl">811707</span>, <span class="fl">478600</span>, <span class="fl">471490</span>, <span class="fl">309282</span>, <span class="fl">291198</span>, <span class="fl">266259</span>, <span class="fl">220866</span>, <span class="fl">189000</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
@@ -1461,7 +1461,7 @@ callbacks.shift()();
 <h3>
 <span class="header-section-number">22.3.5</span> googleVis Gauge Chart<a class="anchor" aria-label="anchor" href="#googlevis-gauge-chart"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">temperature</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>city<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'Las Vegas'</span>, <span class="st">'Los Angeles'</span>, <span class="st">'Pheonix'</span>, <span class="st">'Dallas'</span>, <span class="st">'Houston'</span>, <span class="st">'Miami'</span><span class="op">)</span>,</span>
 <span>                          temp<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">115</span>, <span class="fl">103</span>, <span class="fl">120</span>, <span class="fl">110</span>, <span class="fl">112</span>, <span class="fl">101</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">Gauge</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisGauge.html">gvisGauge</a></span><span class="op">(</span><span class="va">temperature</span>, </span>
@@ -1584,7 +1584,7 @@ callbacks.shift()();
 <h3>
 <span class="header-section-number">22.3.6</span> googleVis Tabular Chart<a class="anchor" aria-label="anchor" href="#googlevis-tabular-chart"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Tabular Data Un-Paged</span></span>
 <span><span class="va">Population_Tabular_Unpaged</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisTable.html">gvisTable</a></span><span class="op">(</span><span class="va">Population</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">30</span>,<span class="op">]</span>,</span>
 <span>                                        formats<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span>Population<span class="op">=</span><span class="st">"#,###"</span>,<span class="st">'% of World Population'</span><span class="op">=</span><span class="st">'#.#%'</span><span class="op">)</span><span class="op">)</span></span>
@@ -1944,7 +1944,7 @@ callbacks.shift()();
 </script><!-- jsChart --><script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartTableID2c3b7585a3f5"></script><!-- divChart --><div id="TableID2c3b7585a3f5" style="width: 500; height: automatic;">
 
 </div>
-<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Tabular Data Paged</span></span>
 <span><span class="va">Population_Tabular_paged</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisTable.html">gvisTable</a></span><span class="op">(</span><span class="va">Population</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">30</span>,<span class="op">]</span>, </span>
 <span>                                      formats<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span>Population<span class="op">=</span><span class="st">"#,###"</span>,<span class="st">'% of World Population'</span><span class="op">=</span><span class="st">'#.#%'</span><span class="op">)</span>,</span>
@@ -2314,7 +2314,7 @@ callbacks.shift()();
 <h3>
 <span class="header-section-number">22.3.7</span> googleVis Tree Map Chart<a class="anchor" aria-label="anchor" href="#googlevis-tree-map-chart"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Country_Tree</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisTreeMap.html">gvisTreeMap</a></span><span class="op">(</span><span class="va">Regions</span>, <span class="st">"Region"</span>, <span class="st">"Parent"</span>, <span class="st">"Val"</span>, <span class="st">"Fac"</span>, </span>
 <span>                     options<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span>width<span class="op">=</span><span class="fl">800</span>, height<span class="op">=</span><span class="fl">500</span>, fontSize<span class="op">=</span><span class="fl">15</span>,</span>
 <span>                                  minColor<span class="op">=</span><span class="st">'#cfe2f3'</span>,midColor<span class="op">=</span><span class="st">'#6fa8dc'</span>,maxColor<span class="op">=</span><span class="st">'#0b5394'</span>,</span>
@@ -2478,7 +2478,7 @@ callbacks.shift()();
 <h3>
 <span class="header-section-number">22.3.8</span> googleVis Annotation Chart<a class="anchor" aria-label="anchor" href="#googlevis-annotation-chart"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Stock_Annotation</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisAnnotationChart.html">gvisAnnotationChart</a></span><span class="op">(</span><span class="va">Stock</span>, datevar<span class="op">=</span><span class="st">"Date"</span>,numvar<span class="op">=</span><span class="st">"Value"</span>, idvar<span class="op">=</span><span class="st">"Device"</span>, titlevar<span class="op">=</span><span class="st">"Title"</span>,</span>
 <span>                                        annotationvar<span class="op">=</span><span class="st">"Annotation"</span>,</span>
 <span>                                        options<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span>displayAnnotations<span class="op">=</span><span class="cn">TRUE</span>,</span>
@@ -2634,7 +2634,7 @@ callbacks.shift()();
 <h3>
 <span class="header-section-number">22.3.9</span> googleVis Calendar Chart<a class="anchor" aria-label="anchor" href="#googlevis-calendar-chart"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Calendar_Temp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisCalendar.html">gvisCalendar</a></span><span class="op">(</span><span class="va">Cairo</span>, datevar<span class="op">=</span><span class="st">"Date"</span>, numvar<span class="op">=</span><span class="st">"Temp"</span>,</span>
 <span>                    options<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span>title<span class="op">=</span><span class="st">"Cairo's variation in Daily</span></span>
 <span><span class="st">                                 temperature"</span>,height<span class="op">=</span><span class="fl">400</span>,width<span class="op">=</span><span class="fl">1000</span>,</span>
@@ -7095,7 +7095,7 @@ callbacks.shift()();
 <h3>
 <span class="header-section-number">22.3.10</span> googleVis Timeline Chart<a class="anchor" aria-label="anchor" href="#googlevis-timeline-chart"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Position_Timeline_Data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>Position<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"President"</span>, <span class="fl">4</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="st">"Vice"</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>                    Name<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"William Clinton"</span>,<span class="st">"George Bush"</span>, <span class="st">"Barack Obama"</span>, <span class="st">"   Donald Trump"</span>,</span>
 <span>                          <span class="st">" Albert Gore"</span>,<span class="st">"Dick Cheney"</span>, <span class="st">"Biden, Jr."</span>, <span class="st">"Michael Pence"</span><span class="op">)</span>,</span>
@@ -7247,7 +7247,7 @@ callbacks.shift()();
 <h3>
 <span class="header-section-number">22.3.11</span> googleVis Gantt Chart<a class="anchor" aria-label="anchor" href="#googlevis-gantt-chart"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">daysToMilliseconds</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">days</span><span class="op">)</span><span class="op">{</span><span class="va">days</span> <span class="op">*</span> <span class="fl">24</span> <span class="op">*</span> <span class="fl">60</span> <span class="op">*</span> <span class="fl">60</span> <span class="op">*</span> <span class="fl">1000</span><span class="op">}</span></span>
 <span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>taskID <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"PS"</span>, <span class="st">"EDA"</span>, <span class="st">"R"</span>, <span class="st">"ML"</span>, <span class="st">"DP"</span><span class="op">)</span>,</span>
 <span>                 taskName <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Identify Problem Statement"</span>, <span class="st">"EDA Analysis"</span>, <span class="st">"Research"</span>,</span>
@@ -7411,7 +7411,7 @@ callbacks.shift()();
 <h3>
 <span class="header-section-number">22.3.12</span> googleVis Merging Charts<a class="anchor" aria-label="anchor" href="#googlevis-merging-charts"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Geographic</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://mages.github.io/googleVis/reference/gvisGeoChart.html">gvisGeoChart</a></span><span class="op">(</span><span class="va">Exports</span>,</span>
 <span>                           locationvar<span class="op">=</span><span class="st">"Country"</span>,colorvar<span class="op">=</span><span class="st">"Profit"</span>,</span>
 <span>                           options<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span>width<span class="op">=</span><span class="fl">400</span>, height<span class="op">=</span><span class="fl">200</span><span class="op">)</span><span class="op">)</span></span>
