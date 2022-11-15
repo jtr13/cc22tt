@@ -26,6 +26,7 @@ rmd_files: [
   'color_r_python_css.Rmd',
   'colorPalettesDV_cheatsheet.Rmd',
   'python_seaborn_data_vis.Rmd',
+  'machine_learning_cheatsheet_for_r_and_python.Rmd',
 
   # Part: Tutorials
   'time_series_visualization_project.Rmd',  
