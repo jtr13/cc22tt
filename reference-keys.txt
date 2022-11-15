@@ -155,6 +155,15 @@ adding-colors-to-3d-scatterplot
 adding-sizes-to-3d-scatterplot
 conclusion-4
 works-cited
+visualizing-time-series-data
+starting-point
+working-with-time-series-ts-objects
+dynamics-of-time-series-data
+seasonality-cycle-trend
+plotting-exploiting-the-temporal-axis
+gannt-charts
+using-month-and-year-creatively-in-line-plots
+data-smoothing
 part-interview-prep
 ten-interview-questions-and-answers
 forward
