@@ -7,16 +7,16 @@ Boping Xia and Mingkang Yuan
 knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 ```
 
-## Motivation
-
-Obtaining data is the crucial part before we explore and visualize it. Although some processed data are provided in R packages, in a realistic project, we need to collect data from a reliable source that has yet to be processed. We've been able to scrap the data from the site. But scratching the data from their site is amazingly questionable since a simple alteration on the web page will break our whole scratching calculation. Moreover, the data we get may not be the one we need. Some sources may provide their data in CSV or other file formats. Still, most sources use an application programming interface (API) to allow users to access their data. However, when we were working on the final project proposal, it took us a long time to get data from the website. One reason is that most of the resources and tutorials on using APIs are obscure for people with limited knowledge. Another reason is that each source processes and distributes data in distinct ways. In addition, the data we receive from the API is most commonly a JSON file. It is not a tabular file format, so we need extra steps to clean it. This tutorial will guide you on using the httr package to request data from API and transcribe JSON files into a data frame or table.
-
 ```{r, warning=FALSE, message=FALSE}
 # load required packages, can be installed by calling install.packages()
 library(httr)
 library(jsonlite)
 library(tidyverse)
 ```
+
+## Motivation
+
+Obtaining data is the crucial part before we explore and visualize it. Although some processed data are provided in R packages, in a realistic project, we need to collect data from a reliable source that has yet to be processed. We've been able to scrap the data from the site. But scratching the data from their site is amazingly questionable since a simple alteration on the web page will break our whole scratching calculation. Moreover, the data we get may not be the one we need. Some sources may provide their data in CSV or other file formats. Still, most sources use an application programming interface (API) to allow users to access their data. However, when we were working on the final project proposal, it took us a long time to get data from the website. One reason is that most of the resources and tutorials on using APIs are obscure for people with limited knowledge. Another reason is that each source processes and distributes data in distinct ways. In addition, the data we receive from the API is most commonly a JSON file. It is not a tabular file format, so we need extra steps to clean it. This tutorial will guide you on using the httr package to request data from API and transcribe JSON files into a data frame or table.
 
 ## What is API and JSON?
 
