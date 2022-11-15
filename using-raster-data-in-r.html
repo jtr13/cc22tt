@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 32 Using raster data in R | Community Contributions for EDAV Fall 2022 Tues/Thurs</title>
+<meta name="description" content="Andre Evard  32.1 Introduction to rasters This Community Contribution project gives an overview of the online book Geocomputation in R, specifically in regards to the raster type of geographic...">
+<meta name="generator" content="bookdown 0.30 with bs4_book()">
+<meta property="og:title" content="Chapter 32 Using raster data in R | Community Contributions for EDAV Fall 2022 Tues/Thurs">
+<meta property="og:type" content="book">
+<meta property="og:description" content="Andre Evard  32.1 Introduction to rasters This Community Contribution project gives an overview of the online book Geocomputation in R, specifically in regards to the raster type of geographic...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 32 Using raster data in R | Community Contributions for EDAV Fall 2022 Tues/Thurs">
+<meta name="twitter:description" content="Andre Evard  32.1 Introduction to rasters This Community Contribution project gives an overview of the online book Geocomputation in R, specifically in regards to the raster type of geographic...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.1/transition.js"></script><script src="libs/bs3compat-0.4.1/tabs.js"></script><script src="libs/bs3compat-0.4.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><script src="libs/plotly-binding-4.10.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script><link href="libs/visjs-7.4.9/vis-timeline-graph2d.min.css" rel="stylesheet">
+<script src="libs/visjs-7.4.9/vis-timeline-graph2d.min.js"></script><link href="libs/timeline-0.4/timevis.css" rel="stylesheet">
+<script src="libs/timevis-binding-2.1.0/timevis.js"></script><link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
+<script src="libs/leaflet-1.3.1/leaflet.js"></script><link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
+<script src="libs/proj4-2.6.2/proj4.min.js"></script><script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script><link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
+<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Community Contributions for EDAV Fall 2022 Tues/Thurs</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Welcome!</a></li>
+<li><a class="" href="community-contribution.html"><span class="header-section-number">2</span> Community Contribution</a></li>
+<li><a class="" href="github-submission-instructions.html"><span class="header-section-number">3</span> GitHub submission instructions</a></li>
+<li><a class="" href="sample-project.html"><span class="header-section-number">4</span> Sample project</a></li>
+<li class="book-part">Cheatsheets</li>
+<li><a class="" href="r-window-functions-cheatsheet.html"><span class="header-section-number">6</span> R window functions cheatsheet</a></li>
+<li><a class="" href="rmd-chunk-option-cheat-sheet.html"><span class="header-section-number">7</span> Rmd chunk option cheat sheet</a></li>
+<li><a class="" href="helpful-ggplot2-extensions-cheatsheet.html"><span class="header-section-number">8</span> Helpful ggplot2 Extensions Cheatsheet</a></li>
+<li><a class="" href="commonly-used-graph-cheatcheet.html"><span class="header-section-number">9</span> Commonly-used graph cheatcheet</a></li>
+<li><a class="" href="git-and-version-control.html"><span class="header-section-number">10</span> Git and version control</a></li>
+<li><a class="" href="useful-plots-for-bioinfomatics-in-r.html"><span class="header-section-number">11</span> Useful plots for Bioinfomatics in R</a></li>
+<li><a class="" href="different-ways-to-create-world-map-in-r.html"><span class="header-section-number">12</span> Different ways to create world map in R</a></li>
+<li><a class="" href="color-in-r-python-and-jshtmlcss.html"><span class="header-section-number">13</span> Color in R, Python, and JS/HTML/CSS</a></li>
+<li><a class="" href="color-palettes-for-data-visualization.html"><span class="header-section-number">14</span> Color Palettes for Data Visualization</a></li>
+<li><a class="" href="data-visualization-using-seaborn.html"><span class="header-section-number">15</span> Data visualization using Seaborn</a></li>
+<li><a class="" href="machine-learning-cheatsheet-for-r-and-python.html"><span class="header-section-number">16</span> Machine Learning Cheatsheet for R and Python</a></li>
+<li class="book-part">Tutorials</li>
+<li><a class="" href="preprocessing-and-visualization-of-time-series-data.html"><span class="header-section-number">18</span> Preprocessing and Visualization of Time Series Data</a></li>
+<li><a class="" href="how-to-use-sqldf.html"><span class="header-section-number">19</span> How to use sqldf</a></li>
+<li><a class="" href="googlevis-in-r.html"><span class="header-section-number">20</span> googleVis in R</a></li>
+<li><a class="" href="tutorial-for-vector-fields-in-r.html"><span class="header-section-number">21</span> Tutorial for vector fields in r</a></li>
+<li><a class="" href="data-cleaning-with-r.html"><span class="header-section-number">22</span> Data cleaning with r</a></li>
+<li><a class="" href="introduction-to-shiny-web-apps.html"><span class="header-section-number">23</span> Introduction to Shiny Web Apps</a></li>
+<li><a class="" href="python-missingno-library-tutorial.html"><span class="header-section-number">24</span> Python missingno library tutorial</a></li>
+<li><a class="" href="data-explorer-tutorial-and-automation.html"><span class="header-section-number">25</span> Data Explorer Tutorial and Automation</a></li>
+<li><a class="" href="d-visualization-in-r.html"><span class="header-section-number">26</span> 3D Visualization in R</a></li>
+<li><a class="" href="visualizing-time-series-data.html"><span class="header-section-number">27</span> Visualizing Time Series Data</a></li>
+<li><a class="" href="igraph-in-r.html"><span class="header-section-number">28</span> igraph in r</a></li>
+<li><a class="" href="geo-mapping-coordinate-extraction-using-api-calls.html"><span class="header-section-number">29</span> Geo-Mapping Coordinate Extraction Using API Calls</a></li>
+<li><a class="" href="edav-garden.html"><span class="header-section-number">30</span> EDAV Garden</a></li>
+<li><a class="" href="data-visualization-with-r-ggplot2-vs.-matlab.html"><span class="header-section-number">31</span> Data Visualization with R ggplot2 vs. Matlab</a></li>
+<li><a class="active" href="using-raster-data-in-r.html"><span class="header-section-number">32</span> Using raster data in R</a></li>
+<li class="book-part">Interview Prep</li>
+<li><a class="" href="ten-interview-questions-and-answers.html"><span class="header-section-number">34</span> Ten interview questions and answers</a></li>
+<li><a class="" href="data-science-internship-search-survival-guide.html"><span class="header-section-number">35</span> Data science internship search survival guide</a></li>
+<li class="book-part">Case Studies</li>
+<li><a class="" href="benford-case-study.html"><span class="header-section-number">37</span> Benford Case Study</a></li>
+<li class="book-part">Appendices</li>
+<li><a class="" href="github-initial-setup.html"><span class="header-section-number">38</span> Github initial setup</a></li>
+<li><a class="" href="tutorial-for-pull-request-mergers.html"><span class="header-section-number">39</span> Tutorial for pull request mergers</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/jtr13/cc22tt">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="using-raster-data-in-r" class="section level1" number="32">
+<h1>
+<span class="header-section-number">32</span> Using raster data in R<a class="anchor" aria-label="anchor" href="#using-raster-data-in-r"><i class="fas fa-link"></i></a>
+</h1>
+<p>Andre Evard</p>
+<div id="introduction-to-rasters" class="section level2" number="32.1">
+<h2>
+<span class="header-section-number">32.1</span> Introduction to rasters<a class="anchor" aria-label="anchor" href="#introduction-to-rasters"><i class="fas fa-link"></i></a>
+</h2>
+<p>This Community Contribution project gives an overview of the online book
+<a href="https://geocompr.robinlovelace.net/index.html">Geocomputation in R</a>,
+specifically in regards to the raster type of geographic data representation.
+Please note, the second version of this book is in active development, so some
+packages and references may be out-of-date in the near future.</p>
+<p>Frequent references to a package called terra are made, which may be read about
+in detail <a href="https://rdrr.io/cran/terra/man/terra-package.html">here</a>. All extra
+data sources used here are detailed by the book, except this <a href="https://zenodo.org/record/5774954/#.Y3OqVILMIeU">snow cover data</a> that was found on a website,
+Zenodo, that Geocomputation in R already links to.</p>
+<div id="what-is-a-raster" class="section level3" number="32.1.1">
+<h3>
+<span class="header-section-number">32.1.1</span> What is a Raster?<a class="anchor" aria-label="anchor" href="#what-is-a-raster"><i class="fas fa-link"></i></a>
+</h3>
+<p>A <a href="https://geocompr.robinlovelace.net/spatial-class.html#raster-data">raster</a> is
+a spatial model that crosswise divides an area of land into regularized boxes,
+or cells. Each raster is strictly rectangular in the X and Y dimensions, each
+cell has the same dimensions and is defined by a point in one corner, and each
+stores associated values, say temperature, elevation, population density, the
+list goes on. A raster may have multiple layers, and each cell has exactly one
+value per layer.</p>
+<p>These rasters are extremely useful for environmental scientific modeling outside
+of the confines of political boundaries, for example capturing the number of frog
+species discovered in square kilometer sections of the Amazon Rainforest, or
+they can be as widespread as the RGB pixels on the screen you are viewing this
+through.</p>
+<p>For reference, the other type of geocomputational model the book is concerned
+about is the <a href="https://geocompr.robinlovelace.net/spatial-class.html#vector-data">vector</a>.
+It is defined by cells with specified shapes and geometries, which are better
+able to represent human political boundaries for instance. Although this project
+is centered on the raster, vectors will be referenced on occasion for data
+translation or transformation.</p>
+</div>
+<div id="what-is-terra" class="section level3" number="32.1.2">
+<h3>
+<span class="header-section-number">32.1.2</span> What is Terra?<a class="anchor" aria-label="anchor" href="#what-is-terra"><i class="fas fa-link"></i></a>
+</h3>
+<p>(covers sections <a href="https://geocompr.robinlovelace.net/spatial-class.html#r-packages-for-working-with-raster-data">2.3.1</a> through <a href="https://geocompr.robinlovelace.net/spatial-class.html#basic-map-raster">2.3.3</a>)</p>
+<p><a href="https://rdrr.io/cran/terra/man/terra-package.html">Terra</a> is the primary package
+that Geocomputation with R cites for raster processing. Reportedly, terra is the
+more common usecase and easier to learn package, whilst <a href="https://rdrr.io/cran/stars/">stars</a>’s niche
+is the premire for more specialized datasets. <a href="https://rdrr.io/cran/sf/">sf</a> is the third and final package the book describes in heavy detail, but that is for vector data.</p>
+<p>Terra is built upon the older raster package, with an internal foundation of
+C++ for efficiency. As for its Raster representation, in one of the book’s first
+code snippets, we can see its default attributes.</p>
+<div class="sourceCode" id="cb390"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">raster_filepath</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"raster/srtm.tif"</span>, package <span class="op">=</span> <span class="st">"spDataLarge"</span><span class="op">)</span></span>
+<span><span class="va">srtm</span> <span class="op">=</span> <span class="fu">rast</span><span class="op">(</span><span class="va">raster_filepath</span><span class="op">)</span></span></code></pre></div>
+<p>As we can see here, the raster is defined by:</p>
+<ul>
+<li>dimensions:
+<ul>
+<li>nrow: number of rows</li>
+<li>ncol: number of columns</li>
+<li>nlyr: number of layers</li>
+</ul>
+</li>
+<li>resolution: the space to be covered by a single cell, in two dimensions</li>
+<li>extent: the boundaries of each coordinate</li>
+<li>coordinate reference: the distance’s data type (more about the “EPSG:4326” <a href="https://geocompr.robinlovelace.net/reproj-geo-data.html#crs-in-r">here</a>)</li>
+</ul>
+<p>And we have access to the additional fields of the source, name, class, and
+some small metadata.</p>
+<p>terra also provides have dedicated functions to return the components:</p>
+<ul>
+<li>Dimensions: <a href="https://rdrr.io/cran/terra/man/dimensions.html">ndim()</a>
+</li>
+<li>Cells: <a href="https://rdrr.io/cran/terra/man/dimensions.html">ncell()</a>
+</li>
+<li>Spatial Extent: <a href="https://rdrr.io/cran/terra/man/ext.html">ext()</a>
+</li>
+<li>Coordinate Reference System: <a href="https://rdrr.io/pkg/terra/man/crs.html">crs()</a>
+</li>
+</ul>
+<p>Geocomputation in R makes frequent usage of this example, srtm, an elevation map
+surrounding a Utah national park, and though we will provide other examples,
+sometimes its quick reference provides the best example.
+Quickly plotting it shows the following graphic:</p>
+<div class="sourceCode" id="cb391"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">srtm</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="raster_overview_files/figure-html/unnamed-chunk-3-1.png" width="80%" style="display: block; margin: auto;"></div>
+<p>And intuitively, each cell has its own value, represented visually through pixels
+by this color scale.</p>
+</div>
+</div>
+<div id="raster-creation" class="section level2" number="32.2">
+<h2>
+<span class="header-section-number">32.2</span> Raster Creation<a class="anchor" aria-label="anchor" href="#raster-creation"><i class="fas fa-link"></i></a>
+</h2>
+<div id="the-direct-approach" class="section level3" number="32.2.1">
+<h3>
+<span class="header-section-number">32.2.1</span> The direct approach<a class="anchor" aria-label="anchor" href="#the-direct-approach"><i class="fas fa-link"></i></a>
+</h3>
+<p>(covers sections <a href="https://geocompr.robinlovelace.net/spatial-class.html#an-introduction-to-terra">2.3.4</a>, and <a href="https://geocompr.robinlovelace.net/attr.html#raster-subsetting">3.3.1</a>)
+So we know what rasters are, and a basic data structure. Okay, well how do we
+create, load, or populate more general rasters? There’s a few options, as always.</p>
+<p>Naturally, we can directly create our own raster with the <a href="https://rdrr.io/cran/terra/man/rast.html">rast()</a> function as follows:</p>
+<div class="sourceCode" id="cb392"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">manual_raster</span> <span class="op">=</span> <span class="fu">rast</span><span class="op">(</span></span>
+<span>  nrows <span class="op">=</span> <span class="fl">100</span>,</span>
+<span>  ncols <span class="op">=</span> <span class="fl">100</span>,</span>
+<span>  nlyrs <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  resolution <span class="op">=</span> <span class="fl">.5</span>,</span>
+<span>  xmin <span class="op">=</span> <span class="op">-</span><span class="fl">25</span>,</span>
+<span>  xmax <span class="op">=</span> <span class="fl">25</span>,</span>
+<span>  ymin <span class="op">=</span> <span class="op">-</span><span class="fl">25</span>,</span>
+<span>  ymax <span class="op">=</span> <span class="fl">25</span>,</span>
+<span>  vals <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">20000</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">manual_raster</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="raster_overview_files/figure-html/unnamed-chunk-4-1.png" width="80%" style="display: block; margin: auto;"></div>
+<p>This isn’t exactly a terribly useful raster, but it is intuitive.
+You can also <a href="https://rdrr.io/cran/terra/man/extract.html">extract</a> and <a href="https://rdrr.io/cran/terra/man/replace.html">replace</a> these values, though those
+aren’t recommended for anything past small structures and experiments. With
+knowledge of what row/col values you’re targeting, you can directly set values
+in a similar fashion, using c() functions if more than one cell is desired.
+Mutliple layers may also be modified at a time this way.
+See the last section for a better approach to raster manipulation.</p>
+<div class="sourceCode" id="cb393"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/extract.html">extract</a></span><span class="op">(</span><span class="va">manual_raster</span>, <span class="fl">10</span>, <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##   lyr.1 lyr.2
+## 1    10 10010</code></pre>
+<div class="sourceCode" id="cb395"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">manual_raster</span><span class="op">[</span><span class="fl">15</span>, <span class="op">-</span><span class="fl">10</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">15000</span></span>
+<span><span class="va">manual_raster</span><span class="op">[</span><span class="fl">15</span>, <span class="op">-</span><span class="fl">10</span><span class="op">]</span></span></code></pre></div>
+<pre><code>##   lyr.1 lyr.2
+## 1    NA    NA</code></pre>
+<div class="sourceCode" id="cb397"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">manual_raster</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">19</span>, <span class="fl">20</span>, <span class="fl">21</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">19</span>, <span class="fl">20</span>, <span class="fl">21</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5000</span><span class="op">:</span><span class="fl">5008</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">15000</span><span class="op">:</span><span class="fl">15008</span><span class="op">)</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">manual_raster</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="raster_overview_files/figure-html/unnamed-chunk-5-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="sourceCode" id="cb398"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># You can also use &lt;raster&gt;[] as a shortcut of .values().</span></span></code></pre></div>
+</div>
+<div id="raster-files-and-their-formats" class="section level3" number="32.2.2">
+<h3>
+<span class="header-section-number">32.2.2</span> Raster files and their formats<a class="anchor" aria-label="anchor" href="#raster-files-and-their-formats"><i class="fas fa-link"></i></a>
+</h3>
+<p>(covers sections <a href="https://geocompr.robinlovelace.net/read-write.html#file-formats">8.5</a> and <a href="https://geocompr.robinlovelace.net/read-write.html#raster-data-read">8.6.2</a>)</p>
+<p>Loading files is preferred approach and far more robust, should you have an
+image file already handy (or one you producedyourself!).</p>
+<p>Firstly, there’s a lot to know about raster files. Pulling from section <a href="https://geocompr.robinlovelace.net/read-write.html#file-formats">8.5</a>, we can
+find a quick overview of popular raster (and vector) formats. In short though,
+our primary file format will be GeoTIFF, which embeds additional geospatial data
+(such as coordinate systems) into .tif/.tiff image files. Among others, <a href="https://www.earthdata.nasa.gov/esdis/esco/standards-and-practices/geotiff">NASA</a> and
+<a href="https://developers.google.com/earth-engine/guides/image_upload">Google</a> both have some of their data publicaly available as COGs.</p>
+<p>Outside of GeoTIFF, there is also Arc ASCII (.asc) for text-based storage,
+SpatiaLite as an extension for SQLite, and ESRI FileGDB which is proprietary.
+So, outside of specific use cases, our recommendation is to use GeoTIFF.</p>
+<p>Notably, GeoTIFF also supports Cloud Optimized GeoTIFFs (COG), which allows
+rasters to be hosted on HTTP servers and enables users to download only a
+segment of what can be rather large files.</p>
+<p>Given a path, the <a href="https://rdrr.io/cran/terra/man/rast.html">rast()</a> function
+does a good job at loading in rasters.</p>
+<div class="sourceCode" id="cb399"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">snowurl</span> <span class="op">=</span> <span class="st">"/vsicurl/https://zenodo.org/record/5774954/files/clm_snow.cover_esa.modis_p05_1km_s0..0cm_2001.01_epsg4326_v1.tif"</span></span>
+<span><span class="va">snow</span> <span class="op">=</span> <span class="fu">rast</span><span class="op">(</span><span class="va">snowurl</span><span class="op">)</span></span>
+<span><span class="va">snow</span></span></code></pre></div>
+<pre><code>## class       : SpatRaster 
+## dimensions  : 17924, 43200, 1  (nrow, ncol, nlyr)
+## resolution  : 0.008333333, 0.008333333  (x, y)
+## extent      : -180, 180, -61.99666, 87.37  (xmin, xmax, ymin, ymax)
+## coord. ref. : lon/lat WGS 84 (EPSG:4326) 
+## source      : clm_snow.cover_esa.modis_p05_1km_s0..0cm_2001.01_epsg4326_v1.tif 
+## name        : clm_snow.cover_esa.modis_p05_1km_s0..0cm_2001.01_epsg4326_v1</code></pre>
+<p>As previously mentioned, the whole GeoTIFF will not be downloaded at once this
+way, merely attached to. /vsicurl/ followed by the https url is all that’s
+necessary to download such information, provided you have the image provider
+located already of course. The relevant portions will be loaded if we utilize
+or manipulate it in some manner, such as this:</p>
+<div class="sourceCode" id="cb401"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dimension_raster</span> <span class="op">=</span> <span class="fu">rast</span><span class="op">(</span></span>
+<span>  nrows <span class="op">=</span> <span class="fl">1000</span>,</span>
+<span>  ncols <span class="op">=</span> <span class="fl">1000</span>,</span>
+<span>  resolution <span class="op">=</span> <span class="fl">0.008333333</span>,</span>
+<span>  xmin <span class="op">=</span> <span class="fl">2.5</span>,</span>
+<span>  xmax <span class="op">=</span> <span class="fl">17.5</span>,</span>
+<span>  ymin <span class="op">=</span> <span class="fl">42.5</span>,</span>
+<span>  ymax <span class="op">=</span> <span class="fl">57.5</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">snow_clipped</span> <span class="op">=</span> <span class="fu">crop</span><span class="op">(</span><span class="va">snow</span>, <span class="va">dimension_raster</span><span class="op">)</span></span>
+<span><span class="va">snow_clipped</span></span></code></pre></div>
+<pre><code>## class       : SpatRaster 
+## dimensions  : 1800, 1800, 1  (nrow, ncol, nlyr)
+## resolution  : 0.008333333, 0.008333333  (x, y)
+## extent      : 2.499993, 17.49999, 42.50334, 57.50333  (xmin, xmax, ymin, ymax)
+## coord. ref. : lon/lat WGS 84 (EPSG:4326) 
+## source      : memory 
+## name        : clm_snow.cover_esa.modis_p05_1km_s0..0cm_2001.01_epsg4326_v1 
+## min value   :                                                            0 
+## max value   :                                                          100</code></pre>
+<div class="sourceCode" id="cb403"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">snow_clipped</span>, main<span class="op">=</span><span class="st">"Snow cover around the Alps in Jan 2001"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="raster_overview_files/figure-html/unnamed-chunk-7-1.png" width="80%" style="display: block; margin: auto;"></div>
+<p>We will discuss cropping later. Naturally, we can also load local files using
+rast(). You can produce or save them yourself, or use packages such as <a href="https://rdrr.io/cran/SpNMF/man/spdata.html">spData</a>.</p>
+<div class="sourceCode" id="cb404"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># what it would look like with a local file </span></span>
+<span><span class="co">#snow_rast = rast("2019_jan_snow_cover.tif") </span></span>
+<span><span class="va">snow_rast</span> <span class="op">=</span> <span class="fu">rast</span><span class="op">(</span><span class="st">"/vsicurl/https://zenodo.org/record/5774954/files/clm_snow.cover_esa.modis_p95_1km_s0..0cm_2019.01_epsg4326_v1.tif?download=1"</span><span class="op">)</span></span>
+<span><span class="va">USA_NE_raster</span> <span class="op">=</span> <span class="fu">rast</span><span class="op">(</span></span>
+<span>  nrows <span class="op">=</span> <span class="fl">1000</span>,</span>
+<span>  ncols <span class="op">=</span> <span class="fl">1000</span>,</span>
+<span>  resolution <span class="op">=</span> <span class="fl">0.008333333</span>,</span>
+<span>  xmin <span class="op">=</span> <span class="op">-</span><span class="fl">83.5</span>,</span>
+<span>  xmax <span class="op">=</span> <span class="op">-</span><span class="fl">68.5</span>,</span>
+<span>  ymin <span class="op">=</span> <span class="fl">35.5</span>,</span>
+<span>  ymax <span class="op">=</span> <span class="fl">50.5</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">cropped_NE_snow</span> <span class="op">=</span> <span class="fu">crop</span><span class="op">(</span><span class="va">snow_rast</span>, <span class="va">USA_NE_raster</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">cropped_NE_snow</span>, main<span class="op">=</span><span class="st">"USA Northeast snow cover in jan 2019"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="raster_overview_files/figure-html/unnamed-chunk-8-1.png" width="80%" style="display: block; margin: auto;"></div>
+</div>
+<div id="rasterization" class="section level3" number="32.2.3">
+<h3>
+<span class="header-section-number">32.2.3</span> Rasterization<a class="anchor" aria-label="anchor" href="#rasterization"><i class="fas fa-link"></i></a>
+</h3>
+<p>(covers section <a href="https://geocompr.robinlovelace.net/raster-vector.html#rasterization">6.4</a>)</p>
+<p>There’s one more type of raster creation: transformations from vectors,
+<a href="https://rdrr.io/cran/terra/man/rasterize.html">rasterize</a>. Usage of these
+requires more knowledge of spatial vector data than we have time to go into depth
+here, but in short, it is a set of extremely flexible operations that convert
+various statistics from a vector set and transform that into some sort of grid.
+Examples provided are state boundaries, aggregating the count or average values
+of point clusters, and we’re confident that with the right vector datasets the
+possibilities are quite endless.</p>
+<p>More at Geocomputation with R’s section <a href="https://geocompr.robinlovelace.net/raster-vector.html#rasterization">6.4</a> if you’re curious.</p>
+</div>
+</div>
+<div id="raster-manipulations-and-their-applications" class="section level2" number="32.3">
+<h2>
+<span class="header-section-number">32.3</span> Raster Manipulations, and their applications<a class="anchor" aria-label="anchor" href="#raster-manipulations-and-their-applications"><i class="fas fa-link"></i></a>
+</h2>
+<p>So knowing how to create them is all well and good, but what can we <em>do</em> with
+rasters? How do we use them?</p>
+<div id="spatial-operations" class="section level4" number="32.3.0.1">
+<h4>
+<span class="header-section-number">32.3.0.1</span> Spatial operations<a class="anchor" aria-label="anchor" href="#spatial-operations"><i class="fas fa-link"></i></a>
+</h4>
+<p>There are a good number of geometrically-based operations that terra supports
+out of the box. The sections that Geocomputation with R lays out are <a href="https://geocompr.robinlovelace.net/spatial-operations.html#spatial-raster-subsetting">Subsetting in 4.3.1</a>,
+<a href="https://geocompr.robinlovelace.net/spatial-operations.html#local-operations">Local</a>, <a href="https://geocompr.robinlovelace.net/spatial-operations.html#focal-operations">Focal</a>,
+<a href="https://geocompr.robinlovelace.net/spatial-operations.html#zonal-operations">Zonal</a>,
+and <a href="https://geocompr.robinlovelace.net/spatial-operations.html#global-operations-and-distances">Global</a>
+map algebra operations in sections 4.3.3 through 4.3.6, and raster <a href="https://geocompr.robinlovelace.net/spatial-operations.html#merging-rasters">Merging</a>
+in section 4.3.8</p>
+</div>
+<div id="subsetting" class="section level3" number="32.3.1">
+<h3>
+<span class="header-section-number">32.3.1</span> Subsetting<a class="anchor" aria-label="anchor" href="#subsetting"><i class="fas fa-link"></i></a>
+</h3>
+<p>(covers section <a href="https://geocompr.robinlovelace.net/spatial-operations.html#spatial-raster-subsetting">4.3.1</a>)</p>
+<p>There are a few ways to (cleanly) draw values from individual cells, the cells,
+rows, or columns ids from coordinates, or to slice apart the data.
+<a href="https://rdrr.io/cran/terra/man/xyCellFrom.html">cellFromXY()</a> and assorted functions, and
+<a href="https://rdrr.io/cran/terra/man/extract.html">terra::extract</a> are two good ones,
+though beware the overlap with tidyverse’s extract. We can also define smaller
+rasters and clip or crop them through, as we have done in examples prior.</p>
+<div class="sourceCode" id="cb405"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">xy</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">73.94</span>, <span class="fl">40.73</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="va">matrix_cells</span> <span class="op">=</span> <span class="fu">cellFromXY</span><span class="op">(</span><span class="va">cropped_NE_snow</span>, <span class="va">xy</span><span class="op">)</span></span>
+<span><span class="va">cropped_NE_snow</span><span class="op">[</span><span class="va">matrix_cells</span><span class="op">]</span></span></code></pre></div>
+<pre><code>##   clm_snow.cover_esa.modis_p95_1km_s0..0cm_2019.01_epsg4326_v1
+## 1                                                           31</code></pre>
+<div class="sourceCode" id="cb407"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/extract.html">extract</a></span><span class="op">(</span><span class="va">cropped_NE_snow</span>, <span class="va">xy</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##   clm_snow.cover_esa.modis_p95_1km_s0..0cm_2019.01_epsg4326_v1
+## 1                                                           31</code></pre>
+<div class="sourceCode" id="cb409"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">filter</span> <span class="op">=</span> <span class="fu">rast</span><span class="op">(</span></span>
+<span>  xmin <span class="op">=</span> <span class="op">-</span><span class="fl">74.5</span>,</span>
+<span>  xmax <span class="op">=</span> <span class="op">-</span><span class="fl">73.5</span>,</span>
+<span>  ymin <span class="op">=</span> <span class="fl">40.2</span>,</span>
+<span>  ymax <span class="op">=</span> <span class="fl">41.2</span>,</span>
+<span>  resolution <span class="op">=</span> <span class="fl">0.0083</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">NYC_sieve</span> <span class="op">=</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/extract.html">extract</a></span><span class="op">(</span><span class="va">cropped_NE_snow</span>, <span class="fu">ext</span><span class="op">(</span><span class="va">filter</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">NYC_sieve</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##   clm_snow.cover_esa.modis_p95_1km_s0..0cm_2019.01_epsg4326_v1
+## 1                                                           62
+## 2                                                           61
+## 3                                                           68
+## 4                                                           74
+## 5                                                           75
+## 6                                                           81</code></pre>
+<div class="sourceCode" id="cb411"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># extract does a lot more things more flexibly, cellfromxy and related</span></span>
+<span><span class="co"># better for method header precision and location manipulation</span></span>
+<span><span class="co"># NYC was not very snowy that winter, it seems...</span></span></code></pre></div>
+<p>As well as direct access, should we know either the desired row &amp; column numbers
+or the 1D cell ids:</p>
+<div class="sourceCode" id="cb412"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">srtm</span><span class="op">[</span><span class="fl">50</span>, <span class="fl">50</span><span class="op">]</span></span></code></pre></div>
+<pre><code>##   srtm
+## 1 1885</code></pre>
+<div class="sourceCode" id="cb414"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">srtm</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">49</span>, <span class="fl">50</span>, <span class="fl">51</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">49</span>, <span class="fl">50</span>, <span class="fl">51</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
+<pre><code>##   srtm
+## 1 1854
+## 2 1919
+## 3 1986
+## 4 1835
+## 5 1885
+## 6 1962
+## 7 1819
+## 8 1869
+## 9 1929</code></pre>
+<div class="sourceCode" id="cb416"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">srtm</span><span class="op">[</span><span class="fl">100</span><span class="op">]</span></span></code></pre></div>
+<pre><code>##   srtm
+## 1 2034</code></pre>
+</div>
+<div id="cropping-and-masking" class="section level3" number="32.3.2">
+<h3>
+<span class="header-section-number">32.3.2</span> Cropping and Masking<a class="anchor" aria-label="anchor" href="#cropping-and-masking"><i class="fas fa-link"></i></a>
+</h3>
+<p>(covers section <a href="https://geocompr.robinlovelace.net/raster-vector.html?q=mask#raster-cropping">6.2</a>)</p>
+<p>Two similar concepts, <a href="https://rdrr.io/cran/terra/man/crop.html">crop()</a> and <a href="https://rdrr.io/cran/terra/man/mask.html">mask()</a>
+perform the task of downsizing a raster, typically in tandem, and both require
+the usage of an additional spatial object, in practice typically a vector.
+Where they differ is that cropping reduces the dimensions of the original raster
+based on the second object’s boundaries, whereas masking sets everything
+outside of the second object’s boundaries to zero, but leaves the structure intact.</p>
+<div class="sourceCode" id="cb418"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">zion</span> <span class="op">=</span> <span class="fu">read_sf</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"vector/zion.gpkg"</span>, package <span class="op">=</span> <span class="st">"spDataLarge"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">zion</span> <span class="op">=</span> <span class="fu">st_transform</span><span class="op">(</span><span class="va">zion</span>, <span class="fu">crs</span><span class="op">(</span><span class="va">srtm</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">srtm_cropped</span> <span class="op">=</span> <span class="fu">crop</span><span class="op">(</span><span class="va">srtm</span>, <span class="va">zion</span><span class="op">)</span></span>
+<span><span class="va">srtm_masked</span> <span class="op">=</span> <span class="fu">mask</span><span class="op">(</span><span class="va">srtm</span>, <span class="va">zion</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">zion</span><span class="op">[</span><span class="fl">0</span><span class="op">]</span>, main<span class="op">=</span><span class="st">"Outline of Zion national park"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="raster_overview_files/figure-html/unnamed-chunk-11-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="sourceCode" id="cb419"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">srtm_cropped</span>, main<span class="op">=</span><span class="st">"SRTM cropped by Zion national park"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="raster_overview_files/figure-html/unnamed-chunk-11-2.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="sourceCode" id="cb420"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">srtm_masked</span>, main<span class="op">=</span><span class="st">"SRTM masked by Zion national park"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="raster_overview_files/figure-html/unnamed-chunk-11-3.png" width="80%" style="display: block; margin: auto;"></div>
+<p>And of course we can combine them:</p>
+<div class="sourceCode" id="cb421"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu">crop</span><span class="op">(</span><span class="va">srtm_masked</span>, <span class="va">zion</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="raster_overview_files/figure-html/unnamed-chunk-12-1.png" width="80%" style="display: block; margin: auto;"></div>
+</div>
+<div id="map-algebra" class="section level3" number="32.3.3">
+<h3>
+<span class="header-section-number">32.3.3</span> Map Algebra<a class="anchor" aria-label="anchor" href="#map-algebra"><i class="fas fa-link"></i></a>
+</h3>
+<p>(covers sections <a href="https://geocompr.robinlovelace.net/spatial-operations.html#map-algebra">4.3.2</a>, <a href="https://geocompr.robinlovelace.net/spatial-operations.html#local-operations">4.3.3</a>, <a href="https://geocompr.robinlovelace.net/spatial-operations.html#focal-operations">4.3.4</a>,
+<a href="https://geocompr.robinlovelace.net/spatial-operations.html#zonal-operations">4.3.5</a>, and
+<a href="https://geocompr.robinlovelace.net/spatial-operations.html#global-operations-and-distances">4.3.6</a>)</p>
+<p>As we can see here, many algebraic calculations can be performed on rasters at the local level.</p>
+<div class="sourceCode" id="cb422"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">srtm</span> <span class="op">=</span> <span class="fu">rast</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"raster/srtm.tif"</span>, package <span class="op">=</span> <span class="st">"spDataLarge"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">srtm</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="raster_overview_files/figure-html/unnamed-chunk-13-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="sourceCode" id="cb423"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">srtm</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="raster_overview_files/figure-html/unnamed-chunk-13-2.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="sourceCode" id="cb424"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">srtm</span> <span class="op">^</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="raster_overview_files/figure-html/unnamed-chunk-13-3.png" width="80%" style="display: block; margin: auto;"></div>
+<p>As well as boolean operations</p>
+<div class="sourceCode" id="cb425"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">snow_clipped</span> <span class="op">&gt;</span> <span class="fl">20</span>, main<span class="op">=</span><span class="st">"Areas with more than 20% snow cover"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="raster_overview_files/figure-html/unnamed-chunk-14-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="sourceCode" id="cb426"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">snow_clipped</span> <span class="op">==</span> <span class="fl">0</span>, main<span class="op">=</span><span class="st">"Areas with no snow cover"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="raster_overview_files/figure-html/unnamed-chunk-14-2.png" width="80%" style="display: block; margin: auto;"></div>
+<p>And through the use of <a href="https://rdrr.io/cran/terra/man/app.html">app()</a> for efficiency on large data.</p>
+<div class="sourceCode" id="cb427"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">app</span><span class="op">(</span><span class="va">snow_clipped</span>, fun<span class="op">=</span><span class="kw">function</span><span class="op">(</span><span class="va">i</span><span class="op">)</span> <span class="op">{</span> <span class="fl">2</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">i</span><span class="op">)</span> <span class="op">}</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## class       : SpatRaster 
+## dimensions  : 1800, 1800, 1  (nrow, ncol, nlyr)
+## resolution  : 0.008333333, 0.008333333  (x, y)
+## extent      : 2.499993, 17.49999, 42.50334, 57.50333  (xmin, xmax, ymin, ymax)
+## coord. ref. : lon/lat WGS 84 (EPSG:4326) 
+## source      : memory 
+## name        :   lyr.1 
+## min value   :    - ?  
+## max value   : 9.21034</code></pre>
+<p>Given the right attributes in the data (the book lists coil class, pH, etc),
+this can be used for predictive modeling.</p>
+<p><a href="https://rdrr.io/cran/terra/man/focal.html">Focal</a> transformations:</p>
+<div class="sourceCode" id="cb429"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mean_srtm</span> <span class="op">=</span> <span class="fu">focal</span><span class="op">(</span><span class="va">srtm</span>, w <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">1</span>, nrow <span class="op">=</span> <span class="fl">5</span>, ncol <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>, fun <span class="op">=</span> <span class="va">mean</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">mean_srtm</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="raster_overview_files/figure-html/unnamed-chunk-16-1.png" width="80%" style="display: block; margin: auto;"></div>
+<p>Similar to sliding windows in some machine learning algorithms, focal operations
+transform cells by their neighborhoods, working to process out extremes whilst
+preserving the form of the original data. Another potential focal operator is
+<a href="https://rdrr.io/cran/terra/man/terrain.html">terrain()</a>, which calculates
+terrain characteristics from elevation data.</p>
+<p><a href="https://rdrr.io/cran/terra/man/zonal.html">Zonal</a> is similar to focal but one
+level of aggregation up. It uses a second raster to define zones to group the
+first by, applying statistical measurements on that divided population.</p>
+<p><a href="https://rdrr.io/cran/terra/man/global.html">Global</a> are cross-raster statistical
+calculations, and can be used for <a href="https://rdrr.io/cran/terra/man/distance.html">distance</a>
+and a few other possibilities–namely, summary functions we’d see on any type of
+dataset.</p>
+<p><a href="https://rdrr.io/cran/terra/man/summary.html">summary()</a> describes the archetypal
+statistical bands, <a href="https://rdrr.io/cran/terra/man/freq.html">freq()</a> counts the
+occurrences of each class, and <a href="https://rdrr.io/cran/terra/man/boxplot.html">boxplot()</a>,
+<a href="https://rdrr.io/cran/terra/man/density.html">density()</a>,
+<a href="https://rdrr.io/cran/terra/man/hist.html">hist()</a>,
+and <a href="https://rdrr.io/cran/terra/man/pairs.html">pairs()</a> can all be run out-of-the-box
+for immediate exploration. global() remains the most robust approach, as you can
+self-define a statistical function yourself to apply your particular dataset,
+much as you can with the aforementioned app() and its entourage.</p>
+<div class="sourceCode" id="cb430"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">snow_clipped</span><span class="op">)</span> <span class="co"># 3rd quartile of 1, but mean of 10?</span></span></code></pre></div>
+<pre><code>##  clm_snow.cover_esa.modis_p05_1km_s0..0cm_2001.01_epsg4326_v1
+##  Min.   :  0.00                                              
+##  1st Qu.:  0.00                                              
+##  Median :  0.00                                              
+##  Mean   : 10.27                                              
+##  3rd Qu.:  1.00                                              
+##  Max.   :100.00                                              
+##  NA's   :28886</code></pre>
+<div class="sourceCode" id="cb432"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">snow_tenths</span> <span class="op">=</span> <span class="fu">app</span><span class="op">(</span><span class="va">snow_clipped</span>, fun<span class="op">=</span><span class="kw">function</span><span class="op">(</span><span class="va">i</span><span class="op">)</span> <span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">ceiling</a></span><span class="op">(</span><span class="va">i</span> <span class="op">/</span> <span class="fl">10</span><span class="op">)</span> <span class="op">*</span> <span class="fl">10</span><span class="op">}</span><span class="op">)</span></span>
+<span><span class="fu">freq</span><span class="op">(</span><span class="va">snow_tenths</span><span class="op">)</span> <span class="co"># Indeed, 0 is by far the most common</span></span></code></pre></div>
+<pre><code>##    layer value   count
+## 1      1     0 1696965
+## 2      1    10  190843
+## 3      1    20   61456
+## 4      1    30   44132
+## 5      1    40   42039
+## 6      1    50   43384
+## 7      1    60   46092
+## 8      1    70   47859
+## 9      1    80   46767
+## 10     1    90   43627
+## 11     1   100   46772</code></pre>
+</div>
+<div id="extraction" class="section level3" number="32.3.4">
+<h3>
+<span class="header-section-number">32.3.4</span> Extraction<a class="anchor" aria-label="anchor" href="#extraction"><i class="fas fa-link"></i></a>
+</h3>
+<p>(covers section <a href="https://geocompr.robinlovelace.net/raster-vector.html#raster-extraction">6.3</a>)</p>
+<p>Extraction is the process of gathering a targetted subset of values from a raster,
+through the use of <a href="https://rdrr.io/cran/terra/man/extract.html">terra::extract()</a>.
+It will take the use of vector spatial objects, but the result is some rather
+powerful if specialized inferences. We’ll keep it brief, but please visit <a href="https://geocompr.robinlovelace.net/raster-vector.html#raster-extraction">6.3</a>
+if you’re interested further.</p>
+<p>Example use cases of raster extraction can vary as wildly as your creativity.
+For a few quick examples, we could import the boundaries of European country
+around the alps and aggregate snow cover there, or find the highest/lowest points
+along Zion National Park’s boundaries. The demonstrations the book provides are
+picking elevation from a selection of points, and the elevation graph along a
+line segment for planning a hike. Categorical and continuous data can both be
+extracted, sometimes at once across different layers.</p>
+<p>One quick note–the book points out there can be performance issues at scale,
+and to use <a href="https://rdrr.io/cran/exactextractr/man/exact_extract.html">exact_extract()</a> from the <a href="https://rdrr.io/cran/exactextractr/man/exactextractr.html">exactextract</a> package where possible.</p>
+</div>
+<div id="vectorization" class="section level3" number="32.3.5">
+<h3>
+<span class="header-section-number">32.3.5</span> Vectorization<a class="anchor" aria-label="anchor" href="#vectorization"><i class="fas fa-link"></i></a>
+</h3>
+<p>(covers section <a href="https://geocompr.robinlovelace.net/raster-vector.html#spatial-vectorization">6.5</a>)</p>
+<p>The opposite of rasterization, spatial vectorization transforms rasters into vectors.
+If you’re familiar with vectors, there is again an abundance of flexibility here, lying in the <a href="https://rdrr.io/cran/terra/man/as.spatvector.html">as.spatvector</a> class of
+functions. One particularly eye-catching use is the quick visualization of
+contour lines using <a href="https://rdrr.io/cran/terra/man/contour.html">as.contour()</a> as follows:</p>
+<div class="sourceCode" id="cb434"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">cl</span> <span class="op">=</span> <span class="fu">as.contour</span><span class="op">(</span><span class="va">srtm</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">cl</span>, axes<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="raster_overview_files/figure-html/unnamed-chunk-18-1.png" width="80%" style="display: block; margin: auto;"></div>
+</div>
+<div id="file-output" class="section level3" number="32.3.6">
+<h3>
+<span class="header-section-number">32.3.6</span> File Output<a class="anchor" aria-label="anchor" href="#file-output"><i class="fas fa-link"></i></a>
+</h3>
+<p>(covers section <a href="https://geocompr.robinlovelace.net/read-write.html#raster-data-write">8.7.2</a>)
+Okay, so you’ve done your experiments, and would like to preserve your rasters
+to share your results and save on later computational power. How?</p>
+<p>Simple. <a href="https://rdrr.io/cran/terra/man/writeRaster.html">writeRaster()</a>.</p>
+<div class="sourceCode" id="cb435"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Is how I would do it, if I wanted to dirty the CC project</span></span>
+<span><span class="co"># writeRaster(snow_clipped, filename="2007_jan_eu_snow.tif", datatype="INT1U",</span></span>
+<span><span class="co">#             overwrite=TRUE)</span></span></code></pre></div>
+<p>There is a little more involved, such as selecting the bit datatype for storage,
+filetypes if writeRaster can’t infer it from the filename, names for the layer names,
+and an assortment of memory-related variables for debugging and throughput of
+particularly large rasters. Compared to loading in rasters, though,
+this function is conveniently straightforward, yet still plenty capable in terms
+of flexibility; like rasters as a hole, rigid, yet surprisingly flexible just one layer beyond the surface.</p>
+
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="data-visualization-with-r-ggplot2-vs.-matlab.html"><span class="header-section-number">31</span> Data Visualization with R ggplot2 vs. Matlab</a></div>
+<div class="next"><a href="ten-interview-questions-and-answers.html"><span class="header-section-number">34</span> Ten interview questions and answers</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#using-raster-data-in-r"><span class="header-section-number">32</span> Using raster data in R</a></li>
+<li>
+<a class="nav-link" href="#introduction-to-rasters"><span class="header-section-number">32.1</span> Introduction to rasters</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#what-is-a-raster"><span class="header-section-number">32.1.1</span> What is a Raster?</a></li>
+<li><a class="nav-link" href="#what-is-terra"><span class="header-section-number">32.1.2</span> What is Terra?</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#raster-creation"><span class="header-section-number">32.2</span> Raster Creation</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#the-direct-approach"><span class="header-section-number">32.2.1</span> The direct approach</a></li>
+<li><a class="nav-link" href="#raster-files-and-their-formats"><span class="header-section-number">32.2.2</span> Raster files and their formats</a></li>
+<li><a class="nav-link" href="#rasterization"><span class="header-section-number">32.2.3</span> Rasterization</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#raster-manipulations-and-their-applications"><span class="header-section-number">32.3</span> Raster Manipulations, and their applications</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#subsetting"><span class="header-section-number">32.3.1</span> Subsetting</a></li>
+<li><a class="nav-link" href="#cropping-and-masking"><span class="header-section-number">32.3.2</span> Cropping and Masking</a></li>
+<li><a class="nav-link" href="#map-algebra"><span class="header-section-number">32.3.3</span> Map Algebra</a></li>
+<li><a class="nav-link" href="#extraction"><span class="header-section-number">32.3.4</span> Extraction</a></li>
+<li><a class="nav-link" href="#vectorization"><span class="header-section-number">32.3.5</span> Vectorization</a></li>
+<li><a class="nav-link" href="#file-output"><span class="header-section-number">32.3.6</span> File Output</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/jtr13/cc22tt/blob/main/raster_overview.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/jtr13/cc22tt/edit/main/raster_overview.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Community Contributions for EDAV Fall 2022 Tues/Thurs</strong>" was written by . It was last built on 2022-11-15.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

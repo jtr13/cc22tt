@@ -82,7 +82,7 @@ You may lay out the user interface of your app by placing elements in the fluidP
 Next we will create a visualization tool to display k-means clustering of Iris dataset. To do this, we need to define the UI panel and return a scatterplot. 
 Iris data set contains 3 classes of 50 instances each, where each class refers to a type of iris plant. The feature set contains "Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"  
 
-![](resources/shiny_app_intro/km.png){width=30%}
+![](resources/shiny_app_intro/km.png){width=80%}
 
 ### layout
 
@@ -106,13 +106,13 @@ ui <- fluidPage(
 ```
   
   
-![](resources/shiny_app_intro/ui1.png){width=40%}
+![](resources/shiny_app_intro/ui1.png){width=70%}
 
 ### Input functions
 
 We can also add control widgets to provide a way for users to send messages to the Shiny app. Shiny widgets collect a value from your user. When a user changes the widget, the value will change as well.There are many input functions to create widgets. Below are some examples of basic widgets.  
 
-![](resources/shiny_app_intro/ui2.png){width=60%}
+![](resources/shiny_app_intro/ui2.png){width=80%}
 
 Next I will introduce a common input function `selectInput()` that shows a box with choices to select from. 
 `selectInput()` has 3 required arguments:  
@@ -128,7 +128,7 @@ selectInput(inputID='ycol', label='Y Variable',
 ```
   
   
-![](resources/shiny_app_intro/ui3.png){width=50%}  
+![](resources/shiny_app_intro/ui3.png){width=70%}
   
 
 Here I include the select widget that allows the user to select the y variable of output plot. I also define the variables to choose from are attributes from the feature set, and set the default choice to be 'Sepal.Width'. Similarly, we can define the selection box for x variable and a numeric Input box that user can define cluster numbers for our clustering example.

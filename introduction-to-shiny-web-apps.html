@@ -79,14 +79,15 @@
 <li><a class="" href="geo-mapping-coordinate-extraction-using-api-calls.html"><span class="header-section-number">29</span> Geo-Mapping Coordinate Extraction Using API Calls</a></li>
 <li><a class="" href="edav-garden.html"><span class="header-section-number">30</span> EDAV Garden</a></li>
 <li><a class="" href="data-visualization-with-r-ggplot2-vs.-matlab.html"><span class="header-section-number">31</span> Data Visualization with R ggplot2 vs. Matlab</a></li>
+<li><a class="" href="using-raster-data-in-r.html"><span class="header-section-number">32</span> Using raster data in R</a></li>
 <li class="book-part">Interview Prep</li>
-<li><a class="" href="ten-interview-questions-and-answers.html"><span class="header-section-number">33</span> Ten interview questions and answers</a></li>
-<li><a class="" href="data-science-internship-search-survival-guide.html"><span class="header-section-number">34</span> Data science internship search survival guide</a></li>
+<li><a class="" href="ten-interview-questions-and-answers.html"><span class="header-section-number">34</span> Ten interview questions and answers</a></li>
+<li><a class="" href="data-science-internship-search-survival-guide.html"><span class="header-section-number">35</span> Data science internship search survival guide</a></li>
 <li class="book-part">Case Studies</li>
-<li><a class="" href="benford-case-study.html"><span class="header-section-number">36</span> Benford Case Study</a></li>
+<li><a class="" href="benford-case-study.html"><span class="header-section-number">37</span> Benford Case Study</a></li>
 <li class="book-part">Appendices</li>
-<li><a class="" href="github-initial-setup.html"><span class="header-section-number">37</span> Github initial setup</a></li>
-<li><a class="" href="tutorial-for-pull-request-mergers.html"><span class="header-section-number">38</span> Tutorial for pull request mergers</a></li>
+<li><a class="" href="github-initial-setup.html"><span class="header-section-number">38</span> Github initial setup</a></li>
+<li><a class="" href="tutorial-for-pull-request-mergers.html"><span class="header-section-number">39</span> Tutorial for pull request mergers</a></li>
 </ul>
 
         <div class="book-extra">
@@ -178,7 +179,7 @@ The server controls the data being displayed in UI. It’s where you load and wr
 <p>You may lay out the user interface of your app by placing elements in the fluidPage function. Elements can be seperated to inputs and outputs function.</p>
 <p>Next we will create a visualization tool to display k-means clustering of Iris dataset. To do this, we need to define the UI panel and return a scatterplot.
 Iris data set contains 3 classes of 50 instances each, where each class refers to a type of iris plant. The feature set contains “Sepal.Length”, “Sepal.Width”, “Petal.Length”, “Petal.Width”</p>
-<div class="inline-figure"><img src="resources/shiny_app_intro/km.png" style="width:30.0%"></div>
+<div class="inline-figure"><img src="resources/shiny_app_intro/km.png" style="width:80.0%"></div>
 <div id="layout" class="section level3" number="23.5.1">
 <h3>
 <span class="header-section-number">23.5.1</span> layout<a class="anchor" aria-label="anchor" href="#layout"><i class="fas fa-link"></i></a>
@@ -196,14 +197,14 @@ Iris data set contains 3 classes of 50 instances each, where each class refers t
 <span>    <span class="fu"><a href="https://rdrr.io/pkg/shiny/man/sidebarLayout.html">mainPanel</a></span><span class="op">(</span><span class="st">"main panel"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="resources/shiny_app_intro/ui1.png" style="width:40.0%"></div>
+<div class="inline-figure"><img src="resources/shiny_app_intro/ui1.png" style="width:70.0%"></div>
 </div>
 <div id="input-functions" class="section level3" number="23.5.2">
 <h3>
 <span class="header-section-number">23.5.2</span> Input functions<a class="anchor" aria-label="anchor" href="#input-functions"><i class="fas fa-link"></i></a>
 </h3>
 <p>We can also add control widgets to provide a way for users to send messages to the Shiny app. Shiny widgets collect a value from your user. When a user changes the widget, the value will change as well.There are many input functions to create widgets. Below are some examples of basic widgets.</p>
-<div class="inline-figure"><img src="resources/shiny_app_intro/ui2.png" style="width:60.0%"></div>
+<div class="inline-figure"><img src="resources/shiny_app_intro/ui2.png" style="width:80.0%"></div>
 <p>Next I will introduce a common input function <code><a href="https://rdrr.io/pkg/shiny/man/selectInput.html">selectInput()</a></code> that shows a box with choices to select from.
 <code><a href="https://rdrr.io/pkg/shiny/man/selectInput.html">selectInput()</a></code> has 3 required arguments:<br>
 inputId: The input name to access the value (for internal ues–&gt; use <code>input$inputId</code> to refer the input value when in server)<br>
@@ -214,7 +215,7 @@ We can also use <code>selected</code> to set initial selected value if user not 
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/selectInput.html">selectInput</a></span><span class="op">(</span>inputID<span class="op">=</span><span class="st">'ycol'</span>, label<span class="op">=</span><span class="st">'Y Variable'</span>, </span>
 <span>            choices<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>,<span class="co">#"Sepal.Length" "Sepal.Width"  "Petal.Length" "Petal.Width" </span></span>
 <span>      selected <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="co"># set "Petal.Length" to be default</span></span></code></pre></div>
-<div class="inline-figure"><img src="resources/shiny_app_intro/ui3.png" style="width:50.0%"></div>
+<div class="inline-figure"><img src="resources/shiny_app_intro/ui3.png" style="width:70.0%"></div>
 <p>Here I include the select widget that allows the user to select the y variable of output plot. I also define the variables to choose from are attributes from the feature set, and set the default choice to be ‘Sepal.Width’. Similarly, we can define the selection box for x variable and a numeric Input box that user can define cluster numbers for our clustering example.</p>
 </div>
 <div id="output-functions" class="section level3" number="23.5.3">
