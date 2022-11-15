@@ -33,6 +33,7 @@ Suggests:
     mlbench,
     plot3D,
     ggfortify,
+    timevis,
 Remotes:
     hadley/emo
     
