@@ -89,9 +89,9 @@ raw_json <- content(api_response)
 glimpse(raw_json, list.len = 5)
 ```
 
-## Transform Json to data frame 
+## Transform JSON to data frame 
 
-### Json structure analysis (list)
+### JSON structure analysis (list)
 
 We learned in class how to deal with CSV data, and our most fixed approach is to convert the data into a data frame because that's the structure we're used to working with data (and that's our goal). However, data does not need to be stored in a table with columns and rows. This tabular format is inefficient, so many Internet companies never store raw data in this format. For example, let's say a store is following your buys. Your distinctive visits may be stamped by the entire sum of cash you went through, the length of the visit, taken after by point-by-point thing data (such as item name, brand, quantity, product id, etc.). There's a lot of detailed information, and putting away all this data in a single table isn't exceptionally productive since you have got to rehash the total information (add up to get to and time) for each point-by-point thing. While having different tables is one solution, consumers of this dataset typically prefer a single data source with all the information. This leads to the existence of hierarchical data types like lists. We use `read_json()` to read the JSON file and return the data type list. So, how to handle JSON files is equivalent to how to handle lists. 
 
