@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 35 How to obtain data from API and process raw JSON data | Community Contributions for EDAV Fall 2022 Tues/Thurs</title>
+<meta name="description" content="Boping Xia and Mingkang Yuan # load required packages, can be installed by calling install.packages() library(httr) library(jsonlite) library(tidyverse)  35.1 Motivation Obtaining data is the...">
+<meta name="generator" content="bookdown 0.30 with bs4_book()">
+<meta property="og:title" content="Chapter 35 How to obtain data from API and process raw JSON data | Community Contributions for EDAV Fall 2022 Tues/Thurs">
+<meta property="og:type" content="book">
+<meta property="og:description" content="Boping Xia and Mingkang Yuan # load required packages, can be installed by calling install.packages() library(httr) library(jsonlite) library(tidyverse)  35.1 Motivation Obtaining data is the...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 35 How to obtain data from API and process raw JSON data | Community Contributions for EDAV Fall 2022 Tues/Thurs">
+<meta name="twitter:description" content="Boping Xia and Mingkang Yuan # load required packages, can be installed by calling install.packages() library(httr) library(jsonlite) library(tidyverse)  35.1 Motivation Obtaining data is the...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.1/transition.js"></script><script src="libs/bs3compat-0.4.1/tabs.js"></script><script src="libs/bs3compat-0.4.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><script src="libs/plotly-binding-4.10.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script><link href="libs/visjs-7.4.9/vis-timeline-graph2d.min.css" rel="stylesheet">
+<script src="libs/visjs-7.4.9/vis-timeline-graph2d.min.js"></script><link href="libs/timeline-0.4/timevis.css" rel="stylesheet">
+<script src="libs/timevis-binding-2.1.0/timevis.js"></script><link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
+<script src="libs/leaflet-1.3.1/leaflet.js"></script><link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
+<script src="libs/proj4-2.6.2/proj4.min.js"></script><script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script><link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
+<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Community Contributions for EDAV Fall 2022 Tues/Thurs</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Welcome!</a></li>
+<li><a class="" href="community-contribution.html"><span class="header-section-number">2</span> Community Contribution</a></li>
+<li><a class="" href="github-submission-instructions.html"><span class="header-section-number">3</span> GitHub submission instructions</a></li>
+<li><a class="" href="sample-project.html"><span class="header-section-number">4</span> Sample project</a></li>
+<li class="book-part">Cheatsheets</li>
+<li><a class="" href="r-window-functions-cheatsheet.html"><span class="header-section-number">6</span> R window functions cheatsheet</a></li>
+<li><a class="" href="rmd-chunk-option-cheat-sheet.html"><span class="header-section-number">7</span> Rmd chunk option cheat sheet</a></li>
+<li><a class="" href="helpful-ggplot2-extensions-cheatsheet.html"><span class="header-section-number">8</span> Helpful ggplot2 Extensions Cheatsheet</a></li>
+<li><a class="" href="commonly-used-graph-cheatcheet.html"><span class="header-section-number">9</span> Commonly-used graph cheatcheet</a></li>
+<li><a class="" href="git-and-version-control.html"><span class="header-section-number">10</span> Git and version control</a></li>
+<li><a class="" href="useful-plots-for-bioinfomatics-in-r.html"><span class="header-section-number">11</span> Useful plots for Bioinfomatics in R</a></li>
+<li><a class="" href="different-ways-to-create-world-map-in-r.html"><span class="header-section-number">12</span> Different ways to create world map in R</a></li>
+<li><a class="" href="color-in-r-python-and-jshtmlcss.html"><span class="header-section-number">13</span> Color in R, Python, and JS/HTML/CSS</a></li>
+<li><a class="" href="color-palettes-for-data-visualization.html"><span class="header-section-number">14</span> Color Palettes for Data Visualization</a></li>
+<li><a class="" href="data-visualization-using-seaborn.html"><span class="header-section-number">15</span> Data visualization using Seaborn</a></li>
+<li><a class="" href="machine-learning-cheatsheet-for-r-and-python.html"><span class="header-section-number">16</span> Machine Learning Cheatsheet for R and Python</a></li>
+<li><a class="" href="data-visualization-with-r-ggplot2-vs.-matlab.html"><span class="header-section-number">17</span> Data Visualization with R ggplot2 vs. Matlab</a></li>
+<li><a class="" href="ggplot2-plots-in-python-cheat-sheet-tutorial.html"><span class="header-section-number">18</span> Ggplot2 plots in python cheat sheet tutorial</a></li>
+<li class="book-part">Tutorials</li>
+<li><a class="" href="preprocessing-and-visualization-of-time-series-data.html"><span class="header-section-number">20</span> Preprocessing and Visualization of Time Series Data</a></li>
+<li><a class="" href="how-to-use-sqldf.html"><span class="header-section-number">21</span> How to use sqldf</a></li>
+<li><a class="" href="googlevis-in-r.html"><span class="header-section-number">22</span> googleVis in R</a></li>
+<li><a class="" href="tutorial-for-vector-fields-in-r.html"><span class="header-section-number">23</span> Tutorial for vector fields in r</a></li>
+<li><a class="" href="data-cleaning-with-r.html"><span class="header-section-number">24</span> Data cleaning with r</a></li>
+<li><a class="" href="introduction-to-shiny-web-apps.html"><span class="header-section-number">25</span> Introduction to Shiny Web Apps</a></li>
+<li><a class="" href="python-missingno-library-tutorial.html"><span class="header-section-number">26</span> Python missingno library tutorial</a></li>
+<li><a class="" href="data-explorer-tutorial-and-automation.html"><span class="header-section-number">27</span> Data Explorer Tutorial and Automation</a></li>
+<li><a class="" href="d-visualization-in-r.html"><span class="header-section-number">28</span> 3D Visualization in R</a></li>
+<li><a class="" href="visualizing-time-series-data.html"><span class="header-section-number">29</span> Visualizing Time Series Data</a></li>
+<li><a class="" href="igraph-in-r.html"><span class="header-section-number">30</span> igraph in r</a></li>
+<li><a class="" href="geo-mapping-coordinate-extraction-using-api-calls.html"><span class="header-section-number">31</span> Geo-Mapping Coordinate Extraction Using API Calls</a></li>
+<li><a class="" href="edav-garden.html"><span class="header-section-number">32</span> EDAV Garden</a></li>
+<li><a class="" href="using-raster-data-in-r.html"><span class="header-section-number">33</span> Using raster data in R</a></li>
+<li><a class="" href="make-geographical-maps-with-different-packages.html"><span class="header-section-number">34</span> Make Geographical Maps with Different Packages</a></li>
+<li><a class="active" href="how-to-obtain-data-from-api-and-process-raw-json-data.html"><span class="header-section-number">35</span> How to obtain data from API and process raw JSON data</a></li>
+<li class="book-part">Interview Prep</li>
+<li><a class="" href="ten-interview-questions-and-answers.html"><span class="header-section-number">37</span> Ten interview questions and answers</a></li>
+<li><a class="" href="data-science-internship-search-survival-guide.html"><span class="header-section-number">38</span> Data science internship search survival guide</a></li>
+<li><a class="" href="data-visualization-interview-questions-sample.html"><span class="header-section-number">39</span> Data visualization interview questions sample</a></li>
+<li class="book-part">Case Studies</li>
+<li><a class="" href="benford-case-study.html"><span class="header-section-number">41</span> Benford Case Study</a></li>
+<li class="book-part">Appendices</li>
+<li><a class="" href="github-initial-setup.html"><span class="header-section-number">42</span> Github initial setup</a></li>
+<li><a class="" href="tutorial-for-pull-request-mergers.html"><span class="header-section-number">43</span> Tutorial for pull request mergers</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/jtr13/cc22tt">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="how-to-obtain-data-from-api-and-process-raw-json-data" class="section level1" number="35">
+<h1>
+<span class="header-section-number">35</span> How to obtain data from API and process raw JSON data<a class="anchor" aria-label="anchor" href="#how-to-obtain-data-from-api-and-process-raw-json-data"><i class="fas fa-link"></i></a>
+</h1>
+<p>Boping Xia and Mingkang Yuan</p>
+<div class="sourceCode" id="cb459"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># load required packages, can be installed by calling install.packages()</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://httr.r-lib.org/">httr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://arxiv.org/abs/1403.2805">jsonlite</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code></pre></div>
+<div id="motivation-5" class="section level2" number="35.1">
+<h2>
+<span class="header-section-number">35.1</span> Motivation<a class="anchor" aria-label="anchor" href="#motivation-5"><i class="fas fa-link"></i></a>
+</h2>
+<p>Obtaining data is the crucial part before we explore and visualize it. Although some processed data are provided in R packages, in a realistic project, we need to collect data from a reliable source that has yet to be processed. We’ve been able to scrap the data from the site. But scratching the data from their site is amazingly questionable since a simple alteration on the web page will break our whole scratching calculation. Moreover, the data we get may not be the one we need. Some sources may provide their data in CSV or other file formats. Still, most sources use an application programming interface (API) to allow users to access their data. However, when we were working on the final project proposal, it took us a long time to get data from the website. One reason is that most of the resources and tutorials on using APIs are obscure for people with limited knowledge. Another reason is that each source processes and distributes data in distinct ways. In addition, the data we receive from the API is most commonly a JSON file. It is not a tabular file format, so we need extra steps to clean it. This tutorial will guide you on using the httr package to request data from API and transcribe JSON files into a data frame or table.</p>
+</div>
+<div id="what-is-api-and-json" class="section level2" number="35.2">
+<h2>
+<span class="header-section-number">35.2</span> What is API and JSON?<a class="anchor" aria-label="anchor" href="#what-is-api-and-json"><i class="fas fa-link"></i></a>
+</h2>
+<p>API (application programming interface) is a method by which two programs share data. Usually, each API has its unique settings (parameters). Today API usually refers to web API, which programs communicate under Hypertext Transfer Protocol (HTTP). Online data sources typically use a web API that allows users to obtain their data remotely. Some APIs also require a personalized token to protect and monitor data transmittance. API uses designated URLs to make them unique on the Internet. Compared to data already in a file, API allows users only to download the parts they will work on.</p>
+<p>JSON (JavaScript Object Notation) is a file format that aims to exchange data more efficiently on the Internet. Because JSON is simple, human-readable and writable, and lightweight, it has been widely accepted and has become a standard. JSON stores data in key/value pairs. There are six value types in JSON: number, boolean, string, null, array, and object. An object is a collection of key/value pairs. Below is a sample JSON file:</p>
+<pre><code>{
+  "department": "Technical",
+  "location": "New York",
+  "yearEst": 2016,
+  "employees": [
+    {
+      "name": "Tom",
+      "age": 34,
+      "title": "Manager",
+      "onDuty": true
+    },
+    {
+      "name": "Kate",
+      "age": 24,
+      "title": "Backend Developer",
+      "onDuty": true
+    },
+    {
+      "name": "Wei",
+      "age": 21,
+      "title": null,
+      "onDuty": false
+    }
+  ]
+}</code></pre>
+<p>In this example, <code>department</code> and <code>location</code> are string variables, <code>yearEst</code> is a number variable, and <code>employees</code> is an array of objects. Each element of <code>employees</code> contains two string variables, <code>name</code> and <code>title</code>, a number variable, <code>age</code>, and a boolean variable, <code>onDuty</code>. The <code>null</code> in Wei’s title is the same as NA, which means empty. Notice that this whole chunk of data is also an object. This nested structure of objects allows JSON files efficiently store data with complicated relations.</p>
+</div>
+<div id="using-httr-package-to-request-data-from-api" class="section level2" number="35.3">
+<h2>
+<span class="header-section-number">35.3</span> Using <code>httr</code> package to request data from API<a class="anchor" aria-label="anchor" href="#using-httr-package-to-request-data-from-api"><i class="fas fa-link"></i></a>
+</h2>
+<div id="introduction-to-http-verb-and-httr" class="section level3" number="35.3.1">
+<h3>
+<span class="header-section-number">35.3.1</span> Introduction to HTTP verb and <code>httr</code><a class="anchor" aria-label="anchor" href="#introduction-to-http-verb-and-httr"><i class="fas fa-link"></i></a>
+</h3>
+<p>Since this tutorial faces people with limited CS/Internet knowledge, we will only dig a little bit into it. A key idea here is the HTTP verb, which is the action you perform on the server (we prefer HTTP method instead of HTTP verb). There are five mainly used HTTP verbs: POST, GET, PUT, PATCH, and DELETE. For our purpose of obtaining data, we will usually use GET (in some contexts, we will use POST), which is getting specific resources from the server.</p>
+<p><code>httr</code> is a package developed by RStudio, and it is an easy but powerful tool for dealing with HTTP. It contains wrapper functions that allow you to make designated requests to the server and decode the response from the server.</p>
+</div>
+<div id="example-of-use-httrget-to-request-data-from-api" class="section level3" number="35.3.2">
+<h3>
+<span class="header-section-number">35.3.2</span> Example of use <code>httr::GET</code> to request data from API<a class="anchor" aria-label="anchor" href="#example-of-use-httrget-to-request-data-from-api"><i class="fas fa-link"></i></a>
+</h3>
+<p>WARNING: This is only an example illustrating the workflow of retrieving data from API. Since each API has its unique parameters, they work differently. Therefore, as you want to utilize an API, you first need to go through its reference or usage page to understand how to communicate with it correctly.</p>
+<p>We will use an example of getting warships’ information from the game World of Warships through Wargaming developer API. Notice that to download data from Wargaming API, you must register an account and create an application id. This id is unique to you, and you should not share your id with anyone else (others may use your id to do something illegal like DDOS). For demonstration purposes, we created a temporary id and stored it in a JSON file. This temporary id will be <strong>DEACTIVATED</strong> after Dec. 15, 2022. Please <strong>DO NOT</strong> use our id in your code.</p>
+<div class="sourceCode" id="cb461"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">id_json</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jsonlite/man/read_json.html">read_json</a></span><span class="op">(</span><span class="st">"resources/api_json_tutorial/application_id.json"</span><span class="op">)</span></span>
+<span><span class="va">app_id</span> <span class="op">&lt;-</span> <span class="va">id_json</span><span class="op">$</span><span class="va">id</span></span></code></pre></div>
+<p>Here we will use <code><a href="https://httr.r-lib.org/reference/GET.html">GET()</a></code> function to obtain data from API. There are two fields we need to pass to the function: <code>url</code>, where is the address of the API, and <code>query</code>, where is the parameters need to pass to the API. Before parsing the response, checking the status code is a good habit to ensure you successfully get the data you want. For <code><a href="https://httr.r-lib.org/reference/GET.html">GET()</a></code> method, code 200 means the server received your request and sent you the corresponding data. If you received other status codes, please check your setup or consult other resources.</p>
+<div class="sourceCode" id="cb462"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># The application id will be DEACTIVATED after Dec. 15, 2022 and will cause error in GET call.</span></span>
+<span><span class="va">api_response</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://httr.r-lib.org/reference/GET.html">GET</a></span><span class="op">(</span>url <span class="op">=</span> <span class="st">"https://api.worldofwarships.eu/wows/encyclopedia/ships/"</span>,</span>
+<span>                    query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span>application_id <span class="op">=</span> <span class="va">app_id</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">api_response</span><span class="op">$</span><span class="va">status_code</span></span></code></pre></div>
+<pre><code>## [1] 200</code></pre>
+<p>After receiving the server’s response, we need to decode and extract the data we want. Thankfully, <code><a href="https://httr.r-lib.org/reference/content.html">content()</a></code> will automatically dig out the data inside the response object.</p>
+<div class="sourceCode" id="cb464"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">raw_json</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://httr.r-lib.org/reference/content.html">content</a></span><span class="op">(</span><span class="va">api_response</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">raw_json</span>, list.len <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## List of 3
+##  $ status: chr "ok"
+##  $ meta  :List of 5
+##   ..$ count     : int 100
+##   ..$ page_total: int 7
+##   ..$ total     : int 608
+##   ..$ limit     : int 100
+##   ..$ page      : int 1
+##  $ data  :List of 100
+##   ..$ 3542005744:List of 19
+##   .. ..$ description     : chr "Brave and energetic like her elder sister, Cleveland. Loves battles and stands up to even the strongest of foes"| __truncated__
+##   .. ..$ price_gold      : int 11000
+##   .. ..$ ship_id_str     : chr "PASC718"
+##   .. ..$ has_demo_profile: logi FALSE
+##   .. ..$ images          :List of 4
+##   .. .. [list output truncated]
+##   ..$ 3553572848:List of 19
+##   .. ..$ description     : chr "A Tennessee-class battleship armed with twelve 356 mm guns and possessing quite modest speed characteristics. A"| __truncated__
+##   .. ..$ price_gold      : int 9500
+##   .. ..$ ship_id_str     : chr "PASB707"
+##   .. ..$ has_demo_profile: logi FALSE
+##   .. ..$ images          :List of 4
+##   .. .. [list output truncated]
+##   ..$ 3541972176:List of 19
+##   .. ..$ description     : chr "Orks do not navigate the Warp. They need no Astronomican like pesky Umiez. Gork and Mork guide them to WAAAGH! "| __truncated__
+##   .. ..$ price_gold      : int 10000
+##   .. ..$ ship_id_str     : chr "PZSD718"
+##   .. ..$ has_demo_profile: logi FALSE
+##   .. ..$ images          :List of 4
+##   .. .. [list output truncated]
+##   ..$ 3741234640:List of 19
+##   .. ..$ description     : chr "One of the versions of a project of a small light cruiser (MLK-8-152). Her main battery artillery consisted of "| __truncated__
+##   .. ..$ price_gold      : int 11000
+##   .. ..$ ship_id_str     : chr "PRSC528"
+##   .. ..$ has_demo_profile: logi FALSE
+##   .. ..$ images          :List of 4
+##   .. .. [list output truncated]
+##   ..$ 3655251408:List of 19
+##   .. ..$ description     : chr "Developed after World War II, a project of a small light cruiser (MLK 16 x 130) equipped with sixteen dual-purp"| __truncated__
+##   .. ..$ price_gold      : int 34650
+##   .. ..$ ship_id_str     : chr "PRSC610"
+##   .. ..$ has_demo_profile: logi FALSE
+##   .. ..$ images          :List of 4
+##   .. .. [list output truncated]
+##   .. [list output truncated]</code></pre>
+</div>
+</div>
+<div id="transform-json-to-data-frame" class="section level2" number="35.4">
+<h2>
+<span class="header-section-number">35.4</span> Transform JSON to data frame<a class="anchor" aria-label="anchor" href="#transform-json-to-data-frame"><i class="fas fa-link"></i></a>
+</h2>
+<div id="json-structure-analysis-list" class="section level3" number="35.4.1">
+<h3>
+<span class="header-section-number">35.4.1</span> JSON structure analysis (list)<a class="anchor" aria-label="anchor" href="#json-structure-analysis-list"><i class="fas fa-link"></i></a>
+</h3>
+<p>We learned in class how to deal with CSV data, and our most fixed approach is to convert the data into a data frame because that’s the structure we’re used to working with data (and that’s our goal). However, data does not need to be stored in a table with columns and rows. This tabular format is inefficient, so many Internet companies never store raw data in this format. For example, let’s say a store is following your buys. Your distinctive visits may be stamped by the entire sum of cash you went through, the length of the visit, taken after by point-by-point thing data (such as item name, brand, quantity, product id, etc.). There’s a lot of detailed information, and putting away all this data in a single table isn’t exceptionally productive since you have got to rehash the total information (add up to get to and time) for each point-by-point thing. While having different tables is one solution, consumers of this dataset typically prefer a single data source with all the information. This leads to the existence of hierarchical data types like lists. We use <code><a href="https://rdrr.io/pkg/jsonlite/man/read_json.html">read_json()</a></code> to read the JSON file and return the data type list. So, how to handle JSON files is equivalent to how to handle lists.</p>
+<div class="sourceCode" id="cb466"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/typeof.html">typeof</a></span><span class="op">(</span><span class="va">raw_json</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "list"</code></pre>
+<div class="sourceCode" id="cb468"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">raw_json</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##        Length Class  Mode     
+## status   1    -none- character
+## meta     5    -none- list     
+## data   100    -none- list</code></pre>
+<div class="sourceCode" id="cb470"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">raw_json</span><span class="op">$</span><span class="va">meta</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##            Length Class  Mode   
+## count      1      -none- numeric
+## page_total 1      -none- numeric
+## total      1      -none- numeric
+## limit      1      -none- numeric
+## page       1      -none- numeric</code></pre>
+<div class="sourceCode" id="cb472"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">raw_json</span><span class="op">$</span><span class="va">meta</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## $count
+## [1] 100
+## 
+## $page_total
+## [1] 7
+## 
+## $total
+## [1] 608
+## 
+## $limit
+## [1] 100
+## 
+## $page
+## [1] 1</code></pre>
+<div class="sourceCode" id="cb474"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">raw_json</span><span class="op">$</span><span class="va">data</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##   [1] "3542005744" "3553572848" "3541972176" "3741234640" "3655251408"
+##   [6] "3338548944" "3560912592" "3553572560" "3340744656" "3551475152"
+##  [11] "3667834576" "3554555600" "3532568272" "3667802064" "3667900400"
+##  [16] "3332323024" "3340711888" "3315513040" "3545183952" "3730749392"
+##  [21] "3740153648" "3730749424" "3666818864" "3333404368" "3741202128"
+##  [26] "3551442640" "3445536752" "3731830736" "3554588464" "3340678608"
+##  [31] "3659445712" "3552491216" "3669964624" "3668916016" "3541972688"
+##  [36] "3553539792" "3363780304" "3542005456" "3667900208" "3522082512"
+##  [41] "3740219088" "3655251664" "3374266064" "3542005552" "3658397424"
+##  [46] "3741267408" "3668883440" "3555636944" "3550394352" "3337500656"
+##  [51] "3340678960" "3655284528" "3655218960" "3730748880" "3730782032"
+##  [56] "3550360880" "3730782192" "3655251952" "3666786288" "3740186416"
+##  [61] "3720263664" "3530504176" "3555670000" "3741267760" "3355359056"
+##  [66] "3655218480" "3741267792" "3667867440" "3676223184" "3553540080"
+##  [71] "3555669712" "3335501808" "3353294672" "3543054032" "3554621136"
+##  [76] "3340711728" "3550393808" "3679369200" "3667900112" "3655251920"
+##  [81] "3655317296" "3551410160" "3667801808" "3741235184" "3333371888"
+##  [86] "3730814960" "3667801296" "3655284688" "3720263120" "3552524016"
+##  [91] "3666818896" "3552524272" "3668850672" "3741235152" "3552523984"
+##  [96] "3667867632" "3551409616" "3340645840" "3655219184" "3552458448"</code></pre>
+<p>We can see that the resulting data structure by applying the content function to the api_response is a list. Lists are the foremost adaptable data type that can contain other sorts of information. A list can contain distinctive diverse sorts of information in each component, indeed another list. Each element in the list does not have to be the same length as another element. This makes lists flexible but also relatively difficult to use. Notice that in our case, we found that our <code>raw_json</code> has three layers. The first layer contains the information on status, which has the type of character. The second layer is a list containing the elements of our meta data (summarized data) such as count, page, total… After applying <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function on the second layer (<code>meta</code>), we get the detailed information inside the second layer (<code>meta</code>) of <code>raw_json</code>. For example, we know there are seven pages. The third layer is the most crucial part, which is a huge list containing our warship data that has 100 elements in it (meaning there are 100 warships). And each element is a list as well. We apply <code><a href="https://rdrr.io/r/base/names.html">names()</a></code> function on the third layer (<code>data</code>), and we get these id’s above. If we explored further above, we would likely have deduced that the different “names” correspond to the different warships. So you can imagine that if we wanted to study warship, we could want to create a data frame where the rows correspond to different warships and the columns correspond to different features of the warships inside the third layer such as <code>name</code>, <code>nation</code>, <code>type</code>, and <code>tier</code>.</p>
+</div>
+<div id="process-to-extract-target-features-from-a-list" class="section level3" number="35.4.2">
+<h3>
+<span class="header-section-number">35.4.2</span> Process to extract target features from a list<a class="anchor" aria-label="anchor" href="#process-to-extract-target-features-from-a-list"><i class="fas fa-link"></i></a>
+</h3>
+<div id="steps-to-create-extraction-function" class="section level4" number="35.4.2.1">
+<h4>
+<span class="header-section-number">35.4.2.1</span> Steps to create extraction function<a class="anchor" aria-label="anchor" href="#steps-to-create-extraction-function"><i class="fas fa-link"></i></a>
+</h4>
+<p>Here’s the code to grab some features (<code>name</code>, <code>nation</code>, <code>type</code>, and <code>tier</code>) out of a warship.
+We will demo this step by step. After figuring out the structure of the huge list (<code>raw_json</code>), let’s extract the information we need for the project. To clarify, let’s pull the elements (<code>name</code>, <code>nation</code>, <code>type</code>, and <code>tier</code>) we need for the first warship. For example, if we want to get the name of the first warship, we do the following.</p>
+<div class="sourceCode" id="cb476"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">raw_json</span><span class="op">$</span><span class="va">data</span><span class="op">$</span><span class="va">`3542005744`</span><span class="op">$</span><span class="va">name</span></span></code></pre></div>
+<pre><code>## [1] "AL Montpelier"</code></pre>
+<div class="sourceCode" id="cb478"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">raw_json</span><span class="op">$</span><span class="va">data</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">name</span></span></code></pre></div>
+<pre><code>## [1] "AL Montpelier"</code></pre>
+<p>Note that both codes give the same result for the name of our first warship. But remember, we need to extract 100 names of warships. So the second approach would be our best choice.</p>
+<p>Applying the <code><a href="https://rdrr.io/r/base/names.html">names()</a></code> function to the first (<code>data[[1]]</code>) of the third layers (<code>data</code>) of <code>raw_json</code> data, we found that our target features (<code>name</code>, <code>nation</code>, <code>type</code> and <code>tier</code>) are all in the same layer.</p>
+<div class="sourceCode" id="cb480"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">raw_json</span><span class="op">$</span><span class="va">data</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##  [1] "description"      "price_gold"       "ship_id_str"      "has_demo_profile"
+##  [5] "images"           "modules"          "modules_tree"     "nation"          
+##  [9] "is_premium"       "ship_id"          "price_credit"     "default_profile" 
+## [13] "upgrades"         "tier"             "next_ships"       "mod_slots"       
+## [17] "type"             "is_special"       "name"</code></pre>
+<p>Running the code below, we extract the target features of our first warship. What we’re going to do is take the remaining 99 warships, each row is a warship, and each column is our target feature, and turn them into a more manageable data frame type.</p>
+<div class="sourceCode" id="cb482"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">name</span> <span class="op">=</span> <span class="va">raw_json</span><span class="op">$</span><span class="va">data</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">name</span></span>
+<span><span class="va">nation</span> <span class="op">=</span> <span class="va">raw_json</span><span class="op">$</span><span class="va">data</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">nation</span></span>
+<span><span class="va">type</span> <span class="op">=</span> <span class="va">raw_json</span><span class="op">$</span><span class="va">data</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">type</span></span>
+<span><span class="va">tier</span> <span class="op">=</span> <span class="va">raw_json</span><span class="op">$</span><span class="va">data</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">tier</span></span>
+<span><span class="va">name</span> </span></code></pre></div>
+<pre><code>## [1] "AL Montpelier"</code></pre>
+<div class="sourceCode" id="cb484"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">nation</span> </span></code></pre></div>
+<pre><code>## [1] "usa"</code></pre>
+<div class="sourceCode" id="cb486"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">type</span> </span></code></pre></div>
+<pre><code>## [1] "Cruiser"</code></pre>
+<div class="sourceCode" id="cb488"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">tier</span></span></code></pre></div>
+<pre><code>## [1] 8</code></pre>
+<p>However, as the amount of data you want to extract increases, creating a function that extracts the data given an individual “data” might be better. So, let’s rewrite the code to define the function easily:</p>
+<div class="sourceCode" id="cb490"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op">=</span> <span class="va">raw_json</span><span class="op">$</span><span class="va">data</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="va">result</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>  name <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">name</span>,</span>
+<span>  nation <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">nation</span>,</span>
+<span>  type <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">type</span>,</span>
+<span>  tier <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">tier</span><span class="op">)</span></span>
+<span><span class="va">result</span></span></code></pre></div>
+<pre><code>##            name nation    type tier
+## 1 AL Montpelier    usa Cruiser    8</code></pre>
+<p>Here we get our first row of the aimed data frame. The output is as expected. Right now, we would formally define the function:</p>
+<div class="sourceCode" id="cb492"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">extract_data</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="va">result</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>    name <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">name</span>,</span>
+<span>    nation <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">nation</span>,</span>
+<span>    type <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">type</span>,</span>
+<span>    tier <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">tier</span><span class="op">)</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="fu">extract_data</span><span class="op">(</span><span class="va">raw_json</span><span class="op">$</span><span class="va">data</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##            name nation    type tier
+## 1 AL Montpelier    usa Cruiser    8</code></pre>
+</div>
+<div id="lapply-function" class="section level4" number="35.4.2.2">
+<h4>
+<span class="header-section-number">35.4.2.2</span> <code>lapply()</code> function<a class="anchor" aria-label="anchor" href="#lapply-function"><i class="fas fa-link"></i></a>
+</h4>
+<p>Our function works perfectly, returning the same results as the previous section. So now we can extract all the warship information using <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code> function:</p>
+<div class="sourceCode" id="cb494"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">data_features</span> <span class="op">=</span> <span class="va">raw_json</span><span class="op">$</span><span class="va">data</span></span>
+<span><span class="va">warship_list</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">data_features</span>, <span class="va">extract_data</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/typeof.html">typeof</a></span><span class="op">(</span><span class="va">warship_list</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "list"</code></pre>
+<div class="sourceCode" id="cb496"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">warship_list</span>,<span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## $`3542005744`
+##            name nation    type tier
+## 1 AL Montpelier    usa Cruiser    8
+## 
+## $`3553572848`
+##         name nation       type tier
+## 1 California    usa Battleship    7</code></pre>
+<p>The first argument to <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code> is a list. The second input is a function. <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code> will apply the function on each element in the list provided and return the output in a list format. It applies a given function for each element in a list, so there will be several function calls. For example, in our case, our function is called <code>extract_data</code>, and the <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code> function applies the <code>extract_data</code> function to the list called <code>data_features,</code> and it also returns a list. Notice that for the <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code> function:</p>
+<ol style="list-style-type: lower-roman">
+<li>The input data is a list, the output data is a list</li>
+<li>The length of the input is equal to the length of the output</li>
+<li>The same function is “distributed” across each element within the list</li>
+</ol>
+</div>
+<div id="do.call-function" class="section level4" number="35.4.2.3">
+<h4>
+<span class="header-section-number">35.4.2.3</span> <code>do.call()</code> function<a class="anchor" aria-label="anchor" href="#do.call-function"><i class="fas fa-link"></i></a>
+</h4>
+<p>Our final step is combining the outputs with <code><a href="https://rdrr.io/r/base/do.call.html">do.call()</a></code>. The code above makes a list where each component contains an information outline of a single row. Right now, we need to make them as a single data frame. <code><a href="https://rdrr.io/r/base/do.call.html">do.call()</a></code> applies a given function to the list as a whole, so there is only one function call. In this case, we will use <code><a href="https://rdrr.io/r/base/cbind.html">rbind()</a></code> function to combine our rows.</p>
+<div class="sourceCode" id="cb498"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">warship</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span><span class="op">(</span><span class="va">rbind</span>,<span class="va">warship_list</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">warship</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##                     name   nation       type tier
+## 3542005744 AL Montpelier      usa    Cruiser    8
+## 3553572848    California      usa Battleship    7
+## 3541972176   Ship Smasha pan_asia  Destroyer    8
+## 3741234640       Ochakov     ussr    Cruiser    8
+## 3655251408      Smolensk     ussr    Cruiser   10
+## 3338548944   [Shimakaze]    japan  Destroyer   10</code></pre>
+</div>
+</div>
+<div id="why-introducing-lappy-and-do.call" class="section level3" number="35.4.3">
+<h3>
+<span class="header-section-number">35.4.3</span> Why introducing <code>lappy()</code> and <code>do.call()</code><a class="anchor" aria-label="anchor" href="#why-introducing-lappy-and-do.call"><i class="fas fa-link"></i></a>
+</h3>
+<p>From a programming perspective, using the <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code> and <code><a href="https://rdrr.io/r/base/do.call.html">do.call()</a></code> approaches can make your code easier to read. It is also more straightforward to modify if you want to add/remove parts from the data frame you want to create. It also would directly apply to a different dataset of warship data. In contrast, for the loop-based approach, you’d need to change every result occurrence in the for loop and when defining the original outcome variable too.</p>
+</div>
+</div>
+<div id="filter-desired-data-by-directly-passing-parameters-to-api" class="section level2" number="35.5">
+<h2>
+<span class="header-section-number">35.5</span> Filter desired data by directly passing parameters to API<a class="anchor" aria-label="anchor" href="#filter-desired-data-by-directly-passing-parameters-to-api"><i class="fas fa-link"></i></a>
+</h2>
+<p>Above we showed you how to parse and extract useful data in a huge JSON file. However, one advantage of API is that we can only request the data we need from the server. API like Wargaming provides detailed information on reference page that tells you how their API works and what parameters it receives. But you cannot assume every API thoroughly documents its usage. In the context of a poorly described API, excavating useful information from a mess is needed. After figuring out the information you need, you can pass corresponding parameters and convert it to a data frame. Continuing with our example, after we read the reference page, we know that setting <code>fields</code> parameters will filter out the entry we want.</p>
+<div class="sourceCode" id="cb500"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">api_response_filtered</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://httr.r-lib.org/reference/GET.html">GET</a></span><span class="op">(</span>url <span class="op">=</span> <span class="st">"https://api.worldofwarships.eu/wows/encyclopedia/ships/"</span>,</span>
+<span>                    query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span></span>
+<span>                      application_id <span class="op">=</span> <span class="va">app_id</span>,</span>
+<span>                      fields <span class="op">=</span> <span class="st">"name, nation, tier, type"</span></span>
+<span>                                 <span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">raw_json_filtered</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://httr.r-lib.org/reference/content.html">content</a></span><span class="op">(</span><span class="va">api_response_filtered</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">raw_json_filtered</span>, list.len <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## List of 3
+##  $ status: chr "ok"
+##  $ meta  :List of 5
+##   ..$ count     : int 100
+##   ..$ page_total: int 7
+##   ..$ total     : int 608
+##   ..$ limit     : int 100
+##   ..$ page      : int 1
+##  $ data  :List of 100
+##   ..$ 3542005744:List of 4
+##   .. ..$ tier  : int 8
+##   .. ..$ type  : chr "Cruiser"
+##   .. ..$ name  : chr "AL Montpelier"
+##   .. ..$ nation: chr "usa"
+##   ..$ 3553572848:List of 4
+##   .. ..$ tier  : int 7
+##   .. ..$ type  : chr "Battleship"
+##   .. ..$ name  : chr "California"
+##   .. ..$ nation: chr "usa"
+##   ..$ 3541972176:List of 4
+##   .. ..$ tier  : int 8
+##   .. ..$ type  : chr "Destroyer"
+##   .. ..$ name  : chr "Ship Smasha"
+##   .. ..$ nation: chr "pan_asia"
+##   ..$ 3741234640:List of 4
+##   .. ..$ tier  : int 8
+##   .. ..$ type  : chr "Cruiser"
+##   .. ..$ name  : chr "Ochakov"
+##   .. ..$ nation: chr "ussr"
+##   ..$ 3655251408:List of 4
+##   .. ..$ tier  : int 10
+##   .. ..$ type  : chr "Cruiser"
+##   .. ..$ name  : chr "Smolensk"
+##   .. ..$ nation: chr "ussr"
+##   .. [list output truncated]</code></pre>
+<p>Here we saw that only <code>name</code>, <code>nation</code>, <code>type</code>, and <code>tier</code> entries are obtained for the same 100 warships. Because the data is relatively neat, we don’t need to call <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code> or <code><a href="https://rdrr.io/r/base/do.call.html">do.call()</a></code> to convert it into a data frame. Instead, we will use <code><a href="https://tibble.tidyverse.org/reference/enframe.html">enframe()</a></code> and <code><a href="https://rdrr.io/r/base/unlist.html">unlist()</a></code> jointly to remove the nested structure. This will return us a very long list.</p>
+<div class="sourceCode" id="cb502"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">denested_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/enframe.html">enframe</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="va">raw_json_filtered</span><span class="op">$</span><span class="va">data</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">denested_list</span>, <span class="fl">8</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 8 × 2
+##   name              value        
+##   &lt;chr&gt;             &lt;chr&gt;        
+## 1 3542005744.tier   8            
+## 2 3542005744.type   Cruiser      
+## 3 3542005744.name   AL Montpelier
+## 4 3542005744.nation usa          
+## 5 3553572848.tier   7            
+## 6 3553572848.type   Battleship   
+## 7 3553572848.name   California   
+## 8 3553572848.nation usa</code></pre>
+<p>This looks like a tidy data set where we combine two variables into one. Calling <code><a href="https://tidyr.tidyverse.org/reference/separate.html">separate()</a></code> on <code>name</code> will generate a tidy data set. Then we call <code><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider()</a></code> on the tidy data to obtain the desired data frame for further analysis.</p>
+<div class="sourceCode" id="cb504"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">warship_dataframe</span> <span class="op">&lt;-</span> <span class="va">denested_list</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/separate.html">separate</a></span><span class="op">(</span><span class="va">name</span>, into <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"id"</span>, <span class="st">"entry"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">entry</span>, values_from <span class="op">=</span> <span class="va">value</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">warship_dataframe</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 6 × 5
+##   id         tier  type       name          nation  
+##   &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;         &lt;chr&gt;   
+## 1 3542005744 8     Cruiser    AL Montpelier usa     
+## 2 3553572848 7     Battleship California    usa     
+## 3 3541972176 8     Destroyer  Ship Smasha   pan_asia
+## 4 3741234640 8     Cruiser    Ochakov       ussr    
+## 5 3655251408 10    Cruiser    Smolensk      ussr    
+## 6 3338548944 10    Destroyer  [Shimakaze]   japan</code></pre>
+</div>
+<div id="evaluation-2" class="section level2" number="35.6">
+<h2>
+<span class="header-section-number">35.6</span> Evaluation<a class="anchor" aria-label="anchor" href="#evaluation-2"><i class="fas fa-link"></i></a>
+</h2>
+<p>By writing the tutorial on this topic, we gained a clearer understanding of how to legally use the API to get data from the source website and how to understand the structure of JSON files and lists in r language. This tutorial can also be said to be the final project of students as a service, to help students how to get data and how to clean data. Getting the data and cleaning it up are the most time-consuming and unique steps in a project (because every data resource is different). The purpose of this tutorial is to cover these two steps in the most general way possible. Of course, we wanted to improve our tutorial further. In that case, we might insert more graphic images to explain the list structure in detail since we believe that architectural images are always the most intuitive. We should also talk a little bit more about <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code> and the other functions (the <code><a href="https://rdrr.io/r/base/apply.html">apply()</a></code> family), and maybe mention the logic inherent in functions like mapping, which is also very important for understanding a function.</p>
+</div>
+<div id="reference-3" class="section level2" number="35.7">
+<h2>
+<span class="header-section-number">35.7</span> Reference<a class="anchor" aria-label="anchor" href="#reference-3"><i class="fas fa-link"></i></a>
+</h2>
+<p><a href="https://cran.r-project.org/web/packages/httr/vignettes/quickstart.html" class="uri">https://cran.r-project.org/web/packages/httr/vignettes/quickstart.html</a></p>
+<p><a href="https://cran.r-project.org/web/packages/jsonlite/vignettes/json-aaquickstart.html" class="uri">https://cran.r-project.org/web/packages/jsonlite/vignettes/json-aaquickstart.html</a></p>
+<p><a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/lapply" class="uri">https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/lapply</a></p>
+<p><a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/do.call" class="uri">https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/do.call</a></p>
+<p><a href="https://developers.wargaming.net/documentation/guide/getting-started/" class="uri">https://developers.wargaming.net/documentation/guide/getting-started/</a></p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status" class="uri">https://developer.mozilla.org/en-US/docs/Web/HTTP/Status</a></p>
+<p><a href="https://www.json.org/json-en.html" class="uri">https://www.json.org/json-en.html</a></p>
+<p><a href="https://nordicapis.com/ultimate-guide-to-all-9-standard-http-methods/" class="uri">https://nordicapis.com/ultimate-guide-to-all-9-standard-http-methods/</a></p>
+<p><a href="https://www.mulesoft.com/resources/api/what-is-an-api" class="uri">https://www.mulesoft.com/resources/api/what-is-an-api</a></p>
+<p><a href="https://leewtai.github.io/courses/stat_computing/lectures/learning_r_data_wrangle.html" class="uri">https://leewtai.github.io/courses/stat_computing/lectures/learning_r_data_wrangle.html</a></p>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="make-geographical-maps-with-different-packages.html"><span class="header-section-number">34</span> Make Geographical Maps with Different Packages</a></div>
+<div class="next"><a href="ten-interview-questions-and-answers.html"><span class="header-section-number">37</span> Ten interview questions and answers</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#how-to-obtain-data-from-api-and-process-raw-json-data"><span class="header-section-number">35</span> How to obtain data from API and process raw JSON data</a></li>
+<li><a class="nav-link" href="#motivation-5"><span class="header-section-number">35.1</span> Motivation</a></li>
+<li><a class="nav-link" href="#what-is-api-and-json"><span class="header-section-number">35.2</span> What is API and JSON?</a></li>
+<li>
+<a class="nav-link" href="#using-httr-package-to-request-data-from-api"><span class="header-section-number">35.3</span> Using httr package to request data from API</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#introduction-to-http-verb-and-httr"><span class="header-section-number">35.3.1</span> Introduction to HTTP verb and httr</a></li>
+<li><a class="nav-link" href="#example-of-use-httrget-to-request-data-from-api"><span class="header-section-number">35.3.2</span> Example of use httr::GET to request data from API</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#transform-json-to-data-frame"><span class="header-section-number">35.4</span> Transform JSON to data frame</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#json-structure-analysis-list"><span class="header-section-number">35.4.1</span> JSON structure analysis (list)</a></li>
+<li><a class="nav-link" href="#process-to-extract-target-features-from-a-list"><span class="header-section-number">35.4.2</span> Process to extract target features from a list</a></li>
+<li><a class="nav-link" href="#why-introducing-lappy-and-do.call"><span class="header-section-number">35.4.3</span> Why introducing lappy() and do.call()</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#filter-desired-data-by-directly-passing-parameters-to-api"><span class="header-section-number">35.5</span> Filter desired data by directly passing parameters to API</a></li>
+<li><a class="nav-link" href="#evaluation-2"><span class="header-section-number">35.6</span> Evaluation</a></li>
+<li><a class="nav-link" href="#reference-3"><span class="header-section-number">35.7</span> Reference</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/jtr13/cc22tt/blob/main/api_json_tutorial.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/jtr13/cc22tt/edit/main/api_json_tutorial.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Community Contributions for EDAV Fall 2022 Tues/Thurs</strong>" was written by . It was last built on 2022-11-15.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
