@@ -28,6 +28,14 @@ Suggests:
     tigris,
     leafsync,
     imputeTS,
+    HSAUR2,
+    scatterplot3d,
+    mlbench,
+    plot3D,
+    ggfortify,
+    timevis,
+    igraph,
+    igraphdata,
 Remotes:
     hadley/emo
     

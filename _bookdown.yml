@@ -24,6 +24,7 @@ rmd_files: [
   'plots_for_bioinfo_cheatsheet.Rmd',
   'worldMapCheatSheet.Rmd',
   'color_r_python_css.Rmd',
+  'colorPalettesDV_cheatsheet.Rmd',
 
   # Part: Tutorials
   'time_series_visualization_project.Rmd',  
@@ -34,6 +35,11 @@ rmd_files: [
   # 'mapview_tutorial.Rmd',
   'r_data_cleaning.Rmd',
   'shiny_app_intro.Rmd',
+  'python_missingno_tutorial.Rmd',
+  'data_explorer_tutorial.Rmd',
+  '3d_visualization_in_r.Rmd',
+  'visualization_time_series.Rmd',
+  'igraph-in-r.Rmd',
   
   # Part: Interview Prep
   'ten_interview_questions.Rmd',
