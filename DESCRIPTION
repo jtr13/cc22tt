@@ -5,6 +5,7 @@ Version: 0.0.0.9000
 Imports:
     emo,
     tidyverse,
+    geocompkg
 Suggests:
     bookdown,
     bslib,
@@ -54,7 +55,9 @@ Suggests:
     chorddiag,
     collapsibleTree,
     circlepackeR,
-    streamgraph,   
+    streamgraph,
+    caret,
+    terra
 Remotes:
     hadley/emo,
     kassambara/navdata,
@@ -63,3 +66,4 @@ Remotes:
     mattflor/chorddiag,
     jeromefroe/circlepackeR,
     hrbrmstr/streamgraph,
+    geocompr/geocompkg
