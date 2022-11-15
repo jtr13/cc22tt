@@ -25,6 +25,7 @@ rmd_files: [
   'worldMapCheatSheet.Rmd',
   'color_r_python_css.Rmd',
   'colorPalettesDV_cheatsheet.Rmd',
+  'python_seaborn_data_vis.Rmd',
 
   # Part: Tutorials
   'time_series_visualization_project.Rmd',  
@@ -40,6 +41,7 @@ rmd_files: [
   '3d_visualization_in_r.Rmd',
   'visualization_time_series.Rmd',
   'igraph-in-r.Rmd',
+  'geomap_api.Rmd',
   
   # Part: Interview Prep
   'ten_interview_questions.Rmd',
