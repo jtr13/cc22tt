@@ -37,6 +37,7 @@ ggplot2-plots-in-python-cheat-sheet-tutorial
 motivation
 table
 example
+model-evaluation-selection-visualization-with-easystats
 part-tutorials
 preprocessing-and-visualization-of-time-series-data
 preprocess-on-a-time-series-data

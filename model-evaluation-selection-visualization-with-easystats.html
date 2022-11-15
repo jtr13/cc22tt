@@ -4,15 +4,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 28 Data Explorer Tutorial and Automation | Community Contributions for EDAV Fall 2022 Tues/Thurs</title>
-<meta name="description" content="Akshay Iyengar I created a video tutorial on a shortcut known as data explorer. While this package is not talked about in class, it is emphasized to be a useful and fast data exploration package....">
+<title>Chapter 19 Model evaluation, selection &amp; visualization with easystats | Community Contributions for EDAV Fall 2022 Tues/Thurs</title>
+<meta name="description" content="Zhuolin Luo (zl2852), Kaiyuan Liu (kl3447) We created a cheat sheet for the package named easystats in R. easystats in a collective framework of packages, including “performance”, “parameters”,...">
 <meta name="generator" content="bookdown 0.30 with bs4_book()">
-<meta property="og:title" content="Chapter 28 Data Explorer Tutorial and Automation | Community Contributions for EDAV Fall 2022 Tues/Thurs">
+<meta property="og:title" content="Chapter 19 Model evaluation, selection &amp; visualization with easystats | Community Contributions for EDAV Fall 2022 Tues/Thurs">
 <meta property="og:type" content="book">
-<meta property="og:description" content="Akshay Iyengar I created a video tutorial on a shortcut known as data explorer. While this package is not talked about in class, it is emphasized to be a useful and fast data exploration package....">
+<meta property="og:description" content="Zhuolin Luo (zl2852), Kaiyuan Liu (kl3447) We created a cheat sheet for the package named easystats in R. easystats in a collective framework of packages, including “performance”, “parameters”,...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 28 Data Explorer Tutorial and Automation | Community Contributions for EDAV Fall 2022 Tues/Thurs">
-<meta name="twitter:description" content="Akshay Iyengar I created a video tutorial on a shortcut known as data explorer. While this package is not talked about in class, it is emphasized to be a useful and fast data exploration package....">
+<meta name="twitter:title" content="Chapter 19 Model evaluation, selection &amp; visualization with easystats | Community Contributions for EDAV Fall 2022 Tues/Thurs">
+<meta name="twitter:description" content="Zhuolin Luo (zl2852), Kaiyuan Liu (kl3447) We created a cheat sheet for the package named easystats in R. easystats in a collective framework of packages, including “performance”, “parameters”,...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.1/transition.js"></script><script src="libs/bs3compat-0.4.1/tabs.js"></script><script src="libs/bs3compat-0.4.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -67,7 +67,7 @@
 <li><a class="" href="machine-learning-cheatsheet-for-r-and-python.html"><span class="header-section-number">16</span> Machine Learning Cheatsheet for R and Python</a></li>
 <li><a class="" href="data-visualization-with-r-ggplot2-vs.-matlab.html"><span class="header-section-number">17</span> Data Visualization with R ggplot2 vs. Matlab</a></li>
 <li><a class="" href="ggplot2-plots-in-python-cheat-sheet-tutorial.html"><span class="header-section-number">18</span> Ggplot2 plots in python cheat sheet tutorial</a></li>
-<li><a class="" href="model-evaluation-selection-visualization-with-easystats.html"><span class="header-section-number">19</span> Model evaluation, selection &amp; visualization with easystats</a></li>
+<li><a class="active" href="model-evaluation-selection-visualization-with-easystats.html"><span class="header-section-number">19</span> Model evaluation, selection &amp; visualization with easystats</a></li>
 <li class="book-part">Tutorials</li>
 <li><a class="" href="preprocessing-and-visualization-of-time-series-data.html"><span class="header-section-number">21</span> Preprocessing and Visualization of Time Series Data</a></li>
 <li><a class="" href="how-to-use-sqldf.html"><span class="header-section-number">22</span> How to use sqldf</a></li>
@@ -76,7 +76,7 @@
 <li><a class="" href="data-cleaning-with-r.html"><span class="header-section-number">25</span> Data cleaning with r</a></li>
 <li><a class="" href="introduction-to-shiny-web-apps.html"><span class="header-section-number">26</span> Introduction to Shiny Web Apps</a></li>
 <li><a class="" href="python-missingno-library-tutorial.html"><span class="header-section-number">27</span> Python missingno library tutorial</a></li>
-<li><a class="active" href="data-explorer-tutorial-and-automation.html"><span class="header-section-number">28</span> Data Explorer Tutorial and Automation</a></li>
+<li><a class="" href="data-explorer-tutorial-and-automation.html"><span class="header-section-number">28</span> Data Explorer Tutorial and Automation</a></li>
 <li><a class="" href="d-visualization-in-r.html"><span class="header-section-number">29</span> 3D Visualization in R</a></li>
 <li><a class="" href="visualizing-time-series-data.html"><span class="header-section-number">30</span> Visualizing Time Series Data</a></li>
 <li><a class="" href="igraph-in-r.html"><span class="header-section-number">31</span> igraph in r</a></li>
@@ -101,29 +101,32 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="data-explorer-tutorial-and-automation" class="section level1" number="28">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="model-evaluation-selection-visualization-with-easystats" class="section level1" number="19">
 <h1>
-<span class="header-section-number">28</span> Data Explorer Tutorial and Automation<a class="anchor" aria-label="anchor" href="#data-explorer-tutorial-and-automation"><i class="fas fa-link"></i></a>
+<span class="header-section-number">19</span> Model evaluation, selection &amp; visualization with easystats<a class="anchor" aria-label="anchor" href="#model-evaluation-selection-visualization-with-easystats"><i class="fas fa-link"></i></a>
 </h1>
-<p>Akshay Iyengar</p>
-<p>I created a video tutorial on a shortcut known as data explorer. While this package is not talked about in class, it is emphasized to be a useful and fast data exploration package. My video will teach my classmates on how automation can be both useful and not useful at the same time.This especially is one of the many packages that does help with creating general visualizations for data scientists.</p>
-<p><a href="https://youtu.be/_JXlDjyajAQ">Youtube Link</a></p>
-<p>Sources:</p>
-<p><a href="https://cran.r-project.org/web/packages/DataExplorer/vignettes/dataexplorer-intro.html">CRAN</a>
-<a href="https://rpubs.com/mark_sch7/DataExplorerPackage">Rpubs</a></p>
+<p>Zhuolin Luo (zl2852), Kaiyuan Liu (kl3447)</p>
+<p>We created a cheat sheet for the package named easystats in R. easystats in a collective framework of packages, including “performance”, “parameters”, etc. It intends for easier statistical modeling, reporting, and visualization.</p>
+<p>This cheat sheet will focus on the functions, examples, and visualizations related to reporting, checking, and visualizing model parameters, model predictions, model assumptions, model performance, and model selection with easystats package. Hopefully it can smoothen the model building process. The cheat sheet is divided into following parts:</p>
+<p>Parameters: this section includes functions reporting the features of parameters in a model.</p>
+<p>Predictions: this section includes functions making model-based estimations and predictions, with visualization examples provided.</p>
+<p>Assumption Diagnostics: this section includes functions testing whether a model satisfies a specific assumption and returning the corresponding value, with visualization examples provided.</p>
+<p>Performance: this section includes functions that report the metrics evaluating a model’s performance.</p>
+<p>Model Selection: this section includes functions that compares the performance among different models and helps select the model, with visualization examples provided.</p>
+<p>The cheatsheet is available here: [Cheat Sheet for Model Evaluation, Selection &amp; Visualization with easystats] (<a href="https://github.com/ChristalL99/Fall_2022_5702_EDAV_Community_Contribution/blob/17c60a9ddf50770303bc7d9b12ff308cd13a6370/Cheatsheet%20for%20Model%20Evaluation,%20Selection%20&amp;%20Visualization%20with%20easystats.pdf" class="uri">https://github.com/ChristalL99/Fall_2022_5702_EDAV_Community_Contribution/blob/17c60a9ddf50770303bc7d9b12ff308cd13a6370/Cheatsheet%20for%20Model%20Evaluation,%20Selection%20&amp;%20Visualization%20with%20easystats.pdf</a>)</p>
 
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="python-missingno-library-tutorial.html"><span class="header-section-number">27</span> Python missingno library tutorial</a></div>
-<div class="next"><a href="d-visualization-in-r.html"><span class="header-section-number">29</span> 3D Visualization in R</a></div>
+<div class="prev"><a href="ggplot2-plots-in-python-cheat-sheet-tutorial.html"><span class="header-section-number">18</span> Ggplot2 plots in python cheat sheet tutorial</a></div>
+<div class="next"><a href="preprocessing-and-visualization-of-time-series-data.html"><span class="header-section-number">21</span> Preprocessing and Visualization of Time Series Data</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#data-explorer-tutorial-and-automation"><span class="header-section-number">28</span> Data Explorer Tutorial and Automation</a></li></ul>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#model-evaluation-selection-visualization-with-easystats"><span class="header-section-number">19</span> Model evaluation, selection &amp; visualization with easystats</a></li></ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/jtr13/cc22tt/blob/main/data_explorer_tutorial.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/jtr13/cc22tt/edit/main/data_explorer_tutorial.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+<li><a id="book-source" href="https://github.com/jtr13/cc22tt/blob/main/easystats_cheat_sheet.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/jtr13/cc22tt/edit/main/easystats_cheat_sheet.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>
