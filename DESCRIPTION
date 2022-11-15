@@ -5,7 +5,6 @@ Version: 0.0.0.9000
 Imports:
     emo,
     tidyverse,
-    kassambara/navdata
 Suggests:
     bookdown,
     bslib,
@@ -37,8 +36,30 @@ Suggests:
     timevis,
     igraph,
     igraphdata,
-    navdata
+    navdata,
+    httr,
+    leaflet,
+    assertthat,
+    jsonlite,
+    DT,
+    dygraphs,
+    networkD3,
+    tibble,
+    visNetwork,
+    d3heatmap,
+    threejs,
+    rgl,
+    maptools,
+    maps,
+    chorddiag,
+    collapsibleTree,
+    circlepackeR,
+    streamgraph,   
 Remotes:
     hadley/emo,
-    kassambara/navdata
-    
+    kassambara/navdata,
+    talgalili/d3heatmap,
+    dmurdoch/rgl,
+    mattflor/chorddiag,
+    jeromefroe/circlepackeR,
+    hrbrmstr/streamgraph,
