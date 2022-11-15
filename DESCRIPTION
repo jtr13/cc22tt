@@ -5,6 +5,7 @@ Version: 0.0.0.9000
 Imports:
     emo,
     tidyverse,
+    geocompkg
 Suggests:
     bookdown,
     bslib,
@@ -56,6 +57,11 @@ Suggests:
     circlepackeR,
     streamgraph,
     caret,
+    terra,
+    readr,
+    osmextract,
+    ggplot2,
+    
 Remotes:
     hadley/emo,
     kassambara/navdata,
@@ -64,3 +70,4 @@ Remotes:
     mattflor/chorddiag,
     jeromefroe/circlepackeR,
     hrbrmstr/streamgraph,
+    geocompr/geocompkg
