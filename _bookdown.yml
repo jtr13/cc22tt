@@ -29,6 +29,7 @@ rmd_files: [
   'machine_learning_cheatsheet_for_r_and_python.Rmd',
   'r_vs_matlab_graph.Rmd',
   'ggplot2_to_python.Rmd',
+  'easystats_cheat_sheet.Rmd',
 
   # Part: Tutorials
   'time_series_visualization_project.Rmd',  
