@@ -54,8 +54,7 @@ Suggests:
     chorddiag,
     collapsibleTree,
     circlepackeR,
-    streamgraph,
-    
+    streamgraph,   
 Remotes:
     hadley/emo,
     kassambara/navdata,
