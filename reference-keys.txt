@@ -204,6 +204,7 @@ q8.-how-many-data-structures-does-r-have
 q9.-what-is-the-difference-between-pivot_wider-and-pivot_longer
 q10.-why-do-people-use-ggplot2
 references-1
+data-science-internship-search-survival-guide
 part-case-studies
 benford-case-study
 contents
