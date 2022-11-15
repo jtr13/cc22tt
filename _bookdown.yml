@@ -32,7 +32,7 @@ rmd_files: [
   'googleVis.Rmd',
   'vector_field_tutorial.Rmd',
   # 'a_summary_of_interactive_chart.Rmd',
-  'mapview_tutorial.Rmd',
+  # 'mapview_tutorial.Rmd',
   'r_data_cleaning.Rmd',
   'shiny_app_intro.Rmd',
   'python_missingno_tutorial.Rmd',
