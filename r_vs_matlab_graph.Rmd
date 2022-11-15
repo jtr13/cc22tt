@@ -8,7 +8,7 @@ Motivated by an assignment on analyzing auditory fMRI data with Matlab in an app
 
 Link: https://github.com/linlinlin-yx/R-ggplot2-vs-Matlab-Plot/blob/main/r_vs_matlab.pdf
 
-#### Reference
+### Reference
 
 [1] https://www.geeksforgeeks.org/differences-between-matlab-and-r-programming-language/
 
