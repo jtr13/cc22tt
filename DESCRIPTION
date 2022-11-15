@@ -5,6 +5,7 @@ Version: 0.0.0.9000
 Imports:
     emo,
     tidyverse,
+    spDataLarge,
 Suggests:
     bookdown,
     bslib,
@@ -56,6 +57,7 @@ Suggests:
     circlepackeR,
     streamgraph,
     caret,
+    terra
 Remotes:
     hadley/emo,
     kassambara/navdata,
@@ -64,3 +66,4 @@ Remotes:
     mattflor/chorddiag,
     jeromefroe/circlepackeR,
     hrbrmstr/streamgraph,
+    robinlovelace/geocompr
