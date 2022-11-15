@@ -39,6 +39,7 @@ rmd_files: [
   'data_explorer_tutorial.Rmd',
   '3d_visualization_in_r.Rmd',
   'visualization_time_series.Rmd',
+  'igraph-in-r.Rmd',
   
   # Part: Interview Prep
   'ten_interview_questions.Rmd',

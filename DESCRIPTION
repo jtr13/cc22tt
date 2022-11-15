@@ -34,6 +34,8 @@ Suggests:
     plot3D,
     ggfortify,
     timevis,
+    igraph,
+    igraphdata,
 Remotes:
     hadley/emo
     
