@@ -1,5 +1,3 @@
-# (PART) tutorial{-}
-
 # Introduction to Shiny Web Apps
 
 Wenxi Zhang (wz2615)
