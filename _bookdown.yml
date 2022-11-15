@@ -1,5 +1,5 @@
 book_filename: "cc22"
-new_session: false # true
+new_session: true
 before_chapter_script: _common.R
 delete_merged_file: true
 language:
@@ -22,17 +22,37 @@ rmd_files: [
   'EDAV_Commonly_Used_Graph_Cheatsheet.Rmd',
   'git_cheatsheet.Rmd',
   'plots_for_bioinfo_cheatsheet.Rmd',
+  'worldMapCheatSheet.Rmd',
+  'color_r_python_css.Rmd',
+  'colorPalettesDV_cheatsheet.Rmd',
+  'python_seaborn_data_vis.Rmd',
+  'machine_learning_cheatsheet_for_r_and_python.Rmd',
+  'r_vs_matlab_graph.Rmd',
+  'ggplot2_to_python.Rmd',
 
   # Part: Tutorials
   'time_series_visualization_project.Rmd',  
   'how_to_use_sqldf.Rmd',
   'googleVis.Rmd',
   'vector_field_tutorial.Rmd',
-  'a_summary_of_interactive_chart.Rmd',
+  # 'a_summary_of_interactive_chart.Rmd',
   # 'mapview_tutorial.Rmd',
+  'r_data_cleaning.Rmd',
+  'shiny_app_intro.Rmd',
+  'python_missingno_tutorial.Rmd',
+  'data_explorer_tutorial.Rmd',
+  '3d_visualization_in_r.Rmd',
+  'visualization_time_series.Rmd',
+  'igraph-in-r.Rmd',
+  'geomap_api.Rmd',
+  'edav_garden.Rmd',
+  'raster_overview.Rmd',
+  'make_geographical_maps_with_different_packages.Rmd',
   
   # Part: Interview Prep
   'ten_interview_questions.Rmd',
+  'data_science_internship_search_guide.Rmd',
+  'data_visualization_interview_questions_sample.Rmd',
   
   # Part: Case Studies
   'benford_case_study.Rmd',
