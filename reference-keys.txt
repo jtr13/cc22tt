@@ -29,6 +29,7 @@ color-in-r-python-and-jshtmlcss
 color-palettes-for-data-visualization
 explanation-of-the-motivation
 data-visualization-using-seaborn
+machine-learning-cheatsheet-for-r-and-python
 part-tutorials
 preprocessing-and-visualization-of-time-series-data
 preprocess-on-a-time-series-data
