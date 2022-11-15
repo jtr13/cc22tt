@@ -37,7 +37,11 @@ Suggests:
     timevis,
     igraph,
     igraphdata,
-    navdata
+    navdata,
+    httr,
+    leaflet,
+    assertthat
+    jsonlite
 Remotes:
     hadley/emo,
     kassambara/navdata
