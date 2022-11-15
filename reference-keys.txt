@@ -1,3 +1,4 @@
+tab:unnamed-chunk-3
 welcome
 community-contribution
 important-logistics
@@ -32,6 +33,10 @@ data-visualization-using-seaborn
 machine-learning-cheatsheet-for-r-and-python
 data-visualization-with-r-ggplot2-vs.-matlab
 reference
+ggplot2-plots-in-python-cheat-sheet-tutorial
+motivation
+table
+example
 part-tutorials
 preprocessing-and-visualization-of-time-series-data
 preprocess-on-a-time-series-data
@@ -41,7 +46,7 @@ deal-with-problematic-data-points
 visualize-a-time-series-data
 conclusion
 how-to-use-sqldf
-motivation
+motivation-1
 usage
 basics
 more-advanced-sql-tasks
@@ -125,7 +130,7 @@ ordinal-encoding
 one-hot-encoding-3
 reference-1
 introduction-to-shiny-web-apps
-motivation-1
+motivation-2
 how-to-host
 create-your-first-shiny-app
 basic-struture
@@ -142,7 +147,7 @@ reference-2
 python-missingno-library-tutorial
 data-explorer-tutorial-and-automation
 d-visualization-in-r
-motivation-2
+motivation-3
 scatterplot3d
 load-data
 create-matrix
@@ -183,7 +188,7 @@ details-for-decorating-igraph-visualization
 example-for-advanced-igraph-visualization
 geo-mapping-coordinate-extraction-using-api-calls
 introduction-1
-motivation-3
+motivation-4
 public-datasets
 api-calls
 code
