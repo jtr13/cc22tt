@@ -189,6 +189,9 @@ circle-plots
 evaluation-1
 future-work
 conclusion-5
+edav-garden
+how-to-explore-the-garden
+main-sections
 part-interview-prep
 ten-interview-questions-and-answers
 forward
