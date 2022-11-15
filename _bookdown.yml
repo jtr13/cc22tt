@@ -45,6 +45,7 @@ rmd_files: [
   
   # Part: Interview Prep
   'ten_interview_questions.Rmd',
+  'data_science_internship_search_guide.Rmd',
   
   # Part: Case Studies
   'benford_case_study.Rmd',
