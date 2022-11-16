@@ -50,6 +50,7 @@ rmd_files: [
   'raster_overview.Rmd',
   'make_geographical_maps_with_different_packages.Rmd',
   'api_json_tutorial.Rmd',
+  'sample_statistic_tutorial.Rmd',
   
   # Part: Interview Prep
   'ten_interview_questions.Rmd',
