@@ -111,7 +111,7 @@
 <span class="header-section-number">37</span> Sample Statistic Tutorial<a class="anchor" aria-label="anchor" href="#sample-statistic-tutorial"><i class="fas fa-link"></i></a>
 </h1>
 <p>Yuqing Hong and William Gu</p>
-<div class="sourceCode" id="cb506"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb517"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">boot</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span></code></pre></div>
@@ -131,7 +131,7 @@
 <span class="header-section-number">37.2.1</span> Duplicated Data<a class="anchor" aria-label="anchor" href="#duplicated-data"><i class="fas fa-link"></i></a>
 </h3>
 <div class="line-block">As for some variables that should be unique in the data set, we should drop duplicate rows. For example, for a data set containing students’ grades, the student ID should be unique for each student, thus we should avoid duplicates in IDs.</div>
-<div class="sourceCode" id="cb507"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb518"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">stud_grades</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
@@ -158,7 +158,7 @@
 <ul>
 <li>extracting unique elements on a vector:</li>
 </ul>
-<div class="sourceCode" id="cb509"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb520"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">v</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">6</span>, <span class="fl">4</span>, <span class="fl">6</span>, <span class="fl">4</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">v</span><span class="op">)</span> </span></code></pre></div>
 <pre><code>## [1] 1 2 6 4</code></pre>
@@ -169,7 +169,7 @@
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb511"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb522"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">stud_grades</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 6 × 3
 ##   student_id name      grade
@@ -183,7 +183,7 @@
 </li>
 <li>
 <p>function <em>distinct()</em> (dplyr package): only the first row is preserved for duplicate rows.</p>
-<div class="sourceCode" id="cb513"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb524"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">stud_grades</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 6 × 3
 ##   student_id name      grade
@@ -197,7 +197,7 @@
 <ul>
 <li>If we want to drop duplicates based on some particular variables:</li>
 </ul>
-<div class="sourceCode" id="cb515"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb526"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#remove duplicated rows based on variable "name"</span></span>
 <span><span class="co">#'.keep_all = TRUE' means that not only output the variable 'name' but output all            #variables </span></span>
 <span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">stud_grades</span>, <span class="va">name</span>, .keep_all <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
@@ -219,14 +219,14 @@
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb517"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb528"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">v</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">6</span>, <span class="fl">4</span>, <span class="fl">6</span>, <span class="fl">4</span><span class="op">)</span></span>
 <span><span class="va">v</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/duplicated.html">duplicated</a></span><span class="op">(</span><span class="va">v</span><span class="op">)</span><span class="op">]</span> <span class="co">#used as a filter </span></span></code></pre></div>
 <pre><code>## [1] 1 2 6 4</code></pre>
 <ul>
 <li>extracting unique rows on a data frame</li>
 </ul>
-<div class="sourceCode" id="cb519"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb530"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">stud_grades</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/duplicated.html">duplicated</a></span><span class="op">(</span><span class="va">stud_grades</span><span class="op">$</span><span class="va">student_id</span><span class="op">)</span>,<span class="op">]</span></span></code></pre></div>
 <pre><code>## # A tibble: 6 × 3
 ##   student_id name      grade
@@ -252,7 +252,7 @@
 <li>Survey-subject refuse to answer some questions</li>
 <li>etc.</li>
 </ul>
-<div class="sourceCode" id="cb521"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb532"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#create a simple data frame as an example to visualization</span></span>
 <span><span class="va">fruits</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
 <span>  name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"apple"</span>, <span class="st">"banana"</span>, <span class="st">"orange"</span>, <span class="st">"strawberry"</span>, <span class="st">"blueberry"</span><span class="op">)</span>,  </span>
@@ -274,11 +274,11 @@
 <ul>
 <li>We should remove or fill missing data because many models can’t handle missing data. We will introduce two basic approaches to deal with NA entries.</li>
 </ul>
-<div class="sourceCode" id="cb523"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb534"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#na.rm = TRUE shoule be set to tell the function ignore NAs.</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">fruits</span><span class="op">$</span><span class="va">price</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 3.25</code></pre>
-<div class="sourceCode" id="cb525"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb536"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#return Boolean if the input element is a missing value or not.</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">fruits</span><span class="op">$</span><span class="va">price</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] FALSE FALSE FALSE  TRUE FALSE</code></pre>
@@ -290,7 +290,7 @@
 </ol>
 </li>
 </ul>
-<div class="sourceCode" id="cb527"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb538"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="va">fruits</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 3 × 3
 ##   name      price weight
@@ -298,7 +298,7 @@
 ## 1 apple         2   14.5
 ## 2 banana        3    4.4
 ## 3 blueberry     5    5.7</code></pre>
-<div class="sourceCode" id="cb529"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb540"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#used as a filter instead of outputting directly</span></span>
 <span><span class="co">#The input fruits[ , 3:3] tell let function only consider NAs on the column #3 ("weight")</span></span>
 <span><span class="va">fruits</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/stats/complete.cases.html">complete.cases</a></span><span class="op">(</span><span class="va">fruits</span><span class="op">[</span> , <span class="fl">3</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span>,<span class="op">]</span> </span></code></pre></div>
@@ -317,7 +317,7 @@
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb532"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb543"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fruits_new</span> <span class="op">&lt;-</span> <span class="va">fruits</span></span>
 <span></span>
 <span><span class="co">#1. fill the NAs in 'weight' by the median weight of existing values</span></span>
@@ -368,7 +368,7 @@
 <ol style="list-style-type: decimal">
 <li>The package <em>boot</em> allows us to do Bootstrapping.</li>
 </ol>
-<div class="sourceCode" id="cb535"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb546"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">boot</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>  <span class="co">#for plotting</span></span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
@@ -378,18 +378,18 @@
 </ul>
 </li>
 </ol>
-<div class="sourceCode" id="cb536"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb547"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">199</span>,<span class="fl">100</span>,replace<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span> <span class="co">#used as an example of original sample data</span></span>
 <span><span class="va">fc</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">d</span>,<span class="va">i</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">d</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <ol start="3" style="list-style-type: decimal">
 <li>Using the boot function to find the R bootstrap of the statistic.</li>
 </ol>
-<div class="sourceCode" id="cb537"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb548"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">b1</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/boot/man/boot.html">boot</a></span><span class="op">(</span><span class="va">x1</span>,<span class="va">fc</span>,R<span class="op">=</span><span class="fl">1000</span><span class="op">)</span></span></code></pre></div>
 <ol start="4" style="list-style-type: decimal">
 <li>Plot the generated bootstrap distribution. In this example, the distribution of the bootstrap samples’ mean is shown.</li>
 </ol>
-<div class="sourceCode" id="cb538"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb549"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Plot the bootstrap sampling</span></span>
 <span><span class="co"># distribution using ggplot</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">b1</span><span class="op">)</span></span></code></pre></div>
@@ -410,10 +410,10 @@
 </ul>
 </li>
 </ol>
-<div class="sourceCode" id="cb539"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb550"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x1</span><span class="op">)</span> <span class="co">#output the sample mean</span></span></code></pre></div>
 <pre><code>## [1] 98.86</code></pre>
-<div class="sourceCode" id="cb541"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb552"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/boot/man/boot.ci.html">boot.ci</a></span><span class="op">(</span><span class="va">b1</span>, conf <span class="op">=</span> <span class="fl">0.95</span>, type<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"norm"</span>,<span class="st">"basic"</span>,<span class="st">"perc"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## BOOTSTRAP CONFIDENCE INTERVAL CALCULATIONS
 ## Based on 1000 bootstrap replicates
@@ -465,11 +465,11 @@
 <li>One sample T-test is used to test the mean of sample with a known mean value:<br>
 In this example, we randomly sample 50 numbers from a normal distributed population with true mean 10 to simulate our sample data. Running the t test given that the null hypothesis is “the true mean is 10” will result a large p-value, which means we should not reject the null hypothesis as expected. By contrast, running the t test given that the null hypothesis is “the true mean is 6” will result a really small p-value, which means it has a really small chance to obtain the observed sample mean given the null hypothesis is true, then we should reject the null hypothesis.</li>
 </ul>
-<div class="sourceCode" id="cb543"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb554"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">10</span><span class="op">)</span> <span class="co"># true mean is 10</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 10.20618</code></pre>
-<div class="sourceCode" id="cb545"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb556"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">x</span>, mu<span class="op">=</span><span class="fl">10</span><span class="op">)</span> <span class="co"># setting H0: true mean is equal to 10</span></span></code></pre></div>
 <pre><code>## 
 ##  One Sample t-test
@@ -482,7 +482,7 @@ In this example, we randomly sample 50 numbers from a normal distributed populat
 ## sample estimates:
 ## mean of x 
 ##  10.20618</code></pre>
-<div class="sourceCode" id="cb547"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb558"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">x</span>, mu<span class="op">=</span><span class="fl">6</span><span class="op">)</span> <span class="co"># setting H0: true mean is equal to 6</span></span></code></pre></div>
 <pre><code>## 
 ##  One Sample t-test
@@ -499,7 +499,7 @@ In this example, we randomly sample 50 numbers from a normal distributed populat
 <li>Two sample T-test is used to compare two sample data and indicates if they are same:<br>
 In this example, we randomly sample 20 and 50 numbers from a normal distributed population with true mean 5 into two sets of sample data. Running the t test over two samples sets the null hypothesis to be “the difference between means is 0” will give a large p-value, which fails to reject H0 as expected. When the test is used on random samples with different means, we would expect an extremely small p value which indicates that the difference is statistically significant, in that case we should reject the null hypothesis. When samples are having same size, we can also set parameter pairs to True to perform paired test</li>
 </ul>
-<div class="sourceCode" id="cb549"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb560"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="va">x1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">5</span><span class="op">)</span></span>
@@ -515,7 +515,7 @@ In this example, we randomly sample 20 and 50 numbers from a normal distributed 
 ## sample estimates:
 ## mean of x mean of y 
 ##  5.023414  4.936783</code></pre>
-<div class="sourceCode" id="cb551"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb562"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">x1</span>, <span class="va">y</span>, paired<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ##  Paired t-test
@@ -534,7 +534,7 @@ In this example, we randomly sample 20 and 50 numbers from a normal distributed 
 <li>One-sample U-test takes “exact” parameter, which is a logical indicating whether an exact p-value should be computed.<br>
 In this example, we randomly sample 100 numbers from a normal distributed population with true mean at 0. Hence, the null hypothesis is “the true location of mean is at 0”. By this test we’re expected to get a large p-value which fails to reject H0 as expected. We can also set mu=3, and we’ll get extremely small p-value and we should take alternative hypothesis: “the true mean is not at location 3”.</li>
 </ul>
-<div class="sourceCode" id="cb553"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb564"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">x</span>, exact <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
@@ -543,7 +543,7 @@ In this example, we randomly sample 100 numbers from a normal distributed popula
 ## data:  x
 ## V = 2434, p-value = 0.7557
 ## alternative hypothesis: true location is not equal to 0</code></pre>
-<div class="sourceCode" id="cb555"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb566"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">x</span>, mu <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ##  Wilcoxon signed rank test with continuity correction
@@ -555,7 +555,7 @@ In this example, we randomly sample 100 numbers from a normal distributed popula
 <li>Two-sample U-test is used to compare two sets of sample data:<br>
 In this example, we randomly sample 100 numbers from a normal distributed population with different true mean at 10 and 20 to create two sample dataset. The null hypothesis of this test is “the difference of ture means is 0”. By this test we’ll expect p-value &lt; 2.2e-16 since the mean is different, and we should reject H0. Alternatively, when we get large p-value for our own data, we should not reject the null hypothesis.</li>
 </ul>
-<div class="sourceCode" id="cb557"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb568"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">10</span><span class="op">)</span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">20</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span></span></code></pre></div>

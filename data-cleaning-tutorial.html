@@ -125,11 +125,11 @@ We can’t perform any visualization or machine learning analysis without first 
 <span class="header-section-number">38.2</span> Observe the Dataset<a class="anchor" aria-label="anchor" href="#observe-the-dataset"><i class="fas fa-link"></i></a>
 </h2>
 <p>It is important that we first view the dataset and understand what each column means. In our example, we are analyzing the median listing prices of houses in different cities on different dates.</p>
-<div class="sourceCode" id="cb559"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb570"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">listing_price</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/connections.html">url</a></span><span class="op">(</span><span class="st">"https://files.zillowstatic.com/research/public_csvs/mlp/Metro_mlp_uc_sfrcondo_month.csv?t=1668571408"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">listing_price</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 898  63</code></pre>
-<div class="sourceCode" id="cb561"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb572"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">listing_price</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">listing_price</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span><span class="op">]</span> <span class="co"># Showing only 6 columns, remaining are similar to the date column</span></span></code></pre></div>
 <pre><code>##   RegionID SizeRank      RegionName RegionType StateName X2018.01.31
 ## 1   102001        0   United States    country                255000
@@ -145,7 +145,7 @@ We can’t perform any visualization or machine learning analysis without first 
 </h2>
 <p>The data may contain Numeric, Character, Logical, Factor or other data types. We need to check if the columns in the raw data have a suitable data type. For examples some numerical data may be stored as character and it is important to convert them into numerical before proceeding to analyse the data.</p>
 <p>For each column of the dataset check the data type using str(dataset). This will show the data type of the column along with a few example values.</p>
-<div class="sourceCode" id="cb563"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb574"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">listing_price</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 'data.frame':    898 obs. of  63 variables:
 ##  $ RegionID   : int  102001 394913 753899 394463 394514 394692 395209 394856 394974 394347 ...
@@ -217,7 +217,7 @@ We can’t perform any visualization or machine learning analysis without first 
 <span class="header-section-number">38.4</span> Optional Step<a class="anchor" aria-label="anchor" href="#optional-step"><i class="fas fa-link"></i></a>
 </h2>
 <p>We can also check if all the columns are named neatly. Using the clean_names function, we can rename all the columns with consistent format.</p>
-<div class="sourceCode" id="cb565"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb576"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">listing_price</span> <span class="op">&lt;-</span> <span class="fu">clean_names</span><span class="op">(</span><span class="va">listing_price</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">listing_price</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##  [1] "region_id"   "size_rank"   "region_name" "region_type" "state_name" 
@@ -239,7 +239,7 @@ We can’t perform any visualization or machine learning analysis without first 
 <span class="header-section-number">38.5</span> Check for duplicate data<a class="anchor" aria-label="anchor" href="#check-for-duplicate-data"><i class="fas fa-link"></i></a>
 </h2>
 <p>Next, we check if there are any duplicate rows in the dataset and remove the repeated rows using the distinct function in the dplyr package.</p>
-<div class="sourceCode" id="cb567"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb578"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">listing_price</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">listing_price</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div id="remove-empty-rows-and-columns" class="section level2" number="38.6">
@@ -247,7 +247,7 @@ We can’t perform any visualization or machine learning analysis without first 
 <span class="header-section-number">38.6</span> Remove empty rows and columns<a class="anchor" aria-label="anchor" href="#remove-empty-rows-and-columns"><i class="fas fa-link"></i></a>
 </h2>
 <p>We need to remove all the empty rows and columns as they dont contain any useful information. This can be done using the remove_empty function from the janitor package.</p>
-<div class="sourceCode" id="cb568"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb579"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">listing_price</span> <span class="op">&lt;-</span> <span class="fu">remove_empty</span><span class="op">(</span><span class="va">listing_price</span>, which <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"rows"</span>, <span class="st">"cols"</span><span class="op">)</span>, quiet <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div id="converting-messy-data-into-tidy-data" class="section level2" number="38.7">
@@ -255,7 +255,7 @@ We can’t perform any visualization or machine learning analysis without first 
 <span class="header-section-number">38.7</span> Converting messy data into tidy data<a class="anchor" aria-label="anchor" href="#converting-messy-data-into-tidy-data"><i class="fas fa-link"></i></a>
 </h2>
 <p>The data we have currently is messy. As a good practice, we can convert this data into tidy format where every column is a variable and every every row is an observation.</p>
-<div class="sourceCode" id="cb569"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb580"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tidy_df</span> <span class="op">&lt;-</span> <span class="va">listing_price</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>cols<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">listing_price</span><span class="op">)</span><span class="op">[</span><span class="fl">6</span><span class="op">:</span><span class="fl">60</span><span class="op">]</span>, names_to<span class="op">=</span><span class="st">"date"</span>, values_to <span class="op">=</span> <span class="st">"listing_price"</span><span class="op">)</span> </span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">tidy_df</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 6 × 10
@@ -276,7 +276,7 @@ We can’t perform any visualization or machine learning analysis without first 
 <span class="header-section-number">38.8</span> Check for missing values<a class="anchor" aria-label="anchor" href="#check-for-missing-values"><i class="fas fa-link"></i></a>
 </h2>
 <p>We check if our data contains missing values using the is.na() function. We can find the number of missing values in the dataset by calculating sum(is.na(data)).</p>
-<div class="sourceCode" id="cb571"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb582"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">tidy_df</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 1074</code></pre>
 </div>
@@ -288,20 +288,20 @@ We can’t perform any visualization or machine learning analysis without first 
 <ol style="list-style-type: decimal">
 <li>We can omit the rows that contain missing values.</li>
 </ol>
-<div class="sourceCode" id="cb573"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb584"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="co"># we can also use na.exclude(data)</span></span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li>We can replace the missing value with a previous value in the column.
 (This may be the best way to replace missing values in the case when a group of rows are given the same value for a column and written only once)</li>
 </ol>
-<div class="sourceCode" id="cb574"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb585"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
 <span><span class="va">data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/fill.html">fill</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html">all_of</a></span><span class="op">(</span><span class="va">i</span><span class="op">)</span>, .direction <span class="op">=</span> <span class="st">'up'</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <ol start="3" style="list-style-type: decimal">
 <li>We can replace the missing value with the average of the column.</li>
 </ol>
-<div class="sourceCode" id="cb575"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb586"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">na.aggregate</span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="co"># Replace NA in all columns with column mean</span></span></code></pre></div>
 <ol start="4" style="list-style-type: decimal">
 <li>Or we can replace them with the average of the values prior and post to the missing value depending on the context.</li>
@@ -312,7 +312,7 @@ We can’t perform any visualization or machine learning analysis without first 
 <li><p>We can remove the cities with missing values. This will remove 95 of the 898 cities. This can be done by omitting the rows containing NA before tidying the data.</p></li>
 <li><p>We can remove the dates where the particular city does not have a price listed. This can be done by converting the data into tidy format and then omitting the rows with missing values. We are choosing this way, as omitting the dates where price is unavailable is good enough for our analysis.</p></li>
 </ol>
-<div class="sourceCode" id="cb576"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb587"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tidy_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="va">tidy_df</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div id="removing-outliers-optional" class="section level2" number="38.10">
@@ -321,7 +321,7 @@ We can’t perform any visualization or machine learning analysis without first 
 </h2>
 <p>In case outliers are changing the trends in the data, we may want to analyse by removing the outliers. This can be done by finding the Z scores as shown below and having a threshold for the Z score to filter out the outliers.</p>
 <p>In our dataset, this is not required, as we aim to visualize the house prices as they are.</p>
-<div class="sourceCode" id="cb577"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb588"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#For numeric columns of data only</span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select_all.html">select_if</a></span><span class="op">(</span><span class="va">data</span>,<span class="va">is.numeric</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="va">z_scores</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">df</span>, <span class="kw">function</span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">df</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>

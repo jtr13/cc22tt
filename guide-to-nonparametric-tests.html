@@ -111,7 +111,7 @@
 <span class="header-section-number">40</span> Guide to nonparametric tests<a class="anchor" aria-label="anchor" href="#guide-to-nonparametric-tests"><i class="fas fa-link"></i></a>
 </h1>
 <p>Tseng-Han Yu</p>
-<div class="sourceCode" id="cb578"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb589"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://andrisignorell.github.io/DescTools/">"DescTools"</a></span><span class="op">)</span></span></code></pre></div>
 <div id="introduction-3" class="section level2" number="40.1">
 <h2>
@@ -160,7 +160,7 @@ The null hypothesis implies two distributions, population 1 and population 2, ar
 <h3>
 <span class="header-section-number">40.2.4</span> Implementation<a class="anchor" aria-label="anchor" href="#implementation"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb579"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb590"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sample1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">38</span>, <span class="fl">50</span>, <span class="fl">56</span>, <span class="fl">58</span><span class="op">)</span></span>
 <span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">sample1</span><span class="op">)</span></span>
 <span></span>
@@ -173,7 +173,7 @@ The null hypothesis implies two distributions, population 1 and population 2, ar
 <span><span class="co"># How many permutations of m assigned to sample 1 and n assigned to sample 2?</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Special.html">choose</a></span><span class="op">(</span><span class="va">m</span><span class="op">+</span><span class="va">n</span>,<span class="va">m</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 70</code></pre>
-<div class="sourceCode" id="cb581"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb592"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Find all permutations of data for sample 1: all unique groupings of m data points</span></span>
 <span><span class="va">perm1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/combn.html">combn</a></span><span class="op">(</span><span class="va">data</span>,<span class="va">m</span><span class="op">)</span></span>
 <span><span class="va">perm1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">perm1</span><span class="op">)</span> <span class="co">#transpose the data so each permuted "sample 1" is a row, rather than a column</span></span>
@@ -203,13 +203,13 @@ The null hypothesis implies two distributions, population 1 and population 2, ar
 ## [4,] 56 58 39 47 38 50 24 32      14.0
 ## [5,] 38 56 58 47 50 24 32 39      13.5
 ## [6,] 50 56 58 32 38 24 39 47      12.0</code></pre>
-<div class="sourceCode" id="cb583"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb594"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Find the proportion of permutations that have a difference of means </span></span>
 <span><span class="co"># greater than the observed difference of means</span></span>
 <span><span class="va">diffmeans.obs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">sample1</span><span class="op">)</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">sample2</span><span class="op">)</span> <span class="co"># calculate observed difference in means</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">diffmeans</span> <span class="op">&gt;=</span> <span class="va">diffmeans.obs</span><span class="op">)</span> <span class="co"># this is the total number of differences greater than or equal to observed</span></span></code></pre></div>
 <pre><code>## [1] 3</code></pre>
-<div class="sourceCode" id="cb585"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb596"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">diffmeans</span> <span class="op">&gt;=</span> <span class="va">diffmeans.obs</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/Special.html">choose</a></span><span class="op">(</span><span class="va">m</span><span class="op">+</span><span class="va">n</span>,<span class="va">m</span><span class="op">)</span> <span class="co"># this is the proportion of differences greater than or equal to observed (p-value)</span></span></code></pre></div>
 <pre><code>## [1] 0.04285714</code></pre>
 </div>
@@ -258,7 +258,7 @@ The null hypothesis implies two distributions, population 1 and population 2, ar
 <h3>
 <span class="header-section-number">40.3.4</span> Implementation<a class="anchor" aria-label="anchor" href="#implementation-1"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb587"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb598"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sample1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">38</span>, <span class="fl">50</span>, <span class="fl">56</span>, <span class="fl">58</span><span class="op">)</span></span>
 <span><span class="va">sample2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">24</span>, <span class="fl">32</span>, <span class="fl">39</span>, <span class="fl">47</span><span class="op">)</span></span>
 <span></span>
@@ -274,7 +274,7 @@ The null hypothesis implies two distributions, population 1 and population 2, ar
 <pre><code>##       [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8]
 ## data    38   50   56   58   24   32   39   47
 ## ranks    3    6    7    8    1    2    4    5</code></pre>
-<div class="sourceCode" id="cb589"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb600"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># the output is just to visualize how the ranking works</span></span>
 <span></span>
 <span><span class="co">### WILCOXON RANK-SUM TEST ###</span></span>
@@ -286,7 +286,7 @@ The null hypothesis implies two distributions, population 1 and population 2, ar
 ## data:  sample1 and sample2
 ## W = 14, p-value = 0.05714
 ## alternative hypothesis: true location shift is greater than 0</code></pre>
-<div class="sourceCode" id="cb591"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb602"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># The options for alternative are "less", "greater", or "two.sided":</span></span>
 <span><span class="co"># "less" refers to the lower tail test</span></span>
 <span><span class="co"># "greater" refers to the upper tail test</span></span>
@@ -341,7 +341,7 @@ The null hypothesis implies two distributions, population 1 and population 2, ar
 <span class="header-section-number">40.4.4</span> Implementation<a class="anchor" aria-label="anchor" href="#implementation-2"><i class="fas fa-link"></i></a>
 </h3>
 <p>Because of the equivalence to the Wilcoxon Rank-Sum Test, we can use the very same function in R for both tests.</p>
-<div class="sourceCode" id="cb592"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb603"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sample1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">38</span>, <span class="fl">50</span>, <span class="fl">56</span>, <span class="fl">58</span><span class="op">)</span></span>
 <span><span class="va">sample2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">24</span>, <span class="fl">32</span>, <span class="fl">39</span>, <span class="fl">47</span><span class="op">)</span></span>
 <span></span>
@@ -352,7 +352,7 @@ The null hypothesis implies two distributions, population 1 and population 2, ar
 ## data:  sample1 and sample2
 ## W = 14, p-value = 0.05714
 ## alternative hypothesis: true location shift is greater than 0</code></pre>
-<div class="sourceCode" id="cb594"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb605"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># The options for alternative are "less", "greater", or "two.sided":</span></span>
 <span><span class="co"># The test statistic returned by R is actually the Mann-Whitney Test’s U, not W for the Wilcoxon Rank-Sum Test.</span></span></code></pre></div>
 </div>
@@ -407,7 +407,7 @@ The null hypothesis implies the population distribution is symmetric about zero.
 <h3>
 <span class="header-section-number">40.5.4</span> Implementation<a class="anchor" aria-label="anchor" href="#implementation-3"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb595"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb606"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pre</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1180</span>, <span class="fl">1210</span>, <span class="fl">1300</span>, <span class="fl">1080</span>, <span class="fl">1120</span>, <span class="fl">1240</span>, <span class="fl">1360</span>, <span class="fl">980</span><span class="op">)</span></span>
 <span><span class="va">post</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1230</span>, <span class="fl">1280</span>, <span class="fl">1310</span>, <span class="fl">1140</span>, <span class="fl">1150</span>, <span class="fl">1200</span>, <span class="fl">1340</span>, <span class="fl">1100</span><span class="op">)</span></span>
 <span><span class="va">diff</span><span class="op">&lt;-</span><span class="va">post</span><span class="op">-</span><span class="va">pre</span></span>
@@ -464,7 +464,7 @@ The null hypothesis implies the population distribution is symmetric about zero.
 <h3>
 <span class="header-section-number">40.6.4</span> Implementation<a class="anchor" aria-label="anchor" href="#implementation-4"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb597"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb608"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pre</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1180</span>, <span class="fl">1210</span>, <span class="fl">1300</span>, <span class="fl">1080</span>, <span class="fl">1120</span>, <span class="fl">1240</span>, <span class="fl">1360</span>, <span class="fl">980</span><span class="op">)</span></span>
 <span><span class="va">post</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1230</span>, <span class="fl">1280</span>, <span class="fl">1310</span>, <span class="fl">1140</span>, <span class="fl">1150</span>, <span class="fl">1200</span>, <span class="fl">1340</span>, <span class="fl">1100</span><span class="op">)</span></span>
 <span><span class="va">diff</span><span class="op">&lt;-</span><span class="va">post</span><span class="op">-</span><span class="va">pre</span></span>
@@ -519,7 +519,7 @@ Ho: 𝜎1 = 𝜎2 vs. Ha: 𝜎1 != 𝜎2</p>
 <h3>
 <span class="header-section-number">40.7.4</span> Implementation<a class="anchor" aria-label="anchor" href="#implementation-5"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb599"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb610"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">16.55</span>, <span class="fl">15.36</span>, <span class="fl">15.94</span>, <span class="fl">16.43</span>, <span class="fl">16.01</span><span class="op">)</span></span>
 <span><span class="va">y</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">16.05</span>, <span class="fl">15.98</span>, <span class="fl">16.10</span>, <span class="fl">15.88</span>, <span class="fl">15.91</span><span class="op">)</span></span>
 <span></span>
@@ -570,7 +570,7 @@ Ho: 𝜎1 = 𝜎2 vs. Ha: 𝜎1 != 𝜎2</p>
 <h3>
 <span class="header-section-number">40.8.4</span> Implementation<a class="anchor" aria-label="anchor" href="#implementation-6"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb601"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb612"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">16.55</span>, <span class="fl">15.36</span>, <span class="fl">15.94</span>, <span class="fl">16.43</span>, <span class="fl">16.01</span><span class="op">)</span></span>
 <span><span class="va">y</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">16.05</span>, <span class="fl">15.98</span>, <span class="fl">16.10</span>, <span class="fl">15.88</span>, <span class="fl">15.91</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/ansari.test.html">ansari.test</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, alternative<span class="op">=</span><span class="st">"greater"</span><span class="op">)</span></span></code></pre></div>
@@ -580,7 +580,7 @@ Ho: 𝜎1 = 𝜎2 vs. Ha: 𝜎1 != 𝜎2</p>
 ## data:  x and y
 ## AB = 13, p-value = 0.2698
 ## alternative hypothesis: true ratio of scales is greater than 1</code></pre>
-<div class="sourceCode" id="cb603"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb614"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># note that the test statistic is different, but the p-value is correct comparing to Siegel-Tukey Test </span></span></code></pre></div>
 </div>
 </div>
@@ -627,7 +627,7 @@ Ho: 𝜎1 = 𝜎2 vs. Ha: 𝜎1 != 𝜎2</p>
 <h3>
 <span class="header-section-number">40.9.4</span> Implementation<a class="anchor" aria-label="anchor" href="#implementation-7"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb604"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb615"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">16.55</span>, <span class="fl">15.36</span>, <span class="fl">15.94</span>, <span class="fl">16.43</span>, <span class="fl">16.01</span><span class="op">)</span></span>
 <span><span class="va">y</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">16.05</span>, <span class="fl">15.98</span>, <span class="fl">16.10</span>, <span class="fl">15.88</span>, <span class="fl">15.91</span><span class="op">)</span></span>
 <span><span class="co"># first, we need to combine the data for permuting</span></span>
@@ -657,7 +657,7 @@ Ho: 𝜎1 = 𝜎2 vs. Ha: 𝜎1 != 𝜎2</p>
 <span><span class="co"># solve for the p-value</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">RMD</span> <span class="op">&gt;=</span> <span class="va">RMD.obs</span><span class="op">)</span> <span class="co"># use &gt; because this is the upper tail test (would switch for different Ha)</span></span></code></pre></div>
 <pre><code>## [1] 20</code></pre>
-<div class="sourceCode" id="cb606"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb617"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">RMD</span> <span class="op">&gt;=</span> <span class="va">RMD.obs</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/Special.html">choose</a></span><span class="op">(</span><span class="va">m</span><span class="op">+</span><span class="va">n</span>, <span class="va">m</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.07936508</code></pre>
 </div>

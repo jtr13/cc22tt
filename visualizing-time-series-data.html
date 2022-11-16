@@ -233,17 +233,14 @@
 <p>Now there is no apparent relationship: positive change in SMI today won’t predict positive change in DAX tomorrow. There is a positive trend over the long term, but this does little to predict in the short term</p>
 <p>Observations:<br></p>
 <ul>
-<li>Careful with time series data: use same techniques, but reshape data</li>
-<li>Change in values from one time to another is vital concept</li>
+<li>Be careful with time series data: use same techniques, but reshape data</li>
+<li>Change in values from one time to another is vital concept<br>
+</li>
 </ul>
 </div>
-<div id="dynamics-of-time-series-data" class="section level3" number="30.0.1">
-<h3>
-<span class="header-section-number">30.0.1</span> Dynamics of Time Series Data<a class="anchor" aria-label="anchor" href="#dynamics-of-time-series-data"><i class="fas fa-link"></i></a>
-</h3>
-<div id="seasonality-cycle-trend" class="section level4" number="30.0.1.1">
+<div id="dynamics-of-time-series-data" class="section level4" number="30.0.0.4">
 <h4>
-<span class="header-section-number">30.0.1.1</span> Seasonality, Cycle, Trend<a class="anchor" aria-label="anchor" href="#seasonality-cycle-trend"><i class="fas fa-link"></i></a>
+<span class="header-section-number">30.0.0.4</span> Dynamics of Time Series Data<a class="anchor" aria-label="anchor" href="#dynamics-of-time-series-data"><i class="fas fa-link"></i></a>
 </h4>
 <p>Three aspects of time series data:</p>
 <ul>
@@ -264,16 +261,29 @@
 </ul>
 </li>
 </ul>
-<p>These can be gathered through visual inspection:<br></p>
+<div id="line-plots" class="section level5" number="30.0.0.4.1">
+<h5>
+<span class="header-section-number">30.0.0.4.1</span> Line plots<a class="anchor" aria-label="anchor" href="#line-plots"><i class="fas fa-link"></i></a>
+</h5>
+<p>Discover patterns through visual inspection:</p>
+<div class="sourceCode" id="cb330"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"Year"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Passengers"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="visualization_time_series_files/figure-html/unnamed-chunk-5-1.png" width="80%" style="display: block; margin: auto;"></div>
 <ul>
-<li>Line plot
+<li>Observations:
 <ul>
 <li>Clear trend
 <ul>
 <li>Consider log transform or differencing</li>
 </ul>
 </li>
-<li>Increasing variance</li>
+<li>Increasing variance
+<ul>
+<li>Consider log or square root transform</li>
+</ul>
+</li>
 <li>Multiplicative seasonality
 <ul>
 <li>Seasonal swings grow along with overall values</li>
@@ -282,13 +292,11 @@
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb330"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span><span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"Year"</span><span class="op">)</span><span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Passengers"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="visualization_time_series_files/figure-html/unnamed-chunk-5-1.png" width="80%" style="display: block; margin: auto;"></div>
-<ul>
-<li>Time series decomposition:
+</div>
+<div id="time-series-decomposition" class="section level5" number="30.0.0.4.2">
+<h5>
+<span class="header-section-number">30.0.0.4.2</span> Time series decomposition:<a class="anchor" aria-label="anchor" href="#time-series-decomposition"><i class="fas fa-link"></i></a>
+</h5>
 <ul>
 <li>Break data into seasonal, trend, and remainder components</li>
 <li>Seasonal component:
@@ -300,8 +308,6 @@
 <li>stats package
 <ul>
 <li>stl()<br>
-</li>
-</ul>
 </li>
 </ul>
 </li>
@@ -325,22 +331,24 @@
 </li>
 </ul>
 </li>
-<li>Both reveal information on patterns that need to be identified and potentially dealt with before forecasting can occur</li>
+<li>Both reveal information on patterns that need to be identified and potentially dealt with before forecasting can occur<br>
+</li>
 </ul>
 </li>
 </ul>
 </div>
-<div id="plotting-exploiting-the-temporal-axis" class="section level4" number="30.0.1.2">
+</div>
+<div id="plotting-exploiting-the-temporal-axis" class="section level4" number="30.0.0.5">
 <h4>
-<span class="header-section-number">30.0.1.2</span> Plotting: exploiting the temporal axis<a class="anchor" aria-label="anchor" href="#plotting-exploiting-the-temporal-axis"><i class="fas fa-link"></i></a>
+<span class="header-section-number">30.0.0.5</span> Plotting: Exploiting the Temporal Axis<a class="anchor" aria-label="anchor" href="#plotting-exploiting-the-temporal-axis"><i class="fas fa-link"></i></a>
 </h4>
-<div id="gannt-charts" class="section level5" number="30.0.1.2.1">
+<div id="gannt-charts" class="section level5" number="30.0.0.5.1">
 <h5>
-<span class="header-section-number">30.0.1.2.1</span> Gannt charts<a class="anchor" aria-label="anchor" href="#gannt-charts"><i class="fas fa-link"></i></a>
+<span class="header-section-number">30.0.0.5.1</span> Gannt charts<a class="anchor" aria-label="anchor" href="#gannt-charts"><i class="fas fa-link"></i></a>
 </h5>
 <ul>
 <li>Shows overlapping time periods, duration of event relative to others</li>
-<li>timevis package</li>
+<li>timevis package timevis()</li>
 </ul>
 <div class="sourceCode" id="cb332"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dates</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">'1998-01-01'</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">'2000-01-01'</span><span class="op">)</span>, by<span class="op">=</span><span class="st">"day"</span><span class="op">)</span>, <span class="fl">16</span><span class="op">)</span></span>
@@ -359,16 +367,29 @@
 </div>
 <script type="application/json" data-for="htmlwidget-af9dd8efd861f043ad6a">{"x":{"items":[{"content":"Project 1","start":"1998-05-25","end":"1998-11-26"},{"content":"Project 2","start":"1998-05-30","end":"1999-01-09"},{"content":"Project 3","start":"1998-06-10","end":"1999-05-04"},{"content":"Project 4","start":"1998-08-17","end":"1999-05-08"},{"content":"Project 5","start":"1998-09-26","end":"1999-07-21"},{"content":"Project 6","start":"1998-10-04","end":"1999-10-16"},{"content":"Project 7","start":"1998-10-07","end":"1999-11-01"},{"content":"Project 8","start":"1998-11-02","end":"1999-11-13"}],"groups":null,"showZoom":true,"zoomFactor":0.5,"fit":true,"options":[],"height":null,"timezone":null,"api":[]},"evals":[],"jsHooks":[]}</script>
 </div>
-<div id="using-month-and-year-creatively-in-line-plots" class="section level5" number="30.0.1.2.2">
+<div id="using-month-and-year-creatively-in-line-plots" class="section level5" number="30.0.0.5.2">
 <h5>
-<span class="header-section-number">30.0.1.2.2</span> Using month and year creatively in line plots<a class="anchor" aria-label="anchor" href="#using-month-and-year-creatively-in-line-plots"><i class="fas fa-link"></i></a>
+<span class="header-section-number">30.0.0.5.2</span> Using month and year creatively in line plots<a class="anchor" aria-label="anchor" href="#using-month-and-year-creatively-in-line-plots"><i class="fas fa-link"></i></a>
 </h5>
 <ul>
 <li>forecast package
 <ul>
-<li>ggseasonplot()</li>
-<li>ggmonthplot()</li>
-<li>suppressMessages() prevents printing information outputted when loading a package</li>
+<li>ggseasonplot()
+<ul>
+<li>X axis is months</li>
+<li>Y axis is the variable of interest</li>
+<li>Each line represents a year.</li>
+<li>Shows if months exhibited similar/different seasonal patterns over the years</li>
+</ul>
+</li>
+<li>ggmonthplot()
+<ul>
+<li>X axis is months</li>
+<li>Y axis is the variable of interest</li>
+<li>Blue line is mean of each season</li>
+<li>Black line is the values for every year for a single month</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -391,16 +412,22 @@
 </li>
 </ul>
 </div>
-<div id="d-visualizations-plotly-package" class="section level5" number="30.0.1.2.3">
-<h5>
-<span class="header-section-number">30.0.1.2.3</span> 3-D Visualizations: plotly package<br><a class="anchor" aria-label="anchor" href="#d-visualizations-plotly-package"><i class="fas fa-link"></i></a>
-</h5>
+</div>
+<div id="d-visualizations-plotly-package" class="section level4" number="30.0.0.6">
+<h4>
+<span class="header-section-number">30.0.0.6</span> 3-D Visualizations: plotly package<br><a class="anchor" aria-label="anchor" href="#d-visualizations-plotly-package"><i class="fas fa-link"></i></a>
+</h4>
 <ul>
 <li>Convert to a format plotly will understand
 <ul>
 <li>Avoid using ts() object</li>
 <li>Dataframe with datetime, numeric columns</li>
-<li>lubridate package for date manipulation</li>
+<li>lubridate package for date manipulation
+<ul>
+<li>year()</li>
+<li>month()</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -416,13 +443,12 @@
 <span>                        zaxis <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">'Passenger Count'</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div id="htmlwidget-6016f10079fe78a0357f" style="width:80%;height:480px;" class="plotly html-widget"></div>
 <script type="application/json" data-for="htmlwidget-6016f10079fe78a0357f">{"x":{"visdat":{"3c5421368b78":["function () ","plotlyVisDat"]},"cur_data":"3c5421368b78","attrs":{"3c5421368b78":{"x":{},"y":{},"z":{},"color":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter3d","mode":"markers","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"xaxis":{"title":"Month"},"yaxis":{"title":"Year"},"zaxis":{"title":"Passenger Count"}},"xaxis":{"type":"category","categoryorder":"array","categoryarray":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":["Dec","Dec","Dec","Dec","Dec","Dec","Dec","Dec","Dec","Dec","Dec","Dec"],"y":[1949,1950,1951,1952,1953,1954,1955,1956,1957,1958,1959,1960],"z":[118,140,166,194,201,229,278,306,336,337,405,432],"type":"scatter3d","mode":"markers","name":"Dec","marker":{"color":"rgba(253,231,37,1)","line":{"color":"rgba(253,231,37,1)"}},"textfont":{"color":"rgba(253,231,37,1)"},"error_y":{"color":"rgba(253,231,37,1)"},"error_x":{"color":"rgba(253,231,37,1)"},"line":{"color":"rgba(253,231,37,1)"},"frame":null},{"x":["Nov","Nov","Nov","Nov","Nov","Nov","Nov","Nov","Nov","Nov","Nov","Nov"],"y":[1949,1950,1951,1952,1953,1954,1955,1956,1957,1958,1959,1960],"z":[104,114,146,172,180,203,237,271,305,310,362,390],"type":"scatter3d","mode":"markers","name":"Nov","marker":{"color":"rgba(194,223,35,1)","line":{"color":"rgba(194,223,35,1)"}},"textfont":{"color":"rgba(194,223,35,1)"},"error_y":{"color":"rgba(194,223,35,1)"},"error_x":{"color":"rgba(194,223,35,1)"},"line":{"color":"rgba(194,223,35,1)"},"frame":null},{"x":["Oct","Oct","Oct","Oct","Oct","Oct","Oct","Oct","Oct","Oct","Oct","Oct"],"y":[1949,1950,1951,1952,1953,1954,1955,1956,1957,1958,1959,1960],"z":[119,133,162,191,211,229,274,306,347,359,407,461],"type":"scatter3d","mode":"markers","name":"Oct","marker":{"color":"rgba(133,213,74,1)","line":{"color":"rgba(133,213,74,1)"}},"textfont":{"color":"rgba(133,213,74,1)"},"error_y":{"color":"rgba(133,213,74,1)"},"error_x":{"color":"rgba(133,213,74,1)"},"line":{"color":"rgba(133,213,74,1)"},"frame":null},{"x":["Sep","Sep","Sep","Sep","Sep","Sep","Sep","Sep","Sep","Sep","Sep","Sep"],"y":[1949,1950,1951,1952,1953,1954,1955,1956,1957,1958,1959,1960],"z":[136,158,184,209,237,259,312,355,404,404,463,508],"type":"scatter3d","mode":"markers","name":"Sep","marker":{"color":"rgba(81,197,106,1)","line":{"color":"rgba(81,197,106,1)"}},"textfont":{"color":"rgba(81,197,106,1)"},"error_y":{"color":"rgba(81,197,106,1)"},"error_x":{"color":"rgba(81,197,106,1)"},"line":{"color":"rgba(81,197,106,1)"},"frame":null},{"x":["Aug","Aug","Aug","Aug","Aug","Aug","Aug","Aug","Aug","Aug","Aug","Aug"],"y":[1949,1950,1951,1952,1953,1954,1955,1956,1957,1958,1959,1960],"z":[148,170,199,242,272,293,347,405,467,505,559,606],"type":"scatter3d","mode":"markers","name":"Aug","marker":{"color":"rgba(43,176,127,1)","line":{"color":"rgba(43,176,127,1)"}},"textfont":{"color":"rgba(43,176,127,1)"},"error_y":{"color":"rgba(43,176,127,1)"},"error_x":{"color":"rgba(43,176,127,1)"},"line":{"color":"rgba(43,176,127,1)"},"frame":null},{"x":["Jul","Jul","Jul","Jul","Jul","Jul","Jul","Jul","Jul","Jul","Jul","Jul"],"y":[1949,1950,1951,1952,1953,1954,1955,1956,1957,1958,1959,1960],"z":[148,170,199,230,264,302,364,413,465,491,548,622],"type":"scatter3d","mode":"markers","name":"Jul","marker":{"color":"rgba(30,155,138,1)","line":{"color":"rgba(30,155,138,1)"}},"textfont":{"color":"rgba(30,155,138,1)"},"error_y":{"color":"rgba(30,155,138,1)"},"error_x":{"color":"rgba(30,155,138,1)"},"line":{"color":"rgba(30,155,138,1)"},"frame":null},{"x":["Jun","Jun","Jun","Jun","Jun","Jun","Jun","Jun","Jun","Jun","Jun","Jun"],"y":[1949,1950,1951,1952,1953,1954,1955,1956,1957,1958,1959,1960],"z":[135,149,178,218,243,264,315,374,422,435,472,535],"type":"scatter3d","mode":"markers","name":"Jun","marker":{"color":"rgba(37,133,142,1)","line":{"color":"rgba(37,133,142,1)"}},"textfont":{"color":"rgba(37,133,142,1)"},"error_y":{"color":"rgba(37,133,142,1)"},"error_x":{"color":"rgba(37,133,142,1)"},"line":{"color":"rgba(37,133,142,1)"},"frame":null},{"x":["May","May","May","May","May","May","May","May","May","May","May","May"],"y":[1949,1950,1951,1952,1953,1954,1955,1956,1957,1958,1959,1960],"z":[121,125,172,183,229,234,270,318,355,363,420,472],"type":"scatter3d","mode":"markers","name":"May","marker":{"color":"rgba(45,112,142,1)","line":{"color":"rgba(45,112,142,1)"}},"textfont":{"color":"rgba(45,112,142,1)"},"error_y":{"color":"rgba(45,112,142,1)"},"error_x":{"color":"rgba(45,112,142,1)"},"line":{"color":"rgba(45,112,142,1)"},"frame":null},{"x":["Apr","Apr","Apr","Apr","Apr","Apr","Apr","Apr","Apr","Apr","Apr","Apr"],"y":[1949,1950,1951,1952,1953,1954,1955,1956,1957,1958,1959,1960],"z":[129,135,163,181,235,227,269,313,348,348,396,461],"type":"scatter3d","mode":"markers","name":"Apr","marker":{"color":"rgba(56,89,140,1)","line":{"color":"rgba(56,89,140,1)"}},"textfont":{"color":"rgba(56,89,140,1)"},"error_y":{"color":"rgba(56,89,140,1)"},"error_x":{"color":"rgba(56,89,140,1)"},"line":{"color":"rgba(56,89,140,1)"},"frame":null},{"x":["Mar","Mar","Mar","Mar","Mar","Mar","Mar","Mar","Mar","Mar","Mar","Mar"],"y":[1949,1950,1951,1952,1953,1954,1955,1956,1957,1958,1959,1960],"z":[132,141,178,193,236,235,267,317,356,362,406,419],"type":"scatter3d","mode":"markers","name":"Mar","marker":{"color":"rgba(67,62,133,1)","line":{"color":"rgba(67,62,133,1)"}},"textfont":{"color":"rgba(67,62,133,1)"},"error_y":{"color":"rgba(67,62,133,1)"},"error_x":{"color":"rgba(67,62,133,1)"},"line":{"color":"rgba(67,62,133,1)"},"frame":null},{"x":["Feb","Feb","Feb","Feb","Feb","Feb","Feb","Feb","Feb","Feb","Feb","Feb"],"y":[1949,1950,1951,1952,1953,1954,1955,1956,1957,1958,1959,1960],"z":[118,126,150,180,196,188,233,277,301,318,342,391],"type":"scatter3d","mode":"markers","name":"Feb","marker":{"color":"rgba(72,33,115,1)","line":{"color":"rgba(72,33,115,1)"}},"textfont":{"color":"rgba(72,33,115,1)"},"error_y":{"color":"rgba(72,33,115,1)"},"error_x":{"color":"rgba(72,33,115,1)"},"line":{"color":"rgba(72,33,115,1)"},"frame":null},{"x":["Jan","Jan","Jan","Jan","Jan","Jan","Jan","Jan","Jan","Jan","Jan","Jan"],"y":[1949,1950,1951,1952,1953,1954,1955,1956,1957,1958,1959,1960],"z":[112,115,145,171,196,204,242,284,315,340,360,417],"type":"scatter3d","mode":"markers","name":"Jan","marker":{"color":"rgba(68,1,84,1)","line":{"color":"rgba(68,1,84,1)"}},"textfont":{"color":"rgba(68,1,84,1)"},"error_y":{"color":"rgba(68,1,84,1)"},"error_x":{"color":"rgba(68,1,84,1)"},"line":{"color":"rgba(68,1,84,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script><ul>
-<li>Allows a better view of the relationships between month and year</li>
+<li>Allows a better view of the relationship between month, year, and number of passengers</li>
 </ul>
 </div>
-</div>
-<div id="data-smoothing" class="section level4" number="30.0.1.3">
+<div id="data-smoothing" class="section level4" number="30.0.0.7">
 <h4>
-<span class="header-section-number">30.0.1.3</span> Data Smoothing<a class="anchor" aria-label="anchor" href="#data-smoothing"><i class="fas fa-link"></i></a>
+<span class="header-section-number">30.0.0.7</span> Data Smoothing<a class="anchor" aria-label="anchor" href="#data-smoothing"><i class="fas fa-link"></i></a>
 </h4>
 <ul>
 <li>Usually need to smooth the data before starting analysis or visualization
@@ -431,7 +457,7 @@
 <li>Irrelevant spikes dominate the narrative</li>
 </ul>
 </li>
-<li>Methods:/
+<li>Methods:
 <ul>
 <li>Moving average/median
 <ul>
@@ -439,17 +465,35 @@
 <li>Rolling mean reduces variance
 <ul>
 <li>Keep in mind: affects accuracy, R² statistics, etc.</li>
-<li>Zoo package rollmean()</li>
+<li>Zoo package rollmean() and rollmedian()
+<ul>
+<li>k = 7 is a 7 month rolling window</li>
+</ul>
+</li>
+</ul>
+</li>
 <li>Prevent lookahead, use past values as the window (align=“right”)</li>
-<li>k = 6 is a 6 month rolling window</li>
-<li>gsub() substitute series names for the clearer legend</li>
+<li>gsub() substitute series names for a clearer legend</li>
 <li>tidyr package gather()
 <ul>
-<li>Convert from wide to long, use this as color/group in ggplot</li>
-</ul>
+<li>Convert from wide to long, use this as color/group in ggplot2 geom_line()<br>
 </li>
 </ul>
 </li>
+</ul>
+</li>
+<li>Exponentially weighted moving average
+<ul>
+<li>Weigh past values less than recent</li>
+<li>pracma package movavg() function</li>
+<li>Useful when more recent data is more or less informative than the past</li>
+</ul>
+</li>
+<li>Geometric mean
+<ul>
+<li>Combats strong serial correlation</li>
+<li>Good for series with data that compounds greatly as time goes on</li>
+<li>Base R exp(mean(log())) and zoo package rollapply()</li>
 </ul>
 </li>
 </ul>
@@ -461,24 +505,236 @@
 <span><span class="va">new</span><span class="op">$</span><span class="va">year</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"1949-01-01"</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"1960-12-01"</span><span class="op">)</span>,by<span class="op">=</span><span class="st">"month"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">new</span> <span class="op">=</span> <span class="va">new</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>roll_mean <span class="op">=</span> <span class="fu">rollmean</span><span class="op">(</span><span class="va">new</span><span class="op">$</span><span class="va">AirPassengers</span>,k<span class="op">=</span><span class="fl">6</span>,align<span class="op">=</span><span class="st">"right"</span>,fill <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>roll_mean <span class="op">=</span> <span class="fu">rollmean</span><span class="op">(</span><span class="va">new</span><span class="op">$</span><span class="va">AirPassengers</span>,k<span class="op">=</span><span class="fl">7</span>,align<span class="op">=</span><span class="st">"right"</span>,fill <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span>,</span>
+<span>         roll_median <span class="op">=</span> <span class="fu">rollmedian</span><span class="op">(</span><span class="va">new</span><span class="op">$</span><span class="va">AirPassengers</span>,k<span class="op">=</span><span class="fl">7</span>,align<span class="op">=</span><span class="st">"right"</span>,fill <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/gather.html">gather</a></span><span class="op">(</span><span class="va">new</span>, key <span class="op">=</span> <span class="va">year</span>, value <span class="op">=</span> <span class="va">Rate</span>, </span>
-<span>                            <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"roll_mean"</span>, <span class="st">"AirPassengers"</span><span class="op">)</span><span class="op">)</span></span>
+<span>                            <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"roll_mean"</span>,<span class="st">"roll_median"</span>, <span class="st">"AirPassengers"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">df</span><span class="op">$</span><span class="va">year</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">"AirPassengers"</span>,<span class="st">"series"</span>,<span class="va">df</span><span class="op">$</span><span class="va">year</span><span class="op">)</span></span>
 <span><span class="va">df</span><span class="op">$</span><span class="va">year</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">"roll_mean"</span>,<span class="st">"rolling mean"</span>,<span class="va">df</span><span class="op">$</span><span class="va">year</span><span class="op">)</span></span>
-<span><span class="va">df</span><span class="op">$</span><span class="va">date</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="va">new</span><span class="op">$</span><span class="va">year</span>,<span class="fl">2</span><span class="op">)</span></span>
+<span><span class="va">df</span><span class="op">$</span><span class="va">year</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">"roll_median"</span>,<span class="st">"rolling median"</span>,<span class="va">df</span><span class="op">$</span><span class="va">year</span><span class="op">)</span></span>
+<span><span class="va">df</span><span class="op">$</span><span class="va">date</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="va">new</span><span class="op">$</span><span class="va">year</span>,<span class="fl">3</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">date</span>, y <span class="op">=</span> <span class="va">Rate</span>, group <span class="op">=</span> <span class="va">year</span>, colour <span class="op">=</span> <span class="va">year</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/stats/complete.cases.html">complete.cases</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>,<span class="op">]</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">date</span>, y <span class="op">=</span> <span class="va">Rate</span>, group <span class="op">=</span> <span class="va">year</span>, colour <span class="op">=</span> <span class="va">year</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure">
 <img src="visualization_time_series_files/figure-html/unnamed-chunk-10-1.png" width="80%" style="display: block; margin: auto;">
-* Exponentially weighted moving averages
-* Weigh long past values less than recent
-* Geometric mean
-* Combats strong serial correlation
-* Good for series with data that compounds greatly as time goes on</div>
-
+ </div>
+</div>
+<div id="checking-time-series-properties" class="section level4" number="30.0.0.8">
+<h4>
+<span class="header-section-number">30.0.0.8</span> Checking Time Series Properties<a class="anchor" aria-label="anchor" href="#checking-time-series-properties"><i class="fas fa-link"></i></a>
+</h4>
+<div id="stationarity" class="section level5" number="30.0.0.8.1">
+<h5>
+<span class="header-section-number">30.0.0.8.1</span> Stationarity<a class="anchor" aria-label="anchor" href="#stationarity"><i class="fas fa-link"></i></a>
+</h5>
+<ul>
+<li>Many time series models rely on stationarity
+<ul>
+<li>Stable mean/variance/autocorrelation over time</li>
+<li>Examine error term behavior</li>
+<li>Can do this visually:
+<ul>
+<li>Look for seasonality, trend, increasing variance</li>
+</ul>
+</li>
+<li>Statistically:
+<ul>
+<li>Augmented Dickey–Fuller (ADF) test
+<ul>
+<li>Null hypothesis = unit root</li>
+<li>Focuses on changing mean</li>
+<li>tseries package adf.test()</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Visual can be better:
+<ul>
+<li>ADF tests perform poorly on near unit roots, small sample size</li>
+<li>Use both approaches</li>
+</ul>
+</li>
+<li>Remedies:
+<ul>
+<li>Difference the data to correct trend</li>
+<li>Logarithm or square root to correct variance</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="sourceCode" id="cb337"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">new</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span></span>
+<span><span class="va">new</span><span class="op">$</span><span class="va">AirPassengers</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">new</span><span class="op">$</span><span class="va">AirPassengers</span><span class="op">)</span></span>
+<span><span class="va">new</span><span class="op">$</span><span class="va">date</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"1949-01-01"</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"1960-12-01"</span><span class="op">)</span>,by<span class="op">=</span><span class="st">"month"</span><span class="op">)</span></span>
+<span><span class="va">new</span><span class="op">$</span><span class="va">diff_data</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">NA</span>,<span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span><span class="op">(</span><span class="va">new</span><span class="op">$</span><span class="va">AirPassengers</span>, differences<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">new</span><span class="op">$</span><span class="va">diff_data2</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">NA</span>,<span class="cn">NA</span>,<span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span><span class="op">(</span><span class="va">new</span><span class="op">$</span><span class="va">AirPassengers</span>, differences<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">g</span><span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">new</span> , <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">date</span>,<span class="va">AirPassengers</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">g_diff</span><span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">new</span> , <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">date</span>,<span class="va">diff_data</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Difference Data"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">g_diff2</span><span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">new</span> , <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">date</span>,<span class="va">diff_data2</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>colour <span class="op">=</span> <span class="st">"blue"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"2nd Difference Data"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">grid.arrange</span><span class="op">(</span><span class="va">g</span>,<span class="va">g_diff</span>,<span class="va">g_diff2</span>,top<span class="op">=</span><span class="fu">textGrob</span><span class="op">(</span><span class="st">"Airline Passengers"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="visualization_time_series_files/figure-html/unnamed-chunk-11-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="sourceCode" id="cb338"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">adf.test</span><span class="op">(</span><span class="va">new</span><span class="op">$</span><span class="va">AirPassengers</span>,alternative<span class="op">=</span><span class="st">'stationary'</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+##  Augmented Dickey-Fuller Test
+## 
+## data:  new$AirPassengers
+## Dickey-Fuller = -7.3186, Lag order = 5, p-value = 0.01
+## alternative hypothesis: stationary</code></pre>
+<div class="sourceCode" id="cb340"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">adf.test</span><span class="op">(</span><span class="va">new</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/stats/complete.cases.html">complete.cases</a></span><span class="op">(</span><span class="va">new</span><span class="op">$</span><span class="va">diff_data</span><span class="op">)</span>,<span class="fl">3</span><span class="op">]</span>,alternative<span class="op">=</span><span class="st">'stationary'</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+##  Augmented Dickey-Fuller Test
+## 
+## data:  new[complete.cases(new$diff_data), 3]
+## Dickey-Fuller = -7.0177, Lag order = 5, p-value = 0.01
+## alternative hypothesis: stationary</code></pre>
+<div class="sourceCode" id="cb342"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">adf.test</span><span class="op">(</span><span class="va">new</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/stats/complete.cases.html">complete.cases</a></span><span class="op">(</span><span class="va">new</span><span class="op">$</span><span class="va">diff_data2</span><span class="op">)</span>,<span class="fl">4</span><span class="op">]</span>,alternative<span class="op">=</span><span class="st">'stationary'</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+##  Augmented Dickey-Fuller Test
+## 
+## data:  new[complete.cases(new$diff_data2), 4]
+## Dickey-Fuller = -8.0516, Lag order = 5, p-value = 0.01
+## alternative hypothesis: stationary</code></pre>
+<ul>
+<li>Observations:
+<ul>
+<li>The data has clear trend and increasing variance</li>
+<li>By using differencing, the trend is dampened</li>
+<li>There’s still some increasing variance, so log transform might be the right choice</li>
+<li>Things start getting muddied at second difference</li>
+<li>ADF says that the original series is stationary based on small p-value
+<ul>
+<li>Visual inspection says otherwise</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div id="normality" class="section level5" number="30.0.0.8.2">
+<h5>
+<span class="header-section-number">30.0.0.8.2</span> Normality:<a class="anchor" aria-label="anchor" href="#normality"><i class="fas fa-link"></i></a>
+</h5>
+<ul>
+<li>Many time series models assume normality</li>
+<li>This can be observed through a histogram or QQ plot
+<ul>
+<li>ggplot2 package geom_histogram()</li>
+<li>stats package qqnorm() and qqline()</li>
+</ul>
+</li>
+<li>If it is not normal:
+<ul>
+<li>Box Cox transformation
+<ul>
+<li>MASS package boxcox()</li>
+</ul>
+</li>
+<li>Be careful with transformations!
+<ul>
+<li>Are you preserving the important information?</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="sourceCode" id="cb344"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">new</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">AirPassengers</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span><span class="fl">20</span>,fill <span class="op">=</span> <span class="st">"mediumpurple"</span><span class="op">)</span> <span class="op">+</span>             </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"Passengers"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="visualization_time_series_files/figure-html/unnamed-chunk-12-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="sourceCode" id="cb345"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqnorm</a></span><span class="op">(</span><span class="va">new</span><span class="op">$</span><span class="va">AirPassengers</span>, main<span class="op">=</span><span class="st">"Airline Passengers"</span>, xlab<span class="op">=</span><span class="st">""</span>, ylab<span class="op">=</span><span class="st">""</span>, pch<span class="op">=</span><span class="fl">16</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqline</a></span><span class="op">(</span><span class="va">new</span><span class="op">$</span><span class="va">AirPassengers</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="visualization_time_series_files/figure-html/unnamed-chunk-12-2.png" width="80%" style="display: block; margin: auto;"></div>
+<ul>
+<li>Observations:
+<ul>
+<li>Data does not look normal: it is skewed</li>
+<li>Even though this doesn’t capture the time aspect of the data, the input variable must be normal for many models</li>
+</ul>
+</li>
+</ul>
+</div>
+<div id="lagged-correlations" class="section level5" number="30.0.0.8.3">
+<h5>
+<span class="header-section-number">30.0.0.8.3</span> Lagged Correlations<a class="anchor" aria-label="anchor" href="#lagged-correlations"><i class="fas fa-link"></i></a>
+</h5>
+<ul>
+<li>Autocorrelation Function
+<ul>
+<li>Correlation between two points in a time series in a fixed interval</li>
+<li>Linear relationship between points as a function of their time difference</li>
+<li>Common behaviors:
+<ul>
+<li>ACF of stationary series drops to zero quickly</li>
+<li>For nonstationary series, value at lag 1 is large and positive</li>
+<li>White noise will have 0 at all lags but 0</li>
+</ul>
+</li>
+<li>Significance of ACF estimate determined by “critical region” with bounds at +/–1.96 × sqrt(n)</li>
+<li>forecast package Acf()
+<ul>
+<li>Y axis is the correlation</li>
+<li>X axis is the time lag</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="sourceCode" id="cb346"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">Acf</span><span class="op">(</span><span class="va">new</span><span class="op">$</span><span class="va">AirPassengers</span>,main<span class="op">=</span><span class="st">'Passengers Autcorrelation Function'</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="visualization_time_series_files/figure-html/unnamed-chunk-13-1.png" width="80%" style="display: block; margin: auto;"></div>
+<ul>
+<li>Partial Autocorrelation Function:
+<ul>
+<li>The partial correlation of the series at time <em>t</em> with the series at time <em>t-k</em> given all the information between <em>t-k….t</em>
+</li>
+<li>Same critical regions as ACF</li>
+<li>ACF vs PACF:
+<ul>
+<li>Redundant correlations appear in ACF</li>
+<li>PACF correlations show exactly how the kth lagged value is related to the current point</li>
+<li>PACF helps you know how long a time series needs to be to capture dynamics you want to model</li>
+</ul>
+</li>
+<li>forecast package Pacf()</li>
+</ul>
+</li>
+</ul>
+<div class="sourceCode" id="cb347"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">Pacf</span><span class="op">(</span><span class="va">new</span><span class="op">$</span><span class="va">AirPassengers</span>,main<span class="op">=</span><span class="st">'Passengers Partial Autcorrelation Function'</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="visualization_time_series_files/figure-html/unnamed-chunk-14-1.png" width="80%" style="display: block; margin: auto;"></div>
+<ul>
+<li>Observations:
+<ul>
+<li>The ACF fails to trail off after a certain lag, indicating clear trend</li>
+<li>PACF shows strong significance at around lag 12, coinciding with Christmas, a seasonal peak that is to be expected.</li>
+<li>Behavior of the PACF and ACF vital in determining parameters for time series ARIMA models and many others.</li>
+</ul>
+</li>
+</ul>
+<p>Now you are ready to get started with time series data!</p>
+<p>References</p>
+<ul>
+<li><a href="https://www.statology.org/exponential-moving-average-in-r/" class="uri">https://www.statology.org/exponential-moving-average-in-r/</a></li>
+<li><a href="https://www.itl.nist.gov/div898/handbook/pmc/section4/pmc442.htm" class="uri">https://www.itl.nist.gov/div898/handbook/pmc/section4/pmc442.htm</a></li>
+<li><a href="https://learning.oreilly.com/library/view/practical-time-series/9781492041641/ch02.html" class="uri">https://learning.oreilly.com/library/view/practical-time-series/9781492041641/ch02.html</a></li>
+</ul>
 </div>
 </div>
 </div>
@@ -487,9 +743,7 @@
 <div class="next"><a href="igraph-in-r.html"><span class="header-section-number">31</span> igraph in r</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li>
-<a class="nav-link" href="#visualizing-time-series-data"><span class="header-section-number">30</span> Visualizing Time Series Data</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#dynamics-of-time-series-data"><span class="header-section-number">30.0.1</span> Dynamics of Time Series Data</a></li></ul>
-</li></ul>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#visualizing-time-series-data"><span class="header-section-number">30</span> Visualizing Time Series Data</a></li></ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">

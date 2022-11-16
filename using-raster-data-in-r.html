@@ -159,7 +159,7 @@ is the premire for more specialized datasets. <a href="https://rdrr.io/cran/sf/"
 <p>Terra is built upon the older raster package, with an internal foundation of
 C++ for efficiency. As for its Raster representation, in one of the book’s first
 code snippets, we can see its default attributes.</p>
-<div class="sourceCode" id="cb393"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb404"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">raster_filepath</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"raster/srtm.tif"</span>, package <span class="op">=</span> <span class="st">"spDataLarge"</span><span class="op">)</span></span>
 <span><span class="va">srtm</span> <span class="op">=</span> <span class="fu">rast</span><span class="op">(</span><span class="va">raster_filepath</span><span class="op">)</span></span></code></pre></div>
 <p>As we can see here, the raster is defined by:</p>
@@ -192,7 +192,7 @@ some small metadata.</p>
 surrounding a Utah national park, and though we will provide other examples,
 sometimes its quick reference provides the best example.
 Quickly plotting it shows the following graphic:</p>
-<div class="sourceCode" id="cb394"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb405"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">srtm</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="raster_overview_files/figure-html/unnamed-chunk-3-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>And intuitively, each cell has its own value, represented visually through pixels
@@ -211,7 +211,7 @@ by this color scale.</p>
 So we know what rasters are, and a basic data structure. Okay, well how do we
 create, load, or populate more general rasters? There’s a few options, as always.</p>
 <p>Naturally, we can directly create our own raster with the <a href="https://rdrr.io/cran/terra/man/rast.html">rast()</a> function as follows:</p>
-<div class="sourceCode" id="cb395"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb406"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">manual_raster</span> <span class="op">=</span> <span class="fu">rast</span><span class="op">(</span></span>
 <span>  nrows <span class="op">=</span> <span class="fl">100</span>,</span>
 <span>  ncols <span class="op">=</span> <span class="fl">100</span>,</span>
@@ -232,20 +232,20 @@ knowledge of what row/col values you’re targeting, you can directly set values
 in a similar fashion, using c() functions if more than one cell is desired.
 Mutliple layers may also be modified at a time this way.
 See the last section for a better approach to raster manipulation.</p>
-<div class="sourceCode" id="cb396"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb407"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/extract.html">extract</a></span><span class="op">(</span><span class="va">manual_raster</span>, <span class="fl">10</span>, <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##   lyr.1 lyr.2
 ## 1    10 10010</code></pre>
-<div class="sourceCode" id="cb398"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb409"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">manual_raster</span><span class="op">[</span><span class="fl">15</span>, <span class="op">-</span><span class="fl">10</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">15000</span></span>
 <span><span class="va">manual_raster</span><span class="op">[</span><span class="fl">15</span>, <span class="op">-</span><span class="fl">10</span><span class="op">]</span></span></code></pre></div>
 <pre><code>##   lyr.1 lyr.2
 ## 1    NA    NA</code></pre>
-<div class="sourceCode" id="cb400"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb411"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">manual_raster</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">19</span>, <span class="fl">20</span>, <span class="fl">21</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">19</span>, <span class="fl">20</span>, <span class="fl">21</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5000</span><span class="op">:</span><span class="fl">5008</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">15000</span><span class="op">:</span><span class="fl">15008</span><span class="op">)</span><span class="op">)</span> </span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">manual_raster</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="raster_overview_files/figure-html/unnamed-chunk-5-1.png" width="80%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb401"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb412"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># You can also use &lt;raster&gt;[] as a shortcut of .values().</span></span></code></pre></div>
 </div>
 <div id="raster-files-and-their-formats" class="section level3" number="34.2.2">
@@ -268,7 +268,7 @@ rasters to be hosted on HTTP servers and enables users to download only a
 segment of what can be rather large files.</p>
 <p>Given a path, the <a href="https://rdrr.io/cran/terra/man/rast.html">rast()</a> function
 does a good job at loading in rasters.</p>
-<div class="sourceCode" id="cb402"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb413"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">snowurl</span> <span class="op">=</span> <span class="st">"/vsicurl/https://zenodo.org/record/5774954/files/clm_snow.cover_esa.modis_p05_1km_s0..0cm_2001.01_epsg4326_v1.tif"</span></span>
 <span><span class="va">snow</span> <span class="op">=</span> <span class="fu">rast</span><span class="op">(</span><span class="va">snowurl</span><span class="op">)</span></span>
 <span><span class="va">snow</span></span></code></pre></div>
@@ -284,7 +284,7 @@ way, merely attached to. /vsicurl/ followed by the https url is all that’s
 necessary to download such information, provided you have the image provider
 located already of course. The relevant portions will be loaded if we utilize
 or manipulate it in some manner, such as this:</p>
-<div class="sourceCode" id="cb404"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb415"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dimension_raster</span> <span class="op">=</span> <span class="fu">rast</span><span class="op">(</span></span>
 <span>  nrows <span class="op">=</span> <span class="fl">1000</span>,</span>
 <span>  ncols <span class="op">=</span> <span class="fl">1000</span>,</span>
@@ -305,12 +305,12 @@ or manipulate it in some manner, such as this:</p>
 ## name        : clm_snow.cover_esa.modis_p05_1km_s0..0cm_2001.01_epsg4326_v1 
 ## min value   :                                                            0 
 ## max value   :                                                          100</code></pre>
-<div class="sourceCode" id="cb406"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb417"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">snow_clipped</span>, main<span class="op">=</span><span class="st">"Snow cover around the Alps in Jan 2001"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="raster_overview_files/figure-html/unnamed-chunk-7-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>We will discuss cropping later. Naturally, we can also load local files using
 rast(). You can produce or save them yourself, or use packages such as <a href="https://rdrr.io/cran/SpNMF/man/spdata.html">spData</a>.</p>
-<div class="sourceCode" id="cb407"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb418"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># what it would look like with a local file </span></span>
 <span><span class="co">#snow_rast = rast("2019_jan_snow_cover.tif") </span></span>
 <span><span class="va">snow_rast</span> <span class="op">=</span> <span class="fu">rast</span><span class="op">(</span><span class="st">"/vsicurl/https://zenodo.org/record/5774954/files/clm_snow.cover_esa.modis_p95_1km_s0..0cm_2019.01_epsg4326_v1.tif?download=1"</span><span class="op">)</span></span>
@@ -372,17 +372,17 @@ rows, or columns ids from coordinates, or to slice apart the data.
 <a href="https://rdrr.io/cran/terra/man/extract.html">terra::extract</a> are two good ones,
 though beware the overlap with tidyverse’s extract. We can also define smaller
 rasters and clip or crop them through, as we have done in examples prior.</p>
-<div class="sourceCode" id="cb408"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb419"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">xy</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">73.94</span>, <span class="fl">40.73</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="va">matrix_cells</span> <span class="op">=</span> <span class="fu">cellFromXY</span><span class="op">(</span><span class="va">cropped_NE_snow</span>, <span class="va">xy</span><span class="op">)</span></span>
 <span><span class="va">cropped_NE_snow</span><span class="op">[</span><span class="va">matrix_cells</span><span class="op">]</span></span></code></pre></div>
 <pre><code>##   clm_snow.cover_esa.modis_p95_1km_s0..0cm_2019.01_epsg4326_v1
 ## 1                                                           31</code></pre>
-<div class="sourceCode" id="cb410"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb421"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">terra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terra/man/extract.html">extract</a></span><span class="op">(</span><span class="va">cropped_NE_snow</span>, <span class="va">xy</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##   clm_snow.cover_esa.modis_p95_1km_s0..0cm_2019.01_epsg4326_v1
 ## 1                                                           31</code></pre>
-<div class="sourceCode" id="cb412"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb423"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">filter</span> <span class="op">=</span> <span class="fu">rast</span><span class="op">(</span></span>
 <span>  xmin <span class="op">=</span> <span class="op">-</span><span class="fl">74.5</span>,</span>
 <span>  xmax <span class="op">=</span> <span class="op">-</span><span class="fl">73.5</span>,</span>
@@ -400,17 +400,17 @@ rasters and clip or crop them through, as we have done in examples prior.</p>
 ## 4                                                           74
 ## 5                                                           75
 ## 6                                                           81</code></pre>
-<div class="sourceCode" id="cb414"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb425"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># extract does a lot more things more flexibly, cellfromxy and related</span></span>
 <span><span class="co"># better for method header precision and location manipulation</span></span>
 <span><span class="co"># NYC was not very snowy that winter, it seems...</span></span></code></pre></div>
 <p>As well as direct access, should we know either the desired row &amp; column numbers
 or the 1D cell ids:</p>
-<div class="sourceCode" id="cb415"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb426"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">srtm</span><span class="op">[</span><span class="fl">50</span>, <span class="fl">50</span><span class="op">]</span></span></code></pre></div>
 <pre><code>##   srtm
 ## 1 1885</code></pre>
-<div class="sourceCode" id="cb417"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb428"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">srtm</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">49</span>, <span class="fl">50</span>, <span class="fl">51</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">49</span>, <span class="fl">50</span>, <span class="fl">51</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
 <pre><code>##   srtm
 ## 1 1854
@@ -422,7 +422,7 @@ or the 1D cell ids:</p>
 ## 7 1819
 ## 8 1869
 ## 9 1929</code></pre>
-<div class="sourceCode" id="cb419"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb430"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">srtm</span><span class="op">[</span><span class="fl">100</span><span class="op">]</span></span></code></pre></div>
 <pre><code>##   srtm
 ## 1 2034</code></pre>
@@ -438,21 +438,21 @@ the usage of an additional spatial object, in practice typically a vector.
 Where they differ is that cropping reduces the dimensions of the original raster
 based on the second object’s boundaries, whereas masking sets everything
 outside of the second object’s boundaries to zero, but leaves the structure intact.</p>
-<div class="sourceCode" id="cb421"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb432"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">zion</span> <span class="op">=</span> <span class="fu">read_sf</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"vector/zion.gpkg"</span>, package <span class="op">=</span> <span class="st">"spDataLarge"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">zion</span> <span class="op">=</span> <span class="fu">st_transform</span><span class="op">(</span><span class="va">zion</span>, <span class="fu">crs</span><span class="op">(</span><span class="va">srtm</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">srtm_cropped</span> <span class="op">=</span> <span class="fu">crop</span><span class="op">(</span><span class="va">srtm</span>, <span class="va">zion</span><span class="op">)</span></span>
 <span><span class="va">srtm_masked</span> <span class="op">=</span> <span class="fu">mask</span><span class="op">(</span><span class="va">srtm</span>, <span class="va">zion</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">zion</span><span class="op">[</span><span class="fl">0</span><span class="op">]</span>, main<span class="op">=</span><span class="st">"Outline of Zion national park"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="raster_overview_files/figure-html/unnamed-chunk-11-1.png" width="80%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb422"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb433"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">srtm_cropped</span>, main<span class="op">=</span><span class="st">"SRTM cropped by Zion national park"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="raster_overview_files/figure-html/unnamed-chunk-11-2.png" width="80%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb423"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb434"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">srtm_masked</span>, main<span class="op">=</span><span class="st">"SRTM masked by Zion national park"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="raster_overview_files/figure-html/unnamed-chunk-11-3.png" width="80%" style="display: block; margin: auto;"></div>
 <p>And of course we can combine them:</p>
-<div class="sourceCode" id="cb424"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb435"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu">crop</span><span class="op">(</span><span class="va">srtm_masked</span>, <span class="va">zion</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="raster_overview_files/figure-html/unnamed-chunk-12-1.png" width="80%" style="display: block; margin: auto;"></div>
 </div>
@@ -464,25 +464,25 @@ outside of the second object’s boundaries to zero, but leaves the structure in
 <a href="https://geocompr.robinlovelace.net/spatial-operations.html#zonal-operations">4.3.5</a>, and
 <a href="https://geocompr.robinlovelace.net/spatial-operations.html#global-operations-and-distances">4.3.6</a>)</p>
 <p>As we can see here, many algebraic calculations can be performed on rasters at the local level.</p>
-<div class="sourceCode" id="cb425"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb436"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">srtm</span> <span class="op">=</span> <span class="fu">rast</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"raster/srtm.tif"</span>, package <span class="op">=</span> <span class="st">"spDataLarge"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">srtm</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="raster_overview_files/figure-html/unnamed-chunk-13-1.png" width="80%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb426"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb437"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">srtm</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="raster_overview_files/figure-html/unnamed-chunk-13-2.png" width="80%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb427"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb438"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">srtm</span> <span class="op">^</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="raster_overview_files/figure-html/unnamed-chunk-13-3.png" width="80%" style="display: block; margin: auto;"></div>
 <p>As well as boolean operations</p>
-<div class="sourceCode" id="cb428"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb439"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">snow_clipped</span> <span class="op">&gt;</span> <span class="fl">20</span>, main<span class="op">=</span><span class="st">"Areas with more than 20% snow cover"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="raster_overview_files/figure-html/unnamed-chunk-14-1.png" width="80%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb429"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb440"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">snow_clipped</span> <span class="op">==</span> <span class="fl">0</span>, main<span class="op">=</span><span class="st">"Areas with no snow cover"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="raster_overview_files/figure-html/unnamed-chunk-14-2.png" width="80%" style="display: block; margin: auto;"></div>
 <p>And through the use of <a href="https://rdrr.io/cran/terra/man/app.html">app()</a> for efficiency on large data.</p>
-<div class="sourceCode" id="cb430"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb441"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">app</span><span class="op">(</span><span class="va">snow_clipped</span>, fun<span class="op">=</span><span class="kw">function</span><span class="op">(</span><span class="va">i</span><span class="op">)</span> <span class="op">{</span> <span class="fl">2</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">i</span><span class="op">)</span> <span class="op">}</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## class       : SpatRaster 
 ## dimensions  : 1800, 1800, 1  (nrow, ncol, nlyr)
@@ -496,7 +496,7 @@ outside of the second object’s boundaries to zero, but leaves the structure in
 <p>Given the right attributes in the data (the book lists coil class, pH, etc),
 this can be used for predictive modeling.</p>
 <p><a href="https://rdrr.io/cran/terra/man/focal.html">Focal</a> transformations:</p>
-<div class="sourceCode" id="cb432"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb443"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mean_srtm</span> <span class="op">=</span> <span class="fu">focal</span><span class="op">(</span><span class="va">srtm</span>, w <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fl">1</span>, nrow <span class="op">=</span> <span class="fl">5</span>, ncol <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>, fun <span class="op">=</span> <span class="va">mean</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">mean_srtm</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="raster_overview_files/figure-html/unnamed-chunk-16-1.png" width="80%" style="display: block; margin: auto;"></div>
@@ -521,7 +521,7 @@ and <a href="https://rdrr.io/cran/terra/man/pairs.html">pairs()</a> can all be r
 for immediate exploration. global() remains the most robust approach, as you can
 self-define a statistical function yourself to apply your particular dataset,
 much as you can with the aforementioned app() and its entourage.</p>
-<div class="sourceCode" id="cb433"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb444"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">snow_clipped</span><span class="op">)</span> <span class="co"># 3rd quartile of 1, but mean of 10?</span></span></code></pre></div>
 <pre><code>##  clm_snow.cover_esa.modis_p05_1km_s0..0cm_2001.01_epsg4326_v1
 ##  Min.   :  0.00                                              
@@ -531,7 +531,7 @@ much as you can with the aforementioned app() and its entourage.</p>
 ##  3rd Qu.:  1.00                                              
 ##  Max.   :100.00                                              
 ##  NA's   :28886</code></pre>
-<div class="sourceCode" id="cb435"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb446"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">snow_tenths</span> <span class="op">=</span> <span class="fu">app</span><span class="op">(</span><span class="va">snow_clipped</span>, fun<span class="op">=</span><span class="kw">function</span><span class="op">(</span><span class="va">i</span><span class="op">)</span> <span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">ceiling</a></span><span class="op">(</span><span class="va">i</span> <span class="op">/</span> <span class="fl">10</span><span class="op">)</span> <span class="op">*</span> <span class="fl">10</span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="fu">freq</span><span class="op">(</span><span class="va">snow_tenths</span><span class="op">)</span> <span class="co"># Indeed, 0 is by far the most common</span></span></code></pre></div>
 <pre><code>##    layer value   count
@@ -576,7 +576,7 @@ and to use <a href="https://rdrr.io/cran/exactextractr/man/exact_extract.html">e
 If you’re familiar with vectors, there is again an abundance of flexibility here, lying in the <a href="https://rdrr.io/cran/terra/man/as.spatvector.html">as.spatvector</a> class of
 functions. One particularly eye-catching use is the quick visualization of
 contour lines using <a href="https://rdrr.io/cran/terra/man/contour.html">as.contour()</a> as follows:</p>
-<div class="sourceCode" id="cb437"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb448"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cl</span> <span class="op">=</span> <span class="fu">as.contour</span><span class="op">(</span><span class="va">srtm</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">cl</span>, axes<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="raster_overview_files/figure-html/unnamed-chunk-18-1.png" width="80%" style="display: block; margin: auto;"></div>
@@ -589,7 +589,7 @@ contour lines using <a href="https://rdrr.io/cran/terra/man/contour.html">as.con
 Okay, so you’ve done your experiments, and would like to preserve your rasters
 to share your results and save on later computational power. How?</p>
 <p>Simple. <a href="https://rdrr.io/cran/terra/man/writeRaster.html">writeRaster()</a>.</p>
-<div class="sourceCode" id="cb438"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb449"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Is how I would do it, if I wanted to dirty the CC project</span></span>
 <span><span class="co"># writeRaster(snow_clipped, filename="2007_jan_eu_snow.tif", datatype="INT1U",</span></span>
 <span><span class="co">#             overwrite=TRUE)</span></span></code></pre></div>

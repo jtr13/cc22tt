@@ -172,11 +172,16 @@ visualizing-time-series-data
 starting-point
 working-with-time-series-ts-objects
 dynamics-of-time-series-data
-seasonality-cycle-trend
+line-plots
+time-series-decomposition
 plotting-exploiting-the-temporal-axis
 gannt-charts
 using-month-and-year-creatively-in-line-plots
 data-smoothing
+checking-time-series-properties
+stationarity
+normality
+lagged-correlations
 igraph-in-r
 igraph-basics
 create-igraph-network-object
