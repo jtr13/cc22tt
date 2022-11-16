@@ -62,6 +62,8 @@ Suggests:
     osmextract,
     ggplot2,
     kableExtra,
+    carData,
+    cowplot,
 Remotes:
     hadley/emo,
     kassambara/navdata,

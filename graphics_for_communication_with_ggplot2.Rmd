@@ -1,0 +1,261 @@
+---
+title: "Graphics for Communication with ggplot2"
+author: "Junyuan Huang"
+date: "2022-11-15"
+output: 
+  pdf_document: default
+---
+
+# Graphics for Communication with ggplot2
+
+Junyuan Huang
+
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+library(carData)
+library(cowplot)
+```
+
+
+## Motivation
+
+To help readers quickly build up a good mental model of the data,
+we will need to invest considerable effort in making plots as
+self-explanatory as possible. However, It is laborious for those new to R to adjust labels, legends, coordinate scales, etc. This article will summarize the tools in ggplot2 that help us to add details to the plots, and make the plots more interactive and expressive.
+
+
+## Label
+
+Adding appropriate labels is the easiest way to turn an exploratory graphic into an expository graphic. We can do this by using labs() function. There are some useful arguments in labs():
+
+    - x: x-axes label
+    - y: y-axes label
+    - title: plot title
+    - subtitle: additional detail in a smaller font beneath the title 
+    - caption: text at the bottom right of the plot, often used to describe the source of data. 
+    - tag: text displayed at the top-left of the plot by default.
+    
+
+Use Salaries data in PSet2 Question3 to give a example:
+```{r}
+Salary_of_pro <- Salaries
+
+ggplot(Salary_of_pro, aes(x = yrs.since.phd, y = salary)) + 
+  geom_point(alpha = 0.8, aes(color = rank))+
+  labs(x ='Years since PhD', 
+       y = 'Salary',
+       title = 'Salary distribution of professor',
+       subtitle = 'This is a subtitle',
+       caption = "Data from carData package",
+       tag = "***") 
+
+```
+
+## Annotations
+
+Sometimes we need to label individual data point or group. We can use **geom_text()**, **geom_label()** and **ggrepel::geom_label_repel** to add textual labels to data. There are some common arguments for these three function:
+
+    - aes(label): The attribute you want to label in data points.
+    - data: The data set to be label.
+    - nudge_x: Horizontal adjustment.
+    - nudge_y: Vertical adjustment
+
+The main different of these three functions is :
+
+    - geom_text(): Add text to the data point
+    - geom_label(): Based on geom_text(), draws a rectangle behind the text
+    - ggrepel::geom_label_repel(): Based on geom_label(), automatically adjust 
+      labels so that they don’t overlap.
+
+```{r}
+
+highest_salary <- Salary_of_pro %>%
+  group_by(rank) %>%
+  filter(row_number(desc(salary)) < 4)
+
+ggplot(Salary_of_pro, aes(x = yrs.since.phd, y = salary)) + 
+  geom_point(alpha = 0.8, aes(color = rank)) +
+  geom_text(aes(label = sex), 
+             data = highest_salary,
+             nudge_y = 2) +
+  labs(x ='Years since PhD', 
+       y = 'Salary',
+       title = 'Label by geom_text()')
+
+```
+```{r}
+ggplot(Salary_of_pro, aes(x = yrs.since.phd, y = salary)) + 
+  geom_point(alpha = 0.8, aes(color = rank)) +
+  geom_label(aes(label = sex), 
+             data = highest_salary,
+             nudge_y = 2) +
+  labs(x ='Years since PhD', 
+       y = 'Salary',
+       title = 'Label by geom_label()')
+```
+
+
+```{r}
+ggplot(Salary_of_pro, aes(x = yrs.since.phd, y = salary)) + 
+  geom_point(alpha = 0.8, aes(color = rank)) +
+  ggrepel::geom_label_repel(aes(label = sex), 
+             data = highest_salary) +
+  labs(x ='Years since PhD', 
+       y = 'Salary',
+       title = 'Label by ggrepel::geom_label_repel()')
+```
+
+It seems that ggrepel::geom_label_repel is a more convenient tool as it automatically adjusts the location of text to avoid overlap. 
+
+Additionally, wecan adjust size, alpha, and other attributes of the text by simply adding relative arguments.
+
+```{r}
+ggplot(Salary_of_pro, aes(x = yrs.since.phd, y = salary)) + 
+  geom_point(alpha = 0.8, aes(color = rank)) +
+  ggrepel::geom_label_repel(aes(label = sex), 
+             data = highest_salary,
+             size = 3,
+             alpha =0.8) +
+  labs(x ='Years since PhD', 
+       y = 'Salary',
+       title = 'Label by ggrepel::geom_label_repel()')
+```
+
+We can also use hjust and vjust to control the alignment of the label, nine possible combinations are showed below:
+
+```{r, echo=FALSE}
+knitr::include_graphics("figs/hvjust.jpeg")
+```
+
+## Scales
+
+Adjusting the scale is another way to make the plot better for communication. Scales control the mapping from data values to things that you can perceive. There is a default setting of scale: **scale_x_continuous() + scale_y_continuous() + scale_color_discrete()**, even if we do not add these functions.
+
+The most frequently used parameter of the function **scale_x_continuous/scale_y_continuous** are:
+
+    - breaks: input a sequence to set the axis ticks.
+    - labels: set "NULL" to hide the axes, useful in maps
+    - position: The position of the axes. 
+                "left" (default) or "right" for y axes, 
+                "top" or "bottom" (defaukt) for x axes.
+
+Use fuel economy data from the mpg data set to give an example. In the figure below, I change the position of y-axes to right and make certain ticks, and set the label of x-axes as NULL.
+
+
+```{r}
+mpg1 <- mpg
+ggplot(mpg1, aes(displ, hwy)) +
+  geom_point() +
+  scale_x_continuous(position = "bottom", labels = NULL) +
+  scale_y_continuous(position = "right", breaks = seq(15, 40, by = 5))
+```
+
+However, most of the time, we will use a completely different algorithm and replace the scale altogether, rather than just adjust the details a little bit. The most common transformation is taking a log(). Use diamonds in diamonds data set to illustrate.
+
+```{r}
+diamonds1 <-diamonds
+ggplot(diamonds1, aes(carat, price)) +
+geom_bin2d() +
+scale_x_log10() +
+scale_y_log10()
+```
+
+
+```{r}
+p0 <- ggplot(diamonds1, aes(log10(carat), log10(price))) +
+  geom_bin2d()
+
+p00 <- ggplot(diamonds1, aes(carat, price)) +
+  geom_bin2d() +
+  scale_x_log10() +
+  scale_y_log10()
+
+plot_grid(p0, p00, labels = NULL, ncol = 1)
+```
+
+Remark: Normally it is better to do the transformation with the scale, instead of in the aesthetic mapping. Although this is visually identical, the axes will be labeled on the transformed data scale if we do it in the aesthetic mapping, making it hard to interpret the plot.
+
+## Zooming
+
+The following is a scatter plot of engine displacement and highway miles per gallon.
+
+```{r}
+ggplot(mpg, mapping = aes(displ, hwy)) +
+geom_point(aes(color = class)) +
+geom_smooth()
+```
+
+If we need to zoom in on a part of it, the best way is to use **coord_cartesian()** to set the xlim and ylim parameters.
+
+    - xlim: limits for x-axes.
+    - ylim: limit for y-axes.
+
+
+```{r}
+ggplot(mpg, mapping = aes(displ, hwy)) +
+geom_point(aes(color = class)) +
+geom_smooth() + 
+  coord_cartesian(xlim = c(5, 7), ylim = c(10, 30))
+```
+
+Remark: **coord_cartesian()** is a zooming in the plot, instead of plot in the subset of data, that is completely different if we limit the data point in mapping. 
+
+```{r}
+mpg %>%
+  filter(displ >= 5, displ <= 7, hwy >= 10, hwy <= 30) %>%
+  ggplot(aes(displ, hwy)) +
+  geom_point(aes(color = class)) +
+  geom_smooth()
+```
+
+We can see that the regression curve also changed as we subset the data, which is inconsistent with the global regression performance.
+
+## Themes
+
+Finally, we can customize our plot by theme. The default theme has a gray background. **ggplot2** includes 8 themes, many more are included in add-on packages like **ggthemes**, by Jeffrey Arnold.
+
+```{r, echo=FALSE}
+knitr::include_graphics("figs/themes.jpeg")
+```
+
+
+```{r}
+p1 <- ggplot(mpg, aes(displ, hwy)) +
+  geom_point(aes(color = class)) +
+  geom_smooth(se = FALSE) +
+  labs(title = "theme_bw()") +
+  theme_bw()
+
+p2 <- ggplot(mpg, aes(displ, hwy)) +
+  geom_point(aes(color = class)) +
+  geom_smooth(se = FALSE) +
+  labs(title = "theme_classic()") +
+  theme_classic()
+
+p3 <- ggplot(mpg, aes(displ, hwy)) +
+  geom_point(aes(color = class)) +
+  geom_smooth(se = FALSE) +
+  labs(title = "theme_linedraw()") +
+  theme_linedraw()
+
+p4 <- ggplot(mpg, aes(displ, hwy)) +
+  geom_point(aes(color = class)) +
+  geom_smooth(se = FALSE) +
+  labs(title = "theme_dark()") +
+  theme_dark()
+
+plot_grid(p1, p2, p3 ,p4, labels = NULL, ncol = 2)
+```
+
+## Reference
+
+[1] Grolemund, G., & Wickham, H. (2017). R for Data Science. O’Reilly Media.
+
+[2] https://ggplot2-book.org/ 
+
+
+
+
+
