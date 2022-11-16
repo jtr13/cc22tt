@@ -65,6 +65,7 @@ Suggests:
     carData,
     cowplot,
     janitor,
+    DescTools,
 Remotes:
     hadley/emo,
     kassambara/navdata,
