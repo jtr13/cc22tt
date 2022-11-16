@@ -2,14 +2,13 @@
 
 Siyu Shen  
 
-
-The **dplyr** package is mainly used for cleaning and sorting data. By using **dplyr** package, we can efficiently process the data, which is very important for people to do data analysis. In this note, I am going to introduce the most common used functions in **dplyr**.
-
-
 ```{r echo=T, message=FALSE, results='hide'}
 #load 'dplyr' package
 library(dplyr)
 ```
+
+The **dplyr** package is mainly used for cleaning and sorting data. By using **dplyr** package, we can efficiently process the data, which is very important for people to do data analysis. In this note, I am going to introduce the most common used functions in **dplyr**.
+
 
 ```{r}
 #load data 'mtcars' as example
