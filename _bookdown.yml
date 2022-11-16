@@ -51,6 +51,10 @@ rmd_files: [
   'make_geographical_maps_with_different_packages.Rmd',
   'api_json_tutorial.Rmd',
   'sample_statistic_tutorial.Rmd',
+  'data_cleaning_tutorial.Rmd',
+  'mlr3_package_tutorial.Rmd',
+  'guide_to_nonparametric_tests.Rmd',
+  'dplyr_in_r.Rmd',
   
   # Part: Interview Prep
   'ten_interview_questions.Rmd',
