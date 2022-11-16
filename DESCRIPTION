@@ -64,6 +64,7 @@ Suggests:
     kableExtra,
     carData,
     cowplot,
+    janitor,
 Remotes:
     hadley/emo,
     kassambara/navdata,
