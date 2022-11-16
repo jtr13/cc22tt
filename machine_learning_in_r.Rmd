@@ -1,15 +1,8 @@
----
-title: "R Machine Learning Workflow Tutorial"
-author: "Tongli Su(ts3478), Yifan Lu(yl5113)"
-output:
-  html_document:
-    fig_width: 5
-    fig_height: 3.5
-  pdf_document: default
----
+# R machine learning workflow tutorial
 
-```{r setup, include=FALSE}
-# this prevents package loading message from appearing in the rendered version of your problem set
+Tongli Su, Yifan Lu
+
+```{r, include=FALSE}
 knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 ```
 
