@@ -1,11 +1,8 @@
----
-title: "Community Contribution"
-author: "Yu Song Ng"
-date: "2022-11-08"
-output: html_document
----
+# 3D visualizations with rayshader package
 
-```{r setup, include=FALSE}
+Yu Song Ng
+
+```{r, include=FALSE}
 knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 options(rgl.useNULL = TRUE,
         rgl.printRglwidget = TRUE)
@@ -22,13 +19,8 @@ options(rgl.useNULL = TRUE,
 
 library(rayshader)
 library(raster)
-# library(rgeos)
-# library(maptools)
 library(ggplot2)
-# library(ggalt)
 library(ggthemes)
-# library(viridis)
-# library(rvest)
 library(rgl)
 library(rvest)
 knitr::knit_hooks$set(webgl = hook_webgl)
