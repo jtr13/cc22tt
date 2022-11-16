@@ -1,0 +1,258 @@
+# dplyr pacakage in R
+
+Siyu Shen  
+
+```{r echo=T, message=FALSE, results='hide'}
+#load 'dplyr' package
+library(dplyr)
+```
+
+The **dplyr** package is mainly used for cleaning and sorting data. By using **dplyr** package, we can efficiently process the data, which is very important for people to do data analysis. In this note, I am going to introduce the most common used functions in **dplyr**.
+
+
+```{r}
+#load data 'mtcars' as example
+data(mtcars)
+
+#show the structure of the data 'mtcars'
+str(mtcars)
+```
+
+There are 32 observations on 11 variables. The meanings of each variables are:  
+**mpg**: Miles/(US) gallon,  
+**cyl**: Number of cylinders,  
+**disp**:	Displacement (cu.in.),  
+**hp**:	Gross horsepower,  
+**drat**:	Rear axle ratio,  
+**wt**:	Weight (1000 lbs),  
+**qsec**:	1/4 mile time,  
+**vs**:	Engine (0 = V-shaped, 1 = straight),  
+**am**:	Transmission (0 = automatic, 1 = manual),  
+**gear**:	Number of forward gears,  
+**carb**:	Number of carburetors.  
+
+## 1. Pipe operator '%>%'
+
+It is important to know the pipe **%>%** operator before we start to learn the functions in **dplyr** package. With the use of **%>%** , multiple functions can be wrapper together. And it can be used with any function.
+
+```{r eval=FALSE}
+# usage in filter() function
+filter(data_frame, variable == value)
+data_frame %>% filter(variable == value)
+
+# usage in mutate() function
+mutate(data_frame, expression(s))
+data_frame %>% mutate(expression(s))
+```
+
+
+## 2. Filter by row: filter() function
+
+You can use **filter()** function to filter the subsets by the given logic, which is similar to the **subset()** function, for example:
+
+```{r}
+#filter when mpg is greater than or equal to 22
+filter(mtcars, mpg >= 22)
+```
+
+```{r eval=FALSE}
+#filter when cyl=4 or gear=3
+filter(mtcars, cyl == 4 | gear == 3)
+
+#filter when cyl=4 and gear=3
+filter(mtcars, cyl == 4 & gear == 3)
+
+#note: when using AND operation, avoid using '&&' instead of '&'
+```
+
+
+## 3. Filter by column: select() function
+
+**select()** function selects subdatasets with column names as arguments. The **dplyr** package provides some special functions to be used in conjunction with the **select()** function to filter variables, including **starts_with**, **ends_with**, **contains**, **matches**, **one_of**, **num_range**, and **everything**.
+
+```{r warning=FALSE}
+#choose data 'iris' as example
+data(iris)
+
+iris = tbl_df(iris)
+
+#show the 'iris' data
+head(iris)
+```
+
+```{r}
+#select the columns that start with 'Petal'
+select(iris, starts_with("Petal"))
+```
+
+```{r eval=FALSE}
+#select the columns that not start with 'Petal'
+select(iris, -starts_with("Petal"))
+select(iris, !starts_with("Petal"))
+
+#select the columns that end with 'Petal'
+select(iris, ends_with("Width"))
+
+#select the columns that contain with 'etal'
+select(iris, contains("etal"))
+
+#select the columns that the variables name is with 't'
+select(iris, matches(".t."))
+
+#select the columns you want directly
+select(iris, Petal.Length, Petal.Width)
+
+#select multi-columns by using colon
+select(iris, Sepal.Length:Petal.Width)
+```
+
+```{r eval=FALSE}
+#when we cannot use the character vector filter, we need to use 'one_of()' function
+vars <- c("Petal.Length", "Petal.Width")
+select(iris, one_of(vars))
+```
+
+```{r eval=FALSE}
+#return all columns, generally used when adjusting the order of variables in a dataset
+select(iris, everything())
+
+#return all columns, but reorder the columns and put 'Species' column in the front
+select(iris, Species, everything())
+```
+
+## 4. mutate() and transmute()
+
+**mutate()** adds new variables and preserves existing ones; **transmute()** adds new variables and drops existing ones.  
+
+**4.1. mutate()**  
+
+**4.1.1. New columns**  
+
+```{r}
+#create two more columns named 'cyl2' and 'cyl4'
+head(mtcars %>% mutate(cyl2 = cyl * 2, cyl4 = cyl2 * 2))
+```
+
+**4.1.2. Delete columns**  
+
+```{r eval=FALSE}
+#delete the column 'mpg' and update the column 'disp'
+mtcars %>% mutate(mpg = NULL, disp = disp * 0.0163871)
+
+#delete the column 'cyl'
+mtcars %>% mutate(cyl = NULL)
+```
+
+**4.1.3. Application of Window function**  
+
+```{r}
+#create a new column 'rank' using min_rank() function by group 'cyl'
+head(mtcars %>% group_by(cyl) %>% mutate(rank = min_rank(desc(mpg))))
+
+#create a new column 'mpg_max' using max() function by group 'cyl'
+head(mtcars %>% group_by(cyl) %>% mutate(mpg_max = max(mpg)))
+
+```
+  
+
+**4.2. transmute()**  
+
+The return value does not contain the original dataset variables, only the variables after calculation and transformation are retained.  
+
+```{r}
+head(mtcars %>% mutate(wt_log=log(wt)))
+
+head(mtcars %>% transmute(wt_log=log(wt)))
+
+head(mtcars %>% mutate(displ_l = disp / 61.0237))
+
+head(mtcars %>% transmute(displ_l = disp / 61.0237))
+```
+
+## 5. Ranking function
+
+row_number: the results of the parallel rankings are in different order, and the elements appearing first are ranked first.  
+
+min_rank: the results of the tie ranks are the same, and the next rank will be occupied.  
+
+dense_rank: tied ranking does not occupy the ranking, for example: no matter how many tied for the second place, the subsequent ranking should still be the third place  
+
+percent_rank: rank by percentage  
+
+cume_dist: rank of cumulative distribution interval  
+
+ntile: roughly ranks vectors by dividing into n buckets. Larger buckets have lower rank.
+
+```{r}
+x = c(5, 1, 3, 2, 2, NA)
+
+row_number(x)
+
+min_rank(x)
+
+dense_rank(x)
+
+percent_rank(x)
+
+cume_dist(x)
+
+ntile(x, 2)
+
+head(mtcars%>%mutate(dense_rank=cume_dist(cyl)))
+```
+
+## 6. Sort function: arrange()  
+
+Note the difference between sorting and ranking.  
+
+**arrange()** sorts the rows sequentially by the given column names.  
+
+```{r}
+#sorted by column 'mpg'
+head(arrange(mtcars, mpg))
+
+#sorted by column 'mpg' and 'disp'
+head(arrange(mtcars, mpg, disp))
+
+#reverse order by using desc()
+head(arrange(mtcars, desc(mpg)))
+
+#reverse order by using '-'
+head(arrange(mtcars, -mpg))
+```
+
+## 7. Summary function: summarise()
+
+**7.1. Summary in whole**
+
+```{r}
+#return the mean value in column 'disp'
+summarise(mtcars, mean(disp))
+
+#return the standard deviation in column 'disp'
+summarise(mtcars, sd(disp))
+
+#return the maximum and minimum value in column 'disp'
+summarise(mtcars, max(disp), min(disp))
+
+#return the number of columns in dataset 'mtcars'
+summarise(mtcars, n())
+
+#return the number of unique gear
+summarise(mtcars, n_distinct(gear))
+
+#return the first value in column 'disp'
+summarise(mtcars, first(disp))
+
+#return the last value in column 'disp'
+summarise(mtcars, last(disp))
+```
+
+**7.2. Summary by group**
+
+```{r}
+#return the mean value and standard deviation of column 'disp' by grouping column 'cyl'
+mtcars %>% group_by(cyl) %>%
+summarise(mean = mean(disp), sd = sd(disp))
+```
+
