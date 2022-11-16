@@ -1,0 +1,142 @@
+# Data cleaning tutorial
+
+Saili Myana and Sai Rithvik Kanakamedala
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE)
+library(tidyr)
+library(janitor)
+library(dplyr)
+library(zoo)
+```
+
+
+## Motivation
+Data cleaning is an important preliminary processing step that we perform on the data before we visualize and model it. Data with errors or missing values will lead to erroneous observations. Making business decisions with inaccurate observations may lead to downfall of the company. 
+For example, Will Hillier said. "It’s like creating a foundation for a building: do it right and you can build something strong and long-lasting. Do it wrong, and your building will soon collapse." 
+We can't perform any visualization or machine learning analysis without first cleaning the dataset.
+
+In this tutorial, we are going to perform step-by-step data cleaning on a real world dataset from [Zillow Research](https://www.zillow.com/research/data/){target="_blank"}. The data can be downloaded by going to list and sale prices section and selecting Median List Price(Raw, All Homes, Monthly) which contains the data of monthly listing prices of houses across the United States.  
+
+## Observe the Dataset
+
+It is important that we first view the dataset and understand what each column means. In our example, we are analyzing the median listing prices of houses in different cities on different dates.
+
+```{r}
+listing_price <- read.csv(url("https://files.zillowstatic.com/research/public_csvs/mlp/Metro_mlp_uc_sfrcondo_month.csv?t=1668571408"))
+print(dim(listing_price))
+head(listing_price)[colnames(listing_price)[1:6]] # Showing only 6 columns, remaining are similar to the date column
+```
+
+## Check the data type of columns
+
+The data may contain Numeric, Character, Logical, Factor or other data types. We need to check if the columns in the raw data have a suitable data type. For examples some numerical data may be stored as character and it is important to convert them into numerical before proceeding to analyse the data.
+
+For each column of the dataset check the data type using str(dataset). This will show the data type of the column along with a few example values.
+
+```{r}
+str(listing_price)
+```
+## Optional Step
+
+We can also check if all the columns are named neatly. Using the clean_names function, we can rename all the columns with consistent format.  
+
+```{r}
+listing_price <- clean_names(listing_price)
+colnames(listing_price)
+```
+## Check for duplicate data
+
+Next, we check if there are any duplicate rows in the dataset and remove the repeated rows using the distinct function in the dplyr package.
+
+```{r}
+listing_price <- distinct(listing_price)
+```
+
+
+## Remove empty rows and columns
+We need to remove all the empty rows and columns as they dont contain any useful information. This can be done using the remove_empty function from the janitor package.
+
+```{r}
+listing_price <- remove_empty(listing_price, which = c("rows", "cols"), quiet = FALSE)
+```
+
+## Converting messy data into tidy data
+
+The data we have currently is messy. As a good practice, we can convert this data into tidy format where every column is a variable and every every row is an observation. 
+
+```{r}
+tidy_df <- listing_price %>% pivot_longer(cols=colnames(listing_price)[6:60], names_to="date", values_to = "listing_price") 
+head(tidy_df)
+```
+## Check for missing values
+We check if our data contains missing values using the is.na() function. We can find the number of missing values in the dataset by calculating sum(is.na(data)). 
+```{r}
+sum(is.na(tidy_df))
+```
+
+## Handling missing values
+
+There are multiple ways to handle missing values.
+
+1) We can omit the rows that contain missing values.
+
+```{r, results="hide", eval=F, echo=T}
+data <- na.omit(data) # we can also use na.exclude(data)
+```
+
+2) We can replace the missing value with a previous value in the column.
+(This may be the best way to replace missing values in the case when a group of rows are given the same value for a column and written only once)
+
+```{r, results="hide", eval=F, echo=T}
+for (i in colnames(data)){
+data %>% fill(all_of(i), .direction = 'up')
+}
+```
+
+3) We can replace the missing value with the average of the column.
+
+```{r, eval = "FALSE", eval=F, echo=T}
+data <- na.aggregate(data) # Replace NA in all columns with column mean
+```
+
+
+4) Or we can replace them with the average of the values prior and post to the missing value depending on the context. 
+
+There are more advanced methods to predict the missing values like Regression techniques, which can be used if needed. Depending on the dataset, we can select the method that is most appropriate.
+
+In our dataset, we have two appropriate ways of dealing with missing values.
+
+1) We can remove the cities with missing values. This will remove 95 of the 898 cities. This can be done by omitting the rows containing NA before tidying the data.
+
+2) We can remove the dates where the particular city does not have a price listed. This can be done by converting the data into tidy format and then omitting the rows with missing values. We are choosing this way, as omitting the dates where price is unavailable is good enough for our analysis.
+
+```{r}
+tidy_df <- na.omit(tidy_df)
+```
+
+
+
+
+## Removing Outliers (Optional)
+
+In case outliers are changing the trends in the data, we may want to analyse by removing the outliers. This can be done by finding the Z scores as shown below and having a threshold for the Z score to filter out the outliers.  
+
+In our dataset, this is not required, as we aim to visualize the house prices as they are.
+
+```{r, result="hide", eval=F, echo=T}
+#For numeric columns of data only
+df <- data[names(dplyr::select_if(data,is.numeric))]
+z_scores <- as.data.frame(sapply(df, function(df) (abs(df-mean(df))/sd(df))))
+head(z_scores)
+
+no_outliers_data <- data[!rowSums(z_scores>3), ] #removing rows with z-scores greater than 3
+dim(no_outliers_data) #to check final dimensions of data
+```
+
+
+
+Now the dataset is ready to be analyzed. We can also model the data using some Machine Learning models as it doesn't contain any missing values or corrupted data.
+
+## Conclusion
+Through this tutorial, we discovered different ways in which data can be messy. We thought about what could be wrong in the column names, what could be wrong in their data types, how to deal when some data is missing and what to do when there are unwanted outliers. Through this journey, we learnt to question if there is anything unexpected in the data and how to convert it to desired format. We will think of these data cleaning steps for any dataset we encounter in the future, and implement the requisite steps. 

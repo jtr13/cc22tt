@@ -1,0 +1,426 @@
+# Geo-Mapping Coordinate Extraction Using API Calls
+
+Wei Xiong Toh
+
+```{r , include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(httr)
+library(stringr)
+library(leaflet)
+library(sf)
+library(assertthat)
+library(jsonlite)
+```
+
+## Introduction
+
+Leaflet is a popular library in R that allows us to plot interactive maps. It is extremely easy to use and there are many applications for visualizing geometric information. However, it is relatively prohibitive to use without prior access to the required Shapefiles or spatial data. This project aims to automate the process of generating spatial data and incorporating the information with existing data frames for ease of plotting with Leaflet. A detailed guide on using Leaflet can be found [here](https://rstudio.github.io/leaflet/).
+
+## Motivation
+
+Consider the following toy problem: we have the following population information and want to display it by outlining each country in the data frame, with each individual country's population shown by its color on the map. 
+
+```{r population_country}
+input_list <- c('US', 'UK', 'China', 'Japan', 'Brazil')
+input_vals <- c(329064917, 	67508936, 1425887337, 128547854, 215313498)
+input_df <- data.frame(name=input_list, val=input_vals)
+print(input_df)
+```
+
+### Public Datasets
+
+There are several open source datasets that contain Shapefiles/coordinates with geographical boundaries for countries. An example can be found [here](https://public.opendatasoft.com/explore/dataset/world-administrative-boundaries/export/). The challenge following downloading the data would be to integrate existing information (population in the above example) with the spatial coordinates in the Shapefiles, which one needs to manually filter through the dataset to obtain. Another significant challenge arises when the areas of interest are not located within the same dataset. Extracting coordinates from multiple sources becomes tedious. For example, the following comparison might need several disparate sources.
+
+```{r population_city}
+input_list_2 <- c('New York', 'London', 'Shanghai', 'Tokyo', 'Rio')
+input_vals_2 <- c(8467513, 9541000, 20217748, 37274000, 13634000)
+input_df_2 <- data.frame(name=input_list_2, val=input_vals_2)
+print(input_df_2)
+```
+
+### API Calls
+
+The alternative to relying on publicly available datasets for spatial coordinates is to obtain the information through API calls. There are several steps to the process:
+
+1. Obtain relation number of point of interest from [OpenStreetMap](https://www.openstreetmap.org/)
+![OSM API](resources/relation_number.png)
+
+2. Input relation number into the [Polygon Search API](https://polygons.openstreetmap.fr/)
+![Polygon Search](resources/polygon.png)
+
+3. Extract coordinates from response
+![Response](resources/poly_results.png)
+
+The benefit of using this method is that it is accurate for all levels of administration, whether one is looking for a country, state or even city. 
+The next section details the process to automate this search given only the input data frames above. Several improvements arise from this contribution:
+
+1. Eliminate the need to download several datasets from multiple sources.
+2. Reduce time taken to filter through dataset to obtain relevant coordinates.
+3. Obtain either point or polygon coordinates.
+
+
+## Code
+
+The user has to specify the following input parameters:
+
+```{r input_params}
+input_list <- c('US', 'UK', 'China', 'Japan', 'Brazil')
+input_vals <- c(329064917, 	67508936, 	1425887337, 128547854, 215313498)
+input_df <- data.frame(name=input_list, val=input_vals)
+input_type <- 'Country'
+input_ll_type <- 'poly'
+granularity <- 50
+```
+
+
+* ```input_type``` parameter allows the user to select the level of administration for each input in the list.
+* ```granularity``` parameter is used to speed up plotting by reducing the number of points in the final multipolygon shape.
+
+### Multipolygon
+
+Main code to obtain longitude and latitudes of areas of interest:
+
+```{r code_body_poly}
+input_list <- c('US', 'UK', 'China', 'Japan', 'Brazil')
+input_vals <- c(329064917, 	67508936, 	1425887337, 128547854, 215313498)
+input_df <- data.frame(name=input_list, val=input_vals)
+input_type <- 'Country'
+input_ll_type <- 'poly'
+granularity <- 50
+
+# check inputs
+stopifnot(input_type %in% c('City', 'State', 'Country'))
+stopifnot(input_ll_type %in% c('poly', 'point'))
+stopifnot(granularity > 0)
+
+if (str_detect(input_ll_type, 'poly')) {
+  mpoly_result = c()
+  
+  for (input in input_list) {
+    # replace spaces with '+'
+    input <- input %>% str_replace_all(string=., ' ', '+')
+    
+    # concat to get final query url
+    base_url <- 'https://www.openstreetmap.org/geocoder/search_osm_nominatim?query='
+    query_url <- paste(c(base_url, input), collapse='')
+    
+    # get relation number from OSM API
+    res <- GET(query_url)
+    results <- content(res, as='text')
+    results <- results %>% str_extract_all(., 'li class=.+')
+    results <- results[[1]]
+    
+    # Part 1: extract relation number matching input type
+    for (result in results) {
+      data_pref <- str_extract(result, 'data-prefix=.+?(\\s)')
+      # check for match with query
+      if (!is.na(str_extract(data_pref, input_type))) {
+        rn <- str_extract(result, 'data-id=.+?(\\s)')
+        rn <- rn %>% str_replace(., 'data-id=\"', '') %>% 
+                str_replace(., '\" ', '')
+        break
+      }
+    }
+    
+    # Part 2: get latitude and longitude from OSM API
+    poly_base_url <- 'https://polygons.openstreetmap.fr/get_poly.py?id='
+    params <- '&params=0'
+    poly_url <- paste(c(poly_base_url, rn, params), collapse='')
+    
+    poly_res <- GET(poly_url)
+    poly_ll <- read.table(text=content(poly_res,as='text'), sep='\n')
+    
+    # Part 3: create polygons for plotting
+    mpoly_coords <- list()
+    curr_coords <- list()
+    count <- 1
+    
+    for (coords in poly_ll[2:NROW(poly_ll)-1,]) {
+      # add to current mpoly list
+      if (str_detect(coords, 'END')) {
+        if (length(curr_coords) > 1) {
+          # verify closed polygon
+          if (curr_coords[[length(curr_coords)-1]] != curr_coords[[1]] || 
+              curr_coords[[length(curr_coords)]] != curr_coords[[2]]) {
+            curr_coords[[length(curr_coords)+1]] <- curr_coords[[1]]
+            curr_coords[[length(curr_coords)+1]] <- curr_coords[[2]]
+          }
+          
+          mpoly_coords[[length(mpoly_coords)+1]] <- matrix(as.numeric(curr_coords), ncol=2, byrow=TRUE)
+          curr_coords <- list()
+          count <- 1
+        }
+      }
+      # check if coords are valid
+      else if ((count-1) %% granularity == 0 && nchar(coords) > 1) {
+        long = as.numeric(str_split(coords, '\t')[[1]][2])
+        lat = as.numeric(str_split(coords, '\t')[[1]][3])
+        
+        if (!is.na(long) && !is.na(lat)) {
+          curr_coords <- append(curr_coords, long)
+          curr_coords <- append(curr_coords, lat)
+        }
+      }
+      
+      count <- count + 1
+    }
+    
+    mpoly_shape <- st_multipolygon(list(mpoly_coords))
+    
+    mpoly_result[[length(mpoly_result)+1]] <- mpoly_shape
+  
+  }
+  
+  # create sf object to plot
+  mpoly_sf <- st_sf(input_df, geometry=mpoly_result)
+  
+} else {
+  # single point
+  mpoint_list <- c()
+  
+  for (input in input_list) {
+    # replace spaces with '+'
+    input <- input %>% str_replace_all(string=., ' ', '+')
+    
+    # concat to get final query url
+    base_url <- 'https://www.openstreetmap.org/geocoder/search_osm_nominatim?query='
+    query_url <- paste(c(base_url, input), collapse='')
+    
+    # get relation number from OSM API
+    res <- GET(query_url)
+    results <- content(res, as='text')
+    results <- results %>% str_extract_all(., 'li class=.+')
+    results <- results[[1]]
+    
+    # Part 1: extract relation number matching input type
+    for (result in results) {
+      data_pref <- str_extract(result, 'data-prefix=.+?(\\s)')
+      # check for match with query
+      if (!is.na(str_extract(data_pref, input_type))) {
+        rn <- str_extract(result, 'data-id=.+?(\\s)')
+        rn <- rn %>% str_replace(., 'data-id=\"', '') %>% 
+          str_replace(., '\" ', '')
+        break
+      }
+    }
+    
+    # Part 2: get latitude and longitude from OSM API
+    base_url <- 'https://nominatim.openstreetmap.org/details?osmtype=R&osmid='
+    query_url <- paste(c(base_url, rn, '&format=json'), collapse='')
+    
+    # extract info from OSM API
+    res <- fromJSON(query_url)
+    
+    if ("centroid" %in% names(res)) {
+      long <- res$centroid$coordinates[1]
+      lat <- res$centroid$coordinates[2]
+    } else {
+      long <- NULL
+      lat <- NULL
+    }
+    
+    if (!is.na(long) && !is.na(lat)) {
+      mpoint_list[[length(mpoint_list)+1]] <- st_point(c(long, lat))
+    }
+  }
+  
+  mpoint_sf <- st_sf(input_df, geometry=mpoint_list)
+  
+}
+
+```
+
+#### Multipolygon Plots
+
+```{r plot_poly}
+input_colorP <- "YlOrRd"
+
+leaflet(mpoly_sf) %>% 
+    addTiles() %>%
+    addPolygons(
+      fillOpacity = 1, smoothFactor = 0.75,
+      color=~colorNumeric(input_colorP, val)(val)
+    )
+```
+
+### Points
+
+```{r code_body_points}
+input_list <- c('New York', 'London', 'Shanghai', 'Tokyo', 'Rio')
+input_vals <- c(8467513, 	9541000, 	20217748, 37274000, 13634000)
+input_df <- data.frame(name=input_list, val=input_vals)
+input_type <- 'City'
+input_ll_type <- 'point'
+granularity <- 50
+
+# check inputs
+stopifnot(input_type %in% c('City', 'State', 'Country'))
+stopifnot(input_ll_type %in% c('poly', 'point'))
+stopifnot(granularity > 0)
+
+if (str_detect(input_ll_type, 'poly')) {
+  mpoly_result <- c()
+  
+  for (input in input_list) {
+    # replace spaces with '+'
+    input <- input %>% str_replace_all(string=., ' ', '+')
+    
+    # concat to get final query url
+    base_url <- 'https://www.openstreetmap.org/geocoder/search_osm_nominatim?query='
+    query_url <- paste(c(base_url, input), collapse='')
+    
+    # get relation number from OSM API
+    res <- GET(query_url)
+    results <- content(res, as='text')
+    results <- results %>% str_extract_all(., 'li class=.+')
+    results <- results[[1]]
+    
+    # Part 1: extract relation number matching input type
+    for (result in results) {
+      data_pref <- str_extract(result, 'data-prefix=.+?(\\s)')
+      # check for match with query
+      if (!is.na(str_extract(data_pref, input_type))) {
+        rn <- str_extract(result, 'data-id=.+?(\\s)')
+        rn <- rn %>% str_replace(., 'data-id=\"', '') %>% 
+                str_replace(., '\" ', '')
+        break
+      }
+    }
+    
+    # Part 2: get latitude and longitude from OSM API
+    poly_base_url <- 'https://polygons.openstreetmap.fr/get_poly.py?id='
+    params <- '&params=0'
+    poly_url <- paste(c(poly_base_url, rn, params), collapse='')
+    
+    poly_res <- GET(poly_url)
+    poly_ll <- read.table(text=content(poly_res,as='text'), sep='\n')
+    
+    # Part 3: create polygons for plotting
+    mpoly_coords <- list()
+    curr_coords <- list()
+    count <- 1
+    
+    for (coords in poly_ll[2:NROW(poly_ll)-1,]) {
+      # add to current mpoly list
+      if (str_detect(coords, 'END')) {
+        if (length(curr_coords) > 1) {
+          # verify closed polygon
+          if (curr_coords[[length(curr_coords)-1]] != curr_coords[[1]] || 
+              curr_coords[[length(curr_coords)]] != curr_coords[[2]]) {
+            curr_coords[[length(curr_coords)+1]] <- curr_coords[[1]]
+            curr_coords[[length(curr_coords)+1]] <- curr_coords[[2]]
+          }
+          
+          mpoly_coords[[length(mpoly_coords)+1]] <- matrix(as.numeric(curr_coords), ncol=2, byrow=TRUE)
+          curr_coords <- list()
+          count <- 1
+        }
+      }
+      # check if coords are valid
+      else if ((count-1) %% granularity == 0 && nchar(coords) > 1) {
+        long = as.numeric(str_split(coords, '\t')[[1]][2])
+        lat = as.numeric(str_split(coords, '\t')[[1]][3])
+        
+        if (!is.na(long) && !is.na(lat)) {
+          curr_coords <- append(curr_coords, long)
+          curr_coords <- append(curr_coords, lat)
+        }
+      }
+      
+      count <- count + 1
+    }
+    
+    mpoly_shape <- st_multipolygon(list(mpoly_coords))
+    
+    mpoly_result[[length(mpoly_result)+1]] <- mpoly_shape
+  
+  }
+  
+  # create sf object to plot
+  mpoly_sf <- st_sf(input_df, geometry=mpoly_result)
+  
+} else {
+  # single point
+  mpoint_list <- c()
+  
+  for (input in input_list) {
+    # replace spaces with '+'
+    input <- input %>% str_replace_all(string=., ' ', '+')
+    
+    # concat to get final query url
+    base_url <- 'https://www.openstreetmap.org/geocoder/search_osm_nominatim?query='
+    query_url <- paste(c(base_url, input), collapse='')
+    
+    # get relation number from OSM API
+    res <- GET(query_url)
+    results <- content(res, as='text')
+    results <- results %>% str_extract_all(., 'li class=.+')
+    results <- results[[1]]
+    
+    # Part 1: extract relation number matching input type
+    for (result in results) {
+      data_pref <- str_extract(result, 'data-prefix=.+?(\\s)')
+      # check for match with query
+      if (!is.na(str_extract(data_pref, input_type))) {
+        rn <- str_extract(result, 'data-id=.+?(\\s)')
+        rn <- rn %>% str_replace(., 'data-id=\"', '') %>% 
+          str_replace(., '\" ', '')
+        break
+      }
+    }
+    
+    # Part 2: get latitude and longitude from OSM API
+    base_url <- 'https://nominatim.openstreetmap.org/details?osmtype=R&osmid='
+    query_url <- paste(c(base_url, rn, '&format=json'), collapse='')
+    
+    # extract info from OSM API
+    res <- fromJSON(query_url)
+    
+    if ("centroid" %in% names(res)) {
+      long <- res$centroid$coordinates[1]
+      lat <- res$centroid$coordinates[2]
+    } else {
+      long <- NULL
+      lat <- NULL
+    }
+    
+    if (!is.na(long) && !is.na(lat)) {
+      mpoint_list[[length(mpoint_list)+1]] <- st_point(c(long, lat))
+    }
+  }
+  
+  mpoint_sf <- st_sf(input_df, geometry=mpoint_list)
+  
+}
+
+```
+### Single Marker Plots
+
+```{r points_plot}
+leaflet(mpoint_sf) %>% 
+    addTiles() %>% 
+    addMarkers()
+```
+
+
+### Circle Plots
+
+``` {r circle_plot}
+leaflet(mpoint_sf) %>% 
+    addTiles() %>% 
+    addCircles(radius=~sqrt(val)*50)
+```
+
+## Evaluation
+
+The same set of code generates different [simple feature collection objects](https://r-spatial.github.io/sf/articles/sf1.html) depending on the input variables set by the user. This allows for a lot of flexibility in obtaining the spatial coordinates based on the user's needs. As compared to the traditional method of downloading open source spatial data, this approach is more convenient because the user does not have to obtain the data, nor does the user need to know how to manipulate the data prior to plotting. 
+
+Since this method relies on two key API calls, the accuracy is limited by the accuracy of the data maintained by the API libraries used. It is not feasible to rely on API calls should the administrators of OpenStreetMap decide to remove public access to their libraries or charge a fee for their usage. 
+
+## Future Work
+
+Given more time to work on this project, I would publish the code as a library in R so that the overall code is neater with even more error handling incorporated. 
+
+## Conclusion
+
+This project automates the method of API calls to efficiently extract geospatial coordinates of points of interests (POIs), which can then be merged with existing data frames for visualizing spatial information. Users only need to provide the names of the POIs, the administrative level of the POIs (Country/State/City), the type of plot required and the granularity for selecting coordinates if plotting polygons. Users can then use the combined data frame as an input to Leaflet to visualize their data.
