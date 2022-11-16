@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 41 dplyr pacakage in R | Community Contributions for EDAV Fall 2022 Tues/Thurs</title>
+<meta name="description" content="Siyu Shen #load 'dplyr' package library(dplyr) The dplyr package is mainly used for cleaning and sorting data. By using dplyr package, we can efficiently process the data, which is very important...">
+<meta name="generator" content="bookdown 0.30 with bs4_book()">
+<meta property="og:title" content="Chapter 41 dplyr pacakage in R | Community Contributions for EDAV Fall 2022 Tues/Thurs">
+<meta property="og:type" content="book">
+<meta property="og:description" content="Siyu Shen #load 'dplyr' package library(dplyr) The dplyr package is mainly used for cleaning and sorting data. By using dplyr package, we can efficiently process the data, which is very important...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 41 dplyr pacakage in R | Community Contributions for EDAV Fall 2022 Tues/Thurs">
+<meta name="twitter:description" content="Siyu Shen #load 'dplyr' package library(dplyr) The dplyr package is mainly used for cleaning and sorting data. By using dplyr package, we can efficiently process the data, which is very important...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.1/transition.js"></script><script src="libs/bs3compat-0.4.1/tabs.js"></script><script src="libs/bs3compat-0.4.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><script src="libs/plotly-binding-4.10.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script><link href="libs/visjs-7.4.9/vis-timeline-graph2d.min.css" rel="stylesheet">
+<script src="libs/visjs-7.4.9/vis-timeline-graph2d.min.js"></script><link href="libs/timeline-0.4/timevis.css" rel="stylesheet">
+<script src="libs/timevis-binding-2.1.0/timevis.js"></script><link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
+<script src="libs/leaflet-1.3.1/leaflet.js"></script><link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
+<script src="libs/proj4-2.6.2/proj4.min.js"></script><script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script><link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
+<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Community Contributions for EDAV Fall 2022 Tues/Thurs</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Welcome!</a></li>
+<li><a class="" href="community-contribution.html"><span class="header-section-number">2</span> Community Contribution</a></li>
+<li><a class="" href="github-submission-instructions.html"><span class="header-section-number">3</span> GitHub submission instructions</a></li>
+<li><a class="" href="sample-project.html"><span class="header-section-number">4</span> Sample project</a></li>
+<li class="book-part">Cheatsheets</li>
+<li><a class="" href="r-window-functions-cheatsheet.html"><span class="header-section-number">6</span> R window functions cheatsheet</a></li>
+<li><a class="" href="rmd-chunk-option-cheat-sheet.html"><span class="header-section-number">7</span> Rmd chunk option cheat sheet</a></li>
+<li><a class="" href="helpful-ggplot2-extensions-cheatsheet.html"><span class="header-section-number">8</span> Helpful ggplot2 Extensions Cheatsheet</a></li>
+<li><a class="" href="commonly-used-graph-cheatcheet.html"><span class="header-section-number">9</span> Commonly-used graph cheatcheet</a></li>
+<li><a class="" href="git-and-version-control.html"><span class="header-section-number">10</span> Git and version control</a></li>
+<li><a class="" href="useful-plots-for-bioinfomatics-in-r.html"><span class="header-section-number">11</span> Useful plots for Bioinfomatics in R</a></li>
+<li><a class="" href="different-ways-to-create-world-map-in-r.html"><span class="header-section-number">12</span> Different ways to create world map in R</a></li>
+<li><a class="" href="color-in-r-python-and-jshtmlcss.html"><span class="header-section-number">13</span> Color in R, Python, and JS/HTML/CSS</a></li>
+<li><a class="" href="color-palettes-for-data-visualization.html"><span class="header-section-number">14</span> Color Palettes for Data Visualization</a></li>
+<li><a class="" href="data-visualization-using-seaborn.html"><span class="header-section-number">15</span> Data visualization using Seaborn</a></li>
+<li><a class="" href="machine-learning-cheatsheet-for-r-and-python.html"><span class="header-section-number">16</span> Machine Learning Cheatsheet for R and Python</a></li>
+<li><a class="" href="data-visualization-with-r-ggplot2-vs.-matlab.html"><span class="header-section-number">17</span> Data Visualization with R ggplot2 vs. Matlab</a></li>
+<li><a class="" href="ggplot2-plots-in-python-cheat-sheet-tutorial.html"><span class="header-section-number">18</span> Ggplot2 plots in python cheat sheet tutorial</a></li>
+<li><a class="" href="model-evaluation-selection-visualization-with-easystats.html"><span class="header-section-number">19</span> Model evaluation, selection &amp; visualization with easystats</a></li>
+<li class="book-part">Tutorials</li>
+<li><a class="" href="preprocessing-and-visualization-of-time-series-data.html"><span class="header-section-number">21</span> Preprocessing and Visualization of Time Series Data</a></li>
+<li><a class="" href="how-to-use-sqldf.html"><span class="header-section-number">22</span> How to use sqldf</a></li>
+<li><a class="" href="googlevis-in-r.html"><span class="header-section-number">23</span> googleVis in R</a></li>
+<li><a class="" href="tutorial-for-vector-fields-in-r.html"><span class="header-section-number">24</span> Tutorial for vector fields in r</a></li>
+<li><a class="" href="data-cleaning-with-r.html"><span class="header-section-number">25</span> Data cleaning with r</a></li>
+<li><a class="" href="introduction-to-shiny-web-apps.html"><span class="header-section-number">26</span> Introduction to Shiny Web Apps</a></li>
+<li><a class="" href="python-missingno-library-tutorial.html"><span class="header-section-number">27</span> Python missingno library tutorial</a></li>
+<li><a class="" href="data-explorer-tutorial-and-automation.html"><span class="header-section-number">28</span> Data Explorer Tutorial and Automation</a></li>
+<li><a class="" href="d-visualization-in-r.html"><span class="header-section-number">29</span> 3D Visualization in R</a></li>
+<li><a class="" href="visualizing-time-series-data.html"><span class="header-section-number">30</span> Visualizing Time Series Data</a></li>
+<li><a class="" href="igraph-in-r.html"><span class="header-section-number">31</span> igraph in r</a></li>
+<li><a class="" href="geo-mapping-coordinate-extraction-using-api-calls.html"><span class="header-section-number">32</span> Geo-Mapping Coordinate Extraction Using API Calls</a></li>
+<li><a class="" href="edav-garden.html"><span class="header-section-number">33</span> EDAV Garden</a></li>
+<li><a class="" href="using-raster-data-in-r.html"><span class="header-section-number">34</span> Using raster data in R</a></li>
+<li><a class="" href="make-geographical-maps-with-different-packages.html"><span class="header-section-number">35</span> Make Geographical Maps with Different Packages</a></li>
+<li><a class="" href="how-to-obtain-data-from-api-and-process-raw-json-data.html"><span class="header-section-number">36</span> How to obtain data from API and process raw JSON data</a></li>
+<li><a class="" href="sample-statistic-tutorial.html"><span class="header-section-number">37</span> Sample Statistic Tutorial</a></li>
+<li><a class="" href="data-cleaning-tutorial.html"><span class="header-section-number">38</span> Data cleaning tutorial</a></li>
+<li><a class="" href="mlr3-package-tutorial.html"><span class="header-section-number">39</span> mlr3 Package Tutorial</a></li>
+<li><a class="" href="guide-to-nonparametric-tests.html"><span class="header-section-number">40</span> Guide to nonparametric tests</a></li>
+<li><a class="active" href="dplyr-pacakage-in-r.html"><span class="header-section-number">41</span> dplyr pacakage in R</a></li>
+<li class="book-part">Interview Prep</li>
+<li><a class="" href="ten-interview-questions-and-answers.html"><span class="header-section-number">43</span> Ten interview questions and answers</a></li>
+<li><a class="" href="data-science-internship-search-survival-guide.html"><span class="header-section-number">44</span> Data science internship search survival guide</a></li>
+<li><a class="" href="data-visualization-interview-questions-sample.html"><span class="header-section-number">45</span> Data visualization interview questions sample</a></li>
+<li class="book-part">Case Studies</li>
+<li><a class="" href="benford-case-study.html"><span class="header-section-number">47</span> Benford Case Study</a></li>
+<li class="book-part">Appendices</li>
+<li><a class="" href="github-initial-setup.html"><span class="header-section-number">48</span> Github initial setup</a></li>
+<li><a class="" href="tutorial-for-pull-request-mergers.html"><span class="header-section-number">49</span> Tutorial for pull request mergers</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/jtr13/cc22tt">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="dplyr-pacakage-in-r" class="section level1" number="41">
+<h1>
+<span class="header-section-number">41</span> dplyr pacakage in R<a class="anchor" aria-label="anchor" href="#dplyr-pacakage-in-r"><i class="fas fa-link"></i></a>
+</h1>
+<p>Siyu Shen</p>
+<div class="sourceCode" id="cb608"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#load 'dplyr' package</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span></code></pre></div>
+<p>The <strong>dplyr</strong> package is mainly used for cleaning and sorting data. By using <strong>dplyr</strong> package, we can efficiently process the data, which is very important for people to do data analysis. In this note, I am going to introduce the most common used functions in <strong>dplyr</strong>.</p>
+<div class="sourceCode" id="cb609"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#load data 'mtcars' as example</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#show the structure of the data 'mtcars'</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 'data.frame':    32 obs. of  11 variables:
+##  $ mpg : num  21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...
+##  $ cyl : num  6 6 4 6 8 6 8 4 4 6 ...
+##  $ disp: num  160 160 108 258 360 ...
+##  $ hp  : num  110 110 93 110 175 105 245 62 95 123 ...
+##  $ drat: num  3.9 3.9 3.85 3.08 3.15 2.76 3.21 3.69 3.92 3.92 ...
+##  $ wt  : num  2.62 2.88 2.32 3.21 3.44 ...
+##  $ qsec: num  16.5 17 18.6 19.4 17 ...
+##  $ vs  : num  0 0 1 1 0 1 0 1 1 1 ...
+##  $ am  : num  1 1 1 0 0 0 0 0 0 0 ...
+##  $ gear: num  4 4 4 3 3 3 3 4 4 4 ...
+##  $ carb: num  4 4 1 1 2 1 4 2 2 4 ...</code></pre>
+<p>There are 32 observations on 11 variables. The meanings of each variables are:<br><strong>mpg</strong>: Miles/(US) gallon,<br><strong>cyl</strong>: Number of cylinders,<br><strong>disp</strong>: Displacement (cu.in.),<br><strong>hp</strong>: Gross horsepower,<br><strong>drat</strong>: Rear axle ratio,<br><strong>wt</strong>: Weight (1000 lbs),<br><strong>qsec</strong>: 1/4 mile time,<br><strong>vs</strong>: Engine (0 = V-shaped, 1 = straight),<br><strong>am</strong>: Transmission (0 = automatic, 1 = manual),<br><strong>gear</strong>: Number of forward gears,<br><strong>carb</strong>: Number of carburetors.</p>
+<div id="pipe-operator" class="section level2" number="41.1">
+<h2>
+<span class="header-section-number">41.1</span> 1. Pipe operator ‘%&gt;%’<a class="anchor" aria-label="anchor" href="#pipe-operator"><i class="fas fa-link"></i></a>
+</h2>
+<p>It is important to know the pipe <strong>%&gt;%</strong> operator before we start to learn the functions in <strong>dplyr</strong> package. With the use of <strong>%&gt;%</strong> , multiple functions can be wrapper together. And it can be used with any function.</p>
+<div class="sourceCode" id="cb611"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># usage in filter() function</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">data_frame</span>, <span class="va">variable</span> <span class="op">==</span> <span class="va">value</span><span class="op">)</span></span>
+<span><span class="va">data_frame</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">variable</span> <span class="op">==</span> <span class="va">value</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># usage in mutate() function</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="va">data_frame</span>, <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">s</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">data_frame</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">s</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="filter-by-row-filter-function" class="section level2" number="41.2">
+<h2>
+<span class="header-section-number">41.2</span> 2. Filter by row: filter() function<a class="anchor" aria-label="anchor" href="#filter-by-row-filter-function"><i class="fas fa-link"></i></a>
+</h2>
+<p>You can use <strong>filter()</strong> function to filter the subsets by the given logic, which is similar to the <strong>subset()</strong> function, for example:</p>
+<div class="sourceCode" id="cb612"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#filter when mpg is greater than or equal to 22</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">mpg</span> <span class="op">&gt;=</span> <span class="fl">22</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##                 mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+## Datsun 710     22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+## Merc 240D      24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+## Merc 230       22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+## Fiat 128       32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+## Honda Civic    30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+## Toyota Corolla 33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+## Fiat X1-9      27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+## Porsche 914-2  26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+## Lotus Europa   30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2</code></pre>
+<div class="sourceCode" id="cb614"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#filter when cyl=4 or gear=3</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">cyl</span> <span class="op">==</span> <span class="fl">4</span> <span class="op">|</span> <span class="va">gear</span> <span class="op">==</span> <span class="fl">3</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#filter when cyl=4 and gear=3</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">cyl</span> <span class="op">==</span> <span class="fl">4</span> <span class="op">&amp;</span> <span class="va">gear</span> <span class="op">==</span> <span class="fl">3</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#note: when using AND operation, avoid using '&amp;&amp;' instead of '&amp;'</span></span></code></pre></div>
+</div>
+<div id="filter-by-column-select-function" class="section level2" number="41.3">
+<h2>
+<span class="header-section-number">41.3</span> 3. Filter by column: select() function<a class="anchor" aria-label="anchor" href="#filter-by-column-select-function"><i class="fas fa-link"></i></a>
+</h2>
+<p><strong>select()</strong> function selects subdatasets with column names as arguments. The <strong>dplyr</strong> package provides some special functions to be used in conjunction with the <strong>select()</strong> function to filter variables, including <strong>starts_with</strong>, <strong>ends_with</strong>, <strong>contains</strong>, <strong>matches</strong>, <strong>one_of</strong>, <strong>num_range</strong>, and <strong>everything</strong>.</p>
+<div class="sourceCode" id="cb615"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#choose data 'iris' as example</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">iris</span> <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/tbl_df.html">tbl_df</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#show the 'iris' data</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 6 × 5
+##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+##          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  
+## 1          5.1         3.5          1.4         0.2 setosa 
+## 2          4.9         3            1.4         0.2 setosa 
+## 3          4.7         3.2          1.3         0.2 setosa 
+## 4          4.6         3.1          1.5         0.2 setosa 
+## 5          5           3.6          1.4         0.2 setosa 
+## 6          5.4         3.9          1.7         0.4 setosa</code></pre>
+<div class="sourceCode" id="cb617"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#select the columns that start with 'Petal'</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">"Petal"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 150 × 2
+##    Petal.Length Petal.Width
+##           &lt;dbl&gt;       &lt;dbl&gt;
+##  1          1.4         0.2
+##  2          1.4         0.2
+##  3          1.3         0.2
+##  4          1.5         0.2
+##  5          1.4         0.2
+##  6          1.7         0.4
+##  7          1.4         0.3
+##  8          1.5         0.2
+##  9          1.4         0.2
+## 10          1.5         0.1
+## # … with 140 more rows</code></pre>
+<div class="sourceCode" id="cb619"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#select the columns that not start with 'Petal'</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">iris</span>, <span class="op">-</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">"Petal"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">iris</span>, <span class="op">!</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">"Petal"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#select the columns that end with 'Petal'</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">ends_with</a></span><span class="op">(</span><span class="st">"Width"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#select the columns that contain with 'etal'</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">contains</a></span><span class="op">(</span><span class="st">"etal"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#select the columns that the variables name is with 't'</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">matches</a></span><span class="op">(</span><span class="st">".t."</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#select the columns you want directly</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">iris</span>, <span class="va">Petal.Length</span>, <span class="va">Petal.Width</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#select multi-columns by using colon</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">iris</span>, <span class="va">Sepal.Length</span><span class="op">:</span><span class="va">Petal.Width</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb620"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#when we cannot use the character vector filter, we need to use 'one_of()' function</span></span>
+<span><span class="va">vars</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Petal.Length"</span>, <span class="st">"Petal.Width"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/one_of.html">one_of</a></span><span class="op">(</span><span class="va">vars</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb621"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#return all columns, generally used when adjusting the order of variables in a dataset</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#return all columns, but reorder the columns and put 'Species' column in the front</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">iris</span>, <span class="va">Species</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="mutate-and-transmute" class="section level2" number="41.4">
+<h2>
+<span class="header-section-number">41.4</span> 4. mutate() and transmute()<a class="anchor" aria-label="anchor" href="#mutate-and-transmute"><i class="fas fa-link"></i></a>
+</h2>
+<p><strong>mutate()</strong> adds new variables and preserves existing ones; <strong>transmute()</strong> adds new variables and drops existing ones.</p>
+<p><strong>4.1. mutate()</strong></p>
+<p><strong>4.1.1. New columns</strong></p>
+<div class="sourceCode" id="cb622"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#create two more columns named 'cyl2' and 'cyl4'</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">mtcars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>cyl2 <span class="op">=</span> <span class="va">cyl</span> <span class="op">*</span> <span class="fl">2</span>, cyl4 <span class="op">=</span> <span class="va">cyl2</span> <span class="op">*</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb cyl2 cyl4
+## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4   12   24
+## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4   12   24
+## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1    8   16
+## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1   12   24
+## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2   16   32
+## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1   12   24</code></pre>
+<p><strong>4.1.2. Delete columns</strong></p>
+<div class="sourceCode" id="cb624"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#delete the column 'mpg' and update the column 'disp'</span></span>
+<span><span class="va">mtcars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>mpg <span class="op">=</span> <span class="cn">NULL</span>, disp <span class="op">=</span> <span class="va">disp</span> <span class="op">*</span> <span class="fl">0.0163871</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#delete the column 'cyl'</span></span>
+<span><span class="va">mtcars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>cyl <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+<p><strong>4.1.3. Application of Window function</strong></p>
+<div class="sourceCode" id="cb625"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#create a new column 'rank' using min_rank() function by group 'cyl'</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">mtcars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>rank <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/ranking.html">min_rank</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 6 × 12
+## # Groups:   cyl [3]
+##     mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb  rank
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;
+## 1  21       6   160   110  3.9   2.62  16.5     0     1     4     4     2
+## 2  21       6   160   110  3.9   2.88  17.0     0     1     4     4     2
+## 3  22.8     4   108    93  3.85  2.32  18.6     1     1     4     1     8
+## 4  21.4     6   258   110  3.08  3.22  19.4     1     0     3     1     1
+## 5  18.7     8   360   175  3.15  3.44  17.0     0     0     3     2     2
+## 6  18.1     6   225   105  2.76  3.46  20.2     1     0     3     1     6</code></pre>
+<div class="sourceCode" id="cb627"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#create a new column 'mpg_max' using max() function by group 'cyl'</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">mtcars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>mpg_max <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 6 × 12
+## # Groups:   cyl [3]
+##     mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb mpg_max
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
+## 1  21       6   160   110  3.9   2.62  16.5     0     1     4     4    21.4
+## 2  21       6   160   110  3.9   2.88  17.0     0     1     4     4    21.4
+## 3  22.8     4   108    93  3.85  2.32  18.6     1     1     4     1    33.9
+## 4  21.4     6   258   110  3.08  3.22  19.4     1     0     3     1    21.4
+## 5  18.7     8   360   175  3.15  3.44  17.0     0     0     3     2    19.2
+## 6  18.1     6   225   105  2.76  3.46  20.2     1     0     3     1    21.4</code></pre>
+<p><strong>4.2. transmute()</strong></p>
+<p>The return value does not contain the original dataset variables, only the variables after calculation and transformation are retained.</p>
+<div class="sourceCode" id="cb629"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">mtcars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>wt_log<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">wt</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb    wt_log
+## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4 0.9631743
+## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4 1.0560527
+## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1 0.8415672
+## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1 1.1678274
+## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2 1.2354715
+## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1 1.2412686</code></pre>
+<div class="sourceCode" id="cb631"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">mtcars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">transmute</a></span><span class="op">(</span>wt_log<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">wt</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##                      wt_log
+## Mazda RX4         0.9631743
+## Mazda RX4 Wag     1.0560527
+## Datsun 710        0.8415672
+## Hornet 4 Drive    1.1678274
+## Hornet Sportabout 1.2354715
+## Valiant           1.2412686</code></pre>
+<div class="sourceCode" id="cb633"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">mtcars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>displ_l <span class="op">=</span> <span class="va">disp</span> <span class="op">/</span> <span class="fl">61.0237</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb  displ_l
+## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4 2.621932
+## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4 2.621932
+## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1 1.769804
+## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1 4.227866
+## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2 5.899347
+## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1 3.687092</code></pre>
+<div class="sourceCode" id="cb635"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">mtcars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">transmute</a></span><span class="op">(</span>displ_l <span class="op">=</span> <span class="va">disp</span> <span class="op">/</span> <span class="fl">61.0237</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##                    displ_l
+## Mazda RX4         2.621932
+## Mazda RX4 Wag     2.621932
+## Datsun 710        1.769804
+## Hornet 4 Drive    4.227866
+## Hornet Sportabout 5.899347
+## Valiant           3.687092</code></pre>
+</div>
+<div id="ranking-function" class="section level2" number="41.5">
+<h2>
+<span class="header-section-number">41.5</span> 5. Ranking function<a class="anchor" aria-label="anchor" href="#ranking-function"><i class="fas fa-link"></i></a>
+</h2>
+<p>row_number: the results of the parallel rankings are in different order, and the elements appearing first are ranked first.</p>
+<p>min_rank: the results of the tie ranks are the same, and the next rank will be occupied.</p>
+<p>dense_rank: tied ranking does not occupy the ranking, for example: no matter how many tied for the second place, the subsequent ranking should still be the third place</p>
+<p>percent_rank: rank by percentage</p>
+<p>cume_dist: rank of cumulative distribution interval</p>
+<p>ntile: roughly ranks vectors by dividing into n buckets. Larger buckets have lower rank.</p>
+<div class="sourceCode" id="cb637"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">1</span>, <span class="fl">3</span>, <span class="fl">2</span>, <span class="fl">2</span>, <span class="cn">NA</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/ranking.html">row_number</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1]  5  1  4  2  3 NA</code></pre>
+<div class="sourceCode" id="cb639"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/ranking.html">min_rank</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1]  5  1  4  2  2 NA</code></pre>
+<div class="sourceCode" id="cb641"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/ranking.html">dense_rank</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1]  4  1  3  2  2 NA</code></pre>
+<div class="sourceCode" id="cb643"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/ranking.html">percent_rank</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 1.00 0.00 0.75 0.25 0.25   NA</code></pre>
+<div class="sourceCode" id="cb645"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/ranking.html">cume_dist</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 1.0 0.2 0.8 0.6 0.6  NA</code></pre>
+<div class="sourceCode" id="cb647"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/ranking.html">ntile</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1]  2  1  2  1  1 NA</code></pre>
+<div class="sourceCode" id="cb649"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>dense_rank<span class="op">=</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/ranking.html">cume_dist</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb dense_rank
+## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4    0.56250
+## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4    0.56250
+## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1    0.34375
+## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1    0.56250
+## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2    1.00000
+## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1    0.56250</code></pre>
+</div>
+<div id="sort-function-arrange" class="section level2" number="41.6">
+<h2>
+<span class="header-section-number">41.6</span> 6. Sort function: arrange()<a class="anchor" aria-label="anchor" href="#sort-function-arrange"><i class="fas fa-link"></i></a>
+</h2>
+<p>Note the difference between sorting and ranking.</p>
+<p><strong>arrange()</strong> sorts the rows sequentially by the given column names.</p>
+<div class="sourceCode" id="cb651"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#sorted by column 'mpg'</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">mpg</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##                      mpg cyl disp  hp drat    wt  qsec vs am gear carb
+## Cadillac Fleetwood  10.4   8  472 205 2.93 5.250 17.98  0  0    3    4
+## Lincoln Continental 10.4   8  460 215 3.00 5.424 17.82  0  0    3    4
+## Camaro Z28          13.3   8  350 245 3.73 3.840 15.41  0  0    3    4
+## Duster 360          14.3   8  360 245 3.21 3.570 15.84  0  0    3    4
+## Chrysler Imperial   14.7   8  440 230 3.23 5.345 17.42  0  0    3    4
+## Maserati Bora       15.0   8  301 335 3.54 3.570 14.60  0  1    5    8</code></pre>
+<div class="sourceCode" id="cb653"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#sorted by column 'mpg' and 'disp'</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">mpg</span>, <span class="va">disp</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##                      mpg cyl disp  hp drat    wt  qsec vs am gear carb
+## Lincoln Continental 10.4   8  460 215 3.00 5.424 17.82  0  0    3    4
+## Cadillac Fleetwood  10.4   8  472 205 2.93 5.250 17.98  0  0    3    4
+## Camaro Z28          13.3   8  350 245 3.73 3.840 15.41  0  0    3    4
+## Duster 360          14.3   8  360 245 3.21 3.570 15.84  0  0    3    4
+## Chrysler Imperial   14.7   8  440 230 3.23 5.345 17.42  0  0    3    4
+## Maserati Bora       15.0   8  301 335 3.54 3.570 14.60  0  1    5    8</code></pre>
+<div class="sourceCode" id="cb655"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#reverse order by using desc()</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##                 mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+## Toyota Corolla 33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+## Fiat 128       32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+## Honda Civic    30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+## Lotus Europa   30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+## Fiat X1-9      27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+## Porsche 914-2  26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2</code></pre>
+<div class="sourceCode" id="cb657"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#reverse order by using '-'</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="op">-</span><span class="va">mpg</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##                 mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+## Toyota Corolla 33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+## Fiat 128       32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+## Honda Civic    30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+## Lotus Europa   30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+## Fiat X1-9      27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+## Porsche 914-2  26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2</code></pre>
+</div>
+<div id="summary-function-summarise" class="section level2" number="41.7">
+<h2>
+<span class="header-section-number">41.7</span> 7. Summary function: summarise()<a class="anchor" aria-label="anchor" href="#summary-function-summarise"><i class="fas fa-link"></i></a>
+</h2>
+<p><strong>7.1. Summary in whole</strong></p>
+<div class="sourceCode" id="cb659"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#return the mean value in column 'disp'</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">disp</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##   mean(disp)
+## 1   230.7219</code></pre>
+<div class="sourceCode" id="cb661"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#return the standard deviation in column 'disp'</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">disp</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##   sd(disp)
+## 1 123.9387</code></pre>
+<div class="sourceCode" id="cb663"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#return the maximum and minimum value in column 'disp'</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">disp</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">disp</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##   max(disp) min(disp)
+## 1       472      71.1</code></pre>
+<div class="sourceCode" id="cb665"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#return the number of columns in dataset 'mtcars'</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##   n()
+## 1  32</code></pre>
+<div class="sourceCode" id="cb667"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#return the number of unique gear</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/n_distinct.html">n_distinct</a></span><span class="op">(</span><span class="va">gear</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##   n_distinct(gear)
+## 1                3</code></pre>
+<div class="sourceCode" id="cb669"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#return the first value in column 'disp'</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/nth.html">first</a></span><span class="op">(</span><span class="va">disp</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##   first(disp)
+## 1         160</code></pre>
+<div class="sourceCode" id="cb671"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#return the last value in column 'disp'</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/nth.html">last</a></span><span class="op">(</span><span class="va">disp</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##   last(disp)
+## 1        121</code></pre>
+<p><strong>7.2. Summary by group</strong></p>
+<div class="sourceCode" id="cb673"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#return the mean value and standard deviation of column 'disp' by grouping column 'cyl'</span></span>
+<span><span class="va">mtcars</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">disp</span><span class="op">)</span>, sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">disp</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 3 × 3
+##     cyl  mean    sd
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1     4  105.  26.9
+## 2     6  183.  41.6
+## 3     8  353.  67.8</code></pre>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="guide-to-nonparametric-tests.html"><span class="header-section-number">40</span> Guide to nonparametric tests</a></div>
+<div class="next"><a href="ten-interview-questions-and-answers.html"><span class="header-section-number">43</span> Ten interview questions and answers</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#dplyr-pacakage-in-r"><span class="header-section-number">41</span> dplyr pacakage in R</a></li>
+<li><a class="nav-link" href="#pipe-operator"><span class="header-section-number">41.1</span> 1. Pipe operator ‘%&gt;%’</a></li>
+<li><a class="nav-link" href="#filter-by-row-filter-function"><span class="header-section-number">41.2</span> 2. Filter by row: filter() function</a></li>
+<li><a class="nav-link" href="#filter-by-column-select-function"><span class="header-section-number">41.3</span> 3. Filter by column: select() function</a></li>
+<li><a class="nav-link" href="#mutate-and-transmute"><span class="header-section-number">41.4</span> 4. mutate() and transmute()</a></li>
+<li><a class="nav-link" href="#ranking-function"><span class="header-section-number">41.5</span> 5. Ranking function</a></li>
+<li><a class="nav-link" href="#sort-function-arrange"><span class="header-section-number">41.6</span> 6. Sort function: arrange()</a></li>
+<li><a class="nav-link" href="#summary-function-summarise"><span class="header-section-number">41.7</span> 7. Summary function: summarise()</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/jtr13/cc22tt/blob/main/dplyr_in_r.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/jtr13/cc22tt/edit/main/dplyr_in_r.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Community Contributions for EDAV Fall 2022 Tues/Thurs</strong>" was written by . It was last built on 2022-11-16.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

@@ -318,6 +318,14 @@ hypotheses-7
 implementation-7
 motivation-8
 citations
+dplyr-pacakage-in-r
+pipe-operator
+filter-by-row-filter-function
+filter-by-column-select-function
+mutate-and-transmute
+ranking-function
+sort-function-arrange
+summary-function-summarise
 part-interview-prep
 ten-interview-questions-and-answers
 forward
