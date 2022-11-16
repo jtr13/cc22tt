@@ -66,6 +66,7 @@ Suggests:
     cowplot,
     janitor,
     DescTools,
+    tseries,
 Remotes:
     hadley/emo,
     kassambara/navdata,
