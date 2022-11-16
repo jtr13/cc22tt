@@ -52,6 +52,7 @@ rmd_files: [
   'api_json_tutorial.Rmd',
   'sample_statistic_tutorial.Rmd',
   'data_cleaning_tutorial.Rmd',
+  'mlr3_package_tutorial.Rmd',
   
   # Part: Interview Prep
   'ten_interview_questions.Rmd',
