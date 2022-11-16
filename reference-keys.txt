@@ -273,6 +273,7 @@ check-for-missing-values
 handling-missing-values
 removing-outliers-optional
 conclusion-6
+mlr3-package-tutorial
 part-interview-prep
 ten-interview-questions-and-answers
 forward
