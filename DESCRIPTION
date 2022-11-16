@@ -4,7 +4,8 @@ Title: Does not matter
 Version: 0.0.0.9000
 Imports:
     emo,
-    tidyverse
+    tidyverse,
+    geocompkg
 Suggests:
     bookdown,
     bslib,
@@ -32,6 +33,45 @@ Suggests:
     scatterplot3d,
     mlbench,
     plot3D,
+    ggfortify,
+    timevis,
+    igraph,
+    igraphdata,
+    navdata,
+    httr,
+    leaflet,
+    assertthat,
+    jsonlite,
+    DT,
+    dygraphs,
+    networkD3,
+    tibble,
+    visNetwork,
+    d3heatmap,
+    threejs,
+    rgl,
+    maptools,
+    maps,
+    chorddiag,
+    collapsibleTree,
+    circlepackeR,
+    streamgraph,
+    caret,
+    terra,
+    readr,
+    osmextract,
+    ggplot2,
+    kableExtra,
+    carData,
+    cowplot,
+    janitor,
+    DescTools,
 Remotes:
-    hadley/emo
-    
+    hadley/emo,
+    kassambara/navdata,
+    talgalili/d3heatmap,
+    dmurdoch/rgl,
+    mattflor/chorddiag,
+    jeromefroe/circlepackeR,
+    hrbrmstr/streamgraph,
+    geocompr/geocompkg
