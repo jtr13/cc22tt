@@ -261,6 +261,18 @@ hypothesis-testing
 bootstrapping
 hypothesis-testing-1
 reference-4
+data-cleaning-tutorial
+motivation-7
+observe-the-dataset
+check-the-data-type-of-columns
+optional-step
+check-for-duplicate-data
+remove-empty-rows-and-columns
+converting-messy-data-into-tidy-data
+check-for-missing-values
+handling-missing-values
+removing-outliers-optional
+conclusion-6
 part-interview-prep
 ten-interview-questions-and-answers
 forward
@@ -307,7 +319,7 @@ example-usage-of-benford.analysis
 randomized-case-study
 manipulated-data
 findings
-conclusion-6
+conclusion-7
 sources
 github-initial-setup
 create-new-repo

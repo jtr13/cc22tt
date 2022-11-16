@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 38 Data cleaning tutorial | Community Contributions for EDAV Fall 2022 Tues/Thurs</title>
+<meta name="description" content="Saili Myana and Sai Rithvik Kanakamedala  38.1 Motivation Data cleaning is an important preliminary processing step that we perform on the data before we visualize and model it. Data with errors...">
+<meta name="generator" content="bookdown 0.30 with bs4_book()">
+<meta property="og:title" content="Chapter 38 Data cleaning tutorial | Community Contributions for EDAV Fall 2022 Tues/Thurs">
+<meta property="og:type" content="book">
+<meta property="og:description" content="Saili Myana and Sai Rithvik Kanakamedala  38.1 Motivation Data cleaning is an important preliminary processing step that we perform on the data before we visualize and model it. Data with errors...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 38 Data cleaning tutorial | Community Contributions for EDAV Fall 2022 Tues/Thurs">
+<meta name="twitter:description" content="Saili Myana and Sai Rithvik Kanakamedala  38.1 Motivation Data cleaning is an important preliminary processing step that we perform on the data before we visualize and model it. Data with errors...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.1/transition.js"></script><script src="libs/bs3compat-0.4.1/tabs.js"></script><script src="libs/bs3compat-0.4.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><script src="libs/plotly-binding-4.10.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script><link href="libs/visjs-7.4.9/vis-timeline-graph2d.min.css" rel="stylesheet">
+<script src="libs/visjs-7.4.9/vis-timeline-graph2d.min.js"></script><link href="libs/timeline-0.4/timevis.css" rel="stylesheet">
+<script src="libs/timevis-binding-2.1.0/timevis.js"></script><link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
+<script src="libs/leaflet-1.3.1/leaflet.js"></script><link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
+<script src="libs/proj4-2.6.2/proj4.min.js"></script><script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script><link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
+<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Community Contributions for EDAV Fall 2022 Tues/Thurs</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Welcome!</a></li>
+<li><a class="" href="community-contribution.html"><span class="header-section-number">2</span> Community Contribution</a></li>
+<li><a class="" href="github-submission-instructions.html"><span class="header-section-number">3</span> GitHub submission instructions</a></li>
+<li><a class="" href="sample-project.html"><span class="header-section-number">4</span> Sample project</a></li>
+<li class="book-part">Cheatsheets</li>
+<li><a class="" href="r-window-functions-cheatsheet.html"><span class="header-section-number">6</span> R window functions cheatsheet</a></li>
+<li><a class="" href="rmd-chunk-option-cheat-sheet.html"><span class="header-section-number">7</span> Rmd chunk option cheat sheet</a></li>
+<li><a class="" href="helpful-ggplot2-extensions-cheatsheet.html"><span class="header-section-number">8</span> Helpful ggplot2 Extensions Cheatsheet</a></li>
+<li><a class="" href="commonly-used-graph-cheatcheet.html"><span class="header-section-number">9</span> Commonly-used graph cheatcheet</a></li>
+<li><a class="" href="git-and-version-control.html"><span class="header-section-number">10</span> Git and version control</a></li>
+<li><a class="" href="useful-plots-for-bioinfomatics-in-r.html"><span class="header-section-number">11</span> Useful plots for Bioinfomatics in R</a></li>
+<li><a class="" href="different-ways-to-create-world-map-in-r.html"><span class="header-section-number">12</span> Different ways to create world map in R</a></li>
+<li><a class="" href="color-in-r-python-and-jshtmlcss.html"><span class="header-section-number">13</span> Color in R, Python, and JS/HTML/CSS</a></li>
+<li><a class="" href="color-palettes-for-data-visualization.html"><span class="header-section-number">14</span> Color Palettes for Data Visualization</a></li>
+<li><a class="" href="data-visualization-using-seaborn.html"><span class="header-section-number">15</span> Data visualization using Seaborn</a></li>
+<li><a class="" href="machine-learning-cheatsheet-for-r-and-python.html"><span class="header-section-number">16</span> Machine Learning Cheatsheet for R and Python</a></li>
+<li><a class="" href="data-visualization-with-r-ggplot2-vs.-matlab.html"><span class="header-section-number">17</span> Data Visualization with R ggplot2 vs. Matlab</a></li>
+<li><a class="" href="ggplot2-plots-in-python-cheat-sheet-tutorial.html"><span class="header-section-number">18</span> Ggplot2 plots in python cheat sheet tutorial</a></li>
+<li><a class="" href="model-evaluation-selection-visualization-with-easystats.html"><span class="header-section-number">19</span> Model evaluation, selection &amp; visualization with easystats</a></li>
+<li class="book-part">Tutorials</li>
+<li><a class="" href="preprocessing-and-visualization-of-time-series-data.html"><span class="header-section-number">21</span> Preprocessing and Visualization of Time Series Data</a></li>
+<li><a class="" href="how-to-use-sqldf.html"><span class="header-section-number">22</span> How to use sqldf</a></li>
+<li><a class="" href="googlevis-in-r.html"><span class="header-section-number">23</span> googleVis in R</a></li>
+<li><a class="" href="tutorial-for-vector-fields-in-r.html"><span class="header-section-number">24</span> Tutorial for vector fields in r</a></li>
+<li><a class="" href="data-cleaning-with-r.html"><span class="header-section-number">25</span> Data cleaning with r</a></li>
+<li><a class="" href="introduction-to-shiny-web-apps.html"><span class="header-section-number">26</span> Introduction to Shiny Web Apps</a></li>
+<li><a class="" href="python-missingno-library-tutorial.html"><span class="header-section-number">27</span> Python missingno library tutorial</a></li>
+<li><a class="" href="data-explorer-tutorial-and-automation.html"><span class="header-section-number">28</span> Data Explorer Tutorial and Automation</a></li>
+<li><a class="" href="d-visualization-in-r.html"><span class="header-section-number">29</span> 3D Visualization in R</a></li>
+<li><a class="" href="visualizing-time-series-data.html"><span class="header-section-number">30</span> Visualizing Time Series Data</a></li>
+<li><a class="" href="igraph-in-r.html"><span class="header-section-number">31</span> igraph in r</a></li>
+<li><a class="" href="geo-mapping-coordinate-extraction-using-api-calls.html"><span class="header-section-number">32</span> Geo-Mapping Coordinate Extraction Using API Calls</a></li>
+<li><a class="" href="edav-garden.html"><span class="header-section-number">33</span> EDAV Garden</a></li>
+<li><a class="" href="using-raster-data-in-r.html"><span class="header-section-number">34</span> Using raster data in R</a></li>
+<li><a class="" href="make-geographical-maps-with-different-packages.html"><span class="header-section-number">35</span> Make Geographical Maps with Different Packages</a></li>
+<li><a class="" href="how-to-obtain-data-from-api-and-process-raw-json-data.html"><span class="header-section-number">36</span> How to obtain data from API and process raw JSON data</a></li>
+<li><a class="" href="sample-statistic-tutorial.html"><span class="header-section-number">37</span> Sample Statistic Tutorial</a></li>
+<li><a class="active" href="data-cleaning-tutorial.html"><span class="header-section-number">38</span> Data cleaning tutorial</a></li>
+<li class="book-part">Interview Prep</li>
+<li><a class="" href="ten-interview-questions-and-answers.html"><span class="header-section-number">40</span> Ten interview questions and answers</a></li>
+<li><a class="" href="data-science-internship-search-survival-guide.html"><span class="header-section-number">41</span> Data science internship search survival guide</a></li>
+<li><a class="" href="data-visualization-interview-questions-sample.html"><span class="header-section-number">42</span> Data visualization interview questions sample</a></li>
+<li class="book-part">Case Studies</li>
+<li><a class="" href="benford-case-study.html"><span class="header-section-number">44</span> Benford Case Study</a></li>
+<li class="book-part">Appendices</li>
+<li><a class="" href="github-initial-setup.html"><span class="header-section-number">45</span> Github initial setup</a></li>
+<li><a class="" href="tutorial-for-pull-request-mergers.html"><span class="header-section-number">46</span> Tutorial for pull request mergers</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/jtr13/cc22tt">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="data-cleaning-tutorial" class="section level1" number="38">
+<h1>
+<span class="header-section-number">38</span> Data cleaning tutorial<a class="anchor" aria-label="anchor" href="#data-cleaning-tutorial"><i class="fas fa-link"></i></a>
+</h1>
+<p>Saili Myana and Sai Rithvik Kanakamedala</p>
+<div id="motivation-7" class="section level2" number="38.1">
+<h2>
+<span class="header-section-number">38.1</span> Motivation<a class="anchor" aria-label="anchor" href="#motivation-7"><i class="fas fa-link"></i></a>
+</h2>
+<p>Data cleaning is an important preliminary processing step that we perform on the data before we visualize and model it. Data with errors or missing values will lead to erroneous observations. Making business decisions with inaccurate observations may lead to downfall of the company.
+For example, Will Hillier said. “It’s like creating a foundation for a building: do it right and you can build something strong and long-lasting. Do it wrong, and your building will soon collapse.”
+We can’t perform any visualization or machine learning analysis without first cleaning the dataset.</p>
+<p>In this tutorial, we are going to perform step-by-step data cleaning on a real world dataset from <a href="https://www.zillow.com/research/data/" target="_blank">Zillow Research</a>. The data can be downloaded by going to list and sale prices section and selecting Median List Price(Raw, All Homes, Monthly) which contains the data of monthly listing prices of houses across the United States.</p>
+</div>
+<div id="observe-the-dataset" class="section level2" number="38.2">
+<h2>
+<span class="header-section-number">38.2</span> Observe the Dataset<a class="anchor" aria-label="anchor" href="#observe-the-dataset"><i class="fas fa-link"></i></a>
+</h2>
+<p>It is important that we first view the dataset and understand what each column means. In our example, we are analyzing the median listing prices of houses in different cities on different dates.</p>
+<div class="sourceCode" id="cb559"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">listing_price</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/connections.html">url</a></span><span class="op">(</span><span class="st">"https://files.zillowstatic.com/research/public_csvs/mlp/Metro_mlp_uc_sfrcondo_month.csv?t=1668571408"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">listing_price</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 898  63</code></pre>
+<div class="sourceCode" id="cb561"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">listing_price</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">listing_price</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span><span class="op">]</span> <span class="co"># Showing only 6 columns, remaining are similar to the date column</span></span></code></pre></div>
+<pre><code>##   RegionID SizeRank      RegionName RegionType StateName X2018.01.31
+## 1   102001        0   United States    country                255000
+## 2   394913        1    New York, NY        msa        NY      489000
+## 3   753899        2 Los Angeles, CA        msa        CA      709000
+## 4   394463        3     Chicago, IL        msa        IL      269900
+## 5   394514        4      Dallas, TX        msa        TX      318000
+## 6   394692        5     Houston, TX        msa        TX      289500</code></pre>
+</div>
+<div id="check-the-data-type-of-columns" class="section level2" number="38.3">
+<h2>
+<span class="header-section-number">38.3</span> Check the data type of columns<a class="anchor" aria-label="anchor" href="#check-the-data-type-of-columns"><i class="fas fa-link"></i></a>
+</h2>
+<p>The data may contain Numeric, Character, Logical, Factor or other data types. We need to check if the columns in the raw data have a suitable data type. For examples some numerical data may be stored as character and it is important to convert them into numerical before proceeding to analyse the data.</p>
+<p>For each column of the dataset check the data type using str(dataset). This will show the data type of the column along with a few example values.</p>
+<div class="sourceCode" id="cb563"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">listing_price</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 'data.frame':    898 obs. of  63 variables:
+##  $ RegionID   : int  102001 394913 753899 394463 394514 394692 395209 394856 394974 394347 ...
+##  $ SizeRank   : int  0 1 2 3 4 5 6 7 8 9 ...
+##  $ RegionName : chr  "United States" "New York, NY" "Los Angeles, CA" "Chicago, IL" ...
+##  $ RegionType : chr  "country" "msa" "msa" "msa" ...
+##  $ StateName  : chr  "" "NY" "CA" "IL" ...
+##  $ X2018.01.31: num  255000 489000 709000 269900 318000 ...
+##  $ X2018.02.28: num  264900 505000 725000 289000 325000 ...
+##  $ X2018.03.31: num  269900 515000 730000 294900 325990 ...
+##  $ X2018.04.30: num  279000 519000 750000 299900 334500 ...
+##  $ X2018.05.31: num  280000 529900 750000 307000 334900 ...
+##  $ X2018.06.30: num  280000 530000 750000 299900 329000 ...
+##  $ X2018.07.31: num  279900 525000 749000 299000 324605 ...
+##  $ X2018.08.31: num  279000 524800 729900 294900 319000 ...
+##  $ X2018.09.30: num  279900 529000 729900 294450 319900 ...
+##  $ X2018.10.31: num  279500 529000 725000 289000 317998 ...
+##  $ X2018.11.30: num  279000 529000 719000 282000 315000 ...
+##  $ X2018.12.31: num  275000 525000 715000 279000 315000 ...
+##  $ X2019.01.31: num  275000 520000 699900 279000 310000 ...
+##  $ X2019.02.28: num  280000 529000 719900 294900 316000 ...
+##  $ X2019.03.31: num  289900 535000 729000 299900 324900 ...
+##  $ X2019.04.30: num  298000 549000 749000 309000 330000 ...
+##  $ X2019.05.31: num  299900 549000 750000 310000 330500 ...
+##  $ X2019.06.30: num  299900 549000 759800 309400 329900 ...
+##  $ X2019.07.31: num  299000 545000 759900 299995 325000 ...
+##  $ X2019.08.31: num  295000 539000 758000 299000 319999 ...
+##  $ X2019.09.30: num  295000 549000 759000 298000 319900 ...
+##  $ X2019.10.31: num  290000 549000 759000 289900 319900 ...
+##  $ X2019.11.30: num  289900 549000 769000 285000 319000 ...
+##  $ X2019.12.31: num  285000 549900 769000 279900 315000 ...
+##  $ X2020.01.31: num  284900 549000 765000 280000 310000 ...
+##  $ X2020.02.29: num  290000 549000 779894 295000 315900 ...
+##  $ X2020.03.31: num  299000 559000 795000 299900 319900 ...
+##  $ X2020.04.30: num  299900 559900 789000 299000 320000 ...
+##  $ X2020.05.31: num  305000 559000 799000 299900 325000 ...
+##  $ X2020.06.30: num  315000 565000 819000 305000 331900 ...
+##  $ X2020.07.31: num  319900 575000 830000 309000 334900 ...
+##  $ X2020.08.31: num  319000 584900 829000 309000 332900 ...
+##  $ X2020.09.30: num  319000 595000 829900 309900 335000 ...
+##  $ X2020.10.31: num  318900 599000 835000 300000 330000 ...
+##  $ X2020.11.30: num  310000 599900 849982 299900 329800 ...
+##  $ X2020.12.31: num  304990 599900 849000 294900 326000 ...
+##  $ X2021.01.31: num  300500 595000 849000 294900 329900 ...
+##  $ X2021.02.28: num  319900 599000 849900 309900 335000 ...
+##  $ X2021.03.31: num  325000 599000 850000 310000 343490 ...
+##  $ X2021.04.30: num  335000 599000 874900 310000 350000 ...
+##  $ X2021.05.31: num  342000 599000 878000 315000 360000 ...
+##  $ X2021.06.30: num  345000 599000 885000 315000 369000 ...
+##  $ X2021.07.31: num  342000 590000 869999 309900 374878 ...
+##  $ X2021.08.31: num  339900 579000 850000 299900 370000 ...
+##  $ X2021.09.30: num  342000 588000 850000 299900 375000 ...
+##  $ X2021.10.31: num  340000 589000 859000 299000 375000 ...
+##  $ X2021.11.30: num  335000 586000 850000 289999 378259 ...
+##  $ X2021.12.31: num  328000 595000 859000 279900 379900 ...
+##  $ X2022.01.31: num  332000 599000 889000 285000 385000 325000 450000 450000 275000 345000 ...
+##  $ X2022.02.28: num  350000 619000 899869 299000 397995 ...
+##  $ X2022.03.31: num  365000 629000 928944 309000 400000 ...
+##  $ X2022.04.30: num  379900 647639 949900 319900 420000 ...
+##  $ X2022.05.31: num  394900 649000 950000 325000 434900 ...
+##  $ X2022.06.30: num  399000 649000 950000 325000 440000 ...
+##  $ X2022.07.31: num  399000 629000 949000 321948 439900 ...
+##  $ X2022.08.31: num  390000 625000 925000 315000 425000 ...
+##  $ X2022.09.30: num  389900 629000 924900 315000 420000 ...
+##  $ X2022.10.31: num  385000 644950 900000 309900 410000 ...</code></pre>
+</div>
+<div id="optional-step" class="section level2" number="38.4">
+<h2>
+<span class="header-section-number">38.4</span> Optional Step<a class="anchor" aria-label="anchor" href="#optional-step"><i class="fas fa-link"></i></a>
+</h2>
+<p>We can also check if all the columns are named neatly. Using the clean_names function, we can rename all the columns with consistent format.</p>
+<div class="sourceCode" id="cb565"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">listing_price</span> <span class="op">&lt;-</span> <span class="fu">clean_names</span><span class="op">(</span><span class="va">listing_price</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">listing_price</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##  [1] "region_id"   "size_rank"   "region_name" "region_type" "state_name" 
+##  [6] "x2018_01_31" "x2018_02_28" "x2018_03_31" "x2018_04_30" "x2018_05_31"
+## [11] "x2018_06_30" "x2018_07_31" "x2018_08_31" "x2018_09_30" "x2018_10_31"
+## [16] "x2018_11_30" "x2018_12_31" "x2019_01_31" "x2019_02_28" "x2019_03_31"
+## [21] "x2019_04_30" "x2019_05_31" "x2019_06_30" "x2019_07_31" "x2019_08_31"
+## [26] "x2019_09_30" "x2019_10_31" "x2019_11_30" "x2019_12_31" "x2020_01_31"
+## [31] "x2020_02_29" "x2020_03_31" "x2020_04_30" "x2020_05_31" "x2020_06_30"
+## [36] "x2020_07_31" "x2020_08_31" "x2020_09_30" "x2020_10_31" "x2020_11_30"
+## [41] "x2020_12_31" "x2021_01_31" "x2021_02_28" "x2021_03_31" "x2021_04_30"
+## [46] "x2021_05_31" "x2021_06_30" "x2021_07_31" "x2021_08_31" "x2021_09_30"
+## [51] "x2021_10_31" "x2021_11_30" "x2021_12_31" "x2022_01_31" "x2022_02_28"
+## [56] "x2022_03_31" "x2022_04_30" "x2022_05_31" "x2022_06_30" "x2022_07_31"
+## [61] "x2022_08_31" "x2022_09_30" "x2022_10_31"</code></pre>
+</div>
+<div id="check-for-duplicate-data" class="section level2" number="38.5">
+<h2>
+<span class="header-section-number">38.5</span> Check for duplicate data<a class="anchor" aria-label="anchor" href="#check-for-duplicate-data"><i class="fas fa-link"></i></a>
+</h2>
+<p>Next, we check if there are any duplicate rows in the dataset and remove the repeated rows using the distinct function in the dplyr package.</p>
+<div class="sourceCode" id="cb567"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">listing_price</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">listing_price</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="remove-empty-rows-and-columns" class="section level2" number="38.6">
+<h2>
+<span class="header-section-number">38.6</span> Remove empty rows and columns<a class="anchor" aria-label="anchor" href="#remove-empty-rows-and-columns"><i class="fas fa-link"></i></a>
+</h2>
+<p>We need to remove all the empty rows and columns as they dont contain any useful information. This can be done using the remove_empty function from the janitor package.</p>
+<div class="sourceCode" id="cb568"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">listing_price</span> <span class="op">&lt;-</span> <span class="fu">remove_empty</span><span class="op">(</span><span class="va">listing_price</span>, which <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"rows"</span>, <span class="st">"cols"</span><span class="op">)</span>, quiet <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="converting-messy-data-into-tidy-data" class="section level2" number="38.7">
+<h2>
+<span class="header-section-number">38.7</span> Converting messy data into tidy data<a class="anchor" aria-label="anchor" href="#converting-messy-data-into-tidy-data"><i class="fas fa-link"></i></a>
+</h2>
+<p>The data we have currently is messy. As a good practice, we can convert this data into tidy format where every column is a variable and every every row is an observation.</p>
+<div class="sourceCode" id="cb569"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">tidy_df</span> <span class="op">&lt;-</span> <span class="va">listing_price</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>cols<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">listing_price</span><span class="op">)</span><span class="op">[</span><span class="fl">6</span><span class="op">:</span><span class="fl">60</span><span class="op">]</span>, names_to<span class="op">=</span><span class="st">"date"</span>, values_to <span class="op">=</span> <span class="st">"listing_price"</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">tidy_df</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 6 × 10
+##   region…¹ size_…² regio…³ regio…⁴ state…⁵ x2022…⁶ x2022…⁷ x2022…⁸ date  listi…⁹
+##      &lt;int&gt;   &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;
+## 1   102001       0 United… country ""       390000  389900  385000 x201…  255000
+## 2   102001       0 United… country ""       390000  389900  385000 x201…  264900
+## 3   102001       0 United… country ""       390000  389900  385000 x201…  269900
+## 4   102001       0 United… country ""       390000  389900  385000 x201…  279000
+## 5   102001       0 United… country ""       390000  389900  385000 x201…  280000
+## 6   102001       0 United… country ""       390000  389900  385000 x201…  280000
+## # … with abbreviated variable names ¹​region_id, ²​size_rank, ³​region_name,
+## #   ⁴​region_type, ⁵​state_name, ⁶​x2022_08_31, ⁷​x2022_09_30, ⁸​x2022_10_31,
+## #   ⁹​listing_price</code></pre>
+</div>
+<div id="check-for-missing-values" class="section level2" number="38.8">
+<h2>
+<span class="header-section-number">38.8</span> Check for missing values<a class="anchor" aria-label="anchor" href="#check-for-missing-values"><i class="fas fa-link"></i></a>
+</h2>
+<p>We check if our data contains missing values using the is.na() function. We can find the number of missing values in the dataset by calculating sum(is.na(data)).</p>
+<div class="sourceCode" id="cb571"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">tidy_df</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 1074</code></pre>
+</div>
+<div id="handling-missing-values" class="section level2" number="38.9">
+<h2>
+<span class="header-section-number">38.9</span> Handling missing values<a class="anchor" aria-label="anchor" href="#handling-missing-values"><i class="fas fa-link"></i></a>
+</h2>
+<p>There are multiple ways to handle missing values.</p>
+<ol style="list-style-type: decimal">
+<li>We can omit the rows that contain missing values.</li>
+</ol>
+<div class="sourceCode" id="cb573"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="co"># we can also use na.exclude(data)</span></span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>We can replace the missing value with a previous value in the column.
+(This may be the best way to replace missing values in the case when a group of rows are given the same value for a column and written only once)</li>
+</ol>
+<div class="sourceCode" id="cb574"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
+<span><span class="va">data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/fill.html">fill</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html">all_of</a></span><span class="op">(</span><span class="va">i</span><span class="op">)</span>, .direction <span class="op">=</span> <span class="st">'up'</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li>We can replace the missing value with the average of the column.</li>
+</ol>
+<div class="sourceCode" id="cb575"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">na.aggregate</span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="co"># Replace NA in all columns with column mean</span></span></code></pre></div>
+<ol start="4" style="list-style-type: decimal">
+<li>Or we can replace them with the average of the values prior and post to the missing value depending on the context.</li>
+</ol>
+<p>There are more advanced methods to predict the missing values like Regression techniques, which can be used if needed. Depending on the dataset, we can select the method that is most appropriate.</p>
+<p>In our dataset, we have two appropriate ways of dealing with missing values.</p>
+<ol style="list-style-type: decimal">
+<li><p>We can remove the cities with missing values. This will remove 95 of the 898 cities. This can be done by omitting the rows containing NA before tidying the data.</p></li>
+<li><p>We can remove the dates where the particular city does not have a price listed. This can be done by converting the data into tidy format and then omitting the rows with missing values. We are choosing this way, as omitting the dates where price is unavailable is good enough for our analysis.</p></li>
+</ol>
+<div class="sourceCode" id="cb576"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">tidy_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="va">tidy_df</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="removing-outliers-optional" class="section level2" number="38.10">
+<h2>
+<span class="header-section-number">38.10</span> Removing Outliers (Optional)<a class="anchor" aria-label="anchor" href="#removing-outliers-optional"><i class="fas fa-link"></i></a>
+</h2>
+<p>In case outliers are changing the trends in the data, we may want to analyse by removing the outliers. This can be done by finding the Z scores as shown below and having a threshold for the Z score to filter out the outliers.</p>
+<p>In our dataset, this is not required, as we aim to visualize the house prices as they are.</p>
+<div class="sourceCode" id="cb577"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#For numeric columns of data only</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select_all.html">select_if</a></span><span class="op">(</span><span class="va">data</span>,<span class="va">is.numeric</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="va">z_scores</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">df</span>, <span class="kw">function</span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">df</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">z_scores</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">no_outliers_data</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="va">z_scores</span><span class="op">&gt;</span><span class="fl">3</span><span class="op">)</span>, <span class="op">]</span> <span class="co">#removing rows with z-scores greater than 3</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">no_outliers_data</span><span class="op">)</span> <span class="co">#to check final dimensions of data</span></span></code></pre></div>
+<p>Now the dataset is ready to be analyzed. We can also model the data using some Machine Learning models as it doesn’t contain any missing values or corrupted data.</p>
+</div>
+<div id="conclusion-6" class="section level2" number="38.11">
+<h2>
+<span class="header-section-number">38.11</span> Conclusion<a class="anchor" aria-label="anchor" href="#conclusion-6"><i class="fas fa-link"></i></a>
+</h2>
+<p>Through this tutorial, we discovered different ways in which data can be messy. We thought about what could be wrong in the column names, what could be wrong in their data types, how to deal when some data is missing and what to do when there are unwanted outliers. Through this journey, we learnt to question if there is anything unexpected in the data and how to convert it to desired format. We will think of these data cleaning steps for any dataset we encounter in the future, and implement the requisite steps.</p>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="sample-statistic-tutorial.html"><span class="header-section-number">37</span> Sample Statistic Tutorial</a></div>
+<div class="next"><a href="ten-interview-questions-and-answers.html"><span class="header-section-number">40</span> Ten interview questions and answers</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#data-cleaning-tutorial"><span class="header-section-number">38</span> Data cleaning tutorial</a></li>
+<li><a class="nav-link" href="#motivation-7"><span class="header-section-number">38.1</span> Motivation</a></li>
+<li><a class="nav-link" href="#observe-the-dataset"><span class="header-section-number">38.2</span> Observe the Dataset</a></li>
+<li><a class="nav-link" href="#check-the-data-type-of-columns"><span class="header-section-number">38.3</span> Check the data type of columns</a></li>
+<li><a class="nav-link" href="#optional-step"><span class="header-section-number">38.4</span> Optional Step</a></li>
+<li><a class="nav-link" href="#check-for-duplicate-data"><span class="header-section-number">38.5</span> Check for duplicate data</a></li>
+<li><a class="nav-link" href="#remove-empty-rows-and-columns"><span class="header-section-number">38.6</span> Remove empty rows and columns</a></li>
+<li><a class="nav-link" href="#converting-messy-data-into-tidy-data"><span class="header-section-number">38.7</span> Converting messy data into tidy data</a></li>
+<li><a class="nav-link" href="#check-for-missing-values"><span class="header-section-number">38.8</span> Check for missing values</a></li>
+<li><a class="nav-link" href="#handling-missing-values"><span class="header-section-number">38.9</span> Handling missing values</a></li>
+<li><a class="nav-link" href="#removing-outliers-optional"><span class="header-section-number">38.10</span> Removing Outliers (Optional)</a></li>
+<li><a class="nav-link" href="#conclusion-6"><span class="header-section-number">38.11</span> Conclusion</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/jtr13/cc22tt/blob/main/data_cleaning_tutorial.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/jtr13/cc22tt/edit/main/data_cleaning_tutorial.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Community Contributions for EDAV Fall 2022 Tues/Thurs</strong>" was written by . It was last built on 2022-11-16.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
