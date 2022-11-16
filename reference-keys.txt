@@ -252,6 +252,15 @@ why-introducing-lappy-and-do.call
 filter-desired-data-by-directly-passing-parameters-to-api
 evaluation-2
 reference-3
+sample-statistic-tutorial
+motivation-6
+data-cleaning-1
+duplicated-data
+missing-data
+hypothesis-testing
+bootstrapping
+hypothesis-testing-1
+reference-4
 part-interview-prep
 ten-interview-questions-and-answers
 forward

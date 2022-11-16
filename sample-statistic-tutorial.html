@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 37 Sample Statistic Tutorial | Community Contributions for EDAV Fall 2022 Tues/Thurs</title>
+<meta name="description" content="Yuqing Hong and William Gu library(tidyverse) library(boot) library(ggplot2)  37.1 Motivation This guide will introduce the basic statistical inferences for a data scientist, including Data...">
+<meta name="generator" content="bookdown 0.30 with bs4_book()">
+<meta property="og:title" content="Chapter 37 Sample Statistic Tutorial | Community Contributions for EDAV Fall 2022 Tues/Thurs">
+<meta property="og:type" content="book">
+<meta property="og:description" content="Yuqing Hong and William Gu library(tidyverse) library(boot) library(ggplot2)  37.1 Motivation This guide will introduce the basic statistical inferences for a data scientist, including Data...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 37 Sample Statistic Tutorial | Community Contributions for EDAV Fall 2022 Tues/Thurs">
+<meta name="twitter:description" content="Yuqing Hong and William Gu library(tidyverse) library(boot) library(ggplot2)  37.1 Motivation This guide will introduce the basic statistical inferences for a data scientist, including Data...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.1/transition.js"></script><script src="libs/bs3compat-0.4.1/tabs.js"></script><script src="libs/bs3compat-0.4.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><script src="libs/plotly-binding-4.10.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script><link href="libs/visjs-7.4.9/vis-timeline-graph2d.min.css" rel="stylesheet">
+<script src="libs/visjs-7.4.9/vis-timeline-graph2d.min.js"></script><link href="libs/timeline-0.4/timevis.css" rel="stylesheet">
+<script src="libs/timevis-binding-2.1.0/timevis.js"></script><link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
+<script src="libs/leaflet-1.3.1/leaflet.js"></script><link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
+<script src="libs/proj4-2.6.2/proj4.min.js"></script><script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script><link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
+<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Community Contributions for EDAV Fall 2022 Tues/Thurs</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Welcome!</a></li>
+<li><a class="" href="community-contribution.html"><span class="header-section-number">2</span> Community Contribution</a></li>
+<li><a class="" href="github-submission-instructions.html"><span class="header-section-number">3</span> GitHub submission instructions</a></li>
+<li><a class="" href="sample-project.html"><span class="header-section-number">4</span> Sample project</a></li>
+<li class="book-part">Cheatsheets</li>
+<li><a class="" href="r-window-functions-cheatsheet.html"><span class="header-section-number">6</span> R window functions cheatsheet</a></li>
+<li><a class="" href="rmd-chunk-option-cheat-sheet.html"><span class="header-section-number">7</span> Rmd chunk option cheat sheet</a></li>
+<li><a class="" href="helpful-ggplot2-extensions-cheatsheet.html"><span class="header-section-number">8</span> Helpful ggplot2 Extensions Cheatsheet</a></li>
+<li><a class="" href="commonly-used-graph-cheatcheet.html"><span class="header-section-number">9</span> Commonly-used graph cheatcheet</a></li>
+<li><a class="" href="git-and-version-control.html"><span class="header-section-number">10</span> Git and version control</a></li>
+<li><a class="" href="useful-plots-for-bioinfomatics-in-r.html"><span class="header-section-number">11</span> Useful plots for Bioinfomatics in R</a></li>
+<li><a class="" href="different-ways-to-create-world-map-in-r.html"><span class="header-section-number">12</span> Different ways to create world map in R</a></li>
+<li><a class="" href="color-in-r-python-and-jshtmlcss.html"><span class="header-section-number">13</span> Color in R, Python, and JS/HTML/CSS</a></li>
+<li><a class="" href="color-palettes-for-data-visualization.html"><span class="header-section-number">14</span> Color Palettes for Data Visualization</a></li>
+<li><a class="" href="data-visualization-using-seaborn.html"><span class="header-section-number">15</span> Data visualization using Seaborn</a></li>
+<li><a class="" href="machine-learning-cheatsheet-for-r-and-python.html"><span class="header-section-number">16</span> Machine Learning Cheatsheet for R and Python</a></li>
+<li><a class="" href="data-visualization-with-r-ggplot2-vs.-matlab.html"><span class="header-section-number">17</span> Data Visualization with R ggplot2 vs. Matlab</a></li>
+<li><a class="" href="ggplot2-plots-in-python-cheat-sheet-tutorial.html"><span class="header-section-number">18</span> Ggplot2 plots in python cheat sheet tutorial</a></li>
+<li><a class="" href="model-evaluation-selection-visualization-with-easystats.html"><span class="header-section-number">19</span> Model evaluation, selection &amp; visualization with easystats</a></li>
+<li class="book-part">Tutorials</li>
+<li><a class="" href="preprocessing-and-visualization-of-time-series-data.html"><span class="header-section-number">21</span> Preprocessing and Visualization of Time Series Data</a></li>
+<li><a class="" href="how-to-use-sqldf.html"><span class="header-section-number">22</span> How to use sqldf</a></li>
+<li><a class="" href="googlevis-in-r.html"><span class="header-section-number">23</span> googleVis in R</a></li>
+<li><a class="" href="tutorial-for-vector-fields-in-r.html"><span class="header-section-number">24</span> Tutorial for vector fields in r</a></li>
+<li><a class="" href="data-cleaning-with-r.html"><span class="header-section-number">25</span> Data cleaning with r</a></li>
+<li><a class="" href="introduction-to-shiny-web-apps.html"><span class="header-section-number">26</span> Introduction to Shiny Web Apps</a></li>
+<li><a class="" href="python-missingno-library-tutorial.html"><span class="header-section-number">27</span> Python missingno library tutorial</a></li>
+<li><a class="" href="data-explorer-tutorial-and-automation.html"><span class="header-section-number">28</span> Data Explorer Tutorial and Automation</a></li>
+<li><a class="" href="d-visualization-in-r.html"><span class="header-section-number">29</span> 3D Visualization in R</a></li>
+<li><a class="" href="visualizing-time-series-data.html"><span class="header-section-number">30</span> Visualizing Time Series Data</a></li>
+<li><a class="" href="igraph-in-r.html"><span class="header-section-number">31</span> igraph in r</a></li>
+<li><a class="" href="geo-mapping-coordinate-extraction-using-api-calls.html"><span class="header-section-number">32</span> Geo-Mapping Coordinate Extraction Using API Calls</a></li>
+<li><a class="" href="edav-garden.html"><span class="header-section-number">33</span> EDAV Garden</a></li>
+<li><a class="" href="using-raster-data-in-r.html"><span class="header-section-number">34</span> Using raster data in R</a></li>
+<li><a class="" href="make-geographical-maps-with-different-packages.html"><span class="header-section-number">35</span> Make Geographical Maps with Different Packages</a></li>
+<li><a class="" href="how-to-obtain-data-from-api-and-process-raw-json-data.html"><span class="header-section-number">36</span> How to obtain data from API and process raw JSON data</a></li>
+<li><a class="active" href="sample-statistic-tutorial.html"><span class="header-section-number">37</span> Sample Statistic Tutorial</a></li>
+<li class="book-part">Interview Prep</li>
+<li><a class="" href="ten-interview-questions-and-answers.html"><span class="header-section-number">39</span> Ten interview questions and answers</a></li>
+<li><a class="" href="data-science-internship-search-survival-guide.html"><span class="header-section-number">40</span> Data science internship search survival guide</a></li>
+<li><a class="" href="data-visualization-interview-questions-sample.html"><span class="header-section-number">41</span> Data visualization interview questions sample</a></li>
+<li class="book-part">Case Studies</li>
+<li><a class="" href="benford-case-study.html"><span class="header-section-number">43</span> Benford Case Study</a></li>
+<li class="book-part">Appendices</li>
+<li><a class="" href="github-initial-setup.html"><span class="header-section-number">44</span> Github initial setup</a></li>
+<li><a class="" href="tutorial-for-pull-request-mergers.html"><span class="header-section-number">45</span> Tutorial for pull request mergers</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/jtr13/cc22tt">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="sample-statistic-tutorial" class="section level1" number="37">
+<h1>
+<span class="header-section-number">37</span> Sample Statistic Tutorial<a class="anchor" aria-label="anchor" href="#sample-statistic-tutorial"><i class="fas fa-link"></i></a>
+</h1>
+<p>Yuqing Hong and William Gu</p>
+<div class="sourceCode" id="cb506"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">boot</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span></code></pre></div>
+<div id="motivation-6" class="section level2" number="37.1">
+<h2>
+<span class="header-section-number">37.1</span> Motivation<a class="anchor" aria-label="anchor" href="#motivation-6"><i class="fas fa-link"></i></a>
+</h2>
+<div class="line-block">This guide will introduce the basic statistical inferences for a data scientist, including Data Cleaning, Bootstrapping, and Hypothesis Testing. When starting with raw data, we should use some methods to preprocess and clean the messy data for most of the time to better understand what we have and improves the data quantity. Whether our sample statistics can be used as a good approximation of the population? We provide some methods to test the sample parameters. In this tutorial, we provide step-by-step instructions on how to implement these statistical inferences in R. Hopefully this will help you next time working on analyzing data!</div>
+</div>
+<div id="data-cleaning-1" class="section level2" number="37.2">
+<h2>
+<span class="header-section-number">37.2</span> Data Cleaning<a class="anchor" aria-label="anchor" href="#data-cleaning-1"><i class="fas fa-link"></i></a>
+</h2>
+<div class="line-block">In reality, the raw data collected usually are messy. Raw data may contain wrong data types, duplicate data that should be unique, and so on. Thus we are motivated to preprocess the raw data into consistent data so that improves the data quality and can be better analyzed,</div>
+<div id="duplicated-data" class="section level3" number="37.2.1">
+<h3>
+<span class="header-section-number">37.2.1</span> Duplicated Data<a class="anchor" aria-label="anchor" href="#duplicated-data"><i class="fas fa-link"></i></a>
+</h3>
+<div class="line-block">As for some variables that should be unique in the data set, we should drop duplicate rows. For example, for a data set containing students’ grades, the student ID should be unique for each student, thus we should avoid duplicates in IDs.</div>
+<div class="sourceCode" id="cb507"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">stud_grades</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
+<span>  student_id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">4</span>, <span class="fl">6</span><span class="op">)</span>,</span>
+<span>  name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Marry"</span>, <span class="st">"John"</span>, <span class="st">"Mike"</span>, <span class="st">"Emma"</span>, <span class="st">"Elizabeth"</span>, <span class="st">"Emma"</span>, <span class="st">"Elizabeth"</span><span class="op">)</span>,  </span>
+<span>  grade <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">97</span>, <span class="fl">76</span>, <span class="fl">84</span>, <span class="fl">85</span>, <span class="fl">74</span>, <span class="fl">85</span>, <span class="fl">73</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="va">stud_grades</span></span></code></pre></div>
+<pre><code>## # A tibble: 7 × 3
+##   student_id name      grade
+##        &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;
+## 1          1 Marry        97
+## 2          2 John         76
+## 3          3 Mike         84
+## 4          4 Emma         85
+## 5          5 Elizabeth    74
+## 6          4 Emma         85
+## 7          6 Elizabeth    73</code></pre>
+<div class="line-block">Here, we introduce three functions that can be used to remove duplicates.</div>
+<ol style="list-style-type: decimal">
+<li>
+<p>function <em>unique()</em> (R base function):</p>
+<ul>
+<li>extracting unique elements on a vector:</li>
+</ul>
+<div class="sourceCode" id="cb509"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">v</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">6</span>, <span class="fl">4</span>, <span class="fl">6</span>, <span class="fl">4</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">v</span><span class="op">)</span> </span></code></pre></div>
+<pre><code>## [1] 1 2 6 4</code></pre>
+<ul>
+<li>extracting unique rows on a data frame
+<ul>
+<li>Remark: Only all entries are the same will be considered as duplicated row.</li>
+</ul>
+</li>
+</ul>
+<div class="sourceCode" id="cb511"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">stud_grades</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 6 × 3
+##   student_id name      grade
+##        &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;
+## 1          1 Marry        97
+## 2          2 John         76
+## 3          3 Mike         84
+## 4          4 Emma         85
+## 5          5 Elizabeth    74
+## 6          6 Elizabeth    73</code></pre>
+</li>
+<li>
+<p>function <em>distinct()</em> (dplyr package): only the first row is preserved for duplicate rows.</p>
+<div class="sourceCode" id="cb513"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">stud_grades</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 6 × 3
+##   student_id name      grade
+##        &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;
+## 1          1 Marry        97
+## 2          2 John         76
+## 3          3 Mike         84
+## 4          4 Emma         85
+## 5          5 Elizabeth    74
+## 6          6 Elizabeth    73</code></pre>
+<ul>
+<li>If we want to drop duplicates based on some particular variables:</li>
+</ul>
+<div class="sourceCode" id="cb515"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#remove duplicated rows based on variable "name"</span></span>
+<span><span class="co">#'.keep_all = TRUE' means that not only output the variable 'name' but output all            #variables </span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">stud_grades</span>, <span class="va">name</span>, .keep_all <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 5 × 3
+##   student_id name      grade
+##        &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;
+## 1          1 Marry        97
+## 2          2 John         76
+## 3          3 Mike         84
+## 4          4 Emma         85
+## 5          5 Elizabeth    74</code></pre>
+</li>
+<li>
+<p>function <em>duplicated()</em> (R base function): identifying if the input element is duplicated or not and returning Boolean results.</p>
+<ul>
+<li>extracting unique elements on a vector:
+<ul>
+<li>Remark: duplicated() return TRUE for duplicated elements, thus <strong>!duplicated()</strong> should be used to obtain unique elements.</li>
+</ul>
+</li>
+</ul>
+<div class="sourceCode" id="cb517"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">v</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">6</span>, <span class="fl">4</span>, <span class="fl">6</span>, <span class="fl">4</span><span class="op">)</span></span>
+<span><span class="va">v</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/duplicated.html">duplicated</a></span><span class="op">(</span><span class="va">v</span><span class="op">)</span><span class="op">]</span> <span class="co">#used as a filter </span></span></code></pre></div>
+<pre><code>## [1] 1 2 6 4</code></pre>
+<ul>
+<li>extracting unique rows on a data frame</li>
+</ul>
+<div class="sourceCode" id="cb519"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">stud_grades</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/duplicated.html">duplicated</a></span><span class="op">(</span><span class="va">stud_grades</span><span class="op">$</span><span class="va">student_id</span><span class="op">)</span>,<span class="op">]</span></span></code></pre></div>
+<pre><code>## # A tibble: 6 × 3
+##   student_id name      grade
+##        &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;
+## 1          1 Marry        97
+## 2          2 John         76
+## 3          3 Mike         84
+## 4          4 Emma         85
+## 5          5 Elizabeth    74
+## 6          6 Elizabeth    73</code></pre>
+</li>
+</ol>
+</div>
+<div id="missing-data" class="section level3" number="37.2.2">
+<h3>
+<span class="header-section-number">37.2.2</span> Missing Data<a class="anchor" aria-label="anchor" href="#missing-data"><i class="fas fa-link"></i></a>
+</h3>
+<ol style="list-style-type: decimal">
+<li>Reasons for missing data
+<ul>
+<li>Sensor error during data collection</li>
+<li>Data entry error</li>
+<li>Survey-subject refuse to answer some questions</li>
+<li>etc.</li>
+</ul>
+<div class="sourceCode" id="cb521"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#create a simple data frame as an example to visualization</span></span>
+<span><span class="va">fruits</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
+<span>  name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"apple"</span>, <span class="st">"banana"</span>, <span class="st">"orange"</span>, <span class="st">"strawberry"</span>, <span class="st">"blueberry"</span><span class="op">)</span>,  </span>
+<span>  price    <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"2"</span>, <span class="st">"3"</span>, <span class="st">"3"</span>, <span class="st">"four"</span> ,<span class="st">"5"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  weight <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">14.5</span>, <span class="fl">4.4</span>, <span class="cn">NA</span>, <span class="fl">5.1</span>, <span class="fl">5.7</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="va">fruits</span></span></code></pre></div>
+<pre><code>## # A tibble: 5 × 3
+##   name       price weight
+##   &lt;chr&gt;      &lt;dbl&gt;  &lt;dbl&gt;
+## 1 apple          2   14.5
+## 2 banana         3    4.4
+## 3 orange         3   NA  
+## 4 strawberry    NA    5.1
+## 5 blueberry      5    5.7</code></pre>
+<div class="line-block">In this example, some value is missing before processing, and some value is missing because wrong data type is not correctly processed.</div>
+</li>
+<li>Dealing with missing data
+<ul>
+<li>We should remove or fill missing data because many models can’t handle missing data. We will introduce two basic approaches to deal with NA entries.</li>
+</ul>
+<div class="sourceCode" id="cb523"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#na.rm = TRUE shoule be set to tell the function ignore NAs.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">fruits</span><span class="op">$</span><span class="va">price</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 3.25</code></pre>
+<div class="sourceCode" id="cb525"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#return Boolean if the input element is a missing value or not.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">fruits</span><span class="op">$</span><span class="va">price</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] FALSE FALSE FALSE  TRUE FALSE</code></pre>
+<ul>
+<li>Method 1: Drop the entire row
+<ol style="list-style-type: decimal">
+<li><p>function <em>na.omit()</em> removes all rows that containing missing data.</p></li>
+<li><p>function <em>complete.cases()</em> can be used to removes rows that containing missing data at some particular columns. It return logical vector specifying which rows have no missing values across the columns we specified.</p></li>
+</ol>
+</li>
+</ul>
+<div class="sourceCode" id="cb527"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="va">fruits</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 3 × 3
+##   name      price weight
+##   &lt;chr&gt;     &lt;dbl&gt;  &lt;dbl&gt;
+## 1 apple         2   14.5
+## 2 banana        3    4.4
+## 3 blueberry     5    5.7</code></pre>
+<div class="sourceCode" id="cb529"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#used as a filter instead of outputting directly</span></span>
+<span><span class="co">#The input fruits[ , 3:3] tell let function only consider NAs on the column #3 ("weight")</span></span>
+<span><span class="va">fruits</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/stats/complete.cases.html">complete.cases</a></span><span class="op">(</span><span class="va">fruits</span><span class="op">[</span> , <span class="fl">3</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span>,<span class="op">]</span> </span></code></pre></div>
+<pre><code>## # A tibble: 4 × 3
+##   name       price weight
+##   &lt;chr&gt;      &lt;dbl&gt;  &lt;dbl&gt;
+## 1 apple          2   14.5
+## 2 banana         3    4.4
+## 3 strawberry    NA    5.1
+## 4 blueberry      5    5.7</code></pre>
+<pre><code> - Disadvantages: we may lose a large number of data after removing those rows.</code></pre>
+<ul>
+<li>Method 2: Impute from data in the same column
+<ul>
+<li>Instead of removing some data, we can fill those missing values with value inferred from existing values in that column. The Common filler values are 1)mean, 2)median and 3)mode.</li>
+</ul>
+</li>
+</ul>
+<div class="sourceCode" id="cb532"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">fruits_new</span> <span class="op">&lt;-</span> <span class="va">fruits</span></span>
+<span></span>
+<span><span class="co">#1. fill the NAs in 'weight' by the median weight of existing values</span></span>
+<span><span class="va">fruits_new</span><span class="op">$</span><span class="va">weight</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">fruits_new</span><span class="op">$</span><span class="va">weight</span><span class="op">)</span>, </span>
+<span>                           <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">fruits_new</span><span class="op">$</span><span class="va">weight</span>,na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>                           <span class="va">fruits_new</span><span class="op">$</span><span class="va">weight</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#2. fill the NAs in 'price' by the mean price of existing values  </span></span>
+<span><span class="va">fruits_new</span><span class="op">$</span><span class="va">price</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">fruits_new</span><span class="op">$</span><span class="va">price</span><span class="op">)</span>, </span>
+<span>                          <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">fruits_new</span><span class="op">$</span><span class="va">price</span>,na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>                          <span class="va">fruits_new</span><span class="op">$</span><span class="va">price</span><span class="op">)</span></span>
+<span><span class="va">fruits_new</span></span></code></pre></div>
+<pre><code>## # A tibble: 5 × 3
+##   name       price weight
+##   &lt;chr&gt;      &lt;dbl&gt;  &lt;dbl&gt;
+## 1 apple       2      14.5
+## 2 banana      3       4.4
+## 3 orange      3       5.4
+## 4 strawberry  3.25    5.1
+## 5 blueberry   5       5.7</code></pre>
+<pre><code> - Disadvantages: it may lose feature interactions after filling.</code></pre>
+</li>
+</ol>
+</div>
+</div>
+<div id="hypothesis-testing" class="section level2" number="37.3">
+<h2>
+<span class="header-section-number">37.3</span> Hypothesis Testing<a class="anchor" aria-label="anchor" href="#hypothesis-testing"><i class="fas fa-link"></i></a>
+</h2>
+<p>After transform our raw sample data into consistent data which is ready for statistical inference, we can now obtain the desired sample statistic to estimate the population. And we can use hypothesis testing to check whether the sample statistic is a good approximation of the population.</p>
+<div id="bootstrapping" class="section level3" number="37.3.1">
+<h3>
+<span class="header-section-number">37.3.1</span> Bootstrapping<a class="anchor" aria-label="anchor" href="#bootstrapping"><i class="fas fa-link"></i></a>
+</h3>
+<p>We are trying to find a good approximation of population parameters by using sample statistics. More samples give a better approximation. But what if we can’t generate additional samples?</p>
+<p>Bootstrapping is a statistical method that draws samples with replacement within a single dataset to create many simulated samples.</p>
+<ul>
+<li>Bootstrapping procedure:
+<ol style="list-style-type: decimal">
+<li>Draw a random sample of size n with replacement from the original sample data.</li>
+<li>Record the sample statistic. eg. mean, median, etc.</li>
+<li>Repeat steps 1 and 2 many times.</li>
+<li>Plot the calculated stats which forms the bootstrap distribution.</li>
+<li>Using the bootstrap distribution of the sample statistic, we can calculate the x% bootstrap confidence intervals and perform hypothesis testing.</li>
+</ol>
+</li>
+<li>Implementation in R
+<ol style="list-style-type: decimal">
+<li>The package <em>boot</em> allows us to do Bootstrapping.</li>
+</ol>
+<div class="sourceCode" id="cb535"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">boot</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>  <span class="co">#for plotting</span></span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>Create a function that computes the statistic we want to use, such as mean, median, correlation, etc.
+<ul>
+<li>Note: Before calling boot, we need to define a function that will return the desired statistic(s). The first argument passed to the function should be the dataset. The second argument can be an index vector of the observations in the dataset or a frequency or weight vector that informs the sampling probabilities. For this example, we use the default index vector i, and the statistic of interest is the mean for this example.</li>
+</ul>
+</li>
+</ol>
+<div class="sourceCode" id="cb536"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">199</span>,<span class="fl">100</span>,replace<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span> <span class="co">#used as an example of original sample data</span></span>
+<span><span class="va">fc</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">d</span>,<span class="va">i</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">d</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li>Using the boot function to find the R bootstrap of the statistic.</li>
+</ol>
+<div class="sourceCode" id="cb537"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">b1</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/boot/man/boot.html">boot</a></span><span class="op">(</span><span class="va">x1</span>,<span class="va">fc</span>,R<span class="op">=</span><span class="fl">1000</span><span class="op">)</span></span></code></pre></div>
+<ol start="4" style="list-style-type: decimal">
+<li>Plot the generated bootstrap distribution. In this example, the distribution of the bootstrap samples’ mean is shown.</li>
+</ol>
+<div class="sourceCode" id="cb538"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Plot the bootstrap sampling</span></span>
+<span><span class="co"># distribution using ggplot</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">b1</span><span class="op">)</span></span></code></pre></div>
+<img src="sample_statistic_tutorial_files/figure-html/unnamed-chunk-17-1.png" width="80%" style="display: block; margin: auto;"><ol start="5" style="list-style-type: decimal">
+<li>Using the boot.ci() function to get the confidence intervals using bootstrap samples.
+<ul>
+<li>return x% confidence interval by setting confidence level <em>conf = x</em>. Here, we use the 95 percent confidence interval.</li>
+<li>set <em>type</em> of intervals by
+<ul>
+<li>“norm”: using the Standard confidence limits methods which compute CI by the standard deviation.</li>
+<li>“basic”: using the Hall’s (second percentile) method which calculate upper and lower limit of test statistic by percentile.</li>
+<li>“stud”: resamples the bootstrap sample to find a second-stage bootstrap statistic and use it to calculate the CI.</li>
+<li>“perc”: using Quantile-based intervals to calculate the CI.</li>
+<li>“bca”: Bias Corrected Accelerated use percentile limits with bias correction and estimate acceleration coefficient corrects the limit and find the CI.</li>
+<li>or simply type = “all” to obtain all five types of intervals</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<div class="sourceCode" id="cb539"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x1</span><span class="op">)</span> <span class="co">#output the sample mean</span></span></code></pre></div>
+<pre><code>## [1] 98.86</code></pre>
+<div class="sourceCode" id="cb541"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/boot/man/boot.ci.html">boot.ci</a></span><span class="op">(</span><span class="va">b1</span>, conf <span class="op">=</span> <span class="fl">0.95</span>, type<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"norm"</span>,<span class="st">"basic"</span>,<span class="st">"perc"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## BOOTSTRAP CONFIDENCE INTERVAL CALCULATIONS
+## Based on 1000 bootstrap replicates
+## 
+## CALL : 
+## boot.ci(boot.out = b1, conf = 0.95, type = c("norm", "basic", 
+##     "perc"))
+## 
+## Intervals : 
+## Level      Normal              Basic              Percentile     
+## 95%   ( 87.43, 110.15 )   ( 87.43, 110.47 )   ( 87.25, 110.29 )  
+## Calculations and Intervals on Original Scale</code></pre>
+<ol start="6" style="list-style-type: decimal">
+<li>As for this example, we randomly sample 100 numbers without replacement from (1,199) to simulate the random sample data. If we want to use the sample mean mean(x1) to approximate or represent the population true mean, we can use Bootstrapping to generate more samples and test our original sample statistic. Here, the boot.ci() gives that we are 95 percent confident that the population mean is in this interval. If the sample mean mean(x1) is in this interval, we can’t say that it is a bad approximation.</li>
+</ol>
+</li>
+</ul>
+</div>
+<div id="hypothesis-testing-1" class="section level3" number="37.3.2">
+<h3>
+<span class="header-section-number">37.3.2</span> Hypothesis Testing<a class="anchor" aria-label="anchor" href="#hypothesis-testing-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>Hypothesis testing is a statistical method that is used to decide whether the data sufficiently support a particular hypothesis.It evaluated two mutually exclusive statements about a population, and this method is used to access the plausibility of a hypothesis by using sample data.</p>
+<ul>
+<li>
+<p><strong>Keywords to understand:</strong></p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Null Hypothesis(H0):</strong> In statistics, the null hypothesis is a general given statement that the statistic observed is due to random chance or that there is no difference between two measured cases or among groups (e.g. true difference in means is equal to 0). It is usually a statement we want to prove wrong.</p></li>
+<li><p><strong>Alternative Hypothesis(H1):</strong> The alternative hypothesis is the hypothesis that is contrary to null hypothesis, which we want to prove right. (e.g. true difference in means is not equal to 0).</p></li>
+<li><p><strong>Level of significance:</strong> It refers to the degree of significance in which we accept or reject the null-hypothesis. The value is the probability of a false rejection in a hypothesis test. We usually select a level of significance of 5%, which means your output should be 95% confident to give similar predictions.</p></li>
+<li><p><strong>P-value:</strong> The P value, also known as calculated probability, is the probability of finding the observed or more extreme results when the null hypothesis(H0) of a study given problem is true. When P value is less than the chosen significance level, it has a really small chance to obtain the observed value given the null hypothesis is true, then we should reject the null hypothesis.</p></li>
+<li><p><strong>Type I error &amp; Type II error:</strong> Type I error (= p value): When we reject the null hypothesis, although that hypothesis was true. Type II error: When we accept the null hypothesis but it is false.</p></li>
+</ol>
+</li>
+<li>
+<p><strong>Procedure of Hypothesis testing</strong></p>
+<ol style="list-style-type: decimal">
+<li>State null and alternative hypothesis.</li>
+<li>Formulate an analysis plan, set the significance level.</li>
+<li>Analyze sample data with a test statistic. Use the value of the test statistic to make the decision based on the significance level.</li>
+</ol>
+</li>
+<li><p><strong>Implementation in R:</strong><br></p></li>
+</ul>
+<ol style="list-style-type: decimal">
+<li>
+<strong>T-test</strong> is usually used on relatively small-amount normally distributed data without known standard deviation. We use t.test() for T-tests in R.
+<ul>
+<li>One sample T-test is used to test the mean of sample with a known mean value:<br>
+In this example, we randomly sample 50 numbers from a normal distributed population with true mean 10 to simulate our sample data. Running the t test given that the null hypothesis is “the true mean is 10” will result a large p-value, which means we should not reject the null hypothesis as expected. By contrast, running the t test given that the null hypothesis is “the true mean is 6” will result a really small p-value, which means it has a really small chance to obtain the observed sample mean given the null hypothesis is true, then we should reject the null hypothesis.</li>
+</ul>
+<div class="sourceCode" id="cb543"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">10</span><span class="op">)</span> <span class="co"># true mean is 10</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 10.20618</code></pre>
+<div class="sourceCode" id="cb545"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">x</span>, mu<span class="op">=</span><span class="fl">10</span><span class="op">)</span> <span class="co"># setting H0: true mean is equal to 10</span></span></code></pre></div>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  x
+## t = 1.8931, df = 49, p-value = 0.06426
+## alternative hypothesis: true mean is not equal to 10
+## 95 percent confidence interval:
+##   9.987311 10.425043
+## sample estimates:
+## mean of x 
+##  10.20618</code></pre>
+<div class="sourceCode" id="cb547"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">x</span>, mu<span class="op">=</span><span class="fl">6</span><span class="op">)</span> <span class="co"># setting H0: true mean is equal to 6</span></span></code></pre></div>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  x
+## t = 38.62, df = 49, p-value &lt; 2.2e-16
+## alternative hypothesis: true mean is not equal to 6
+## 95 percent confidence interval:
+##   9.987311 10.425043
+## sample estimates:
+## mean of x 
+##  10.20618</code></pre>
+<ul>
+<li>Two sample T-test is used to compare two sample data and indicates if they are same:<br>
+In this example, we randomly sample 20 and 50 numbers from a normal distributed population with true mean 5 into two sets of sample data. Running the t test over two samples sets the null hypothesis to be “the difference between means is 0” will give a large p-value, which fails to reject H0 as expected. When the test is used on random samples with different means, we would expect an extremely small p value which indicates that the difference is statistically significant, in that case we should reject the null hypothesis. When samples are having same size, we can also set parameter pairs to True to perform paired test</li>
+</ul>
+<div class="sourceCode" id="cb549"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">5</span><span class="op">)</span></span>
+<span><span class="va">x1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">5</span><span class="op">)</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">5</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  x and y
+## t = 0.31774, df = 37.268, p-value = 0.7525
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -0.4656674  0.6389280
+## sample estimates:
+## mean of x mean of y 
+##  5.023414  4.936783</code></pre>
+<div class="sourceCode" id="cb551"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html">t.test</a></span><span class="op">(</span><span class="va">x1</span>, <span class="va">y</span>, paired<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+##  Paired t-test
+## 
+## data:  x1 and y
+## t = 0.60717, df = 19, p-value = 0.5509
+## alternative hypothesis: true mean difference is not equal to 0
+## 95 percent confidence interval:
+##  -0.5656056  1.0278536
+## sample estimates:
+## mean difference 
+##        0.231124</code></pre>
+</li>
+<li>What do we do when normality assumption fails? We’ll use <strong>U-test</strong>, which is usually used on relatively large sample data, when comparison has to computed on one sample and the data is non-parametric. We use wilcox.test() for U-test in R.
+<ul>
+<li>One-sample U-test takes “exact” parameter, which is a logical indicating whether an exact p-value should be computed.<br>
+In this example, we randomly sample 100 numbers from a normal distributed population with true mean at 0. Hence, the null hypothesis is “the true location of mean is at 0”. By this test we’re expected to get a large p-value which fails to reject H0 as expected. We can also set mu=3, and we’ll get extremely small p-value and we should take alternative hypothesis: “the true mean is not at location 3”.</li>
+</ul>
+<div class="sourceCode" id="cb553"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">x</span>, exact <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+##  Wilcoxon signed rank test with continuity correction
+## 
+## data:  x
+## V = 2434, p-value = 0.7557
+## alternative hypothesis: true location is not equal to 0</code></pre>
+<div class="sourceCode" id="cb555"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">x</span>, mu <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+##  Wilcoxon signed rank test with continuity correction
+## 
+## data:  x
+## V = 0, p-value &lt; 2.2e-16
+## alternative hypothesis: true location is not equal to 3</code></pre>
+<ul>
+<li>Two-sample U-test is used to compare two sets of sample data:<br>
+In this example, we randomly sample 100 numbers from a normal distributed population with different true mean at 10 and 20 to create two sample dataset. The null hypothesis of this test is “the difference of ture means is 0”. By this test we’ll expect p-value &lt; 2.2e-16 since the mean is different, and we should reject H0. Alternatively, when we get large p-value for our own data, we should not reject the null hypothesis.</li>
+</ul>
+<div class="sourceCode" id="cb557"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">10</span><span class="op">)</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">20</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+##  Wilcoxon rank sum test with continuity correction
+## 
+## data:  x and y
+## W = 0, p-value &lt; 2.2e-16
+## alternative hypothesis: true location shift is not equal to 0</code></pre>
+</li>
+</ol>
+</div>
+</div>
+<div id="reference-4" class="section level2" number="37.4">
+<h2>
+<span class="header-section-number">37.4</span> Reference<a class="anchor" aria-label="anchor" href="#reference-4"><i class="fas fa-link"></i></a>
+</h2>
+<ol style="list-style-type: decimal">
+<li><p><a href="https://www.geeksforgeeks.org/bootstrap-confidence-interval-with-r-programming/" class="uri">https://www.geeksforgeeks.org/bootstrap-confidence-interval-with-r-programming/</a></p></li>
+<li><p><a href="https://www.datanovia.com/en/lessons/identify-and-remove-duplicate-data-in-r/" class="uri">https://www.datanovia.com/en/lessons/identify-and-remove-duplicate-data-in-r/</a></p></li>
+<li><p><a href="https://www.geeksforgeeks.org/data-cleaning-in-r/" class="uri">https://www.geeksforgeeks.org/data-cleaning-in-r/</a></p></li>
+<li><p><a href="https://www.geeksforgeeks.org/hypothesis-testing-in-r-programming/" class="uri">https://www.geeksforgeeks.org/hypothesis-testing-in-r-programming/</a></p></li>
+<li><p><a href="https://www.geeksforgeeks.org/understanding-hypothesis-testing/" class="uri">https://www.geeksforgeeks.org/understanding-hypothesis-testing/</a></p></li>
+</ol>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="how-to-obtain-data-from-api-and-process-raw-json-data.html"><span class="header-section-number">36</span> How to obtain data from API and process raw JSON data</a></div>
+<div class="next"><a href="ten-interview-questions-and-answers.html"><span class="header-section-number">39</span> Ten interview questions and answers</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#sample-statistic-tutorial"><span class="header-section-number">37</span> Sample Statistic Tutorial</a></li>
+<li><a class="nav-link" href="#motivation-6"><span class="header-section-number">37.1</span> Motivation</a></li>
+<li>
+<a class="nav-link" href="#data-cleaning-1"><span class="header-section-number">37.2</span> Data Cleaning</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#duplicated-data"><span class="header-section-number">37.2.1</span> Duplicated Data</a></li>
+<li><a class="nav-link" href="#missing-data"><span class="header-section-number">37.2.2</span> Missing Data</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#hypothesis-testing"><span class="header-section-number">37.3</span> Hypothesis Testing</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#bootstrapping"><span class="header-section-number">37.3.1</span> Bootstrapping</a></li>
+<li><a class="nav-link" href="#hypothesis-testing-1"><span class="header-section-number">37.3.2</span> Hypothesis Testing</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#reference-4"><span class="header-section-number">37.4</span> Reference</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/jtr13/cc22tt/blob/main/sample_statistic_tutorial.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/jtr13/cc22tt/edit/main/sample_statistic_tutorial.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Community Contributions for EDAV Fall 2022 Tues/Thurs</strong>" was written by . It was last built on 2022-11-16.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
