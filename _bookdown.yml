@@ -54,6 +54,7 @@ rmd_files: [
   'data_cleaning_tutorial.Rmd',
   'mlr3_package_tutorial.Rmd',
   'guide_to_nonparametric_tests.Rmd',
+  'dplyr_in_r.Rmd',
   
   # Part: Interview Prep
   'ten_interview_questions.Rmd',
