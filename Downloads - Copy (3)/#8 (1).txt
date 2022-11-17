@@ -1,5 +1,0 @@
-1. z.x                            [cat file | grep 'z.x']
-2. banana|mango                   [grep -E 'banana|mango' sample.txt]
-3. [aeiou]\{5,}			  [grep -E '[aeiou]\{5,}' sample.txt]
-4. never\>
-5. \<[qs]z{2}
