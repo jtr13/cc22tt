@@ -380,6 +380,7 @@ manipulated-data
 findings
 conclusion-7
 sources
+equity-in-ai
 github-initial-setup
 create-new-repo
 pages-in-repo-settings
