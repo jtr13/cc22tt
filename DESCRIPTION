@@ -67,6 +67,9 @@ Suggests:
     janitor,
     DescTools,
     tseries,
+    textdata,
+    tidytext,
+    tidyr,
 Remotes:
     hadley/emo,
     kassambara/navdata,
