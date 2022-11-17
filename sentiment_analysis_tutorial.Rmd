@@ -33,11 +33,11 @@ sentiments
 ```
 The following are the three lexicons that are based on unigrams (single words) that are in English. The `AFFIN` lexicon uses a scoring system from -5 to 5 to assign a word with negative scores indicating negative sentiment and positive scores indicating positive sentiment. The `bing` lexicon uses a binary system where words are categorized as either positive or negative. The `nrc` lexicon has 10 categories that include positive, negative, anger, anticipation, disgust, fear, joy, sadness, surprise, and trust. Use the function `get_sentiment()` to get a specific sentiment lexicon.
 
-* `AFFIN` from [Finn Årup Nielsen](http://www2.imm.dtu.dk/pubdb/pubs/6010-full.html)
+* `AFINN` from [Finn Årup Nielsen](http://www2.imm.dtu.dk/pubdb/pubs/6010-full.html)
 * `bing` from [Bing Liu and collaborators](https://www.cs.uic.edu/~liub/FBS/sentiment-analysis.html)
 * `nrc` from [Saif Mohammad and Peter Turney](http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm)
 
-```{r echo=TRUE}
+```{r echo=TRUE, eval=FALSE}
 # to see the individual lexicons 
 get_sentiments("afinn")
 get_sentiments("bing")
@@ -147,7 +147,7 @@ nrow(darwin_bing)
 
 # nrc dataset
 darwin_nrc <- darwin_data %>%
-  inner_join(get_sentiments("nrc"))
+   inner_join(get_sentiments("nrc"))
 nrow(darwin_nrc)
 ```
 As predicted, the number of rows reduced after each lexicon was applied. The `afinn` lexicon significantly reduced the row dimensions from 78,556 rows of words to 4,758. The `bing` lexicon resulted in 6,378 rows whereas the `nrc` lexicon has the greatest amount at 27,156 rows. This may be due to its multi-categorical nature since it is able to encapsulate more words. 
@@ -159,7 +159,6 @@ Since we have a tidy dataframe, we can easily display the most common positive a
 
 ```{r echo=TRUE}
 afinn_word_counts <- darwin_afinn %>% 
-  #summarise(sentiment = sum(value)) %>% 
   mutate(method = "AFINN") %>%
   count(word, sentiment = value, sort = TRUE)
 
