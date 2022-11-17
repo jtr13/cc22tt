@@ -56,6 +56,7 @@ rmd_files: [
   'guide_to_nonparametric_tests.Rmd',
   'dplyr_in_r.Rmd',
   'visualizing_us_elections.Rmd',
+  'sentiment_analysis_tutorial.Rmd',
   
   # Part: Interview Prep
   'ten_interview_questions.Rmd',
