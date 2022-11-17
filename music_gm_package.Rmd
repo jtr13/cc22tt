@@ -21,7 +21,8 @@ This is an example of an arrangement of the first few lines of "Let it Be" by th
 
 ```{r}
 melodyhigh <- Line(
-  pitches = list(NA,NA,NA,NA,"G5","G5","G5","G5", "A5", "C6","G5","G5","C6","D6","E6","E6","E6","D6","D6","C6","C6", "E6","E6","F6","E6","E6","D6","E6","D6","C6","C6"),
+  pitches = list(NA,NA,NA,NA,"G5","G5","G5","G5", "A5", "C6","G5","G5","C6","D6","E6","E6","E6","D6","D6","C6","C6",
+                 "E6","E6","F6","E6","E6","D6","E6","D6","C6","C6"),
   durations = list("q","q","q","8", "16", "16", "8", "16","8.","8","8","8","16","8.","16","16","q","16","8","16","q.","8","8","8","16","8","q","16","16","16","w"),
    tie = list(30)
 )
