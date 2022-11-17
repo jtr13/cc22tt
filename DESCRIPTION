@@ -71,6 +71,7 @@ Suggests:
     tidytext,
     tidyr,
     formatR,
+    wordcloud,
 Remotes:
     hadley/emo,
     kassambara/navdata,
