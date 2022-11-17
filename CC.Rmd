@@ -1,3 +1,5 @@
+# (PART) Blogs
+
 # Equity in AI
 
 Dillon Sparks
