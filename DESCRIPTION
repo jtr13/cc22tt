@@ -5,7 +5,8 @@ Version: 0.0.0.9000
 Imports:
     emo,
     tidyverse,
-    geocompkg
+    geocompkg,
+    academictwitteR
 Suggests:
     bookdown,
     bslib,
@@ -81,4 +82,5 @@ Remotes:
     mattflor/chorddiag,
     jeromefroe/circlepackeR,
     hrbrmstr/streamgraph,
-    geocompr/geocompkg
+    geocompr/geocompkg,
+    cjbarrie/academictwitteR
