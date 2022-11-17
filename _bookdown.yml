@@ -65,6 +65,9 @@ rmd_files: [
   # Part: Case Studies
   'benford_case_study.Rmd',
   
+  # Part: Blogs
+  'CC.Rmd',
+  
   # Part: Workshops
   
   # Part: Appendices
