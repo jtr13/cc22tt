@@ -1,0 +1,22 @@
+(1) grep -c raven TheRaven.txt
+
+(a) grep -n '^$' TheRaven.txt
+
+
+(b) grep '...*' TheRaven.txt
+
+
+
+(c) grep [abc] TheRaven.txt or grep [abc]{3} TheRaven.txt
+
+
+(d) grep [^a]a\{3,\5}[^a] TheRaven.txt
+
+
+(e) egrep -v '[[:punct:]]' TheRaven.txt
+
+
+(f) egrep -e [[:upper:]] TheRaven.txt
+
+
+(g) grep [abc][cba][bdc] TheRaven.txt
