@@ -82,8 +82,9 @@ shinyApp(ui = ui, server = server)
 You may lay out the user interface of your app by placing elements in the fluidPage function. Elements can be seperated to inputs and outputs function.
 
 Next we will create a visualization tool to display k-means clustering of Iris dataset. To do this, we need to define the UI panel and return a scatterplot. 
-Iris data set contains 3 classes of 50 instances each, where each class refers to a type of iris plant. The feature set contains "Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width" 
-![Iris k-means](resources/shiny_app_intro/km.png)
+Iris data set contains 3 classes of 50 instances each, where each class refers to a type of iris plant. The feature set contains "Sepal.Length", "Sepal.Width", "Petal.Length", "Petal.Width"  
+
+![](resources/shiny_app_intro/km.png){width=80%}
 
 ### layout
 
@@ -104,12 +105,15 @@ ui <- fluidPage(
   )
 )
 ```
-![example1](resources/shiny_app_intro/ui1.png)
+  
+  
+![](resources/shiny_app_intro/ui1.png){width=70%}
 
 ### Input functions
 
-We can also add control widgets to provide a way for users to send messages to the Shiny app. Shiny widgets collect a value from your user. When a user changes the widget, the value will change as well.There are many input functions to create widgets. Below are some examples of basic widgets.
-![basic widgets](resources/shiny_app_intro/ui2.png)
+We can also add control widgets to provide a way for users to send messages to the Shiny app. Shiny widgets collect a value from your user. When a user changes the widget, the value will change as well.There are many input functions to create widgets. Below are some examples of basic widgets.  
+
+![](resources/shiny_app_intro/ui2.png){width=80%}
 
 Next I will introduce a common input function `selectInput()` that shows a box with choices to select from. 
 `selectInput()` has 3 required arguments:  
@@ -122,7 +126,10 @@ selectInput(inputID='ycol', label='Y Variable',
             choices=names(iris)[1:4],#"Sepal.Length" "Sepal.Width"  "Petal.Length" "Petal.Width" 
       selected = names(iris)[[2]])# set "Petal.Length" to be default
 ```
-![selectInput example](resources/shiny_app_intro/ui3.png)
+  
+  
+![](resources/shiny_app_intro/ui3.png){width=70%}
+  
 
 Here I include the select widget that allows the user to select the y variable of output plot. I also define the variables to choose from are attributes from the feature set, and set the default choice to be 'Sepal.Width'. Similarly, we can define the selection box for x variable and a numeric Input box that user can define cluster numbers for our clustering example.
 
@@ -198,7 +205,8 @@ However, it could be computational costy if we update all R expression inside th
 `reactive()` builds a reactive object that will respond to every input value in the code. We can save the R expressions what modifies input values in `reactive()` and call the reactive expression like a function. 
 
 In our example, we can save the user specified two feature columns of Iris dataset as `selectedData` and calculate k-mans model `clusters` base on `selectedData` and user specified cluster numbers.
-Moreover, `selectedData` won't change if `input$xcol` and `input$ycol` aren't changed. We can avoid unnecessary computation by not putting all expressions in the final `render*()` function, so that we don't need to update `iris[, c(input$xcol, input$ycol)]` whenever `input$clusters` changes.
+Moreover, `selectedData` won't change if `input$xcol` and `input$ycol` aren't changed. We can avoid unnecessary computation by not putting all expressions in the final `render*()` function, so that we don't need to update `iris[, c(input$xcol, input$ycol)]` whenever `input$clusters` changes.  
+
 
 ```{r, eval=FALSE}
   selectedData <- reactive({
