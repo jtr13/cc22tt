@@ -38,6 +38,9 @@ motivation
 table
 example
 model-evaluation-selection-visualization-with-easystats
+time-series-itsmr-cheat-sheet
+introduction
+motivation-1
 part-tutorials
 preprocessing-and-visualization-of-time-series-data
 preprocess-on-a-time-series-data
@@ -47,7 +50,7 @@ deal-with-problematic-data-points
 visualize-a-time-series-data
 conclusion
 how-to-use-sqldf
-motivation-1
+motivation-2
 usage
 basics
 more-advanced-sql-tasks
@@ -93,7 +96,7 @@ extra
 data-cleaning-with-r
 data-cleaning-with-r-1
 import-data-set
-introduction
+introduction-1
 data-frame-modification-general-modification
 create-dataframe-by-arrays
 create-dataframe-by-combining-two-dataframeusing-cbindrbind
@@ -131,7 +134,7 @@ ordinal-encoding
 one-hot-encoding-3
 reference-1
 introduction-to-shiny-web-apps
-motivation-2
+motivation-3
 how-to-host
 create-your-first-shiny-app
 basic-struture
@@ -148,7 +151,7 @@ reference-2
 python-missingno-library-tutorial
 data-explorer-tutorial-and-automation
 d-visualization-in-r
-motivation-3
+motivation-4
 scatterplot3d
 load-data
 create-matrix
@@ -193,8 +196,8 @@ decorating-igraph-visualizations
 details-for-decorating-igraph-visualization
 example-for-advanced-igraph-visualization
 geo-mapping-coordinate-extraction-using-api-calls
-introduction-1
-motivation-4
+introduction-2
+motivation-5
 public-datasets
 api-calls
 code
@@ -226,7 +229,7 @@ extraction
 vectorization
 file-output
 make-geographical-maps-with-different-packages
-introduction-2
+introduction-3
 make-geographical-maps-with-map-package
 import-dataset-with-function-map_data
 usage-of-map_data
@@ -242,7 +245,7 @@ usage-of-extract_map_data
 plot-the-map-of-china
 plot-the-map-of-japan
 how-to-obtain-data-from-api-and-process-raw-json-data
-motivation-5
+motivation-6
 what-is-api-and-json
 using-httr-package-to-request-data-from-api
 introduction-to-http-verb-and-httr
@@ -258,7 +261,7 @@ filter-desired-data-by-directly-passing-parameters-to-api
 evaluation-2
 reference-3
 sample-statistic-tutorial
-motivation-6
+motivation-7
 data-cleaning-1
 duplicated-data
 missing-data
@@ -267,7 +270,7 @@ bootstrapping
 hypothesis-testing-1
 reference-4
 data-cleaning-tutorial
-motivation-7
+motivation-8
 observe-the-dataset
 check-the-data-type-of-columns
 optional-step
@@ -280,7 +283,7 @@ removing-outliers-optional
 conclusion-6
 mlr3-package-tutorial
 guide-to-nonparametric-tests
-introduction-3
+introduction-4
 two-sample-inference-procedure-difference-in-location-permutation-test
 summary
 assumptions
@@ -321,7 +324,7 @@ summary-7
 assumptions-7
 hypotheses-7
 implementation-7
-motivation-8
+motivation-9
 citations
 dplyr-pacakage-in-r
 pipe-operator
@@ -333,7 +336,7 @@ sort-function-arrange
 summary-function-summarise
 how-not-to-visualize-american-elections
 time-series-visualization-with-r
-introduction-4
+introduction-5
 line-plots-1
 bar-plots
 area-plots
@@ -380,7 +383,7 @@ question-is-excel-a-data-visualization-tool
 part-case-studies
 benford-case-study
 contents
-introduction-5
+introduction-6
 what-is-benfords-law
 applications-in-fraud-detection
 benford-package-in-r

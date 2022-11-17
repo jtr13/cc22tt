@@ -4,14 +4,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 25 Data cleaning with r | Community Contributions for EDAV Fall 2022 Tues/Thurs</title>
+<title>Chapter 28 Data cleaning with r | Community Contributions for EDAV Fall 2022 Tues/Thurs</title>
 <meta name="description" content="Jincheng Liu and Yudu Chen #install.packages(openintro) library(openintro) #install.packages('dplyr') library(dplyr) #install.packages('tidyr') library(tidyr) #install.packages(imputeTS)...">
 <meta name="generator" content="bookdown 0.30 with bs4_book()">
-<meta property="og:title" content="Chapter 25 Data cleaning with r | Community Contributions for EDAV Fall 2022 Tues/Thurs">
+<meta property="og:title" content="Chapter 28 Data cleaning with r | Community Contributions for EDAV Fall 2022 Tues/Thurs">
 <meta property="og:type" content="book">
 <meta property="og:description" content="Jincheng Liu and Yudu Chen #install.packages(openintro) library(openintro) #install.packages('dplyr') library(dplyr) #install.packages('tidyr') library(tidyr) #install.packages(imputeTS)...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 25 Data cleaning with r | Community Contributions for EDAV Fall 2022 Tues/Thurs">
+<meta name="twitter:title" content="Chapter 28 Data cleaning with r | Community Contributions for EDAV Fall 2022 Tues/Thurs">
 <meta name="twitter:description" content="Jincheng Liu and Yudu Chen #install.packages(openintro) library(openintro) #install.packages('dplyr') library(dplyr) #install.packages('tidyr') library(tidyr) #install.packages(imputeTS)...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -69,41 +69,44 @@
 <li><a class="" href="data-visualization-with-r-ggplot2-vs.-matlab.html"><span class="header-section-number">17</span> Data Visualization with R ggplot2 vs. Matlab</a></li>
 <li><a class="" href="ggplot2-plots-in-python-cheat-sheet-tutorial.html"><span class="header-section-number">18</span> Ggplot2 plots in python cheat sheet tutorial</a></li>
 <li><a class="" href="model-evaluation-selection-visualization-with-easystats.html"><span class="header-section-number">19</span> Model evaluation, selection &amp; visualization with easystats</a></li>
+<li><a class="" href="time-series-itsmr-cheat-sheet.html"><span class="header-section-number">20</span> Time Series: ITSMR Cheat Sheet</a></li>
+<li><a class="" href="introduction.html"><span class="header-section-number">21</span> Introduction:</a></li>
+<li><a class="" href="motivation-1.html"><span class="header-section-number">22</span> Motivation:</a></li>
 <li class="book-part">Tutorials</li>
-<li><a class="" href="preprocessing-and-visualization-of-time-series-data.html"><span class="header-section-number">21</span> Preprocessing and Visualization of Time Series Data</a></li>
-<li><a class="" href="how-to-use-sqldf.html"><span class="header-section-number">22</span> How to use sqldf</a></li>
-<li><a class="" href="googlevis-in-r.html"><span class="header-section-number">23</span> googleVis in R</a></li>
-<li><a class="" href="tutorial-for-vector-fields-in-r.html"><span class="header-section-number">24</span> Tutorial for vector fields in r</a></li>
-<li><a class="active" href="data-cleaning-with-r.html"><span class="header-section-number">25</span> Data cleaning with r</a></li>
-<li><a class="" href="introduction-to-shiny-web-apps.html"><span class="header-section-number">26</span> Introduction to Shiny Web Apps</a></li>
-<li><a class="" href="python-missingno-library-tutorial.html"><span class="header-section-number">27</span> Python missingno library tutorial</a></li>
-<li><a class="" href="data-explorer-tutorial-and-automation.html"><span class="header-section-number">28</span> Data Explorer Tutorial and Automation</a></li>
-<li><a class="" href="d-visualization-in-r.html"><span class="header-section-number">29</span> 3D Visualization in R</a></li>
-<li><a class="" href="visualizing-time-series-data.html"><span class="header-section-number">30</span> Visualizing Time Series Data</a></li>
-<li><a class="" href="igraph-in-r.html"><span class="header-section-number">31</span> igraph in r</a></li>
-<li><a class="" href="geo-mapping-coordinate-extraction-using-api-calls.html"><span class="header-section-number">32</span> Geo-Mapping Coordinate Extraction Using API Calls</a></li>
-<li><a class="" href="edav-garden.html"><span class="header-section-number">33</span> EDAV Garden</a></li>
-<li><a class="" href="using-raster-data-in-r.html"><span class="header-section-number">34</span> Using raster data in R</a></li>
-<li><a class="" href="make-geographical-maps-with-different-packages.html"><span class="header-section-number">35</span> Make Geographical Maps with Different Packages</a></li>
-<li><a class="" href="how-to-obtain-data-from-api-and-process-raw-json-data.html"><span class="header-section-number">36</span> How to obtain data from API and process raw JSON data</a></li>
-<li><a class="" href="sample-statistic-tutorial.html"><span class="header-section-number">37</span> Sample Statistic Tutorial</a></li>
-<li><a class="" href="data-cleaning-tutorial.html"><span class="header-section-number">38</span> Data cleaning tutorial</a></li>
-<li><a class="" href="mlr3-package-tutorial.html"><span class="header-section-number">39</span> mlr3 Package Tutorial</a></li>
-<li><a class="" href="guide-to-nonparametric-tests.html"><span class="header-section-number">40</span> Guide to nonparametric tests</a></li>
-<li><a class="" href="dplyr-pacakage-in-r.html"><span class="header-section-number">41</span> dplyr pacakage in R</a></li>
-<li><a class="" href="how-not-to-visualize-american-elections.html"><span class="header-section-number">42</span> How (not) to visualize American elections</a></li>
-<li><a class="" href="time-series-visualization-with-r.html"><span class="header-section-number">43</span> Time series visualization with R</a></li>
+<li><a class="" href="preprocessing-and-visualization-of-time-series-data.html"><span class="header-section-number">24</span> Preprocessing and Visualization of Time Series Data</a></li>
+<li><a class="" href="how-to-use-sqldf.html"><span class="header-section-number">25</span> How to use sqldf</a></li>
+<li><a class="" href="googlevis-in-r.html"><span class="header-section-number">26</span> googleVis in R</a></li>
+<li><a class="" href="tutorial-for-vector-fields-in-r.html"><span class="header-section-number">27</span> Tutorial for vector fields in r</a></li>
+<li><a class="active" href="data-cleaning-with-r.html"><span class="header-section-number">28</span> Data cleaning with r</a></li>
+<li><a class="" href="introduction-to-shiny-web-apps.html"><span class="header-section-number">29</span> Introduction to Shiny Web Apps</a></li>
+<li><a class="" href="python-missingno-library-tutorial.html"><span class="header-section-number">30</span> Python missingno library tutorial</a></li>
+<li><a class="" href="data-explorer-tutorial-and-automation.html"><span class="header-section-number">31</span> Data Explorer Tutorial and Automation</a></li>
+<li><a class="" href="d-visualization-in-r.html"><span class="header-section-number">32</span> 3D Visualization in R</a></li>
+<li><a class="" href="visualizing-time-series-data.html"><span class="header-section-number">33</span> Visualizing Time Series Data</a></li>
+<li><a class="" href="igraph-in-r.html"><span class="header-section-number">34</span> igraph in r</a></li>
+<li><a class="" href="geo-mapping-coordinate-extraction-using-api-calls.html"><span class="header-section-number">35</span> Geo-Mapping Coordinate Extraction Using API Calls</a></li>
+<li><a class="" href="edav-garden.html"><span class="header-section-number">36</span> EDAV Garden</a></li>
+<li><a class="" href="using-raster-data-in-r.html"><span class="header-section-number">37</span> Using raster data in R</a></li>
+<li><a class="" href="make-geographical-maps-with-different-packages.html"><span class="header-section-number">38</span> Make Geographical Maps with Different Packages</a></li>
+<li><a class="" href="how-to-obtain-data-from-api-and-process-raw-json-data.html"><span class="header-section-number">39</span> How to obtain data from API and process raw JSON data</a></li>
+<li><a class="" href="sample-statistic-tutorial.html"><span class="header-section-number">40</span> Sample Statistic Tutorial</a></li>
+<li><a class="" href="data-cleaning-tutorial.html"><span class="header-section-number">41</span> Data cleaning tutorial</a></li>
+<li><a class="" href="mlr3-package-tutorial.html"><span class="header-section-number">42</span> mlr3 Package Tutorial</a></li>
+<li><a class="" href="guide-to-nonparametric-tests.html"><span class="header-section-number">43</span> Guide to nonparametric tests</a></li>
+<li><a class="" href="dplyr-pacakage-in-r.html"><span class="header-section-number">44</span> dplyr pacakage in R</a></li>
+<li><a class="" href="how-not-to-visualize-american-elections.html"><span class="header-section-number">45</span> How (not) to visualize American elections</a></li>
+<li><a class="" href="time-series-visualization-with-r.html"><span class="header-section-number">46</span> Time series visualization with R</a></li>
 <li class="book-part">Interview Prep</li>
-<li><a class="" href="ten-interview-questions-and-answers.html"><span class="header-section-number">45</span> Ten interview questions and answers</a></li>
-<li><a class="" href="data-science-internship-search-survival-guide.html"><span class="header-section-number">46</span> Data science internship search survival guide</a></li>
-<li><a class="" href="data-visualization-interview-questions-sample.html"><span class="header-section-number">47</span> Data visualization interview questions sample</a></li>
+<li><a class="" href="ten-interview-questions-and-answers.html"><span class="header-section-number">48</span> Ten interview questions and answers</a></li>
+<li><a class="" href="data-science-internship-search-survival-guide.html"><span class="header-section-number">49</span> Data science internship search survival guide</a></li>
+<li><a class="" href="data-visualization-interview-questions-sample.html"><span class="header-section-number">50</span> Data visualization interview questions sample</a></li>
 <li class="book-part">Case Studies</li>
-<li><a class="" href="benford-case-study.html"><span class="header-section-number">49</span> Benford Case Study</a></li>
+<li><a class="" href="benford-case-study.html"><span class="header-section-number">52</span> Benford Case Study</a></li>
 <li class="book-part">Blogs</li>
-<li><a class="" href="equity-in-ai.html"><span class="header-section-number">51</span> Equity in AI</a></li>
+<li><a class="" href="equity-in-ai.html"><span class="header-section-number">54</span> Equity in AI</a></li>
 <li class="book-part">Appendices</li>
-<li><a class="" href="github-initial-setup.html"><span class="header-section-number">52</span> Github initial setup</a></li>
-<li><a class="" href="tutorial-for-pull-request-mergers.html"><span class="header-section-number">53</span> Tutorial for pull request mergers</a></li>
+<li><a class="" href="github-initial-setup.html"><span class="header-section-number">55</span> Github initial setup</a></li>
+<li><a class="" href="tutorial-for-pull-request-mergers.html"><span class="header-section-number">56</span> Tutorial for pull request mergers</a></li>
 </ul>
 
         <div class="book-extra">
@@ -111,9 +114,9 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="data-cleaning-with-r" class="section level1" number="25">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="data-cleaning-with-r" class="section level1" number="28">
 <h1>
-<span class="header-section-number">25</span> Data cleaning with r<a class="anchor" aria-label="anchor" href="#data-cleaning-with-r"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28</span> Data cleaning with r<a class="anchor" aria-label="anchor" href="#data-cleaning-with-r"><i class="fas fa-link"></i></a>
 </h1>
 <p>Jincheng Liu and Yudu Chen</p>
 <div class="sourceCode" id="cb103"><pre class="downlit sourceCode r">
@@ -131,15 +134,15 @@
 <span></span>
 <span><span class="co">#install.packages(caret)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/topepo/caret/">caret</a></span><span class="op">)</span></span></code></pre></div>
-<div id="data-cleaning-with-r-1" class="section level2" number="25.1">
+<div id="data-cleaning-with-r-1" class="section level2" number="28.1">
 <h2>
-<span class="header-section-number">25.1</span> Data cleaning with R<a class="anchor" aria-label="anchor" href="#data-cleaning-with-r-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.1</span> Data cleaning with R<a class="anchor" aria-label="anchor" href="#data-cleaning-with-r-1"><i class="fas fa-link"></i></a>
 </h2>
 <p>In the real world, the data sets we are handling are often not data scientists can readily use. They might contain duplicate entries when entries are supposed to be unique. They might contain missing values, which is problematic for tasks such as training predicative modeling. The data features might be at vastly different scale, which both induces instability of float point arithmatics and inaccurate measurement of feature importance in training machine learning model. We will discuss how to use R to clean Data sets where situations above take place.</p>
 </div>
-<div id="import-data-set" class="section level2" number="25.2">
+<div id="import-data-set" class="section level2" number="28.2">
 <h2>
-<span class="header-section-number">25.2</span> Import data set<a class="anchor" aria-label="anchor" href="#import-data-set"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.2</span> Import data set<a class="anchor" aria-label="anchor" href="#import-data-set"><i class="fas fa-link"></i></a>
 </h2>
 <p>We will explore techniques of data cleaning using “Airquality” dataset from base R and duke_forest data set from openintro. The data set is available in baseR and does not require import from outside source.</p>
 <div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
@@ -160,20 +163,20 @@
 <div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">duke_forest_copy</span> <span class="op">&lt;-</span> <span class="va">duke_forest</span></span></code></pre></div>
 </div>
-<div id="introduction" class="section level2" number="25.3">
+<div id="introduction-1" class="section level2" number="28.3">
 <h2>
-<span class="header-section-number">25.3</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.3</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction-1"><i class="fas fa-link"></i></a>
 </h2>
 <p>In the real world, the data sets we are handling are often not data scientists can readily use. They might contain duplicate entries when entries are supposed to be unique. They might contain missing values, which is problematic for tasks such as training predicative modeling. The data features might be at vastly different scale, which both induces instability of float point arithmatics and inaccurate measurement of feature importance in training machine learning model. We will discuss how to use R to clean Data sets where situations above take place.</p>
 </div>
-<div id="data-frame-modification-general-modification" class="section level2" number="25.4">
+<div id="data-frame-modification-general-modification" class="section level2" number="28.4">
 <h2>
-<span class="header-section-number">25.4</span> Data frame modification (general modification)<a class="anchor" aria-label="anchor" href="#data-frame-modification-general-modification"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.4</span> Data frame modification (general modification)<a class="anchor" aria-label="anchor" href="#data-frame-modification-general-modification"><i class="fas fa-link"></i></a>
 </h2>
 <p>For the most of the time, we will have to engineer our data sets before we do some data analyzation on them. Here I present some tricks to modify our dat sets in R.</p>
-<div id="create-dataframe-by-arrays" class="section level3" number="25.4.1">
+<div id="create-dataframe-by-arrays" class="section level3" number="28.4.1">
 <h3>
-<span class="header-section-number">25.4.1</span> Create DataFrame by arrays<a class="anchor" aria-label="anchor" href="#create-dataframe-by-arrays"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.4.1</span> Create DataFrame by arrays<a class="anchor" aria-label="anchor" href="#create-dataframe-by-arrays"><i class="fas fa-link"></i></a>
 </h3>
 <p>Creating DataFrame by two arrays, These two arrays will by columns of df.Array length should be the same.order matters.</p>
 <div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
@@ -198,9 +201,9 @@
 ## 2      value_2       value_5      value_8
 ## 3      value_3       value_6      value_9</code></pre>
 </div>
-<div id="create-dataframe-by-combining-two-dataframeusing-cbindrbind" class="section level3" number="25.4.2">
+<div id="create-dataframe-by-combining-two-dataframeusing-cbindrbind" class="section level3" number="28.4.2">
 <h3>
-<span class="header-section-number">25.4.2</span> Create DataFrame by combining two dataFrame(using cbind/rbind)<a class="anchor" aria-label="anchor" href="#create-dataframe-by-combining-two-dataframeusing-cbindrbind"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.4.2</span> Create DataFrame by combining two dataFrame(using cbind/rbind)<a class="anchor" aria-label="anchor" href="#create-dataframe-by-combining-two-dataframeusing-cbindrbind"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># create a new dataFrame</span></span>
@@ -234,9 +237,9 @@
 ## 5      value_8      value_11
 ## 6      value_9      value_12</code></pre>
 </div>
-<div id="addingchange-row-name" class="section level3" number="25.4.3">
+<div id="addingchange-row-name" class="section level3" number="28.4.3">
 <h3>
-<span class="header-section-number">25.4.3</span> adding/change row name<a class="anchor" aria-label="anchor" href="#addingchange-row-name"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.4.3</span> adding/change row name<a class="anchor" aria-label="anchor" href="#addingchange-row-name"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">bigger_df2</span><span class="op">)</span></span></code></pre></div>
@@ -277,9 +280,9 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">bigger_df2</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "1" "2" "3" "4" "5" "6"</code></pre>
 </div>
-<div id="changing-column-names" class="section level3" number="25.4.4">
+<div id="changing-column-names" class="section level3" number="28.4.4">
 <h3>
-<span class="header-section-number">25.4.4</span> changing column names<a class="anchor" aria-label="anchor" href="#changing-column-names"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.4.4</span> changing column names<a class="anchor" aria-label="anchor" href="#changing-column-names"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code></pre></div>
@@ -308,9 +311,9 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "new column name" "C2"              NA</code></pre>
 </div>
-<div id="adding-array-to-to-dataframe-as-new-column" class="section level3" number="25.4.5">
+<div id="adding-array-to-to-dataframe-as-new-column" class="section level3" number="28.4.5">
 <h3>
-<span class="header-section-number">25.4.5</span> Adding array to to dataFrame as new column<a class="anchor" aria-label="anchor" href="#adding-array-to-to-dataframe-as-new-column"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.4.5</span> Adding array to to dataFrame as new column<a class="anchor" aria-label="anchor" href="#adding-array-to-to-dataframe-as-new-column"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">bigger_df2</span><span class="op">)</span></span></code></pre></div>
@@ -340,9 +343,9 @@
 ## 5         value_2 value_5 value_8   8
 ## 6         value_3 value_6 value_9  12</code></pre>
 </div>
-<div id="adding-column-by-combination-of-other-columns" class="section level3" number="25.4.6">
+<div id="adding-column-by-combination-of-other-columns" class="section level3" number="28.4.6">
 <h3>
-<span class="header-section-number">25.4.6</span> adding column by combination of other columns<a class="anchor" aria-label="anchor" href="#adding-column-by-combination-of-other-columns"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.4.6</span> adding column by combination of other columns<a class="anchor" aria-label="anchor" href="#adding-column-by-combination-of-other-columns"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb136"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># using mutate() from dplyr</span></span>
@@ -371,9 +374,9 @@
 ## 2            2             5           yes
 ## 3            3             6            No</code></pre>
 </div>
-<div id="joining-two-table-2" class="section level3" number="25.4.7">
+<div id="joining-two-table-2" class="section level3" number="28.4.7">
 <h3>
-<span class="header-section-number">25.4.7</span> joining two table <strong>[2]</strong><a class="anchor" aria-label="anchor" href="#joining-two-table-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.4.7</span> joining two table <strong>[2]</strong><a class="anchor" aria-label="anchor" href="#joining-two-table-2"><i class="fas fa-link"></i></a>
 </h3>
 <p>Bewaring that the order of dataframe in the merge function matters(right join left)</p>
 <div class="sourceCode" id="cb140"><pre class="downlit sourceCode r">
@@ -458,9 +461,9 @@
 ## 5              103
 ## 6              104</code></pre>
 </div>
-<div id="pivoting-dataframe-understanding-pivot_longer" class="section level3" number="25.4.8">
+<div id="pivoting-dataframe-understanding-pivot_longer" class="section level3" number="28.4.8">
 <h3>
-<span class="header-section-number">25.4.8</span> pivoting dataframe, understanding pivot_longer<a class="anchor" aria-label="anchor" href="#pivoting-dataframe-understanding-pivot_longer"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.4.8</span> pivoting dataframe, understanding pivot_longer<a class="anchor" aria-label="anchor" href="#pivoting-dataframe-understanding-pivot_longer"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb148"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># pivot_longer transform a data frame from a wide format to a long format by converting feature names to a categorical feature.</span></span>
@@ -491,9 +494,9 @@
 ## 6 C            eagle      18
 ## 7 D            sparrow    19
 ## 8 D            eagle      12</code></pre>
-<div id="binning-using-cut" class="section level4" number="25.4.8.1">
+<div id="binning-using-cut" class="section level4" number="28.4.8.1">
 <h4>
-<span class="header-section-number">25.4.8.1</span> binning using cut()<a class="anchor" aria-label="anchor" href="#binning-using-cut"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.4.8.1</span> binning using cut()<a class="anchor" aria-label="anchor" href="#binning-using-cut"><i class="fas fa-link"></i></a>
 </h4>
 <p>This is also a good way to categorize feature</p>
 <div class="sourceCode" id="cb152"><pre class="downlit sourceCode r">
@@ -531,9 +534,9 @@
 ## 11  Koban wife              13        8              (9,13]
 ## 12      string               8        9               (5,9]</code></pre>
 </div>
-<div id="binning-using-case" class="section level4" number="25.4.8.2">
+<div id="binning-using-case" class="section level4" number="28.4.8.2">
 <h4>
-<span class="header-section-number">25.4.8.2</span> binning using case()<a class="anchor" aria-label="anchor" href="#binning-using-case"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.4.8.2</span> binning using case()<a class="anchor" aria-label="anchor" href="#binning-using-case"><i class="fas fa-link"></i></a>
 </h4>
 <div class="sourceCode" id="cb156"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hour_df2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>shop_name<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'MAC'</span>, <span class="st">'Tangro'</span>, <span class="st">'cummington'</span>, <span class="st">'Burger King'</span>, <span class="st">'judgement'</span>, <span class="st">'KFC'</span>, <span class="st">'ye'</span>, <span class="st">'Dungeon'</span>, <span class="st">'Razer'</span>, <span class="st">'yeah sir'</span>, <span class="st">'Koban wife'</span>, <span class="st">'string'</span><span class="op">)</span>,</span>
@@ -577,9 +580,9 @@
 ## 12      string               8        9              median</code></pre>
 </div>
 </div>
-<div id="ordering" class="section level3" number="25.4.9">
+<div id="ordering" class="section level3" number="28.4.9">
 <h3>
-<span class="header-section-number">25.4.9</span> ordering<a class="anchor" aria-label="anchor" href="#ordering"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.4.9</span> ordering<a class="anchor" aria-label="anchor" href="#ordering"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb160"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">student_result_wild</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>name<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Ram"</span>,<span class="st">"Geeta"</span>,<span class="st">"John"</span>,<span class="st">"Paul"</span>,</span>
@@ -632,14 +635,14 @@
 ## 6  Geeta     8       7       7  2</code></pre>
 </div>
 </div>
-<div id="duplicated-values" class="section level2" number="25.5">
+<div id="duplicated-values" class="section level2" number="28.5">
 <h2>
-<span class="header-section-number">25.5</span> Duplicated Values<a class="anchor" aria-label="anchor" href="#duplicated-values"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.5</span> Duplicated Values<a class="anchor" aria-label="anchor" href="#duplicated-values"><i class="fas fa-link"></i></a>
 </h2>
 <p>In many cases, we observe duplicated values in a data set where every instances are supposed to be unique. We will now discussed how to handle duplicates.</p>
-<div id="data-set-with-row-wise-duplicates" class="section level3" number="25.5.1">
+<div id="data-set-with-row-wise-duplicates" class="section level3" number="28.5.1">
 <h3>
-<span class="header-section-number">25.5.1</span> Data set with row-wise duplicates<a class="anchor" aria-label="anchor" href="#data-set-with-row-wise-duplicates"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.5.1</span> Data set with row-wise duplicates<a class="anchor" aria-label="anchor" href="#data-set-with-row-wise-duplicates"><i class="fas fa-link"></i></a>
 </h3>
 <p>Although the dataset we use in this example, airquality data, does not have duplicate, we will use it illustrate the techniques of handling duplicate data.</p>
 <div class="sourceCode" id="cb168"><pre class="downlit sourceCode r">
@@ -705,9 +708,9 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">'number of duplicate value in data frame after calling distinct is'</span>, <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/duplicated.html">duplicated</a></span><span class="op">(</span><span class="va">data_duplicated_values</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "number of duplicate value in data frame after calling distinct is0"</code></pre>
 </div>
-<div id="duplicates-based-on-specific-columns" class="section level3" number="25.5.2">
+<div id="duplicates-based-on-specific-columns" class="section level3" number="28.5.2">
 <h3>
-<span class="header-section-number">25.5.2</span> Duplicates based on specific columns<a class="anchor" aria-label="anchor" href="#duplicates-based-on-specific-columns"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.5.2</span> Duplicates based on specific columns<a class="anchor" aria-label="anchor" href="#duplicates-based-on-specific-columns"><i class="fas fa-link"></i></a>
 </h3>
 <p>Some times duplication of elements in certain column/columns is not desirable. We want to be able to remove rows with duplication in specified columns. We first insert 5 rows with duplicates in “Day” and “Month”, we should see “158” rows after insertion:</p>
 <div class="sourceCode" id="cb187"><pre class="downlit sourceCode r">
@@ -738,14 +741,14 @@
 <pre><code>## [1] "number of rows after removing 5 duplicated rows on Dat and Month is153"</code></pre>
 </div>
 </div>
-<div id="missing-values" class="section level2" number="25.6">
+<div id="missing-values" class="section level2" number="28.6">
 <h2>
-<span class="header-section-number">25.6</span> Missing Values<a class="anchor" aria-label="anchor" href="#missing-values"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.6</span> Missing Values<a class="anchor" aria-label="anchor" href="#missing-values"><i class="fas fa-link"></i></a>
 </h2>
 <p>Encountering missing data in dataset is not uncommon. When collecting temperature data the sensor might be broken and unable to measure temperature. When conduct public opinion surveying, the interviewee might forget filling entires on questionaires. Many data science job requires completeness of data, such as training predicative model based on numerical/categorical data. We will now discuss doing data cleaning in R.</p>
-<div id="na-in-r" class="section level3" number="25.6.1">
+<div id="na-in-r" class="section level3" number="28.6.1">
 <h3>
-<span class="header-section-number">25.6.1</span> NA in R<a class="anchor" aria-label="anchor" href="#na-in-r"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.6.1</span> NA in R<a class="anchor" aria-label="anchor" href="#na-in-r"><i class="fas fa-link"></i></a>
 </h3>
 <p>In R, a missing value is represented by symbol “NA”.</p>
 <div class="sourceCode" id="cb193"><pre class="downlit sourceCode r">
@@ -786,13 +789,13 @@ To know number of rows with missing value, we use “complete.cases(df)”. The 
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"number of rows in data frame after extracting rows with NA is "</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">airQuality_na_droped</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "number of rows in data frame after extracting rows with NA is 111"</code></pre>
 <p>After removing all 42 rows with missing values, we only have 111 rows left, with 42 rows removed from total 153 rows in original data frame.</p>
-<div id="drop-rows-with-missing-data-in-specified-columns" class="section level4" number="25.6.1.1">
+<div id="drop-rows-with-missing-data-in-specified-columns" class="section level4" number="28.6.1.1">
 <h4>
-<span class="header-section-number">25.6.1.1</span> Drop rows with missing data in specified columns<a class="anchor" aria-label="anchor" href="#drop-rows-with-missing-data-in-specified-columns"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.6.1.1</span> Drop rows with missing data in specified columns<a class="anchor" aria-label="anchor" href="#drop-rows-with-missing-data-in-specified-columns"><i class="fas fa-link"></i></a>
 </h4>
-<div id="na-in-single-column" class="section level5" number="25.6.1.1.1">
+<div id="na-in-single-column" class="section level5" number="28.6.1.1.1">
 <h5>
-<span class="header-section-number">25.6.1.1.1</span> NA in single column<a class="anchor" aria-label="anchor" href="#na-in-single-column"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.6.1.1.1</span> NA in single column<a class="anchor" aria-label="anchor" href="#na-in-single-column"><i class="fas fa-link"></i></a>
 </h5>
 <p>We can see dropping all columns with missing data could be wasteful if we don’t use all features in the dataset. For example, if our job does not require feature “Ozone”, we don’t really care if “Ozone” value is missing or not as it is irrelevant to our task. We will explore how to drop rows with na in specific columns.</p>
 <p>We see “is.na(df)” evaluate presence of NA(missing value) in the entire data set. If we change its argument from df, the entire data set, into a specific column, the function will only evaluate specific columns in the data set and return a boolean array that only reflects presence of missing value at the columns. For example, if we want to see number of rows with missing value in “Ozone” column:</p>
@@ -806,9 +809,9 @@ To know number of rows with missing value, we use “complete.cases(df)”. The 
 <pre><code>## [1] 116</code></pre>
 <p>37 rows are extracted from 153 columns, resulting in 116 rows.</p>
 </div>
-<div id="na-in-several-columns-and" class="section level5" number="25.6.1.1.2">
+<div id="na-in-several-columns-and" class="section level5" number="28.6.1.1.2">
 <h5>
-<span class="header-section-number">25.6.1.1.2</span> NA in several columns (And)<a class="anchor" aria-label="anchor" href="#na-in-several-columns-and"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.6.1.1.2</span> NA in several columns (And)<a class="anchor" aria-label="anchor" href="#na-in-several-columns-and"><i class="fas fa-link"></i></a>
 </h5>
 <p>If we want to drop rows with NA in specific column, for example, rows with NA in both “Ozone” and “Solar.R” columns, we can take advantage of the fact that “is.na(df)” is a boolean array, and we can perform element wise boolean operation in two arrays of same dimension:</p>
 <div class="sourceCode" id="cb208"><pre class="downlit sourceCode r">
@@ -827,9 +830,9 @@ To know number of rows with missing value, we use “complete.cases(df)”. The 
 <pre><code>## [1] 151</code></pre>
 <p>We have droped two rows from 153 rows in original dataset, so we have 151 rows left.</p>
 </div>
-<div id="na-in-several-columns-or" class="section level5" number="25.6.1.1.3">
+<div id="na-in-several-columns-or" class="section level5" number="28.6.1.1.3">
 <h5>
-<span class="header-section-number">25.6.1.1.3</span> NA in several columns (Or)<a class="anchor" aria-label="anchor" href="#na-in-several-columns-or"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.6.1.1.3</span> NA in several columns (Or)<a class="anchor" aria-label="anchor" href="#na-in-several-columns-or"><i class="fas fa-link"></i></a>
 </h5>
 <p>What if we want to drop columns with NA in “Ozone” or “Solar.R”, such that if any of the two columns contains missing values. We could have used boolean operation between several boolean arrays as we did, but it could be tedious as we have more feastures to consider. We could use “complete.cases()” but use specific columns in dataset as input. The “complete.cases()” returns false if a single column in the rows in data frame we pass in has a missing value, so we could perform “or” operation with it.</p>
 <div class="sourceCode" id="cb214"><pre class="downlit sourceCode r">
@@ -847,9 +850,9 @@ To know number of rows with missing value, we use “complete.cases(df)”. The 
 <span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">airQuality_NA_Ozone_or_Solor</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 111</code></pre>
 </div>
-<div id="drop-columns-with-certain-number-of-na" class="section level5" number="25.6.1.1.4">
+<div id="drop-columns-with-certain-number-of-na" class="section level5" number="28.6.1.1.4">
 <h5>
-<span class="header-section-number">25.6.1.1.4</span> Drop columns with certain number of NA<a class="anchor" aria-label="anchor" href="#drop-columns-with-certain-number-of-na"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.6.1.1.4</span> Drop columns with certain number of NA<a class="anchor" aria-label="anchor" href="#drop-columns-with-certain-number-of-na"><i class="fas fa-link"></i></a>
 </h5>
 <p>This might be uncommon, but we might want to drop rows with more than certain number of NA, such as rows with more than 3 NA and even rows with number of NA equal to number of columns, which means the row has all column value being NA. To know number of NA in each row, we can use “rowSums()” functions:</p>
 <div class="sourceCode" id="cb220"><pre class="downlit sourceCode r">
@@ -906,18 +909,18 @@ To know number of rows with missing value, we use “complete.cases(df)”. The 
 </div>
 </div>
 </div>
-<div id="impute" class="section level3" number="25.6.2">
+<div id="impute" class="section level3" number="28.6.2">
 <h3>
-<span class="header-section-number">25.6.2</span> Impute<a class="anchor" aria-label="anchor" href="#impute"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.6.2</span> Impute<a class="anchor" aria-label="anchor" href="#impute"><i class="fas fa-link"></i></a>
 </h3>
 <p>Dropping rows is a straight forward approach. However, dropping too many drows would induce huge data loss, which would be detrimental to our task. We can insert values we specify into entries with missing values. This will minimize data loss. Though we would never know if imputed values could reflect the true pattern of the data.</p>
-<div id="impute-numerical-values" class="section level4" number="25.6.2.1">
+<div id="impute-numerical-values" class="section level4" number="28.6.2.1">
 <h4>
-<span class="header-section-number">25.6.2.1</span> Impute numerical values<a class="anchor" aria-label="anchor" href="#impute-numerical-values"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.6.2.1</span> Impute numerical values<a class="anchor" aria-label="anchor" href="#impute-numerical-values"><i class="fas fa-link"></i></a>
 </h4>
-<div id="impute-with-constant" class="section level5" number="25.6.2.1.1">
+<div id="impute-with-constant" class="section level5" number="28.6.2.1.1">
 <h5>
-<span class="header-section-number">25.6.2.1.1</span> Impute with constant<a class="anchor" aria-label="anchor" href="#impute-with-constant"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.6.2.1.1</span> Impute with constant<a class="anchor" aria-label="anchor" href="#impute-with-constant"><i class="fas fa-link"></i></a>
 </h5>
 <p>For a column with missing value,we select a constant we think will reflect the real data and fill missing entry in the column with the constant we have selected.</p>
 <p>Let’s say we use constant 30 to fill “Ozone” entries with missing values.</p>
@@ -960,9 +963,9 @@ To know number of rows with missing value, we use “complete.cases(df)”. The 
 </li>
 </ul>
 </div>
-<div id="impute-with-sample-statistics" class="section level5" number="25.6.2.1.2">
+<div id="impute-with-sample-statistics" class="section level5" number="28.6.2.1.2">
 <h5>
-<span class="header-section-number">25.6.2.1.2</span> Impute with Sample statistics<a class="anchor" aria-label="anchor" href="#impute-with-sample-statistics"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.6.2.1.2</span> Impute with Sample statistics<a class="anchor" aria-label="anchor" href="#impute-with-sample-statistics"><i class="fas fa-link"></i></a>
 </h5>
 <p>We can impute missing values in a column using sample statistics of the columns such as mean and median. This way we fill the missing value and does not alter data statistics in the column. We now fill “Ozone” column with current “Mean” of “Ozone” column and “Solar.R” with median of “Solar.R” column. Note the “na.rm = True” arguement is to neglect missing value when computing sample statistics so that we get a real value answer.</p>
 <div class="sourceCode" id="cb238"><pre class="downlit sourceCode r">
@@ -1008,9 +1011,9 @@ To know number of rows with missing value, we use “complete.cases(df)”. The 
 </li>
 </ul>
 </div>
-<div id="impute-by-value-adjacent-to-missing-value" class="section level5" number="25.6.2.1.3">
+<div id="impute-by-value-adjacent-to-missing-value" class="section level5" number="28.6.2.1.3">
 <h5>
-<span class="header-section-number">25.6.2.1.3</span> Impute by value adjacent to Missing value<a class="anchor" aria-label="anchor" href="#impute-by-value-adjacent-to-missing-value"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.6.2.1.3</span> Impute by value adjacent to Missing value<a class="anchor" aria-label="anchor" href="#impute-by-value-adjacent-to-missing-value"><i class="fas fa-link"></i></a>
 </h5>
 <p>Often in time-series data, value on a time point is highly assosicated with most adjacent valid values. Therefore, we want to fill a missing entries using valid data values before or after it.</p>
 <div class="sourceCode" id="cb254"><pre class="downlit sourceCode r">
@@ -1059,9 +1062,9 @@ To know number of rows with missing value, we use “complete.cases(df)”. The 
 </li>
 </ul>
 </div>
-<div id="impute-using-predicative-model" class="section level5" number="25.6.2.1.4">
+<div id="impute-using-predicative-model" class="section level5" number="28.6.2.1.4">
 <h5>
-<span class="header-section-number">25.6.2.1.4</span> Impute using predicative model<a class="anchor" aria-label="anchor" href="#impute-using-predicative-model"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.6.2.1.4</span> Impute using predicative model<a class="anchor" aria-label="anchor" href="#impute-using-predicative-model"><i class="fas fa-link"></i></a>
 </h5>
 <p>If we believe certain features in the data frame depends on some other features, we can use other features to fit a predicative model to predict missing value in certain feature. We need to make sure the “other features” our prediction is based on are all valid entries, which we need to impute using some method. We now assume “Ozone” and “Solar.R” features depends on climate related features such as “Wind” and “Temperature”, and we build linear regression models for “Ozone” and “Solar.R” based on “Wind” and “Temperature”.</p>
 <div class="sourceCode" id="cb259"><pre class="downlit sourceCode r">
@@ -1165,9 +1168,9 @@ To know number of rows with missing value, we use “complete.cases(df)”. The 
 </ul>
 </div>
 </div>
-<div id="impute-categorical-features" class="section level4" number="25.6.2.2">
+<div id="impute-categorical-features" class="section level4" number="28.6.2.2">
 <h4>
-<span class="header-section-number">25.6.2.2</span> Impute categorical features<a class="anchor" aria-label="anchor" href="#impute-categorical-features"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.6.2.2</span> Impute categorical features<a class="anchor" aria-label="anchor" href="#impute-categorical-features"><i class="fas fa-link"></i></a>
 </h4>
 <p>As for imputing categorical features,</p>
 <p>Replacing NA in categorical features with string</p>
@@ -1212,14 +1215,14 @@ To know number of rows with missing value, we use “complete.cases(df)”. The 
 </div>
 </div>
 </div>
-<div id="data-scaling" class="section level2" number="25.7">
+<div id="data-scaling" class="section level2" number="28.7">
 <h2>
-<span class="header-section-number">25.7</span> Data scaling<a class="anchor" aria-label="anchor" href="#data-scaling"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.7</span> Data scaling<a class="anchor" aria-label="anchor" href="#data-scaling"><i class="fas fa-link"></i></a>
 </h2>
 <p>Scaling is important for data analysis and exploration, Data without scaling can produce misleading result. Also scaling is beneficial for mathematics computation and machine learning.</p>
-<div id="standardization" class="section level3" number="25.7.1">
+<div id="standardization" class="section level3" number="28.7.1">
 <h3>
-<span class="header-section-number">25.7.1</span> standardization<a class="anchor" aria-label="anchor" href="#standardization"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.7.1</span> standardization<a class="anchor" aria-label="anchor" href="#standardization"><i class="fas fa-link"></i></a>
 </h3>
 <p>Standardization unify all the samples’ mean and std to 0 and 1, so we could compare the distribution among the scaled samples.</p>
 <div class="sourceCode" id="cb281"><pre class="downlit sourceCode r">
@@ -1235,9 +1238,9 @@ To know number of rows with missing value, we use “complete.cases(df)”. The 
 <span><span class="va">scale_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_all</a></span><span class="op">(</span><span class="op">~</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/scale.html">scale</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">as.vector</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># apply scale() to every column</span></span></code></pre></div>
 <div class="inline-figure"><img src="r_data_cleaning_files/figure-html/unnamed-chunk-58-2.png" width="80%" style="display: block; margin: auto;"></div>
 </div>
-<div id="min-max-scaling" class="section level3" number="25.7.2">
+<div id="min-max-scaling" class="section level3" number="28.7.2">
 <h3>
-<span class="header-section-number">25.7.2</span> Min Max scaling<a class="anchor" aria-label="anchor" href="#min-max-scaling"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.7.2</span> Min Max scaling<a class="anchor" aria-label="anchor" href="#min-max-scaling"><i class="fas fa-link"></i></a>
 </h3>
 <p>MINMAX scaling is good for svm, so don’t hesistate to use it :)</p>
 <div class="sourceCode" id="cb283"><pre class="downlit sourceCode r">
@@ -1253,13 +1256,13 @@ To know number of rows with missing value, we use “complete.cases(df)”. The 
 <div class="inline-figure"><img src="r_data_cleaning_files/figure-html/unnamed-chunk-59-2.png" width="80%" style="display: block; margin: auto;"></div>
 </div>
 </div>
-<div id="data-encoding" class="section level2" number="25.8">
+<div id="data-encoding" class="section level2" number="28.8">
 <h2>
-<span class="header-section-number">25.8</span> data encoding<a class="anchor" aria-label="anchor" href="#data-encoding"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.8</span> data encoding<a class="anchor" aria-label="anchor" href="#data-encoding"><i class="fas fa-link"></i></a>
 </h2>
-<div id="ordinal-encoding" class="section level3" number="25.8.1">
+<div id="ordinal-encoding" class="section level3" number="28.8.1">
 <h3>
-<span class="header-section-number">25.8.1</span> ordinal encoding<a class="anchor" aria-label="anchor" href="#ordinal-encoding"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.8.1</span> ordinal encoding<a class="anchor" aria-label="anchor" href="#ordinal-encoding"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb285"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ordinal</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">order</span><span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
@@ -1284,9 +1287,9 @@ To know number of rows with missing value, we use “complete.cases(df)”. The 
 <code class="sourceCode R"><span><span class="fu">ordinal</span><span class="op">(</span><span class="va">encode_df</span><span class="op">[[</span><span class="st">"D"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 1 2 3 4 3</code></pre>
 </div>
-<div id="one-hot-encoding-3" class="section level3" number="25.8.2">
+<div id="one-hot-encoding-3" class="section level3" number="28.8.2">
 <h3>
-<span class="header-section-number">25.8.2</span> one-hot encoding <strong>[3]</strong><a class="anchor" aria-label="anchor" href="#one-hot-encoding-3"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.8.2</span> one-hot encoding <strong>[3]</strong><a class="anchor" aria-label="anchor" href="#one-hot-encoding-3"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb293"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">encode_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>A <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">7</span>, <span class="fl">8</span>, <span class="fl">5</span>, <span class="fl">3</span><span class="op">)</span>,</span>
@@ -1313,9 +1316,9 @@ To know number of rows with missing value, we use “complete.cases(df)”. The 
 ## 5       0    0</code></pre>
 </div>
 </div>
-<div id="reference-1" class="section level2" number="25.9">
+<div id="reference-1" class="section level2" number="28.9">
 <h2>
-<span class="header-section-number">25.9</span> Reference<a class="anchor" aria-label="anchor" href="#reference-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">28.9</span> Reference<a class="anchor" aria-label="anchor" href="#reference-1"><i class="fas fa-link"></i></a>
 </h2>
 <p>[1] <a href="https://sparkbyexamples.com/r-programming/how-to-do-left-join-in-r/#" class="uri">https://sparkbyexamples.com/r-programming/how-to-do-left-join-in-r/#</a>:~:text=How%20to%20do%20left%20join%20on%20data%20frames%20in%20R,join%20data%20frames%20in%20R.</p>
 <p>[2]<a href="https://stackoverflow.com/questions/36377813/impute-most-frequent-categorical-value-in-all-columns-in-data-frame" class="uri">https://stackoverflow.com/questions/36377813/impute-most-frequent-categorical-value-in-all-columns-in-data-frame</a></p>
@@ -1324,53 +1327,53 @@ To know number of rows with missing value, we use “complete.cases(df)”. The 
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="tutorial-for-vector-fields-in-r.html"><span class="header-section-number">24</span> Tutorial for vector fields in r</a></div>
-<div class="next"><a href="introduction-to-shiny-web-apps.html"><span class="header-section-number">26</span> Introduction to Shiny Web Apps</a></div>
+<div class="prev"><a href="tutorial-for-vector-fields-in-r.html"><span class="header-section-number">27</span> Tutorial for vector fields in r</a></div>
+<div class="next"><a href="introduction-to-shiny-web-apps.html"><span class="header-section-number">29</span> Introduction to Shiny Web Apps</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#data-cleaning-with-r"><span class="header-section-number">25</span> Data cleaning with r</a></li>
-<li><a class="nav-link" href="#data-cleaning-with-r-1"><span class="header-section-number">25.1</span> Data cleaning with R</a></li>
-<li><a class="nav-link" href="#import-data-set"><span class="header-section-number">25.2</span> Import data set</a></li>
-<li><a class="nav-link" href="#introduction"><span class="header-section-number">25.3</span> Introduction</a></li>
+<li><a class="nav-link" href="#data-cleaning-with-r"><span class="header-section-number">28</span> Data cleaning with r</a></li>
+<li><a class="nav-link" href="#data-cleaning-with-r-1"><span class="header-section-number">28.1</span> Data cleaning with R</a></li>
+<li><a class="nav-link" href="#import-data-set"><span class="header-section-number">28.2</span> Import data set</a></li>
+<li><a class="nav-link" href="#introduction-1"><span class="header-section-number">28.3</span> Introduction</a></li>
 <li>
-<a class="nav-link" href="#data-frame-modification-general-modification"><span class="header-section-number">25.4</span> Data frame modification (general modification)</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#create-dataframe-by-arrays"><span class="header-section-number">25.4.1</span> Create DataFrame by arrays</a></li>
-<li><a class="nav-link" href="#create-dataframe-by-combining-two-dataframeusing-cbindrbind"><span class="header-section-number">25.4.2</span> Create DataFrame by combining two dataFrame(using cbind/rbind)</a></li>
-<li><a class="nav-link" href="#addingchange-row-name"><span class="header-section-number">25.4.3</span> adding/change row name</a></li>
-<li><a class="nav-link" href="#changing-column-names"><span class="header-section-number">25.4.4</span> changing column names</a></li>
-<li><a class="nav-link" href="#adding-array-to-to-dataframe-as-new-column"><span class="header-section-number">25.4.5</span> Adding array to to dataFrame as new column</a></li>
-<li><a class="nav-link" href="#adding-column-by-combination-of-other-columns"><span class="header-section-number">25.4.6</span> adding column by combination of other columns</a></li>
-<li><a class="nav-link" href="#joining-two-table-2"><span class="header-section-number">25.4.7</span> joining two table [2]</a></li>
-<li><a class="nav-link" href="#pivoting-dataframe-understanding-pivot_longer"><span class="header-section-number">25.4.8</span> pivoting dataframe, understanding pivot_longer</a></li>
-<li><a class="nav-link" href="#ordering"><span class="header-section-number">25.4.9</span> ordering</a></li>
+<a class="nav-link" href="#data-frame-modification-general-modification"><span class="header-section-number">28.4</span> Data frame modification (general modification)</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#create-dataframe-by-arrays"><span class="header-section-number">28.4.1</span> Create DataFrame by arrays</a></li>
+<li><a class="nav-link" href="#create-dataframe-by-combining-two-dataframeusing-cbindrbind"><span class="header-section-number">28.4.2</span> Create DataFrame by combining two dataFrame(using cbind/rbind)</a></li>
+<li><a class="nav-link" href="#addingchange-row-name"><span class="header-section-number">28.4.3</span> adding/change row name</a></li>
+<li><a class="nav-link" href="#changing-column-names"><span class="header-section-number">28.4.4</span> changing column names</a></li>
+<li><a class="nav-link" href="#adding-array-to-to-dataframe-as-new-column"><span class="header-section-number">28.4.5</span> Adding array to to dataFrame as new column</a></li>
+<li><a class="nav-link" href="#adding-column-by-combination-of-other-columns"><span class="header-section-number">28.4.6</span> adding column by combination of other columns</a></li>
+<li><a class="nav-link" href="#joining-two-table-2"><span class="header-section-number">28.4.7</span> joining two table [2]</a></li>
+<li><a class="nav-link" href="#pivoting-dataframe-understanding-pivot_longer"><span class="header-section-number">28.4.8</span> pivoting dataframe, understanding pivot_longer</a></li>
+<li><a class="nav-link" href="#ordering"><span class="header-section-number">28.4.9</span> ordering</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#duplicated-values"><span class="header-section-number">25.5</span> Duplicated Values</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#data-set-with-row-wise-duplicates"><span class="header-section-number">25.5.1</span> Data set with row-wise duplicates</a></li>
-<li><a class="nav-link" href="#duplicates-based-on-specific-columns"><span class="header-section-number">25.5.2</span> Duplicates based on specific columns</a></li>
+<a class="nav-link" href="#duplicated-values"><span class="header-section-number">28.5</span> Duplicated Values</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#data-set-with-row-wise-duplicates"><span class="header-section-number">28.5.1</span> Data set with row-wise duplicates</a></li>
+<li><a class="nav-link" href="#duplicates-based-on-specific-columns"><span class="header-section-number">28.5.2</span> Duplicates based on specific columns</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#missing-values"><span class="header-section-number">25.6</span> Missing Values</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#na-in-r"><span class="header-section-number">25.6.1</span> NA in R</a></li>
-<li><a class="nav-link" href="#impute"><span class="header-section-number">25.6.2</span> Impute</a></li>
+<a class="nav-link" href="#missing-values"><span class="header-section-number">28.6</span> Missing Values</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#na-in-r"><span class="header-section-number">28.6.1</span> NA in R</a></li>
+<li><a class="nav-link" href="#impute"><span class="header-section-number">28.6.2</span> Impute</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#data-scaling"><span class="header-section-number">25.7</span> Data scaling</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#standardization"><span class="header-section-number">25.7.1</span> standardization</a></li>
-<li><a class="nav-link" href="#min-max-scaling"><span class="header-section-number">25.7.2</span> Min Max scaling</a></li>
+<a class="nav-link" href="#data-scaling"><span class="header-section-number">28.7</span> Data scaling</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#standardization"><span class="header-section-number">28.7.1</span> standardization</a></li>
+<li><a class="nav-link" href="#min-max-scaling"><span class="header-section-number">28.7.2</span> Min Max scaling</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#data-encoding"><span class="header-section-number">25.8</span> data encoding</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#ordinal-encoding"><span class="header-section-number">25.8.1</span> ordinal encoding</a></li>
-<li><a class="nav-link" href="#one-hot-encoding-3"><span class="header-section-number">25.8.2</span> one-hot encoding [3]</a></li>
+<a class="nav-link" href="#data-encoding"><span class="header-section-number">28.8</span> data encoding</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#ordinal-encoding"><span class="header-section-number">28.8.1</span> ordinal encoding</a></li>
+<li><a class="nav-link" href="#one-hot-encoding-3"><span class="header-section-number">28.8.2</span> one-hot encoding [3]</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#reference-1"><span class="header-section-number">25.9</span> Reference</a></li>
+<li><a class="nav-link" href="#reference-1"><span class="header-section-number">28.9</span> Reference</a></li>
 </ul>
 
       <div class="book-extra">

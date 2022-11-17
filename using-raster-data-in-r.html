@@ -4,15 +4,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 34 Using raster data in R | Community Contributions for EDAV Fall 2022 Tues/Thurs</title>
-<meta name="description" content="Andre Evard  34.1 Introduction to rasters This Community Contribution project gives an overview of the online book Geocomputation in R, specifically in regards to the raster type of geographic...">
+<title>Chapter 37 Using raster data in R | Community Contributions for EDAV Fall 2022 Tues/Thurs</title>
+<meta name="description" content="Andre Evard  37.1 Introduction to rasters This Community Contribution project gives an overview of the online book Geocomputation in R, specifically in regards to the raster type of geographic...">
 <meta name="generator" content="bookdown 0.30 with bs4_book()">
-<meta property="og:title" content="Chapter 34 Using raster data in R | Community Contributions for EDAV Fall 2022 Tues/Thurs">
+<meta property="og:title" content="Chapter 37 Using raster data in R | Community Contributions for EDAV Fall 2022 Tues/Thurs">
 <meta property="og:type" content="book">
-<meta property="og:description" content="Andre Evard  34.1 Introduction to rasters This Community Contribution project gives an overview of the online book Geocomputation in R, specifically in regards to the raster type of geographic...">
+<meta property="og:description" content="Andre Evard  37.1 Introduction to rasters This Community Contribution project gives an overview of the online book Geocomputation in R, specifically in regards to the raster type of geographic...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 34 Using raster data in R | Community Contributions for EDAV Fall 2022 Tues/Thurs">
-<meta name="twitter:description" content="Andre Evard  34.1 Introduction to rasters This Community Contribution project gives an overview of the online book Geocomputation in R, specifically in regards to the raster type of geographic...">
+<meta name="twitter:title" content="Chapter 37 Using raster data in R | Community Contributions for EDAV Fall 2022 Tues/Thurs">
+<meta name="twitter:description" content="Andre Evard  37.1 Introduction to rasters This Community Contribution project gives an overview of the online book Geocomputation in R, specifically in regards to the raster type of geographic...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.1/transition.js"></script><script src="libs/bs3compat-0.4.1/tabs.js"></script><script src="libs/bs3compat-0.4.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -69,41 +69,44 @@
 <li><a class="" href="data-visualization-with-r-ggplot2-vs.-matlab.html"><span class="header-section-number">17</span> Data Visualization with R ggplot2 vs. Matlab</a></li>
 <li><a class="" href="ggplot2-plots-in-python-cheat-sheet-tutorial.html"><span class="header-section-number">18</span> Ggplot2 plots in python cheat sheet tutorial</a></li>
 <li><a class="" href="model-evaluation-selection-visualization-with-easystats.html"><span class="header-section-number">19</span> Model evaluation, selection &amp; visualization with easystats</a></li>
+<li><a class="" href="time-series-itsmr-cheat-sheet.html"><span class="header-section-number">20</span> Time Series: ITSMR Cheat Sheet</a></li>
+<li><a class="" href="introduction.html"><span class="header-section-number">21</span> Introduction:</a></li>
+<li><a class="" href="motivation-1.html"><span class="header-section-number">22</span> Motivation:</a></li>
 <li class="book-part">Tutorials</li>
-<li><a class="" href="preprocessing-and-visualization-of-time-series-data.html"><span class="header-section-number">21</span> Preprocessing and Visualization of Time Series Data</a></li>
-<li><a class="" href="how-to-use-sqldf.html"><span class="header-section-number">22</span> How to use sqldf</a></li>
-<li><a class="" href="googlevis-in-r.html"><span class="header-section-number">23</span> googleVis in R</a></li>
-<li><a class="" href="tutorial-for-vector-fields-in-r.html"><span class="header-section-number">24</span> Tutorial for vector fields in r</a></li>
-<li><a class="" href="data-cleaning-with-r.html"><span class="header-section-number">25</span> Data cleaning with r</a></li>
-<li><a class="" href="introduction-to-shiny-web-apps.html"><span class="header-section-number">26</span> Introduction to Shiny Web Apps</a></li>
-<li><a class="" href="python-missingno-library-tutorial.html"><span class="header-section-number">27</span> Python missingno library tutorial</a></li>
-<li><a class="" href="data-explorer-tutorial-and-automation.html"><span class="header-section-number">28</span> Data Explorer Tutorial and Automation</a></li>
-<li><a class="" href="d-visualization-in-r.html"><span class="header-section-number">29</span> 3D Visualization in R</a></li>
-<li><a class="" href="visualizing-time-series-data.html"><span class="header-section-number">30</span> Visualizing Time Series Data</a></li>
-<li><a class="" href="igraph-in-r.html"><span class="header-section-number">31</span> igraph in r</a></li>
-<li><a class="" href="geo-mapping-coordinate-extraction-using-api-calls.html"><span class="header-section-number">32</span> Geo-Mapping Coordinate Extraction Using API Calls</a></li>
-<li><a class="" href="edav-garden.html"><span class="header-section-number">33</span> EDAV Garden</a></li>
-<li><a class="active" href="using-raster-data-in-r.html"><span class="header-section-number">34</span> Using raster data in R</a></li>
-<li><a class="" href="make-geographical-maps-with-different-packages.html"><span class="header-section-number">35</span> Make Geographical Maps with Different Packages</a></li>
-<li><a class="" href="how-to-obtain-data-from-api-and-process-raw-json-data.html"><span class="header-section-number">36</span> How to obtain data from API and process raw JSON data</a></li>
-<li><a class="" href="sample-statistic-tutorial.html"><span class="header-section-number">37</span> Sample Statistic Tutorial</a></li>
-<li><a class="" href="data-cleaning-tutorial.html"><span class="header-section-number">38</span> Data cleaning tutorial</a></li>
-<li><a class="" href="mlr3-package-tutorial.html"><span class="header-section-number">39</span> mlr3 Package Tutorial</a></li>
-<li><a class="" href="guide-to-nonparametric-tests.html"><span class="header-section-number">40</span> Guide to nonparametric tests</a></li>
-<li><a class="" href="dplyr-pacakage-in-r.html"><span class="header-section-number">41</span> dplyr pacakage in R</a></li>
-<li><a class="" href="how-not-to-visualize-american-elections.html"><span class="header-section-number">42</span> How (not) to visualize American elections</a></li>
-<li><a class="" href="time-series-visualization-with-r.html"><span class="header-section-number">43</span> Time series visualization with R</a></li>
+<li><a class="" href="preprocessing-and-visualization-of-time-series-data.html"><span class="header-section-number">24</span> Preprocessing and Visualization of Time Series Data</a></li>
+<li><a class="" href="how-to-use-sqldf.html"><span class="header-section-number">25</span> How to use sqldf</a></li>
+<li><a class="" href="googlevis-in-r.html"><span class="header-section-number">26</span> googleVis in R</a></li>
+<li><a class="" href="tutorial-for-vector-fields-in-r.html"><span class="header-section-number">27</span> Tutorial for vector fields in r</a></li>
+<li><a class="" href="data-cleaning-with-r.html"><span class="header-section-number">28</span> Data cleaning with r</a></li>
+<li><a class="" href="introduction-to-shiny-web-apps.html"><span class="header-section-number">29</span> Introduction to Shiny Web Apps</a></li>
+<li><a class="" href="python-missingno-library-tutorial.html"><span class="header-section-number">30</span> Python missingno library tutorial</a></li>
+<li><a class="" href="data-explorer-tutorial-and-automation.html"><span class="header-section-number">31</span> Data Explorer Tutorial and Automation</a></li>
+<li><a class="" href="d-visualization-in-r.html"><span class="header-section-number">32</span> 3D Visualization in R</a></li>
+<li><a class="" href="visualizing-time-series-data.html"><span class="header-section-number">33</span> Visualizing Time Series Data</a></li>
+<li><a class="" href="igraph-in-r.html"><span class="header-section-number">34</span> igraph in r</a></li>
+<li><a class="" href="geo-mapping-coordinate-extraction-using-api-calls.html"><span class="header-section-number">35</span> Geo-Mapping Coordinate Extraction Using API Calls</a></li>
+<li><a class="" href="edav-garden.html"><span class="header-section-number">36</span> EDAV Garden</a></li>
+<li><a class="active" href="using-raster-data-in-r.html"><span class="header-section-number">37</span> Using raster data in R</a></li>
+<li><a class="" href="make-geographical-maps-with-different-packages.html"><span class="header-section-number">38</span> Make Geographical Maps with Different Packages</a></li>
+<li><a class="" href="how-to-obtain-data-from-api-and-process-raw-json-data.html"><span class="header-section-number">39</span> How to obtain data from API and process raw JSON data</a></li>
+<li><a class="" href="sample-statistic-tutorial.html"><span class="header-section-number">40</span> Sample Statistic Tutorial</a></li>
+<li><a class="" href="data-cleaning-tutorial.html"><span class="header-section-number">41</span> Data cleaning tutorial</a></li>
+<li><a class="" href="mlr3-package-tutorial.html"><span class="header-section-number">42</span> mlr3 Package Tutorial</a></li>
+<li><a class="" href="guide-to-nonparametric-tests.html"><span class="header-section-number">43</span> Guide to nonparametric tests</a></li>
+<li><a class="" href="dplyr-pacakage-in-r.html"><span class="header-section-number">44</span> dplyr pacakage in R</a></li>
+<li><a class="" href="how-not-to-visualize-american-elections.html"><span class="header-section-number">45</span> How (not) to visualize American elections</a></li>
+<li><a class="" href="time-series-visualization-with-r.html"><span class="header-section-number">46</span> Time series visualization with R</a></li>
 <li class="book-part">Interview Prep</li>
-<li><a class="" href="ten-interview-questions-and-answers.html"><span class="header-section-number">45</span> Ten interview questions and answers</a></li>
-<li><a class="" href="data-science-internship-search-survival-guide.html"><span class="header-section-number">46</span> Data science internship search survival guide</a></li>
-<li><a class="" href="data-visualization-interview-questions-sample.html"><span class="header-section-number">47</span> Data visualization interview questions sample</a></li>
+<li><a class="" href="ten-interview-questions-and-answers.html"><span class="header-section-number">48</span> Ten interview questions and answers</a></li>
+<li><a class="" href="data-science-internship-search-survival-guide.html"><span class="header-section-number">49</span> Data science internship search survival guide</a></li>
+<li><a class="" href="data-visualization-interview-questions-sample.html"><span class="header-section-number">50</span> Data visualization interview questions sample</a></li>
 <li class="book-part">Case Studies</li>
-<li><a class="" href="benford-case-study.html"><span class="header-section-number">49</span> Benford Case Study</a></li>
+<li><a class="" href="benford-case-study.html"><span class="header-section-number">52</span> Benford Case Study</a></li>
 <li class="book-part">Blogs</li>
-<li><a class="" href="equity-in-ai.html"><span class="header-section-number">51</span> Equity in AI</a></li>
+<li><a class="" href="equity-in-ai.html"><span class="header-section-number">54</span> Equity in AI</a></li>
 <li class="book-part">Appendices</li>
-<li><a class="" href="github-initial-setup.html"><span class="header-section-number">52</span> Github initial setup</a></li>
-<li><a class="" href="tutorial-for-pull-request-mergers.html"><span class="header-section-number">53</span> Tutorial for pull request mergers</a></li>
+<li><a class="" href="github-initial-setup.html"><span class="header-section-number">55</span> Github initial setup</a></li>
+<li><a class="" href="tutorial-for-pull-request-mergers.html"><span class="header-section-number">56</span> Tutorial for pull request mergers</a></li>
 </ul>
 
         <div class="book-extra">
@@ -111,14 +114,14 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="using-raster-data-in-r" class="section level1" number="34">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="using-raster-data-in-r" class="section level1" number="37">
 <h1>
-<span class="header-section-number">34</span> Using raster data in R<a class="anchor" aria-label="anchor" href="#using-raster-data-in-r"><i class="fas fa-link"></i></a>
+<span class="header-section-number">37</span> Using raster data in R<a class="anchor" aria-label="anchor" href="#using-raster-data-in-r"><i class="fas fa-link"></i></a>
 </h1>
 <p>Andre Evard</p>
-<div id="introduction-to-rasters" class="section level2" number="34.1">
+<div id="introduction-to-rasters" class="section level2" number="37.1">
 <h2>
-<span class="header-section-number">34.1</span> Introduction to rasters<a class="anchor" aria-label="anchor" href="#introduction-to-rasters"><i class="fas fa-link"></i></a>
+<span class="header-section-number">37.1</span> Introduction to rasters<a class="anchor" aria-label="anchor" href="#introduction-to-rasters"><i class="fas fa-link"></i></a>
 </h2>
 <p>This Community Contribution project gives an overview of the online book
 <a href="https://geocompr.robinlovelace.net/index.html">Geocomputation in R</a>,
@@ -129,9 +132,9 @@ packages and references may be out-of-date in the near future.</p>
 in detail <a href="https://rdrr.io/cran/terra/man/terra-package.html">here</a>. All extra
 data sources used here are detailed by the book, except this <a href="https://zenodo.org/record/5774954/#.Y3OqVILMIeU">snow cover data</a> that was found on a website,
 Zenodo, that Geocomputation in R already links to.</p>
-<div id="what-is-a-raster" class="section level3" number="34.1.1">
+<div id="what-is-a-raster" class="section level3" number="37.1.1">
 <h3>
-<span class="header-section-number">34.1.1</span> What is a Raster?<a class="anchor" aria-label="anchor" href="#what-is-a-raster"><i class="fas fa-link"></i></a>
+<span class="header-section-number">37.1.1</span> What is a Raster?<a class="anchor" aria-label="anchor" href="#what-is-a-raster"><i class="fas fa-link"></i></a>
 </h3>
 <p>A <a href="https://geocompr.robinlovelace.net/spatial-class.html#raster-data">raster</a> is
 a spatial model that crosswise divides an area of land into regularized boxes,
@@ -152,9 +155,9 @@ able to represent human political boundaries for instance. Although this project
 is centered on the raster, vectors will be referenced on occasion for data
 translation or transformation.</p>
 </div>
-<div id="what-is-terra" class="section level3" number="34.1.2">
+<div id="what-is-terra" class="section level3" number="37.1.2">
 <h3>
-<span class="header-section-number">34.1.2</span> What is Terra?<a class="anchor" aria-label="anchor" href="#what-is-terra"><i class="fas fa-link"></i></a>
+<span class="header-section-number">37.1.2</span> What is Terra?<a class="anchor" aria-label="anchor" href="#what-is-terra"><i class="fas fa-link"></i></a>
 </h3>
 <p>(covers sections <a href="https://geocompr.robinlovelace.net/spatial-class.html#r-packages-for-working-with-raster-data">2.3.1</a> through <a href="https://geocompr.robinlovelace.net/spatial-class.html#basic-map-raster">2.3.3</a>)</p>
 <p><a href="https://rdrr.io/cran/terra/man/terra-package.html">Terra</a> is the primary package
@@ -204,13 +207,13 @@ Quickly plotting it shows the following graphic:</p>
 by this color scale.</p>
 </div>
 </div>
-<div id="raster-creation" class="section level2" number="34.2">
+<div id="raster-creation" class="section level2" number="37.2">
 <h2>
-<span class="header-section-number">34.2</span> Raster Creation<a class="anchor" aria-label="anchor" href="#raster-creation"><i class="fas fa-link"></i></a>
+<span class="header-section-number">37.2</span> Raster Creation<a class="anchor" aria-label="anchor" href="#raster-creation"><i class="fas fa-link"></i></a>
 </h2>
-<div id="the-direct-approach" class="section level3" number="34.2.1">
+<div id="the-direct-approach" class="section level3" number="37.2.1">
 <h3>
-<span class="header-section-number">34.2.1</span> The direct approach<a class="anchor" aria-label="anchor" href="#the-direct-approach"><i class="fas fa-link"></i></a>
+<span class="header-section-number">37.2.1</span> The direct approach<a class="anchor" aria-label="anchor" href="#the-direct-approach"><i class="fas fa-link"></i></a>
 </h3>
 <p>(covers sections <a href="https://geocompr.robinlovelace.net/spatial-class.html#an-introduction-to-terra">2.3.4</a>, and <a href="https://geocompr.robinlovelace.net/attr.html#raster-subsetting">3.3.1</a>)
 So we know what rasters are, and a basic data structure. Okay, well how do we
@@ -253,9 +256,9 @@ See the last section for a better approach to raster manipulation.</p>
 <div class="sourceCode" id="cb412"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># You can also use &lt;raster&gt;[] as a shortcut of .values().</span></span></code></pre></div>
 </div>
-<div id="raster-files-and-their-formats" class="section level3" number="34.2.2">
+<div id="raster-files-and-their-formats" class="section level3" number="37.2.2">
 <h3>
-<span class="header-section-number">34.2.2</span> Raster files and their formats<a class="anchor" aria-label="anchor" href="#raster-files-and-their-formats"><i class="fas fa-link"></i></a>
+<span class="header-section-number">37.2.2</span> Raster files and their formats<a class="anchor" aria-label="anchor" href="#raster-files-and-their-formats"><i class="fas fa-link"></i></a>
 </h3>
 <p>(covers sections <a href="https://geocompr.robinlovelace.net/read-write.html#file-formats">8.5</a> and <a href="https://geocompr.robinlovelace.net/read-write.html#raster-data-read">8.6.2</a>)</p>
 <p>Loading files is preferred approach and far more robust, should you have an
@@ -332,9 +335,9 @@ rast(). You can produce or save them yourself, or use packages such as <a href="
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">cropped_NE_snow</span>, main<span class="op">=</span><span class="st">"USA Northeast snow cover in jan 2019"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="raster_overview_files/figure-html/unnamed-chunk-8-1.png" width="80%" style="display: block; margin: auto;"></div>
 </div>
-<div id="rasterization" class="section level3" number="34.2.3">
+<div id="rasterization" class="section level3" number="37.2.3">
 <h3>
-<span class="header-section-number">34.2.3</span> Rasterization<a class="anchor" aria-label="anchor" href="#rasterization"><i class="fas fa-link"></i></a>
+<span class="header-section-number">37.2.3</span> Rasterization<a class="anchor" aria-label="anchor" href="#rasterization"><i class="fas fa-link"></i></a>
 </h3>
 <p>(covers section <a href="https://geocompr.robinlovelace.net/raster-vector.html#rasterization">6.4</a>)</p>
 <p>There’s one more type of raster creation: transformations from vectors,
@@ -348,15 +351,15 @@ possibilities are quite endless.</p>
 <p>More at Geocomputation with R’s section <a href="https://geocompr.robinlovelace.net/raster-vector.html#rasterization">6.4</a> if you’re curious.</p>
 </div>
 </div>
-<div id="raster-manipulations-and-their-applications" class="section level2" number="34.3">
+<div id="raster-manipulations-and-their-applications" class="section level2" number="37.3">
 <h2>
-<span class="header-section-number">34.3</span> Raster Manipulations, and their applications<a class="anchor" aria-label="anchor" href="#raster-manipulations-and-their-applications"><i class="fas fa-link"></i></a>
+<span class="header-section-number">37.3</span> Raster Manipulations, and their applications<a class="anchor" aria-label="anchor" href="#raster-manipulations-and-their-applications"><i class="fas fa-link"></i></a>
 </h2>
 <p>So knowing how to create them is all well and good, but what can we <em>do</em> with
 rasters? How do we use them?</p>
-<div id="spatial-operations" class="section level4" number="34.3.0.1">
+<div id="spatial-operations" class="section level4" number="37.3.0.1">
 <h4>
-<span class="header-section-number">34.3.0.1</span> Spatial operations<a class="anchor" aria-label="anchor" href="#spatial-operations"><i class="fas fa-link"></i></a>
+<span class="header-section-number">37.3.0.1</span> Spatial operations<a class="anchor" aria-label="anchor" href="#spatial-operations"><i class="fas fa-link"></i></a>
 </h4>
 <p>There are a good number of geometrically-based operations that terra supports
 out of the box. The sections that Geocomputation with R lays out are <a href="https://geocompr.robinlovelace.net/spatial-operations.html#spatial-raster-subsetting">Subsetting in 4.3.1</a>,
@@ -366,9 +369,9 @@ and <a href="https://geocompr.robinlovelace.net/spatial-operations.html#global-o
 map algebra operations in sections 4.3.3 through 4.3.6, and raster <a href="https://geocompr.robinlovelace.net/spatial-operations.html#merging-rasters">Merging</a>
 in section 4.3.8</p>
 </div>
-<div id="subsetting" class="section level3" number="34.3.1">
+<div id="subsetting" class="section level3" number="37.3.1">
 <h3>
-<span class="header-section-number">34.3.1</span> Subsetting<a class="anchor" aria-label="anchor" href="#subsetting"><i class="fas fa-link"></i></a>
+<span class="header-section-number">37.3.1</span> Subsetting<a class="anchor" aria-label="anchor" href="#subsetting"><i class="fas fa-link"></i></a>
 </h3>
 <p>(covers section <a href="https://geocompr.robinlovelace.net/spatial-operations.html#spatial-raster-subsetting">4.3.1</a>)</p>
 <p>There are a few ways to (cleanly) draw values from individual cells, the cells,
@@ -432,9 +435,9 @@ or the 1D cell ids:</p>
 <pre><code>##   srtm
 ## 1 2034</code></pre>
 </div>
-<div id="cropping-and-masking" class="section level3" number="34.3.2">
+<div id="cropping-and-masking" class="section level3" number="37.3.2">
 <h3>
-<span class="header-section-number">34.3.2</span> Cropping and Masking<a class="anchor" aria-label="anchor" href="#cropping-and-masking"><i class="fas fa-link"></i></a>
+<span class="header-section-number">37.3.2</span> Cropping and Masking<a class="anchor" aria-label="anchor" href="#cropping-and-masking"><i class="fas fa-link"></i></a>
 </h3>
 <p>(covers section <a href="https://geocompr.robinlovelace.net/raster-vector.html?q=mask#raster-cropping">6.2</a>)</p>
 <p>Two similar concepts, <a href="https://rdrr.io/cran/terra/man/crop.html">crop()</a> and <a href="https://rdrr.io/cran/terra/man/mask.html">mask()</a>
@@ -461,9 +464,9 @@ outside of the second object’s boundaries to zero, but leaves the structure in
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="fu">crop</span><span class="op">(</span><span class="va">srtm_masked</span>, <span class="va">zion</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="raster_overview_files/figure-html/unnamed-chunk-12-1.png" width="80%" style="display: block; margin: auto;"></div>
 </div>
-<div id="map-algebra" class="section level3" number="34.3.3">
+<div id="map-algebra" class="section level3" number="37.3.3">
 <h3>
-<span class="header-section-number">34.3.3</span> Map Algebra<a class="anchor" aria-label="anchor" href="#map-algebra"><i class="fas fa-link"></i></a>
+<span class="header-section-number">37.3.3</span> Map Algebra<a class="anchor" aria-label="anchor" href="#map-algebra"><i class="fas fa-link"></i></a>
 </h3>
 <p>(covers sections <a href="https://geocompr.robinlovelace.net/spatial-operations.html#map-algebra">4.3.2</a>, <a href="https://geocompr.robinlovelace.net/spatial-operations.html#local-operations">4.3.3</a>, <a href="https://geocompr.robinlovelace.net/spatial-operations.html#focal-operations">4.3.4</a>,
 <a href="https://geocompr.robinlovelace.net/spatial-operations.html#zonal-operations">4.3.5</a>, and
@@ -552,9 +555,9 @@ much as you can with the aforementioned app() and its entourage.</p>
 ## 10     1    90   43627
 ## 11     1   100   46772</code></pre>
 </div>
-<div id="extraction" class="section level3" number="34.3.4">
+<div id="extraction" class="section level3" number="37.3.4">
 <h3>
-<span class="header-section-number">34.3.4</span> Extraction<a class="anchor" aria-label="anchor" href="#extraction"><i class="fas fa-link"></i></a>
+<span class="header-section-number">37.3.4</span> Extraction<a class="anchor" aria-label="anchor" href="#extraction"><i class="fas fa-link"></i></a>
 </h3>
 <p>(covers section <a href="https://geocompr.robinlovelace.net/raster-vector.html#raster-extraction">6.3</a>)</p>
 <p>Extraction is the process of gathering a targetted subset of values from a raster,
@@ -572,9 +575,9 @@ extracted, sometimes at once across different layers.</p>
 <p>One quick note–the book points out there can be performance issues at scale,
 and to use <a href="https://rdrr.io/cran/exactextractr/man/exact_extract.html">exact_extract()</a> from the <a href="https://rdrr.io/cran/exactextractr/man/exactextractr.html">exactextract</a> package where possible.</p>
 </div>
-<div id="vectorization" class="section level3" number="34.3.5">
+<div id="vectorization" class="section level3" number="37.3.5">
 <h3>
-<span class="header-section-number">34.3.5</span> Vectorization<a class="anchor" aria-label="anchor" href="#vectorization"><i class="fas fa-link"></i></a>
+<span class="header-section-number">37.3.5</span> Vectorization<a class="anchor" aria-label="anchor" href="#vectorization"><i class="fas fa-link"></i></a>
 </h3>
 <p>(covers section <a href="https://geocompr.robinlovelace.net/raster-vector.html#spatial-vectorization">6.5</a>)</p>
 <p>The opposite of rasterization, spatial vectorization transforms rasters into vectors.
@@ -586,9 +589,9 @@ contour lines using <a href="https://rdrr.io/cran/terra/man/contour.html">as.con
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">cl</span>, axes<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="raster_overview_files/figure-html/unnamed-chunk-18-1.png" width="80%" style="display: block; margin: auto;"></div>
 </div>
-<div id="file-output" class="section level3" number="34.3.6">
+<div id="file-output" class="section level3" number="37.3.6">
 <h3>
-<span class="header-section-number">34.3.6</span> File Output<a class="anchor" aria-label="anchor" href="#file-output"><i class="fas fa-link"></i></a>
+<span class="header-section-number">37.3.6</span> File Output<a class="anchor" aria-label="anchor" href="#file-output"><i class="fas fa-link"></i></a>
 </h3>
 <p>(covers section <a href="https://geocompr.robinlovelace.net/read-write.html#raster-data-write">8.7.2</a>)
 Okay, so you’ve done your experiments, and would like to preserve your rasters
@@ -609,33 +612,33 @@ of flexibility; like rasters as a hole, rigid, yet surprisingly flexible just on
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="edav-garden.html"><span class="header-section-number">33</span> EDAV Garden</a></div>
-<div class="next"><a href="make-geographical-maps-with-different-packages.html"><span class="header-section-number">35</span> Make Geographical Maps with Different Packages</a></div>
+<div class="prev"><a href="edav-garden.html"><span class="header-section-number">36</span> EDAV Garden</a></div>
+<div class="next"><a href="make-geographical-maps-with-different-packages.html"><span class="header-section-number">38</span> Make Geographical Maps with Different Packages</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#using-raster-data-in-r"><span class="header-section-number">34</span> Using raster data in R</a></li>
+<li><a class="nav-link" href="#using-raster-data-in-r"><span class="header-section-number">37</span> Using raster data in R</a></li>
 <li>
-<a class="nav-link" href="#introduction-to-rasters"><span class="header-section-number">34.1</span> Introduction to rasters</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#what-is-a-raster"><span class="header-section-number">34.1.1</span> What is a Raster?</a></li>
-<li><a class="nav-link" href="#what-is-terra"><span class="header-section-number">34.1.2</span> What is Terra?</a></li>
+<a class="nav-link" href="#introduction-to-rasters"><span class="header-section-number">37.1</span> Introduction to rasters</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#what-is-a-raster"><span class="header-section-number">37.1.1</span> What is a Raster?</a></li>
+<li><a class="nav-link" href="#what-is-terra"><span class="header-section-number">37.1.2</span> What is Terra?</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#raster-creation"><span class="header-section-number">34.2</span> Raster Creation</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#the-direct-approach"><span class="header-section-number">34.2.1</span> The direct approach</a></li>
-<li><a class="nav-link" href="#raster-files-and-their-formats"><span class="header-section-number">34.2.2</span> Raster files and their formats</a></li>
-<li><a class="nav-link" href="#rasterization"><span class="header-section-number">34.2.3</span> Rasterization</a></li>
+<a class="nav-link" href="#raster-creation"><span class="header-section-number">37.2</span> Raster Creation</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#the-direct-approach"><span class="header-section-number">37.2.1</span> The direct approach</a></li>
+<li><a class="nav-link" href="#raster-files-and-their-formats"><span class="header-section-number">37.2.2</span> Raster files and their formats</a></li>
+<li><a class="nav-link" href="#rasterization"><span class="header-section-number">37.2.3</span> Rasterization</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#raster-manipulations-and-their-applications"><span class="header-section-number">34.3</span> Raster Manipulations, and their applications</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#subsetting"><span class="header-section-number">34.3.1</span> Subsetting</a></li>
-<li><a class="nav-link" href="#cropping-and-masking"><span class="header-section-number">34.3.2</span> Cropping and Masking</a></li>
-<li><a class="nav-link" href="#map-algebra"><span class="header-section-number">34.3.3</span> Map Algebra</a></li>
-<li><a class="nav-link" href="#extraction"><span class="header-section-number">34.3.4</span> Extraction</a></li>
-<li><a class="nav-link" href="#vectorization"><span class="header-section-number">34.3.5</span> Vectorization</a></li>
-<li><a class="nav-link" href="#file-output"><span class="header-section-number">34.3.6</span> File Output</a></li>
+<a class="nav-link" href="#raster-manipulations-and-their-applications"><span class="header-section-number">37.3</span> Raster Manipulations, and their applications</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#subsetting"><span class="header-section-number">37.3.1</span> Subsetting</a></li>
+<li><a class="nav-link" href="#cropping-and-masking"><span class="header-section-number">37.3.2</span> Cropping and Masking</a></li>
+<li><a class="nav-link" href="#map-algebra"><span class="header-section-number">37.3.3</span> Map Algebra</a></li>
+<li><a class="nav-link" href="#extraction"><span class="header-section-number">37.3.4</span> Extraction</a></li>
+<li><a class="nav-link" href="#vectorization"><span class="header-section-number">37.3.5</span> Vectorization</a></li>
+<li><a class="nav-link" href="#file-output"><span class="header-section-number">37.3.6</span> File Output</a></li>
 </ul>
 </li>
 </ul>
