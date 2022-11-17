@@ -55,6 +55,7 @@ rmd_files: [
   'mlr3_package_tutorial.Rmd',
   'guide_to_nonparametric_tests.Rmd',
   'dplyr_in_r.Rmd',
+  'visualizing_us_elections.Rmd',
   
   # Part: Interview Prep
   'ten_interview_questions.Rmd',
