@@ -380,6 +380,7 @@ manipulated-data
 findings
 conclusion-7
 sources
+part-blogs
 equity-in-ai
 github-initial-setup
 create-new-repo
