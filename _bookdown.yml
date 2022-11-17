@@ -30,6 +30,7 @@ rmd_files: [
   'r_vs_matlab_graph.Rmd',
   'ggplot2_to_python.Rmd',
   'easystats_cheat_sheet.Rmd',
+  'itsmr_cheat_sheet.Rmd',
 
   # Part: Tutorials
   'time_series_visualization_project.Rmd',  
