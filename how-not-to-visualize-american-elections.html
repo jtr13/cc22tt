@@ -24,7 +24,8 @@
 <script src="libs/timevis-binding-2.1.0/timevis.js"></script><link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
 <script src="libs/leaflet-1.3.1/leaflet.js"></script><link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
 <script src="libs/proj4-2.6.2/proj4.min.js"></script><script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script><link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
-<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script><link href="libs/dygraphs-1.1.1/dygraph.css" rel="stylesheet">
+<script src="libs/dygraphs-1.1.1/dygraph-combined.js"></script><script src="libs/dygraphs-1.1.1/shapes.js"></script><script src="libs/moment-2.8.4/moment.js"></script><script src="libs/moment-timezone-0.2.5/moment-timezone-with-data.js"></script><script src="libs/moment-fquarter-1.0.0/moment-fquarter.min.js"></script><script src="libs/dygraphs-binding-1.1.1.6/dygraphs.js"></script><script src="libs/Dygraph.Plugins.Crosshair-1.0/crosshair.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -91,17 +92,18 @@
 <li><a class="" href="guide-to-nonparametric-tests.html"><span class="header-section-number">40</span> Guide to nonparametric tests</a></li>
 <li><a class="" href="dplyr-pacakage-in-r.html"><span class="header-section-number">41</span> dplyr pacakage in R</a></li>
 <li><a class="active" href="how-not-to-visualize-american-elections.html"><span class="header-section-number">42</span> How (not) to visualize American elections</a></li>
+<li><a class="" href="time-series-visualization-with-r.html"><span class="header-section-number">43</span> Time series visualization with R</a></li>
 <li class="book-part">Interview Prep</li>
-<li><a class="" href="ten-interview-questions-and-answers.html"><span class="header-section-number">44</span> Ten interview questions and answers</a></li>
-<li><a class="" href="data-science-internship-search-survival-guide.html"><span class="header-section-number">45</span> Data science internship search survival guide</a></li>
-<li><a class="" href="data-visualization-interview-questions-sample.html"><span class="header-section-number">46</span> Data visualization interview questions sample</a></li>
+<li><a class="" href="ten-interview-questions-and-answers.html"><span class="header-section-number">45</span> Ten interview questions and answers</a></li>
+<li><a class="" href="data-science-internship-search-survival-guide.html"><span class="header-section-number">46</span> Data science internship search survival guide</a></li>
+<li><a class="" href="data-visualization-interview-questions-sample.html"><span class="header-section-number">47</span> Data visualization interview questions sample</a></li>
 <li class="book-part">Case Studies</li>
-<li><a class="" href="benford-case-study.html"><span class="header-section-number">48</span> Benford Case Study</a></li>
+<li><a class="" href="benford-case-study.html"><span class="header-section-number">49</span> Benford Case Study</a></li>
 <li class="book-part">Blogs</li>
-<li><a class="" href="equity-in-ai.html"><span class="header-section-number">50</span> Equity in AI</a></li>
+<li><a class="" href="equity-in-ai.html"><span class="header-section-number">51</span> Equity in AI</a></li>
 <li class="book-part">Appendices</li>
-<li><a class="" href="github-initial-setup.html"><span class="header-section-number">51</span> Github initial setup</a></li>
-<li><a class="" href="tutorial-for-pull-request-mergers.html"><span class="header-section-number">52</span> Tutorial for pull request mergers</a></li>
+<li><a class="" href="github-initial-setup.html"><span class="header-section-number">52</span> Github initial setup</a></li>
+<li><a class="" href="tutorial-for-pull-request-mergers.html"><span class="header-section-number">53</span> Tutorial for pull request mergers</a></li>
 </ul>
 
         <div class="book-extra">
@@ -119,7 +121,7 @@
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="dplyr-pacakage-in-r.html"><span class="header-section-number">41</span> dplyr pacakage in R</a></div>
-<div class="next"><a href="ten-interview-questions-and-answers.html"><span class="header-section-number">44</span> Ten interview questions and answers</a></div>
+<div class="next"><a href="time-series-visualization-with-r.html"><span class="header-section-number">43</span> Time series visualization with R</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav"><li><a class="nav-link" href="#how-not-to-visualize-american-elections"><span class="header-section-number">42</span> How (not) to visualize American elections</a></li></ul>

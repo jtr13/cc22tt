@@ -332,6 +332,16 @@ ranking-function
 sort-function-arrange
 summary-function-summarise
 how-not-to-visualize-american-elections
+time-series-visualization-with-r
+introduction-4
+line-plots-1
+bar-plots
+area-plots
+areas-under-a-single-time-series
+stacked-polygons
+interactive-time-series
+conclusion-7
+reference-5
 part-interview-prep
 ten-interview-questions-and-answers
 forward
@@ -370,7 +380,7 @@ question-is-excel-a-data-visualization-tool
 part-case-studies
 benford-case-study
 contents
-introduction-4
+introduction-5
 what-is-benfords-law
 applications-in-fraud-detection
 benford-package-in-r
@@ -378,7 +388,7 @@ example-usage-of-benford.analysis
 randomized-case-study
 manipulated-data
 findings
-conclusion-7
+conclusion-8
 sources
 part-blogs
 equity-in-ai
