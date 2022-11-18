@@ -4,15 +4,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 32 3D Visualization in R | Community Contributions for EDAV Fall 2022 Tues/Thurs</title>
-<meta name="description" content="Tianyu Han and Shijia Huang  32.1 Motivation As an important part of data visualization, 3D plotting makes the data exploration part easier for users and allow a visual display of datasets.By...">
+<title>Chapter 30 3D Visualization in R | Community Contributions for EDAV Fall 2022 Tues/Thurs</title>
+<meta name="description" content="Tianyu Han and Shijia Huang  30.1 Motivation As an important part of data visualization, 3D plotting makes the data exploration part easier for users and allow a visual display of datasets.By...">
 <meta name="generator" content="bookdown 0.30 with bs4_book()">
-<meta property="og:title" content="Chapter 32 3D Visualization in R | Community Contributions for EDAV Fall 2022 Tues/Thurs">
+<meta property="og:title" content="Chapter 30 3D Visualization in R | Community Contributions for EDAV Fall 2022 Tues/Thurs">
 <meta property="og:type" content="book">
-<meta property="og:description" content="Tianyu Han and Shijia Huang  32.1 Motivation As an important part of data visualization, 3D plotting makes the data exploration part easier for users and allow a visual display of datasets.By...">
+<meta property="og:description" content="Tianyu Han and Shijia Huang  30.1 Motivation As an important part of data visualization, 3D plotting makes the data exploration part easier for users and allow a visual display of datasets.By...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 32 3D Visualization in R | Community Contributions for EDAV Fall 2022 Tues/Thurs">
-<meta name="twitter:description" content="Tianyu Han and Shijia Huang  32.1 Motivation As an important part of data visualization, 3D plotting makes the data exploration part easier for users and allow a visual display of datasets.By...">
+<meta name="twitter:title" content="Chapter 30 3D Visualization in R | Community Contributions for EDAV Fall 2022 Tues/Thurs">
+<meta name="twitter:description" content="Tianyu Han and Shijia Huang  30.1 Motivation As an important part of data visualization, 3D plotting makes the data exploration part easier for users and allow a visual display of datasets.By...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.1/transition.js"></script><script src="libs/bs3compat-0.4.1/tabs.js"></script><script src="libs/bs3compat-0.4.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -25,7 +25,10 @@
 <script src="libs/leaflet-1.3.1/leaflet.js"></script><link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
 <script src="libs/proj4-2.6.2/proj4.min.js"></script><script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script><link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
 <script src="libs/leaflet-binding-2.1.1/leaflet.js"></script><link href="libs/dygraphs-1.1.1/dygraph.css" rel="stylesheet">
-<script src="libs/dygraphs-1.1.1/dygraph-combined.js"></script><script src="libs/dygraphs-1.1.1/shapes.js"></script><script src="libs/moment-2.8.4/moment.js"></script><script src="libs/moment-timezone-0.2.5/moment-timezone-with-data.js"></script><script src="libs/moment-fquarter-1.0.0/moment-fquarter.min.js"></script><script src="libs/dygraphs-binding-1.1.1.6/dygraphs.js"></script><script src="libs/Dygraph.Plugins.Crosshair-1.0/crosshair.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+<script src="libs/dygraphs-1.1.1/dygraph-combined.js"></script><script src="libs/dygraphs-1.1.1/shapes.js"></script><script src="libs/moment-2.8.4/moment.js"></script><script src="libs/moment-timezone-0.2.5/moment-timezone-with-data.js"></script><script src="libs/moment-fquarter-1.0.0/moment-fquarter.min.js"></script><script src="libs/dygraphs-binding-1.1.1.6/dygraphs.js"></script><script src="libs/Dygraph.Plugins.Crosshair-1.0/crosshair.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="libs/datatables-binding-0.26/datatables.js"></script><link href="libs/dt-core-1.12.1/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="libs/dt-core-1.12.1/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="libs/dt-core-1.12.1/js/jquery.dataTables.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -70,43 +73,44 @@
 <li><a class="" href="ggplot2-plots-in-python-cheat-sheet-tutorial.html"><span class="header-section-number">18</span> Ggplot2 plots in python cheat sheet tutorial</a></li>
 <li><a class="" href="model-evaluation-selection-visualization-with-easystats.html"><span class="header-section-number">19</span> Model evaluation, selection &amp; visualization with easystats</a></li>
 <li><a class="" href="time-series-itsmr-cheat-sheet.html"><span class="header-section-number">20</span> Time Series: ITSMR Cheat Sheet</a></li>
-<li><a class="" href="introduction.html"><span class="header-section-number">21</span> Introduction:</a></li>
-<li><a class="" href="motivation-1.html"><span class="header-section-number">22</span> Motivation:</a></li>
 <li class="book-part">Tutorials</li>
-<li><a class="" href="preprocessing-and-visualization-of-time-series-data.html"><span class="header-section-number">24</span> Preprocessing and Visualization of Time Series Data</a></li>
-<li><a class="" href="how-to-use-sqldf.html"><span class="header-section-number">25</span> How to use sqldf</a></li>
-<li><a class="" href="googlevis-in-r.html"><span class="header-section-number">26</span> googleVis in R</a></li>
-<li><a class="" href="tutorial-for-vector-fields-in-r.html"><span class="header-section-number">27</span> Tutorial for vector fields in r</a></li>
-<li><a class="" href="data-cleaning-with-r.html"><span class="header-section-number">28</span> Data cleaning with r</a></li>
-<li><a class="" href="introduction-to-shiny-web-apps.html"><span class="header-section-number">29</span> Introduction to Shiny Web Apps</a></li>
-<li><a class="" href="python-missingno-library-tutorial.html"><span class="header-section-number">30</span> Python missingno library tutorial</a></li>
-<li><a class="" href="data-explorer-tutorial-and-automation.html"><span class="header-section-number">31</span> Data Explorer Tutorial and Automation</a></li>
-<li><a class="active" href="d-visualization-in-r.html"><span class="header-section-number">32</span> 3D Visualization in R</a></li>
-<li><a class="" href="visualizing-time-series-data.html"><span class="header-section-number">33</span> Visualizing Time Series Data</a></li>
-<li><a class="" href="igraph-in-r.html"><span class="header-section-number">34</span> igraph in r</a></li>
-<li><a class="" href="geo-mapping-coordinate-extraction-using-api-calls.html"><span class="header-section-number">35</span> Geo-Mapping Coordinate Extraction Using API Calls</a></li>
-<li><a class="" href="edav-garden.html"><span class="header-section-number">36</span> EDAV Garden</a></li>
-<li><a class="" href="using-raster-data-in-r.html"><span class="header-section-number">37</span> Using raster data in R</a></li>
-<li><a class="" href="make-geographical-maps-with-different-packages.html"><span class="header-section-number">38</span> Make Geographical Maps with Different Packages</a></li>
-<li><a class="" href="how-to-obtain-data-from-api-and-process-raw-json-data.html"><span class="header-section-number">39</span> How to obtain data from API and process raw JSON data</a></li>
-<li><a class="" href="sample-statistic-tutorial.html"><span class="header-section-number">40</span> Sample Statistic Tutorial</a></li>
-<li><a class="" href="data-cleaning-tutorial.html"><span class="header-section-number">41</span> Data cleaning tutorial</a></li>
-<li><a class="" href="mlr3-package-tutorial.html"><span class="header-section-number">42</span> mlr3 Package Tutorial</a></li>
-<li><a class="" href="guide-to-nonparametric-tests.html"><span class="header-section-number">43</span> Guide to nonparametric tests</a></li>
-<li><a class="" href="dplyr-pacakage-in-r.html"><span class="header-section-number">44</span> dplyr pacakage in R</a></li>
-<li><a class="" href="how-not-to-visualize-american-elections.html"><span class="header-section-number">45</span> How (not) to visualize American elections</a></li>
-<li><a class="" href="time-series-visualization-with-r.html"><span class="header-section-number">46</span> Time series visualization with R</a></li>
+<li><a class="" href="preprocessing-and-visualization-of-time-series-data.html"><span class="header-section-number">22</span> Preprocessing and Visualization of Time Series Data</a></li>
+<li><a class="" href="how-to-use-sqldf.html"><span class="header-section-number">23</span> How to use sqldf</a></li>
+<li><a class="" href="googlevis-in-r.html"><span class="header-section-number">24</span> googleVis in R</a></li>
+<li><a class="" href="tutorial-for-vector-fields-in-r.html"><span class="header-section-number">25</span> Tutorial for vector fields in r</a></li>
+<li><a class="" href="data-cleaning-with-r.html"><span class="header-section-number">26</span> Data cleaning with r</a></li>
+<li><a class="" href="introduction-to-shiny-web-apps.html"><span class="header-section-number">27</span> Introduction to Shiny Web Apps</a></li>
+<li><a class="" href="python-missingno-library-tutorial.html"><span class="header-section-number">28</span> Python missingno library tutorial</a></li>
+<li><a class="" href="data-explorer-tutorial-and-automation.html"><span class="header-section-number">29</span> Data Explorer Tutorial and Automation</a></li>
+<li><a class="active" href="d-visualization-in-r.html"><span class="header-section-number">30</span> 3D Visualization in R</a></li>
+<li><a class="" href="visualizing-time-series-data.html"><span class="header-section-number">31</span> Visualizing Time Series Data</a></li>
+<li><a class="" href="igraph-in-r.html"><span class="header-section-number">32</span> igraph in r</a></li>
+<li><a class="" href="geo-mapping-coordinate-extraction-using-api-calls.html"><span class="header-section-number">33</span> Geo-Mapping Coordinate Extraction Using API Calls</a></li>
+<li><a class="" href="edav-garden.html"><span class="header-section-number">34</span> EDAV Garden</a></li>
+<li><a class="" href="using-raster-data-in-r.html"><span class="header-section-number">35</span> Using raster data in R</a></li>
+<li><a class="" href="make-geographical-maps-with-different-packages.html"><span class="header-section-number">36</span> Make Geographical Maps with Different Packages</a></li>
+<li><a class="" href="how-to-obtain-data-from-api-and-process-raw-json-data.html"><span class="header-section-number">37</span> How to obtain data from API and process raw JSON data</a></li>
+<li><a class="" href="sample-statistic-tutorial.html"><span class="header-section-number">38</span> Sample Statistic Tutorial</a></li>
+<li><a class="" href="data-cleaning-tutorial.html"><span class="header-section-number">39</span> Data cleaning tutorial</a></li>
+<li><a class="" href="mlr3-package-tutorial.html"><span class="header-section-number">40</span> mlr3 Package Tutorial</a></li>
+<li><a class="" href="guide-to-nonparametric-tests.html"><span class="header-section-number">41</span> Guide to nonparametric tests</a></li>
+<li><a class="" href="dplyr-pacakage-in-r.html"><span class="header-section-number">42</span> dplyr pacakage in R</a></li>
+<li><a class="" href="how-not-to-visualize-american-elections.html"><span class="header-section-number">43</span> How (not) to visualize American elections</a></li>
+<li><a class="" href="time-series-visualization-with-r.html"><span class="header-section-number">44</span> Time series visualization with R</a></li>
+<li><a class="" href="causal-inference-tutorial-a-quick-glance-at-interventional-treatment-and-simpsons-paradox.html"><span class="header-section-number">45</span> Causal Inference Tutorial: A Quick Glance at Interventional Treatment and Simpson’s Paradox</a></li>
+<li><a class="" href="network-analysis-and-social-network-analysis.html"><span class="header-section-number">46</span> Network analysis and social network analysis</a></li>
+<li><a class="" href="network-analysis-in-r.html"><span class="header-section-number">47</span> Network Analysis in R</a></li>
 <li class="book-part">Interview Prep</li>
-<li><a class="" href="ten-interview-questions-and-answers.html"><span class="header-section-number">48</span> Ten interview questions and answers</a></li>
-<li><a class="" href="data-science-internship-search-survival-guide.html"><span class="header-section-number">49</span> Data science internship search survival guide</a></li>
-<li><a class="" href="data-visualization-interview-questions-sample.html"><span class="header-section-number">50</span> Data visualization interview questions sample</a></li>
+<li><a class="" href="ten-interview-questions-and-answers.html"><span class="header-section-number">49</span> Ten interview questions and answers</a></li>
+<li><a class="" href="data-science-internship-search-survival-guide.html"><span class="header-section-number">50</span> Data science internship search survival guide</a></li>
+<li><a class="" href="data-visualization-interview-questions-sample.html"><span class="header-section-number">51</span> Data visualization interview questions sample</a></li>
 <li class="book-part">Case Studies</li>
-<li><a class="" href="benford-case-study.html"><span class="header-section-number">52</span> Benford Case Study</a></li>
+<li><a class="" href="benford-case-study.html"><span class="header-section-number">53</span> Benford Case Study</a></li>
 <li class="book-part">Blogs</li>
-<li><a class="" href="equity-in-ai.html"><span class="header-section-number">54</span> Equity in AI</a></li>
+<li><a class="" href="equity-in-ai.html"><span class="header-section-number">55</span> Equity in AI</a></li>
 <li class="book-part">Appendices</li>
-<li><a class="" href="github-initial-setup.html"><span class="header-section-number">55</span> Github initial setup</a></li>
-<li><a class="" href="tutorial-for-pull-request-mergers.html"><span class="header-section-number">56</span> Tutorial for pull request mergers</a></li>
+<li><a class="" href="github-initial-setup.html"><span class="header-section-number">56</span> Github initial setup</a></li>
+<li><a class="" href="tutorial-for-pull-request-mergers.html"><span class="header-section-number">57</span> Tutorial for pull request mergers</a></li>
 </ul>
 
         <div class="book-extra">
@@ -114,27 +118,27 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="d-visualization-in-r" class="section level1" number="32">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="d-visualization-in-r" class="section level1" number="30">
 <h1>
-<span class="header-section-number">32</span> 3D Visualization in R<a class="anchor" aria-label="anchor" href="#d-visualization-in-r"><i class="fas fa-link"></i></a>
+<span class="header-section-number">30</span> 3D Visualization in R<a class="anchor" aria-label="anchor" href="#d-visualization-in-r"><i class="fas fa-link"></i></a>
 </h1>
 <p>Tianyu Han and Shijia Huang</p>
-<div id="motivation-4" class="section level2" number="32.1">
+<div id="motivation-4" class="section level2" number="30.1">
 <h2>
-<span class="header-section-number">32.1</span> Motivation<a class="anchor" aria-label="anchor" href="#motivation-4"><i class="fas fa-link"></i></a>
+<span class="header-section-number">30.1</span> Motivation<a class="anchor" aria-label="anchor" href="#motivation-4"><i class="fas fa-link"></i></a>
 </h2>
 <p>As an important part of data visualization, 3D plotting makes the data exploration part easier for users and allow a visual display of datasets.By plotting data points on three axes, 3D plots describe the relationship between these three variables and are useful to identify underlying patterns and interactions that are not shown on 2D graphs.</p>
 <p>In this tutorial, we will introduce different packages for 3D plots, including package Scatterplot3D, package plot3D, and also plotly. By the end of the tutorial, one will be able to choose the most suitable package for his/her project.</p>
 <p>What we can learn from this project is that there are always different ways to tackle the same problem using different R libraries and packages. It will require extensive research and trials in order to determine which one works best in the given scenario.</p>
 </div>
-<div id="scatterplot3d" class="section level2" number="32.2">
+<div id="scatterplot3d" class="section level2" number="30.2">
 <h2>
-<span class="header-section-number">32.2</span> Scatterplot3D<a class="anchor" aria-label="anchor" href="#scatterplot3d"><i class="fas fa-link"></i></a>
+<span class="header-section-number">30.2</span> Scatterplot3D<a class="anchor" aria-label="anchor" href="#scatterplot3d"><i class="fas fa-link"></i></a>
 </h2>
 <p>Scatterplot3d is an R package that displays multidimensional data in 3D space.There is only one function scatterplot3d() in this package.The usage of scatterplot3d() will be discussed with examples as below.</p>
-<div id="load-data" class="section level3" number="32.2.1">
+<div id="load-data" class="section level3" number="30.2.1">
 <h3>
-<span class="header-section-number">32.2.1</span> Load Data<a class="anchor" aria-label="anchor" href="#load-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">30.2.1</span> Load Data<a class="anchor" aria-label="anchor" href="#load-data"><i class="fas fa-link"></i></a>
 </h3>
 <p>We use the preloaded dataset USArrests as an example to show what information can be draw from 3D plot using scatterplot3d.</p>
 <div class="sourceCode" id="cb302"><pre class="downlit sourceCode r">
@@ -148,9 +152,9 @@
 ## California    9.0     276       91 40.6
 ## Colorado      7.9     204       78 38.7</code></pre>
 </div>
-<div id="create-matrix" class="section level3" number="32.2.2">
+<div id="create-matrix" class="section level3" number="30.2.2">
 <h3>
-<span class="header-section-number">32.2.2</span> Create matrix<a class="anchor" aria-label="anchor" href="#create-matrix"><i class="fas fa-link"></i></a>
+<span class="header-section-number">30.2.2</span> Create matrix<a class="anchor" aria-label="anchor" href="#create-matrix"><i class="fas fa-link"></i></a>
 </h3>
 <p>For Scatterplot3d, the dataframe provided must be converted into a matrix. Here we select Assault, Urban Population, and Rape as our three axes.</p>
 <div class="sourceCode" id="cb304"><pre class="downlit sourceCode r">
@@ -159,9 +163,9 @@
 <span><span class="va">y1</span> <span class="op">&lt;-</span> <span class="va">USArrestsMatrix</span><span class="op">[</span>,<span class="fl">3</span><span class="op">]</span> <span class="co">## Urban Population</span></span>
 <span><span class="va">z1</span> <span class="op">&lt;-</span> <span class="va">USArrestsMatrix</span><span class="op">[</span>,<span class="fl">4</span><span class="op">]</span> <span class="co">## Rape</span></span></code></pre></div>
 </div>
-<div id="generate-3d-scatter-plot" class="section level3" number="32.2.3">
+<div id="generate-3d-scatter-plot" class="section level3" number="30.2.3">
 <h3>
-<span class="header-section-number">32.2.3</span> Generate 3d scatter plot<a class="anchor" aria-label="anchor" href="#generate-3d-scatter-plot"><i class="fas fa-link"></i></a>
+<span class="header-section-number">30.2.3</span> Generate 3d scatter plot<a class="anchor" aria-label="anchor" href="#generate-3d-scatter-plot"><i class="fas fa-link"></i></a>
 </h3>
 <p>Creating a graph using scatterplot3d. “highlight” gives a color scale that enables users to understand the relative position of each data point. “pch” specifies a plotting shape, here we set pch = 16, which is a small dot.</p>
 <div class="sourceCode" id="cb305"><pre class="downlit sourceCode r">
@@ -189,9 +193,9 @@
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/text.html">text</a></span><span class="op">(</span><span class="va">sp3</span><span class="op">$</span><span class="fu">xyz.convert</span><span class="op">(</span><span class="va">USArrests</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span>,labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">USArrests</span><span class="op">)</span>, cex <span class="op">=</span> <span class="fl">0.5</span>, color <span class="op">=</span> <span class="st">'pink'</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="3d_visualization_in_r_files/figure-html/unnamed-chunk-6-1.png" width="80%" style="display: block; margin: auto;"></div>
 </div>
-<div id="d-scatter-plot-with-x-y-plane-position" class="section level3" number="32.2.4">
+<div id="d-scatter-plot-with-x-y-plane-position" class="section level3" number="30.2.4">
 <h3>
-<span class="header-section-number">32.2.4</span> 3D scatter plot with x-y plane position<a class="anchor" aria-label="anchor" href="#d-scatter-plot-with-x-y-plane-position"><i class="fas fa-link"></i></a>
+<span class="header-section-number">30.2.4</span> 3D scatter plot with x-y plane position<a class="anchor" aria-label="anchor" href="#d-scatter-plot-with-x-y-plane-position"><i class="fas fa-link"></i></a>
 </h3>
 <p>Use the “Type = ‘h’” to create vertical lines between each data point and the x-y plane.</p>
 <div class="sourceCode" id="cb308"><pre class="downlit sourceCode r">
@@ -203,15 +207,15 @@
 <div class="inline-figure"><img src="3d_visualization_in_r_files/figure-html/unnamed-chunk-7-1.png" width="80%" style="display: block; margin: auto;"></div>
 </div>
 </div>
-<div id="d-plot-and-pca" class="section level2" number="32.3">
+<div id="d-plot-and-pca" class="section level2" number="30.3">
 <h2>
-<span class="header-section-number">32.3</span> 3D plot and PCA<a class="anchor" aria-label="anchor" href="#d-plot-and-pca"><i class="fas fa-link"></i></a>
+<span class="header-section-number">30.3</span> 3D plot and PCA<a class="anchor" aria-label="anchor" href="#d-plot-and-pca"><i class="fas fa-link"></i></a>
 </h2>
 <p>In data science, 3D plot can also be used for machine learning steps. For example, by plotting principal components in a 3D space, we could efficiently observe the interaction between the important vectors of an input data.</p>
 <p>We use the preloaded data “Glass” to perform the principal component analysis and 3D visualization of components.</p>
-<div id="load-package-mlbench-and-use-the-glass-dataset." class="section level3" number="32.3.1">
+<div id="load-package-mlbench-and-use-the-glass-dataset." class="section level3" number="30.3.1">
 <h3>
-<span class="header-section-number">32.3.1</span> Load Package “mlbench” and use the Glass dataset.<a class="anchor" aria-label="anchor" href="#load-package-mlbench-and-use-the-glass-dataset."><i class="fas fa-link"></i></a>
+<span class="header-section-number">30.3.1</span> Load Package “mlbench” and use the Glass dataset.<a class="anchor" aria-label="anchor" href="#load-package-mlbench-and-use-the-glass-dataset."><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb309"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">Glass</span><span class="op">)</span></span>
@@ -224,9 +228,9 @@
 ## 5 1.51742 13.27 3.62 1.24 73.08 0.55 8.07  0 0.00    1
 ## 6 1.51596 12.79 3.61 1.62 72.97 0.64 8.07  0 0.26    1</code></pre>
 </div>
-<div id="data-cleaning" class="section level3" number="32.3.2">
+<div id="data-cleaning" class="section level3" number="30.3.2">
 <h3>
-<span class="header-section-number">32.3.2</span> Data Cleaning<a class="anchor" aria-label="anchor" href="#data-cleaning"><i class="fas fa-link"></i></a>
+<span class="header-section-number">30.3.2</span> Data Cleaning<a class="anchor" aria-label="anchor" href="#data-cleaning"><i class="fas fa-link"></i></a>
 </h3>
 <p>Perform PCA on the dataset and convert the pca result into a dataframe. Here we plot three components of the PCA results.Specify three colors for them.”shape” specifies three different shapes for each component.</p>
 <div class="sourceCode" id="cb311"><pre class="downlit sourceCode r">
@@ -261,9 +265,9 @@
 <div class="sourceCode" id="cb317"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pca.result</span><span class="op">$</span><span class="va">Type</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">Glass</span><span class="op">$</span><span class="va">Type</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="define-color-and-shape-parameter." class="section level3" number="32.3.3">
+<div id="define-color-and-shape-parameter." class="section level3" number="30.3.3">
 <h3>
-<span class="header-section-number">32.3.3</span> Define color and shape parameter.<a class="anchor" aria-label="anchor" href="#define-color-and-shape-parameter."><i class="fas fa-link"></i></a>
+<span class="header-section-number">30.3.3</span> Define color and shape parameter.<a class="anchor" aria-label="anchor" href="#define-color-and-shape-parameter."><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb318"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## choose 6 colors for 6 glass types</span></span>
@@ -273,9 +277,9 @@
 <span><span class="va">shape</span><span class="op">&lt;-</span><span class="fl">10</span><span class="op">:</span><span class="fl">15</span></span>
 <span><span class="va">shape</span><span class="op">&lt;-</span><span class="va">shape</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">pca.result</span><span class="op">$</span><span class="va">Type</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
 </div>
-<div id="generate-graph" class="section level3" number="32.3.4">
+<div id="generate-graph" class="section level3" number="30.3.4">
 <h3>
-<span class="header-section-number">32.3.4</span> Generate graph<a class="anchor" aria-label="anchor" href="#generate-graph"><i class="fas fa-link"></i></a>
+<span class="header-section-number">30.3.4</span> Generate graph<a class="anchor" aria-label="anchor" href="#generate-graph"><i class="fas fa-link"></i></a>
 </h3>
 <p>Plot the result of our PCA analysis following the step in the previous part. Adjust angle for best visualization. Below is an example of how a 3D plot can help us see the contribution of each component in classifying types of glass.</p>
 <div class="sourceCode" id="cb319"><pre class="downlit sourceCode r">
@@ -291,9 +295,9 @@
 <div class="inline-figure"><img src="3d_visualization_in_r_files/figure-html/unnamed-chunk-11-1.png" width="80%" style="display: block; margin: auto;"></div>
 </div>
 </div>
-<div id="other-usage-of-the-scatterplot3d-function" class="section level2" number="32.4">
+<div id="other-usage-of-the-scatterplot3d-function" class="section level2" number="30.4">
 <h2>
-<span class="header-section-number">32.4</span> Other usage of the scatterplot3d function<a class="anchor" aria-label="anchor" href="#other-usage-of-the-scatterplot3d-function"><i class="fas fa-link"></i></a>
+<span class="header-section-number">30.4</span> Other usage of the scatterplot3d function<a class="anchor" aria-label="anchor" href="#other-usage-of-the-scatterplot3d-function"><i class="fas fa-link"></i></a>
 </h2>
 <p>Sometimes it is hard to imagine the relationship between two functions or graph, by plotting them on a 3D space, we could visualize the interaction on a dynamic environment.</p>
 <p>Here is a simple example of how we could graph the interaction of cos and sin function.</p>
@@ -304,9 +308,9 @@
 <span><span class="fu">scatterplot3d</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, <span class="va">z</span>, highlight.3d<span class="op">=</span><span class="cn">TRUE</span>, col.axis <span class="op">=</span><span class="st">"blue"</span>,col.grid <span class="op">=</span><span class="st">"lightblue"</span>, main<span class="op">=</span><span class="st">"an example of cosine and sine interaction"</span>, pch<span class="op">=</span><span class="fl">20</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="3d_visualization_in_r_files/figure-html/unnamed-chunk-12-1.png" width="80%" style="display: block; margin: auto;"></div>
 </div>
-<div id="d-histogram" class="section level2" number="32.5">
+<div id="d-histogram" class="section level2" number="30.5">
 <h2>
-<span class="header-section-number">32.5</span> 3D Histogram<a class="anchor" aria-label="anchor" href="#d-histogram"><i class="fas fa-link"></i></a>
+<span class="header-section-number">30.5</span> 3D Histogram<a class="anchor" aria-label="anchor" href="#d-histogram"><i class="fas fa-link"></i></a>
 </h2>
 <p>If we were to generate a histogram in 3d, we can use the plot 3D package. We first initiate the x-axis and the y-axis. Then, we need to create z as matrix that has the dimension |x| * |y|. We can then use hist3D function in the package to help us generate the 3D histogram that we need.</p>
 <div class="sourceCode" id="cb321"><pre class="downlit sourceCode r">
@@ -317,13 +321,13 @@
 <span><span class="fu">hist3D</span><span class="op">(</span>z<span class="op">=</span><span class="va">mat1</span>, x <span class="op">=</span> <span class="va">x</span>, y<span class="op">=</span> <span class="va">y</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="3d_visualization_in_r_files/figure-html/unnamed-chunk-13-1.png" width="80%" style="display: block; margin: auto;"></div>
 </div>
-<div id="d-scatter-plot-using-plotly" class="section level2" number="32.6">
+<div id="d-scatter-plot-using-plotly" class="section level2" number="30.6">
 <h2>
-<span class="header-section-number">32.6</span> 3D scatter plot using plotly<a class="anchor" aria-label="anchor" href="#d-scatter-plot-using-plotly"><i class="fas fa-link"></i></a>
+<span class="header-section-number">30.6</span> 3D scatter plot using plotly<a class="anchor" aria-label="anchor" href="#d-scatter-plot-using-plotly"><i class="fas fa-link"></i></a>
 </h2>
-<div id="demo-data" class="section level3" number="32.6.1">
+<div id="demo-data" class="section level3" number="30.6.1">
 <h3>
-<span class="header-section-number">32.6.1</span> Demo Data<a class="anchor" aria-label="anchor" href="#demo-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">30.6.1</span> Demo Data<a class="anchor" aria-label="anchor" href="#demo-data"><i class="fas fa-link"></i></a>
 </h3>
 <p>In order to better demonstrate the different features of plotly 3D Scatterplot, we selected a sample data which includes 40 observations on household expenditure for single men and women. There are 5 variables for each observation:</p>
 <p>Housing: money(usd) spent on housing</p>
@@ -375,9 +379,9 @@
 ## 39    1199 1095   261     344   male
 ## 40    1524  964  1739    1410   male</code></pre>
 </div>
-<div id="the-classic-3d-scatterplot" class="section level3" number="32.6.2">
+<div id="the-classic-3d-scatterplot" class="section level3" number="30.6.2">
 <h3>
-<span class="header-section-number">32.6.2</span> The classic 3D Scatterplot<a class="anchor" aria-label="anchor" href="#the-classic-3d-scatterplot"><i class="fas fa-link"></i></a>
+<span class="header-section-number">30.6.2</span> The classic 3D Scatterplot<a class="anchor" aria-label="anchor" href="#the-classic-3d-scatterplot"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb324"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fig</span> <span class="op">&lt;-</span> <span class="fu">plot_ly</span><span class="op">(</span><span class="va">household</span>, x <span class="op">=</span> <span class="op">~</span><span class="va">housing</span>, y <span class="op">=</span> <span class="op">~</span><span class="va">food</span>, z <span class="op">=</span> <span class="op">~</span><span class="va">goods</span> <span class="op">+</span> <span class="va">service</span><span class="op">)</span></span>
@@ -388,9 +392,9 @@
 <div id="htmlwidget-89087dc6b652a3434340" style="width:80%;height:480px;" class="plotly html-widget"></div>
 <script type="application/json" data-for="htmlwidget-89087dc6b652a3434340">{"x":{"visdat":{"3e616c0ba4de":["function () ","plotlyVisDat"]},"cur_data":"3e616c0ba4de","attrs":{"3e616c0ba4de":{"x":{},"y":{},"z":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20]}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"xaxis":{"title":"housing"},"yaxis":{"title":"food"},"zaxis":{"title":"goods and services"}},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[820,184,921,488,721,614,801,396,864,845,404,781,457,1029,1047,552,718,495,382,1090,497,839,798,892,1585,755,388,617,248,1641,1180,619,253,661,1981,1746,1865,238,1199,1524],"y":[114,74,66,80,83,55,56,59,65,64,97,47,103,71,90,91,104,114,77,59,591,942,1308,842,781,764,655,879,438,440,1243,684,422,739,869,746,915,522,1095,964],"z":[337,26,2141,218,280,634,571,141,1970,2349,80,2358,244,433,951,343,887,139,377,490,444,667,1252,682,4216,866,386,1476,87,8534,1581,303,63,259,2521,4256,6951,104,605,3149],"type":"scatter3d","mode":"markers","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
-<div id="adding-colors-to-3d-scatterplot" class="section level3" number="32.6.3">
+<div id="adding-colors-to-3d-scatterplot" class="section level3" number="30.6.3">
 <h3>
-<span class="header-section-number">32.6.3</span> Adding colors to 3D Scatterplot<a class="anchor" aria-label="anchor" href="#adding-colors-to-3d-scatterplot"><i class="fas fa-link"></i></a>
+<span class="header-section-number">30.6.3</span> Adding colors to 3D Scatterplot<a class="anchor" aria-label="anchor" href="#adding-colors-to-3d-scatterplot"><i class="fas fa-link"></i></a>
 </h3>
 <p>In order differentiate the observations of opposite genders, we will need to add colors to our 3D scatter plot. It is done as followed:</p>
 <div class="sourceCode" id="cb325"><pre class="downlit sourceCode r">
@@ -404,9 +408,9 @@
 <div id="htmlwidget-2f48a94652080ed3d729" style="width:80%;height:480px;" class="plotly html-widget"></div>
 <script type="application/json" data-for="htmlwidget-2f48a94652080ed3d729">{"x":{"visdat":{"3e61a2a4980":["function () ","plotlyVisDat"]},"cur_data":"3e61a2a4980","attrs":{"3e61a2a4980":{"x":{},"y":{},"z":{},"color":{},"colors":["#17becf","#d62728"],"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter3d","mode":"markers","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"xaxis":{"title":"housing"},"yaxis":{"title":"food"},"zaxis":{"title":"goods and services"}},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[820,184,921,488,721,614,801,396,864,845,404,781,457,1029,1047,552,718,495,382,1090],"y":[114,74,66,80,83,55,56,59,65,64,97,47,103,71,90,91,104,114,77,59],"z":[337,26,2141,218,280,634,571,141,1970,2349,80,2358,244,433,951,343,887,139,377,490],"type":"scatter3d","mode":"markers","name":"female","marker":{"color":"rgba(23,190,207,1)","line":{"color":"rgba(23,190,207,1)"}},"textfont":{"color":"rgba(23,190,207,1)"},"error_y":{"color":"rgba(23,190,207,1)"},"error_x":{"color":"rgba(23,190,207,1)"},"line":{"color":"rgba(23,190,207,1)"},"frame":null},{"x":[497,839,798,892,1585,755,388,617,248,1641,1180,619,253,661,1981,1746,1865,238,1199,1524],"y":[591,942,1308,842,781,764,655,879,438,440,1243,684,422,739,869,746,915,522,1095,964],"z":[444,667,1252,682,4216,866,386,1476,87,8534,1581,303,63,259,2521,4256,6951,104,605,3149],"type":"scatter3d","mode":"markers","name":"male","marker":{"color":"rgba(214,39,40,1)","line":{"color":"rgba(214,39,40,1)"}},"textfont":{"color":"rgba(214,39,40,1)"},"error_y":{"color":"rgba(214,39,40,1)"},"error_x":{"color":"rgba(214,39,40,1)"},"line":{"color":"rgba(214,39,40,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
-<div id="adding-sizes-to-3d-scatterplot" class="section level3" number="32.6.4">
+<div id="adding-sizes-to-3d-scatterplot" class="section level3" number="30.6.4">
 <h3>
-<span class="header-section-number">32.6.4</span> Adding sizes to 3D Scatterplot<a class="anchor" aria-label="anchor" href="#adding-sizes-to-3d-scatterplot"><i class="fas fa-link"></i></a>
+<span class="header-section-number">30.6.4</span> Adding sizes to 3D Scatterplot<a class="anchor" aria-label="anchor" href="#adding-sizes-to-3d-scatterplot"><i class="fas fa-link"></i></a>
 </h3>
 <p>It is interesting to note that size is available as a fifth parameter if it helps us plot our findings. In our example, we used size to plot the overall expenditure of the household. It help us visualize the overall trend better.</p>
 <div class="sourceCode" id="cb326"><pre class="downlit sourceCode r">
@@ -421,15 +425,15 @@
 <script type="application/json" data-for="htmlwidget-0f4e2257d1613a8018d1">{"x":{"visdat":{"3e61490edcdb":["function () ","plotlyVisDat"]},"cur_data":"3e61490edcdb","attrs":{"3e61490edcdb":{"x":{},"y":{},"z":{},"color":{},"size":{},"colors":["#2ca02c","#8c564b"],"alpha_stroke":1,"sizes":[500,5000],"spans":[1,20],"type":"scatter3d","mode":"markers","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"xaxis":{"title":"housing"},"yaxis":{"title":"food"},"zaxis":{"title":"goods and services"}},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[820,184,921,488,721,614,801,396,864,845,404,781,457,1029,1047,552,718,495,382,1090],"y":[114,74,66,80,83,55,56,59,65,64,97,47,103,71,90,91,104,114,77,59],"z":[337,26,2141,218,280,634,571,141,1970,2349,80,2358,244,433,951,343,887,139,377,490],"type":"scatter3d","mode":"markers","name":"female","marker":{"color":"rgba(44,160,44,1)","size":[929.919659277901,500,1738.79585712903,718.662278579034,848.46578259607,943.858290581744,998.30606911238,635.901655212467,1639.0475268609,1795.42154680089,629.367921788791,1764.05962636724,726.502758687446,1044.04220307811,1285.79033975414,805.778724228051,1120.70467524925,702.110153905721,740.441389991288,1090.21391927209],"sizemode":"area","line":{"color":"rgba(44,160,44,1)"}},"textfont":{"color":"rgba(44,160,44,1)","size":[929.919659277901,500,1738.79585712903,718.662278579034,848.46578259607,943.858290581744,998.30606911238,635.901655212467,1639.0475268609,1795.42154680089,629.367921788791,1764.05962636724,726.502758687446,1044.04220307811,1285.79033975414,805.778724228051,1120.70467524925,702.110153905721,740.441389991288,1090.21391927209]},"error_y":{"color":"rgba(44,160,44,1)","width":[]},"error_x":{"color":"rgba(44,160,44,1)","width":[]},"line":{"color":"rgba(44,160,44,1)"},"frame":null},{"x":[497,839,798,892,1585,755,388,617,248,1641,1180,619,253,661,1981,1746,1865,238,1199,1524],"y":[591,942,1308,842,781,764,655,879,438,440,1243,684,422,739,869,746,915,522,1095,964],"z":[444,667,1252,682,4216,866,386,1476,87,8534,1581,303,63,259,2521,4256,6951,104,605,3149],"type":"scatter3d","mode":"markers","name":"male","marker":{"color":"rgba(140,86,75,1)","size":[1043.60662084987,1442.59994192237,1838.9797696254,1428.66131061853,3243.29687348756,1415.15826154293,998.741651340625,1670.8450295228,712.999709611848,5000,2120.36588907173,1075.83970574001,697.75433162327,1098.925563837,2715.80679508276,3315.60352337625,4614.94531023134,752.637692382151,1639.0475268609,2831.67166779595],"sizemode":"area","line":{"color":"rgba(140,86,75,1)"}},"textfont":{"color":"rgba(140,86,75,1)","size":[1043.60662084987,1442.59994192237,1838.9797696254,1428.66131061853,3243.29687348756,1415.15826154293,998.741651340625,1670.8450295228,712.999709611848,5000,2120.36588907173,1075.83970574001,697.75433162327,1098.925563837,2715.80679508276,3315.60352337625,4614.94531023134,752.637692382151,1639.0475268609,2831.67166779595]},"error_y":{"color":"rgba(140,86,75,1)","width":[]},"error_x":{"color":"rgba(140,86,75,1)","width":[]},"line":{"color":"rgba(140,86,75,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
-<div id="conclusion-4" class="section level2" number="32.7">
+<div id="conclusion-4" class="section level2" number="30.7">
 <h2>
-<span class="header-section-number">32.7</span> Conclusion<a class="anchor" aria-label="anchor" href="#conclusion-4"><i class="fas fa-link"></i></a>
+<span class="header-section-number">30.7</span> Conclusion<a class="anchor" aria-label="anchor" href="#conclusion-4"><i class="fas fa-link"></i></a>
 </h2>
 <p>In our tutorial, we have introduced scatterplot3d, plot3d, and also plotly. They each have their respective advantages. If you need a more interactive graph that allows zooming in and rotating, plotly would be your better choice. However, if you were to perform principal component analysis and better visualize your results, it would be easier to use scatterplot3d.</p>
 </div>
-<div id="works-cited" class="section level2" number="32.8">
+<div id="works-cited" class="section level2" number="30.8">
 <h2>
-<span class="header-section-number">32.8</span> Works Cited<a class="anchor" aria-label="anchor" href="#works-cited"><i class="fas fa-link"></i></a>
+<span class="header-section-number">30.8</span> Works Cited<a class="anchor" aria-label="anchor" href="#works-cited"><i class="fas fa-link"></i></a>
 </h2>
 <p>Ligges, Uwe, and Martin Mächler. “Scatterplot3d - an R Package for Visualizing Multivariate Data.” Journal of Statistical Software, vol. 8, no. 11, Foundation for Open Access Statistic, 2003, <a href="https://doi.org/10.18637/jss.v008.i11" class="uri">https://doi.org/10.18637/jss.v008.i11</a>.</p>
 <p><a href="http://www.sthda.com/english/wiki/scatterplot3d-3d-graphics-r-software-and-data-visualization" class="uri">http://www.sthda.com/english/wiki/scatterplot3d-3d-graphics-r-software-and-data-visualization</a></p>
@@ -441,41 +445,41 @@
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="data-explorer-tutorial-and-automation.html"><span class="header-section-number">31</span> Data Explorer Tutorial and Automation</a></div>
-<div class="next"><a href="visualizing-time-series-data.html"><span class="header-section-number">33</span> Visualizing Time Series Data</a></div>
+<div class="prev"><a href="data-explorer-tutorial-and-automation.html"><span class="header-section-number">29</span> Data Explorer Tutorial and Automation</a></div>
+<div class="next"><a href="visualizing-time-series-data.html"><span class="header-section-number">31</span> Visualizing Time Series Data</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#d-visualization-in-r"><span class="header-section-number">32</span> 3D Visualization in R</a></li>
-<li><a class="nav-link" href="#motivation-4"><span class="header-section-number">32.1</span> Motivation</a></li>
+<li><a class="nav-link" href="#d-visualization-in-r"><span class="header-section-number">30</span> 3D Visualization in R</a></li>
+<li><a class="nav-link" href="#motivation-4"><span class="header-section-number">30.1</span> Motivation</a></li>
 <li>
-<a class="nav-link" href="#scatterplot3d"><span class="header-section-number">32.2</span> Scatterplot3D</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#load-data"><span class="header-section-number">32.2.1</span> Load Data</a></li>
-<li><a class="nav-link" href="#create-matrix"><span class="header-section-number">32.2.2</span> Create matrix</a></li>
-<li><a class="nav-link" href="#generate-3d-scatter-plot"><span class="header-section-number">32.2.3</span> Generate 3d scatter plot</a></li>
-<li><a class="nav-link" href="#d-scatter-plot-with-x-y-plane-position"><span class="header-section-number">32.2.4</span> 3D scatter plot with x-y plane position</a></li>
+<a class="nav-link" href="#scatterplot3d"><span class="header-section-number">30.2</span> Scatterplot3D</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#load-data"><span class="header-section-number">30.2.1</span> Load Data</a></li>
+<li><a class="nav-link" href="#create-matrix"><span class="header-section-number">30.2.2</span> Create matrix</a></li>
+<li><a class="nav-link" href="#generate-3d-scatter-plot"><span class="header-section-number">30.2.3</span> Generate 3d scatter plot</a></li>
+<li><a class="nav-link" href="#d-scatter-plot-with-x-y-plane-position"><span class="header-section-number">30.2.4</span> 3D scatter plot with x-y plane position</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#d-plot-and-pca"><span class="header-section-number">32.3</span> 3D plot and PCA</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#load-package-mlbench-and-use-the-glass-dataset."><span class="header-section-number">32.3.1</span> Load Package “mlbench” and use the Glass dataset.</a></li>
-<li><a class="nav-link" href="#data-cleaning"><span class="header-section-number">32.3.2</span> Data Cleaning</a></li>
-<li><a class="nav-link" href="#define-color-and-shape-parameter."><span class="header-section-number">32.3.3</span> Define color and shape parameter.</a></li>
-<li><a class="nav-link" href="#generate-graph"><span class="header-section-number">32.3.4</span> Generate graph</a></li>
+<a class="nav-link" href="#d-plot-and-pca"><span class="header-section-number">30.3</span> 3D plot and PCA</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#load-package-mlbench-and-use-the-glass-dataset."><span class="header-section-number">30.3.1</span> Load Package “mlbench” and use the Glass dataset.</a></li>
+<li><a class="nav-link" href="#data-cleaning"><span class="header-section-number">30.3.2</span> Data Cleaning</a></li>
+<li><a class="nav-link" href="#define-color-and-shape-parameter."><span class="header-section-number">30.3.3</span> Define color and shape parameter.</a></li>
+<li><a class="nav-link" href="#generate-graph"><span class="header-section-number">30.3.4</span> Generate graph</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#other-usage-of-the-scatterplot3d-function"><span class="header-section-number">32.4</span> Other usage of the scatterplot3d function</a></li>
-<li><a class="nav-link" href="#d-histogram"><span class="header-section-number">32.5</span> 3D Histogram</a></li>
+<li><a class="nav-link" href="#other-usage-of-the-scatterplot3d-function"><span class="header-section-number">30.4</span> Other usage of the scatterplot3d function</a></li>
+<li><a class="nav-link" href="#d-histogram"><span class="header-section-number">30.5</span> 3D Histogram</a></li>
 <li>
-<a class="nav-link" href="#d-scatter-plot-using-plotly"><span class="header-section-number">32.6</span> 3D scatter plot using plotly</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#demo-data"><span class="header-section-number">32.6.1</span> Demo Data</a></li>
-<li><a class="nav-link" href="#the-classic-3d-scatterplot"><span class="header-section-number">32.6.2</span> The classic 3D Scatterplot</a></li>
-<li><a class="nav-link" href="#adding-colors-to-3d-scatterplot"><span class="header-section-number">32.6.3</span> Adding colors to 3D Scatterplot</a></li>
-<li><a class="nav-link" href="#adding-sizes-to-3d-scatterplot"><span class="header-section-number">32.6.4</span> Adding sizes to 3D Scatterplot</a></li>
+<a class="nav-link" href="#d-scatter-plot-using-plotly"><span class="header-section-number">30.6</span> 3D scatter plot using plotly</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#demo-data"><span class="header-section-number">30.6.1</span> Demo Data</a></li>
+<li><a class="nav-link" href="#the-classic-3d-scatterplot"><span class="header-section-number">30.6.2</span> The classic 3D Scatterplot</a></li>
+<li><a class="nav-link" href="#adding-colors-to-3d-scatterplot"><span class="header-section-number">30.6.3</span> Adding colors to 3D Scatterplot</a></li>
+<li><a class="nav-link" href="#adding-sizes-to-3d-scatterplot"><span class="header-section-number">30.6.4</span> Adding sizes to 3D Scatterplot</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#conclusion-4"><span class="header-section-number">32.7</span> Conclusion</a></li>
-<li><a class="nav-link" href="#works-cited"><span class="header-section-number">32.8</span> Works Cited</a></li>
+<li><a class="nav-link" href="#conclusion-4"><span class="header-section-number">30.7</span> Conclusion</a></li>
+<li><a class="nav-link" href="#works-cited"><span class="header-section-number">30.8</span> Works Cited</a></li>
 </ul>
 
       <div class="book-extra">
@@ -493,7 +497,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Community Contributions for EDAV Fall 2022 Tues/Thurs</strong>" was written by . It was last built on 2022-11-17.</p>
+    <p>"<strong>Community Contributions for EDAV Fall 2022 Tues/Thurs</strong>" was written by . It was last built on 2022-11-18.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
