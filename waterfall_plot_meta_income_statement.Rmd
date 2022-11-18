@@ -35,7 +35,8 @@ META Quarterly Earnings reports: <https://investor.fb.com/financials/default.asp
 
 ## downlaod the Q3-2022 META's Income Statement from the above link
 ## read the Excel file
-META_IS <- read_excel('Downloadable-PL-Q3-2022.xlsx')
+
+META_IS <- read_excel('resources/waterfall_plot_meta_income_statement/Downloadable-PL-Q3-2022.xlsx')
 
 ## select relevant revenue lines for the waterfall chart
 META_summary <- META_IS[c(10,11,12,13,40,41,43),]
@@ -60,7 +61,7 @@ colnames(META_summary) <- c('Breakdown','Q3-2020', 'Q4-2020', 'Q1-2021', 'Q2-202
 -   The order of the records on the label field will be the order on the graph. If that order is not desirable, you need to change the order of the records.
 
 ```{r echo = F}
-META <- read.csv('META_income_statement.csv')
+META <- read.csv('resources/waterfall_plot_meta_income_statement/META_income_statement.csv')
 colnames(META)[2] = 'Q3-2021'
 colnames(META)[3] = 'Q3-2022'
 META_cond <- META[c(1:7),]
@@ -97,7 +98,7 @@ waterfall(
   scale_y_continuous(labels = dollar)
 ```
 ```{r echo = F}
-META_QoQ <- read.csv('META_quarter_to_quarter.csv')
+META_QoQ <- read.csv('resources/waterfall_plot_meta_income_statement/META_quarter_to_quarter.csv')
 META_QoQ$Amount<- as.numeric(gsub(",", "", META_QoQ$Amount))
 ```
 
