@@ -62,6 +62,7 @@ rmd_files: [
   'short_causal_inference_tutorial.Rmd',
   'network_analysis.Rmd',
   # 'sentiment_analysis_tutorial.Rmd',
+  'Interactive_3D_Vis.Rmd',
   
   # Part: Interview Prep
   'ten_interview_questions.Rmd',
