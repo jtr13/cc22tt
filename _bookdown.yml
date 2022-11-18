@@ -60,6 +60,7 @@ rmd_files: [
   'time_series_visualization_with_r.Rmd',
   'twitter_scrape_nlp.Rmd',
   'short_causal_inference_tutorial.Rmd',
+  'network_analysis.Rmd',
   # 'sentiment_analysis_tutorial.Rmd',
   
   # Part: Interview Prep
