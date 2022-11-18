@@ -1,0 +1,174 @@
+# What you see is what you understand: learning data science visually
+
+Rohan Poddar
+
+*"Visualization is the process of making an external spatial representation of information. Visualizing is a useful strategy for discovering structure and organizing information efficiently"* (Schwartz, Tsang, & Blair, 2016, p. 277)
+
+Data Science consists of a lot of abstract concepts like Linear Algebra, Probability and Statistics, and Machine Learning. I believe a great way to develop a strong understanding and intuition of these concepts is by learning through interactive visualizations. I have curated a list of resources that cover some of the important topics in a visually interactive way.
+
+------------------------------------------------------------------------
+
+## Programming
+
+### 1. Python Tutor
+
+Link: <https://pythontutor.com/>
+
+Writing code is very abstract and become difficult to follow as the length and complexity of the code increases. Python Tutor helps learn Python, JavaScript, C, C++, and Java programming by visualizing code execution.
+
+![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%201.14.10%20PM.png)
+
+### 2. Pandas Tutor
+
+Link: <https://pandastutor.com/>
+
+Transforming and manipulating Pandas data frames are the backbone of every Data Science project. However, manipulating data frames can become very complex to hard to follow. Using bulky print statements and copy-pasting snippets of the code to see what is happening can get cumbersome. Pandas Tutor lets you write code directly in the browser and helps visualize the data transformation step-by-step.
+
+![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%201.02.06%20PM.png) ![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%201.01.36%20PM.png){width="48%"}
+
+### 3. TidyData Tutor
+
+Link: <https://tidydatatutor.com/>
+
+Similar to Pandas Tutor, Tidy Data Tutor lets you write R code in the browser and helps visualize how the data frame changes at each step of a data analysis pipeline.
+
+![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%201.06.26%20PM.png){width="48%"} ![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%201.06.59%20PM.png){width="48%"}
+
+------------------------------------------------------------------------
+
+## Probability and Statistics
+
+### 1. Seeing Theory
+
+Link: <https://seeing-theory.brown.edu/>
+
+Seeing Theory was created by an undergraduate student at Brown University with the aim of making statistics more accessible through interactive visualizations. Seeing theory breaks down statistical concepts into 6 chapters:
+
+1.  **Basic Probability** - An introduction to the basic concepts of probability theory.\
+    *Chance Events, Expectation and Variance*
+
+    ![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%2012.36.48%20PM.png){width="48%"} ![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%2012.37.09%20PM.png){width="48%"}
+
+2.  **Compound Probability** - Further discusses concepts that lie at the core of probability theory.\
+    *Set Theory, Counting, Conditional Probability*
+
+    ![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%2012.37.53%20PM.png){width="48%"} ![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%2012.38.27%20PM.png){width="48%"}
+
+3.  **Probability Distributions** - Specifies the relative likelihoods of all possible outcomes.\
+    *Random Variables, Discrete and Continuous, Central Limit Theorem*
+
+    ![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%2012.39.08%20PM.png){width="48%"} ![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%2012.39.55%20PM.png){width="48%"}
+
+4.  **Frequentist Inference** - The process of determining properties of an underlying distribution via the observation of data. *Point Estimation, Interval Estimation, The Bootstrap*
+
+    ![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%2012.40.23%20PM.png){width="48%"} ![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%2012.41.17%20PM.png){width="48%"}
+
+5.  **Bayesian Inference** - Techniques specifying how one should update one's beliefs upon observing data. *Bayes' Theorem, Likelihood, Prior to Posterior*
+
+    ![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%2012.41.58%20PM.png){width="48%"} ![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%2012.42.58%20PM.png){width="48%"}
+
+6.  **Regression Analysis** - An approach for modeling the linear relationship between two variables.\
+    *Ordinary Least Squares, Correlation, Analysis of Variance*
+
+    ![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%2012.43.40%20PM.png){width="48%"} ![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%2012.44.02%20PM.png){width="48%"}
+
+------------------------------------------------------------------------
+
+## Linear Algebra
+
+### 1. Immersive Linear Algebra
+
+Link: <http://immersivemath.com/ila/index.html>
+
+Linear Algebra is another important area of Data Science that is very abstract which makes it hard to understand at times. Immersive Linear Algebra uses interactive figures to explain and simplify the different concepts.
+
+![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%205.34.02%20PM.png){width="48%"} ![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%205.32.10%20PM.png){width="48%"}
+
+------------------------------------------------------------------------
+
+## Machine Learning
+
+### 1. R2D3
+
+Link: <http://www.r2d3.us/>
+
+R2D3 describes itself as "an experiment in expressing statistical thinking with interactive design". The website visually introduces Machine Learning by visualizing the steps of understanding the data, creating and tuning a model that helps distinguish homes in New York from homes in San Francisco. It is broken down into 2 parts:
+
+1.  **A visual introduction to machine learning**\
+    (<http://www.r2d3.us/visual-intro-to-machine-learning-part-1/>)
+
+    ![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%2012.00.00%20AM.png){width="48%"} ![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%2012.00.39%20AM.png){width="48%"}
+
+2.  **Model Tuning and the Bias-Variance Tradeoff\
+    **(<http://www.r2d3.us/visual-intro-to-machine-learning-part-2/>)
+
+    ![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%2012.05.13%20AM.png){width="48%"} ![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%2012.05.30%20AM.png){width="48%"}
+
+R2D3 also has a miscellaneous visualization piece on COVID-19.
+
+1.  **Making sense of COVID19 through simulations\
+    **(<http://www.r2d3.us/covid-19/>)
+
+    ![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%2012.12.14%20AM.png){width="48%"} ![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%2012.12.32%20AM.png){width="48%"}
+
+### 2. ConvNetJS
+
+Link: <https://cs.stanford.edu/people/karpathy/convnetjs/index.html>
+
+ConvNetJS is a Javascript library for training Deep Learning models (Neural Networks) entirely in your browser. It has an additional functionality of visualizing the models and the outputs at various layers. It's a great resource to explore some frequently used data sets and models.
+
+![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.02.01%20PM.png){width="48%"} ![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.02.21%20PM.png){width="48%"}
+
+### 3. AI Notes by DeepLearning.AI
+
+Link: <https://www.deeplearning.ai/ai-notes/index.html>
+
+AI Notes is a series of long-form tutorials with interactive visualizations that help build intuition about foundational deep learning concepts. It is broken down into 2 parts:
+
+1.  **Initializing neural networks**
+
+    ![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.07.30%20PM.png){width="48%"} ![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.08.01%20PM.png){width="48%"}
+
+2.  **Parameter optimization in neural networks**
+
+    ![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.08.38%20PM.png){width="48%"} ![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.09.07%20PM.png){width="48%"}
+
+### 4. OpenAI Microscope
+
+Link: <https://microscope.openai.com/models>
+
+OpenAI Microscope is a collection of visualizations of every significant layer and neuron of several common "model organisms" which are often studied in interpretability. Microscope makes it easier to analyze the features that form inside these neural networks, and move towards understanding these complicated systems.
+
+![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.18.31%20PM.png){width="48%"} ![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.19.25%20PM.png){width="48%"}
+
+### 5. MLU-Explain
+
+Link: <https://mlu-explain.github.io/>
+
+MLU-Explain exists to teach important machine learning concepts through visual essays in a fun, informative, and accessible manner.
+
+It includes topics like: Cross-Validation, Linear and Logistic Regression, ROC & AUC, Train, test and validation sets, Precision & Recall, Decision Trees & Random Forests, etc.
+
+![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.22.35%20PM.png){width="48%"} ![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.23.00%20PM.png){width="48%"}
+
+------------------------------------------------------------------------
+
+## Journals and Publications
+
+### 1. Distill
+
+Link: <https://distill.pub/>
+
+Distill is a scientific journal that operated between 2016 and 2021. However, most of the research papers and articles on the website are very engaging and remain highly relevant for Data Scientists. Distill shares Machine Learning Research in interactive and new ways to facilitate learning and thinking.
+
+![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.31.01%20PM.png){width="48%"} ![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.31.25%20PM.png){width="48%"}
+
+### 2. The Pudding
+
+Link: <https://pudding.cool/>
+
+The Pudding is a digital publication with the aim of making data fun through their various visual essay on contemporary topics. While Pudding does not explicitly teach Data Science concepts, it's a great resource to see the fun ways of visualizing projects.
+
+![](resources/learning_data_science_visually/Screenshot%202022-11-15%20at%205.54.30%20PM.png){width="48%"} ![](resources/learning_data_science_visually/Screenshot%202022-11-15%20at%205.54.57%20PM.png){width="48%"}
+
+------------------------------------------------------------------------

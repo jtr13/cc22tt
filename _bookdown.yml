@@ -30,6 +30,7 @@ rmd_files: [
   'r_vs_matlab_graph.Rmd',
   'ggplot2_to_python.Rmd',
   'easystats_cheat_sheet.Rmd',
+  'itsmr_cheat_sheet.Rmd',
 
   # Part: Tutorials
   'time_series_visualization_project.Rmd',  
@@ -56,6 +57,10 @@ rmd_files: [
   'guide_to_nonparametric_tests.Rmd',
   'dplyr_in_r.Rmd',
   'visualizing_us_elections.Rmd',
+  'time_series_visualization_with_r.Rmd',
+  'twitter_scrape_nlp.Rmd',
+  'short_causal_inference_tutorial.Rmd',
+  'network_analysis.Rmd',
   # 'sentiment_analysis_tutorial.Rmd',
   
   # Part: Interview Prep

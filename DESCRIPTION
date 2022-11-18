@@ -5,7 +5,9 @@ Version: 0.0.0.9000
 Imports:
     emo,
     tidyverse,
-    geocompkg
+    geocompkg,
+    academictwitteR,
+    widyr,
 Suggests:
     bookdown,
     bslib,
@@ -71,6 +73,10 @@ Suggests:
     tidytext,
     tidyr,
     formatR,
+    wordcloud,
+    plotrix,
+    academictwitteR,
+    widyr
 Remotes:
     hadley/emo,
     kassambara/navdata,
@@ -79,4 +85,7 @@ Remotes:
     mattflor/chorddiag,
     jeromefroe/circlepackeR,
     hrbrmstr/streamgraph,
-    geocompr/geocompkg
+    geocompr/geocompkg,
+    cjbarrie/academictwitteR,
+    juliasilge/widyr,
+
