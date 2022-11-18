@@ -7,7 +7,7 @@ Imports:
     tidyverse,
     geocompkg,
     academictwitteR,
-    widyr
+    widyr,
 Suggests:
     bookdown,
     bslib,
@@ -75,6 +75,8 @@ Suggests:
     formatR,
     wordcloud,
     plotrix,
+    academictwitteR,
+    widyr
 Remotes:
     hadley/emo,
     kassambara/navdata,
