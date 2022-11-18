@@ -79,7 +79,8 @@ Suggests:
     widyr,
     corpus,
     tm,
-    tmap
+    tmap,
+    topicmodels,
 Remotes:
     hadley/emo,
     kassambara/navdata,
