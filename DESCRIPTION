@@ -81,6 +81,11 @@ Suggests:
     tm,
     tmap,
     topicmodels,
+    ggraph,
+    syuzhet,
+    gridExtra,
+    palmerpenguins,
+    hrbrthemes,
 Remotes:
     hadley/emo,
     kassambara/navdata,
