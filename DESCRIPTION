@@ -76,7 +76,8 @@ Suggests:
     wordcloud,
     plotrix,
     academictwitteR,
-    widyr
+    widyr,
+    corpus,
 Remotes:
     hadley/emo,
     kassambara/navdata,
