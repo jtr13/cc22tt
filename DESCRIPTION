@@ -78,7 +78,6 @@ Suggests:
     academictwitteR,
     widyr,
     corpus,
-    anglr,
 Remotes:
     hadley/emo,
     kassambara/navdata,
