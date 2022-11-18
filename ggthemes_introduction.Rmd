@@ -1,0 +1,833 @@
+# An Introduction of the ggthemes Package
+
+Yining Ma, Yi Zhuang
+
+```{r}
+library("ggplot2")
+library("ggthemes")
+library("maps")
+library("mapproj")
+library("pander")
+library("scales")
+```
+
+## Motivation and Evaluation
+
+### Motivation
+
+The reason why we choose this topic is when we draw graphs and do data visualizations in R, sometime we find the default color or background can't help show the information, for example, the line in the background may be distracted. Moreover, it is hard fo us to choose a proper theme by looking through all the themes providing by packages and some of the introduction of the package do not have a well-documented introduction on the name of the theme, the functions it provides and a sample graph. Additionally, when choosing a theme, we usually consider what kind of background we need. There are several questions that can help us to make our decision: Do I want lines in background? What color do I want for the background? As a result, we believe a summary of the themes by their characteristic can help us make our decision or scale down the searching scope.
+
+### Evaluation
+
+In this project, we explored every themes in "ggthemes" package and other packages and got familiar with different functions and their specific arguments, acknowledging that there are lots of themes that we can choose when presenting the results. By comparing using different themes to show the same graph, we have a clearer idea on how theme can affect the efficiency to show information as well as the aesthetic effect of the graph. What's more, by comparing different themes, we learnt that themes, colors, and shapes should be determined not only by topics, but also by the characteristics of results and features, and color scales generally have more options than shape scales. 
+
+In addition, firstly considering whether we need background lines and which background color we need may be a quick way to find a suitable theme.
+
+We could compare more theme packages in detail especially on how many values a color scale can show which may also be beneficial for people to choose a suitable color scale for their graph.
+
+## ggthemes
+
+### Introduction
+
+Themes can help us easily apply existing patterns to clearly and coherently present our results. Apart from themes in ggplot2, ggthemes also provides a number of themes and scales. Therefore, our motivation is to explore the differences of themes, colors, and shapes, and discover a clear and easy way to choose from different themes to meet our needs. By doing so, we can help to increase our visualization efficiency and present the results more clearly.
+
+In this file, we introduce all the themes, color scales and shapes provided by the package 'ggthemes'. Additionally, we summarize the themes by whether there are lines in the background, the color of the background and whether it has a corresponding color scale for quick check and making it easier for us to choose a theme. We also provide a list of other packages that provide themes or color scales.
+
+### Basic Plots
+
+To show the theme and colors, we use two basic graphs visualizing the "diamonds" data with point and histogram. We noticed that the 'cut' variable is a ordinal categorical variable and it's better to use continuous color scale to show the order of different categories. However, our tutorial focus on the theme and color scale itself. Thus we use these two graphs to show all themes and colors. The two graphs are as follows:
+```{r}
+data("diamonds")
+```
+
+```{r}
+diamonds
+```
+
+```{r}
+p<-ggplot(
+  subset(diamonds, carat >= 2.2),
+  aes(x = table, y = price, colour = cut)
+) +
+  geom_point(alpha = 0.7) +
+  geom_smooth(method = "loess", alpha = 0.1, size = 1, span = 1)
+p
+```
+```{r}
+q<-ggplot(subset(diamonds, carat > 2.2 & depth > 55 & depth < 70),aes(x = depth, fill = cut)) +
+  geom_histogram(binwidth = 1, position = "dodge")
+q
+```
+
+### Themes
+
+In this part, we discuss the use of the themes provided by the ggthemes package. Since some of the themes have their corresponding color and shape to show more information. We will introduce this color and shape options with the theme.
+
+<b>1. Theme Base</b>
+
+(1) Point Graph
+```{r}
+basep<-p + theme_base()
+basep
+```
+
+(2) Histogram
+```{r}
+baseq<-q+theme_base()
+baseq
+```
+
+<b>2. Theme Calc</b>
+
+This theme has its own color scale.
+
+(1) Point Graph
+```{r}
+calcp<-p+theme_calc()
+calcp
+```
+
+```{r}
+calcpc<-p + theme_calc()+scale_color_calc()
+calcpc
+```
+
+(2) Histogram
+```{r}
+calcq<-q+theme_calc()
+calcq
+```
+
+```{r}
+calcqc<-q + theme_calc()+scale_fill_calc()
+calcqc
+```
+
+<b>3. Theme Clean</b>
+
+(1) Point Graph
+```{r}
+cleanp<-p+theme_clean()
+cleanp
+```
+
+(2) Histogram
+```{r}
+cleanq<-q+theme_clean()
+cleanq
+```
+
+<b>4. Theme Economist</b>
+
+This theme has its own color scale and has several version of the background.
+
+(1) Basic Theme
+
+· Point Graph
+```{r}
+ecop<-p + theme_economist()
+ecop
+```
+
+```{r}
+ecopc<-p + theme_economist() +
+  scale_colour_economist()
+ecopc
+```
+
+· Histogram
+```{r}
+ecoq<-q+theme_economist()
+ecoq
+```
+
+```{r}
+ecoqc<-q+theme_economist()+scale_fill_economist()
+ecoqc
+```
+
+
+(2) White Background
+
+· point graph
+```{r}
+ecowhip<-p + theme_economist_white() +
+    scale_colour_economist()
+ecowhip
+```
+
+· histogram
+```{r}
+ecowhiq<-q + theme_economist_white() +
+    scale_fill_economist()
+ecowhiq
+```
+
+(3) All White Theme
+
+· point graph
+```{r}
+ecoallwhip<-p + theme_economist_white(gray_bg = FALSE)+
+    scale_colour_economist()
+ecoallwhip
+```
+
+· histogram
+```{r}
+ecoallwhiq<-q + theme_economist_white(gray_bg = FALSE)+
+    scale_fill_economist()
+ecoallwhiq
+```
+
+<b>5. Theme Excel</b>
+
+This theme has its own color scale.
+
+(1) Point Graph
+```{r}
+excp<-p + theme_excel()
+excp
+```
+
+```{r}
+excpc<-p + theme_excel() + scale_colour_excel()
+excpc
+```
+
+(2) Histogram
+```{r}
+excq<-q+theme_excel()
+excq
+```
+
+```{r}
+excqc<-q+scale_fill_excel() + theme_excel()
+excqc
+```
+
+<b>6. Theme Excel New</b>
+
+This theme has its own color scale.
+
+(1) Point Graph
+```{r}
+excnewp<-p + theme_excel_new()
+excnewp
+```
+
+```{r}
+excnewpc<-p + theme_excel_new()+scale_colour_excel_new()
+excnewpc
+```
+
+(2) Histogram
+```{r}
+excnewq<-q+theme_excel_new()
+excnewq
+```
+
+```{r}
+excnewqc<-q+theme_excel_new() + scale_fill_excel_new()
+excnewqc
+```
+
+<b>7. Theme Few</b>
+
+This theme has several color scale.
+
+(1) Point Graph
+```{r}
+fewp<-p + theme_few()
+fewp
+```
+
+· basic color scale(light color scale)
+```{r}
+fewpc<-p + theme_few() + scale_colour_few()
+fewpc
+```
+
+```{r}
+fewpcli<-p + theme_few() + scale_colour_few("Light")
+fewpcli
+```
+
+· dark color scale
+```{r}
+fewpcda<-p + theme_few() + scale_colour_few("Dark")
+fewpcda
+```
+
+(2) Histogram
+```{r}
+fewq<-q+theme_few()
+fewq
+```
+
+· basic color scale (light color scale)
+```{r}
+fewqc<-q + theme_few() + scale_fill_few()
+fewqc
+```
+
+```{r}
+fewqcli<-q + theme_few() + scale_fill_few("Light")
+fewqcli
+```
+
+· dark color scale
+```{r}
+fewqcda<-q + theme_few() + scale_fill_few("Dark")
+fewqcda
+```
+
+<b>8. Theme fivethirtyeight</b>
+
+This theme has its own color scale which can only handle 3 values. Thus, we use another graph to show the color scale.
+
+(1) Point Graph
+
+```{r}
+ftyep <- ggplot(mtcars) + geom_point(aes(x = wt, y = mpg,colour = factor(gear))) + facet_wrap(~am)+
+  theme_fivethirtyeight()
+ftyep
+
+```
+
+```{r}
+ftyepc <- ggplot(mtcars) + geom_point(aes(x = wt, y = mpg,colour = factor(gear))) + facet_wrap(~am)+
+  theme_fivethirtyeight()+
+  scale_color_fivethirtyeight()
+ftyepc
+```
+
+
+(2) Histogram
+```{r}
+data(mpg)
+ftyeq<-ggplot(mpg, aes(x = class, fill = drv)) +
+  geom_bar()+theme_fivethirtyeight() 
+ftyeq
+```
+
+```{r}
+ftyeqc<-ggplot(mpg, aes(x = class, fill = drv)) +
+  geom_bar()+scale_fill_fivethirtyeight() +
+  theme_fivethirtyeight()
+ftyeqc
+```
+
+<b>9. Theme Foundation</b>
+
+(1) Point Graph
+```{r}
+foup<-p+theme_foundation()
+foup
+```
+
+(2) Histogram
+```{r}
+fouq<-q+theme_foundation()
+fouq
+```
+
+<b>10. Theme gdocs</b>
+
+This theme has its own color scale.
+
+(1) Point Graph
+```{r}
+gdocp<-p + theme_gdocs()
+gdocp
+```
+
+```{r}
+gdocpc<-p + theme_gdocs() + scale_color_gdocs()
+gdocpc
+```
+
+(2) Histogram
+```{r}
+gdocq<-q + theme_gdocs()
+gdocq
+```
+
+```{r}
+gdocqc<-q + theme_gdocs() + scale_fill_gdocs()
+gdocqc
+```
+
+<b>11. Theme hc</b>
+
+This theme has its own color scale.
+
+(1) Point Graph
+```{r}
+hcp<-p + theme_hc()
+hcp
+```
+
+· basic theme with basic color scale
+```{r}
+hcpcb<-p + theme_hc() + scale_colour_hc()
+hcpcb
+```
+
+· darc theme with color scale
+```{r}
+hcpcd<-p + theme_hc(style = "darkunica") +
+  scale_colour_hc("darkunica")
+hcpcd
+```
+
+(2) Histogram
+```{r}
+hcq<-q + theme_hc()
+hcq
+```
+
+· basic theme with basic color scale
+```{r}
+hcqcb<-q + theme_hc() + scale_fill_hc()
+hcqcb
+```
+
+· dark theme with dark color scale
+```{r}
+hcqcd<-q + theme_hc(style = "darkunica") +
+  scale_fill_hc("darkunica")
+hcqcd
+```
+
+<b>12. Theme igray</b>
+
+This theme sets a white panel and a gray background.
+
+(1) Point Graph
+```{r}
+igrayp<-p+theme_igray()
+igrayp
+```
+
+(2) Histogram
+```{r}
+igrayq<-q+theme_igray()
+igrayq
+```
+
+<b>13. Theme map</b>
+
+This theme provides a clean version of "geom_map()"
+```{r}
+
+us <- fortify(map_data("state"), region = "region")
+gg <- ggplot() +
+  geom_map(data  =  us, map = us,
+             aes(x = long, y = lat, map_id = region, group = group),
+             fill = "white", color = "black", size = 0.25) +
+  coord_map("albers", lat0 = 39, lat1 = 45) +
+  theme_map()
+gg
+```
+
+<b>14. Theme pander</b>
+
+"Pander" can  apply "PanderOptions" to draw default 'unify plots', and theme_pander() can also realize this function. Meanwhile, "scale_color_pander()" and "scale_fill_pander()" can change the colors according to pander theme.
+
+(1) Point Graph
+```{r}
+pander<-theme_pander(
+    base_size = 12,
+    base_family = "sans",
+    nomargin = TRUE, ##boolean, whether white space around the plot
+    fc = "black",
+    gM = TRUE, ##major grid
+    gm = TRUE, ##minor grid
+    gc = "grey", ## grid color
+    gl = "dashed", ## grid line
+    boxes = FALSE,
+    bc = "white",
+    pc = "transparent", ## panel background color
+    lp = "right", ## legand position
+    axis = 1
+)
+require("ggplot2")
+if (require("pander")) {
+  p + pander +scale_color_pander()
+}
+
+```
+
+(2) Histogram
+```{r}
+require("ggplot2")
+if (require("pander")) {
+  q +scale_fill_pander()+theme_pander()
+}
+```
+
+<b>15. Theme par</b>
+
+This theme can change parameters like base_size, base_family, and so on. But it's spacing of margins are different from the graphs produced by basic graphics.
+
+(1) Point Graph
+```{r}
+p + theme_par(base_size = par()$ps, base_family = par()$family)
+```
+
+(2) Histogram
+```{r}
+q + theme_par(base_size = par()$ps, base_family = par()$family)
+```
+
+<b>16. Theme Solarized</b>
+
+This theme apply Solarized palette to graphs, and with an argument "light" to control the background colors. There are two variances,theme_solarized is similar to to theme_bw(), while theme_solarized_2() is similar to theme_gray().
+
+Also, there are scale_colour_solarized() and scale_fill_solarized() that can change colors according to solarized theme.
+
+(1) Point Graph
+
+```{r}
+p+theme_solarized(light=FALSE)+scale_colour_solarized()
+```
+
+(2) Histogram
+```{r}
+q+theme_solarized_2(light=FALSE)+scale_fill_solarized()
+```
+
+<b>17. Theme Solid</b>
+
+This theme aims to change background colors of plot using argument "fill". But the axis is not visible in this theme.
+
+(1) Point Graph
+```{r}
+p+theme_solid(base_size = 12, fill = "white")
+```
+
+(2) Histogram
+```{r}
+q+theme_solid(fill = "gray")
+```
+
+<b>18. Theme stata</b>
+
+This theme apply Stata schemes to graph, and uses "scheme" argument (One of "s2color", "s2mono", "s1color", "s1rcolor", or "s1mono", "s2manual", "s1manual", or "sj") to change schemes. 
+Also, there are "scale_colour_stata()" and "scale_fill_stata()" can apply to change colors.
+
+(1) Point Graph
+
+```{r}
+p+theme_stata() +
+  scale_colour_stata("s2color")
+```
+
+(2) Histogram
+```{r}
+q+theme_stata(scheme = "s2mono") +
+  scale_fill_stata("mono")
+```
+
+<b>19. Theme Tufte</b>
+
+This theme is based on 'Data-Ink Maximization and Graphical Design' of Edward Tufte, and uses argument "ticks" to choose whether to show ticks.
+
+(1) Point Graph
+
+```{r}
+p + geom_rug() +
+  theme_tufte(ticks=FALSE)
+```
+
+(2) Histogram
+```{r}
+q+theme_tufte(ticks=FALSE)
+```
+
+<b>20. Theme wsj (Wall Street Journal)</b>
+
+This theme is based on plots in The Wall Street Journal, and can choose background colors from  'brown', 'gray', 'green', 'blue'.
+Also, we can use "scale_color_wsj()" to change to WSJ colors.
+
+(1) Point Graph
+
+```{r}
+p + scale_colour_wsj("colors6", "") + theme_wsj(base_size = 12,base_family = "sans",title_family = "mono",color = "gray")
+```
+
+(2) Histogram
+```{r}
+q+scale_colour_wsj("colors6", "") + theme_wsj(color='brown')
+```
+
+
+### Other Color Scales
+<b>1. Color Bland</b>
+
+```{r}
+colorblindp<-p+scale_color_colorblind()
+colorblindp
+```
+
+```{r}
+colorblindq<-q+scale_fill_colorblind()
+colorblindq
+```
+
+<b>2. Color tableau</b>
+```{r}
+tableaup<-p+scale_color_tableau()
+tableaup
+```
+
+```{r}
+tableauq<-q+scale_fill_tableau()
+tableauq
+```
+
+This color scale also support continuous variables, the functions are as follows:
+```{r}
+scale_color_gradient2_tableau()
+scale_fill_gradient2_tableau()
+
+scale_color_gradient_tableau()
+scale_fill_gradient_tableau()
+scale_color_continuous_tableau()
+scale_fill_continuous_tableau()
+```
+
+
+<b>3. Color Canva</b>
+This color scale can only handle 4 values, thus we also use another dataset to show the color scale. 
+```{r}
+canvap <- ggplot(mtcars) + geom_point(aes(x = wt, y = mpg,colour = factor(gear))) + facet_wrap(~am)+
+  scale_color_canva()
+canvap
+```
+
+```{r}
+canvaq<-ggplot(mpg, aes(x = class, fill = drv)) +
+  geom_bar()+scale_fill_canva() 
+canvaq
+```
+
+<b>4. Color ptol</b>
+
+```{r}
+ptolp<-p+scale_color_ptol()
+ptolp
+```
+
+```{r}
+ptolq<-q+scale_fill_ptol()
+ptolq
+```
+
+### Other Shape Scales
+We can not only use color scales but also shape scales to set labels for categorical features. There are four more types of shape. But compared with colors scale, shape scales have less types, which might not be suitable for features with many categories.
+
+<b>1. Shape Circlefill</b>
+```{r}
+ftyep <- ggplot(mtcars) + geom_point(aes(x = wt, y = mpg,shape = factor(gear))) + facet_wrap(~am)
+ftyep+scale_shape_circlefill()
+```
+
+<b>2. Shape Cleveland</b>
+This shape scale has only up to 3 categories.
+```{r}
+ftyep+scale_shape_cleveland()
+```
+
+<b>3. Shape Tableau</b>
+```{r}
+ftyep+scale_shape_tableau() ##The difference among types in this scale is not that obvious.
+```
+
+<b>4. Shape Tremmel </b>
+```{r}
+ftyep+scale_shape_tremmel() ##only 3 types of shape.
+```
+
+### Get Details about Paltettes
+ggthemes provides palettes details for most theme color scales and shape scales. Therefore, we can refer to this functions to explore more details. We present "stata_pal" and "calc_shape_pal" as examples.
+
+```{r}
+show_col(stata_pal("s2color")(15))
+```
+
+```{r}
+show_shapes(calc_shape_pal()(4))
+```
+
+
+### Quick Check of Themes
+
+#### whether there are lines in the background
+
+<b>1. theme without lines in the background</b>
+
+theme base
+
+theme few
+
+theme par
+
+theme solid
+
+theme tufte
+
+<b>2.theme with lines in the background</b>
+
+the default theme of ggplot2
+
+theme calc
+
+theme clean
+
+theme economist
+
+theme excel
+
+theme excel_new
+
+theme fivethirtyeights
+
+theme foundation
+
+theme gdocs
+
+theme hc
+
+theme igray
+
+theme pander
+
+theme solarized
+
+theme stata
+
+theme wsj
+
+#### the color of the background
+
+<b>1. white</b>
+
+theme base
+
+theme calc
+
+theme clean
+
+theme economist_white
+
+theme excel_new
+
+theme few
+
+theme foundation
+
+theme gdocs
+
+theme hc(default)
+
+theme igray
+
+theme tufte
+
+theme par
+
+theme pander
+
+<b>2. grey</b>
+
+the default theme of ggplot2
+
+theme excel
+
+theme fivethirtyeight
+
+<b>3. dark</b>
+
+theme hc(dark)
+
+<b>4. others</b>
+
+theme economist
+
+theme wsj
+
+theme stata
+
+theme solid
+
+theme solarized
+
+#### whether there is one or more corresponding color/shape scale of the theme
+
+<b>1. do not have a color/shape scale</b>
+
+theme base
+
+theme clean
+
+theme foundation
+
+theme igray
+
+theme par
+
+theme solid
+
+theme tufte
+
+<b>2. have a color/shape scale</b>
+
+theme calc
+
+theme economist
+
+theme excel
+
+theme excel_new
+
+theme few(2 series, light and dark)
+
+theme fivethirtyeight(only support 3 values)
+
+theme gdocs
+
+theme hc(2 series, light and dark)
+
+theme pander
+
+theme solarized
+
+theme stata
+
+theme wsj
+
+
+## Other Packages About Themes and Colors
+
+1. hrbrthemes
+
+2. ggsci
+ a package provides color scales inspired by scientific journals and science fiction TV shows.
+ 
+3. ggtech
+ a package provides themes, scales and geoms inspired by big technology companies.
+ 
+4. ggdark
+ a package provides a dark theme.
+ 
+5. tvthemes
+ a package provides themes and palettes inspired by popular TV.
+ 
+## Citation
+
+[1] Arnold, J. (2021) Jrnold/GGTHEMES: Additional themes, scales, and geoms for GGPLOT2, GitHub. jrnold. Available at: https://github.com/jrnold/ggthemes (Accessed: November 15, 2022). 
+
+[2] BTJ01 (2021) GGTHEMES/inst/examples at master · BTJ01/GGTHEMES, GitHub. BTJ01. Available at: https://github.com/BTJ01/ggthemes/tree/master/inst/examples (Accessed: November 15, 2022). 
+
+[3] Emaasit, D. (no date) ggplot2 Extensions. Daniel Emaasit. Available at: https://exts.ggplot2.tidyverse.org/gallery/ (Accessed: November 15, 2022). 
