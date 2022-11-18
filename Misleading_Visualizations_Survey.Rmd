@@ -1,0 +1,26 @@
+# Is the data visualization misleading or not - Survey 
+
+Conducted by:
+Ritvik Khandelwal - rk3213 
+Sanket Bhandari - sb4719
+
+
+##Overview and motivation
+
+In today’s digital world, everything around us consists of data, but not all are accurate. We use this data to gauge whether something is true or false, but it is not often that we see it in its raw form. Imagine how the many rows and columns that consist of numbers can be very confusing to interpret, hence the need for data visualizations.
+However, as beneficial as data visualization is for interpreting the data, it can also be used to bend the truth and misinterpret trends. Misleading visualizations have been used time and time again by reputed media companies to endorse a particular propaganda or a narrative. At times, they do convey the required information and are factually correct. However, how they are visually represented misleads the population. There are also certain cases where these reputed media companies show only a part of the data, thus conveying the wrong information with the goal of stirring a particular popular opinion among the public.
+
+## Goal
+We conducted this survey to understand whether different fractions of the population (in terms of age group) are even aware that such misleading visualizations exist in media. This survey would serve as a stellar way of spreading awareness that such things happen in real-time. Whether a person is aware or not prior to this survey, we believe this survey serves as a brilliant method to inform people of the different practices that these media companies adopt to mislead the people by endorsing a particular propaganda, thus inducing unnecessary bias among the population.
+In our survey, we have taken 5 precise examples published by the media before. All the graphs in our survey cover a vast majority of the misleading graphs that media agencies propagate. These examples effectively summarize what is done by media companies in general to mislead people. We are confident that anyone who attempts this survey will be able to notice any sort of irregularities in the future and thus will not fall victim to such practices.
+
+The following link contains the link to the report of the suvrvey conducted by us. 
+
+[https://drive.google.com/file/d/18ISbr8DNUWgRwvAxjDntb91_NONzLvr5/view?usp=sharing]{target="_blank"}
+
+Link to the Survey:
+
+[https://forms.gle/VXCpJBduiFnaE7mn7] 
+
+
+
