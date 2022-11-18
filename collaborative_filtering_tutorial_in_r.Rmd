@@ -1,11 +1,10 @@
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
 # Tutorial of Collaborative Filtering in R
 
 Ziwei Yang
+
+```{r include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
 
 ## Motivation
 For data science students, machine learning is always a potential career path they can take. Either work as a machine learning engineer or apply some machine learning techniques to their work. So this tutorial is meant to introduce a technique in machine learning, more specifically in the recommendation system, named collaboratively filtering. 
