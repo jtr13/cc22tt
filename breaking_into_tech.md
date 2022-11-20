@@ -5,11 +5,6 @@ Woomy Michel
 ## Background 
 
 
-
-```r
-knitr::include_graphics("resources/breaking_into_tech/Headshot_NCSU.jpg")
-```
-
 <img src="resources/breaking_into_tech/Headshot_NCSU.jpg" width="80%" style="display: block; margin: auto;" />
 
 Hi, my name is Woomy Michel 👋🏼 and I’m here to share my story as a Black girl in tech. I am the first-born child to Haitian immigrants, an alumna of the Illustrious Clark Atlanta University (goooo Panthers 🐾♥️) and a current data science grad student at Columbia University. I am the first in my family to attend and graduate from college, as well as attend grad school. In this short book, I’ll be sharing my honest journey, tips, advice and ways for you to break into tech. 
@@ -23,11 +18,6 @@ For me, transparency is a big thing and knowing the full story before diving dee
 ## Finding My True Calling
 
 I started off undergrad as a dual-degree engineering major. The program was geared towards students who wanted two bachelor's degrees: one in their engineering discipline and one in their natural science discipline. At the time, I was majoring in math and biomedical engineering. I thought I was going to be a biomedical engineer. I mean, what else could I pursue as someone that was extremely passionate about mathematics? Engineering was the only field people told me I could go into with a math background. 
-
-
-```r
-knitr::include_graphics("resources/breaking_into_tech/shrug.png")
-```
 
 <img src="resources/breaking_into_tech/shrug.png" width="80%" style="display: block; margin: auto;" />
 
@@ -44,11 +34,6 @@ By the end of freshman year, I had completely changed my major to Mathematics an
 I feel like the trajectory of my career changed after technical interview season. After completing my first programming class, I thought that software engineering would be the perfect route for me. Alas, the whiteboard interviews would be an extremely humbling experience for me. 
 
 Now, most roles that you interview for mainly ask behavioral questions to see if you’re the ideal candidate. However, when it comes to the tech industry, there’s a behavioral interview followed by several rounds of technical interviews. I never was able to get the hang of them, to be honest. Something about a HackerRank interview was just so nerve wracking to me. I knew how to program, but I couldn’t solve two coding assessments in an hour no matter how well I prepped. On top of that, the way the interviewer would frame the questions was weird. I’d never understand what they were asking until after the interview because the questions were asked in the most convoluted way possible. One thing I’d always do when stumped was ask clarifying questions so I could gauge how to solve the problem, but even then…it wouldn’t click in my brain until the very end of the interview. You know that feeling when you’re taking an exam and you’re stuck on a problem and finally remember how to solve it, but it’s too late? That was me.
-
-
-```r
-knitr::include_graphics("resources/breaking_into_tech/meme.jpg")
-```
 
 <img src="resources/breaking_into_tech/meme.jpg" alt="Visual representation of myself" width="80%" style="display: block; margin: auto;" />
 
