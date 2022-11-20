@@ -6,7 +6,6 @@ Imports:
     emo,
     tidyverse,
     geocompkg,
-    academictwitteR,
     widyr,
 Suggests:
     bookdown,
@@ -86,6 +85,7 @@ Suggests:
     gridExtra,
     palmerpenguins,
     hrbrthemes,
+    anglr,
 Remotes:
     hadley/emo,
     kassambara/navdata,
@@ -97,3 +97,4 @@ Remotes:
     geocompr/geocompkg,
     cjbarrie/academictwitteR,
     dgrtwo/widyr,
+    hypertidy/anglr,
