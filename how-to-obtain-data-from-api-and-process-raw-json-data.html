@@ -124,7 +124,7 @@
 <span class="header-section-number">37</span> How to obtain data from API and process raw JSON data<a class="anchor" aria-label="anchor" href="#how-to-obtain-data-from-api-and-process-raw-json-data"><i class="fas fa-link"></i></a>
 </h1>
 <p>Boping Xia and Mingkang Yuan</p>
-<div class="sourceCode" id="cb470"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb469"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># load required packages, can be installed by calling install.packages()</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://httr.r-lib.org/">httr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://arxiv.org/abs/1403.2805">jsonlite</a></span><span class="op">)</span></span>
@@ -185,18 +185,18 @@
 </h3>
 <p>WARNING: This is only an example illustrating the workflow of retrieving data from API. Since each API has its unique parameters, they work differently. Therefore, as you want to utilize an API, you first need to go through its reference or usage page to understand how to communicate with it correctly.</p>
 <p>We will use an example of getting warships’ information from the game World of Warships through Wargaming developer API. Notice that to download data from Wargaming API, you must register an account and create an application id. This id is unique to you, and you should not share your id with anyone else (others may use your id to do something illegal like DDOS). For demonstration purposes, we created a temporary id and stored it in a JSON file. This temporary id will be <strong>DEACTIVATED</strong> after Dec. 15, 2022. Please <strong>DO NOT</strong> use our id in your code.</p>
-<div class="sourceCode" id="cb472"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb471"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">id_json</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/jsonlite/man/read_json.html">read_json</a></span><span class="op">(</span><span class="st">"resources/api_json_tutorial/application_id.json"</span><span class="op">)</span></span>
 <span><span class="va">app_id</span> <span class="op">&lt;-</span> <span class="va">id_json</span><span class="op">$</span><span class="va">id</span></span></code></pre></div>
 <p>Here we will use <code><a href="https://httr.r-lib.org/reference/GET.html">GET()</a></code> function to obtain data from API. There are two fields we need to pass to the function: <code>url</code>, where is the address of the API, and <code>query</code>, where is the parameters need to pass to the API. Before parsing the response, checking the status code is a good habit to ensure you successfully get the data you want. For <code><a href="https://httr.r-lib.org/reference/GET.html">GET()</a></code> method, code 200 means the server received your request and sent you the corresponding data. If you received other status codes, please check your setup or consult other resources.</p>
-<div class="sourceCode" id="cb473"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb472"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># The application id will be DEACTIVATED after Dec. 15, 2022 and will cause error in GET call.</span></span>
 <span><span class="va">api_response</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://httr.r-lib.org/reference/GET.html">GET</a></span><span class="op">(</span>url <span class="op">=</span> <span class="st">"https://api.worldofwarships.eu/wows/encyclopedia/ships/"</span>,</span>
 <span>                    query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span>application_id <span class="op">=</span> <span class="va">app_id</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">api_response</span><span class="op">$</span><span class="va">status_code</span></span></code></pre></div>
 <pre><code>## [1] 200</code></pre>
 <p>After receiving the server’s response, we need to decode and extract the data we want. Thankfully, <code><a href="https://httr.r-lib.org/reference/content.html">content()</a></code> will automatically dig out the data inside the response object.</p>
-<div class="sourceCode" id="cb475"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb474"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">raw_json</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://httr.r-lib.org/reference/content.html">content</a></span><span class="op">(</span><span class="va">api_response</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">raw_json</span>, list.len <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## List of 3
@@ -255,16 +255,16 @@
 <span class="header-section-number">37.4.1</span> JSON structure analysis (list)<a class="anchor" aria-label="anchor" href="#json-structure-analysis-list"><i class="fas fa-link"></i></a>
 </h3>
 <p>We learned in class how to deal with CSV data, and our most fixed approach is to convert the data into a data frame because that’s the structure we’re used to working with data (and that’s our goal). However, data does not need to be stored in a table with columns and rows. This tabular format is inefficient, so many Internet companies never store raw data in this format. For example, let’s say a store is following your buys. Your distinctive visits may be stamped by the entire sum of cash you went through, the length of the visit, taken after by point-by-point thing data (such as item name, brand, quantity, product id, etc.). There’s a lot of detailed information, and putting away all this data in a single table isn’t exceptionally productive since you have got to rehash the total information (add up to get to and time) for each point-by-point thing. While having different tables is one solution, consumers of this dataset typically prefer a single data source with all the information. This leads to the existence of hierarchical data types like lists. We use <code><a href="https://rdrr.io/pkg/jsonlite/man/read_json.html">read_json()</a></code> to read the JSON file and return the data type list. So, how to handle JSON files is equivalent to how to handle lists.</p>
-<div class="sourceCode" id="cb477"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb476"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/typeof.html">typeof</a></span><span class="op">(</span><span class="va">raw_json</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "list"</code></pre>
-<div class="sourceCode" id="cb479"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb478"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">raw_json</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##        Length Class  Mode     
 ## status   1    -none- character
 ## meta     5    -none- list     
 ## data   100    -none- list</code></pre>
-<div class="sourceCode" id="cb481"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb480"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">raw_json</span><span class="op">$</span><span class="va">meta</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##            Length Class  Mode   
 ## count      1      -none- numeric
@@ -272,7 +272,7 @@
 ## total      1      -none- numeric
 ## limit      1      -none- numeric
 ## page       1      -none- numeric</code></pre>
-<div class="sourceCode" id="cb483"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb482"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">raw_json</span><span class="op">$</span><span class="va">meta</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## $count
 ## [1] 100
@@ -288,7 +288,7 @@
 ## 
 ## $page
 ## [1] 1</code></pre>
-<div class="sourceCode" id="cb485"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb484"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">raw_json</span><span class="op">$</span><span class="va">data</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##   [1] "3542005744" "3553572848" "3541972176" "3741234640" "3655251408"
 ##   [6] "3338548944" "3560912592" "3553572560" "3340744656" "3551475152"
@@ -322,15 +322,15 @@
 </h4>
 <p>Here’s the code to grab some features (<code>name</code>, <code>nation</code>, <code>type</code>, and <code>tier</code>) out of a warship.
 We will demo this step by step. After figuring out the structure of the huge list (<code>raw_json</code>), let’s extract the information we need for the project. To clarify, let’s pull the elements (<code>name</code>, <code>nation</code>, <code>type</code>, and <code>tier</code>) we need for the first warship. For example, if we want to get the name of the first warship, we do the following.</p>
-<div class="sourceCode" id="cb487"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb486"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">raw_json</span><span class="op">$</span><span class="va">data</span><span class="op">$</span><span class="va">`3542005744`</span><span class="op">$</span><span class="va">name</span></span></code></pre></div>
 <pre><code>## [1] "AL Montpelier"</code></pre>
-<div class="sourceCode" id="cb489"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb488"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">raw_json</span><span class="op">$</span><span class="va">data</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">name</span></span></code></pre></div>
 <pre><code>## [1] "AL Montpelier"</code></pre>
 <p>Note that both codes give the same result for the name of our first warship. But remember, we need to extract 100 names of warships. So the second approach would be our best choice.</p>
 <p>Applying the <code><a href="https://rdrr.io/r/base/names.html">names()</a></code> function to the first (<code>data[[1]]</code>) of the third layers (<code>data</code>) of <code>raw_json</code> data, we found that our target features (<code>name</code>, <code>nation</code>, <code>type</code> and <code>tier</code>) are all in the same layer.</p>
-<div class="sourceCode" id="cb491"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb490"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">raw_json</span><span class="op">$</span><span class="va">data</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##  [1] "description"      "price_gold"       "ship_id_str"      "has_demo_profile"
 ##  [5] "images"           "modules"          "modules_tree"     "nation"          
@@ -338,24 +338,24 @@ We will demo this step by step. After figuring out the structure of the huge lis
 ## [13] "upgrades"         "tier"             "next_ships"       "mod_slots"       
 ## [17] "type"             "is_special"       "name"</code></pre>
 <p>Running the code below, we extract the target features of our first warship. What we’re going to do is take the remaining 99 warships, each row is a warship, and each column is our target feature, and turn them into a more manageable data frame type.</p>
-<div class="sourceCode" id="cb493"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb492"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">name</span> <span class="op">=</span> <span class="va">raw_json</span><span class="op">$</span><span class="va">data</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">name</span></span>
 <span><span class="va">nation</span> <span class="op">=</span> <span class="va">raw_json</span><span class="op">$</span><span class="va">data</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">nation</span></span>
 <span><span class="va">type</span> <span class="op">=</span> <span class="va">raw_json</span><span class="op">$</span><span class="va">data</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">type</span></span>
 <span><span class="va">tier</span> <span class="op">=</span> <span class="va">raw_json</span><span class="op">$</span><span class="va">data</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">tier</span></span>
 <span><span class="va">name</span> </span></code></pre></div>
 <pre><code>## [1] "AL Montpelier"</code></pre>
-<div class="sourceCode" id="cb495"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb494"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">nation</span> </span></code></pre></div>
 <pre><code>## [1] "usa"</code></pre>
-<div class="sourceCode" id="cb497"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb496"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">type</span> </span></code></pre></div>
 <pre><code>## [1] "Cruiser"</code></pre>
-<div class="sourceCode" id="cb499"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb498"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tier</span></span></code></pre></div>
 <pre><code>## [1] 8</code></pre>
 <p>However, as the amount of data you want to extract increases, creating a function that extracts the data given an individual “data” might be better. So, let’s rewrite the code to define the function easily:</p>
-<div class="sourceCode" id="cb501"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb500"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op">=</span> <span class="va">raw_json</span><span class="op">$</span><span class="va">data</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
 <span><span class="va">result</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
 <span>  name <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">name</span>,</span>
@@ -366,7 +366,7 @@ We will demo this step by step. After figuring out the structure of the huge lis
 <pre><code>##            name nation    type tier
 ## 1 AL Montpelier    usa Cruiser    8</code></pre>
 <p>Here we get our first row of the aimed data frame. The output is as expected. Right now, we would formally define the function:</p>
-<div class="sourceCode" id="cb503"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb502"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">extract_data</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span><span class="op">)</span><span class="op">{</span></span>
 <span>  <span class="va">result</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
 <span>    name <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">name</span>,</span>
@@ -385,12 +385,12 @@ We will demo this step by step. After figuring out the structure of the huge lis
 <span class="header-section-number">37.4.2.2</span> <code>lapply()</code> function<a class="anchor" aria-label="anchor" href="#lapply-function"><i class="fas fa-link"></i></a>
 </h4>
 <p>Our function works perfectly, returning the same results as the previous section. So now we can extract all the warship information using <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code> function:</p>
-<div class="sourceCode" id="cb505"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb504"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data_features</span> <span class="op">=</span> <span class="va">raw_json</span><span class="op">$</span><span class="va">data</span></span>
 <span><span class="va">warship_list</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">data_features</span>, <span class="va">extract_data</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/typeof.html">typeof</a></span><span class="op">(</span><span class="va">warship_list</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "list"</code></pre>
-<div class="sourceCode" id="cb507"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb506"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">warship_list</span>,<span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## $`3542005744`
 ##            name nation    type tier
@@ -411,7 +411,7 @@ We will demo this step by step. After figuring out the structure of the huge lis
 <span class="header-section-number">37.4.2.3</span> <code>do.call()</code> function<a class="anchor" aria-label="anchor" href="#do.call-function"><i class="fas fa-link"></i></a>
 </h4>
 <p>Our final step is combining the outputs with <code><a href="https://rdrr.io/r/base/do.call.html">do.call()</a></code>. The code above makes a list where each component contains an information outline of a single row. Right now, we need to make them as a single data frame. <code><a href="https://rdrr.io/r/base/do.call.html">do.call()</a></code> applies a given function to the list as a whole, so there is only one function call. In this case, we will use <code><a href="https://rdrr.io/r/base/cbind.html">rbind()</a></code> function to combine our rows.</p>
-<div class="sourceCode" id="cb509"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb508"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">warship</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span><span class="op">(</span><span class="va">rbind</span>,<span class="va">warship_list</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">warship</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##                     name   nation       type tier
@@ -435,7 +435,7 @@ We will demo this step by step. After figuring out the structure of the huge lis
 <span class="header-section-number">37.5</span> Filter desired data by directly passing parameters to API<a class="anchor" aria-label="anchor" href="#filter-desired-data-by-directly-passing-parameters-to-api"><i class="fas fa-link"></i></a>
 </h2>
 <p>Above we showed you how to parse and extract useful data in a huge JSON file. However, one advantage of API is that we can only request the data we need from the server. API like Wargaming provides detailed information on reference page that tells you how their API works and what parameters it receives. But you cannot assume every API thoroughly documents its usage. In the context of a poorly described API, excavating useful information from a mess is needed. After figuring out the information you need, you can pass corresponding parameters and convert it to a data frame. Continuing with our example, after we read the reference page, we know that setting <code>fields</code> parameters will filter out the entry we want.</p>
-<div class="sourceCode" id="cb511"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb510"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">api_response_filtered</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://httr.r-lib.org/reference/GET.html">GET</a></span><span class="op">(</span>url <span class="op">=</span> <span class="st">"https://api.worldofwarships.eu/wows/encyclopedia/ships/"</span>,</span>
 <span>                    query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span></span>
 <span>                      application_id <span class="op">=</span> <span class="va">app_id</span>,</span>
@@ -479,7 +479,7 @@ We will demo this step by step. After figuring out the structure of the huge lis
 ##   .. ..$ nation: chr "ussr"
 ##   .. [list output truncated]</code></pre>
 <p>Here we saw that only <code>name</code>, <code>nation</code>, <code>type</code>, and <code>tier</code> entries are obtained for the same 100 warships. Because the data is relatively neat, we don’t need to call <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code> or <code><a href="https://rdrr.io/r/base/do.call.html">do.call()</a></code> to convert it into a data frame. Instead, we will use <code><a href="https://tibble.tidyverse.org/reference/enframe.html">enframe()</a></code> and <code><a href="https://rdrr.io/r/base/unlist.html">unlist()</a></code> jointly to remove the nested structure. This will return us a very long list.</p>
-<div class="sourceCode" id="cb513"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb512"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">denested_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/enframe.html">enframe</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="va">raw_json_filtered</span><span class="op">$</span><span class="va">data</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">denested_list</span>, <span class="fl">8</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 8 × 2
@@ -494,7 +494,7 @@ We will demo this step by step. After figuring out the structure of the huge lis
 ## 7 3553572848.name   California   
 ## 8 3553572848.nation usa</code></pre>
 <p>This looks like a tidy data set where we combine two variables into one. Calling <code><a href="https://tidyr.tidyverse.org/reference/separate.html">separate()</a></code> on <code>name</code> will generate a tidy data set. Then we call <code><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider()</a></code> on the tidy data to obtain the desired data frame for further analysis.</p>
-<div class="sourceCode" id="cb515"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb514"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">warship_dataframe</span> <span class="op">&lt;-</span> <span class="va">denested_list</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/separate.html">separate</a></span><span class="op">(</span><span class="va">name</span>, into <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"id"</span>, <span class="st">"entry"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">entry</span>, values_from <span class="op">=</span> <span class="va">value</span><span class="op">)</span></span>

@@ -124,7 +124,7 @@
 <span class="header-section-number">26</span> Data cleaning with r<a class="anchor" aria-label="anchor" href="#data-cleaning-with-r"><i class="fas fa-link"></i></a>
 </h1>
 <p>Jincheng Liu and Yudu Chen</p>
-<div class="sourceCode" id="cb103"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#install.packages(openintro)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://openintrostat.github.io/openintro/">openintro</a></span><span class="op">)</span></span>
 <span></span>
@@ -150,7 +150,7 @@
 <span class="header-section-number">26.2</span> Import data set<a class="anchor" aria-label="anchor" href="#import-data-set"><i class="fas fa-link"></i></a>
 </h2>
 <p>We will explore techniques of data cleaning using “Airquality” dataset from base R and duke_forest data set from openintro. The data set is available in baseR and does not require import from outside source.</p>
-<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb103"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">airQuality_preProcessing</span> <span class="op">&lt;-</span> <span class="va">airquality</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">airQuality_preProcessing</span>, <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
@@ -165,7 +165,7 @@
 ## 8     19      99 13.8   59     5   8
 ## 9      8      19 20.1   61     5   9
 ## 10    NA     194  8.6   69     5  10</code></pre>
-<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">duke_forest_copy</span> <span class="op">&lt;-</span> <span class="va">duke_forest</span></span></code></pre></div>
 </div>
 <div id="introduction-1" class="section level2" number="26.3">
@@ -184,7 +184,7 @@
 <span class="header-section-number">26.4.1</span> Create DataFrame by arrays<a class="anchor" aria-label="anchor" href="#create-dataframe-by-arrays"><i class="fas fa-link"></i></a>
 </h3>
 <p>Creating DataFrame by two arrays, These two arrays will by columns of df.Array length should be the same.order matters.</p>
-<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">first_column</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"value_1"</span>, <span class="st">"value_2"</span>, <span class="st">"value_3"</span><span class="op">)</span></span>
 <span><span class="va">second_column</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"value_4"</span>, <span class="st">"value_5"</span>, <span class="st">"value_6"</span><span class="op">)</span></span>
 <span><span class="va">third_column</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"value_7"</span>, <span class="st">"value_8"</span>, <span class="st">"value_9"</span><span class="op">)</span></span>
@@ -195,7 +195,7 @@
 ## 2      value_2       value_5
 ## 3      value_3       value_6</code></pre>
 <p>another way to create dataFrame, both method produce the same result.</p>
-<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span> <span class="op">(</span>first_column  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"value_1"</span>, <span class="st">"value_2"</span>, <span class="st">"value_3"</span><span class="op">)</span>,</span>
 <span>                  second_column <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"value_4"</span>, <span class="st">"value_5"</span>, <span class="st">"value_6"</span><span class="op">)</span>,</span>
 <span>                  third_column <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"value_7"</span>, <span class="st">"value_8"</span>, <span class="st">"value_9"</span><span class="op">)</span></span>
@@ -210,7 +210,7 @@
 <h3>
 <span class="header-section-number">26.4.2</span> Create DataFrame by combining two dataFrame(using cbind/rbind)<a class="anchor" aria-label="anchor" href="#create-dataframe-by-combining-two-dataframeusing-cbindrbind"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># create a new dataFrame</span></span>
 <span><span class="va">df1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span> <span class="op">(</span>first_column  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"value_1"</span>, <span class="st">"value_2"</span>, <span class="st">"value_3"</span><span class="op">)</span>,</span>
 <span>                  second_column <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"value_4"</span>, <span class="st">"value_5"</span>, <span class="st">"value_6"</span><span class="op">)</span>,</span>
@@ -220,7 +220,7 @@
 <span>                  fourth_column <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"value_10"</span>, <span class="st">"value_11"</span>, <span class="st">"value_12"</span><span class="op">)</span></span>
 <span>                  <span class="op">)</span></span></code></pre></div>
 <p>combine two dataframe by columns,order matters.</p>
-<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bigger_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">df1</span>, <span class="va">df2</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">bigger_df</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##   first_column second_column third_column third_column fourth_column
@@ -228,7 +228,7 @@
 ## 2      value_2       value_5      value_8      value_8      value_11
 ## 3      value_3       value_6      value_9      value_9      value_12</code></pre>
 <p>combine two dataframe by rows, two DataFrames must have the same column name and order.</p>
-<div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span> <span class="op">(</span>third_column <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"value_7"</span>, <span class="st">"value_8"</span>, <span class="st">"value_9"</span><span class="op">)</span>,</span>
 <span>                  fourth_column <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"value_10"</span>, <span class="st">"value_11"</span>, <span class="st">"value_12"</span><span class="op">)</span></span>
 <span>                  <span class="op">)</span></span>
@@ -246,7 +246,7 @@
 <h3>
 <span class="header-section-number">26.4.3</span> adding/change row name<a class="anchor" aria-label="anchor" href="#addingchange-row-name"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb115"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">bigger_df2</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##   third_column fourth_column
 ## 1      value_7      value_10
@@ -255,7 +255,7 @@
 ## 4      value_7      value_10
 ## 5      value_8      value_11
 ## 6      value_9      value_12</code></pre>
-<div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb117"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">bigger_df2</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">LETTERS</span><span class="op">[</span><span class="fl">16</span><span class="op">:</span><span class="fl">21</span><span class="op">]</span></span>
 <span></span>
 <span><span class="va">bigger_df2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">bigger_df2</span>,</span>
@@ -269,7 +269,7 @@
 ## S      value_7      value_10
 ## T      value_8      value_11
 ## U      value_9      value_12</code></pre>
-<div class="sourceCode" id="cb120"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb119"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># rownames can change the row name.</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">bigger_df2</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">6</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">bigger_df2</span><span class="op">)</span></span></code></pre></div>
@@ -280,7 +280,7 @@
 ## 4      value_7      value_10
 ## 5      value_8      value_11
 ## 6      value_9      value_12</code></pre>
-<div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb121"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## get row names</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">bigger_df2</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "1" "2" "3" "4" "5" "6"</code></pre>
@@ -289,13 +289,13 @@
 <h3>
 <span class="header-section-number">26.4.4</span> changing column names<a class="anchor" aria-label="anchor" href="#changing-column-names"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb123"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##   first_column second_column third_column
 ## 1      value_1       value_4      value_7
 ## 2      value_2       value_5      value_8
 ## 3      value_3       value_6      value_9</code></pre>
-<div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb125"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># change all column names</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'C1'</span>,<span class="st">'C2'</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code></pre></div>
@@ -303,7 +303,7 @@
 ## 1 value_1 value_4 value_7
 ## 2 value_2 value_5 value_8
 ## 3 value_3 value_6 value_9</code></pre>
-<div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb127"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># change specific column name</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'new column name'</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code></pre></div>
@@ -311,7 +311,7 @@
 ## 1         value_1 value_4 value_7
 ## 2         value_2 value_5 value_8
 ## 3         value_3 value_6 value_9</code></pre>
-<div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb129"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#get column names</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "new column name" "C2"              NA</code></pre>
@@ -320,7 +320,7 @@
 <h3>
 <span class="header-section-number">26.4.5</span> Adding array to to dataFrame as new column<a class="anchor" aria-label="anchor" href="#adding-array-to-to-dataframe-as-new-column"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb131"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">bigger_df2</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##   third_column fourth_column
 ## 1      value_7      value_10
@@ -329,7 +329,7 @@
 ## 4      value_7      value_10
 ## 5      value_8      value_11
 ## 6      value_9      value_12</code></pre>
-<div class="sourceCode" id="cb134"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bigger_df_new</span> <span class="op">=</span> <span class="va">bigger_df2</span></span>
 <span></span>
 <span><span class="va">bigger_df_new</span><span class="op">$</span><span class="va">new</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span>, <span class="fl">6</span>, <span class="fl">7</span>, <span class="fl">8</span>, <span class="fl">12</span><span class="op">)</span></span>
@@ -352,7 +352,7 @@
 <h3>
 <span class="header-section-number">26.4.6</span> adding column by combination of other columns<a class="anchor" aria-label="anchor" href="#adding-column-by-combination-of-other-columns"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb136"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># using mutate() from dplyr</span></span>
 <span><span class="va">df_math</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span> <span class="op">(</span>first_column  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>,</span>
 <span>                  second_column <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span><span class="op">)</span></span>
@@ -366,7 +366,7 @@
 ## 1            1             4 2.5
 ## 2            2             5 3.5
 ## 3            3             6 4.5</code></pre>
-<div class="sourceCode" id="cb138"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## add new column by boolean operation of other columns.</span></span>
 <span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="va">df_math</span>,</span>
 <span>                 divisible_by2 <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span><span class="op">(</span></span>
@@ -384,7 +384,7 @@
 <span class="header-section-number">26.4.7</span> joining two table <strong>[2]</strong><a class="anchor" aria-label="anchor" href="#joining-two-table-2"><i class="fas fa-link"></i></a>
 </h3>
 <p>Bewaring that the order of dataframe in the merge function matters(right join left)</p>
-<div class="sourceCode" id="cb140"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb139"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">emp_df</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
 <span>  emp_id<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span>,<span class="fl">6</span><span class="op">)</span>,</span>
 <span>  name<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Smith"</span>,<span class="st">"Rose"</span>,<span class="st">"Williams"</span>,<span class="st">"Jones"</span>,<span class="st">"Brown"</span>,<span class="st">"Brown"</span><span class="op">)</span>,</span>
@@ -412,7 +412,7 @@
 ## 3              101
 ## 4              102
 ## 5              104</code></pre>
-<div class="sourceCode" id="cb142"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># outer join </span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/merge.html">merge</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">emp_df</span>, y <span class="op">=</span> <span class="va">dept_df</span>, by <span class="op">=</span> <span class="st">"dept_id"</span>, all <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co"># all means containing all rows</span></span></code></pre></div>
 <pre><code>##   dept_id emp_id     name superior_emp_id dept_branch_id.x dept_name
@@ -431,7 +431,7 @@
 ## 5              103
 ## 6              104
 ## 7               NA</code></pre>
-<div class="sourceCode" id="cb144"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb143"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># left join</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/merge.html">merge</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">emp_df</span>, y <span class="op">=</span> <span class="va">dept_df</span>, by <span class="op">=</span> <span class="st">"dept_id"</span>, all.x <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co"># all.x means containing all rows in x</span></span></code></pre></div>
 <pre><code>##   dept_id emp_id     name superior_emp_id dept_branch_id.x dept_name
@@ -448,7 +448,7 @@
 ## 4              102
 ## 5              104
 ## 6               NA</code></pre>
-<div class="sourceCode" id="cb146"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># right join</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/merge.html">merge</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">emp_df</span>, y <span class="op">=</span> <span class="va">dept_df</span>, by <span class="op">=</span> <span class="st">"dept_id"</span>, all.y <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co"># all.y means containing all rows in y</span></span></code></pre></div>
 <pre><code>##   dept_id emp_id     name superior_emp_id dept_branch_id.x dept_name
@@ -470,7 +470,7 @@
 <h3>
 <span class="header-section-number">26.4.8</span> pivoting dataframe, understanding pivot_longer<a class="anchor" aria-label="anchor" href="#pivoting-dataframe-understanding-pivot_longer"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb148"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># pivot_longer transform a data frame from a wide format to a long format by converting feature names to a categorical feature.</span></span>
 <span></span>
 <span><span class="co"># pivot_longer is from the package tidyr.</span></span>
@@ -484,7 +484,7 @@
 ## 2            B      15    29
 ## 3            C      19    18
 ## 4            D      19    12</code></pre>
-<div class="sourceCode" id="cb150"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">needs_pivoting</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>cols<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'sparrow'</span>, <span class="st">'eagle'</span><span class="op">)</span>, <span class="co"># the columns(feature names) to be pivoted</span></span>
 <span>                                names_to<span class="op">=</span><span class="st">'species'</span>, <span class="co"># the name of the column of features</span></span>
 <span>                                values_to<span class="op">=</span><span class="st">'price'</span><span class="op">)</span> <span class="co"># the name of the column of values</span></span></code></pre></div>
@@ -504,7 +504,7 @@
 <span class="header-section-number">26.4.8.1</span> binning using cut()<a class="anchor" aria-label="anchor" href="#binning-using-cut"><i class="fas fa-link"></i></a>
 </h4>
 <p>This is also a good way to categorize feature</p>
-<div class="sourceCode" id="cb152"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hour_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>shop_name<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'MAC'</span>, <span class="st">'Tangro'</span>, <span class="st">'cummington'</span>, <span class="st">'Burger King'</span>, <span class="st">'judgement'</span>, <span class="st">'KFC'</span>, <span class="st">'ye'</span>, <span class="st">'Dungeon'</span>, <span class="st">'Razer'</span>, <span class="st">'yeah sir'</span>, <span class="st">'Koban wife'</span>, <span class="st">'string'</span><span class="op">)</span>,</span>
 <span>                 operating_hours<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">5</span>, <span class="fl">4</span>, <span class="fl">7</span>, <span class="fl">7</span>, <span class="fl">8</span>, <span class="fl">5</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">11</span>, <span class="fl">13</span>, <span class="fl">8</span><span class="op">)</span>,</span>
 <span>                 rebounds<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">7</span>, <span class="fl">7</span>, <span class="fl">4</span>, <span class="fl">6</span>, <span class="fl">3</span>, <span class="fl">8</span>, <span class="fl">9</span>, <span class="fl">9</span>, <span class="fl">12</span>, <span class="fl">11</span>, <span class="fl">8</span>, <span class="fl">9</span><span class="op">)</span><span class="op">)</span></span>
@@ -522,7 +522,7 @@
 ## 10    yeah sir              11       11
 ## 11  Koban wife              13        8
 ## 12      string               8        9</code></pre>
-<div class="sourceCode" id="cb154"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">new_hour_df</span> <span class="op">&lt;-</span> <span class="va">hour_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>operating_hours_bin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cut.html">cut</a></span><span class="op">(</span><span class="va">operating_hours</span>, breaks<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">5</span>,<span class="fl">9</span>,<span class="fl">13</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">new_hour_df</span></span></code></pre></div>
 <pre><code>##      shop_name operating_hours rebounds operating_hours_bin
@@ -543,7 +543,7 @@
 <h4>
 <span class="header-section-number">26.4.8.2</span> binning using case()<a class="anchor" aria-label="anchor" href="#binning-using-case"><i class="fas fa-link"></i></a>
 </h4>
-<div class="sourceCode" id="cb156"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hour_df2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>shop_name<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'MAC'</span>, <span class="st">'Tangro'</span>, <span class="st">'cummington'</span>, <span class="st">'Burger King'</span>, <span class="st">'judgement'</span>, <span class="st">'KFC'</span>, <span class="st">'ye'</span>, <span class="st">'Dungeon'</span>, <span class="st">'Razer'</span>, <span class="st">'yeah sir'</span>, <span class="st">'Koban wife'</span>, <span class="st">'string'</span><span class="op">)</span>,</span>
 <span>                 operating_hours<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">5</span>, <span class="fl">4</span>, <span class="fl">7</span>, <span class="fl">7</span>, <span class="fl">8</span>, <span class="fl">5</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">11</span>, <span class="fl">13</span>, <span class="fl">8</span><span class="op">)</span>,</span>
 <span>                 rebounds<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">7</span>, <span class="fl">7</span>, <span class="fl">4</span>, <span class="fl">6</span>, <span class="fl">3</span>, <span class="fl">8</span>, <span class="fl">9</span>, <span class="fl">9</span>, <span class="fl">12</span>, <span class="fl">11</span>, <span class="fl">8</span>, <span class="fl">9</span><span class="op">)</span><span class="op">)</span></span>
@@ -561,7 +561,7 @@
 ## 10    yeah sir              11       11
 ## 11  Koban wife              13        8
 ## 12      string               8        9</code></pre>
-<div class="sourceCode" id="cb158"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">new_hour_df</span> <span class="op">&lt;-</span> <span class="va">hour_df2</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>operating_hours_bin <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span><span class="op">(</span> <span class="co"># logistics</span></span>
 <span>                   <span class="va">operating_hours</span> <span class="op">&lt;=</span> <span class="fl">3</span> <span class="op">~</span> <span class="st">'very short'</span>,</span>
 <span>                   <span class="va">operating_hours</span> <span class="op">&lt;=</span> <span class="fl">6</span> <span class="op">&amp;</span> <span class="va">operating_hours</span> <span class="op">&gt;</span> <span class="fl">3</span> <span class="op">~</span> <span class="st">'short'</span>,</span>
@@ -589,7 +589,7 @@
 <h3>
 <span class="header-section-number">26.4.9</span> ordering<a class="anchor" aria-label="anchor" href="#ordering"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb160"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">student_result_wild</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>name<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Ram"</span>,<span class="st">"Geeta"</span>,<span class="st">"John"</span>,<span class="st">"Paul"</span>,</span>
 <span>                                 <span class="st">"Cassie"</span>,<span class="st">"Geeta"</span>,<span class="st">"Paul"</span><span class="op">)</span>,</span>
 <span>                          maths<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">7</span>,<span class="fl">8</span>,<span class="fl">8</span>,<span class="fl">9</span>,<span class="fl">10</span>,<span class="fl">8</span>,<span class="fl">9</span><span class="op">)</span>,</span>
@@ -605,7 +605,7 @@
 ## 5 Cassie    10       9       7 13
 ## 6  Geeta     8       7       7  2
 ## 7   Paul     9       8       7  5</code></pre>
-<div class="sourceCode" id="cb162"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb161"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># order data by certain variable (ascending)</span></span>
 <span><span class="va">student_result_wild</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">student_result_wild</span><span class="op">$</span><span class="va">id</span><span class="op">)</span>,<span class="op">]</span></span></code></pre></div>
 <pre><code>##     name maths science history id
@@ -616,7 +616,7 @@
 ## 7   Paul     9       8       7  5
 ## 1    Ram     7       5       7  9
 ## 5 Cassie    10       9       7 13</code></pre>
-<div class="sourceCode" id="cb164"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb163"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># order data by certain variable (descending)</span></span>
 <span><span class="va">student_result_wild</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="op">-</span><span class="va">student_result_wild</span><span class="op">$</span><span class="va">id</span><span class="op">)</span>,<span class="op">]</span></span></code></pre></div>
 <pre><code>##     name maths science history id
@@ -627,7 +627,7 @@
 ## 3   John     8       6       7  3
 ## 2  Geeta     8       7       7  2
 ## 6  Geeta     8       7       7  2</code></pre>
-<div class="sourceCode" id="cb166"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb165"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># order data by multiple variable, the second orders the duplicates in first variable</span></span>
 <span><span class="va">student_result_wild</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="op">-</span><span class="va">student_result_wild</span><span class="op">$</span><span class="va">id</span>, <span class="va">student_result_wild</span><span class="op">$</span><span class="va">science</span><span class="op">)</span>,<span class="op">]</span></span></code></pre></div>
 <pre><code>##     name maths science history id
@@ -650,24 +650,24 @@
 <span class="header-section-number">26.5.1</span> Data set with row-wise duplicates<a class="anchor" aria-label="anchor" href="#data-set-with-row-wise-duplicates"><i class="fas fa-link"></i></a>
 </h3>
 <p>Although the dataset we use in this example, airquality data, does not have duplicate, we will use it illustrate the techniques of handling duplicate data.</p>
-<div class="sourceCode" id="cb168"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb167"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data_duplicated_values</span> <span class="op">=</span> <span class="va">airQuality_preProcessing</span></span></code></pre></div>
 <p>We see the data frame should have no duplicate rows to begin with.</p>
-<div class="sourceCode" id="cb169"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb168"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">'number of duplicated rows in the data is '</span>,<span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/duplicated.html">duplicated</a></span><span class="op">(</span><span class="va">data_duplicated_values</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "number of duplicated rows in the data is 0"</code></pre>
 <p>Now we randomly pick 5 instances from the data frame and insert them into the data frame to induce duplication</p>
-<div class="sourceCode" id="cb171"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb170"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span> <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="op">{</span></span>
 <span>  <span class="va">data_duplicated_values</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">data_duplicated_values</span><span class="op">)</span><span class="op">+</span><span class="fl">1</span>,<span class="op">]</span> <span class="op">=</span> <span class="va">data_duplicated_values</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">floor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">1</span>, min <span class="op">=</span> <span class="fl">1</span>, max <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">data_duplicated_values</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,<span class="op">]</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <p>We should now have 5 duplicated instances:</p>
-<div class="sourceCode" id="cb172"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb171"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">'number of duplicated rows in the data after insertion is '</span>,<span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/duplicated.html">duplicated</a></span><span class="op">(</span><span class="va">data_duplicated_values</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "number of duplicated rows in the data after insertion is 5"</code></pre>
 <p>The “duplicated(df)” returns a boolean array where each value at each index indicates if row at the same index in original data frame is duplicated or not. We can use ’duplicated(df)” to extract duplicated rows:</p>
-<div class="sourceCode" id="cb174"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb173"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data_duplicated_values</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/duplicated.html">duplicated</a></span><span class="op">(</span><span class="va">data_duplicated_values</span><span class="op">)</span>,<span class="op">]</span></span></code></pre></div>
 <pre><code>##     Ozone Solar.R Wind Temp Month Day
 ## 154    NA     291 14.9   91     7  14
@@ -676,7 +676,7 @@
 ## 157    NA     264 14.3   79     6   6
 ## 158   118     225  2.3   94     8  29</code></pre>
 <p>By adding “!” before “duplicated(df)”, we can negate logics in “duplicated(df)” and access non duplicate rows as a data frame:</p>
-<div class="sourceCode" id="cb176"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb175"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">data_duplicated_values</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/duplicated.html">duplicated</a></span><span class="op">(</span><span class="va">data_duplicated_values</span><span class="op">)</span>,<span class="op">]</span>, <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##    Ozone Solar.R Wind Temp Month Day
 ## 1     41     190  7.4   67     5   1
@@ -690,25 +690,25 @@
 ## 9      8      19 20.1   61     5   9
 ## 10    NA     194  8.6   69     5  10</code></pre>
 <p>There should be no duplicates</p>
-<div class="sourceCode" id="cb178"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb177"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">'duplicates in data frame formed by unique rows in original data frame is '</span>,<span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/duplicated.html">duplicated</a></span><span class="op">(</span><span class="va">data_duplicated_values</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/duplicated.html">duplicated</a></span><span class="op">(</span><span class="va">data_duplicated_values</span><span class="op">)</span>,<span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "duplicates in data frame formed by unique rows in original data frame is 0"</code></pre>
 <p>We can create a new reference to the data set with no duplicates. For the purpose of reusing “data_duplicated_values”, I will just assign the new reference to itself:</p>
-<div class="sourceCode" id="cb180"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb179"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data_duplicated_values</span> <span class="op">&lt;-</span> <span class="va">data_duplicated_values</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/duplicated.html">duplicated</a></span><span class="op">(</span><span class="va">data_duplicated_values</span><span class="op">)</span>,<span class="op">]</span></span></code></pre></div>
 <p>Now “data_duplicated_values” should have no duplicates:</p>
-<div class="sourceCode" id="cb181"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb180"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">'number of duplicated value after re setting reference is '</span>, <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/duplicated.html">duplicated</a></span><span class="op">(</span><span class="va">data_duplicated_values</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "number of duplicated value after re setting reference is 0"</code></pre>
 <p>Another way is to use “distinct()” function from tidyverse package.</p>
-<div class="sourceCode" id="cb183"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb182"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span> <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="op">{</span></span>
 <span>  <span class="va">data_duplicated_values</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">data_duplicated_values</span><span class="op">)</span><span class="op">+</span><span class="fl">1</span>,<span class="op">]</span> <span class="op">=</span> <span class="va">data_duplicated_values</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">floor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">1</span>, min <span class="op">=</span> <span class="fl">1</span>, max <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">data_duplicated_values</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,<span class="op">]</span></span>
 <span><span class="op">}</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">'number of duplicate value in data frame before calling distinct is'</span>, <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/duplicated.html">duplicated</a></span><span class="op">(</span><span class="va">data_duplicated_values</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "number of duplicate value in data frame before calling distinct is5"</code></pre>
-<div class="sourceCode" id="cb185"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb184"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data_duplicated_values</span> <span class="op">&lt;-</span> <span class="va">data_duplicated_values</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">'number of duplicate value in data frame after calling distinct is'</span>, <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/duplicated.html">duplicated</a></span><span class="op">(</span><span class="va">data_duplicated_values</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "number of duplicate value in data frame after calling distinct is0"</code></pre>
@@ -718,10 +718,10 @@
 <span class="header-section-number">26.5.2</span> Duplicates based on specific columns<a class="anchor" aria-label="anchor" href="#duplicates-based-on-specific-columns"><i class="fas fa-link"></i></a>
 </h3>
 <p>Some times duplication of elements in certain column/columns is not desirable. We want to be able to remove rows with duplication in specified columns. We first insert 5 rows with duplicates in “Day” and “Month”, we should see “158” rows after insertion:</p>
-<div class="sourceCode" id="cb187"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb186"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">'number of rows before adding 5 duplicated rows on Day and Month is'</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">data_duplicated_values</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "number of rows before adding 5 duplicated rows on Day and Month is153"</code></pre>
-<div class="sourceCode" id="cb189"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb188"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span> <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="op">{</span></span>
 <span>  <span class="va">Ozone</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">floor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="fl">1</span>,min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">50</span><span class="op">)</span><span class="op">)</span></span>
@@ -740,7 +740,7 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">'number of rows after adding 5 duplicated rows on Day and Month is'</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">data_duplicated_values</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "number of rows after adding 5 duplicated rows on Day and Month is158"</code></pre>
 <p>We can remove rows with duplicated “Day” and “Month” combination using “distinct()”. The “.keep_all = TRUE” argument makes sure that for each duplicated combination of Day and Month, we keep the first row for every duplicated combination and we keep all variables in the Data. We should observe the number of rows after dropping dupicated columns going back to “153”, which is the size of data frame before we insert rows with duplicated “Day” and “Month” combinations.</p>
-<div class="sourceCode" id="cb191"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb190"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data_duplicated_values</span><span class="op">&lt;-</span> <span class="va">data_duplicated_values</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">Day</span>, <span class="va">Month</span>, .keep_all <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">'number of rows after removing 5 duplicated rows on Dat and Month is'</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">data_duplicated_values</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "number of rows after removing 5 duplicated rows on Dat and Month is153"</code></pre>
@@ -756,7 +756,7 @@
 <span class="header-section-number">26.6.1</span> NA in R<a class="anchor" aria-label="anchor" href="#na-in-r"><i class="fas fa-link"></i></a>
 </h3>
 <p>In R, a missing value is represented by symbol “NA”.</p>
-<div class="sourceCode" id="cb193"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb192"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">airquality</span>, <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##    Ozone Solar.R Wind Temp Month Day
 ## 1     41     190  7.4   67     5   1
@@ -774,23 +774,23 @@
 A simple approach is to drop rows with missing data. If our task requires using all features in dataset, we can opt to drop all rows with at least one missing value. However, if our task required using some features, we only need to drop rows with missing values in feastures we specify. We will discuss both cases.
 #### Drop all rows containing missing Data
 Suppose we want to use all features in “airquality” dataset and we want to drop all rows with at least 1 missing values. We first check number of rows with missing data in the dataset. The ‘is.na(df)’ command returns a boolean array, where truth value at each index indicate if data element at the same index in data frame df is NA or not. By summing number of “TRUE” values in the ‘is.na(df)’, we know total number of missing values in the data set.</p>
-<div class="sourceCode" id="cb195"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb194"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">'total number of missing values is '</span>, <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">airQuality_preProcessing</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "total number of missing values is 44"</code></pre>
 <p>We see we have totally 44 missing with at least 1 missing values.
 To know number of rows with missing value, we use “complete.cases(df)”. The return an array of boolean where boolean value at each index indicate if data instance/case at the corresponding row index in data frame df is complete (having no NA the missing value) or not. By summing the number of false in the array, we get the total number of rows that has at least 1 missing value.</p>
-<div class="sourceCode" id="cb197"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb196"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"number of rows with at least 1 missing value is "</span>, <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/stats/complete.cases.html">complete.cases</a></span><span class="op">(</span><span class="va">airQuality_preProcessing</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "number of rows with at least 1 missing value is 42"</code></pre>
 <p>To visualize all rows with missing value, we can access them using the boolean array from “complete.cases()”. Due to large number of rows with missing value, we only put 10 here:</p>
-<div class="sourceCode" id="cb199"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb198"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">airQuality_preProcessing</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/stats/complete.cases.html">complete.cases</a></span><span class="op">(</span><span class="va">airQuality_preProcessing</span><span class="op">)</span>, <span class="op">]</span>, <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
 <p>We now remove rows with na. We use “drop_na()” function from tidyr library to remove all rows with missing values. There are multiple ways to drop rows with missing value, but we will not go exhaustive on this.</p>
-<div class="sourceCode" id="cb200"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb199"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">airQuality_na_droped</span> <span class="op">&lt;-</span> <span class="va">airQuality_preProcessing</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"number of missing values after we drop all NA is "</span>,<span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">airQuality_na_droped</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "number of missing values after we drop all NA is 0"</code></pre>
-<div class="sourceCode" id="cb202"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb201"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"number of rows in data frame after extracting rows with NA is "</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">airQuality_na_droped</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "number of rows in data frame after extracting rows with NA is 111"</code></pre>
 <p>After removing all 42 rows with missing values, we only have 111 rows left, with 42 rows removed from total 153 rows in original data frame.</p>
@@ -804,11 +804,11 @@ To know number of rows with missing value, we use “complete.cases(df)”. The 
 </h5>
 <p>We can see dropping all columns with missing data could be wasteful if we don’t use all features in the dataset. For example, if our job does not require feature “Ozone”, we don’t really care if “Ozone” value is missing or not as it is irrelevant to our task. We will explore how to drop rows with na in specific columns.</p>
 <p>We see “is.na(df)” evaluate presence of NA(missing value) in the entire data set. If we change its argument from df, the entire data set, into a specific column, the function will only evaluate specific columns in the data set and return a boolean array that only reflects presence of missing value at the columns. For example, if we want to see number of rows with missing value in “Ozone” column:</p>
-<div class="sourceCode" id="cb204"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb203"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">'number of NA in Ozone column is '</span>, <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">airQuality_preProcessing</span><span class="op">$</span><span class="va">Ozone</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "number of NA in Ozone column is 37"</code></pre>
 <p>There are 37 rows with NA in “Ozone” column. To drop rows with missing value in “Ozone”, we put column name “Ozone” as argument:</p>
-<div class="sourceCode" id="cb206"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb205"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">airQuality_na_droped_Ozone</span> <span class="op">&lt;-</span> <span class="va">airQuality_preProcessing</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="va">Ozone</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">airQuality_na_droped_Ozone</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 116</code></pre>
@@ -819,17 +819,17 @@ To know number of rows with missing value, we use “complete.cases(df)”. The 
 <span class="header-section-number">26.6.1.1.2</span> NA in several columns (And)<a class="anchor" aria-label="anchor" href="#na-in-several-columns-and"><i class="fas fa-link"></i></a>
 </h5>
 <p>If we want to drop rows with NA in specific column, for example, rows with NA in both “Ozone” and “Solar.R” columns, we can take advantage of the fact that “is.na(df)” is a boolean array, and we can perform element wise boolean operation in two arrays of same dimension:</p>
-<div class="sourceCode" id="cb208"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb207"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">airQuality_preProcessing</span><span class="op">$</span><span class="va">Ozone</span><span class="op">)</span> <span class="op">&amp;</span> <span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">airQuality_preProcessing</span><span class="op">$</span><span class="va">Solar.R</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 2</code></pre>
 <p>We see number of rows with missing value in both “Ozone” and “Solar.R” is 2. We now visualize two rows:</p>
-<div class="sourceCode" id="cb210"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb209"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">airQuality_preProcessing</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">airQuality_preProcessing</span><span class="op">$</span><span class="va">Ozone</span><span class="op">)</span> <span class="op">&amp;</span> <span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">airQuality_preProcessing</span><span class="op">$</span><span class="va">Solar.R</span><span class="op">)</span>, <span class="op">]</span></span></code></pre></div>
 <pre><code>##    Ozone Solar.R Wind Temp Month Day
 ## 5     NA      NA 14.3   56     5   5
 ## 27    NA      NA  8.0   57     5  27</code></pre>
 <p>Having the boolean array, we can negate the logics and obtain all rows where we don’t have missing values in “Ozone” and “Solar.R” at the same time.</p>
-<div class="sourceCode" id="cb212"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb211"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">airQuality_NA_Ozone_and_Solor</span> <span class="op">&lt;-</span> <span class="va">airQuality_preProcessing</span><span class="op">[</span><span class="op">!</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">airQuality_preProcessing</span><span class="op">$</span><span class="va">Ozone</span><span class="op">)</span> <span class="op">&amp;</span> <span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">airQuality_preProcessing</span><span class="op">$</span><span class="va">Solar.R</span><span class="op">)</span><span class="op">)</span>, <span class="op">]</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">airQuality_NA_Ozone_and_Solor</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 151</code></pre>
@@ -840,17 +840,17 @@ To know number of rows with missing value, we use “complete.cases(df)”. The 
 <span class="header-section-number">26.6.1.1.3</span> NA in several columns (Or)<a class="anchor" aria-label="anchor" href="#na-in-several-columns-or"><i class="fas fa-link"></i></a>
 </h5>
 <p>What if we want to drop columns with NA in “Ozone” or “Solar.R”, such that if any of the two columns contains missing values. We could have used boolean operation between several boolean arrays as we did, but it could be tedious as we have more feastures to consider. We could use “complete.cases()” but use specific columns in dataset as input. The “complete.cases()” returns false if a single column in the rows in data frame we pass in has a missing value, so we could perform “or” operation with it.</p>
-<div class="sourceCode" id="cb214"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb213"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">!</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/complete.cases.html">complete.cases</a></span><span class="op">(</span><span class="va">airQuality_preProcessing</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Ozone"</span>,<span class="st">"Solar.R"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 42</code></pre>
 <p>There are 42 rows with missing values in either “Ozone” or “Solar.R”, or both. In fact, missing values only appear in those two columns, such that we get the total number of rows with missing values in the data set. We can obtain all datas that does not having missing value in “Ozone” or “Solar.R”.</p>
-<div class="sourceCode" id="cb216"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb215"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">airQuality_NA_Ozone_or_Solor</span><span class="op">&lt;-</span> <span class="va">airQuality_preProcessing</span><span class="op">[</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/complete.cases.html">complete.cases</a></span><span class="op">(</span><span class="va">airQuality_preProcessing</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Ozone"</span>,<span class="st">"Solar.R"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>, <span class="op">]</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">airQuality_NA_Ozone_or_Solor</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 111</code></pre>
 <p>We have 111 rows after removing 42 rows with missing value on either “Ozone” or “Solar.R”</p>
 <p>We can also use drop_na() to with columns specified in function arguement:</p>
-<div class="sourceCode" id="cb218"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb217"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">airQuality_NA_Ozone_or_Solor</span><span class="op">&lt;-</span> <span class="va">airQuality_preProcessing</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Ozone"</span>, <span class="st">"Solar.R"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">airQuality_NA_Ozone_or_Solor</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 111</code></pre>
@@ -860,11 +860,11 @@ To know number of rows with missing value, we use “complete.cases(df)”. The 
 <span class="header-section-number">26.6.1.1.4</span> Drop columns with certain number of NA<a class="anchor" aria-label="anchor" href="#drop-columns-with-certain-number-of-na"><i class="fas fa-link"></i></a>
 </h5>
 <p>This might be uncommon, but we might want to drop rows with more than certain number of NA, such as rows with more than 3 NA and even rows with number of NA equal to number of columns, which means the row has all column value being NA. To know number of NA in each row, we can use “rowSums()” functions:</p>
-<div class="sourceCode" id="cb220"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb219"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">airQuality_preProcessing</span><span class="op">)</span><span class="op">)</span>,<span class="fl">10</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##  [1] 0 0 0 0 2 1 0 0 0 1</code></pre>
 <p>This means for row 1 to row 10, row 5 has 2 NA and row 6 and 10 has 1 NA. We can drop all rows with number of NA above certain threshold. We now insert 3 rows with 3 NA into the data frame.</p>
-<div class="sourceCode" id="cb222"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb221"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">airQuality_3NA_Inserted</span> <span class="op">&lt;-</span> <span class="va">airQuality_preProcessing</span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span> <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="op">{</span></span>
@@ -897,15 +897,15 @@ To know number of rows with missing value, we use “complete.cases(df)”. The 
 ## 154     2      NA 2.96   15    NA  23
 ## 155    NA     103   NA   NA     9  29
 ## 156    NA      NA 9.43    4    NA   8</code></pre>
-<div class="sourceCode" id="cb224"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb223"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">'number of rows in airQuality_3NA_Inserted is'</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">airQuality_3NA_Inserted</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "number of rows in airQuality_3NA_Inserted is 156"</code></pre>
 <p>Now last 3 rows have 3 NA at tail of airQuality_3NA_Inserted. We now check number of rows with more than or equal to 3 NA:</p>
-<div class="sourceCode" id="cb226"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb225"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"number of rows with at least 3 NA in airQuality_3NA_Inserted is "</span>, <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">airQuality_3NA_Inserted</span><span class="op">)</span><span class="op">)</span> <span class="op">&gt;=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "number of rows with at least 3 NA in airQuality_3NA_Inserted is 2"</code></pre>
 <p>Now we have 3 rows with at least 3 NA. We now drop rows with at least 3 NA from airQuality_3NA_Inserted by selecting rows with NA less than 3 and reset reference of airQuality_3NA_Inserted:</p>
-<div class="sourceCode" id="cb228"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb227"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">airQuality_3NA_Inserted</span> <span class="op">&lt;-</span> <span class="va">airQuality_3NA_Inserted</span><span class="op">[</span><span class="op">!</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">airQuality_3NA_Inserted</span><span class="op">)</span><span class="op">)</span> <span class="op">&gt;=</span> <span class="fl">3</span><span class="op">)</span>, <span class="op">]</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"number of rows in airQuality_3NA_Inserted after dropping is "</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">airQuality_3NA_Inserted</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -929,11 +929,11 @@ To know number of rows with missing value, we use “complete.cases(df)”. The 
 </h5>
 <p>For a column with missing value,we select a constant we think will reflect the real data and fill missing entry in the column with the constant we have selected.</p>
 <p>Let’s say we use constant 30 to fill “Ozone” entries with missing values.</p>
-<div class="sourceCode" id="cb230"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb229"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">airQuality_const_filled</span> <span class="op">&lt;-</span> <span class="va">airQuality_preProcessing</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"number of missing values in Ozone column is "</span>, <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">airQuality_const_filled</span><span class="op">$</span><span class="va">Ozone</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "number of missing values in Ozone column is 37"</code></pre>
-<div class="sourceCode" id="cb232"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb231"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">airQuality_const_filled</span> , <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##   Ozone Solar.R Wind Temp Month Day
 ## 1    41     190  7.4   67     5   1
@@ -942,11 +942,11 @@ To know number of rows with missing value, we use “complete.cases(df)”. The 
 ## 4    18     313 11.5   62     5   4
 ## 5    NA      NA 14.3   56     5   5</code></pre>
 <p>We now fill:</p>
-<div class="sourceCode" id="cb234"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb233"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">airQuality_const_filled</span><span class="op">$</span><span class="va">Ozone</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://SteffenMoritz.github.io/imputeTS/reference/na_replace.html">na_replace</a></span><span class="op">(</span><span class="va">airQuality_const_filled</span><span class="op">$</span><span class="va">Ozone</span>, fill <span class="op">=</span> <span class="fl">30</span>, maxgap <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"number of missing values in Ozone column is "</span>, <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">airQuality_const_filled</span><span class="op">$</span><span class="va">Ozone</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "number of missing values in Ozone column is 0"</code></pre>
-<div class="sourceCode" id="cb236"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb235"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">airQuality_const_filled</span> , <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##   Ozone Solar.R Wind Temp Month Day
 ## 1    41     190  7.4   67     5   1
@@ -973,32 +973,32 @@ To know number of rows with missing value, we use “complete.cases(df)”. The 
 <span class="header-section-number">26.6.2.1.2</span> Impute with Sample statistics<a class="anchor" aria-label="anchor" href="#impute-with-sample-statistics"><i class="fas fa-link"></i></a>
 </h5>
 <p>We can impute missing values in a column using sample statistics of the columns such as mean and median. This way we fill the missing value and does not alter data statistics in the column. We now fill “Ozone” column with current “Mean” of “Ozone” column and “Solar.R” with median of “Solar.R” column. Note the “na.rm = True” arguement is to neglect missing value when computing sample statistics so that we get a real value answer.</p>
-<div class="sourceCode" id="cb238"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb237"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">airQuality_sstat_impute</span> <span class="op">&lt;-</span> <span class="va">airQuality_preProcessing</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"Mean of Ozone before impute is "</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">airQuality_sstat_impute</span><span class="op">$</span><span class="va">Ozone</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "Mean of Ozone before impute is 42.1293103448276"</code></pre>
-<div class="sourceCode" id="cb240"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb239"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"Median of Solar.R before impute is "</span>, <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">airQuality_sstat_impute</span><span class="op">$</span><span class="va">Solar.R</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "Median of Solar.R before impute is 205"</code></pre>
-<div class="sourceCode" id="cb242"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb241"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"number of missing values in Ozone column before impute is "</span>, <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">airQuality_sstat_impute</span><span class="op">$</span><span class="va">Ozone</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "number of missing values in Ozone column before impute is 37"</code></pre>
-<div class="sourceCode" id="cb244"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb243"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"number of missing values in Solar.R column before impute is "</span>, <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">airQuality_sstat_impute</span><span class="op">$</span><span class="va">Solar.R</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "number of missing values in Solar.R column before impute is 7"</code></pre>
-<div class="sourceCode" id="cb246"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb245"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">airQuality_sstat_impute</span><span class="op">$</span><span class="va">Ozone</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://SteffenMoritz.github.io/imputeTS/reference/na_mean.html">na_mean</a></span><span class="op">(</span><span class="va">airQuality_sstat_impute</span><span class="op">$</span><span class="va">Ozone</span>, option <span class="op">=</span> <span class="st">"mean"</span>, maxgap <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span></span>
 <span><span class="va">airQuality_sstat_impute</span><span class="op">$</span><span class="va">Solar.R</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://SteffenMoritz.github.io/imputeTS/reference/na_mean.html">na_mean</a></span><span class="op">(</span><span class="va">airQuality_sstat_impute</span><span class="op">$</span><span class="va">Solar</span>, option <span class="op">=</span> <span class="st">"median"</span>, maxgap <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"Mean of Ozone after impute is "</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">airQuality_sstat_impute</span><span class="op">$</span><span class="va">Ozone</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "Mean of Ozone after impute is 42.1293103448276"</code></pre>
-<div class="sourceCode" id="cb248"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb247"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"Median of Solar.R after impute is "</span>, <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">airQuality_sstat_impute</span><span class="op">$</span><span class="va">Solar.R</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "Median of Solar.R after impute is 205"</code></pre>
-<div class="sourceCode" id="cb250"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb249"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"number of missing values in Ozone column after impute is "</span>, <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">airQuality_sstat_impute</span><span class="op">$</span><span class="va">Ozone</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "number of missing values in Ozone column after impute is 0"</code></pre>
-<div class="sourceCode" id="cb252"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb251"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"number of missing values in Solar.R column after impute is "</span>, <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">airQuality_sstat_impute</span><span class="op">$</span><span class="va">Solar.R</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "number of missing values in Solar.R column after impute is 0"</code></pre>
 <p>We see we no longer have missing values in both columns and mean in “Ozone” column and median in “Solar.R” are both unchanging from before the impute.</p>
@@ -1021,7 +1021,7 @@ To know number of rows with missing value, we use “complete.cases(df)”. The 
 <span class="header-section-number">26.6.2.1.3</span> Impute by value adjacent to Missing value<a class="anchor" aria-label="anchor" href="#impute-by-value-adjacent-to-missing-value"><i class="fas fa-link"></i></a>
 </h5>
 <p>Often in time-series data, value on a time point is highly assosicated with most adjacent valid values. Therefore, we want to fill a missing entries using valid data values before or after it.</p>
-<div class="sourceCode" id="cb254"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb253"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">airQuality_Adjacent_impute</span> <span class="op">&lt;-</span> <span class="va">airQuality_preProcessing</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">airQuality_Adjacent_impute</span>, <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##    Ozone Solar.R Wind Temp Month Day
@@ -1036,10 +1036,10 @@ To know number of rows with missing value, we use “complete.cases(df)”. The 
 ## 9      8      19 20.1   61     5   9
 ## 10    NA     194  8.6   69     5  10</code></pre>
 <p>We first fill missing values in Ozone column with last observed valid value:</p>
-<div class="sourceCode" id="cb256"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb255"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">airQuality_Adjacent_impute</span><span class="op">$</span><span class="va">Ozone</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://SteffenMoritz.github.io/imputeTS/reference/na_locf.html">na_locf</a></span><span class="op">(</span><span class="va">airQuality_Adjacent_impute</span><span class="op">$</span><span class="va">Ozone</span>, option <span class="op">=</span> <span class="st">"locf"</span><span class="op">)</span></span></code></pre></div>
 <p>We then fill missing values in Solar.R column with next observed valid value</p>
-<div class="sourceCode" id="cb257"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb256"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">airQuality_Adjacent_impute</span><span class="op">$</span><span class="va">Solar.R</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://SteffenMoritz.github.io/imputeTS/reference/na_locf.html">na_locf</a></span><span class="op">(</span><span class="va">airQuality_Adjacent_impute</span><span class="op">$</span><span class="va">Solar.R</span>, option <span class="op">=</span> <span class="st">"nocb"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">airQuality_Adjacent_impute</span>, <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##    Ozone Solar.R Wind Temp Month Day
@@ -1072,7 +1072,7 @@ To know number of rows with missing value, we use “complete.cases(df)”. The 
 <span class="header-section-number">26.6.2.1.4</span> Impute using predicative model<a class="anchor" aria-label="anchor" href="#impute-using-predicative-model"><i class="fas fa-link"></i></a>
 </h5>
 <p>If we believe certain features in the data frame depends on some other features, we can use other features to fit a predicative model to predict missing value in certain feature. We need to make sure the “other features” our prediction is based on are all valid entries, which we need to impute using some method. We now assume “Ozone” and “Solar.R” features depends on climate related features such as “Wind” and “Temperature”, and we build linear regression models for “Ozone” and “Solar.R” based on “Wind” and “Temperature”.</p>
-<div class="sourceCode" id="cb259"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb258"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">airQuality_lm_impute</span> <span class="op">&lt;-</span> <span class="va">airQuality_preProcessing</span></span>
 <span></span>
 <span></span>
@@ -1088,13 +1088,13 @@ To know number of rows with missing value, we use “complete.cases(df)”. The 
 ## 8     19      99 13.8   59     5   8
 ## 9      8      19 20.1   61     5   9
 ## 10    NA     194  8.6   69     5  10</code></pre>
-<div class="sourceCode" id="cb261"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb260"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">'number of missing values in Ozone column before impute is '</span>, <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">airQuality_lm_impute</span><span class="op">$</span><span class="va">Ozone</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "number of missing values in Ozone column before impute is 37"</code></pre>
-<div class="sourceCode" id="cb263"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb262"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">'number of missing values in Solar.R column before impute is '</span>, <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">airQuality_lm_impute</span><span class="op">$</span><span class="va">Solar.R</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "number of missing values in Solar.R column before impute is 7"</code></pre>
-<div class="sourceCode" id="cb265"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb264"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">linear_model_Ozone</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Ozone</span> <span class="op">~</span> <span class="va">Wind</span> <span class="op">+</span> <span class="va">Temp</span>, data <span class="op">=</span> <span class="va">airQuality_lm_impute</span><span class="op">)</span></span>
 <span><span class="va">linear_model_Solar.R</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">Solar.R</span> <span class="op">~</span> <span class="va">Wind</span> <span class="op">+</span> <span class="va">Temp</span>, data <span class="op">=</span> <span class="va">airQuality_lm_impute</span><span class="op">)</span></span>
 <span></span>
@@ -1118,7 +1118,7 @@ To know number of rows with missing value, we use “complete.cases(df)”. The 
 ## 9    8.00000  19.0000 20.1   61     5   9
 ## 10  29.66190 194.0000  8.6   69     5  10</code></pre>
 <p>Since the original data are integer, We now convert “Ozone” and “Solar.R” back to integer from double.</p>
-<div class="sourceCode" id="cb267"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb266"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">airQuality_lm_impute</span><span class="op">$</span><span class="va">Ozone</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="va">airQuality_lm_impute</span><span class="op">$</span><span class="va">Ozone</span><span class="op">)</span></span>
 <span><span class="va">airQuality_lm_impute</span><span class="op">$</span><span class="va">Solar.R</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="va">airQuality_lm_impute</span><span class="op">$</span><span class="va">Solar.R</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">airQuality_lm_impute</span>, <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
@@ -1133,7 +1133,7 @@ To know number of rows with missing value, we use “complete.cases(df)”. The 
 ## 8     19      99 13.8   59     5   8
 ## 9      8      19 20.1   61     5   9
 ## 10    29     194  8.6   69     5  10</code></pre>
-<div class="sourceCode" id="cb269"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb268"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">linear_model_Ozone</span> </span></code></pre></div>
 <pre><code>## 
 ## Call:
@@ -1142,7 +1142,7 @@ To know number of rows with missing value, we use “complete.cases(df)”. The 
 ## Coefficients:
 ## (Intercept)         Wind         Temp  
 ##     -71.033       -3.055        1.840</code></pre>
-<div class="sourceCode" id="cb271"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb270"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">linear_model_Solar.R</span></span></code></pre></div>
 <pre><code>## 
 ## Call:
@@ -1152,10 +1152,10 @@ To know number of rows with missing value, we use “complete.cases(df)”. The 
 ## (Intercept)         Wind         Temp  
 ##     -76.362        2.211        3.075</code></pre>
 <p>We have now filled missing values using linear regresison model prediction from valid values from other columns.</p>
-<div class="sourceCode" id="cb273"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb272"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">'number of missing values in Ozone column after impute is '</span>, <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">airQuality_lm_impute</span><span class="op">$</span><span class="va">Ozone</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "number of missing values in Ozone column after impute is 0"</code></pre>
-<div class="sourceCode" id="cb275"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb274"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">'number of missing values in Solar.R column after impute is '</span>, <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">airQuality_lm_impute</span><span class="op">$</span><span class="va">Solar.R</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "number of missing values in Solar.R column after impute is 0"</code></pre>
 <ul>
@@ -1179,7 +1179,7 @@ To know number of rows with missing value, we use “complete.cases(df)”. The 
 </h4>
 <p>As for imputing categorical features,</p>
 <p>Replacing NA in categorical features with string</p>
-<div class="sourceCode" id="cb277"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb276"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">na_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>A <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">7</span>, <span class="fl">8</span>, <span class="fl">5</span>, <span class="fl">3</span><span class="op">)</span>,</span>
 <span>                     B <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">10</span>, <span class="cn">NA</span>, <span class="fl">7</span>, <span class="fl">4</span><span class="op">)</span>, </span>
 <span>                    fantasy <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"sad"</span>, <span class="st">"we"</span>, <span class="cn">NA</span>, <span class="st">'adf'</span>, <span class="st">'NA'</span><span class="op">)</span>,</span>
@@ -1197,7 +1197,7 @@ To know number of rows with missing value, we use “complete.cases(df)”. The 
 ## 4  5  7     adf  9     yes
 ## 5  3  4      NA NA      NA</code></pre>
 <p>Replacing NA in categorical features with mode <strong>[1]</strong></p>
-<div class="sourceCode" id="cb279"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb278"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">na_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>A <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">7</span>, <span class="fl">8</span>, <span class="fl">5</span>, <span class="fl">3</span><span class="op">)</span>,</span>
 <span>                     B <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">10</span>, <span class="cn">NA</span>, <span class="fl">7</span>, <span class="fl">4</span><span class="op">)</span>, </span>
 <span>                    fantasy <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"sad"</span>, <span class="st">"we"</span>, <span class="cn">NA</span>, <span class="st">'adf'</span>, <span class="st">'NA'</span><span class="op">)</span>,</span>
@@ -1230,7 +1230,7 @@ To know number of rows with missing value, we use “complete.cases(df)”. The 
 <span class="header-section-number">26.7.1</span> standardization<a class="anchor" aria-label="anchor" href="#standardization"><i class="fas fa-link"></i></a>
 </h3>
 <p>Standardization unify all the samples’ mean and std to 0 and 1, so we could compare the distribution among the scaled samples.</p>
-<div class="sourceCode" id="cb281"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb280"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># we can use the scale from dplyr</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://openintrostat.github.io/openintro/">openintro</a></span><span class="op">)</span></span>
@@ -1238,7 +1238,7 @@ To know number of rows with missing value, we use “complete.cases(df)”. The 
 <span><span class="co"># what happen if we did not scale.</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">scale_df</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="r_data_cleaning_files/figure-html/unnamed-chunk-58-1.png" width="80%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb282"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb281"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># after scaling</span></span>
 <span><span class="va">scale_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_all</a></span><span class="op">(</span><span class="op">~</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/scale.html">scale</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">as.vector</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># apply scale() to every column</span></span></code></pre></div>
 <div class="inline-figure"><img src="r_data_cleaning_files/figure-html/unnamed-chunk-58-2.png" width="80%" style="display: block; margin: auto;"></div>
@@ -1248,7 +1248,7 @@ To know number of rows with missing value, we use “complete.cases(df)”. The 
 <span class="header-section-number">26.7.2</span> Min Max scaling<a class="anchor" aria-label="anchor" href="#min-max-scaling"><i class="fas fa-link"></i></a>
 </h3>
 <p>MINMAX scaling is good for svm, so don’t hesistate to use it :)</p>
-<div class="sourceCode" id="cb283"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb282"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">minmax</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">na.rm</span> <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="op">(</span><span class="va">x</span><span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
@@ -1256,7 +1256,7 @@ To know number of rows with missing value, we use “complete.cases(df)”. The 
 <span><span class="co"># what happen if we did not scale.</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">scale_df</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="r_data_cleaning_files/figure-html/unnamed-chunk-59-1.png" width="80%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb284"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb283"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">scale_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_all</a></span><span class="op">(</span><span class="op">~</span><span class="op">(</span><span class="fu">minmax</span><span class="op">(</span><span class="va">.</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="va">as.vector</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># apply minmax() to every column</span></span></code></pre></div>
 <div class="inline-figure"><img src="r_data_cleaning_files/figure-html/unnamed-chunk-59-2.png" width="80%" style="display: block; margin: auto;"></div>
 </div>
@@ -1269,7 +1269,7 @@ To know number of rows with missing value, we use “complete.cases(df)”. The 
 <h3>
 <span class="header-section-number">26.8.1</span> ordinal encoding<a class="anchor" aria-label="anchor" href="#ordinal-encoding"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb285"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb284"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ordinal</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">order</span><span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">x</span>, levels <span class="op">=</span> <span class="va">order</span>, exclude <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span><span class="op">)</span></span>
 <span>  <span class="va">x</span></span>
@@ -1281,14 +1281,14 @@ To know number of rows with missing value, we use “complete.cases(df)”. The 
 <span>                     D <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"tangro"</span>, <span class="st">"ok"</span>, <span class="st">'NA'</span>, <span class="st">'yes'</span>, <span class="st">'NA'</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">'origin:'</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "origin:"</code></pre>
-<div class="sourceCode" id="cb287"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb286"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">encode_df</span><span class="op">[</span><span class="st">"D"</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## $D
 ## [1] "tangro" "ok"     "NA"     "yes"    "NA"</code></pre>
-<div class="sourceCode" id="cb289"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb288"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">'encoded:'</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "encoded:"</code></pre>
-<div class="sourceCode" id="cb291"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb290"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">ordinal</span><span class="op">(</span><span class="va">encode_df</span><span class="op">[[</span><span class="st">"D"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 1 2 3 4 3</code></pre>
 </div>
@@ -1296,7 +1296,7 @@ To know number of rows with missing value, we use “complete.cases(df)”. The 
 <h3>
 <span class="header-section-number">26.8.2</span> one-hot encoding <strong>[3]</strong><a class="anchor" aria-label="anchor" href="#one-hot-encoding-3"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb293"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb292"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">encode_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>A <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">7</span>, <span class="fl">8</span>, <span class="fl">5</span>, <span class="fl">3</span><span class="op">)</span>,</span>
 <span>                     B <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">10</span>, <span class="cn">NA</span>, <span class="fl">7</span>, <span class="fl">4</span><span class="op">)</span>, </span>
 <span>                    fantasy <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"sad"</span>, <span class="st">"we"</span>, <span class="st">"seaweed"</span>, <span class="st">'adf'</span>, <span class="st">'NA'</span><span class="op">)</span>,</span>

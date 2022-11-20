@@ -142,7 +142,7 @@
 <span class="header-section-number">30.2.1</span> Load Data<a class="anchor" aria-label="anchor" href="#load-data"><i class="fas fa-link"></i></a>
 </h3>
 <p>We use the preloaded dataset USArrests as an example to show what information can be draw from 3D plot using scatterplot3d.</p>
-<div class="sourceCode" id="cb302"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb301"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"USArrests"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">USArrests</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##            Murder Assault UrbanPop Rape
@@ -158,7 +158,7 @@
 <span class="header-section-number">30.2.2</span> Create matrix<a class="anchor" aria-label="anchor" href="#create-matrix"><i class="fas fa-link"></i></a>
 </h3>
 <p>For Scatterplot3d, the dataframe provided must be converted into a matrix. Here we select Assault, Urban Population, and Rape as our three axes.</p>
-<div class="sourceCode" id="cb304"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb303"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">USArrestsMatrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">USArrests</span><span class="op">)</span></span>
 <span><span class="va">x1</span> <span class="op">&lt;-</span> <span class="va">USArrestsMatrix</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span> <span class="co">## Assault</span></span>
 <span><span class="va">y1</span> <span class="op">&lt;-</span> <span class="va">USArrestsMatrix</span><span class="op">[</span>,<span class="fl">3</span><span class="op">]</span> <span class="co">## Urban Population</span></span>
@@ -169,14 +169,14 @@
 <span class="header-section-number">30.2.3</span> Generate 3d scatter plot<a class="anchor" aria-label="anchor" href="#generate-3d-scatter-plot"><i class="fas fa-link"></i></a>
 </h3>
 <p>Creating a graph using scatterplot3d. “highlight” gives a color scale that enables users to understand the relative position of each data point. “pch” specifies a plotting shape, here we set pch = 16, which is a small dot.</p>
-<div class="sourceCode" id="cb305"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb304"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sp1</span> <span class="op">&lt;-</span> <span class="fu">scatterplot3d</span><span class="op">(</span><span class="va">x1</span>,<span class="va">y1</span>,<span class="va">z1</span>, highlight.3d <span class="op">=</span> <span class="cn">TRUE</span>, pch <span class="op">=</span> <span class="fl">16</span>, angle <span class="op">=</span> <span class="fl">45</span>,</span>
 <span>                     xlab <span class="op">=</span> <span class="st">"Assault"</span>,</span>
 <span>                     ylab <span class="op">=</span> <span class="st">"Urban Population"</span>,</span>
 <span>                     zlab <span class="op">=</span> <span class="st">"Rape"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="3d_visualization_in_r_files/figure-html/unnamed-chunk-4-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>We can also remove the box (or grid) of the graph and change the color of the points. Note that when setting color, the “highlight.3d” argument should be specified as FALSE</p>
-<div class="sourceCode" id="cb306"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb305"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sp2</span> <span class="op">&lt;-</span> <span class="fu">scatterplot3d</span><span class="op">(</span><span class="va">x1</span>,<span class="va">y1</span>,<span class="va">z1</span>,  pch <span class="op">=</span> <span class="fl">16</span>, angle <span class="op">=</span> <span class="fl">45</span>,highlight.3d <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                     xlab <span class="op">=</span> <span class="st">"Assault"</span>,</span>
 <span>                     ylab <span class="op">=</span> <span class="st">"Urban Population"</span>,</span>
@@ -186,7 +186,7 @@
 <span>                     color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"pink"</span><span class="op">)</span><span class="op">)</span> </span></code></pre></div>
 <div class="inline-figure"><img src="3d_visualization_in_r_files/figure-html/unnamed-chunk-5-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>Adding labels to the graph, “cex” specifies the font size.</p>
-<div class="sourceCode" id="cb307"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb306"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sp3</span> <span class="op">&lt;-</span> <span class="fu">scatterplot3d</span><span class="op">(</span><span class="va">x1</span>,<span class="va">y1</span>,<span class="va">z1</span>, highlight.3d <span class="op">=</span> <span class="cn">TRUE</span>, pch <span class="op">=</span> <span class="fl">18</span>, angle <span class="op">=</span> <span class="fl">45</span>,</span>
 <span>                     xlab <span class="op">=</span> <span class="st">"Assault"</span>,</span>
 <span>                     ylab <span class="op">=</span> <span class="st">"Urban Population"</span>,</span>
@@ -199,7 +199,7 @@
 <span class="header-section-number">30.2.4</span> 3D scatter plot with x-y plane position<a class="anchor" aria-label="anchor" href="#d-scatter-plot-with-x-y-plane-position"><i class="fas fa-link"></i></a>
 </h3>
 <p>Use the “Type = ‘h’” to create vertical lines between each data point and the x-y plane.</p>
-<div class="sourceCode" id="cb308"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb307"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sp4</span> <span class="op">&lt;-</span> <span class="fu">scatterplot3d</span><span class="op">(</span><span class="va">x1</span>,<span class="va">y1</span>,<span class="va">z1</span>, highlight.3d <span class="op">=</span> <span class="cn">TRUE</span>, pch <span class="op">=</span> <span class="fl">18</span>, angle <span class="op">=</span> <span class="fl">45</span>,</span>
 <span>                     xlab <span class="op">=</span> <span class="st">"Assault"</span>,</span>
 <span>                     ylab <span class="op">=</span> <span class="st">"Urban Population"</span>,</span>
@@ -218,7 +218,7 @@
 <h3>
 <span class="header-section-number">30.3.1</span> Load Package “mlbench” and use the Glass dataset.<a class="anchor" aria-label="anchor" href="#load-package-mlbench-and-use-the-glass-dataset."><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb309"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb308"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">Glass</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">Glass</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##        RI    Na   Mg   Al    Si    K   Ca Ba   Fe Type
@@ -234,7 +234,7 @@
 <span class="header-section-number">30.3.2</span> Data Cleaning<a class="anchor" aria-label="anchor" href="#data-cleaning"><i class="fas fa-link"></i></a>
 </h3>
 <p>Perform PCA on the dataset and convert the pca result into a dataframe. Here we plot three components of the PCA results.Specify three colors for them.”shape” specifies three different shapes for each component.</p>
-<div class="sourceCode" id="cb311"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb310"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/prcomp.html">prcomp</a></span><span class="op">(</span><span class="va">Glass</span><span class="op">[</span>,<span class="fl">2</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>, scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">results</span><span class="op">$</span><span class="va">rotation</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">1</span><span class="op">*</span><span class="va">results</span><span class="op">$</span><span class="va">rotation</span></span>
 <span><span class="va">results</span><span class="op">$</span><span class="va">rotation</span></span></code></pre></div>
@@ -242,7 +242,7 @@
 ## Na  0.4381565 -0.8763587 0.2000358
 ## Mg -0.6582364 -0.1612544 0.7353380
 ## Al  0.6121632  0.4538639 0.6475058</code></pre>
-<div class="sourceCode" id="cb313"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb312"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">results</span><span class="op">$</span><span class="va">x</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">1</span><span class="op">*</span><span class="va">results</span><span class="op">$</span><span class="va">x</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">results</span><span class="op">$</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##          PC1         PC2       PC3
@@ -252,7 +252,7 @@
 ## 4 -0.7549327 -0.04089696 0.2632213
 ## 5 -0.7521008 -0.14291459 0.1773877
 ## 6 -0.5391614  0.71876865 0.5475329</code></pre>
-<div class="sourceCode" id="cb315"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb314"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pca.result</span> <span class="op">&lt;-</span> <span class="va">results</span><span class="op">$</span><span class="va">x</span></span>
 <span><span class="va">pca.result</span> <span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">pca.result</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">pca.result</span><span class="op">)</span></span></code></pre></div>
@@ -263,14 +263,14 @@
 ## 4 -0.7549327 -0.04089696 0.2632213
 ## 5 -0.7521008 -0.14291459 0.1773877
 ## 6 -0.5391614  0.71876865 0.5475329</code></pre>
-<div class="sourceCode" id="cb317"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb316"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pca.result</span><span class="op">$</span><span class="va">Type</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">Glass</span><span class="op">$</span><span class="va">Type</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div id="define-color-and-shape-parameter." class="section level3" number="30.3.3">
 <h3>
 <span class="header-section-number">30.3.3</span> Define color and shape parameter.<a class="anchor" aria-label="anchor" href="#define-color-and-shape-parameter."><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb318"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb317"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## choose 6 colors for 6 glass types</span></span>
 <span><span class="va">colors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#E69F00"</span>, <span class="st">"#56B4E9"</span>,<span class="st">"#B2182B"</span>,<span class="st">"#D1E5F0"</span>,<span class="st">"#92C5DE"</span>,<span class="st">"#2166AC"</span><span class="op">)</span></span>
 <span><span class="va">colors</span> <span class="op">&lt;-</span> <span class="va">colors</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">pca.result</span><span class="op">$</span><span class="va">Type</span><span class="op">)</span><span class="op">]</span></span>
@@ -283,7 +283,7 @@
 <span class="header-section-number">30.3.4</span> Generate graph<a class="anchor" aria-label="anchor" href="#generate-graph"><i class="fas fa-link"></i></a>
 </h3>
 <p>Plot the result of our PCA analysis following the step in the previous part. Adjust angle for best visualization. Below is an example of how a 3D plot can help us see the contribution of each component in classifying types of glass.</p>
-<div class="sourceCode" id="cb319"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb318"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">PCA3D</span> <span class="op">&lt;-</span> <span class="fu">scatterplot3d</span><span class="op">(</span><span class="va">pca.result</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>,</span>
 <span>                     color<span class="op">=</span><span class="va">colors</span>,</span>
 <span>                     pch <span class="op">=</span> <span class="va">shape</span>, </span>
@@ -302,7 +302,7 @@
 </h2>
 <p>Sometimes it is hard to imagine the relationship between two functions or graph, by plotting them on a 3D space, we could visualize the interaction on a dynamic environment.</p>
 <p>Here is a simple example of how we could graph the interaction of cos and sin function.</p>
-<div class="sourceCode" id="cb320"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb319"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">15</span>, <span class="fl">15</span>, <span class="fl">0.05</span><span class="op">)</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">cos</a></span><span class="op">(</span><span class="va">z</span><span class="op">)</span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">sin</a></span><span class="op">(</span><span class="va">z</span><span class="op">)</span></span>
@@ -314,7 +314,7 @@
 <span class="header-section-number">30.5</span> 3D Histogram<a class="anchor" aria-label="anchor" href="#d-histogram"><i class="fas fa-link"></i></a>
 </h2>
 <p>If we were to generate a histogram in 3d, we can use the plot 3D package. We first initiate the x-axis and the y-axis. Then, we need to create z as matrix that has the dimension |x| * |y|. We can then use hist3D function in the package to help us generate the 3D histogram that we need.</p>
-<div class="sourceCode" id="cb321"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb320"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="va">y</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="va">z</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span></span>
@@ -336,7 +336,7 @@
 <p>Goods: money(usd) spent on goods</p>
 <p>Service: money(usd) spent on service</p>
 <p>Gender: female or male</p>
-<div class="sourceCode" id="cb322"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb321"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">household</span></span></code></pre></div>
 <pre><code>##    housing food goods service gender
 ## 1      820  114   183     154 female
@@ -384,7 +384,7 @@
 <h3>
 <span class="header-section-number">30.6.2</span> The classic 3D Scatterplot<a class="anchor" aria-label="anchor" href="#the-classic-3d-scatterplot"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb324"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb323"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fig</span> <span class="op">&lt;-</span> <span class="fu">plot_ly</span><span class="op">(</span><span class="va">household</span>, x <span class="op">=</span> <span class="op">~</span><span class="va">housing</span>, y <span class="op">=</span> <span class="op">~</span><span class="va">food</span>, z <span class="op">=</span> <span class="op">~</span><span class="va">goods</span> <span class="op">+</span> <span class="va">service</span><span class="op">)</span></span>
 <span><span class="va">fig</span> <span class="op">&lt;-</span> <span class="va">fig</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/graphics/layout.html">layout</a></span><span class="op">(</span>scene <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span>xaxis <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">'housing'</span><span class="op">)</span>,</span>
 <span>                                   yaxis <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">'food'</span><span class="op">)</span>,</span>
@@ -398,7 +398,7 @@
 <span class="header-section-number">30.6.3</span> Adding colors to 3D Scatterplot<a class="anchor" aria-label="anchor" href="#adding-colors-to-3d-scatterplot"><i class="fas fa-link"></i></a>
 </h3>
 <p>In order differentiate the observations of opposite genders, we will need to add colors to our 3D scatter plot. It is done as followed:</p>
-<div class="sourceCode" id="cb325"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb324"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fig</span> <span class="op">&lt;-</span> <span class="fu">plot_ly</span><span class="op">(</span><span class="va">household</span>, x <span class="op">=</span> <span class="op">~</span><span class="va">housing</span>, y <span class="op">=</span> <span class="op">~</span><span class="va">food</span>, z <span class="op">=</span> <span class="op">~</span><span class="va">goods</span> <span class="op">+</span> <span class="va">service</span>,</span>
 <span>               color <span class="op">=</span> <span class="op">~</span><span class="va">gender</span>, colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'#17becf'</span>, <span class="st">'#d62728'</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">fig</span> <span class="op">&lt;-</span> <span class="va">fig</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">add_markers</span><span class="op">(</span><span class="op">)</span></span>
@@ -414,7 +414,7 @@
 <span class="header-section-number">30.6.4</span> Adding sizes to 3D Scatterplot<a class="anchor" aria-label="anchor" href="#adding-sizes-to-3d-scatterplot"><i class="fas fa-link"></i></a>
 </h3>
 <p>It is interesting to note that size is available as a fifth parameter if it helps us plot our findings. In our example, we used size to plot the overall expenditure of the household. It help us visualize the overall trend better.</p>
-<div class="sourceCode" id="cb326"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb325"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fig</span> <span class="op">&lt;-</span> <span class="fu">plot_ly</span><span class="op">(</span><span class="va">household</span>, x <span class="op">=</span> <span class="op">~</span><span class="va">housing</span>, y <span class="op">=</span> <span class="op">~</span><span class="va">food</span>, z <span class="op">=</span> <span class="op">~</span><span class="va">goods</span> <span class="op">+</span> <span class="va">service</span>,</span>
 <span>               color <span class="op">=</span> <span class="op">~</span><span class="va">gender</span>, colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'#2ca02c'</span>, <span class="st">'#8c564b'</span><span class="op">)</span>, size <span class="op">=</span> <span class="op">~</span> <span class="va">housing</span> <span class="op">+</span> <span class="va">food</span> <span class="op">+</span> <span class="va">goods</span> <span class="op">+</span> <span class="va">service</span>, sizes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">500</span>, <span class="fl">5000</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">fig</span> <span class="op">&lt;-</span> <span class="va">fig</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">add_markers</span><span class="op">(</span><span class="op">)</span></span>

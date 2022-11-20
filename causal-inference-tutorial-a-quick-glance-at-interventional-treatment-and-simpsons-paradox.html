@@ -124,7 +124,7 @@
 <span class="header-section-number">45</span> Causal Inference Tutorial: A Quick Glance at Interventional Treatment and Simpson’s Paradox<a class="anchor" aria-label="anchor" href="#causal-inference-tutorial-a-quick-glance-at-interventional-treatment-and-simpsons-paradox"><i class="fas fa-link"></i></a>
 </h1>
 <p>Yizhan Niu</p>
-<div class="sourceCode" id="cb705"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb704"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># remotes::install_github("allisonhorst/palmerpenguins")</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://allisonhorst.github.io/palmerpenguins/">palmerpenguins</a></span><span class="op">)</span></span>
 <span><span class="co"># remotes::install_github("hrbrmstr/hrbrthemes")</span></span>
@@ -164,7 +164,7 @@
 <img src="resources/causal_graphs/Graph1.jpg" alt=""><p class="caption">Graph1</p>
 </div>
 <p>This causal graph represents the ice cream and shark attack case, where Z is the hot weather, X is the ice cream consumption, and Y is the shark attack rate.</p>
-<div class="sourceCode" id="cb706"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb705"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
@@ -193,7 +193,7 @@
 <img src="resources/causal_graphs/Graph1_Intervention.jpg" alt=""><p class="caption">Graph1 Intervention</p>
 </div>
 <p>The right hand side shows the graph after intervention. (Z has no effects on X, because we already have people to eat a fixed number of ice creams.)</p>
-<div class="sourceCode" id="cb707"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb706"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Simulate data from the SCM where do(X = x)</span></span>
 <span><span class="va">intervene_x</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">n</span> <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span></span>
@@ -226,7 +226,7 @@
 <img src="resources/causal_graphs/Graph2.jpg" alt=""><p class="caption">Graph2</p>
 </div>
 <p>We can find that there is an arrow from X to Y now.</p>
-<div class="sourceCode" id="cb708"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb707"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
@@ -254,7 +254,7 @@
 <div class="figure">
 <img src="resources/causal_graphs/Graph2_Intervention.jpg" alt=""><p class="caption">Graph2 Intervention</p>
 </div>
-<div class="sourceCode" id="cb709"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb708"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Simulate data from the SCM where do(X = x)</span></span>
 <span><span class="va">intervene_x</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">n</span> <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span></span>
@@ -293,7 +293,7 @@
 </div>
 <p>The dataset was collected and published by Dr. Kristen Gorman and the Palmer Station, Antarctica LTER, which was originally for species research purposes. This dataset has different features of a penguin in each row: species, island, bill_length_mm, bill_depth_mm, flipper_length_, body_mass_g, sex, and so on. In our case, we will only look at bill lengths (X), bill depths (Y), and species (Z), as Simpson’s Paradox was found among these three variables.</p>
 <p>Here is a brief overview of what the dataset looks like.</p>
-<div class="sourceCode" id="cb710"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb709"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">9450</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">penguin_df</span><span class="op">&lt;-</span> </span>
@@ -310,7 +310,7 @@
 <span class="header-section-number">45.4.2</span> Relationship Between Bill Length (X) And Bill Depth (Y)<a class="anchor" aria-label="anchor" href="#relationship-between-bill-length-x-and-bill-depth-y"><i class="fas fa-link"></i></a>
 </h3>
 <p>First, not taking species into consideration, we would like to see the correlation between bill lengths and bill depths of penguins in the whole dataset.</p>
-<div class="sourceCode" id="cb711"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb710"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#typeof(as.numeric(df["bill_length_mm"][[1]]))</span></span>
 <span></span>
 <span><span class="va">lin_reg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">bill_depth_mm</span> <span class="op">~</span> <span class="va">bill_length_mm</span>, data<span class="op">=</span><span class="va">penguin_df</span><span class="op">)</span></span>
@@ -332,7 +332,7 @@
 <span class="header-section-number">45.4.3</span> Relationship Between Bill Length (X) And Bill Depth (Y) Separated By Species<a class="anchor" aria-label="anchor" href="#relationship-between-bill-length-x-and-bill-depth-y-separated-by-species"><i class="fas fa-link"></i></a>
 </h3>
 <p>Now, if we separated these data into three species, Adelie, Chinstrap, and Gentoo, we will find something different.</p>
-<div class="sourceCode" id="cb712"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb711"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">chin</span><span class="op">&lt;-</span></span>
 <span>  <span class="va">penguin_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">species</span> <span class="op">==</span> <span class="st">"Chinstrap"</span><span class="op">)</span></span>
@@ -366,7 +366,7 @@
 <div class="inline-figure"><img src="short_causal_inference_tutorial_files/figure-html/unnamed-chunk-9-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>Surprisingly, the negative correlation on aggregated data flipped if we separated these data by species. It shows a case of Simpson’s Paradox here.</p>
 <p>The following graphs are plotted separately based on different species.</p>
-<div class="sourceCode" id="cb713"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb712"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Given the same Z, there exists some positive correlation to X and Y.</span></span>
 <span></span>
 <span><span class="va">lin_reg_adelie</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">bill_depth_mm</span> <span class="op">~</span> <span class="va">bill_length_mm</span>, data<span class="op">=</span><span class="va">adelie</span><span class="op">)</span></span>
@@ -416,7 +416,7 @@
 <span class="header-section-number">45.4.4</span> Take a closer look at the distribution given X = 41 and X = 42.<a class="anchor" aria-label="anchor" href="#take-a-closer-look-at-the-distribution-given-x-41-and-x-42."><i class="fas fa-link"></i></a>
 </h3>
 <p>Now, to better understand the patterns of the data, we now take a closer look at the distribution of bill depths, given a certain bill length. We choose the bill lengths of 41 and 42 millimeters.</p>
-<div class="sourceCode" id="cb714"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb713"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">a</span> <span class="op">=</span> <span class="fl">40</span></span>
 <span><span class="va">b</span> <span class="op">=</span> <span class="fl">41.9</span></span>
 <span></span>
@@ -492,7 +492,7 @@ X1: bill_length_mm between 42 and 43.9</p>
 <div class="figure">
 <img src="resources/causal_graphs/Penguin_assumption.jpg" alt=""><p class="caption">Causal Graph Assumption</p>
 </div>
-<div class="sourceCode" id="cb715"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb714"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">penguin_df</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
 <span></span>
 <span><span class="va">prior_adelie</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">penguin_df</span><span class="op">$</span><span class="va">species</span><span class="op">==</span><span class="st">"Adelie"</span><span class="op">)</span><span class="op">/</span><span class="va">n</span></span>

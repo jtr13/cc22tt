@@ -172,7 +172,7 @@
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb327"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb326"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dax</span><span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="va">EuStockMarkets</span><span class="op">[</span>,<span class="st">"DAX"</span><span class="op">]</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Price"</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"Time"</span><span class="op">)</span></span>
@@ -215,7 +215,7 @@
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb328"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb327"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">new</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">EuStockMarkets</span><span class="op">)</span></span>
 <span><span class="va">new</span><span class="op">$</span><span class="va">SMI_diff</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">NA</span>,<span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span><span class="op">(</span><span class="va">new</span><span class="op">$</span><span class="va">SMI</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">new</span><span class="op">$</span><span class="va">DAX_diff</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">NA</span>,<span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span><span class="op">(</span><span class="va">new</span><span class="op">$</span><span class="va">DAX</span><span class="op">)</span><span class="op">)</span></span>
@@ -238,7 +238,7 @@
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb329"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb328"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">new</span><span class="op">$</span><span class="va">SMI_lag_diff</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">NA</span>,<span class="fu">lag</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span><span class="op">(</span><span class="va">new</span><span class="op">$</span><span class="va">SMI</span><span class="op">)</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">new</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/stats/complete.cases.html">complete.cases</a></span><span class="op">(</span><span class="va">new</span><span class="op">)</span>,<span class="op">]</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">SMI_lag_diff</span>,<span class="va">DAX_diff</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">21</span>, colour <span class="op">=</span> <span class="st">"black"</span>, fill <span class="op">=</span> <span class="st">"white"</span>,alpha<span class="op">=</span><span class="fl">0.4</span>,size<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
@@ -279,7 +279,7 @@
 <span class="header-section-number">31.0.0.4.1</span> Line plots<a class="anchor" aria-label="anchor" href="#line-plots"><i class="fas fa-link"></i></a>
 </h5>
 <p>Discover patterns through visual inspection:</p>
-<div class="sourceCode" id="cb330"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb329"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"Year"</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Passengers"</span><span class="op">)</span></span></code></pre></div>
@@ -325,7 +325,7 @@
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb331"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb330"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/stl.html">stl</a></span><span class="op">(</span><span class="va">AirPassengers</span>, s.window <span class="op">=</span> <span class="st">'periodic'</span><span class="op">)</span>, ts.colour <span class="op">=</span> <span class="st">'red'</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"Year"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="visualization_time_series_files/figure-html/unnamed-chunk-6-1.png" width="80%" style="display: block; margin: auto;"><br></p>
@@ -363,7 +363,7 @@
 <li>Shows overlapping time periods, duration of event relative to others</li>
 <li>timevis package timevis()</li>
 </ul>
-<div class="sourceCode" id="cb332"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb331"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dates</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">'1998-01-01'</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">'2000-01-01'</span><span class="op">)</span>, by<span class="op">=</span><span class="st">"day"</span><span class="op">)</span>, <span class="fl">16</span><span class="op">)</span></span>
 <span><span class="va">dates</span><span class="op">=</span><span class="va">dates</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">dates</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="va">projects</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"Project "</span>,<span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">8</span><span class="op">)</span><span class="op">)</span> </span>
@@ -406,10 +406,10 @@
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb333"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb332"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">ggseasonplot</span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="visualization_time_series_files/figure-html/unnamed-chunk-8-1.png" width="80%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb334"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb333"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">ggmonthplot</span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="visualization_time_series_files/figure-html/unnamed-chunk-8-2.png" width="80%" style="display: block; margin: auto;"></div>
 <ul>
@@ -444,7 +444,7 @@
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb335"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb334"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">new</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span></span>
 <span><span class="va">new</span><span class="op">$</span><span class="va">year</span><span class="op">=</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/year.html">year</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"1949-01-01"</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"1960-12-01"</span><span class="op">)</span>,by<span class="op">=</span><span class="st">"month"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">new</span><span class="op">$</span><span class="va">month</span><span class="op">=</span><span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/month.html">month</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"1949-01-01"</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"1960-12-01"</span><span class="op">)</span>,by<span class="op">=</span><span class="st">"month"</span><span class="op">)</span>,label<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
@@ -512,7 +512,7 @@
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb336"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb335"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">new</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span></span>
 <span><span class="va">new</span><span class="op">$</span><span class="va">AirPassengers</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">new</span><span class="op">$</span><span class="va">AirPassengers</span><span class="op">)</span></span>
 <span><span class="va">new</span><span class="op">$</span><span class="va">year</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"1949-01-01"</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"1960-12-01"</span><span class="op">)</span>,by<span class="op">=</span><span class="st">"month"</span><span class="op">)</span></span>
@@ -578,7 +578,7 @@
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb337"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb336"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">new</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">AirPassengers</span><span class="op">)</span></span>
 <span><span class="va">new</span><span class="op">$</span><span class="va">AirPassengers</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">new</span><span class="op">$</span><span class="va">AirPassengers</span><span class="op">)</span></span>
 <span><span class="va">new</span><span class="op">$</span><span class="va">date</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"1949-01-01"</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"1960-12-01"</span><span class="op">)</span>,by<span class="op">=</span><span class="st">"month"</span><span class="op">)</span></span>
@@ -598,7 +598,7 @@
 <span></span>
 <span><span class="fu">grid.arrange</span><span class="op">(</span><span class="va">g</span>,<span class="va">g_diff</span>,<span class="va">g_diff2</span>,top<span class="op">=</span><span class="fu">textGrob</span><span class="op">(</span><span class="st">"Airline Passengers"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="visualization_time_series_files/figure-html/unnamed-chunk-11-1.png" width="80%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb338"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb337"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">adf.test</span><span class="op">(</span><span class="va">new</span><span class="op">$</span><span class="va">AirPassengers</span>,alternative<span class="op">=</span><span class="st">'stationary'</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ##  Augmented Dickey-Fuller Test
@@ -606,7 +606,7 @@
 ## data:  new$AirPassengers
 ## Dickey-Fuller = -7.3186, Lag order = 5, p-value = 0.01
 ## alternative hypothesis: stationary</code></pre>
-<div class="sourceCode" id="cb340"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb339"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">adf.test</span><span class="op">(</span><span class="va">new</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/stats/complete.cases.html">complete.cases</a></span><span class="op">(</span><span class="va">new</span><span class="op">$</span><span class="va">diff_data</span><span class="op">)</span>,<span class="fl">3</span><span class="op">]</span>,alternative<span class="op">=</span><span class="st">'stationary'</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ##  Augmented Dickey-Fuller Test
@@ -614,7 +614,7 @@
 ## data:  new[complete.cases(new$diff_data), 3]
 ## Dickey-Fuller = -7.0177, Lag order = 5, p-value = 0.01
 ## alternative hypothesis: stationary</code></pre>
-<div class="sourceCode" id="cb342"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb341"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">adf.test</span><span class="op">(</span><span class="va">new</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/stats/complete.cases.html">complete.cases</a></span><span class="op">(</span><span class="va">new</span><span class="op">$</span><span class="va">diff_data2</span><span class="op">)</span>,<span class="fl">4</span><span class="op">]</span>,alternative<span class="op">=</span><span class="st">'stationary'</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ##  Augmented Dickey-Fuller Test
@@ -665,12 +665,12 @@
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb344"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb343"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">new</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">AirPassengers</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span><span class="fl">20</span>,fill <span class="op">=</span> <span class="st">"mediumpurple"</span><span class="op">)</span> <span class="op">+</span>             </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"Passengers"</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="visualization_time_series_files/figure-html/unnamed-chunk-12-1.png" width="80%" style="display: block; margin: auto;"></div>
-<div class="sourceCode" id="cb345"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb344"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqnorm</a></span><span class="op">(</span><span class="va">new</span><span class="op">$</span><span class="va">AirPassengers</span>, main<span class="op">=</span><span class="st">"Airline Passengers"</span>, xlab<span class="op">=</span><span class="st">""</span>, ylab<span class="op">=</span><span class="st">""</span>, pch<span class="op">=</span><span class="fl">16</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/qqnorm.html">qqline</a></span><span class="op">(</span><span class="va">new</span><span class="op">$</span><span class="va">AirPassengers</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="visualization_time_series_files/figure-html/unnamed-chunk-12-2.png" width="80%" style="display: block; margin: auto;"></div>
@@ -709,7 +709,7 @@
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb346"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb345"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">Acf</span><span class="op">(</span><span class="va">new</span><span class="op">$</span><span class="va">AirPassengers</span>,main<span class="op">=</span><span class="st">'Passengers Autcorrelation Function'</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="visualization_time_series_files/figure-html/unnamed-chunk-13-1.png" width="80%" style="display: block; margin: auto;"></div>
 <ul>
@@ -729,7 +729,7 @@
 </ul>
 </li>
 </ul>
-<div class="sourceCode" id="cb347"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb346"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">Pacf</span><span class="op">(</span><span class="va">new</span><span class="op">$</span><span class="va">AirPassengers</span>,main<span class="op">=</span><span class="st">'Passengers Partial Autcorrelation Function'</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="visualization_time_series_files/figure-html/unnamed-chunk-14-1.png" width="80%" style="display: block; margin: auto;"></div>
 <ul>
