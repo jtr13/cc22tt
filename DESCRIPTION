@@ -6,7 +6,6 @@ Imports:
     emo,
     tidyverse,
     geocompkg,
-    academictwitteR,
     widyr,
 Suggests:
     bookdown,
@@ -96,4 +95,4 @@ Remotes:
     hrbrmstr/streamgraph,
     geocompr/geocompkg,
     cjbarrie/academictwitteR,
-    dgrtwo/widyr,
+    dgrtwo/widyr
