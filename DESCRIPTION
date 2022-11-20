@@ -85,6 +85,7 @@ Suggests:
     gridExtra,
     palmerpenguins,
     hrbrthemes,
+    anglr,
 Remotes:
     hadley/emo,
     kassambara/navdata,
