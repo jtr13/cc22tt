@@ -74,6 +74,7 @@ rmd_files: [
   
   # Part: Blogs
   'CC.Rmd',
+  'breaking_into_tech.Rmd',
   
   # Part: Workshops
   
