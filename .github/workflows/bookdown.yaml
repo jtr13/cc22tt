@@ -21,6 +21,8 @@ jobs:
           use-public-rspm: true
 
       - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          pak-version: devel
           
       - name: Cache bookdown results
         uses: actions/cache@v2
