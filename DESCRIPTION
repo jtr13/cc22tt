@@ -86,6 +86,7 @@ Suggests:
     palmerpenguins,
     hrbrthemes,
     anglr,
+    googlesheets4
 Remotes:
     hadley/emo,
     kassambara/navdata,
