@@ -416,6 +416,12 @@ conclusion-8
 sources
 part-blogs
 equity-in-ai
+breaking-into-tech-black-girl-edition
+background-1
+finding-my-true-calling
+tips-for-being-in-data-science
+affirmations-for-black-girls
+resources
 github-initial-setup
 create-new-repo
 pages-in-repo-settings
