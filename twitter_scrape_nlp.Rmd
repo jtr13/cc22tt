@@ -96,6 +96,7 @@ For the purpose of this example, I will limit the number of tweets retrieved to 
 # capitol_df_ids <- as.data.frame(capitol$id)
 # write_sheet(capitol_df)
 # write_sheet(capitol_df_ids)
+gs4_deauth()
 capitol <- as.data.frame(read_sheet("https://docs.google.com/spreadsheets/d/198TOYrrXLtUWA3WpRHrch1CBjml0a-pTEdGPXNxqr3U/edit#gid=890543988"))
 
 ```
