@@ -90,7 +90,6 @@ Suggests:
     withr,
     wordcloud,
     xml2
-
 Remotes:
     hadley/emo,
     kassambara/navdata,
