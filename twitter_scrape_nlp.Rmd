@@ -63,7 +63,7 @@ and the [package repository](https://github.com/cjbarrie/academictwitteR) have
 more information on that. For now, you have to call the function `set_bearer()` to
 store that information for future use.
 ```{r bearer}
-set_bearer()
+# set_bearer()
 ```
 Once you follow the instructions above, you are ready to go ahead and run your
 query!
