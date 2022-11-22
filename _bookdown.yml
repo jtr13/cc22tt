@@ -77,6 +77,7 @@ rmd_files: [
   'breaking_into_tech.Rmd',
   
   # Part: Workshops
+  'homepage_artwork.Rmd',
   
   # Part: Appendices
   'appendix_initial_setup.Rmd', # contains PART header
