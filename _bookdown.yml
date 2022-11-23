@@ -64,6 +64,7 @@ rmd_files: [
   # 'sentiment_analysis_tutorial.Rmd',
   # 'Interactive_3D_Vis.Rmd',
   'common_sampling_methods_in_r_tutorial.Rmd',
+  'concentric_circles_ggmap_ggplot.Rmd',
   
   # Part: Interview Prep
   'ten_interview_questions.Rmd',
