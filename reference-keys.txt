@@ -366,6 +366,11 @@ what-is-a-network
 network-analysis-and-social-network-anlysis
 analyzing-a-network
 network-analysis-in-r
+introduction-to-common-sampling-techniques-in-r
+motivation-11
+simple-random-sampling
+stratified-sampling
+source
 part-interview-prep
 ten-interview-questions-and-answers
 forward
