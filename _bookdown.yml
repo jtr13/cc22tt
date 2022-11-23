@@ -63,6 +63,7 @@ rmd_files: [
   'network_analysis.Rmd',
   # 'sentiment_analysis_tutorial.Rmd',
   # 'Interactive_3D_Vis.Rmd',
+  'common_sampling_methods_in_r_tutorial.Rmd',
   
   # Part: Interview Prep
   'ten_interview_questions.Rmd',
