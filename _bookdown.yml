@@ -58,10 +58,12 @@ rmd_files: [
   'dplyr_in_r.Rmd',
   'visualizing_us_elections.Rmd',
   'time_series_visualization_with_r.Rmd',
-  'twitter_scrape_nlp.Rmd',
+  # 'twitter_scrape_nlp.Rmd',  # See https://github.com/jtr13/cc22tt/issues/114
   'short_causal_inference_tutorial.Rmd',
   'network_analysis.Rmd',
   # 'sentiment_analysis_tutorial.Rmd',
+  # 'Interactive_3D_Vis.Rmd',
+  'common_sampling_methods_in_r_tutorial.Rmd',
   
   # Part: Interview Prep
   'ten_interview_questions.Rmd',
@@ -73,8 +75,10 @@ rmd_files: [
   
   # Part: Blogs
   'CC.Rmd',
+  'breaking_into_tech.Rmd',
   
   # Part: Workshops
+  'homepage_artwork.Rmd',
   
   # Part: Appendices
   'appendix_initial_setup.Rmd', # contains PART header
