@@ -429,6 +429,7 @@ tips-for-being-in-data-science
 affirmations-for-black-girls
 resources
 homepage-artwork
+design-homepage-for-class-community
 github-initial-setup
 create-new-repo
 pages-in-repo-settings
