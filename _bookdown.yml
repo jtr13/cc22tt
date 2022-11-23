@@ -79,6 +79,7 @@ rmd_files: [
   
   # Part: Workshops
   'homepage_artwork.Rmd',
+  'design_homepage.Rmd',
   
   # Part: Appendices
   'appendix_initial_setup.Rmd', # contains PART header
