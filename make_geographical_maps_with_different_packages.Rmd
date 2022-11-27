@@ -1,0 +1,162 @@
+# Make Geographical Maps with Different Packages
+
+Xindi Deng
+
+```{r}
+library(readr)
+library(ggplot2)
+library(sf)
+library(osmextract)
+```
+
+## Introduction
+
+When we do spacial analysis, we always focus on the map of USA and extract the dataset from maps package in R. However, the number of datasets in maps package is limited and it does not contain the information of sub-regions for many other countries, such as China, Japan and so on. 
+
+In this tutorial, I first introduce a common way to plot a map by extracting coordinates from "maps" package, then I will talk about "osmextract" package which contains more information of geographical maps.
+
+## Make geographical maps with "map" package 
+
+To make a geographical map, we first need to know the coordinates of all region boundaries for the target country. Here I introduce two ways to extract the data. The first one is more user-friendly while the second one contains more data sets.
+
+### Import dataset with function "map_data"
+
+One of the most common and user-friendly functions to extract map data from maps package is "map_data". It can turn data from the maps package into a data frame suitable for plotting with ggplot2.
+
+
+#### Usage of "map_data"
+map_data(map, region = ".", exact = FALSE, ...)
+
+ - map: the name of map provided by the maps package.
+        
+        The choices of map include a world map, three USA databases (usa, state, county), and more (including Italy database, France database, New Zealand database and so on). 
+        We can use help(package='maps') to check what map data sets can be used by "map_data".
+
+ - region: select sub-regions in the map. Default is ".".
+ 
+#### Dataset exploration
+
+Here we use map="state" as an example to see the format of function return
+
+```{r}
+statesMap <- map_data("state")
+head(statesMap)
+```
+ The data set of "states" has 15537 coordinates and 6 features. 
+ - long: the longitude of a coordinate on the boundaries
+ - lat: the latitude of a coordinate on the boundaries
+ - group: each minimum closed region has a unique group number
+ - region: the name of a region
+ 
+```{r}
+unique(statesMap$region)
+```
+
+### Plot maps
+
+#### The logic of ploting maps
+To plot maps, we take each minimum closed region as a polygon. Since we know the coordinates on boundaries for each minimum closed region, we can plot each polygon by taking longitude as x-axis and taking latitude as y-axis. Since each minimum closed region has a unique group number, we can group the coordinates by the group number and plot all polygons on one graph.
+
+#### Plot the map
+```{r}
+ggplot(statesMap,aes(x=long,y=lat,group=group))+
+  geom_polygon(fill="white",color="black")
+```
+#### Plot sub-regions of a map
+```{r}
+NewYorkMap <- subset(statesMap, region %in% c("new jersey", "new york","connecticut"))
+ggplot(NewYorkMap,aes(x=long,y=lat, group=group, fill = region))+
+  geom_polygon(color="white")
+```
+
+#### Data visualization on the map
+
+Step 1: prepare the data frame.
+
+Import the dataset that need to be visualized as a data frame. Combine the new data frame with the data frame of map by region names. Then we can get the data frame suitable for plotting. 
+```{r}
+murders <- read_csv("./resources/make_geographical_maps_with_different_packages/murders.csv", show_col_types = FALSE)
+murders$region=tolower(murders$State)
+murderMap <- merge(statesMap,murders,by="region")
+head(murderMap)
+```
+
+Step 2: plot the visualization result
+```{r}
+ggplot(murderMap,aes(x=long, y=lat, group=group,fill=GunMurders))+
+  geom_polygon(color="black")+
+  scale_fill_gradient(low="white",high="red",guide="legend")+
+  coord_fixed(1.5)
+```
+
+## Make geographical maps with "osmextract" package 
+
+Even though the defined function "map_data" is easy to use, maps package only contains the data of coordinates for a few countries. To extract the coordinates on boundaries for more countries, such as China, we can use "osmextract" package.
+
+### Import dataset with object "openstreetmap_fr_zones"
+
+"openstreetmap_fr_zones" is an sf object of geographical zones taken from download.openstreetmap.fr. 
+
+#### Define a function to extract the coordinations data
+I define a function called "extract_map_data", which can turn data from openstreetmap_fr_zones into a data frame suitable for plotting with ggplot2.
+
+```{r}
+library(sf)
+library(osmextract) 
+#> OpenStreetMap® is open data, licensed under the Open Data Commons Open Database License (ODbL) by the OpenStreetMap Foundation (OSMF).
+#> Data (c) OpenStreetMap contributors, ODbL 1.0. https://www.openstreetmap.org/copyright.
+#> Check the package website, https://docs.ropensci.org/osmextract/, for more details.
+
+extract_map_data <- function(region_name){
+  # get polygons in the target region
+  poly_region <- openstreetmap_fr_zones[which(tolower(openstreetmap_fr_zones$parent) == region_name), ]
+
+  # extract the coordinations and save the coordinations in a data.frame
+  poly_region_coords <- as.data.frame(st_coordinates(poly_region))
+
+  # extract the region name
+  my_times <- vapply(st_geometry(poly_region), function(x) nrow(st_coordinates(x)), numeric(1))
+  poly_region_coords$region_name <- rep(tolower(poly_region$name), times = my_times)
+  
+  # make the format of data frame similar to that from map_data and make it suitable for plotting with ggplot2
+  poly_region_coords$group <- paste(poly_region_coords$L1,",",poly_region_coords$L2,",",poly_region_coords$L3)
+  colnames(poly_region_coords) <- c("long","lat","group1","group2","group3", "region","group")
+  
+  # explore the data frame
+  print(head(poly_region_coords))
+  
+  return <- poly_region_coords 
+}
+```
+
+#### Usage of "extract_map_data"
+extract_map_data(map)
+
+ - map: the name of the region. All available regions are shown below.
+
+```{r}
+unique(tolower(openstreetmap_fr_zones$parent))
+```
+
+
+
+### Plot the map of China
+```{r}
+map2 = extract_map_data("china")
+ggplot(map2,aes(x=long,y=lat,group=group))+
+  geom_polygon(fill="white",color="black")
+```
+
+### Plot the map of Japan
+```{r}
+map2 = extract_map_data("japan")
+ggplot(map2,aes(x=long,y=lat,group=group))+
+  geom_polygon(fill="white",color="black")
+```
+
+
+References:
+
+https://ggplot2.tidyverse.org/reference/map_data.html
+
+https://cran.r-project.org/web/packages/osmextract/vignettes/osmextract.html
