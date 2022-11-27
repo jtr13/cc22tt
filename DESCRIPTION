@@ -94,6 +94,7 @@ Suggests:
     withr,
     wordcloud,
     xml2,
+    gm,
 Remotes:
     hadley/emo,
     kassambara/navdata,
