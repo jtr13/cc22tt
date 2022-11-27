@@ -8,6 +8,6 @@ description: "This book contains community contributions for EDAV Fall 2022 Tues
 
 # Welcome!
 
-<img src="resources/homepage_artwork/homepage_artwork1.jpeg" width="80%" style="display: block; margin: auto;" />
+<img src="resources/homepage_artwork/homepage_artwork1.jpeg" width="100%" style="display: block; margin: auto;" />
 
 Artwork credit: [Xingye Feng](homepage-artwork.html)
