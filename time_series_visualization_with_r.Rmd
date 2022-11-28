@@ -1,0 +1,195 @@
+# Time series visualization with R
+
+Runnan Jiang
+
+```{r, include=FALSE}
+# this prevents package loading message from appearing in the rendered version of your problem set
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+```
+
+```{r}
+library(tidyverse)
+#library(ggplot2)
+#library(dplyr)
+library(openintro)
+library(plotrix)
+library(zoo)
+library(gcookbook)
+library(xts)
+library(dygraphs)
+```
+
+### 1. Introduction
+
+A time series is a sequence of data points that occur in successive order over some period of time. Time series is very important in many industries. In this tutorial, we collect and organize useful methods to create and customize time series visualizations from R. We hope this tutorial could help us visualize time series data effectively and efficiently in the future. The main packages used are `tidyverse` and `dygraphs`. `ggplot2` has already offered great features when it comes to visualize time series: date can be recognized automatically and result in neat X axis labels; `scale_x_data()` makes it easy to customize those labels. Besides, there are packages including `dygraphs`,`plotly` that can create interactive plots of time series.
+
+### 2 Line Plots
+
+For this section, we use `economics` dataset from ggplot2 package. This dataset was produced from US economic time series data available from [the Federal Reserve Bank of St. Louis](https://fred.stlouisfed.org/). It contains information on personal consumption expenditures, total population, personal savings rate and unemployment with respect to the year and month.
+
+```{r}
+economics %>% glimpse()
+```
+
+Line plots are commonly used to plot time series data.
+```{r}
+economics %>%
+  ggplot(aes(date,psavert)) +
+  geom_line(color="#0099CC") +
+  theme_bw()
+```
+
+We can use `scale_x_date()` to control the x-axis breaks, limits, and labels; use `scale_y_continuous()` to control the y-axis breaks, limits, and labels; use `geom_vline()` with `annotate()` to mark specific events in a time series.
+
+```{r}
+economics %>%
+  ggplot(aes(x=date,y=psavert)) +
+  geom_line(color="#0099CC") +
+  scale_x_date(date_breaks = "5 years", date_labels = "%Y-%m") +
+  scale_y_continuous(breaks = seq(2,20,2)) +
+  geom_vline(xintercept=as.Date("2007-12-01"), color="#FF6666") +
+  annotate("text", x=as.Date("2009-01-01"), y=12, label="Global Recession", angle=90, size=3, color="#FF6666") +
+  ggtitle("Personal Savings Rate Time Series") +
+  theme_bw()
+```
+
+Sometimes multiple indicators that change along time are incomparable. At this time, the data should not be drawn in the same coordinate system. Generally, multiple slices can be drawn and aligned up and down according to the time axis. `facet_wrap()` can be used for faceting.
+```{r}
+economics_facet <- economics %>%
+  pivot_longer(c(pce, psavert),
+               names_to = "index", 
+               values_to = "value")
+economics_facet %>%
+  ggplot(aes(date,value)) + 
+  geom_line(color="#0099CC") + 
+  facet_wrap(~index, ncol = 1, scales = "free_y") +
+  theme_bw()
+```
+
+We can use `rollmean()` in Zoo package to compute rolling means.
+```{r}
+economics_rolling <- economics %>%
+  mutate(roll_mean = rollmean(economics$psavert,k=12,align="right",fill = NA))
+
+economics_rolling <- gather(economics_rolling, key=Metric, value = psavert, 
+                            c("psavert","roll_mean"))
+
+ggplot(economics_rolling) +
+  geom_line(aes(x=date,y=psavert,group=Metric,color=Metric)) +
+  theme_bw()
+```
+
+#### 3 Bar Plots
+
+We can also use barplot to visualize time series data.
+```{r}
+ggplot(economics) +
+  geom_bar(aes(x = date, y = psavert, fill = pop), stat = 'identity') +
+  labs(title = "Personal Savings Rate and Total Population Time Series") +
+  theme_bw()
+```
+
+```{r}
+economics.grouped <-
+  economics %>%
+  mutate(year=format(date,"%Y")) %>%
+  group_by(year) %>%
+  summarise(mean_pop_by_year=mean(pce))
+
+economics.grouped <-
+  economics.grouped %>%
+  filter(year > '2000')
+
+ggplot(economics.grouped) + 
+  geom_bar(aes(x = year, y = mean_pop_by_year), stat = 'identity', fill="#0099CC",color='black',alpha=0.6) +
+  labs(title = "Total Population Yearly Average") +
+  theme_bw()
+```
+
+### 4. Area Plots
+
+#### 4.1 Areas Under a Single Time Series
+
+```{r}
+ggplot(economics, aes(x = date, y = psavert)) +
+  geom_area(fill="#0099CC",color='black',alpha=0.6) +
+  labs(title = "Personal Savings Rate",
+       x = "Date",
+       y = "Personal Savings Rate") +
+  scale_x_date(expand = c(0,0)) +
+  scale_y_continuous(expand = c(0,0)) +
+  theme_bw()
+```
+
+#### 4.2 Stacked Polygons
+
+A stacked area chart can be used to show differences between groups over time. In this section, we use `uspopage` dataset from `gcookbook` package. We will plot the age distribution of the US population from 1900 to 2002.
+```{r}
+data(uspopage, package = "gcookbook")
+uspopage %>% glimpse()
+```
+
+To create stacked polygons (area plots), we use function `stackpoly()` from `plotrix` package. 
+```{r}
+ggplot(uspopage, aes(x = Year,
+                     y = Thousands, 
+                     fill = AgeGroup)) +
+  geom_area(alpha=0.6 , size=.5, colour="white") +
+  ggtitle("US Population by age") +
+  theme_bw()
+```
+
+We could define a appropriate order of stack by ourselves.
+```{r}
+# Give a specific order
+uspopage$AgeGroup <- factor(uspopage$AgeGroup, 
+                   levels=c(">64","55-64","45-54","35-44","25-34","15-24","5-14","<5"))
+
+ggplot(uspopage, aes(x=Year,y=Thousands,fill=AgeGroup)) + 
+    geom_area(alpha=0.6 , size=.5, colour="white") + 
+    ggtitle("US Population by age") +
+    theme_bw()
+```
+
+When the variable is a percentage and the sum of each year is always equal to a hundred, we could use a proportional stacked area graph to visualize the data.
+```{r}
+uspopage_percentage <- uspopage  %>%
+  group_by(Year, AgeGroup) %>%
+  summarise(n = sum(Thousands)) %>%
+  mutate(percentage = n / sum(n))
+
+ggplot(uspopage_percentage, aes(x=Year, y=percentage, fill=AgeGroup)) + 
+    geom_area(alpha=0.6 , size=1, colour="white") +
+    ggtitle("US Population Proportion by age") +
+    theme_bw()
+```
+
+### 5. Interactive Time Series
+
+`dygraphs` is a package for visualizing time series data. With `dygraphs`, we can easily implement zooming, hovering, minimaps and much more visualizations.
+```{r}
+str(economics)
+don <- xts(x = economics$psavert, order.by = economics$date)
+p <- dygraphs::dygraph(don) %>%
+  dyOptions(colors="#0099CC")
+p
+```
+
+```{r}
+p <- dygraph(don) %>%
+  dyOptions(labelsUTC = TRUE, fillGraph=TRUE, fillAlpha=0.1, drawGrid = FALSE,colors = "#0099CC") %>%
+  dyRangeSelector() %>%
+  dyCrosshair(direction = "vertical") %>%
+  dyHighlight(highlightCircleSize = 5, highlightSeriesBackgroundAlpha = 0.2, hideOnMouseOut = FALSE)  %>%
+  dyRoller(rollPeriod = 1)
+p
+```
+
+### 6. Conclusion
+
+In this tutorial, we collect and organize useful methods to create and customize time series visualizations from R. We hope this tutorial could help us visualize time series data effectively and efficiently in the future. The main packages used are `tidyverse` and `dygraphs`. `ggplot2` has already offered great features when it comes to visualize time series: date can be recognized automatically and result in neat X axis labels; `scale_x_data()` makes it easy to customize those labels. Besides, there are packages including `dygraphs`,`plotly` that can create interactive plots of time series.
+
+### 7. Reference
+* R documentation: [R documentation](https://www.rdocumentation.org/)
+* dygraphs package: [dygraphs for R](https://dygraphs.com/)
+* searching for useful R packages: [R Graph Gallery](https://r-graph-gallery.com/index.html)

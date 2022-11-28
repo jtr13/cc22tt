@@ -30,6 +30,7 @@ rmd_files: [
   'r_vs_matlab_graph.Rmd',
   'ggplot2_to_python.Rmd',
   'easystats_cheat_sheet.Rmd',
+  'itsmr_cheat_sheet.Rmd',
 
   # Part: Tutorials
   'time_series_visualization_project.Rmd',  
@@ -51,6 +52,20 @@ rmd_files: [
   'make_geographical_maps_with_different_packages.Rmd',
   'api_json_tutorial.Rmd',
   'sample_statistic_tutorial.Rmd',
+  'data_cleaning_tutorial.Rmd',
+  'mlr3_package_tutorial.Rmd',
+  'guide_to_nonparametric_tests.Rmd',
+  'dplyr_in_r.Rmd',
+  'visualizing_us_elections.Rmd',
+  'time_series_visualization_with_r.Rmd',
+  # 'twitter_scrape_nlp.Rmd',  # See https://github.com/jtr13/cc22tt/issues/114
+  'short_causal_inference_tutorial.Rmd',
+  'network_analysis.Rmd',
+  # 'sentiment_analysis_tutorial.Rmd',
+  # 'Interactive_3D_Vis.Rmd',
+  'common_sampling_methods_in_r_tutorial.Rmd',
+  #'music_gm_package.Rmd',
+  # 'concentric_circles_ggmap_ggplot.Rmd',
   
   # Part: Interview Prep
   'ten_interview_questions.Rmd',
@@ -60,7 +75,13 @@ rmd_files: [
   # Part: Case Studies
   'benford_case_study.Rmd',
   
+  # Part: Blogs
+  'CC.Rmd',
+  'breaking_into_tech.Rmd',
+  
   # Part: Workshops
+  'homepage_artwork.Rmd',
+  'design_homepage.Rmd',
   
   # Part: Appendices
   'appendix_initial_setup.Rmd', # contains PART header

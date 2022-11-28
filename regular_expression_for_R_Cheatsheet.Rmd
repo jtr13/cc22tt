@@ -1,0 +1,19 @@
+# Cheatsheet
+
+Chen Da
+
+## Regular Expressions and String manipulation
+
+For the community contribution for the EDAV class, I created a cheat sheet about the Regular Expressions and String manipulation by using stringr
+
+The link for the cheat sheet is [here](https://github.com/CHENNEY001/regularExpressionCheatsheet/blob/main/Regular%20Expression%20cheatsheet.pdf).
+
+## Motivation for the project and problems it addressed
+
+There are lots of analyzes that say Regular Expression is frequently used when we work with string-searching algorithms for "find" or "find and replace" operations on strings, or for input validation.
+
+Regular expressions are very powerful but can be hard to read because they use special characters. Therefore, I collected documents and combined my experience of using regular expressions before to create this cheatsheet.
+
+## My own evaluation
+
+Through creating this cheatsheet, I become more familiar with the string manipulation in R and the usage of regular expression, which has greatly improved my data processing capability. Besides, regular expression is universally used in many programming languages such as Java and Python，it also will be very helpful for my future development work.
