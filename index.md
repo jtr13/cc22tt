@@ -1,6 +1,6 @@
 ---
 title: "Community Contributions for EDAV Fall 2022 Tues/Thurs"
-date: "2022-11-27"
+date: "2022-11-28"
 site: bookdown::bookdown_site
 github-repo: jtr13/cc22tt
 description: "This book contains community contributions for EDAV Fall 2022 Tues/Thurs"
