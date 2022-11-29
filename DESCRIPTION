@@ -96,6 +96,7 @@ Suggests:
     xml2,
     gm,
     rayshader,
+    ggthemes,
 Remotes:
     hadley/emo,
     kassambara/navdata,
