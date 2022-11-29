@@ -95,6 +95,7 @@ Suggests:
     wordcloud,
     xml2,
     gm,
+    rayshader,
 Remotes:
     hadley/emo,
     kassambara/navdata,
