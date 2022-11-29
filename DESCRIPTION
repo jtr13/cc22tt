@@ -97,6 +97,8 @@ Suggests:
     gm,
     rayshader,
     ggthemes,
+    rvest,
+    raster,
 Remotes:
     hadley/emo,
     kassambara/navdata,
