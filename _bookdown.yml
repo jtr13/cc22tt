@@ -64,6 +64,7 @@ rmd_files: [
   # 'sentiment_analysis_tutorial.Rmd',
   # 'Interactive_3D_Vis.Rmd',
   'common_sampling_methods_in_r_tutorial.Rmd',
+  'rayshader_cheatsheet_3dviz.Rmd',
   #'music_gm_package.Rmd',
   # 'concentric_circles_ggmap_ggplot.Rmd',
   
