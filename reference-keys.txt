@@ -406,6 +406,7 @@ question-how-can-you-visualize-more-than-three-dimensions-in-a-single-chart
 question-what-is-depth-cueing-in-visualization
 question-what-is-row-level-security
 question-is-excel-a-data-visualization-tool
+how-i-got-into-amazon-as-a-full-time-data-analyst
 part-case-studies
 benford-case-study
 contents
