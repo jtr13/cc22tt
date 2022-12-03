@@ -1,0 +1,254 @@
+# Sentiment analysis and visualization
+
+Lylybell Teran 
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, tidy.opts = list(width.cutoff = 60), tidy = TRUE)
+```
+
+In this tutorial we will learn how to convert to tidy data, conduct sentiment analysis, and visualize results using R. The purpose of sentiment analysis model is to categorize words based on their sentiments such as positive, negative, and/or its magnitude. 
+
+We will use the following packages in this tutorial: 
+```{r echo=TRUE} 
+# The following packages must first be installed using the the command: install.packages()
+library(tidyr)
+library(tidytext) # text-mining
+library(dplyr) # data manipulation
+library(stringr) # facilitates strings manipulations
+library(tibble) # reimaging of dataframes
+library(ggplot2) # visualizations
+library(textdata) # includes various sentiment lexicons and labeled text data sets
+```
+## What is Sentiment Analysis?
+
+Sentiment Analysis defines the process of extracting and evaluating the nature of opinion in documents, websites, social media, etc. These opinions are then classified based on a metric where they can be binary (positive or negative) or they can be classified into a multitude of classes (happy, sad, angry, etc.).
+
+
+### Sentiment Lexicons
+
+Sentiment lexicons refers to dictionaries that exist for evaluating text based on emotion/opinion. The `tidytext` package contains three sentiment lexicons in the `sentiments` dataset. 
+
+```{r echo=TRUE}
+sentiments
+```
+The following are the three lexicons that are based on unigrams (single words) that are in English. The `AFFIN` lexicon uses a scoring system from -5 to 5 to assign a word with negative scores indicating negative sentiment and positive scores indicating positive sentiment. The `bing` lexicon uses a binary system where words are categorized as either positive or negative. The `nrc` lexicon has 10 categories that include positive, negative, anger, anticipation, disgust, fear, joy, sadness, surprise, and trust. Use the function `get_sentiment()` to get a specific sentiment lexicon.
+
+* `AFINN` from [Finn Årup Nielsen](http://www2.imm.dtu.dk/pubdb/pubs/6010-full.html)
+* `bing` from [Bing Liu and collaborators](https://www.cs.uic.edu/~liub/FBS/sentiment-analysis.html)
+* `nrc` from [Saif Mohammad and Peter Turney](http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm)
+
+```{r echo=TRUE, eval=FALSE}
+# to see the individual lexicons 
+get_sentiments("afinn")
+get_sentiments("bing")
+get_sentiments("nrc")
+```
+
+## Case Study: Performing Sentiment Analysis on Novel
+
+We will be analyzing the Charles Darwin book entitled "The Origin of Species." We will clean (convert to lower case, remove white spaces, and remove stop words) and reform the data into a dataframe using the `dpylr`, `string`, and `tibble` packages. This process will facilitate the analysis of the text. 
+
+Using the `readRDS()` from the base R package to write a single R object to a file, and to restore it. The parameters take in the following URL: [https://slcladal.github.io/data/origindarwin.rda](https://slcladal.github.io/data/origindarwin.rda)
+
+```{r echo=TRUE}
+darwin <- base::readRDS(url("https://slcladal.github.io/data/origindarwin.rda", "rb"))
+```
+
+
+## Pre-processing Data: Tidy-Text
+Before applying sentiment analysis, we will pre-process the data by cleaning and transforming it to allow for sentiment analysis application. The following text cleaning techniques were applied to the text to get rid of unnecessary characters or words that may interupt our sentiment analysis. The `txtclean()` function was created to clean the data by invoking the following: 
+
+* Convert all words to UTF - 8 
+* Convert all words to lower case
+* Collapse paragraphs into single text
+* Remove white spaces
+* Split into individual words
+* Convert to tabular data
+* Remove predefined stop words 
+* Remove symbols 
+
+The `tidytext` package will allow us to perform efficient text analysis on our data. We will convert the text of our novel into a tidy format using `unnest_tokens()` function. Tidy data has the following structure:
+
+* Each variable is a column
+* Each observation is a row
+* Each type of observational unit is a table
+
+```{r echo=FALSE}
+# function to clean text data
+txtclean <- function(x, title){
+  require(dplyr)
+  require(stringr)
+  require(tibble)
+  x <- x %>%
+    iconv(to = "UTF-8") %>%     # convert to UTF-8
+    base::tolower() %>%         # convert to lower case
+    paste0(collapse = " ") %>%  # collapse into single text
+    stringr::str_squish()%>%    # remove superfluous white spaces
+    stringr::str_split(" ") %>% # split into individual words
+    unlist() %>%                # unlist
+    tibble::tibble() %>%        # convert into a table
+    dplyr::select(word = 1, everything()) %>%
+    dplyr::mutate(novel = title) %>%
+    dplyr::anti_join(stop_words) %>%  # remove function words
+    dplyr::mutate(word = str_remove_all(word, "\\W")) %>% # remove non-word symbols
+    dplyr::filter(word != "")         # remove empty elements
+}
+```
+
+```{r echo=TRUE}
+# process text data using txtclean()
+darwin_data <- txtclean(darwin, "darwin")
+darwin_data
+```
+Now we have transformed the data into a tidy dataframe with two columns: `word` and `novel`. Note that there are currently 78,556 rows of words -- this number will significantly reduce once the lexicon analysis is applied as we will later explain. 
+
+### Initial Analysis: Wordclouds
+Before analyzing the sentiment of the novel, we can start an initial analysis of the words based on their frequency within the text. This allows us to gain some initial insight into patterns we might want to explore later. We can easily create word clouds via the `worldcloud` package which is facilitated by our tidy data. Word clouds are a descriptive tool and should only be used to capture basic qualitative insights at initial stages of analysis. They present text data in a simple and clear format where the cloud size of a word depends on their respective frequencies. They are visually easy and quick to understand.
+
+
+```{r, fig.width=5, fig.height=5, echo=TRUE}
+library(RColorBrewer) # color palettes
+library(wordcloud) # word-cloud generator
+
+darwin_data %>%
+  count(word) %>%
+  with(wordcloud(word, n, max.words = 100, colors=brewer.pal(8, "Dark2")))
+```
+
+As expected, a scientific book about evolution such as "The Origin of Species" contains frequent words like *species*, *selection*, and *natural*. Given the scientific nature of this book, the amount of rows of our data is expected to drop significantly since the lexicons only contain specific words that contain sentimental classification.
+
+
+### Sentiment Analysis: Lexicon Application 
+
+Once tidy text is obtained, we can proceed to apply a sentiment lexicon by using `inner_join()` from the `dpylr` package.
+
+
+In this section we will:
+
+* Explore the sentiment lexicons and their word counts
+* Identify how many words from the book exist in the lexicons
+* Look at specific words and word forms
+
+
+### Creating Sentiment Datasets
+
+Below we created data sets based on specific lexicons. This will facilitate our visualizations in the following sections. 
+```{r echo=TRUE}
+# afinn dataset
+darwin_afinn <- darwin_data %>%
+  inner_join(get_sentiments("afinn"))
+nrow(darwin_afinn)
+
+
+# bing dataset
+darwin_bing <- darwin_data %>%
+  inner_join(get_sentiments("bing"))
+nrow(darwin_bing)
+
+# nrc dataset
+darwin_nrc <- darwin_data %>%
+   inner_join(get_sentiments("nrc"))
+nrow(darwin_nrc)
+```
+As predicted, the number of rows reduced after each lexicon was applied. The `afinn` lexicon significantly reduced the row dimensions from 78,556 rows of words to 4,758. The `bing` lexicon resulted in 6,378 rows whereas the `nrc` lexicon has the greatest amount at 27,156 rows. This may be due to its multi-categorical nature since it is able to encapsulate more words. 
+
+## Most Common Words
+
+Since we have a tidy dataframe, we can easily display the most common positive and negative words. This is done by analyzing word counts that contribute to each sentiment. By implementing `count()` with arguments of both `word` and `sentiment`, we find out each word's sentimental contribution. 
+
+
+```{r echo=TRUE}
+afinn_word_counts <- darwin_afinn %>% 
+  mutate(method = "AFINN") %>%
+  count(word, sentiment = value, sort = TRUE)
+
+afinn_word_counts
+```
+Now we will count the `darwin_bing` data set which assigns a binary classification of positive and negative sentiment. 
+
+```{r echo=TRUE}
+bing_word_counts <- darwin_bing %>%
+  count(word, sentiment, sort = TRUE) %>%
+  ungroup()
+
+bing_word_counts ## probably dont need to display
+```
+Similarly, we count `darwin_nrc` data set which contains multiple categories of sentiment. 
+```{r echo=TRUE}
+nrc_word_counts <- darwin_nrc %>%
+  count(word, sentiment, sort = TRUE) %>%
+  ungroup()
+
+nrc_word_counts
+```
+
+## Visualizations
+
+Now that we have the word counts of the data set with respect to each lexicon, we can start visualizing the text to see the most common positive and negative words. By doing so, we can see the contribution of certain words based on their sentiment contribution within the text. 
+
+### Positive - Bar Chart with Afinn 
+
+Using the `afinn_word_counts` variable we can use the `mutate()` to create a new variable known as `sentiment_severity` which accounts for the sentiment contribution of a word based on the its frequency appearance and score. Using `ggplot2` we can visually see the contribution that each common positive (score >= 0) and negative (score < 0) word had with respect to sentiment.
+
+```{r echo=TRUE}
+afinn_plot <- afinn_word_counts %>%
+  mutate(sentiment_severity = sentiment * n) %>%
+  slice_max(n, n = 10) %>% 
+  ungroup() %>%
+  mutate(word = reorder(word, n)) %>%
+  ggplot(aes(sentiment_severity, word, fill = sentiment_severity)) +
+  geom_col(stat="identity") +
+  labs(x = "Contribution to sentiment",
+       y = "Most Contributing Words",
+       fill = "Sentiment Severity Score")+
+  ggtitle("Charles Darwin Afinn Sentiment")
+
+afinn_plot
+```
+
+Based on the legend, a sentiment severity score closer to 400 will indicate a word that is most frequent and most positive within the text. A negative sentiment severity score closer to zero  will indicate a word that is least frequent and most negative within the text. 
+
+### Wordclouds with Bing
+We can further analyze wordclouds with sentiment analysis using the `comparison.cloud()` function where our current dataframe must be turned into a matrix via `acast()` which is located in the `reshape2’s`. Now we can conduct sentiment analysis using a `inner_join` on positive and negative words via the `bing` lexicon which is already incorporated within `bing_word_counts`.
+
+```{r, fig.width=5, fig.height=5, echo=TRUE}
+library(reshape2)
+bing_wc_plot <- bing_word_counts %>%
+  acast(word ~ sentiment, value.var = "n", fill = 0) %>%
+  comparison.cloud(colors = c("red", "dark green"),
+                   max.words = 100)
+bing_wc_plot
+```
+The above word cloud illustrates the words that are most and least common within the text based on frequency. The larger the word the more frequent and the smaller the word then the least frequent. Unlike the word cloud previously generated in figure 1, this one allows us to classify between positive and negative words since we applied `comparison.cloud()` function to the variable `bing_word_counts`. This word cloud enables us to efficiently visualize the negative (red words) as well as positive groups (green words) of data. The above plot shows that words like *doubt* have a heavy presence that leans towards negative sentiment whereas words like *favour* are not as prevalent and tend to be more positive. 
+
+### Bar Graph with NRC
+
+The plot below shows the total number of instances of words in the text, associated with each of the ten emotions. Using the `ggplolt()` function we can easily plot the word counts of words that are classified based on the the `NRC` lexicon which contains multiple categories. 
+
+
+```{r, fig.width=7, fig.height=5, echo=TRUE}
+nrc_plot <- darwin_nrc %>%
+  group_by(sentiment) %>%
+  summarise(word_count = n()) %>%
+  ungroup() %>%
+  mutate(sentiment = reorder(sentiment, word_count)) %>%
+  ggplot(aes(sentiment, word_count, fill = sentiment)) +
+  geom_col() +
+  labs(x = "Sentiment Categories", y = "Word Count") +
+  ggtitle("Charles Darwin NRC Sentiment")
+
+nrc_plot
+```
+
+This bar chart demonstrates that positively oriented words categorized under *positive* are about 6 times more likely to appear within the text in comparison to *disgust* words. In general, the negatively oriented words are much less frequent. 
+
+## Summary 
+In this tutorial, we went through a simplified sentiment analysis project in R that was implemented over the dataset of Charles Darwin's book entitled "The Origin of Species."  We started by transforming the data into tidy data by using packages such as `tidytext` and `dpylr`. When text data is in a tidy data structure then we can implement sentiment analysis using  `inner_join()`in conjunction with a specified lexicon. We then proceeded to get the most common positive and negative words within the text along with its sentiment contribution. In conclusion, we used sentiment analysis to understand what words are important based on emotional and opinion content by exploring visualizations. 
+
+## References
+Mohammad, Saif M, and Peter D Turney. 2013. “Crowdsourcing a Word-Emotion Association Lexicon.” Computational Intelligence 29 (3): 436–65.
+
+Schweinberger, Martin. (2022)` Sentiment Analysis in R. Brisbane: The University of Queensland. url: https://ladal.edu.au/sentiment.html (Version 2022.10.30).
+
+Silge, Julia, and David Robinson. 2017. Text Mining with r: A Tidy Approach. " O’Reilly Media, Inc.".
+

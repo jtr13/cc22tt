@@ -8,8 +8,8 @@ description: "This book contains community contributions for EDAV Fall 2022 Tues
 
 # Welcome!
 
-Let's add some content to the welcome page.
+```{r, echo=FALSE, out.width='100%'}
+knitr::include_graphics("resources/homepage_artwork/homepage_artwork1.jpeg")
+```
 
-Submit a pull request to do so.
-
-![Under construction](under_construction.jpg)
+Artwork credit: [Xingye Feng](homepage-artwork.html)
