@@ -71,7 +71,7 @@ rmd_files: [
   'ten_interview_questions.Rmd',
   'data_science_internship_search_guide.Rmd',
   'data_visualization_interview_questions_sample.Rmd',
-  'robinzhao39:amazon_interview',
+  'data_science_interview_prep_community.Rmd',
   
   # Part: Case Studies
   'benford_case_study.Rmd',
