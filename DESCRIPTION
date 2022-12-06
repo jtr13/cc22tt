@@ -34,7 +34,6 @@ Suggests:
     formatR,
     gapminder,
     gcookbook,
-    ggbiplot,
     ggfortify,
     ggplot2,
     ggraph,
