@@ -31,7 +31,7 @@ META Quarterly Earnings reports: <https://investor.fb.com/financials/default.asp
   
   #### Data prep
   
-  ```{r}
+```{r}
 
 ## downlaod the Q3-2022 META's Income Statement from the above link
 ## read the Excel file
@@ -136,7 +136,7 @@ development, and the decrease in revenue from advertising.
 Alternatively we can use plotly to create interactive waterfall charts.
 https://plotly.com/r/waterfall-charts/ 
   
-  ``` {r}
+``` {r}
 wf <- plot_ly(
   META_cond[,c(1,3)], type = "waterfall",
   ## list the breakdown. if the list is not specified. plotly order the categories alphabetically.
