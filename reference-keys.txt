@@ -444,6 +444,14 @@ is-the-data-visualization-misleading-or-not---survey
 overview-and-motivation
 goal
 animating-functions-and-histograms-in-python-using-matplotlib
+waterfall-chart-using-meta-income-statement
+why-to-use-waterfall-chart
+data-source
+waterfall-library
+meta-q3-2022-income-statement
+improving-the-chart
+how-year-over-year-quarterly-income-changed
+using-plotly-to-create-simple-waterfall
 part-interview-prep
 ten-interview-questions-and-answers
 forward

@@ -365,17 +365,17 @@ print(str(kmeans_out))
 
 ```
 ## List of 9
-##  $ cluster     : int [1:20] 1 1 1 1 1 1 1 2 2 2 ...
-##  $ centers     : num [1:3, 1:2] 23.4 33.8 45.7 13.9 38.2 ...
+##  $ cluster     : int [1:20] 2 2 2 2 2 2 2 3 3 3 ...
+##  $ centers     : num [1:3, 1:2] 45.7 23.4 33.8 25.9 13.9 ...
 ##   ..- attr(*, "dimnames")=List of 2
 ##   .. ..$ : chr [1:3] "1" "2" "3"
 ##   .. ..$ : chr [1:2] "age" "spend"
 ##  $ totss       : num 4086
-##  $ withinss    : num [1:3] 159 114 287
+##  $ withinss    : num [1:3] 287 159 114
 ##  $ tot.withinss: num 559
 ##  $ betweenss   : num 3527
-##  $ size        : int [1:3] 7 4 9
-##  $ iter        : int 2
+##  $ size        : int [1:3] 9 7 4
+##  $ iter        : int 1
 ##  $ ifault      : int 0
 ##  - attr(*, "class")= chr "kmeans"
 ## NULL
