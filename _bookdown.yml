@@ -62,7 +62,7 @@ rmd_files: [
   'short_causal_inference_tutorial.Rmd',
   'network_analysis.Rmd',
   # 'sentiment_analysis_tutorial.Rmd',
-  # 'Interactive_3D_Vis.Rmd',
+  'Interactive_3D_Vis.Rmd',
   'common_sampling_methods_in_r_tutorial.Rmd',
   #'music_gm_package.Rmd',
   # 'concentric_circles_ggmap_ggplot.Rmd',
