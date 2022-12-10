@@ -410,6 +410,7 @@ the-pudding
 is-the-data-visualization-misleading-or-not---survey
 overview-and-motivation
 goal
+animating-functions-and-histograms-in-python-using-matplotlib
 part-interview-prep
 ten-interview-questions-and-answers
 forward
