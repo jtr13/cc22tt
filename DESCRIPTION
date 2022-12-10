@@ -7,6 +7,7 @@ Imports:
     tidyverse,
     geocompkg,
     widyr,
+    ggbiplot,
 Suggests:
     academictwitteR,
     anglr,
@@ -116,3 +117,4 @@ Remotes:
     hypertidy/anglr,
     dkahle/ggmap,
     flujoo/gm,
+    vqv/ggbiplot
