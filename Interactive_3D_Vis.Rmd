@@ -5,7 +5,7 @@ Yaoyuan Zhang and Zimu An
 ```{r, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 knitr::knit_hooks$set(webgl = "hook_webgl")
-#sdevtools::install_github("hypertidy/anglr") #Run this line if not installed before
+#devtools::install_github("hypertidy/anglr") #Run this line if not installed before
 library(plotly)
 library(rgl)
 library(anglr)
@@ -108,7 +108,7 @@ previously includes:
 
 #### Basic 3D Plot with spheres
 
-```{r, test-rgl, webgl=TRUE}
+```{r, webgl=TRUE}
 rgl_init()
 rgl.spheres(x, y, z, r = 0.1, color = "yellow")  # Scatter plot
 ```
@@ -121,7 +121,7 @@ conformity, this tutorial use spheres to represent data points.
 
 The function **rgl.bbox()** is used:
 
-```{r, test-rgl, webgl=TRUE}
+```{r, webgl=TRUE}
 rgl_init()
 rgl.spheres(x, y, z, r = 0.1, color = "yellow")  
 # Add bounding box decoration
@@ -196,7 +196,7 @@ rgl_add_axes <- function(x, y, z, axis.col = "grey",
     vectors of length four specifying the coordinates of the four nodes
     of the quad.
 
-```{r, test-rgl, webgl=TRUE}
+```{r, webgl=TRUE}
 rgl_init()
 rgl.spheres(x, y, z, r = 0.1, color = "yellow") 
 rgl_add_axes(x, y, z, show.bbox = TRUE)
@@ -243,7 +243,7 @@ get_colors <- function(groups, group.col = palette()){
 
 Change colors by groups:
 
-```{r, test-rgl, webgl=TRUE}
+```{r, webgl=TRUE}
 cols <- get_colors(iris$Species, c("lightblue", "palegreen3", "slateblue3"))
 rgl_init()
 rgl.spheres(x, y, z, r = 0.1, color = cols) 
@@ -271,7 +271,7 @@ can be drawn using the function **shade3d()** and/or **wired3d()**
 
 Draw the ellipse using the function **shade3d()**:
 
-```{r, test-rgl, webgl=TRUE}
+```{r, webgl=TRUE}
 rgl_init()
 rgl.spheres(x, y, z, r = 0.12, color = "#D95F02") 
 rgl_add_axes(x, y, z, show.bbox = TRUE)
@@ -284,7 +284,7 @@ aspect3d(1,1,1)
 
 Draw the ellipse using the function **wired3d()**:
 
-```{r, test-rgl, webgl=TRUE}
+```{r, webgl=TRUE}
 rgl_init()
 rgl.spheres(x, y, z, r = 0.2, color = "#D95F02") 
 rgl_add_axes(x, y, z, show.bbox = TRUE)
@@ -297,7 +297,7 @@ aspect3d(1,1,1)
 
 We can also add ellipse for each group, as such:
 
-```{r, test-rgl, webgl=TRUE}
+```{r, webgl=TRUE}
 # Groups
 groups <- iris$Species
 levs <- levels(groups)
@@ -329,7 +329,7 @@ To add a custom regression plane, we can take the following approach:
 1.  Use the function **lm()** to compute a linear regression model.
 2.  Use the argument **rgl.surface()** to add a regression surface.
 
-```{r, test-rgl, webgl=TRUE}
+```{r, webgl=TRUE}
 rgl_init()
 rgl.spheres(x, y, z, r = 0.1, color = "#D95F02") 
 rgl_add_axes(x, y, z, show.bbox = FALSE)

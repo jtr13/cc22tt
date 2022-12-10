@@ -349,15 +349,22 @@ ggplot(data = sentiment_sums,
 ```
 
 One other nlp task we can implement is identifying words associated with each
-"polarity" (positive and negative):
+"polarity" (positive and negative).
+Originally, the code chunk below contains a line that gets sentiments from the NRC
+dictionary [7]. For the compiled book, I'm reading a Google spreadsheet that
+contains the dictionary.
 ```{r polarity_frequency}
-nrc_positive <- get_sentiments("nrc") %>%
-  filter(sentiment == "positive")
+# nrc_positive <- get_sentiments("nrc") %>%
+#   filter(sentiment == "positive")
+# 
+# sheet_write(nrc_positive, ss = "https://docs.google.com/spreadsheets/d/198TOYrrXLtUWA3WpRHrch1CBjml0a-pTEdGPXNxqr3U/edit#gid=890543988", sheet = "nrc_positive")
+
+nrc_positive <- read_sheet("https://docs.google.com/spreadsheets/d/198TOYrrXLtUWA3WpRHrch1CBjml0a-pTEdGPXNxqr3U/edit#gid=890543988", sheet = "nrc_positive")
 
 tokens_words %>%
   inner_join(nrc_positive) %>%
   arrange(desc(N))
-
+  
 
 ```
 
@@ -383,8 +390,12 @@ plot_positive
 ```
 And we can do the same for negative:
 ```{r polarity_negative}
-nrc_negative <- get_sentiments("nrc") %>%
-  filter(sentiment == "negative")
+# nrc_negative <- get_sentiments("nrc") %>%
+#   filter(sentiment == "negative")
+# 
+# sheet_write(nrc_negative, ss = "https://docs.google.com/spreadsheets/d/198TOYrrXLtUWA3WpRHrch1CBjml0a-pTEdGPXNxqr3U/edit#gid=890543988", sheet = "nrc_negative")
+# 
+nrc_negative <- read_sheet("https://docs.google.com/spreadsheets/d/198TOYrrXLtUWA3WpRHrch1CBjml0a-pTEdGPXNxqr3U/edit#gid=890543988", sheet = "nrc_negative")
 
 tokens_words %>%
   inner_join(nrc_negative) %>%
