@@ -18,6 +18,7 @@ knitr::opts_chunk$set(echo = T,
 library(class)
 library(rpart)
 library('NbClust')
+# install_github("vqv/ggbiplot")
 library(ggbiplot)
 ```
 
