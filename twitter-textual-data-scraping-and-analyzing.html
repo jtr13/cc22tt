@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 45 Twitter textual data: scraping and analyzing | Community Contributions for EDAV Fall 2022 Tues/Thurs</title>
+<meta name="description" content="Renato Russo  45.0.1 Loading all the required packages library(googlesheets4) library(academictwitteR) library(widyr) library(tidytext) library(dplyr) library(corpus) library(tidyr) # used for...">
+<meta name="generator" content="bookdown 0.30 with bs4_book()">
+<meta property="og:title" content="Chapter 45 Twitter textual data: scraping and analyzing | Community Contributions for EDAV Fall 2022 Tues/Thurs">
+<meta property="og:type" content="book">
+<meta property="og:description" content="Renato Russo  45.0.1 Loading all the required packages library(googlesheets4) library(academictwitteR) library(widyr) library(tidytext) library(dplyr) library(corpus) library(tidyr) # used for...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 45 Twitter textual data: scraping and analyzing | Community Contributions for EDAV Fall 2022 Tues/Thurs">
+<meta name="twitter:description" content="Renato Russo  45.0.1 Loading all the required packages library(googlesheets4) library(academictwitteR) library(widyr) library(tidytext) library(dplyr) library(corpus) library(tidyr) # used for...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.1/transition.js"></script><script src="libs/bs3compat-0.4.1/tabs.js"></script><script src="libs/bs3compat-0.4.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><script src="libs/plotly-binding-4.10.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script><link href="libs/visjs-7.4.9/vis-timeline-graph2d.min.css" rel="stylesheet">
+<script src="libs/visjs-7.4.9/vis-timeline-graph2d.min.js"></script><link href="libs/timeline-0.4/timevis.css" rel="stylesheet">
+<script src="libs/timevis-binding-2.1.0/timevis.js"></script><link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
+<script src="libs/leaflet-1.3.1/leaflet.js"></script><link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
+<script src="libs/proj4-2.6.2/proj4.min.js"></script><script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script><link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
+<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script><link href="libs/dygraphs-1.1.1/dygraph.css" rel="stylesheet">
+<script src="libs/dygraphs-1.1.1/dygraph-combined.js"></script><script src="libs/dygraphs-1.1.1/shapes.js"></script><script src="libs/moment-2.8.4/moment.js"></script><script src="libs/moment-timezone-0.2.5/moment-timezone-with-data.js"></script><script src="libs/moment-fquarter-1.0.0/moment-fquarter.min.js"></script><script src="libs/dygraphs-binding-1.1.1.6/dygraphs.js"></script><script src="libs/Dygraph.Plugins.Crosshair-1.0/crosshair.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="libs/datatables-binding-0.26/datatables.js"></script><link href="libs/dt-core-1.12.1/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="libs/dt-core-1.12.1/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="libs/dt-core-1.12.1/js/jquery.dataTables.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Community Contributions for EDAV Fall 2022 Tues/Thurs</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Welcome!</a></li>
+<li><a class="" href="community-contribution.html"><span class="header-section-number">2</span> Community Contribution</a></li>
+<li><a class="" href="github-submission-instructions.html"><span class="header-section-number">3</span> GitHub submission instructions</a></li>
+<li><a class="" href="sample-project.html"><span class="header-section-number">4</span> Sample project</a></li>
+<li class="book-part">Cheatsheets</li>
+<li><a class="" href="r-window-functions-cheatsheet.html"><span class="header-section-number">6</span> R window functions cheatsheet</a></li>
+<li><a class="" href="rmd-chunk-option-cheat-sheet.html"><span class="header-section-number">7</span> Rmd chunk option cheat sheet</a></li>
+<li><a class="" href="helpful-ggplot2-extensions-cheatsheet.html"><span class="header-section-number">8</span> Helpful ggplot2 Extensions Cheatsheet</a></li>
+<li><a class="" href="commonly-used-graph-cheatcheet.html"><span class="header-section-number">9</span> Commonly-used graph cheatcheet</a></li>
+<li><a class="" href="git-and-version-control.html"><span class="header-section-number">10</span> Git and version control</a></li>
+<li><a class="" href="useful-plots-for-bioinfomatics-in-r.html"><span class="header-section-number">11</span> Useful plots for Bioinfomatics in R</a></li>
+<li><a class="" href="different-ways-to-create-world-map-in-r.html"><span class="header-section-number">12</span> Different ways to create world map in R</a></li>
+<li><a class="" href="color-in-r-python-and-jshtmlcss.html"><span class="header-section-number">13</span> Color in R, Python, and JS/HTML/CSS</a></li>
+<li><a class="" href="color-palettes-for-data-visualization.html"><span class="header-section-number">14</span> Color Palettes for Data Visualization</a></li>
+<li><a class="" href="data-visualization-using-seaborn.html"><span class="header-section-number">15</span> Data visualization using Seaborn</a></li>
+<li><a class="" href="machine-learning-cheatsheet-for-r-and-python.html"><span class="header-section-number">16</span> Machine Learning Cheatsheet for R and Python</a></li>
+<li><a class="" href="data-visualization-with-r-ggplot2-vs.-matlab.html"><span class="header-section-number">17</span> Data Visualization with R ggplot2 vs. Matlab</a></li>
+<li><a class="" href="ggplot2-plots-in-python-cheat-sheet-tutorial.html"><span class="header-section-number">18</span> Ggplot2 plots in python cheat sheet tutorial</a></li>
+<li><a class="" href="model-evaluation-selection-visualization-with-easystats.html"><span class="header-section-number">19</span> Model evaluation, selection &amp; visualization with easystats</a></li>
+<li><a class="" href="time-series-itsmr-cheat-sheet.html"><span class="header-section-number">20</span> Time Series: ITSMR Cheat Sheet</a></li>
+<li class="book-part">Tutorials</li>
+<li><a class="" href="preprocessing-and-visualization-of-time-series-data.html"><span class="header-section-number">22</span> Preprocessing and Visualization of Time Series Data</a></li>
+<li><a class="" href="how-to-use-sqldf.html"><span class="header-section-number">23</span> How to use sqldf</a></li>
+<li><a class="" href="googlevis-in-r.html"><span class="header-section-number">24</span> googleVis in R</a></li>
+<li><a class="" href="tutorial-for-vector-fields-in-r.html"><span class="header-section-number">25</span> Tutorial for vector fields in r</a></li>
+<li><a class="" href="data-cleaning-with-r.html"><span class="header-section-number">26</span> Data cleaning with r</a></li>
+<li><a class="" href="introduction-to-shiny-web-apps.html"><span class="header-section-number">27</span> Introduction to Shiny Web Apps</a></li>
+<li><a class="" href="python-missingno-library-tutorial.html"><span class="header-section-number">28</span> Python missingno library tutorial</a></li>
+<li><a class="" href="data-explorer-tutorial-and-automation.html"><span class="header-section-number">29</span> Data Explorer Tutorial and Automation</a></li>
+<li><a class="" href="d-visualization-in-r.html"><span class="header-section-number">30</span> 3D Visualization in R</a></li>
+<li><a class="" href="visualizing-time-series-data.html"><span class="header-section-number">31</span> Visualizing Time Series Data</a></li>
+<li><a class="" href="igraph-in-r.html"><span class="header-section-number">32</span> igraph in r</a></li>
+<li><a class="" href="geo-mapping-coordinate-extraction-using-api-calls.html"><span class="header-section-number">33</span> Geo-Mapping Coordinate Extraction Using API Calls</a></li>
+<li><a class="" href="edav-garden.html"><span class="header-section-number">34</span> EDAV Garden</a></li>
+<li><a class="" href="using-raster-data-in-r.html"><span class="header-section-number">35</span> Using raster data in R</a></li>
+<li><a class="" href="make-geographical-maps-with-different-packages.html"><span class="header-section-number">36</span> Make Geographical Maps with Different Packages</a></li>
+<li><a class="" href="how-to-obtain-data-from-api-and-process-raw-json-data.html"><span class="header-section-number">37</span> How to obtain data from API and process raw JSON data</a></li>
+<li><a class="" href="sample-statistic-tutorial.html"><span class="header-section-number">38</span> Sample Statistic Tutorial</a></li>
+<li><a class="" href="data-cleaning-tutorial.html"><span class="header-section-number">39</span> Data cleaning tutorial</a></li>
+<li><a class="" href="mlr3-package-tutorial.html"><span class="header-section-number">40</span> mlr3 Package Tutorial</a></li>
+<li><a class="" href="guide-to-nonparametric-tests.html"><span class="header-section-number">41</span> Guide to nonparametric tests</a></li>
+<li><a class="" href="dplyr-pacakage-in-r.html"><span class="header-section-number">42</span> dplyr pacakage in R</a></li>
+<li><a class="" href="how-not-to-visualize-american-elections.html"><span class="header-section-number">43</span> How (not) to visualize American elections</a></li>
+<li><a class="" href="time-series-visualization-with-r.html"><span class="header-section-number">44</span> Time series visualization with R</a></li>
+<li><a class="active" href="twitter-textual-data-scraping-and-analyzing.html"><span class="header-section-number">45</span> Twitter textual data: scraping and analyzing</a></li>
+<li><a class="" href="causal-inference-tutorial-a-quick-glance-at-interventional-treatment-and-simpsons-paradox.html"><span class="header-section-number">46</span> Causal Inference Tutorial: A Quick Glance at Interventional Treatment and Simpson’s Paradox</a></li>
+<li><a class="" href="network-analysis-and-social-network-analysis.html"><span class="header-section-number">47</span> Network analysis and social network analysis</a></li>
+<li><a class="" href="network-analysis-in-r.html"><span class="header-section-number">48</span> Network Analysis in R</a></li>
+<li><a class="" href="introduction-to-common-sampling-techniques-in-r.html"><span class="header-section-number">49</span> Introduction to common sampling techniques in r</a></li>
+<li><a class="" href="what-you-see-is-what-you-understand-learning-data-science-visually.html"><span class="header-section-number">50</span> What you see is what you understand: learning data science visually</a></li>
+<li class="book-part">Interview Prep</li>
+<li><a class="" href="ten-interview-questions-and-answers.html"><span class="header-section-number">52</span> Ten interview questions and answers</a></li>
+<li><a class="" href="data-science-internship-search-survival-guide.html"><span class="header-section-number">53</span> Data science internship search survival guide</a></li>
+<li><a class="" href="data-visualization-interview-questions-sample.html"><span class="header-section-number">54</span> Data visualization interview questions sample</a></li>
+<li><a class="" href="how-i-got-into-amazon-as-a-full-time-data-analyst.html"><span class="header-section-number">55</span> How I got into Amazon as a full time data analyst</a></li>
+<li class="book-part">Case Studies</li>
+<li><a class="" href="benford-case-study.html"><span class="header-section-number">57</span> Benford Case Study</a></li>
+<li class="book-part">Blogs</li>
+<li><a class="" href="equity-in-ai.html"><span class="header-section-number">59</span> Equity in AI</a></li>
+<li><a class="" href="breaking-into-tech-black-girl-edition.html"><span class="header-section-number">60</span> Breaking into tech: black girl edition</a></li>
+<li><a class="" href="homepage-artwork.html"><span class="header-section-number">61</span> Homepage Artwork</a></li>
+<li><a class="" href="design-homepage-for-class-community.html"><span class="header-section-number">62</span> Design homepage for class community</a></li>
+<li class="book-part">Appendices</li>
+<li><a class="" href="github-initial-setup.html"><span class="header-section-number">63</span> Github initial setup</a></li>
+<li><a class="" href="tutorial-for-pull-request-mergers.html"><span class="header-section-number">64</span> Tutorial for pull request mergers</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/jtr13/cc22tt">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="twitter-textual-data-scraping-and-analyzing" class="section level1" number="45">
+<h1>
+<span class="header-section-number">45</span> Twitter textual data: scraping and analyzing<a class="anchor" aria-label="anchor" href="#twitter-textual-data-scraping-and-analyzing"><i class="fas fa-link"></i></a>
+</h1>
+<p>Renato Russo</p>
+<div id="loading-all-the-required-packages" class="section level3" number="45.0.1">
+<h3>
+<span class="header-section-number">45.0.1</span> Loading all the required packages<a class="anchor" aria-label="anchor" href="#loading-all-the-required-packages"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb704"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://googlesheets4.tidyverse.org">googlesheets4</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/cjbarrie/academictwitteR">academictwitteR</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/juliasilge/widyr">widyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/juliasilge/tidytext">tidytext</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://leslie-huang.github.io/r-corpus/">corpus</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org">tidyr</a></span><span class="op">)</span> <span class="co"># used for sentiment analysis plot</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://forcats.tidyverse.org/">forcats</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tm.r-forge.r-project.org/">tm</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">topicmodels</span><span class="op">)</span> <span class="co"># visualization of topics in the NLP section</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span> <span class="co"># chart of co-occurring terms</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/juliasilge/tidytext">tidytext</a></span><span class="op">)</span> <span class="co"># chart of co-occurring terms and get sentiment in seniment analysis</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://blog.fellstat.com/?cat=11">wordcloud</a></span><span class="op">)</span> <span class="co">#for wordcloud</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://igraph.org">igraph</a></span><span class="op">)</span> <span class="co"># for the network plot of co-occurring words</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggraph.data-imaginist.com">ggraph</a></span><span class="op">)</span> <span class="co"># for the network plot of co-occurring words</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/mjockers/syuzhet">syuzhet</a></span><span class="op">)</span> <span class="co"># for sentiment analysis</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/EmilHvitfeldt/textdata">textdata</a></span><span class="op">)</span> <span class="co"># for sentiment analysis</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">gridExtra</span><span class="op">)</span> <span class="co"># for sentiment analysis grid charts</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org">tidyr</a></span><span class="op">)</span> <span class="co"># for sentiment analysis</span></span></code></pre></div>
+<p>In this community contribution, we will be looking at three broader tasks of
+data analysis and visualization applied to textual data. More specifically, we
+will look at Twitter datas, and see methods for <strong>collecting (scraping)</strong>,
+<strong>preparing</strong>, and <strong>analyzing</strong> Twitter data.</p>
+</div>
+<div id="scrape-data" class="section level3" number="45.0.2">
+<h3>
+<span class="header-section-number">45.0.2</span> 1. Scrape data<a class="anchor" aria-label="anchor" href="#scrape-data"><i class="fas fa-link"></i></a>
+</h3>
+<p>The first thing you should do is obtaining data. Fortunately, Twitter makes it
+relatively easy to scrape data, all you need to start is a Twitter Developer
+Account so you can get access to Twitter API. Actually, there are a few different
+types of Developer Account. For the purpose of this project, I am using my
+Academic Research account. You may want to check out <a href="https://developer.twitter.com/">Twitter’s Developer Portal</a>
+for more information.
+From this point on, I will assume that you have your Twitter API credentials at
+hand ;-)</p>
+<div id="packages-neededrecommended" class="section level4" number="45.0.2.1">
+<h4>
+<span class="header-section-number">45.0.2.1</span> Packages needed/recommended<a class="anchor" aria-label="anchor" href="#packages-neededrecommended"><i class="fas fa-link"></i></a>
+</h4>
+<p>There are a few packages that help us retrieve data from Twitter. For this project,
+I am using <a href="https://www.research.ed.ac.uk/en/publications/academictwitter-an-r-package-to-access-the-twitter-academic-resea">academictwitteR</a>,
+but you may also want to check out <a href="https://cran.r-project.org/web/packages/twitteR/twitteR.pdf">twitteR</a>
+and <a href="https://cran.rstudio.com/web/packages/rtweet/index.html">rtweet</a>. I have
+already experienced a few glitches with the former, which seems to be updated less
+frequently than rtweet. Another reason why I am using academictwitteR now is because
+it has a more straight forward connection with Twitter API V2, which we can use
+to retrieve “historical data” (the previous API allowed retrieval of data from
+the past 8-10 days only, among other limitations).
+So, let’s get on with the search:</p>
+</div>
+<div id="set-up-credentials" class="section level4" number="45.0.2.2">
+<h4>
+<span class="header-section-number">45.0.2.2</span> Set up credentials<a class="anchor" aria-label="anchor" href="#set-up-credentials"><i class="fas fa-link"></i></a>
+</h4>
+<p>For this step, you will have to look at your profile on Twitter’s developer portal.
+Now, go ahead and get your credentials.
+With academictwitteR, I can use the Bearer Token only. The <a href="https://developer.twitter.com/en/docs/authentication/oauth-2-0/bearer-tokens">API documentation</a>
+and the <a href="https://github.com/cjbarrie/academictwitteR">package repository</a> have
+more information on that. For now, you have to call the function <code><a href="https://rdrr.io/pkg/academictwitteR/man/set_bearer.html">set_bearer()</a></code> to
+store that information for future use.</p>
+<div class="sourceCode" id="cb705"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># set_bearer()</span></span></code></pre></div>
+<p>Once you follow the instructions above, you are ready to go ahead and run your
+query!</p>
+</div>
+<div id="perform-the-search" class="section level4" number="45.0.2.3">
+<h4>
+<span class="header-section-number">45.0.2.3</span> Perform the search<a class="anchor" aria-label="anchor" href="#perform-the-search"><i class="fas fa-link"></i></a>
+</h4>
+<p>Now, you’re finally able to run the search. For that, you will use the
+<code><a href="https://rdrr.io/pkg/academictwitteR/man/get_all_tweets.html">get_all_tweets()</a></code> function. In my case, I am interested in investigating how
+sectors of the alt-right have “hijacked” narratives related to the Capitol attack
+in January 2021, to assess what type of vocabulary people were using to refer to
+different narratives related to that event.
+For the purpose of this example, I will limit the number of tweets retrieved to 5000.</p>
+<div class="sourceCode" id="cb706"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># capitol &lt;- get_all_tweets(query = "capitol", # search query</span></span>
+<span><span class="co">#                                    start_tweets = "2021-01-06T00:00:00Z", # search start date</span></span>
+<span><span class="co">#                                    end_tweets = "2021-01-06T19:00:00Z", # search end date</span></span>
+<span><span class="co">#                                    bearer_token = get_bearer(), # pulling stored bearer toke</span></span>
+<span><span class="co">#                                    data_path = "data", #where data is stored as series of JSON files</span></span>
+<span><span class="co">#                                    n = 5000, # total number of tweets retrieved</span></span>
+<span><span class="co">#                                    is_retweet = FALSE) # excluding retweets</span></span>
+<span></span>
+<span><span class="co"># save(capitol, file = "capitol.Rda")</span></span>
+<span></span>
+<span><span class="co"># load("capitol.Rda") </span></span>
+<span><span class="co"># Originally, I had saved the data as a Rda file, but for</span></span>
+<span><span class="co"># submission purposes, I'm (1) saving the text content as a dataframe; (2) uploading</span></span>
+<span><span class="co"># the data to a Google Spreadsheet, then (3) reading it again here. I set the </span></span>
+<span><span class="co"># sharing to "Anyone with the link."</span></span>
+<span></span>
+<span><span class="co"># capitol_df &lt;- as.data.frame(capitol$text, capitol$id)</span></span>
+<span><span class="co"># capitol_df_ids &lt;- as.data.frame(capitol$id)</span></span>
+<span><span class="co"># write_sheet(capitol_df)</span></span>
+<span><span class="co"># write_sheet(capitol_df_ids)</span></span>
+<span><span class="fu"><a href="https://googlesheets4.tidyverse.org/reference/gs4_deauth.html">gs4_deauth</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">capitol</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://googlesheets4.tidyverse.org/reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="st">"https://docs.google.com/spreadsheets/d/198TOYrrXLtUWA3WpRHrch1CBjml0a-pTEdGPXNxqr3U/edit#gid=890543988"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+</div>
+</div>
+<div id="prepare-data" class="section level3" number="45.0.3">
+<h3>
+<span class="header-section-number">45.0.3</span> 2. Prepare data<a class="anchor" aria-label="anchor" href="#prepare-data"><i class="fas fa-link"></i></a>
+</h3>
+<p>For this analysis, we will predominantly use the “text” column, that is, the
+content of the actual tweet. We could use other data, for example number of likes,
+or the timeline of a user, but let’s focus on the content for now.</p>
+<div id="removing-capitalization-numbers-and-punctuation." class="section level4" number="45.0.3.1">
+<h4>
+<span class="header-section-number">45.0.3.1</span> Removing capitalization, numbers, and punctuation.<a class="anchor" aria-label="anchor" href="#removing-capitalization-numbers-and-punctuation."><i class="fas fa-link"></i></a>
+</h4>
+<p>The custom function below is used to remove capitalization, and to remove numbers and punctuation:</p>
+<div class="sourceCode" id="cb707"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># First, we define the function</span></span>
+<span><span class="va">clean_text</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">text</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">text</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/chartr.html">tolower</a></span><span class="op">(</span><span class="va">text</span><span class="op">)</span></span>
+<span>  <span class="va">text</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">"[[:digit:]]+"</span>, <span class="st">""</span>, <span class="va">text</span><span class="op">)</span></span>
+<span>  <span class="va">text</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="st">"[[:punct:]]+"</span>, <span class="st">""</span>, <span class="va">text</span><span class="op">)</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">text</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="co"># Then, apply it to the text content:</span></span>
+<span><span class="va">capitol</span><span class="op">$</span><span class="va">text</span> <span class="op">&lt;-</span> <span class="fu">clean_text</span><span class="op">(</span><span class="va">capitol</span><span class="op">$</span><span class="va">text</span><span class="op">)</span></span></code></pre></div>
+<p>We also want to remove stop words, that is, those that do not add meaning to
+textual analysis. Before doing that, we will tokenize the words, which is a
+process that will be useful in other steps further ahead:
+#### Tokenize words</p>
+<div class="sourceCode" id="cb708"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">capitol_tokens</span> <span class="op">&lt;-</span> <span class="va">capitol</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">tidytext</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytext/man/unnest_tokens.html">unnest_tokens</a></span><span class="op">(</span><span class="va">word</span>, <span class="va">text</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">id</span>, <span class="va">word</span><span class="op">)</span></span></code></pre></div>
+<p>Below, I am using <code>tidytext</code>’s standard set of stop words:</p>
+<div class="sourceCode" id="cb709"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">capitol_tokens</span> <span class="op">&lt;-</span> <span class="va">capitol_tokens</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html">anti_join</a></span><span class="op">(</span><span class="fu">tidytext</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytext/man/get_stopwords.html">get_stopwords</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>However, preliminary plotting showed that the word “capitol” was causing noise
+in the charts because it obviously appears in every tweet, so I decided to remove
+it from the corpus. I understand that this does not harm the analysis, because we
+are not interested in the connections with the word, but in the general meaning of
+tweets containing that word.</p>
+<div class="sourceCode" id="cb710"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">my_stopwords</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>word <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>,</span>
+<span>                                    <span class="st">"capitol"</span>, <span class="st">"just"</span>, <span class="st">"now"</span>,</span>
+<span>                                <span class="st">"right now"</span>, <span class="st">"get"</span>, <span class="st">"like"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">capitol_tokens</span> <span class="op">&lt;-</span> <span class="va">capitol_tokens</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html">anti_join</a></span><span class="op">(</span><span class="va">my_stopwords</span><span class="op">)</span></span></code></pre></div>
+<p>I will also “stem” words, that is, combine words that share the same “root.” This
+is important because preliminary analysis showed the existence of words that have
+similar seemantic value like “storm” and “storming”</p>
+<div class="sourceCode" id="cb711"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">capitol_tokens</span><span class="op">$</span><span class="va">word</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://leslie-huang.github.io/r-corpus/reference/text_tokens.html">text_tokens</a></span><span class="op">(</span><span class="va">capitol_tokens</span><span class="op">$</span><span class="va">word</span>, stemmer <span class="op">=</span> <span class="st">"en"</span><span class="op">)</span> <span class="co"># english stemmer</span></span></code></pre></div>
+</div>
+<div id="document-term-matrix" class="section level4" number="45.0.3.2">
+<h4>
+<span class="header-section-number">45.0.3.2</span> Document-term matrix<a class="anchor" aria-label="anchor" href="#document-term-matrix"><i class="fas fa-link"></i></a>
+</h4>
+<p>The document-term matrix (dtm) is “a mathematical matrix that describes the frequency
+of terms that occur in a collection of documents” [3]. In this case, each tweet
+is stored as a document, and each word in the tweets is a term. In other words,
+the matrix shows which words appear in each tweet.</p>
+<div class="sourceCode" id="cb712"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">DTM</span> <span class="op">&lt;-</span> <span class="va">capitol_tokens</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">tidytext</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tidytext/man/document_term_casters.html">cast_dtm</a></span><span class="op">(</span><span class="va">id</span>, <span class="va">word</span>, <span class="va">n</span><span class="op">)</span></span>
+<span><span class="va">DTM</span></span></code></pre></div>
+<pre><code>## &lt;&lt;DocumentTermMatrix (documents: 4999, terms: 10402)&gt;&gt;
+## Non-/sparse entries: 61329/51938269
+## Sparsity           : 100%
+## Maximal term length: 30
+## Weighting          : term frequency (tf)</code></pre>
+<p>Looking at the structure of the document-term matrix, we see that this specific
+dtm has 17,635 documents (tweets) and 36,273 terms (unique words). The dtm will
+be used for exploratory analysis in the next section.</p>
+</div>
+</div>
+<div id="analyze-data" class="section level3" number="45.0.4">
+<h3>
+<span class="header-section-number">45.0.4</span> 3. Analyze data<a class="anchor" aria-label="anchor" href="#analyze-data"><i class="fas fa-link"></i></a>
+</h3>
+<div id="exploratory-analysis" class="section level4" number="45.0.4.1">
+<h4>
+<span class="header-section-number">45.0.4.1</span> Exploratory analysis<a class="anchor" aria-label="anchor" href="#exploratory-analysis"><i class="fas fa-link"></i></a>
+</h4>
+<p>First, let’s look at the frequency of words. For that, we apply <code><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by()</a></code>
+and <code><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize()</a></code> to the tokens dataset to find out the frequency:</p>
+<div class="sourceCode" id="cb714"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">capitol_tokens</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">word</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>occurrence <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">occurrence</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 10,402 × 2
+##    word      occurrence
+##    &lt;list&gt;         &lt;int&gt;
+##  1 &lt;chr [1]&gt;       1397
+##  2 &lt;chr [1]&gt;       1333
+##  3 &lt;chr [1]&gt;       1214
+##  4 &lt;chr [1]&gt;       1181
+##  5 &lt;chr [1]&gt;        824
+##  6 &lt;chr [1]&gt;        603
+##  7 &lt;chr [1]&gt;        575
+##  8 &lt;chr [1]&gt;        528
+##  9 &lt;chr [1]&gt;        506
+## 10 &lt;chr [1]&gt;        446
+## # … with 10,392 more rows</code></pre>
+<p>As seen above, the resulting tibble shows only the description of the words as
+list objects <code>&lt;chr [1]&gt;</code>, but not the words themselves, so I create a new tibble
+that “reveals the words:”</p>
+<div class="sourceCode" id="cb716"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">tokens_words</span> <span class="op">&lt;-</span> <span class="va">capitol_tokens</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="co"># creating a data frame with the frequencies</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">word</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>N <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">tokens_words</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "tbl_df"     "tbl"        "data.frame"</code></pre>
+<div class="sourceCode" id="cb718"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">tokens_words</span><span class="op">$</span><span class="va">word</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">tokens_words</span><span class="op">$</span><span class="va">word</span><span class="op">)</span> <span class="co"># turning the tokens into character objects</span></span></code></pre></div>
+<p>Below, we can see the list of words by frequency. We notice that there is a
+“first tier” of frequency containing the words “storm,”“build,” “trump,” and
+“polic” are the 3 most frequent ones. “Storm,” “build,” and “polic” represent word
+stems, so words like “building” are within the “build” term, for example.</p>
+<div class="sourceCode" id="cb719"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">tokens_words</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">word</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">N</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 10,402 × 2
+## # Groups:   word [10,402]
+##    word        N
+##    &lt;chr&gt;   &lt;int&gt;
+##  1 storm    1389
+##  2 build    1276
+##  3 trump    1124
+##  4 polic    1092
+##  5 support   790
+##  6 tri       587
+##  7 protest   521
+##  8 peopl     514
+##  9 us        483
+## 10 hill      431
+## # … with 10,392 more rows</code></pre>
+<p>And we can plot the word frequency in a bar chart:</p>
+<div class="sourceCode" id="cb721"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">tokens_words</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">word</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">N</span> <span class="op">&gt;</span> <span class="fl">300</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_reorder.html">fct_reorder</a></span><span class="op">(</span><span class="va">word</span>, <span class="va">N</span>, .desc <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">N</span>, fill <span class="op">=</span> <span class="va">N</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"identity"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Count"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"Term (stemmed)"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="twitter_scrape_nlp_files/figure-html/word_frequency_chart-1.png" width="80%" style="display: block; margin: auto;"></div>
+<p>Another way to visualize the frequency of words is with a wordcloud. Although not
+always a good choice, in this case a wordcloud allows for visualizations of other
+terms that don’t fit in the bar chart.</p>
+<div class="sourceCode" id="cb722"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1234</span><span class="op">)</span> <span class="co"># for reproducibility</span></span>
+<span></span>
+<span><span class="va">pal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html">brewer.pal</a></span><span class="op">(</span><span class="fl">9</span>, <span class="st">"BuGn"</span><span class="op">)</span> <span class="co"># setting the color palette</span></span>
+<span><span class="va">pal</span> <span class="op">&lt;-</span> <span class="va">pal</span><span class="op">[</span><span class="op">-</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span><span class="op">]</span> <span class="co"># this improves readability by narrowing the range of shades of the palette showing in the chart</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/wordcloud/man/wordcloud.html">wordcloud</a></span><span class="op">(</span>words <span class="op">=</span> <span class="va">tokens_words</span><span class="op">$</span><span class="va">word</span>,</span>
+<span>          freq <span class="op">=</span> <span class="va">tokens_words</span><span class="op">$</span><span class="va">N</span>,</span>
+<span>          min.freq <span class="op">=</span> <span class="fl">50</span>,</span>
+<span>          max.words<span class="op">=</span><span class="fl">200</span>,</span>
+<span>          random.order<span class="op">=</span><span class="cn">FALSE</span>,</span>
+<span>          rot.per<span class="op">=</span><span class="fl">0.35</span>,</span>
+<span>          colors<span class="op">=</span><span class="va">pal</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="twitter_scrape_nlp_files/figure-html/unnamed-chunk-5-1.png" width="80%" style="display: block; margin: auto;"></div>
+</div>
+<div id="natural-language-processing" class="section level4" number="45.0.4.2">
+<h4>
+<span class="header-section-number">45.0.4.2</span> Natural language processing<a class="anchor" aria-label="anchor" href="#natural-language-processing"><i class="fas fa-link"></i></a>
+</h4>
+<div id="visualize-topics-with-latent-dirichlet-allocation-lda" class="section level5" number="45.0.4.2.1">
+<h5>
+<span class="header-section-number">45.0.4.2.1</span> Visualize topics with Latent Dirichlet Allocation (LDA)<a class="anchor" aria-label="anchor" href="#visualize-topics-with-latent-dirichlet-allocation-lda"><i class="fas fa-link"></i></a>
+</h5>
+<p>Latent Dirichlet Allocation is an approach to statistical topic modeling in which
+documents are represented as a set of topics and a topic is a set of words. The
+topics are situated in a “latent layer.” Put in a very simple way, this type of
+modeling compares the presence of a term in a document and in a topic, and uses
+that comparison to establish the probability that the document is part of the
+topic [4].
+This type of modeling is used here to identify the topics and the co-occurring
+terms, that is, terms that appear together in the tweets.
+The code below performs the topic allocation. Initial runs of this and the following
+parts revealed that the topics were too similar, so I proceeded with the creation
+of only 2, which seemed to capture the meaning in tweets satisfactorily.</p>
+<div class="sourceCode" id="cb723"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">LDA</span> <span class="op">&lt;-</span> <span class="fu">topicmodels</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/topicmodels/man/lda.html">LDA</a></span><span class="op">(</span><span class="va">DTM</span>,</span>
+<span>                        k <span class="op">=</span> <span class="fl">2</span>, <span class="co"># number of topics</span></span>
+<span>                        control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/gsubfn/man/list.html">list</a></span><span class="op">(</span>seed <span class="op">=</span> <span class="fl">123</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">LDA_td</span> <span class="op">&lt;-</span> <span class="fu">tidytext</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="va">LDA</span><span class="op">)</span> <span class="co">#tidying the LDA object</span></span></code></pre></div>
+</div>
+<div id="visualize-co-occurring-terms" class="section level5" number="45.0.4.2.2">
+<h5>
+<span class="header-section-number">45.0.4.2.2</span> Visualize co-occurring terms<a class="anchor" aria-label="anchor" href="#visualize-co-occurring-terms"><i class="fas fa-link"></i></a>
+</h5>
+<p>The code below creates a tibble containing topics of 5 terms each.</p>
+<div class="sourceCode" id="cb724"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">topTerms</span> <span class="op">&lt;-</span> <span class="va">LDA_td</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">topic</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/top_n.html">top_n</a></span><span class="op">(</span><span class="fl">5</span>, <span class="va">beta</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="co"># 5 main terms that will later be plotted</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">topic</span>, <span class="op">-</span><span class="va">beta</span><span class="op">)</span> <span class="co"># arranging topics in descending order of beta coefficient</span></span></code></pre></div>
+<p>Then, we plot the topics.</p>
+<div class="sourceCode" id="cb725"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">topTerms</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>term <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/tidytext/man/reorder_within.html">reorder_within</a></span><span class="op">(</span><span class="va">term</span>, <span class="va">beta</span>, <span class="va">topic</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">term</span>, <span class="va">beta</span>, fill <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">topic</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span><span class="op">(</span>show.legend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">topic</span>, scales <span class="op">=</span> <span class="st">"free_x"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_flip.html">coord_flip</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/tidytext/man/reorder_within.html">scale_x_reordered</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Topics in tweets containing the term 'capitol' in January 6, 2021"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="twitter_scrape_nlp_files/figure-html/unnamed-chunk-7-1.png" width="80%" style="display: block; margin: auto;"></div>
+<p>The process of identifying the number of topics and terms in each topic was iterative
+in this case. Preliminary plotting showed that there was strong intersection between
+topics, so I kept reducing the number until I found two that seemed relevant.
+Apparently, topic #2 refers to the process of protesters (stem “protest”) storming
+the capitol building (stem “build”); conversely, topic #1 seems to refer to police
+reaction to the attacks by the supporters.</p>
+<p>Another way to visualize the relationships in the corpus is by identifying the
+frequency of word pairs present in the corpus. The code below generates a data</p>
+<div class="sourceCode" id="cb726"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">word_pairs_capitol</span> <span class="op">&lt;-</span> <span class="va">capitol_tokens</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://juliasilge.github.io/widyr/reference/pairwise_count.html">pairwise_count</a></span><span class="op">(</span><span class="va">word</span>, <span class="va">id</span>, sort <span class="op">=</span> <span class="cn">TRUE</span>, upper <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="network-plot-of-co-occurring-words" class="section level5" number="45.0.4.2.3">
+<h5>
+<span class="header-section-number">45.0.4.2.3</span> Network plot of co-occurring words<a class="anchor" aria-label="anchor" href="#network-plot-of-co-occurring-words"><i class="fas fa-link"></i></a>
+</h5>
+<div class="sourceCode" id="cb727"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">word_pairs_capitol</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">n</span> <span class="op">&gt;=</span> <span class="fl">80</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/igraph/man/graph_from_data_frame.html">graph_from_data_frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/ggraph.html">ggraph</a></span><span class="op">(</span>layout <span class="op">=</span> <span class="st">"fr"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_edge_link.html">geom_edge_link</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>edge_alpha <span class="op">=</span> <span class="va">n</span>, edge_width <span class="op">=</span> <span class="va">n</span><span class="op">)</span>, edge_colour <span class="op">=</span> <span class="st">"cyan4"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_point.html">geom_node_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/geom_node_text.html">geom_node_text</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="va">name</span><span class="op">)</span>, repel <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                 point.padding <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="st">"lines"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Co-occurring terms in tweets containing the term 'capitol' in January 6, 2021"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="twitter_scrape_nlp_files/figure-html/unnamed-chunk-9-1.png" width="80%" style="display: block; margin: auto;"></div>
+<p>The plot above shows a few potentially interesting aspects of this corpus, among
+which we highlight two. First, there is a cluster of words related to non-lethal
+police weapons (“tear gas” and “rubber bullet”); that cluster is connected to
+“police” and and “people.” Another aspect is the proximity of “trump” to the
+center of the graph, strongly connected with “support” (possibly stemmed from
+“supporter/s”). “Support” is also strongly connected with “build” and “storm.”
+This is compatible with the pairwise chart, in which one of the topics is
+possibly associated with the police reaction to the attacks.</p>
+</div>
+<div id="sentiment-analysis" class="section level5" number="45.0.4.2.4">
+<h5>
+<span class="header-section-number">45.0.4.2.4</span> Sentiment analysis<a class="anchor" aria-label="anchor" href="#sentiment-analysis"><i class="fas fa-link"></i></a>
+</h5>
+<div class="sourceCode" id="cb728"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">tweets</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/iconv.html">iconv</a></span><span class="op">(</span><span class="va">capitol</span><span class="op">$</span><span class="va">text</span><span class="op">)</span> <span class="co"># creating a tibble containing the text</span></span>
+<span></span>
+<span><span class="va">sentiment</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/syuzhet/man/get_nrc_sentiment.html">get_nrc_sentiment</a></span><span class="op">(</span><span class="va">tweets</span><span class="op">)</span> <span class="co"># this uses the nrc dictionary to assign sentiment scores for each tweet</span></span></code></pre></div>
+<p>Now that we have a tibble with the sentiment score for each tweet, we can print
+the first results for sentiment and for tweets, if we want to compare:</p>
+<div class="sourceCode" id="cb729"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">sentiment</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##   anger anticipation disgust fear joy sadness surprise trust negative positive
+## 1     1            0       0    0   0       0        0     1        1        1
+## 2     2            1       2    2   0       1        1     2        2        2
+## 3     1            0       1    1   0       1        0     0        1        0
+## 4     0            0       0    0   0       0        0     0        0        0
+## 5     1            0       1    1   0       2        0     0        3        0
+## 6     2            0       1    2   0       1        1     0        3        1</code></pre>
+<div class="sourceCode" id="cb731"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">tweets</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "these are donald trumps supporters attempting to storm the united states capitol at his direction httpstcokcnjxmwvj"                                                                                                                              
+## [2] "ok live coverage\ntrump gave his rabid base an order to march and marching waddling they are toward the capitol\ndamn\ndc is on lockdown natl guard amp cops some buildings evacuated\ntrumps crowd is a creepy lot amp things are getting tense" 
+## [3] "greekpale tvietor not like this not at the capitol this is terrorism"                                                                                                                                                                             
+## [4] "kenhagen quill would you look at that\n\nit only took the capitol to be overrun"                                                                                                                                                                  
+## [5] "one of the things that gets me is the sheer dishonesty and delusion of racists the claim that blm would get treated better if they stormed the capitol like the world wouldnt be treated to images of dead black people in the streets for weeks" 
+## [6] "murderous rhetoric trifecta on display here civil war no bag limits and day of the rope a phrase taken straight from accelerationist neonazis like atomwaffen these are the folks attempting to storm the capitol at the moment httpstcoviatsxujv"</code></pre>
+<p>We can also see the frequency of each sentiment:</p>
+<div class="sourceCode" id="cb733"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">sentiment_sums</span> <span class="op">&lt;-</span> <span class="va">sentiment</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise_all.html">summarise_all</a></span><span class="op">(</span><span class="va">sum</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">sentiment_sums</span> <span class="op">=</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/gather.html">gather</a></span><span class="op">(</span><span class="va">sentiment</span>, key <span class="op">=</span> <span class="st">"S_sum"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">S_sum</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>number <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">value</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">sentiment_sums</span></span></code></pre></div>
+<pre><code>## # A tibble: 10 × 2
+##    S_sum        number
+##    &lt;chr&gt;         &lt;dbl&gt;
+##  1 anger          4466
+##  2 anticipation   1872
+##  3 disgust        1526
+##  4 fear           4463
+##  5 joy            1186
+##  6 negative       5694
+##  7 positive       5612
+##  8 sadness        1951
+##  9 surprise       2403
+## 10 trust          3741</code></pre>
+<p>And create a bar plot with that frequency:</p>
+<div class="sourceCode" id="cb735"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">sentiment_sums</span>,</span>
+<span>       <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_reorder.html">fct_reorder</a></span><span class="op">(</span><span class="va">S_sum</span>,</span>
+<span>                           <span class="va">number</span>,</span>
+<span>                           .desc <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>           y <span class="op">=</span> <span class="va">number</span>,</span>
+<span>           fill <span class="op">=</span> <span class="va">number</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"identity"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Count"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"Sentiment"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="twitter_scrape_nlp_files/figure-html/Sentiment_frequency_chart-1.png" width="80%" style="display: block; margin: auto;"></div>
+<p>One other nlp task we can implement is identifying words associated with each
+“polarity” (positive and negative).
+Originally, the code chunk below contains a line that gets sentiments from the NRC
+dictionary [7]. For the compiled book, I’m reading a Google spreadsheet that
+contains the dictionary.</p>
+<div class="sourceCode" id="cb736"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># nrc_positive &lt;- get_sentiments("nrc") %&gt;%</span></span>
+<span><span class="co">#   filter(sentiment == "positive")</span></span>
+<span><span class="co"># </span></span>
+<span><span class="co"># sheet_write(nrc_positive, ss = "https://docs.google.com/spreadsheets/d/198TOYrrXLtUWA3WpRHrch1CBjml0a-pTEdGPXNxqr3U/edit#gid=890543988", sheet = "nrc_positive")</span></span>
+<span></span>
+<span><span class="va">nrc_positive</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://googlesheets4.tidyverse.org/reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="st">"https://docs.google.com/spreadsheets/d/198TOYrrXLtUWA3WpRHrch1CBjml0a-pTEdGPXNxqr3U/edit#gid=890543988"</span>, sheet <span class="op">=</span> <span class="st">"nrc_positive"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">tokens_words</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join</a></span><span class="op">(</span><span class="va">nrc_positive</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">N</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 318 × 3
+##    word        N sentiment
+##    &lt;chr&gt;   &lt;int&gt; &lt;chr&gt;    
+##  1 build    1276 positive 
+##  2 elect     264 positive 
+##  3 march     158 positive 
+##  4 vote      118 positive 
+##  5 guard     102 positive 
+##  6 speech     81 positive 
+##  7 hope       80 positive 
+##  8 actual     79 positive 
+##  9 good       70 positive 
+## 10 protect    68 positive 
+## # … with 308 more rows</code></pre>
+<p>Ok, now we see that “build” is classified as a positive term, and this adds an
+unintended bias to the analysis. “Building” is classified as positive by the NRC
+dictionary (possibly because of its verb form), and this may not be true in this case.
+In this corpus, “building” is a rather descriptive word, and apparently is mostly
+used as a noun.</p>
+<p>So, let’s build a chart that shows the frequency of positive terms, excluding the
+term “biuld.”</p>
+<div class="sourceCode" id="cb738"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">plot_positive</span> <span class="op">&lt;-</span> <span class="va">tokens_words</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join</a></span><span class="op">(</span><span class="va">nrc_positive</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">N</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">N</span>  <span class="op">&gt;</span> <span class="fl">50</span> <span class="op">&amp;</span> <span class="va">N</span> <span class="op">&lt;</span> <span class="fl">500</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_reorder.html">fct_reorder</a></span><span class="op">(</span><span class="va">word</span>, <span class="va">N</span>, .desc <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">N</span>, fill <span class="op">=</span> <span class="va">N</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>           <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"identity"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Count"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"Positive terms (stemmed)"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">plot_positive</span></span></code></pre></div>
+<div class="inline-figure">
+<img src="twitter_scrape_nlp_files/figure-html/polarity_frequency_chart-1.png" width="80%" style="display: block; margin: auto;">
+And we can do the same for negative:</div>
+<div class="sourceCode" id="cb739"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># nrc_negative &lt;- get_sentiments("nrc") %&gt;%</span></span>
+<span><span class="co">#   filter(sentiment == "negative")</span></span>
+<span><span class="co"># </span></span>
+<span><span class="co"># sheet_write(nrc_negative, ss = "https://docs.google.com/spreadsheets/d/198TOYrrXLtUWA3WpRHrch1CBjml0a-pTEdGPXNxqr3U/edit#gid=890543988", sheet = "nrc_negative")</span></span>
+<span><span class="co"># </span></span>
+<span><span class="va">nrc_negative</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://googlesheets4.tidyverse.org/reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="st">"https://docs.google.com/spreadsheets/d/198TOYrrXLtUWA3WpRHrch1CBjml0a-pTEdGPXNxqr3U/edit#gid=890543988"</span>, sheet <span class="op">=</span> <span class="st">"nrc_negative"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">tokens_words</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join</a></span><span class="op">(</span><span class="va">nrc_negative</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">N</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 470 × 3
+##    word          N sentiment
+##    &lt;chr&gt;     &lt;int&gt; &lt;chr&gt;    
+##  1 storm      1389 negative 
+##  2 breach      248 negative 
+##  3 attack      226 negative 
+##  4 riot        206 negative 
+##  5 violent     171 negative 
+##  6 mob         145 negative 
+##  7 fight       142 negative 
+##  8 vote        118 negative 
+##  9 barrier     100 negative 
+## 10 terrorist    99 negative 
+## # … with 460 more rows</code></pre>
+<div class="sourceCode" id="cb741"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">tokens_words</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join</a></span><span class="op">(</span><span class="va">nrc_negative</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">N</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">N</span>  <span class="op">&gt;</span> <span class="fl">90</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_reorder.html">fct_reorder</a></span><span class="op">(</span><span class="va">word</span>, <span class="va">N</span>, .desc <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">N</span>, fill <span class="op">=</span> <span class="va">N</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>           <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"identity"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Count"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"Negative terms (stemmed)"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure">
+<img src="twitter_scrape_nlp_files/figure-html/polarity_negative-1.png" width="80%" style="display: block; margin: auto;">
+Something slightly similar happens to “storm” among the negative terms: It happens
+with strikingly higher frequency than the rest of the terms, so, for this exercise,
+I’ll remove set the range so that the chart includes most frequent words except for
+“storm:”</div>
+<div class="sourceCode" id="cb742"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">plot_negative</span> <span class="op">&lt;-</span> <span class="va">tokens_words</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join</a></span><span class="op">(</span><span class="va">nrc_negative</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">N</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">N</span>  <span class="op">&gt;</span> <span class="fl">90</span><span class="op">&amp;</span> <span class="va">N</span> <span class="op">&lt;</span> <span class="fl">500</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_reorder.html">fct_reorder</a></span><span class="op">(</span><span class="va">word</span>, <span class="va">N</span>, .desc <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">N</span>, fill <span class="op">=</span> <span class="va">N</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>           <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"identity"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Count"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"Negative terms (stemmed)"</span><span class="op">)</span></span>
+<span><span class="va">plot_negative</span></span></code></pre></div>
+<div class="inline-figure"><img src="twitter_scrape_nlp_files/figure-html/unnamed-chunk-11-1.png" width="80%" style="display: block; margin: auto;"></div>
+<p>As we see, the list of negative terms include words that are possibly related to
+criticism towards the “methods” of the crowd invading the capitol: they are possibly
+described as a <strong>mob</strong> that was <strong>violently</strong> <strong>attacking</strong>. Of course,
+more precise conclusions would require deeper analysis, but these words give a sense
+of the negative vocabulary used to describe the event.</p>
+<p>We can present both negative and positive together using <code><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html">grid.arrange()</a></code>:</p>
+<div class="sourceCode" id="cb743"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">plot_negative</span> <span class="op">&lt;-</span> <span class="va">tokens_words</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join</a></span><span class="op">(</span><span class="va">nrc_negative</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">N</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">N</span>  <span class="op">&gt;</span> <span class="fl">90</span> <span class="op">&amp;</span> <span class="va">N</span> <span class="op">&lt;</span> <span class="fl">500</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_reorder.html">fct_reorder</a></span><span class="op">(</span><span class="va">word</span>, <span class="va">N</span>, .desc <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">N</span>, fill <span class="op">=</span> <span class="va">N</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>           <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"identity"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Count"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"Negative terms (stemmed)"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/lims.html">ylim</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">300</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">plot_negative</span></span></code></pre></div>
+<div class="inline-figure"><img src="twitter_scrape_nlp_files/figure-html/sentiment_grid_arrange-1.png" width="80%" style="display: block; margin: auto;"></div>
+<div class="sourceCode" id="cb744"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">plot_positive</span> <span class="op">&lt;-</span> <span class="va">tokens_words</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join</a></span><span class="op">(</span><span class="va">nrc_positive</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">N</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">N</span>  <span class="op">&gt;</span> <span class="fl">50</span> <span class="op">&amp;</span> <span class="va">N</span> <span class="op">&lt;</span> <span class="fl">500</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_reorder.html">fct_reorder</a></span><span class="op">(</span><span class="va">word</span>, <span class="va">N</span>, .desc <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">N</span>, fill <span class="op">=</span> <span class="va">N</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>           <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"identity"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Count"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"Positive terms (stemmed)"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/lims.html">ylim</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">300</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html">grid.arrange</a></span><span class="op">(</span><span class="va">plot_negative</span>, <span class="va">plot_positive</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="twitter_scrape_nlp_files/figure-html/sentiment_grid_arrange-2.png" width="80%" style="display: block; margin: auto;"></div>
+</div>
+</div>
+</div>
+<div id="conclusion-8" class="section level3" number="45.0.5">
+<h3>
+<span class="header-section-number">45.0.5</span> 4. Conclusion<a class="anchor" aria-label="anchor" href="#conclusion-8"><i class="fas fa-link"></i></a>
+</h3>
+<p>With this project, we covered three main steps in textual analysis of twitter data.
+First, we used Twitter API V2 to scrape tweets of a topic of interest within a
+time range. Second, we prepared the data by removing punctuation, stemming, and
+stop words – both standard ones and those which preliminary analysis had shown
+to cause overplotting in later stages. Finally, I conduct some tasks in textual
+analysis. At that last stage, I first conducted an exploratory analysis by
+identifying most frequent terms in the corpus. I also used a wordcloud to offer
+an alternative visualization to word frequency. Then, I undertook natural
+language processing tasks. Through Latent Dirichlet Allocation, I showed two of
+the most salient topics in the data. Additionally, I plotted bi-grams, which
+demonstrate strength of relationship between words, and “clusters” where words
+concentrate. Finally, I implemented sentiment analysis to identify terms and
+frequencies across sentiments described by the <code>ncr</code> dictionary.</p>
+<p>The most challenging part of carrying out this project was the handling data
+objects, and this is mainly because the object returned by the search is a dataframe
+with other dataframes nested. Because of that, saving a csv file was not as
+straightforward as I was used to. Therefore, it was a little confusing to define
+a strategy to deal with files: should I use a Rda file or save only the columns
+I needed as csv files? With saved files, I was not sure how they would behave
+when someone opened the .rmd file in another computer. I ended up sticking with the
+.rda file, because it seemed the most natural choice as a format in which files
+“carry” all the information needed for analysis.</p>
+<div id="references-1" class="section level5" number="45.0.5.0.1">
+<h5>
+<span class="header-section-number">45.0.5.0.1</span> References:<a class="anchor" aria-label="anchor" href="#references-1"><i class="fas fa-link"></i></a>
+</h5>
+<p>[1] <a href="https://jtr13.github.io/cc21/twitter-sentiment-analysis-in-r.html#word-frequency-plot" class="uri">https://jtr13.github.io/cc21/twitter-sentiment-analysis-in-r.html#word-frequency-plot</a></p>
+<p>[2] <a href="https://towardsdatascience.com/create-a-word-cloud-with-r-bde3e7422e8a" class="uri">https://towardsdatascience.com/create-a-word-cloud-with-r-bde3e7422e8a</a></p>
+<p>[3] DTM: <a href="https://bookdown.org/Maxine/tidy-text-mining/tidying-a-document-term-matrix.html" class="uri">https://bookdown.org/Maxine/tidy-text-mining/tidying-a-document-term-matrix.html</a></p>
+<p>[4] LDA: <a href="https://blog.marketmuse.com/glossary/latent-dirichlet-allocation-definition/" class="uri">https://blog.marketmuse.com/glossary/latent-dirichlet-allocation-definition/</a></p>
+<p>[5] Sentiment analysis: <a href="https://finnstats.com/index.php/2021/05/16/sentiment-analysis-in-r/" class="uri">https://finnstats.com/index.php/2021/05/16/sentiment-analysis-in-r/</a></p>
+<p>[6] Sentiment analysis: <a href="https://www.tidytextmining.com/sentiment.html" class="uri">https://www.tidytextmining.com/sentiment.html</a></p>
+
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="time-series-visualization-with-r.html"><span class="header-section-number">44</span> Time series visualization with R</a></div>
+<div class="next"><a href="causal-inference-tutorial-a-quick-glance-at-interventional-treatment-and-simpsons-paradox.html"><span class="header-section-number">46</span> Causal Inference Tutorial: A Quick Glance at Interventional Treatment and Simpson’s Paradox</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav"><li>
+<a class="nav-link" href="#twitter-textual-data-scraping-and-analyzing"><span class="header-section-number">45</span> Twitter textual data: scraping and analyzing</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#loading-all-the-required-packages"><span class="header-section-number">45.0.1</span> Loading all the required packages</a></li>
+<li><a class="nav-link" href="#scrape-data"><span class="header-section-number">45.0.2</span> 1. Scrape data</a></li>
+<li><a class="nav-link" href="#prepare-data"><span class="header-section-number">45.0.3</span> 2. Prepare data</a></li>
+<li><a class="nav-link" href="#analyze-data"><span class="header-section-number">45.0.4</span> 3. Analyze data</a></li>
+<li><a class="nav-link" href="#conclusion-8"><span class="header-section-number">45.0.5</span> 4. Conclusion</a></li>
+</ul>
+</li></ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/jtr13/cc22tt/blob/main/twitter_scrape_nlp.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/jtr13/cc22tt/edit/main/twitter_scrape_nlp.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Community Contributions for EDAV Fall 2022 Tues/Thurs</strong>" was written by . It was last built on 2022-12-10.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

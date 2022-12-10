@@ -4,14 +4,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 45 Causal Inference Tutorial: A Quick Glance at Interventional Treatment and Simpson’s Paradox | Community Contributions for EDAV Fall 2022 Tues/Thurs</title>
+<title>Chapter 46 Causal Inference Tutorial: A Quick Glance at Interventional Treatment and Simpson’s Paradox | Community Contributions for EDAV Fall 2022 Tues/Thurs</title>
 <meta name="description" content='Yizhan Niu # remotes::install_github("allisonhorst/palmerpenguins") library(palmerpenguins) # remotes::install_github("hrbrmstr/hrbrthemes") library(hrbrthemes) library(gridExtra)...'>
 <meta name="generator" content="bookdown 0.30 with bs4_book()">
-<meta property="og:title" content="Chapter 45 Causal Inference Tutorial: A Quick Glance at Interventional Treatment and Simpson’s Paradox | Community Contributions for EDAV Fall 2022 Tues/Thurs">
+<meta property="og:title" content="Chapter 46 Causal Inference Tutorial: A Quick Glance at Interventional Treatment and Simpson’s Paradox | Community Contributions for EDAV Fall 2022 Tues/Thurs">
 <meta property="og:type" content="book">
 <meta property="og:description" content='Yizhan Niu # remotes::install_github("allisonhorst/palmerpenguins") library(palmerpenguins) # remotes::install_github("hrbrmstr/hrbrthemes") library(hrbrthemes) library(gridExtra)...'>
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 45 Causal Inference Tutorial: A Quick Glance at Interventional Treatment and Simpson’s Paradox | Community Contributions for EDAV Fall 2022 Tues/Thurs">
+<meta name="twitter:title" content="Chapter 46 Causal Inference Tutorial: A Quick Glance at Interventional Treatment and Simpson’s Paradox | Community Contributions for EDAV Fall 2022 Tues/Thurs">
 <meta name="twitter:description" content='Yizhan Niu # remotes::install_github("allisonhorst/palmerpenguins") library(palmerpenguins) # remotes::install_github("hrbrmstr/hrbrthemes") library(hrbrthemes) library(gridExtra)...'>
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
@@ -97,26 +97,27 @@
 <li><a class="" href="dplyr-pacakage-in-r.html"><span class="header-section-number">42</span> dplyr pacakage in R</a></li>
 <li><a class="" href="how-not-to-visualize-american-elections.html"><span class="header-section-number">43</span> How (not) to visualize American elections</a></li>
 <li><a class="" href="time-series-visualization-with-r.html"><span class="header-section-number">44</span> Time series visualization with R</a></li>
-<li><a class="active" href="causal-inference-tutorial-a-quick-glance-at-interventional-treatment-and-simpsons-paradox.html"><span class="header-section-number">45</span> Causal Inference Tutorial: A Quick Glance at Interventional Treatment and Simpson’s Paradox</a></li>
-<li><a class="" href="network-analysis-and-social-network-analysis.html"><span class="header-section-number">46</span> Network analysis and social network analysis</a></li>
-<li><a class="" href="network-analysis-in-r.html"><span class="header-section-number">47</span> Network Analysis in R</a></li>
-<li><a class="" href="introduction-to-common-sampling-techniques-in-r.html"><span class="header-section-number">48</span> Introduction to common sampling techniques in r</a></li>
-<li><a class="" href="what-you-see-is-what-you-understand-learning-data-science-visually.html"><span class="header-section-number">49</span> What you see is what you understand: learning data science visually</a></li>
+<li><a class="" href="twitter-textual-data-scraping-and-analyzing.html"><span class="header-section-number">45</span> Twitter textual data: scraping and analyzing</a></li>
+<li><a class="active" href="causal-inference-tutorial-a-quick-glance-at-interventional-treatment-and-simpsons-paradox.html"><span class="header-section-number">46</span> Causal Inference Tutorial: A Quick Glance at Interventional Treatment and Simpson’s Paradox</a></li>
+<li><a class="" href="network-analysis-and-social-network-analysis.html"><span class="header-section-number">47</span> Network analysis and social network analysis</a></li>
+<li><a class="" href="network-analysis-in-r.html"><span class="header-section-number">48</span> Network Analysis in R</a></li>
+<li><a class="" href="introduction-to-common-sampling-techniques-in-r.html"><span class="header-section-number">49</span> Introduction to common sampling techniques in r</a></li>
+<li><a class="" href="what-you-see-is-what-you-understand-learning-data-science-visually.html"><span class="header-section-number">50</span> What you see is what you understand: learning data science visually</a></li>
 <li class="book-part">Interview Prep</li>
-<li><a class="" href="ten-interview-questions-and-answers.html"><span class="header-section-number">51</span> Ten interview questions and answers</a></li>
-<li><a class="" href="data-science-internship-search-survival-guide.html"><span class="header-section-number">52</span> Data science internship search survival guide</a></li>
-<li><a class="" href="data-visualization-interview-questions-sample.html"><span class="header-section-number">53</span> Data visualization interview questions sample</a></li>
-<li><a class="" href="how-i-got-into-amazon-as-a-full-time-data-analyst.html"><span class="header-section-number">54</span> How I got into Amazon as a full time data analyst</a></li>
+<li><a class="" href="ten-interview-questions-and-answers.html"><span class="header-section-number">52</span> Ten interview questions and answers</a></li>
+<li><a class="" href="data-science-internship-search-survival-guide.html"><span class="header-section-number">53</span> Data science internship search survival guide</a></li>
+<li><a class="" href="data-visualization-interview-questions-sample.html"><span class="header-section-number">54</span> Data visualization interview questions sample</a></li>
+<li><a class="" href="how-i-got-into-amazon-as-a-full-time-data-analyst.html"><span class="header-section-number">55</span> How I got into Amazon as a full time data analyst</a></li>
 <li class="book-part">Case Studies</li>
-<li><a class="" href="benford-case-study.html"><span class="header-section-number">56</span> Benford Case Study</a></li>
+<li><a class="" href="benford-case-study.html"><span class="header-section-number">57</span> Benford Case Study</a></li>
 <li class="book-part">Blogs</li>
-<li><a class="" href="equity-in-ai.html"><span class="header-section-number">58</span> Equity in AI</a></li>
-<li><a class="" href="breaking-into-tech-black-girl-edition.html"><span class="header-section-number">59</span> Breaking into tech: black girl edition</a></li>
-<li><a class="" href="homepage-artwork.html"><span class="header-section-number">60</span> Homepage Artwork</a></li>
-<li><a class="" href="design-homepage-for-class-community.html"><span class="header-section-number">61</span> Design homepage for class community</a></li>
+<li><a class="" href="equity-in-ai.html"><span class="header-section-number">59</span> Equity in AI</a></li>
+<li><a class="" href="breaking-into-tech-black-girl-edition.html"><span class="header-section-number">60</span> Breaking into tech: black girl edition</a></li>
+<li><a class="" href="homepage-artwork.html"><span class="header-section-number">61</span> Homepage Artwork</a></li>
+<li><a class="" href="design-homepage-for-class-community.html"><span class="header-section-number">62</span> Design homepage for class community</a></li>
 <li class="book-part">Appendices</li>
-<li><a class="" href="github-initial-setup.html"><span class="header-section-number">62</span> Github initial setup</a></li>
-<li><a class="" href="tutorial-for-pull-request-mergers.html"><span class="header-section-number">63</span> Tutorial for pull request mergers</a></li>
+<li><a class="" href="github-initial-setup.html"><span class="header-section-number">63</span> Github initial setup</a></li>
+<li><a class="" href="tutorial-for-pull-request-mergers.html"><span class="header-section-number">64</span> Tutorial for pull request mergers</a></li>
 </ul>
 
         <div class="book-extra">
@@ -124,12 +125,12 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="causal-inference-tutorial-a-quick-glance-at-interventional-treatment-and-simpsons-paradox" class="section level1" number="45">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="causal-inference-tutorial-a-quick-glance-at-interventional-treatment-and-simpsons-paradox" class="section level1" number="46">
 <h1>
-<span class="header-section-number">45</span> Causal Inference Tutorial: A Quick Glance at Interventional Treatment and Simpson’s Paradox<a class="anchor" aria-label="anchor" href="#causal-inference-tutorial-a-quick-glance-at-interventional-treatment-and-simpsons-paradox"><i class="fas fa-link"></i></a>
+<span class="header-section-number">46</span> Causal Inference Tutorial: A Quick Glance at Interventional Treatment and Simpson’s Paradox<a class="anchor" aria-label="anchor" href="#causal-inference-tutorial-a-quick-glance-at-interventional-treatment-and-simpsons-paradox"><i class="fas fa-link"></i></a>
 </h1>
 <p>Yizhan Niu</p>
-<div class="sourceCode" id="cb704"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb745"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># remotes::install_github("allisonhorst/palmerpenguins")</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://allisonhorst.github.io/palmerpenguins/">palmerpenguins</a></span><span class="op">)</span></span>
 <span><span class="co"># remotes::install_github("hrbrmstr/hrbrthemes")</span></span>
@@ -139,37 +140,37 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span></code></pre></div>
-<div id="motivation-10" class="section level2" number="45.1">
+<div id="motivation-10" class="section level2" number="46.1">
 <h2>
-<span class="header-section-number">45.1</span> Motivation<a class="anchor" aria-label="anchor" href="#motivation-10"><i class="fas fa-link"></i></a>
+<span class="header-section-number">46.1</span> Motivation<a class="anchor" aria-label="anchor" href="#motivation-10"><i class="fas fa-link"></i></a>
 </h2>
 <p>Causal inference has been more and more recognized in the data science world. One primary reason is that data scientists would like to analyze and estimate the causal effect on an event (Y) from another event (X), while mere statistics can hardly be capable of satisfying such need to find out causal effects. This short tutorial aims at giving readers a quick glance at some applications of causal inference in interpreting and analyzing the data. I chose one tool in causal inference called intervention treatment and a famous problem, Simpson’s Paradox, to show how causal inference can be applied to practice to solve problems using R.</p>
 </div>
-<div id="intro-to-causal-graphs" class="section level2" number="45.2">
+<div id="intro-to-causal-graphs" class="section level2" number="46.2">
 <h2>
-<span class="header-section-number">45.2</span> Intro to Causal Graphs<a class="anchor" aria-label="anchor" href="#intro-to-causal-graphs"><i class="fas fa-link"></i></a>
+<span class="header-section-number">46.2</span> Intro to Causal Graphs<a class="anchor" aria-label="anchor" href="#intro-to-causal-graphs"><i class="fas fa-link"></i></a>
 </h2>
 <p>To represent causal effects between pairs of different observed variables, we need some mathematical language to describe these causal relationships. In this case, graph theory becomes the best candidate. Typically, a directed acyclic graph (DAG) will be our choice for representing causality among multiple variables. A famous example is as shown following:<br><img src="resources/causal_graphs/Causal_Graph.jpg" alt="Causal Graph"></p>
 <p>This example is famous both as a Bayesian Network and as a DAG for representing causal relationships. It describes the relationships among the season (X1), whether the rain fall (X2), whether the sprinkler is turned on (X3), whether the floor is wet (X4), and whether the floor is slippery (X5).</p>
 <p>In the context of causal inference, each causal graph like this will induce a probability distribution, i.e., a joint distribution of all observed variables, which we call observations. One of our goals is to use these observations to determine the causal effects between one variable and the other. The causal effects can be accomplished by intervening on the variable (X) we would like to test, which will be elaborated on below.</p>
 </div>
-<div id="intro-to-interventional" class="section level2" number="45.3">
+<div id="intro-to-interventional" class="section level2" number="46.3">
 <h2>
-<span class="header-section-number">45.3</span> Intro to Interventional<a class="anchor" aria-label="anchor" href="#intro-to-interventional"><i class="fas fa-link"></i></a>
+<span class="header-section-number">46.3</span> Intro to Interventional<a class="anchor" aria-label="anchor" href="#intro-to-interventional"><i class="fas fa-link"></i></a>
 </h2>
 <p>We may hear from time to time the sentence that “correlation is not causation.” With the increase in ice cream consumption (X), the shark attacks (Y) also rise. It seems they have some correlation, but it is hard to imagine any causal effects of eating ice cream on shark attacks.</p>
 <p>One explanation is that hot weather (Z) causes people to eat ice cream and also causes people to go to the beaches, increasing the possibility of being attacked by sharks. Here, hot weather is a common cause of both ice cream consumption and shark attacks, but there are intuitively no causal relationships between the two variables we are curious about.</p>
 <p>To eliminate the effects of that common cause, one thing we can do is intervene on people’s ice cream consumption. We can choose a group of people to have them not consume ice cream and observe whether the shark attack rate rises in that period, leaving any other variable the same. It is one example of intervention, as we are deliberately intervening on one variable to see how the other variable will behave. Even though this intervention is not realistic all the time, we have other techniques such as back-door adjustment and do-calculus using non-experimental data, while we will not elaborate on them here.</p>
 <p>We will then show some examples below which connects causal diagrams and intervention operation.</p>
-<div id="first-causal-graph-example" class="section level3" number="45.3.1">
+<div id="first-causal-graph-example" class="section level3" number="46.3.1">
 <h3>
-<span class="header-section-number">45.3.1</span> First Causal Graph Example<a class="anchor" aria-label="anchor" href="#first-causal-graph-example"><i class="fas fa-link"></i></a>
+<span class="header-section-number">46.3.1</span> First Causal Graph Example<a class="anchor" aria-label="anchor" href="#first-causal-graph-example"><i class="fas fa-link"></i></a>
 </h3>
 <div class="figure">
 <img src="resources/causal_graphs/Graph1.jpg" alt=""><p class="caption">Graph1</p>
 </div>
 <p>This causal graph represents the ice cream and shark attack case, where Z is the hot weather, X is the ice cream consumption, and Y is the shark attack rate.</p>
-<div class="sourceCode" id="cb705"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb746"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
@@ -190,15 +191,15 @@
 <div class="inline-figure"><img src="short_causal_inference_tutorial_files/figure-html/unnamed-chunk-3-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>We can easily find out that these variables are all highly correlated with each other. We would like to test the causal effects of intervening on people’s ice cream consumption.</p>
 </div>
-<div id="first-causal-graph-after-intervention" class="section level3" number="45.3.2">
+<div id="first-causal-graph-after-intervention" class="section level3" number="46.3.2">
 <h3>
-<span class="header-section-number">45.3.2</span> First Causal Graph After Intervention<a class="anchor" aria-label="anchor" href="#first-causal-graph-after-intervention"><i class="fas fa-link"></i></a>
+<span class="header-section-number">46.3.2</span> First Causal Graph After Intervention<a class="anchor" aria-label="anchor" href="#first-causal-graph-after-intervention"><i class="fas fa-link"></i></a>
 </h3>
 <div class="figure">
 <img src="resources/causal_graphs/Graph1_Intervention.jpg" alt=""><p class="caption">Graph1 Intervention</p>
 </div>
 <p>The right hand side shows the graph after intervention. (Z has no effects on X, because we already have people to eat a fixed number of ice creams.)</p>
-<div class="sourceCode" id="cb706"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb747"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Simulate data from the SCM where do(X = x)</span></span>
 <span><span class="va">intervene_x</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">n</span> <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span></span>
@@ -222,16 +223,16 @@
 <div class="inline-figure"><img src="short_causal_inference_tutorial_files/figure-html/unnamed-chunk-4-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>As we can see from the two graphs, having people eating 2022 ice creams during the period does not affect the distribution of the likelihood of their being attacked by sharks. Thus, if it were done in the real world, we can conclude that ice cream consumption has some correlations with shark attacks but has no causation on that event.</p>
 </div>
-<div id="second-causal-graph-example" class="section level3" number="45.3.3">
+<div id="second-causal-graph-example" class="section level3" number="46.3.3">
 <h3>
-<span class="header-section-number">45.3.3</span> Second Causal Graph Example<a class="anchor" aria-label="anchor" href="#second-causal-graph-example"><i class="fas fa-link"></i></a>
+<span class="header-section-number">46.3.3</span> Second Causal Graph Example<a class="anchor" aria-label="anchor" href="#second-causal-graph-example"><i class="fas fa-link"></i></a>
 </h3>
 <p>It is still the example of ice cream consumption and shark attacks, but we imagine a world where ice cream can make people smell more delicious, thus causes sharks to attack people.</p>
 <div class="figure">
 <img src="resources/causal_graphs/Graph2.jpg" alt=""><p class="caption">Graph2</p>
 </div>
 <p>We can find that there is an arrow from X to Y now.</p>
-<div class="sourceCode" id="cb707"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb748"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
@@ -252,14 +253,14 @@
 <div class="inline-figure"><img src="short_causal_inference_tutorial_files/figure-html/unnamed-chunk-5-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>Still, we would like to test on the causal effects of intervening on people’s ice cream consumption, which causes the following graph.</p>
 </div>
-<div id="second-causal-graph-after-intervention" class="section level3" number="45.3.4">
+<div id="second-causal-graph-after-intervention" class="section level3" number="46.3.4">
 <h3>
-<span class="header-section-number">45.3.4</span> Second Causal Graph After Intervention<a class="anchor" aria-label="anchor" href="#second-causal-graph-after-intervention"><i class="fas fa-link"></i></a>
+<span class="header-section-number">46.3.4</span> Second Causal Graph After Intervention<a class="anchor" aria-label="anchor" href="#second-causal-graph-after-intervention"><i class="fas fa-link"></i></a>
 </h3>
 <div class="figure">
 <img src="resources/causal_graphs/Graph2_Intervention.jpg" alt=""><p class="caption">Graph2 Intervention</p>
 </div>
-<div class="sourceCode" id="cb708"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb749"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Simulate data from the SCM where do(X = x)</span></span>
 <span><span class="va">intervene_x</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">n</span> <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span></span>
@@ -284,21 +285,21 @@
 <p>Now, even though we let people eat 2 ice creams, do(X=2) , which is slightly more than their previous consumption of zero ice creams, the probability distribution shifts to the right, and sharks are more likely to attack people who consumer more ice creams. In this case, we cannot eliminate the causality between ice cream consumption and shark attack rate.</p>
 </div>
 </div>
-<div id="intro-to-simpsons-paradox" class="section level2" number="45.4">
+<div id="intro-to-simpsons-paradox" class="section level2" number="46.4">
 <h2>
-<span class="header-section-number">45.4</span> Intro to Simpson’s Paradox<a class="anchor" aria-label="anchor" href="#intro-to-simpsons-paradox"><i class="fas fa-link"></i></a>
+<span class="header-section-number">46.4</span> Intro to Simpson’s Paradox<a class="anchor" aria-label="anchor" href="#intro-to-simpsons-paradox"><i class="fas fa-link"></i></a>
 </h2>
 <p>Now, I would like you to shift our mind to another famous topic in statistics: Simpson’s Paradox. Basically, Simpson’s Paradox describes a situation where data shows some positive (or negative) correlations, but this correlation flips to negative (or positive) if we separate the data based on another variable. We will use the Palmer Penguins dataset to show the occurrence of Simpson’s Paradox and how we use causal inference to interpret this phenomenon.</p>
-<div id="example-of-palmer-penguins-dataset" class="section level3" number="45.4.1">
+<div id="example-of-palmer-penguins-dataset" class="section level3" number="46.4.1">
 <h3>
-<span class="header-section-number">45.4.1</span> Example of Palmer Penguins Dataset<a class="anchor" aria-label="anchor" href="#example-of-palmer-penguins-dataset"><i class="fas fa-link"></i></a>
+<span class="header-section-number">46.4.1</span> Example of Palmer Penguins Dataset<a class="anchor" aria-label="anchor" href="#example-of-palmer-penguins-dataset"><i class="fas fa-link"></i></a>
 </h3>
 <div class="figure">
 <img src="resources/causal_graphs/Penguin_image.jpg" alt=""><p class="caption">Cute Penguins</p>
 </div>
 <p>The dataset was collected and published by Dr. Kristen Gorman and the Palmer Station, Antarctica LTER, which was originally for species research purposes. This dataset has different features of a penguin in each row: species, island, bill_length_mm, bill_depth_mm, flipper_length_, body_mass_g, sex, and so on. In our case, we will only look at bill lengths (X), bill depths (Y), and species (Z), as Simpson’s Paradox was found among these three variables.</p>
 <p>Here is a brief overview of what the dataset looks like.</p>
-<div class="sourceCode" id="cb709"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb750"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">9450</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">penguin_df</span><span class="op">&lt;-</span> </span>
@@ -310,12 +311,12 @@
 <div id="htmlwidget-e0c2e62255b4d8c02037" style="width:100%;height:auto;" class="datatables html-widget"></div>
 <script type="application/json" data-for="htmlwidget-e0c2e62255b4d8c02037">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6"],["Adelie","Adelie","Adelie","Adelie","Adelie","Adelie"],["Torgersen","Torgersen","Torgersen","Torgersen","Torgersen","Torgersen"],[39.1,39.5,40.3,36.7,39.3,38.9],[18.7,17.4,18,19.3,20.6,17.8],[181,186,195,193,190,181],[3750,3800,3250,3450,3650,3625],["male","female","female","female","male","female"],[2007,2007,2007,2007,2007,2007]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>species<\/th>\n      <th>island<\/th>\n      <th>bill_length_mm<\/th>\n      <th>bill_depth_mm<\/th>\n      <th>flipper_length_mm<\/th>\n      <th>body_mass_g<\/th>\n      <th>sex<\/th>\n      <th>year<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[3,4,5,6,8]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
-<div id="relationship-between-bill-length-x-and-bill-depth-y" class="section level3" number="45.4.2">
+<div id="relationship-between-bill-length-x-and-bill-depth-y" class="section level3" number="46.4.2">
 <h3>
-<span class="header-section-number">45.4.2</span> Relationship Between Bill Length (X) And Bill Depth (Y)<a class="anchor" aria-label="anchor" href="#relationship-between-bill-length-x-and-bill-depth-y"><i class="fas fa-link"></i></a>
+<span class="header-section-number">46.4.2</span> Relationship Between Bill Length (X) And Bill Depth (Y)<a class="anchor" aria-label="anchor" href="#relationship-between-bill-length-x-and-bill-depth-y"><i class="fas fa-link"></i></a>
 </h3>
 <p>First, not taking species into consideration, we would like to see the correlation between bill lengths and bill depths of penguins in the whole dataset.</p>
-<div class="sourceCode" id="cb710"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb751"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#typeof(as.numeric(df["bill_length_mm"][[1]]))</span></span>
 <span></span>
 <span><span class="va">lin_reg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">bill_depth_mm</span> <span class="op">~</span> <span class="va">bill_length_mm</span>, data<span class="op">=</span><span class="va">penguin_df</span><span class="op">)</span></span>
@@ -332,12 +333,12 @@
 <div class="inline-figure"><img src="short_causal_inference_tutorial_files/figure-html/unnamed-chunk-8-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>We found a clear negative correlation shown by the red line.</p>
 </div>
-<div id="relationship-between-bill-length-x-and-bill-depth-y-separated-by-species" class="section level3" number="45.4.3">
+<div id="relationship-between-bill-length-x-and-bill-depth-y-separated-by-species" class="section level3" number="46.4.3">
 <h3>
-<span class="header-section-number">45.4.3</span> Relationship Between Bill Length (X) And Bill Depth (Y) Separated By Species<a class="anchor" aria-label="anchor" href="#relationship-between-bill-length-x-and-bill-depth-y-separated-by-species"><i class="fas fa-link"></i></a>
+<span class="header-section-number">46.4.3</span> Relationship Between Bill Length (X) And Bill Depth (Y) Separated By Species<a class="anchor" aria-label="anchor" href="#relationship-between-bill-length-x-and-bill-depth-y-separated-by-species"><i class="fas fa-link"></i></a>
 </h3>
 <p>Now, if we separated these data into three species, Adelie, Chinstrap, and Gentoo, we will find something different.</p>
-<div class="sourceCode" id="cb711"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb752"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">chin</span><span class="op">&lt;-</span></span>
 <span>  <span class="va">penguin_df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">species</span> <span class="op">==</span> <span class="st">"Chinstrap"</span><span class="op">)</span></span>
@@ -371,7 +372,7 @@
 <div class="inline-figure"><img src="short_causal_inference_tutorial_files/figure-html/unnamed-chunk-9-1.png" width="80%" style="display: block; margin: auto;"></div>
 <p>Surprisingly, the negative correlation on aggregated data flipped if we separated these data by species. It shows a case of Simpson’s Paradox here.</p>
 <p>The following graphs are plotted separately based on different species.</p>
-<div class="sourceCode" id="cb712"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb753"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Given the same Z, there exists some positive correlation to X and Y.</span></span>
 <span></span>
 <span><span class="va">lin_reg_adelie</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">bill_depth_mm</span> <span class="op">~</span> <span class="va">bill_length_mm</span>, data<span class="op">=</span><span class="va">adelie</span><span class="op">)</span></span>
@@ -416,12 +417,12 @@
 <span><span class="fu"><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html">grid.arrange</a></span><span class="op">(</span><span class="va">adelie_plot</span>, <span class="va">chin_plot</span>, <span class="va">gentoo_plot</span>, nrow<span class="op">=</span><span class="fl">3</span>, ncol <span class="op">=</span> <span class="fl">1</span>,widths <span class="op">=</span> <span class="fl">1</span>,heights<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1.5</span>,<span class="fl">1.5</span>,<span class="fl">1.5</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"in"</span>,<span class="st">"in"</span>,<span class="st">"in"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="short_causal_inference_tutorial_files/figure-html/unnamed-chunk-10-1.png" width="80%" style="display: block; margin: auto;"></div>
 </div>
-<div id="take-a-closer-look-at-the-distribution-given-x-41-and-x-42." class="section level3" number="45.4.4">
+<div id="take-a-closer-look-at-the-distribution-given-x-41-and-x-42." class="section level3" number="46.4.4">
 <h3>
-<span class="header-section-number">45.4.4</span> Take a closer look at the distribution given X = 41 and X = 42.<a class="anchor" aria-label="anchor" href="#take-a-closer-look-at-the-distribution-given-x-41-and-x-42."><i class="fas fa-link"></i></a>
+<span class="header-section-number">46.4.4</span> Take a closer look at the distribution given X = 41 and X = 42.<a class="anchor" aria-label="anchor" href="#take-a-closer-look-at-the-distribution-given-x-41-and-x-42."><i class="fas fa-link"></i></a>
 </h3>
 <p>Now, to better understand the patterns of the data, we now take a closer look at the distribution of bill depths, given a certain bill length. We choose the bill lengths of 41 and 42 millimeters.</p>
-<div class="sourceCode" id="cb713"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb754"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">a</span> <span class="op">=</span> <span class="fl">40</span></span>
 <span><span class="va">b</span> <span class="op">=</span> <span class="fl">41.9</span></span>
 <span></span>
@@ -486,9 +487,9 @@ X1: bill_length_mm between 42 and 43.9</p>
 <p>Given a certain species such as Gentoo, the data is not balanced in the two graphs. This imbalance of data within one specie may directly lead to the occurrence of Simpson’s paradox. Even though a lower bill length of 41 millimeters leads to a higher average bill depth of penguins, it is because more penguins in the 41-mm group are Adelie, who have deeper bills than other penguins, while more penguins in the 42-mm group are Gentoo, who have shallower bills.</p>
 <p>Thus, such imbalanced data among different species makes the data aggregation less reliable if we do not taking the species type into account.</p>
 </div>
-<div id="connecting-palmer-penguins-example-with-causal-intervention" class="section level3" number="45.4.5">
+<div id="connecting-palmer-penguins-example-with-causal-intervention" class="section level3" number="46.4.5">
 <h3>
-<span class="header-section-number">45.4.5</span> Connecting Palmer Penguins Example With Causal Intervention<a class="anchor" aria-label="anchor" href="#connecting-palmer-penguins-example-with-causal-intervention"><i class="fas fa-link"></i></a>
+<span class="header-section-number">46.4.5</span> Connecting Palmer Penguins Example With Causal Intervention<a class="anchor" aria-label="anchor" href="#connecting-palmer-penguins-example-with-causal-intervention"><i class="fas fa-link"></i></a>
 </h3>
 <p>Now it is necessary to think about the intervention operation we just learned before.</p>
 <p>We are assuming that the causal graph follows that X &lt;- Z -&gt; Y, where there are no causal effects from X to Y.</p>
@@ -497,7 +498,7 @@ X1: bill_length_mm between 42 and 43.9</p>
 <div class="figure">
 <img src="resources/causal_graphs/Penguin_assumption.jpg" alt=""><p class="caption">Causal Graph Assumption</p>
 </div>
-<div class="sourceCode" id="cb714"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb755"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">penguin_df</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
 <span></span>
 <span><span class="va">prior_adelie</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">penguin_df</span><span class="op">$</span><span class="va">species</span><span class="op">==</span><span class="st">"Adelie"</span><span class="op">)</span><span class="op">/</span><span class="va">n</span></span>
@@ -553,16 +554,16 @@ X1: bill_length_mm between 42 and 43.9</p>
 </div>
 </div>
 </div>
-<div id="final-sentences" class="section level2" number="45.5">
+<div id="final-sentences" class="section level2" number="46.5">
 <h2>
-<span class="header-section-number">45.5</span> Final Sentences:<a class="anchor" aria-label="anchor" href="#final-sentences"><i class="fas fa-link"></i></a>
+<span class="header-section-number">46.5</span> Final Sentences:<a class="anchor" aria-label="anchor" href="#final-sentences"><i class="fas fa-link"></i></a>
 </h2>
 <p>The causal inference is increasingly recognized in the industry and academia of data science. It is valuable and meaningful to learn some causal inference techniques to broaden our skill sets.</p>
 <p>Even though I am still taking the course, I would like to share with you some knowledge of what I have just learned. There might also be some typos in the tutorial, but the concepts in causality such as intervention and causal diagrams are very interesting. If you would like to learn more about such content, please read the works by Pearl. Books such as “Causality” and “The book of Why” are really good materials to learn more about causal inference.</p>
 </div>
-<div id="reference-6" class="section level2" number="45.6">
+<div id="reference-6" class="section level2" number="46.6">
 <h2>
-<span class="header-section-number">45.6</span> Reference:<a class="anchor" aria-label="anchor" href="#reference-6"><i class="fas fa-link"></i></a>
+<span class="header-section-number">46.6</span> Reference:<a class="anchor" aria-label="anchor" href="#reference-6"><i class="fas fa-link"></i></a>
 </h2>
 <ol style="list-style-type: decimal">
 <li><p>An introduction to Causal inference: <a href="https://www.r-bloggers.com/2019/11/an-introduction-to-causal-inference/" class="uri">https://www.r-bloggers.com/2019/11/an-introduction-to-causal-inference/</a></p></li>
@@ -576,33 +577,33 @@ X1: bill_length_mm between 42 and 43.9</p>
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="time-series-visualization-with-r.html"><span class="header-section-number">44</span> Time series visualization with R</a></div>
-<div class="next"><a href="network-analysis-and-social-network-analysis.html"><span class="header-section-number">46</span> Network analysis and social network analysis</a></div>
+<div class="prev"><a href="twitter-textual-data-scraping-and-analyzing.html"><span class="header-section-number">45</span> Twitter textual data: scraping and analyzing</a></div>
+<div class="next"><a href="network-analysis-and-social-network-analysis.html"><span class="header-section-number">47</span> Network analysis and social network analysis</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#causal-inference-tutorial-a-quick-glance-at-interventional-treatment-and-simpsons-paradox"><span class="header-section-number">45</span> Causal Inference Tutorial: A Quick Glance at Interventional Treatment and Simpson’s Paradox</a></li>
-<li><a class="nav-link" href="#motivation-10"><span class="header-section-number">45.1</span> Motivation</a></li>
-<li><a class="nav-link" href="#intro-to-causal-graphs"><span class="header-section-number">45.2</span> Intro to Causal Graphs</a></li>
+<li><a class="nav-link" href="#causal-inference-tutorial-a-quick-glance-at-interventional-treatment-and-simpsons-paradox"><span class="header-section-number">46</span> Causal Inference Tutorial: A Quick Glance at Interventional Treatment and Simpson’s Paradox</a></li>
+<li><a class="nav-link" href="#motivation-10"><span class="header-section-number">46.1</span> Motivation</a></li>
+<li><a class="nav-link" href="#intro-to-causal-graphs"><span class="header-section-number">46.2</span> Intro to Causal Graphs</a></li>
 <li>
-<a class="nav-link" href="#intro-to-interventional"><span class="header-section-number">45.3</span> Intro to Interventional</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#first-causal-graph-example"><span class="header-section-number">45.3.1</span> First Causal Graph Example</a></li>
-<li><a class="nav-link" href="#first-causal-graph-after-intervention"><span class="header-section-number">45.3.2</span> First Causal Graph After Intervention</a></li>
-<li><a class="nav-link" href="#second-causal-graph-example"><span class="header-section-number">45.3.3</span> Second Causal Graph Example</a></li>
-<li><a class="nav-link" href="#second-causal-graph-after-intervention"><span class="header-section-number">45.3.4</span> Second Causal Graph After Intervention</a></li>
+<a class="nav-link" href="#intro-to-interventional"><span class="header-section-number">46.3</span> Intro to Interventional</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#first-causal-graph-example"><span class="header-section-number">46.3.1</span> First Causal Graph Example</a></li>
+<li><a class="nav-link" href="#first-causal-graph-after-intervention"><span class="header-section-number">46.3.2</span> First Causal Graph After Intervention</a></li>
+<li><a class="nav-link" href="#second-causal-graph-example"><span class="header-section-number">46.3.3</span> Second Causal Graph Example</a></li>
+<li><a class="nav-link" href="#second-causal-graph-after-intervention"><span class="header-section-number">46.3.4</span> Second Causal Graph After Intervention</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#intro-to-simpsons-paradox"><span class="header-section-number">45.4</span> Intro to Simpson’s Paradox</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#example-of-palmer-penguins-dataset"><span class="header-section-number">45.4.1</span> Example of Palmer Penguins Dataset</a></li>
-<li><a class="nav-link" href="#relationship-between-bill-length-x-and-bill-depth-y"><span class="header-section-number">45.4.2</span> Relationship Between Bill Length (X) And Bill Depth (Y)</a></li>
-<li><a class="nav-link" href="#relationship-between-bill-length-x-and-bill-depth-y-separated-by-species"><span class="header-section-number">45.4.3</span> Relationship Between Bill Length (X) And Bill Depth (Y) Separated By Species</a></li>
-<li><a class="nav-link" href="#take-a-closer-look-at-the-distribution-given-x-41-and-x-42."><span class="header-section-number">45.4.4</span> Take a closer look at the distribution given X = 41 and X = 42.</a></li>
-<li><a class="nav-link" href="#connecting-palmer-penguins-example-with-causal-intervention"><span class="header-section-number">45.4.5</span> Connecting Palmer Penguins Example With Causal Intervention</a></li>
+<a class="nav-link" href="#intro-to-simpsons-paradox"><span class="header-section-number">46.4</span> Intro to Simpson’s Paradox</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#example-of-palmer-penguins-dataset"><span class="header-section-number">46.4.1</span> Example of Palmer Penguins Dataset</a></li>
+<li><a class="nav-link" href="#relationship-between-bill-length-x-and-bill-depth-y"><span class="header-section-number">46.4.2</span> Relationship Between Bill Length (X) And Bill Depth (Y)</a></li>
+<li><a class="nav-link" href="#relationship-between-bill-length-x-and-bill-depth-y-separated-by-species"><span class="header-section-number">46.4.3</span> Relationship Between Bill Length (X) And Bill Depth (Y) Separated By Species</a></li>
+<li><a class="nav-link" href="#take-a-closer-look-at-the-distribution-given-x-41-and-x-42."><span class="header-section-number">46.4.4</span> Take a closer look at the distribution given X = 41 and X = 42.</a></li>
+<li><a class="nav-link" href="#connecting-palmer-penguins-example-with-causal-intervention"><span class="header-section-number">46.4.5</span> Connecting Palmer Penguins Example With Causal Intervention</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#final-sentences"><span class="header-section-number">45.5</span> Final Sentences:</a></li>
-<li><a class="nav-link" href="#reference-6"><span class="header-section-number">45.6</span> Reference:</a></li>
+<li><a class="nav-link" href="#final-sentences"><span class="header-section-number">46.5</span> Final Sentences:</a></li>
+<li><a class="nav-link" href="#reference-6"><span class="header-section-number">46.6</span> Reference:</a></li>
 </ul>
 
       <div class="book-extra">
