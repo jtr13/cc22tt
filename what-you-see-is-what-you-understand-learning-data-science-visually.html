@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 49 What you see is what you understand: learning data science visually | Community Contributions for EDAV Fall 2022 Tues/Thurs</title>
+<meta name="description" content="Rohan Poddar “Visualization is the process of making an external spatial representation of information. Visualizing is a useful strategy for discovering structure and organizing information...">
+<meta name="generator" content="bookdown 0.30 with bs4_book()">
+<meta property="og:title" content="Chapter 49 What you see is what you understand: learning data science visually | Community Contributions for EDAV Fall 2022 Tues/Thurs">
+<meta property="og:type" content="book">
+<meta property="og:description" content="Rohan Poddar “Visualization is the process of making an external spatial representation of information. Visualizing is a useful strategy for discovering structure and organizing information...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 49 What you see is what you understand: learning data science visually | Community Contributions for EDAV Fall 2022 Tues/Thurs">
+<meta name="twitter:description" content="Rohan Poddar “Visualization is the process of making an external spatial representation of information. Visualizing is a useful strategy for discovering structure and organizing information...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.1/transition.js"></script><script src="libs/bs3compat-0.4.1/tabs.js"></script><script src="libs/bs3compat-0.4.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><script src="libs/plotly-binding-4.10.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script><link href="libs/visjs-7.4.9/vis-timeline-graph2d.min.css" rel="stylesheet">
+<script src="libs/visjs-7.4.9/vis-timeline-graph2d.min.js"></script><link href="libs/timeline-0.4/timevis.css" rel="stylesheet">
+<script src="libs/timevis-binding-2.1.0/timevis.js"></script><link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
+<script src="libs/leaflet-1.3.1/leaflet.js"></script><link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
+<script src="libs/proj4-2.6.2/proj4.min.js"></script><script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script><link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
+<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script><link href="libs/dygraphs-1.1.1/dygraph.css" rel="stylesheet">
+<script src="libs/dygraphs-1.1.1/dygraph-combined.js"></script><script src="libs/dygraphs-1.1.1/shapes.js"></script><script src="libs/moment-2.8.4/moment.js"></script><script src="libs/moment-timezone-0.2.5/moment-timezone-with-data.js"></script><script src="libs/moment-fquarter-1.0.0/moment-fquarter.min.js"></script><script src="libs/dygraphs-binding-1.1.1.6/dygraphs.js"></script><script src="libs/Dygraph.Plugins.Crosshair-1.0/crosshair.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="libs/datatables-binding-0.26/datatables.js"></script><link href="libs/dt-core-1.12.1/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="libs/dt-core-1.12.1/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="libs/dt-core-1.12.1/js/jquery.dataTables.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Community Contributions for EDAV Fall 2022 Tues/Thurs</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Welcome!</a></li>
+<li><a class="" href="community-contribution.html"><span class="header-section-number">2</span> Community Contribution</a></li>
+<li><a class="" href="github-submission-instructions.html"><span class="header-section-number">3</span> GitHub submission instructions</a></li>
+<li><a class="" href="sample-project.html"><span class="header-section-number">4</span> Sample project</a></li>
+<li class="book-part">Cheatsheets</li>
+<li><a class="" href="r-window-functions-cheatsheet.html"><span class="header-section-number">6</span> R window functions cheatsheet</a></li>
+<li><a class="" href="rmd-chunk-option-cheat-sheet.html"><span class="header-section-number">7</span> Rmd chunk option cheat sheet</a></li>
+<li><a class="" href="helpful-ggplot2-extensions-cheatsheet.html"><span class="header-section-number">8</span> Helpful ggplot2 Extensions Cheatsheet</a></li>
+<li><a class="" href="commonly-used-graph-cheatcheet.html"><span class="header-section-number">9</span> Commonly-used graph cheatcheet</a></li>
+<li><a class="" href="git-and-version-control.html"><span class="header-section-number">10</span> Git and version control</a></li>
+<li><a class="" href="useful-plots-for-bioinfomatics-in-r.html"><span class="header-section-number">11</span> Useful plots for Bioinfomatics in R</a></li>
+<li><a class="" href="different-ways-to-create-world-map-in-r.html"><span class="header-section-number">12</span> Different ways to create world map in R</a></li>
+<li><a class="" href="color-in-r-python-and-jshtmlcss.html"><span class="header-section-number">13</span> Color in R, Python, and JS/HTML/CSS</a></li>
+<li><a class="" href="color-palettes-for-data-visualization.html"><span class="header-section-number">14</span> Color Palettes for Data Visualization</a></li>
+<li><a class="" href="data-visualization-using-seaborn.html"><span class="header-section-number">15</span> Data visualization using Seaborn</a></li>
+<li><a class="" href="machine-learning-cheatsheet-for-r-and-python.html"><span class="header-section-number">16</span> Machine Learning Cheatsheet for R and Python</a></li>
+<li><a class="" href="data-visualization-with-r-ggplot2-vs.-matlab.html"><span class="header-section-number">17</span> Data Visualization with R ggplot2 vs. Matlab</a></li>
+<li><a class="" href="ggplot2-plots-in-python-cheat-sheet-tutorial.html"><span class="header-section-number">18</span> Ggplot2 plots in python cheat sheet tutorial</a></li>
+<li><a class="" href="model-evaluation-selection-visualization-with-easystats.html"><span class="header-section-number">19</span> Model evaluation, selection &amp; visualization with easystats</a></li>
+<li><a class="" href="time-series-itsmr-cheat-sheet.html"><span class="header-section-number">20</span> Time Series: ITSMR Cheat Sheet</a></li>
+<li class="book-part">Tutorials</li>
+<li><a class="" href="preprocessing-and-visualization-of-time-series-data.html"><span class="header-section-number">22</span> Preprocessing and Visualization of Time Series Data</a></li>
+<li><a class="" href="how-to-use-sqldf.html"><span class="header-section-number">23</span> How to use sqldf</a></li>
+<li><a class="" href="googlevis-in-r.html"><span class="header-section-number">24</span> googleVis in R</a></li>
+<li><a class="" href="tutorial-for-vector-fields-in-r.html"><span class="header-section-number">25</span> Tutorial for vector fields in r</a></li>
+<li><a class="" href="data-cleaning-with-r.html"><span class="header-section-number">26</span> Data cleaning with r</a></li>
+<li><a class="" href="introduction-to-shiny-web-apps.html"><span class="header-section-number">27</span> Introduction to Shiny Web Apps</a></li>
+<li><a class="" href="python-missingno-library-tutorial.html"><span class="header-section-number">28</span> Python missingno library tutorial</a></li>
+<li><a class="" href="data-explorer-tutorial-and-automation.html"><span class="header-section-number">29</span> Data Explorer Tutorial and Automation</a></li>
+<li><a class="" href="d-visualization-in-r.html"><span class="header-section-number">30</span> 3D Visualization in R</a></li>
+<li><a class="" href="visualizing-time-series-data.html"><span class="header-section-number">31</span> Visualizing Time Series Data</a></li>
+<li><a class="" href="igraph-in-r.html"><span class="header-section-number">32</span> igraph in r</a></li>
+<li><a class="" href="geo-mapping-coordinate-extraction-using-api-calls.html"><span class="header-section-number">33</span> Geo-Mapping Coordinate Extraction Using API Calls</a></li>
+<li><a class="" href="edav-garden.html"><span class="header-section-number">34</span> EDAV Garden</a></li>
+<li><a class="" href="using-raster-data-in-r.html"><span class="header-section-number">35</span> Using raster data in R</a></li>
+<li><a class="" href="make-geographical-maps-with-different-packages.html"><span class="header-section-number">36</span> Make Geographical Maps with Different Packages</a></li>
+<li><a class="" href="how-to-obtain-data-from-api-and-process-raw-json-data.html"><span class="header-section-number">37</span> How to obtain data from API and process raw JSON data</a></li>
+<li><a class="" href="sample-statistic-tutorial.html"><span class="header-section-number">38</span> Sample Statistic Tutorial</a></li>
+<li><a class="" href="data-cleaning-tutorial.html"><span class="header-section-number">39</span> Data cleaning tutorial</a></li>
+<li><a class="" href="mlr3-package-tutorial.html"><span class="header-section-number">40</span> mlr3 Package Tutorial</a></li>
+<li><a class="" href="guide-to-nonparametric-tests.html"><span class="header-section-number">41</span> Guide to nonparametric tests</a></li>
+<li><a class="" href="dplyr-pacakage-in-r.html"><span class="header-section-number">42</span> dplyr pacakage in R</a></li>
+<li><a class="" href="how-not-to-visualize-american-elections.html"><span class="header-section-number">43</span> How (not) to visualize American elections</a></li>
+<li><a class="" href="time-series-visualization-with-r.html"><span class="header-section-number">44</span> Time series visualization with R</a></li>
+<li><a class="" href="causal-inference-tutorial-a-quick-glance-at-interventional-treatment-and-simpsons-paradox.html"><span class="header-section-number">45</span> Causal Inference Tutorial: A Quick Glance at Interventional Treatment and Simpson’s Paradox</a></li>
+<li><a class="" href="network-analysis-and-social-network-analysis.html"><span class="header-section-number">46</span> Network analysis and social network analysis</a></li>
+<li><a class="" href="network-analysis-in-r.html"><span class="header-section-number">47</span> Network Analysis in R</a></li>
+<li><a class="" href="introduction-to-common-sampling-techniques-in-r.html"><span class="header-section-number">48</span> Introduction to common sampling techniques in r</a></li>
+<li><a class="active" href="what-you-see-is-what-you-understand-learning-data-science-visually.html"><span class="header-section-number">49</span> What you see is what you understand: learning data science visually</a></li>
+<li class="book-part">Interview Prep</li>
+<li><a class="" href="ten-interview-questions-and-answers.html"><span class="header-section-number">51</span> Ten interview questions and answers</a></li>
+<li><a class="" href="data-science-internship-search-survival-guide.html"><span class="header-section-number">52</span> Data science internship search survival guide</a></li>
+<li><a class="" href="data-visualization-interview-questions-sample.html"><span class="header-section-number">53</span> Data visualization interview questions sample</a></li>
+<li><a class="" href="how-i-got-into-amazon-as-a-full-time-data-analyst.html"><span class="header-section-number">54</span> How I got into Amazon as a full time data analyst</a></li>
+<li class="book-part">Case Studies</li>
+<li><a class="" href="benford-case-study.html"><span class="header-section-number">56</span> Benford Case Study</a></li>
+<li class="book-part">Blogs</li>
+<li><a class="" href="equity-in-ai.html"><span class="header-section-number">58</span> Equity in AI</a></li>
+<li><a class="" href="breaking-into-tech-black-girl-edition.html"><span class="header-section-number">59</span> Breaking into tech: black girl edition</a></li>
+<li><a class="" href="homepage-artwork.html"><span class="header-section-number">60</span> Homepage Artwork</a></li>
+<li><a class="" href="design-homepage-for-class-community.html"><span class="header-section-number">61</span> Design homepage for class community</a></li>
+<li class="book-part">Appendices</li>
+<li><a class="" href="github-initial-setup.html"><span class="header-section-number">62</span> Github initial setup</a></li>
+<li><a class="" href="tutorial-for-pull-request-mergers.html"><span class="header-section-number">63</span> Tutorial for pull request mergers</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/jtr13/cc22tt">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="what-you-see-is-what-you-understand-learning-data-science-visually" class="section level1" number="49">
+<h1>
+<span class="header-section-number">49</span> What you see is what you understand: learning data science visually<a class="anchor" aria-label="anchor" href="#what-you-see-is-what-you-understand-learning-data-science-visually"><i class="fas fa-link"></i></a>
+</h1>
+<p>Rohan Poddar</p>
+<p><em>“Visualization is the process of making an external spatial representation of information. Visualizing is a useful strategy for discovering structure and organizing information efficiently”</em> (Schwartz, Tsang, &amp; Blair, 2016, p. 277)</p>
+<p>Data Science consists of a lot of abstract concepts like Linear Algebra, Probability and Statistics, and Machine Learning. I believe a great way to develop a strong understanding and intuition of these concepts is by learning through interactive visualizations. I have curated a list of resources that cover some of the important topics in a visually interactive way.</p>
+<hr>
+<div id="programming" class="section level2" number="49.1">
+<h2>
+<span class="header-section-number">49.1</span> Programming<a class="anchor" aria-label="anchor" href="#programming"><i class="fas fa-link"></i></a>
+</h2>
+<div id="python-tutor" class="section level3" number="49.1.1">
+<h3>
+<span class="header-section-number">49.1.1</span> 1. Python Tutor<a class="anchor" aria-label="anchor" href="#python-tutor"><i class="fas fa-link"></i></a>
+</h3>
+<p>Link: <a href="https://pythontutor.com/" class="uri">https://pythontutor.com/</a></p>
+<p>Writing code is very abstract and become difficult to follow as the length and complexity of the code increases. Python Tutor helps learn Python, JavaScript, C, C++, and Java programming by visualizing code execution.</p>
+<div class="inline-figure"><img src="resources/learning_data_science_visually/Screenshot%202022-11-14%20at%201.14.10%20PM.png"></div>
+</div>
+<div id="pandas-tutor" class="section level3" number="49.1.2">
+<h3>
+<span class="header-section-number">49.1.2</span> 2. Pandas Tutor<a class="anchor" aria-label="anchor" href="#pandas-tutor"><i class="fas fa-link"></i></a>
+</h3>
+<p>Link: <a href="https://pandastutor.com/" class="uri">https://pandastutor.com/</a></p>
+<p>Transforming and manipulating Pandas data frames are the backbone of every Data Science project. However, manipulating data frames can become very complex to hard to follow. Using bulky print statements and copy-pasting snippets of the code to see what is happening can get cumbersome. Pandas Tutor lets you write code directly in the browser and helps visualize the data transformation step-by-step.</p>
+<p><img src="resources/learning_data_science_visually/Screenshot%202022-11-14%20at%201.02.06%20PM.png"><img src="resources/learning_data_science_visually/Screenshot%202022-11-14%20at%201.01.36%20PM.png" style="width:48.0%"></p>
+</div>
+<div id="tidydata-tutor" class="section level3" number="49.1.3">
+<h3>
+<span class="header-section-number">49.1.3</span> 3. TidyData Tutor<a class="anchor" aria-label="anchor" href="#tidydata-tutor"><i class="fas fa-link"></i></a>
+</h3>
+<p>Link: <a href="https://tidydatatutor.com/" class="uri">https://tidydatatutor.com/</a></p>
+<p>Similar to Pandas Tutor, Tidy Data Tutor lets you write R code in the browser and helps visualize how the data frame changes at each step of a data analysis pipeline.</p>
+<p><img src="resources/learning_data_science_visually/Screenshot%202022-11-14%20at%201.06.26%20PM.png" style="width:48.0%"><img src="resources/learning_data_science_visually/Screenshot%202022-11-14%20at%201.06.59%20PM.png" style="width:48.0%"></p>
+<hr>
+</div>
+</div>
+<div id="probability-and-statistics" class="section level2" number="49.2">
+<h2>
+<span class="header-section-number">49.2</span> Probability and Statistics<a class="anchor" aria-label="anchor" href="#probability-and-statistics"><i class="fas fa-link"></i></a>
+</h2>
+<div id="seeing-theory" class="section level3" number="49.2.1">
+<h3>
+<span class="header-section-number">49.2.1</span> 1. Seeing Theory<a class="anchor" aria-label="anchor" href="#seeing-theory"><i class="fas fa-link"></i></a>
+</h3>
+<p>Link: <a href="https://seeing-theory.brown.edu/" class="uri">https://seeing-theory.brown.edu/</a></p>
+<p>Seeing Theory was created by an undergraduate student at Brown University with the aim of making statistics more accessible through interactive visualizations. Seeing theory breaks down statistical concepts into 6 chapters:</p>
+<ol style="list-style-type: decimal">
+<li>
+<p><strong>Basic Probability</strong> - An introduction to the basic concepts of probability theory.<br><em>Chance Events, Expectation and Variance</em></p>
+<p><img src="resources/learning_data_science_visually/Screenshot%202022-11-14%20at%2012.36.48%20PM.png" style="width:48.0%"><img src="resources/learning_data_science_visually/Screenshot%202022-11-14%20at%2012.37.09%20PM.png" style="width:48.0%"></p>
+</li>
+<li>
+<p><strong>Compound Probability</strong> - Further discusses concepts that lie at the core of probability theory.<br><em>Set Theory, Counting, Conditional Probability</em></p>
+<p><img src="resources/learning_data_science_visually/Screenshot%202022-11-14%20at%2012.37.53%20PM.png" style="width:48.0%"><img src="resources/learning_data_science_visually/Screenshot%202022-11-14%20at%2012.38.27%20PM.png" style="width:48.0%"></p>
+</li>
+<li>
+<p><strong>Probability Distributions</strong> - Specifies the relative likelihoods of all possible outcomes.<br><em>Random Variables, Discrete and Continuous, Central Limit Theorem</em></p>
+<p><img src="resources/learning_data_science_visually/Screenshot%202022-11-14%20at%2012.39.08%20PM.png" style="width:48.0%"><img src="resources/learning_data_science_visually/Screenshot%202022-11-14%20at%2012.39.55%20PM.png" style="width:48.0%"></p>
+</li>
+<li>
+<p><strong>Frequentist Inference</strong> - The process of determining properties of an underlying distribution via the observation of data. <em>Point Estimation, Interval Estimation, The Bootstrap</em></p>
+<p><img src="resources/learning_data_science_visually/Screenshot%202022-11-14%20at%2012.40.23%20PM.png" style="width:48.0%"><img src="resources/learning_data_science_visually/Screenshot%202022-11-14%20at%2012.41.17%20PM.png" style="width:48.0%"></p>
+</li>
+<li>
+<p><strong>Bayesian Inference</strong> - Techniques specifying how one should update one’s beliefs upon observing data. <em>Bayes’ Theorem, Likelihood, Prior to Posterior</em></p>
+<p><img src="resources/learning_data_science_visually/Screenshot%202022-11-14%20at%2012.41.58%20PM.png" style="width:48.0%"><img src="resources/learning_data_science_visually/Screenshot%202022-11-14%20at%2012.42.58%20PM.png" style="width:48.0%"></p>
+</li>
+<li>
+<p><strong>Regression Analysis</strong> - An approach for modeling the linear relationship between two variables.<br><em>Ordinary Least Squares, Correlation, Analysis of Variance</em></p>
+<p><img src="resources/learning_data_science_visually/Screenshot%202022-11-14%20at%2012.43.40%20PM.png" style="width:48.0%"><img src="resources/learning_data_science_visually/Screenshot%202022-11-14%20at%2012.44.02%20PM.png" style="width:48.0%"></p>
+</li>
+</ol>
+<hr>
+</div>
+</div>
+<div id="linear-algebra" class="section level2" number="49.3">
+<h2>
+<span class="header-section-number">49.3</span> Linear Algebra<a class="anchor" aria-label="anchor" href="#linear-algebra"><i class="fas fa-link"></i></a>
+</h2>
+<div id="immersive-linear-algebra" class="section level3" number="49.3.1">
+<h3>
+<span class="header-section-number">49.3.1</span> 1. Immersive Linear Algebra<a class="anchor" aria-label="anchor" href="#immersive-linear-algebra"><i class="fas fa-link"></i></a>
+</h3>
+<p>Link: <a href="http://immersivemath.com/ila/index.html" class="uri">http://immersivemath.com/ila/index.html</a></p>
+<p>Linear Algebra is another important area of Data Science that is very abstract which makes it hard to understand at times. Immersive Linear Algebra uses interactive figures to explain and simplify the different concepts.</p>
+<p><img src="resources/learning_data_science_visually/Screenshot%202022-11-14%20at%205.34.02%20PM.png" style="width:48.0%"><img src="resources/learning_data_science_visually/Screenshot%202022-11-14%20at%205.32.10%20PM.png" style="width:48.0%"></p>
+<hr>
+</div>
+</div>
+<div id="machine-learning" class="section level2" number="49.4">
+<h2>
+<span class="header-section-number">49.4</span> Machine Learning<a class="anchor" aria-label="anchor" href="#machine-learning"><i class="fas fa-link"></i></a>
+</h2>
+<div id="r2d3" class="section level3" number="49.4.1">
+<h3>
+<span class="header-section-number">49.4.1</span> 1. R2D3<a class="anchor" aria-label="anchor" href="#r2d3"><i class="fas fa-link"></i></a>
+</h3>
+<p>Link: <a href="http://www.r2d3.us/" class="uri">http://www.r2d3.us/</a></p>
+<p>R2D3 describes itself as “an experiment in expressing statistical thinking with interactive design”. The website visually introduces Machine Learning by visualizing the steps of understanding the data, creating and tuning a model that helps distinguish homes in New York from homes in San Francisco. It is broken down into 2 parts:</p>
+<ol style="list-style-type: decimal">
+<li>
+<p><strong>A visual introduction to machine learning</strong><br>
+(<a href="http://www.r2d3.us/visual-intro-to-machine-learning-part-1/" class="uri">http://www.r2d3.us/visual-intro-to-machine-learning-part-1/</a>)</p>
+<p><img src="resources/learning_data_science_visually/Screenshot%202022-11-14%20at%2012.00.00%20AM.png" style="width:48.0%"><img src="resources/learning_data_science_visually/Screenshot%202022-11-14%20at%2012.00.39%20AM.png" style="width:48.0%"></p>
+</li>
+<li>
+<p><strong>Model Tuning and the Bias-Variance Tradeoff<br></strong>(<a href="http://www.r2d3.us/visual-intro-to-machine-learning-part-2/" class="uri">http://www.r2d3.us/visual-intro-to-machine-learning-part-2/</a>)</p>
+<p><img src="resources/learning_data_science_visually/Screenshot%202022-11-14%20at%2012.05.13%20AM.png" style="width:48.0%"><img src="resources/learning_data_science_visually/Screenshot%202022-11-14%20at%2012.05.30%20AM.png" style="width:48.0%"></p>
+</li>
+</ol>
+<p>R2D3 also has a miscellaneous visualization piece on COVID-19.</p>
+<ol style="list-style-type: decimal">
+<li>
+<p><strong>Making sense of COVID19 through simulations<br></strong>(<a href="http://www.r2d3.us/covid-19/" class="uri">http://www.r2d3.us/covid-19/</a>)</p>
+<p><img src="resources/learning_data_science_visually/Screenshot%202022-11-14%20at%2012.12.14%20AM.png" style="width:48.0%"><img src="resources/learning_data_science_visually/Screenshot%202022-11-14%20at%2012.12.32%20AM.png" style="width:48.0%"></p>
+</li>
+</ol>
+</div>
+<div id="convnetjs" class="section level3" number="49.4.2">
+<h3>
+<span class="header-section-number">49.4.2</span> 2. ConvNetJS<a class="anchor" aria-label="anchor" href="#convnetjs"><i class="fas fa-link"></i></a>
+</h3>
+<p>Link: <a href="https://cs.stanford.edu/people/karpathy/convnetjs/index.html" class="uri">https://cs.stanford.edu/people/karpathy/convnetjs/index.html</a></p>
+<p>ConvNetJS is a Javascript library for training Deep Learning models (Neural Networks) entirely in your browser. It has an additional functionality of visualizing the models and the outputs at various layers. It’s a great resource to explore some frequently used data sets and models.</p>
+<p><img src="resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.02.01%20PM.png" style="width:48.0%"><img src="resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.02.21%20PM.png" style="width:48.0%"></p>
+</div>
+<div id="ai-notes-by-deeplearning.ai" class="section level3" number="49.4.3">
+<h3>
+<span class="header-section-number">49.4.3</span> 3. AI Notes by DeepLearning.AI<a class="anchor" aria-label="anchor" href="#ai-notes-by-deeplearning.ai"><i class="fas fa-link"></i></a>
+</h3>
+<p>Link: <a href="https://www.deeplearning.ai/ai-notes/index.html" class="uri">https://www.deeplearning.ai/ai-notes/index.html</a></p>
+<p>AI Notes is a series of long-form tutorials with interactive visualizations that help build intuition about foundational deep learning concepts. It is broken down into 2 parts:</p>
+<ol style="list-style-type: decimal">
+<li>
+<p><strong>Initializing neural networks</strong></p>
+<p><img src="resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.07.30%20PM.png" style="width:48.0%"><img src="resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.08.01%20PM.png" style="width:48.0%"></p>
+</li>
+<li>
+<p><strong>Parameter optimization in neural networks</strong></p>
+<p><img src="resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.08.38%20PM.png" style="width:48.0%"><img src="resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.09.07%20PM.png" style="width:48.0%"></p>
+</li>
+</ol>
+</div>
+<div id="openai-microscope" class="section level3" number="49.4.4">
+<h3>
+<span class="header-section-number">49.4.4</span> 4. OpenAI Microscope<a class="anchor" aria-label="anchor" href="#openai-microscope"><i class="fas fa-link"></i></a>
+</h3>
+<p>Link: <a href="https://microscope.openai.com/models" class="uri">https://microscope.openai.com/models</a></p>
+<p>OpenAI Microscope is a collection of visualizations of every significant layer and neuron of several common “model organisms” which are often studied in interpretability. Microscope makes it easier to analyze the features that form inside these neural networks, and move towards understanding these complicated systems.</p>
+<p><img src="resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.18.31%20PM.png" style="width:48.0%"><img src="resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.19.25%20PM.png" style="width:48.0%"></p>
+</div>
+<div id="mlu-explain" class="section level3" number="49.4.5">
+<h3>
+<span class="header-section-number">49.4.5</span> 5. MLU-Explain<a class="anchor" aria-label="anchor" href="#mlu-explain"><i class="fas fa-link"></i></a>
+</h3>
+<p>Link: <a href="https://mlu-explain.github.io/" class="uri">https://mlu-explain.github.io/</a></p>
+<p>MLU-Explain exists to teach important machine learning concepts through visual essays in a fun, informative, and accessible manner.</p>
+<p>It includes topics like: Cross-Validation, Linear and Logistic Regression, ROC &amp; AUC, Train, test and validation sets, Precision &amp; Recall, Decision Trees &amp; Random Forests, etc.</p>
+<p><img src="resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.22.35%20PM.png" style="width:48.0%"><img src="resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.23.00%20PM.png" style="width:48.0%"></p>
+<hr>
+</div>
+</div>
+<div id="journals-and-publications" class="section level2" number="49.5">
+<h2>
+<span class="header-section-number">49.5</span> Journals and Publications<a class="anchor" aria-label="anchor" href="#journals-and-publications"><i class="fas fa-link"></i></a>
+</h2>
+<div id="distill" class="section level3" number="49.5.1">
+<h3>
+<span class="header-section-number">49.5.1</span> 1. Distill<a class="anchor" aria-label="anchor" href="#distill"><i class="fas fa-link"></i></a>
+</h3>
+<p>Link: <a href="https://distill.pub/" class="uri">https://distill.pub/</a></p>
+<p>Distill is a scientific journal that operated between 2016 and 2021. However, most of the research papers and articles on the website are very engaging and remain highly relevant for Data Scientists. Distill shares Machine Learning Research in interactive and new ways to facilitate learning and thinking.</p>
+<p><img src="resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.31.01%20PM.png" style="width:48.0%"><img src="resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.31.25%20PM.png" style="width:48.0%"></p>
+</div>
+<div id="the-pudding" class="section level3" number="49.5.2">
+<h3>
+<span class="header-section-number">49.5.2</span> 2. The Pudding<a class="anchor" aria-label="anchor" href="#the-pudding"><i class="fas fa-link"></i></a>
+</h3>
+<p>Link: <a href="https://pudding.cool/" class="uri">https://pudding.cool/</a></p>
+<p>The Pudding is a digital publication with the aim of making data fun through their various visual essay on contemporary topics. While Pudding does not explicitly teach Data Science concepts, it’s a great resource to see the fun ways of visualizing projects.</p>
+<p><img src="resources/learning_data_science_visually/Screenshot%202022-11-15%20at%205.54.30%20PM.png" style="width:48.0%"><img src="resources/learning_data_science_visually/Screenshot%202022-11-15%20at%205.54.57%20PM.png" style="width:48.0%"></p>
+<hr>
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="introduction-to-common-sampling-techniques-in-r.html"><span class="header-section-number">48</span> Introduction to common sampling techniques in r</a></div>
+<div class="next"><a href="ten-interview-questions-and-answers.html"><span class="header-section-number">51</span> Ten interview questions and answers</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#what-you-see-is-what-you-understand-learning-data-science-visually"><span class="header-section-number">49</span> What you see is what you understand: learning data science visually</a></li>
+<li>
+<a class="nav-link" href="#programming"><span class="header-section-number">49.1</span> Programming</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#python-tutor"><span class="header-section-number">49.1.1</span> 1. Python Tutor</a></li>
+<li><a class="nav-link" href="#pandas-tutor"><span class="header-section-number">49.1.2</span> 2. Pandas Tutor</a></li>
+<li><a class="nav-link" href="#tidydata-tutor"><span class="header-section-number">49.1.3</span> 3. TidyData Tutor</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#probability-and-statistics"><span class="header-section-number">49.2</span> Probability and Statistics</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#seeing-theory"><span class="header-section-number">49.2.1</span> 1. Seeing Theory</a></li></ul>
+</li>
+<li>
+<a class="nav-link" href="#linear-algebra"><span class="header-section-number">49.3</span> Linear Algebra</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#immersive-linear-algebra"><span class="header-section-number">49.3.1</span> 1. Immersive Linear Algebra</a></li></ul>
+</li>
+<li>
+<a class="nav-link" href="#machine-learning"><span class="header-section-number">49.4</span> Machine Learning</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#r2d3"><span class="header-section-number">49.4.1</span> 1. R2D3</a></li>
+<li><a class="nav-link" href="#convnetjs"><span class="header-section-number">49.4.2</span> 2. ConvNetJS</a></li>
+<li><a class="nav-link" href="#ai-notes-by-deeplearning.ai"><span class="header-section-number">49.4.3</span> 3. AI Notes by DeepLearning.AI</a></li>
+<li><a class="nav-link" href="#openai-microscope"><span class="header-section-number">49.4.4</span> 4. OpenAI Microscope</a></li>
+<li><a class="nav-link" href="#mlu-explain"><span class="header-section-number">49.4.5</span> 5. MLU-Explain</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#journals-and-publications"><span class="header-section-number">49.5</span> Journals and Publications</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#distill"><span class="header-section-number">49.5.1</span> 1. Distill</a></li>
+<li><a class="nav-link" href="#the-pudding"><span class="header-section-number">49.5.2</span> 2. The Pudding</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/jtr13/cc22tt/blob/main/learning_data_science_visually.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/jtr13/cc22tt/edit/main/learning_data_science_visually.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Community Contributions for EDAV Fall 2022 Tues/Thurs</strong>" was written by . It was last built on 2022-12-10.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
