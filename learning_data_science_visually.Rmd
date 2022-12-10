@@ -161,7 +161,7 @@ It includes topics like: Cross-Validation, Linear and Logistic Regression, ROC &
 knitr::include_graphics("resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.22.35%20PM.png")
 
 knitr::include_graphics("resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.23.00%20PM.png")
-
+```
 ------------------------------------------------------------------------
 
 ## Journals and Publications
