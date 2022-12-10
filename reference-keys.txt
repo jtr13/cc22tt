@@ -411,6 +411,17 @@ motivation-12
 simple-random-sampling
 stratified-sampling
 source
+machine-learning-in-r
+contribution
+evaluation-3
+supervised-learning-in-r
+linear-regression
+logistic-regression
+k-nearest-neighboors
+tree-based-models
+unsupervised-learning
+k-means
+principle-component-analysis
 what-you-see-is-what-you-understand-learning-data-science-visually
 programming
 python-tutor
