@@ -1,0 +1,543 @@
+# Interactive 3D Visualization in R
+
+Yaoyuan Zhang and Zimu An
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::knit_hooks$set(webgl = "hook_webgl")
+#devtools::install_github("hypertidy/anglr") #Run this line if not installed before
+library(plotly)
+library(rgl)
+library(anglr)
+library(maptools)
+```
+
+## Motivation
+
+Although a 2D plot (or multiple of them) can contain enough information
+we need, a 3D plot can be more intuitive since the 3D space is where we
+reside. For example, we usually see the 2D projection of a map, or
+atlas, in textbooks or websites, but a globe is always more pleasant to
+use. In addition, when encoutering datasets with higher dimensions in
+statistics, a 3D visualization can help us with generalizing in higher
+dimensional spaces.
+
+In this tutorial, we focus on interactive 3D visualization using packages including 
+`plotly` and `rgl`. We first cover the basic 3D scatter plots using the package `rgl`, 
+then we try to add more useful tools for better visualization. We also introduce
+how to produce interactive 3D surface graphs and 3D mesh plots in R
+using the package `plotly`
+
+We hope this tutorial can provide some insights and inspirations for
+people who wish to tackle high-dimensional data visualization problems.
+
+## 3D visualization with `rgl` package
+
+The `rgl` package is used to produce interactive 3-D plots. It contains
+high-level graphics commands modeled loosely after classic R graphics,
+but working in three dimensions. It also contains low level structure
+inspired by (but incompatible with) the `grid` package.
+
+### Preparing the Data
+
+We'll use the `iris` data for this tutorial in the following examples.
+
+`iris` data set gives the measurements of the variables sepal length and
+width, petal length and width, respectively, for 50 flowers from each of
+3 species of iris. The species are Iris setosa, versicolor, and
+virginica.
+
+```{r}
+data(iris)
+head(iris)
+```
+
+```{r}
+x <- sep.l <- iris$Sepal.Length
+y <- pet.l <- iris$Petal.Length
+z <- sep.w <- iris$Sepal.Width
+```
+
+### Starting and Closing the RGL Device
+
+In order to make a 3D plot with RGL, we need to first start the RGL
+device in R. The functions below are used to manage RGL device:
+
+-   **rgl.open()**: Opens a new device
+-   **rgl.close()**: Closes the current device
+-   **rgl.clear()**: Clears the current device
+-   **rgl.cur()**: Returns the active device ID
+-   **rgl.quit()**: Shutdowns the RGL device system
+
+### 3D Scatter Plot
+
+#### Custom function to initialize RGL device
+
+Since the default RGL device usually needs initialization, we can create
+a custom function for easier initialization process. The following
+function **rgl_init()** will create a new **RGL** device if there is no
+opened device:
+
+```{r}
+#' @param new.device a logical value. If TRUE, creates a new device
+#' @param bg the background color of the device
+#' @param width the width of the device
+rgl_init <- function(new.device = FALSE, bg = "white", width = 640) { 
+  if( new.device | rgl.cur() == 0 ) {
+    rgl.open()
+    par3d(windowRect = 50 + c( 0, 0, width, width ) )
+    rgl.bg(color = bg )
+  }
+  rgl.clear(type = c("shapes", "bboxdeco"))
+  rgl.viewpoint(theta = 15, phi = 20, zoom = 0.7)
+}
+```
+
+The functions used in the custom function that were not introduced
+previously includes:
+
+-   **par3d(windowRect)**: set the window size
+-   **rgl.viewpoint(theta, phi, fov, zoom)**: set up viewpoint. The
+    arguments *theta* and *phi* are polar coordinates.
+    -   **theta** and **phi** are polar coordinates. Default values are
+        0 and 15, respectively
+    -   **fov** is the field-of-view angle in degrees. Default value is
+        60
+    -   **zoom** is the zoom factor. Default value is 1
+-   **rgl.bg(color)**: define the background color of the device
+
+#### Basic 3D Plot with spheres
+
+```{r, webgl=TRUE}
+rgl_init()
+rgl.spheres(x, y, z, r = 0.1, color = "yellow")  # Scatter plot
+```
+
+Note that `rgl` package also provides functions such as **rgl.phoints**
+to represent data points in another format. For the purpose of
+conformity, this tutorial use spheres to represent data points.
+
+#### Add a Bounding Box decoration
+
+The function **rgl.bbox()** is used:
+
+```{r, webgl=TRUE}
+rgl_init()
+rgl.spheres(x, y, z, r = 0.1, color = "yellow")  
+# Add bounding box decoration
+rgl.bbox(color=c("#333377","black"), emission="#333377",
+         specular="#3333FF", shininess=5, alpha=0.8 ) 
+```
+
+-   **color**: a vector of colors. The first color is used for the
+    background color of the bounding box. The second color is used for
+    the tick mark labels.
+-   **emission**, **specular**, **shininess**: properties for lighting
+    calculation
+-   **alpha**: value specifying the color transparency. The value should
+    be between 0.0 (fully transparent) and 1.0 (opaque)
+
+#### Add axis lines and labels
+
+-   The function **rgl.lines(x, y = NULL, z = NULL, ...)** can be used
+    to add axis lines.
+-   The function **rgl.texts(x, y = NULL, z = NULL, text)** is used to
+    add axis labels.
+
+For the convenience of plotting, a custom function **rgl_add_axes()** is
+implemented for the purpose of adding x, y, and z axes.
+
+```{r}
+# x, y, z : numeric vectors corresponding to
+#  the coordinates of points
+# axis.col : axis colors
+# xlab, ylab, zlab: axis labels
+# show.plane : add axis planes
+# show.bbox : add the bounding box decoration
+# bbox.col: the bounding box colors. The first color is the
+# the background color; the second color is the color of tick marks
+rgl_add_axes <- function(x, y, z, axis.col = "grey",
+                xlab = "", ylab="", zlab="", show.plane = TRUE, 
+                show.bbox = FALSE, bbox.col = c("#333377","black"))
+  { 
+  
+  lim <- function(x){c(-max(abs(x)), max(abs(x))) * 1.1}
+  # Add axes
+  xlim <- lim(x); ylim <- lim(y); zlim <- lim(z)
+  rgl.lines(xlim, c(0, 0), c(0, 0), color = axis.col)
+  rgl.lines(c(0, 0), ylim, c(0, 0), color = axis.col)
+  rgl.lines(c(0, 0), c(0, 0), zlim, color = axis.col)
+  
+   # Add a point at the end of each axes to specify the direction
+   axes <- rbind(c(xlim[2], 0, 0), c(0, ylim[2], 0), 
+                 c(0, 0, zlim[2]))
+   rgl.points(axes, color = axis.col, size = 3)
+  
+  # Add axis labels
+  rgl.texts(axes, text = c(xlab, ylab, zlab), color = axis.col,
+             adj = c(0.5, -0.8), size = 2)
+  
+  # Add plane
+  if(show.plane) 
+    xlim <- xlim/1.1; zlim <- zlim /1.1
+    rgl.quads( x = rep(xlim, each = 2), y = c(0, 0, 0, 0),
+             z = c(zlim[1], zlim[2], zlim[2], zlim[1]))
+  
+  # Add bounding box decoration
+  if(show.bbox){
+    rgl.bbox(color=c(bbox.col[1],bbox.col[2]), alpha = 0.5, 
+          emission=bbox.col[1], specular=bbox.col[1], shininess=5, 
+          xlen = 3, ylen = 3, zlen = 3) 
+  }
+}
+```
+
+-   **rgl.quads(x, y, z)** is used to add planes. x, y and z are numeric
+    vectors of length four specifying the coordinates of the four nodes
+    of the quad.
+
+```{r, webgl=TRUE}
+rgl_init()
+rgl.spheres(x, y, z, r = 0.1, color = "yellow") 
+rgl_add_axes(x, y, z, show.bbox = TRUE)
+# Show tick marks
+axis3d('x', pos=c( NA, 0, 0 ), col = "darkgrey")
+axis3d('y', pos=c( 0, NA, 0 ), col = "darkgrey")
+axis3d('z', pos=c( 0, 0, NA ), col = "darkgrey")
+```
+
+The function **axis3d()** is used in the previous block to show the
+scales of axes.
+
+#### Set aspect ratios of the axes
+
+The function **aspect3d(x, y = NULL, z = NULL)** can be used to set the
+apparent ratios of the x, y and z axes for the current plot.
+
+x, y and z are the ratio for x, y and z axes, respectively. x can be a
+vector of length 3, specifying the ratio for the 3 axes.
+
+#### Change color of points by groups
+
+A helper function can be used to select automatically a color for each
+group:
+
+```{r}
+#' Get colors for the different levels of 
+#' a factor variable
+#' 
+#' @param groups a factor variable containing the groups
+#'  of observations
+#' @param colors a vector containing the names of 
+#   the default colors to be used
+get_colors <- function(groups, group.col = palette()){
+  groups <- as.factor(groups)
+  ngrps <- length(levels(groups))
+  if(ngrps > length(group.col)) 
+    group.col <- rep(group.col, ngrps)
+  color <- group.col[as.numeric(groups)]
+  names(color) <- as.vector(groups)
+  return(color)
+}
+```
+
+Change colors by groups:
+
+```{r, webgl=TRUE}
+cols <- get_colors(iris$Species, c("lightblue", "palegreen3", "slateblue3"))
+rgl_init()
+rgl.spheres(x, y, z, r = 0.1, color = cols) 
+rgl_add_axes(x, y, z, show.bbox = TRUE)
+aspect3d(1,1,1)
+```
+
+### Additional Analysis tools
+
+#### Ellipse of Concentration
+
+The function **ellipse3d()** is used to estimate the ellipse of
+concentration:
+
+-   **x**: the correlation or covariance matrix between x, y and z
+-   **scale**: If x is a correlation matrix, then the standard
+    deviations of each parameter can be given in the scale parameter.
+    This defaults to c(1, 1, 1), so no rescaling will be done.
+-   **centre**: The center of the ellipse will be at this position.
+-   **level**: The confidence level of a confidence region. This is used
+    to control the size of the ellipsoid.
+
+The function **ellipse3d()** returns an object of class *mesh3d* which
+can be drawn using the function **shade3d()** and/or **wired3d()**
+
+Draw the ellipse using the function **shade3d()**:
+
+```{r, webgl=TRUE}
+rgl_init()
+rgl.spheres(x, y, z, r = 0.12, color = "#D95F02") 
+rgl_add_axes(x, y, z, show.bbox = TRUE)
+# Compute and draw the ellipse of concentration
+ellips <- ellipse3d(cov(cbind(x,y,z)), 
+            centre=c(mean(x), mean(y), mean(z)), level = 0.95)
+shade3d(ellips, col = "#D95F02", alpha = 0.1, lit = FALSE)
+aspect3d(1,1,1)
+```
+
+Draw the ellipse using the function **wired3d()**:
+
+```{r, webgl=TRUE}
+rgl_init()
+rgl.spheres(x, y, z, r = 0.2, color = "#D95F02") 
+rgl_add_axes(x, y, z, show.bbox = TRUE)
+# Compute and draw the ellipse of concentration
+ellips <- ellipse3d(cov(cbind(x,y,z)), 
+            centre=c(mean(x), mean(y), mean(z)), level = 0.95)
+wire3d(ellips, col = "#D95F02",  lit = FALSE)
+aspect3d(1,1,1)
+```
+
+We can also add ellipse for each group, as such:
+
+```{r, webgl=TRUE}
+# Groups
+groups <- iris$Species
+levs <- levels(groups)
+group.col <- c("red", "green", "blue")
+# Plot observations
+rgl_init()
+rgl.spheres(x, y, z, r = 0.1,
+            color = group.col[as.numeric(groups)]) 
+rgl_add_axes(x, y, z, show.bbox = FALSE)
+# Compute ellipse for each group
+for (i in 1:length(levs)) {
+    group <- levs[i]
+    selected <- groups == group
+    xx <- x[selected]; yy <- y[selected]; zz <- z[selected]
+    ellips <- ellipse3d(cov(cbind(xx,yy,zz)), 
+              centre=c(mean(xx), mean(yy), mean(zz)), level = 0.95) 
+    shade3d(ellips, col = group.col[i], alpha = 0.1, lit = FALSE) 
+    # show group labels
+    texts3d(mean(xx),mean(yy), mean(zz), text = group,
+            col= group.col[i], cex = 1)
+  }
+aspect3d(1,1,1)
+```
+
+#### Regression plane
+
+To add a custom regression plane, we can take the following approach:
+
+1.  Use the function **lm()** to compute a linear regression model.
+2.  Use the argument **rgl.surface()** to add a regression surface.
+
+```{r, webgl=TRUE}
+rgl_init()
+rgl.spheres(x, y, z, r = 0.1, color = "#D95F02") 
+rgl_add_axes(x, y, z, show.bbox = FALSE)
+aspect3d(1,1,1)
+# Compute the linear regression (y = ax + bz + d)
+fit <- lm(y ~ x + z)
+# predict values on regular xz grid
+grid.lines = 26
+x.pred <- seq(min(x), max(x), length.out = grid.lines)
+z.pred <- seq(min(z), max(z), length.out = grid.lines)
+xz <- expand.grid( x = x.pred, z = z.pred)
+y.pred <- matrix(predict(fit, newdata = xz), 
+                 nrow = grid.lines, ncol = grid.lines)
+# Add regression surface
+rgl.surface(x.pred, z.pred, y.pred, color = "steelblue", 
+                alpha = 0.5, lit = FALSE)  
+# Add grid lines
+rgl.surface(x.pred, z.pred, y.pred, color = "black",
+    alpha = 0.5, lit = FALSE, front = "lines", back = "lines")
+```
+
+## Interactive 3D surface plots with package `plotly`
+
+### 3D Surface Plot
+
+In this section, we will introduce how to use plotly to generate interactive 3D
+surface plots. 3D suface plots are extremely useful and can convey/visualize a
+lot more information than a traditional contour plot, especially towards topological,
+geographical data in a straight forward fashion.
+
+The dataset we are using here is the 'volcano' (Topographic Information on
+Auckland's Maunga Whau Volcano) dataset. Maunga Whau (Mt Eden) is one of about
+50 volcanos in the Auckland volcanic field. This data set gives topographic
+information for Maunga Whau on a 10m by 10m grid. The dataset is a matrix with
+87 rows and 61 columns, rows corresponding to grid lines running east to west
+and columns to grid lines running south to north. More importantly, since it's
+a numeric matrix we could easily take it as an argument for method **plot_ly**
+which initializes the instance.
+```{r}
+head(volcano)
+```
+
+
+```{r}
+fig <- plot_ly(z = ~volcano)
+fig <- fig %>% add_surface()
+
+fig
+```
+Just few simple lines, we can create a highly interactive 3D plot that
+illustrates the 3D representation of the volcano dataset. The lighter the color,
+the higher the altitude. By rolling the mouse, we can zoom in and out easily.
+Pointing the mouse at every vertex on this 3D graph, the user can easily see the
+x, y, z coordinates while also the sectional view. From the above, we can also
+see the contour lines clearly displayed.
+
+Moreover, we can configure the parameters in **add_surface()**. Here, we will
+modify the contours argument to display contour lines at the top/below the 3D
+graph depending on the view of the user. By setting highlight color to be red and
+setting project, when we move our cursor to each contour line, it maps the
+contour directly to the graph.
+
+We can approach almost any other numeric matrices that displays geographical
+information using this package. With the smooth transformation, animation, and
+easy-to-use convenience, it would largely improve users' experience.
+
+```{r}
+fig <- plot_ly(z = ~volcano) %>% add_surface(
+  # configuring contours mapping
+  contours = list(
+    z = list(
+      show=TRUE,
+      usecolormap=TRUE,
+      highlightcolor="red",
+      project=list(z=TRUE)
+      )
+    )
+  )
+
+fig
+```
+Other than geographical data, we can also apply the approach on kernel density.
+Here we are using the 'Old Faithful Geyser Data', which is a version of the
+eruptions data from the ‘Old Faithful’ geyser in Yellowstone National Park,
+Wyoming. The dataset has 299 observations on 2 variables: duration (numeric
+eruption time in minutes) and waiting (numeric waiting time for this eruption).
+
+We used kde2d to take duration as the x-coordinate, waiting as y-coordinate, and
+produce a Two-dimensional kernel density estimation, where z is the estimation.
+
+
+```{r}
+kd <- with(MASS::geyser, MASS::kde2d(duration, waiting, n = 50))
+# plot using plotly by taking the kernel density created
+fig <- plot_ly(x = kd$x, y = kd$y, z = kd$z) %>% add_surface(
+  contours = list(
+    z = list(
+      show=TRUE,
+      usecolormap=TRUE,
+      highlightcolor="red",
+      project=list(z=TRUE)
+      )
+    )
+  ) %>% layout(
+    # label the axis using layout
+    scene = list(
+                xaxis = list(title = "duration"),
+                yaxis = list(title = "waiting" ),  
+                zaxis = list(title = "Estimate")
+           )
+  )
+
+fig
+```
+
+### Tri-surface Plot
+
+A **Tri-Surface Plot** is a type of surface plot, created by
+triangulation of compact surfaces of finite number of triangles which
+cover the whole surface in a manner that each and every point on the
+surface is in triangle. The intersection of any two triangles results in
+void or a common edge or vertex. This type of plot is created where the
+evenly sampled grids are restrictive and inconvenient to plot.
+
+#### Basic Tri-Surf plot using `plotly`
+
+Since the tri-surface plot is constructed with triangular surfaces, we
+start with the simplest geometry object to plot in 3D - a regular
+tetrahedron:
+
+```{r, warning=FALSE}
+suppressPlotlyMessage <- function(p) {
+  suppressMessages(plotly_build(p))
+}
+
+suppressPlotlyMessage(plot_ly(
+  x = c(0, 1, 2, 0),
+  y = c(0, 0, 1, 2),
+  z = c(0, 2, 0, 1),
+  i = c(0, 0, 0, 1),
+  j = c(1, 2, 3, 2),
+  k = c(2, 3, 1, 3),
+  facecolor = toRGB(viridisLite::viridis(4))
+))
+```
+
+#### More complex tri-surface plot
+
+We can use use `plotly` to create more complex tri-surf plot with proper data set. 
+The following is an example, using the dataset to plot maps of given countries 
+(North America for this specific example):
+
+```{r}
+data(wrld_simpl)
+
+map1 <- subset(wrld_simpl,
+               NAME %in% c("Canada", "Greenland", "Mexico", "United States"))
+## DEL model (like TRI in silicate)
+delmesh <-  anglr::globe(anglr::DEL(map1, max_area = 0.5))
+mesh <- as.mesh3d(delmesh)
+
+
+# plot point cloud
+x <- mesh$vb[1,]
+y <- mesh$vb[2, ]
+z <- mesh$vb[3,]
+m <- matrix(c(x,y,z), ncol=3, dimnames=list(NULL,c("x","y","z")))
+
+# colours in z don't make sense here, need to map object aesthetics above
+zmean <- apply(t(mesh$it),MARGIN=1,function(row){mean(m[row,3])})
+
+library(scales)
+facecolor = colour_ramp(
+  brewer_pal(palette="RdBu")(9)
+)(rescale(x=zmean))
+
+suppressPlotlyMessage(plot_ly(
+  x = x, y = y, z = z,
+  i = mesh$it[1,]-1, j = mesh$it[2,]-1, k = mesh$it[3,]-1,
+  facecolor = facecolor,
+  type = "mesh3d"
+))
+```
+## Conclusion
+
+In this tutorial, we introduced how to use the **rgl** package and its'
+relative functions to create 3D scatter plots, using **plotly** to create
+interactive 3D surface plots and more complex tri-surface plots. We can see that
+plotting scattered plots in 3D can be very useful such that we can fit a regression
+plane for it for future analysis. Through **plotly** we can also create very smooth
+3D interactive visualizations. However, it is not to say that 3D excels 2D plots,
+in most cases we need to makes choices based on the specific case and scenario.
+Sometimes 3D plots overcomplicates the pattern and information that could be
+directly shown in 2D plots.
+
+
+## References
+
+[A complete guide to 3D visualization device system in
+R](http://www.sthda.com/english/wiki/a-complete-guide-to-3d-visualization-device-system-in-r-r-software-and-data-visualization)
+
+[rgl
+Overview](https://cran.r-project.org/web/packages/rgl/vignettes/rgl.html#documents-with-rgl-scenes)
+
+[Make beautiful 3D plots in R - An Enhancement to the
+Storytelling](https://towardsdatascience.com/make-beautiful-3d-plots-in-r-an-enhancement-on-the-story-telling-613ddd11e98)
+
+[Embed an interactive 3D plot with
+rgl](https://bookdown.org/yihui/rmarkdown-cookbook/rgl-3d.html)
+
+[Plotly Graphing Libraries](https://plotly.com/graphing-libraries/)

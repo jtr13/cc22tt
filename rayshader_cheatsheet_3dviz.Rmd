@@ -1,0 +1,209 @@
+# 3D visualizations with rayshader package
+
+Yu Song Ng
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+options(rgl.useNULL = TRUE,
+        rgl.printRglwidget = TRUE)
+
+```
+
+## Rayshader
+
+##### As mentioned in the cheatsheet, rayshader helps with 2D and 3D visualizations of geographic terrain, and can also augment ggplot2 objects. This document shows some examples in further detail.
+
+##### First, we load the necessary packages:
+
+```{r libraries}
+
+library(rayshader)
+library(raster)
+library(ggplot2)
+library(ggthemes)
+library(rgl)
+library(rvest)
+knitr::knit_hooks$set(webgl = hook_webgl)
+```
+
+## Load Default Map 
+
+```{r map, fig.align = 'center'}
+montbay = montereybay
+dim(montbay)
+montbay %>% sphere_shade() %>% plot_map(title_text='Default color palette imhof1', title_bar_color='white', title_size=25)
+```
+
+##### Load the default montereybay map from the rayshader package. This is a matrix, and each entry is the elevation at that point. The  matrix has as shape of 540x540, so when plotting the map visualization, rayshader will treat the points as equally spaced and output a terrain map. Here, `sphere_shade()` is used to map elevation to a continuous RGB value. The default texture is `imhof1` and the color scheme can be changed as shown:
+```{r change-color, fig.align = 'center'}
+
+colors=c('imhof2','imhof3','imhof4','desert','bw','unicorn')
+par(mfrow=c(2,3))
+for (i in colors){
+  montbay %>% sphere_shade(texture=i) %>% plot_map(title_text = paste(i,'color palette'), title_bar_color='white', title_bar_alpha=0.7)
+}
+
+```
+
+## Adding Overlays 
+
+##### Next, different overlays can be added to the map. In many maps, sea level is a significant point, and the depth of the seabed is not as crucial. `detect_water` uses an algorithm to determine where significant water bodies are, and `add_water` uses its result to fill in the color on the map.
+```{r add water, fig.align = 'center'}
+montbay2 = montbay
+montbay2[montbay2<0] = 0 # homogenize the elevation of anything below sea level
+montbay2 %>%
+  sphere_shade() %>%
+  add_water(detect_water(montbay2)) %>%
+  plot_map()
+```
+
+##### Like `sphere_shade()`, the `add_water` function can also produce diffehgrent colors for the water based on the defaults, or defined by the user.
+
+```{r add water-2, fig.align = 'center'}
+montbay2 = montbay
+par(mfrow=c(1,2))
+montbay2[montbay2<0] = 0
+montbay2 %>%
+  sphere_shade() %>%
+  add_water(detect_water(montbay2), color='imhof2') %>%
+  plot_map()
+
+montbay2 %>%
+  sphere_shade() %>%
+  add_water(detect_water(montbay2), color='dodgerblue') %>%
+  plot_map()
+```
+
+##### The `generate_altitude_overlay` function can help to visualize the underwater terrain if required, by adding a second palette for water, defined by `height_shade`.
+
+```{r add water-3, fig.align = 'center'}
+water_palette = colorRampPalette(c("blue4", "dodgerblue", "white"))(200)
+shade2 = height_shade(montbay, texture = water_palette)
+
+montbay %>%
+ sphere_shade() %>%
+ add_overlay(generate_altitude_overlay(shade2, montbay, start_transition=0))  %>%
+ plot_map()
+```
+
+##### One can also add contour lines as an overlay, using `generate_contour_overlay`
+
+```{r contours, fig.align = 'center'}
+
+montbay %>%
+  height_shade() %>%
+  add_water(detect_water(montbay), color='dodgerblue') %>%
+  add_overlay(generate_contour_overlay(montbay)) %>%
+  plot_map()
+```
+
+##### Other overlay examples are as follows:
+
+```{r other-overlays, fig.align = 'center'}
+par(mfrow=c(1,2))
+montbay %>%
+  sphere_shade() %>%
+  add_water(detect_water(montbay), color='dodgerblue') %>%
+  add_overlay(generate_compass_overlay(heightmap = montbay)) %>%
+  plot_map()
+
+montbay %>%
+  sphere_shade() %>%
+  add_water(detect_water(montbay), color='dodgerblue') %>%
+  add_overlay(generate_line_overlay(geometry = monterey_roads_sf, 
+                    extent = attr(montereybay,"extent"), heightmap = montbay)) %>%
+  plot_map()
+```
+
+## Plot 3D Map
+
+##### Maps can also be plotted in 3D
+```{r 3d-map, fig.width=12, fig.height=8}
+
+montbay %>%
+  sphere_shade() %>%
+  add_water(detect_water(montbay2), color='dodgerblue') %>%
+  add_overlay(generate_contour_overlay(montbay)) %>%
+  plot_3d(montbay)
+rglwidget() # to output the 3D map on HTML
+rgl.close()
+
+montbay %>%
+ sphere_shade(texture="imhof2") %>%
+ plot_3d(montbay, zscale=50, water = TRUE, watercolor="imhof2", 
+         waterlinecolor="white", waterlinealpha=0.5)
+rglwidget()
+rgl.close()
+```
+
+## Plot ggplot in 3D
+
+##### Aside from terrain data, we can also convert ggplot objects to 3D using rayshader. This makes use of the `plot_gg` function. The caveat is that 2D visualizations are more suitable for most applications, but this is an option if a 3D format is required. 
+
+```{r crimes-1, fig.align='center'}
+# US Crime Data 
+data("USArrests")
+gg = ggplot(USArrests, aes(x=Rape, y=Assault, color=UrbanPop)) +
+  geom_point()+
+  scale_color_distiller(direction=1, palette="YlGnBu")+
+  ggtitle('Assault Arrests vs Rape Arrests vs %UrbanPop')+
+  theme(title=element_text(size=8))
+
+gg
+```
+
+```{r crimes-2, fig.align='center', fig.width=12, fig.height=8}
+gg = ggplot(USArrests, aes(x=Rape, y=Assault, color=UrbanPop)) +
+  geom_point()+
+  scale_color_distiller(direction=1, palette="YlGnBu")+
+  ggtitle('Assault Arrests vs Rape Arrests \n vs %UrbanPop')+
+  theme(title=element_text(size=8))
+
+gg %>% plot_gg()
+render_snapshot("USA Crimes Scatterplot 3D")
+rglwidget()
+rgl.close()
+```
+
+##### 3D plots can also be useful for geospatial data, such as this data on median housing prices in Hong Kong. 
+
+```{r house, fig.align='center', fig.width=12, fig.height=10}
+hk_data <- read_html("https://www.midland.com.hk/en/market-insight")
+
+median_price <- hk_data %>% html_nodes("[class='sc-d0msdq-3 kOzsej']")%>%html_text()
+median_price <- median_price[seq(from = 2, to = length(median_price)-2, by = 4)]
+
+district_names <- hk_data %>% html_nodes("[class='sc-d0msdq-1 jIHwPc']")%>%html_text()
+
+hk <- getData(country="HKG", level=1)
+
+hk_map <- fortify(hk, region="NAME_1")
+price_dat <- as.data.frame(cbind(district_names,median_price))
+price_dat$median_price <- as.numeric(gsub(",","",price_dat$median_price))
+
+gg = ggplot() + 
+  geom_map(data=hk_map, map=hk_map, aes(x=long, y=lat, map_id=id),color="#b2b2b200", fill="#ffffff00", size=0.15)+
+  geom_map(data=price_dat, map=hk_map, aes(fill=median_price, map_id=district_names),color="#b2b2b2", size=0.15) +
+  # xlim(-180,-50)+
+  scale_fill_distiller(name="Median House Prices \n(per sqft)", palette='PuBu', direction=1)+
+  theme_map()+
+  theme(legend.position="bottom", legend.text=element_text(size=9), legend.key.width= unit(2, 'cm')) 
+
+gg
+```
+
+```{r house-2, fig.align='center', fig.width=12, fig.height=8}
+gg2 = ggplot() + 
+  geom_map(data=hk_map, map=hk_map, aes(x=long, y=lat, map_id=id),color="#b2b2b200", fill="#ffffff00", size=0.15)+
+  geom_map(data=price_dat, map=hk_map, aes(fill=median_price, map_id=district_names),color="#b2b2b2", size=0.15) +
+  # xlim(-180,-50)+
+  scale_fill_distiller(name="Median House Prices \n(per sqft)", palette='PuBu', direction=1)+
+  theme_map()+
+  theme(legend.position="bottom", legend.text=element_text(size=4)) 
+
+gg2 %>% plot_gg()
+rglwidget()
+rgl.close()
+```
+
+##### Documentation for rayshader can be found at https://www.rayshader.com/, which was also the basis of research for this community contribution project. Data for one of the plots, median Hong Kong house prices, was obtained from https://www.midland.com.hk/en/market-insight. 

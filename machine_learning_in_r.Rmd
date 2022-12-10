@@ -1,0 +1,277 @@
+# Machine Learning in R
+
+Wanling Bai and Yancheng Zhang
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = T,
+                      eval = T,
+                      message = F,
+                      warning = F,
+                      fig.width = 4,
+                      fig.height = 3,
+                      fig.align = 'center',
+                      results = 'show')
+```
+
+```{r}
+# load packages
+library(class)
+library(rpart)
+library('NbClust')
+# install_github("vqv/ggbiplot")
+library(ggbiplot)
+```
+
+
+## 1. Contribution
+
+We've learned exploratory data analysis and visualization in R. It is naturally for us to explore the next step for data analyze: machine learning. Since loading data from one platform to another can be time-costing, doing data analyze in one platform simplify our work flow and improve efficiency. 
+
+Unlike Python, different machine learning methods are in different R packages. Some machines learning models are implemented with certain parameter in the functions. If we change the parameter, we change the method. Finding the packages and the right parameter for machine learning methods can be laborious. For this tutorial, we go through some machine learning methods with brief description, pros and cons, and application examples. By composing this tutorial, we gain a systematic knowledge of how to implement machine learning in R and experience the difference between platforms. Hopefully, this tutorial can help you get start with machine learning in R.
+
+## 2. Evaluation
+
+We learned how to process Machine Learning in R, especially how to interpret the corresponding parameters when using functions. However, in this tutorial we just explained "Supervised Machine Learning" and "Unsupervised Machine Learning", there are also other models/methods such as meta-algorithms, time series models, model validation and etc. For further improvements, we can add these parts to tutorial and make it more straightforward to beginners to perform Machine Learning in R.
+
+## 3. Supervised Learning in R
+
+### 3.1 Linear Regression
+
+Linear regression fits a linear relationship between inputs and a numerical output.
+
+To implement linear regression in R, use function 'lm()' in package 'stats'.
+
+Reference:
+https://www.edureka.co/blog/linear-regression-for-machine-learning/
+
+**Linear Regression Advantages: ** \
+1. Easy to train and interpret \
+2. Handles overfitting well using dimensional reduction techniques, regularization, and cross-validation \
+3. Can increase model flexible with modifications that don't affect estimation
+
+**Linear Regression Disadvantages: ** \
+1. The assumption of linearity between input and output variables does not always hold \
+2. Sensitive to outliers \
+3. Prone to multicollinearity
+
+Reference:
+https://www.tutorialspoint.com/r/r_linear_regression.htm
+
+```{r}
+x <- c(151, 174, 138, 186, 128, 136, 179, 163, 152, 131)
+y <- c(63, 81, 56, 91, 47, 57, 76, 72, 62, 48)
+
+# fit the model
+relation <- lm(y~x) 
+print(class(relation)) # 'lm()' returns an object of class 'lm'
+print(relation) 
+# interpret the model and see accuracy
+print(summary(relation))
+
+print('prediction:')
+a <- data.frame(x = 170) # new inpput data 
+# predict with new input data
+result <-  predict(relation,a)
+print(result)
+```
+
+### 3.2 Logistic Regression
+
+Logistic regression fits a linear relationship between inputs and a categorical output.
+
+To implement logistic regression in R, use function 'glm()' in package 'stats'.
+
+**Logistic Regression Advantages: ** \
+1. Easy to train and interpret \
+2. Handles overfitting well using dimensional reduction techniques, regularization, and cross-validation \
+3. Can increase model flexible with modifications that don't affect estimation
+
+**Logistic Regression Disadvantages: ** \
+1. The assumption of linearity between input and output variables does not always hold and is hard to check\
+2. Can overfit with small, high-dimensional data
+
+Reference:
+https://www.tutorialspoint.com/r/r_logistic_regression.htm
+
+```{r}
+input <- mtcars[,c("am","cyl","hp","wt")]
+# fit the model
+am.data = glm(formula = am ~ cyl + hp + wt, data = input, family = binomial) 
+# formula expression am ~ cyl + hp + wt specifies the model
+# interpret the model and see accuracy
+print(summary(am.data))
+
+print('prediction:')
+# predict 
+result <-  predict(am.data,input)
+print(result)
+```
+
+### 3.3 k-Nearest Neighboors
+
+KNN which stand for K Nearest Neighbor, is a Supervised Machine Learning algorithm that classifies a new data point into the target class, depending on the features of its neighboring data points. 
+
+To use KNN algorithm in R, we must first install the ‘class’ package provided by R. This package has the KNN function in it.
+
+Success and failure modes for KNN:
+
+**KNN generally performs well when:**
+
+- the data are concentrated in the feature space
+- the classes appear in separable clusters
+
+**KNN generally performs poorly when:**
+
+- the feature space is high-dimensional (many predictors)
+- there are superfluous features (unrelated to calss membreships)
+
+Reference: 
+
+https://www.edureka.co/blog/knn-algorithm-in-r/
+
+```{r}
+warnings('off')
+# install.packages('class')       #Install class package
+# library(class)                    # Load class package
+train <- rbind(iris3[1:25,,1], iris3[1:25,,2], iris3[1:25,,3])    # X_train
+test <- rbind(iris3[26:50,,1], iris3[26:50,,2], iris3[26:50,,3])  # X_test
+cl <- factor(c(rep("s",25), rep("c",25), rep("v",25)))            # y_train
+cl_test <- factor(c(rep("s",25), rep("c",25), rep("v",25)))       # y_test
+cl_hat = knn(train, test, cl, k = 3, prob=TRUE)                   # k: 'k' in KNN model
+str(cl_hat)                                                       # Output
+table(cl_test, cl_hat)                                            # cross-tabulate
+mean(cl_test != cl_hat)                                           # misclassification error 
+```
+
+### 3.4 Tree-Based Models
+
+Tree-Based models, such as decision tree model can be used to visually represent the “decisions” and are widely used to generate predictions. To use tree-based models algorithm in R, we must first install the 'rpart' package provided by R. This package has the rpart function in it.
+
+Here are some parameters explanations while we are operating 'rpart' to generate tree-based models:
+
+`maxdepth`: The maximum depth level of tree. For single split, you can just set maxdepth argument to 1.
+`minsplit`: The minimum number of observations that must exist in a node in order for a split to be attempted.
+`minbucket`: The minimum number of observations in any terminal node.
+`cp`: Complexity parameter - setting cp to a negative amount ensures that the tree will be fully grown.
+`method`:  The method argument defines the algorithms. It can be one of anova, poisson, class or exp. In this case, the target variables is categorical, so you will use the method as class.
+
+Success and failure modes for Tree-Based Models:
+
+**Advanages for Tree-Based Models:**
+
+- Does not require normalization/scaling of data.
+- Missing values in the data also do NOT affect the process of building a decision tree to any considerable extent.
+- Straightward and easy to explain to company's stakeholders.
+
+**Advanages for Tree-Based Models:**
+
+- Sensitive to small change in the data, which might generate a large change in the structure of the decision tree.
+- High time-complexity.
+- DInadequate for applying regression and predicting continuous values.
+
+Reference:
+
+https://blog.dataiku.com/tree-based-models-how-they-work-in-plain-english
+https://www.pluralsight.com/guides/explore-r-libraries:-rpart
+
+```{r}
+warnings('off')
+# install.packages('rpart')       #Install class package
+# library(rpart)                    # Load class package
+train <- data.frame(
+  ClaimID = 1:7,
+  RearEnd = c(TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE),
+  Whiplash = c(TRUE, TRUE, TRUE, TRUE, TRUE, FALSE, FALSE),
+  Fraud = c(TRUE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE)
+)
+mytree <- rpart(
+  Fraud ~ RearEnd + Whiplash,   # y ~ feature1 + feature2 + feature3 + ...
+  data = train, 
+  method = "class",            
+  maxdepth = 1, 
+  minsplit = 2, 
+  minbucket = 1
+)
+predict_Fraud = predict(mytree, data=train, type = "class")
+table(train$Fraud, predict_Fraud)
+```
+
+
+## 4. Unsupervised Learning
+### 4.1 K-means
+
+K-means clustering finds k (a chosen parameter) center points that produce clusters minimizing the within-cluster sum of squares.
+
+To implement K-means in R, use function 'kmeans()' in package 'stats'.
+
+**K-means Advantages: ** \
+1. Intuitive cluster structure \
+2. easy to compute \
+3. Can increase algorithm flexible with extension to other measures, such as Eucliean distance
+
+**K-means Disadvantages: ** \
+1. Hard to interpret \
+2. Problematic with high-dimensional data
+
+Reference:
+https://www.guru99.com/r-k-means-clustering.html
+
+```{r}
+df <- data.frame(age = c(18, 21, 22, 24, 26, 26, 27, 30, 31, 35, 39, 40, 41, 42, 44, 46, 47, 48, 49, 54),
+    spend = c(10, 11, 22, 15, 12, 13, 14, 33, 39, 37, 44, 27, 29, 20, 28, 21, 30, 31, 23, 24)
+)
+
+kmeans_out <- kmeans(df, centers=3, nstart=5) 
+# centers: number of centers, i.e. k, nstart: number of runs
+print(str(kmeans_out)) 
+
+# choose parameter k
+print('one option to choose k:')
+# library('NbClust')
+NbClust(df, method='kmeans')
+```
+
+### 4.2 Principle Component Analysis
+
+The main feature of unsupervised learning algorithms, when compared to classification and regression methods, is that input data are unlabeled (i.e. no labels or classes given) and that the algorithm learns the structure of the data without any assistance. This creates two main differences. First, it allows us to process large amounts of data because the data does not need to be manually labeled. Second, it is difficult to evaluate the quality of an unsupervised algorithm due to the absence of an explicit goodness metric as used in supervised learning.
+
+One of the most common tasks in unsupervised learning is dimensionality reduction. On one hand, dimensionality reduction may help with data visualization. On the other hand, it may help deal with the multicollinearity of our data and prepare the data for a supervised learning method (e.g. decision trees).
+
+To use PCA models algorithm in R, we can use "princomp" provided by R. This package has the "PCA" function in it. 
+
+Success and failure modes for Principle Component Analysis (PCA):
+
+**Advanages for PCA:**
+
+- Removes correlated features
+- Improves algorithm performance by reducing overfitting
+- Improves visualization by transforming high dimensional data to low dimensional data
+
+**Advanages for PCA:**
+
+- May miss some information as compared to the original list of features.
+- Independent principal components are not as readable and interpretable as original features sometimes.
+
+Reference:
+
+https://www.i2tutorials.com/what-are-the-pros-and-cons-of-the-pca/
+https://www.datacamp.com/tutorial/pca-analysis-r
+https://www.r-bloggers.com/2021/05/principal-component-analysis-pca-in-r/
+
+```{r}
+#warnings('off')
+#install.packages('usethis')
+#library(usethis)
+# install.packages('devtools')
+#library(devtools)
+# install_github("vqv/ggbiplot")
+# library(ggbiplot)
+iris1<-iris[,-5]
+basePCA<-princomp(iris1)     # Default: center = TRUE, scale. = TRUE
+summary(basePCA)
+
+# PCA Visualization
+ggbiplot(basePCA)
+```
+
+
