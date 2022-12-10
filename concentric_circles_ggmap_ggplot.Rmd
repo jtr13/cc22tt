@@ -1,0 +1,69 @@
+# Draw concentric circles around location of interest on google maps
+
+Faizan Dogar
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+``` {r}
+library(ggplot2)
+library(ggmap)
+```
+
+Description of the project: I want to use professor's introductory code to plot a point on google maps along with a function I found online to make online concentric circles of different radii (in terms of kilometers) around the point. Note that the solution provided uses approximate conversions from lat/long to kilometers and hence may not be appropriate if the geographical area analyzed is not too large (for example, the entire landmass of Unites States). Therefore, this project aims to combine ggmap and ggplot2 to create concentric circles around a point of interest, which is Times Square for illustrative purposes in this contribution.
+
+Motivation of the project: When I worked at as an economic consultant, I worked an acquisition that was flagged as potentially anti-competitive by the department of justice (DOJ). As an analyst, I was involved in various kinds of analyses to figure out the state of competition in the market. Since the companies in question owned gas stations, one anaysis was to visualize the state of competition around specific gas stations within 1 mile, 3 mile, and 5 mile radius. The reason we did so was because we wanted to make sure that after the two companies become a single entity, there would still be a reasonable number of gas stations of different companies within those pre-defined radii by the DOJ. I used a pre-written program that interfaced Python with ArcGIS to plot concentric circles of different radii around the gas stations we were interested in looking at. I found that the drawing up of a radial boundary around the point of interest really helped understand the state of competition within a certain radius. Since for my group project this term, my group is thinking of analyzing crime around the Columbia University campus, I thought it would be really helpful to use Professor's introduction to plotting google maps using ggmap along with a function that takes in the central location in lat/long coordinates and returns a certain number of points around the central location that form a circle of a given radius to plot that circle around our central location of interest. I present a very simple application of this process in this community contribution with the hope that other groups and my group find it helpful for our spatial analyses.
+
+
+```{r}
+lat_long_data = data.frame( # Making a dataframe that has the lat/long coordinates of our point of interest. In this case, it is Times Square, NYC.
+    ID = as.numeric(c(1:1)),
+    longitude = as.numeric(c(-73.985130)),
+    latitude = as.numeric(c(40.758896))
+)
+```
+
+
+The following function uses the approximation that each degree of latitude represents 40075 / 360 kilometers and that each degree of longitude represents (40075 / 360) * cos(latitude) kilomemters. 
+
+```{r}
+circles_data <- function(centers, radius, nPoints = 100){
+    # centers: the data frame that has the lat/long coordinate of our point of interest
+    # radius: radius measured in kilometer
+    # nPoints: Defines the number of points on the circumference of the circle. The more the number of points, the smoother your circle will be
+    meanLat <- mean(centers$latitude)
+    # length per longitude changes with lattitude, so need correction
+    radiusLon <- radius /111 / cos(meanLat/57.3) 
+    radiusLat <- radius / 111
+    circleDF <- data.frame(ID = rep(centers$ID, each = nPoints))
+    angle <- seq(0,2*pi,length.out = nPoints)
+
+    circleDF$lon <- unlist(lapply(centers$longitude, function(x) x + radiusLon * cos(angle)))
+    circleDF$lat <- unlist(lapply(centers$latitude, function(x) x + radiusLat * sin(angle)))
+    return(circleDF)
+}
+```
+
+
+Now making the data for two circles with 350 meter and 750 meter radii. 
+```{r}
+circle_700m <- circles_data(lat_long_data, 0.70)
+circle_350m <- circles_data(lat_long_data, 0.35)
+```
+
+
+Now plotting the point of interest along with the radii of interest using Professor's function for getting google map data centered around our point of interest. 
+```{r}
+map = get_googlemap(center = c(lon = -73.985130, lat = 40.758896),zoom = 15)
+ggmap(map) + geom_point(aes(x = longitude, y = latitude), data = lat_long_data, size = 1, color = 'red') + geom_polygon(data = circle_700m, aes(lon, lat), color = "red", alpha = 0) +  geom_polygon(data = circle_350m, aes(lon, lat), color = "red", alpha = 0)
+```
+
+
+Note that if the above function throws in any errors, it's most likey due to the mismatch between the parameter zoom in ggmap and the lenght of the radii of the circles defined. You want to make sure that the defined radii fall within the bounds of the zoomed in graph fetched by ggmap. Also note that the code produced above hides my authentication key for using Google Maps API with ggmap. That is something you will have to set up on your own. The setup is quite easy and feel free to reach out for help in case you cannot figure it out. 
+
+Citations:
+1. Robbins, Joyce. “Edav.info, 2nd Edition.” Chapter 17 Spatial Data, 1 Nov. 2022, https://edav.info/spatial-data.html. 
+2. GL_Li. “Plot Circle with a Certain Radius around Point on a Map in GGPLOT2.” Stack Overflow, https://stackoverflow.com/questions/34183049/plot-circle-with-a-certain-radius-around-point-on-a-map-in-ggplot2. 
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
