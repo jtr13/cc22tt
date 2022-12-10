@@ -70,6 +70,7 @@ rmd_files: [
   'learning_data_science_visually.Rmd',
   'Misleading_Visualizations_Survey.Rmd',
   'python_animations_with_matplotlib.Rmd',
+  'waterfall_plot_meta_income_statement.Rmd',
   
   # Part: Interview Prep
   'ten_interview_questions.Rmd',
