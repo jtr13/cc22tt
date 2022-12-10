@@ -69,12 +69,14 @@ rmd_files: [
   # 'machine_learning_in_r.Rmd',
   'learning_data_science_visually.Rmd',
   'Misleading_Visualizations_Survey.Rmd',
+  'python_animations_with_matplotlib.Rmd',
   
   # Part: Interview Prep
   'ten_interview_questions.Rmd',
   'data_science_internship_search_guide.Rmd',
   'data_visualization_interview_questions_sample.Rmd',
   'data_science_interview_prep_community.Rmd',
+  
   
   # Part: Case Studies
   'benford_case_study.Rmd',
