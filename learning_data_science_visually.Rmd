@@ -157,11 +157,11 @@ MLU-Explain exists to teach important machine learning concepts through visual e
 
 It includes topics like: Cross-Validation, Linear and Logistic Regression, ROC & AUC, Train, test and validation sets, Precision & Recall, Decision Trees & Random Forests, etc.
 
-```{r, echo=FALSE}
-knitr::include_graphics("resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.22.35%20PM.png")
 
-knitr::include_graphics("resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.23.00%20PM.png")
-```
+![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.22.35%20PM.png){width="48%"}
+
+![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.23.00%20PM.png"){width="48%"}
+
 ------------------------------------------------------------------------
 
 ## Journals and Publications
