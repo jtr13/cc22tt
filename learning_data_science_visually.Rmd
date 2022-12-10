@@ -117,7 +117,9 @@ Link: <https://cs.stanford.edu/people/karpathy/convnetjs/index.html>
 
 ConvNetJS is a Javascript library for training Deep Learning models (Neural Networks) entirely in your browser. It has an additional functionality of visualizing the models and the outputs at various layers. It's a great resource to explore some frequently used data sets and models.
 
-![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.02.01%20PM.png){width="48%"} ![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.02.21%20PM.png){width="48%"}
+![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.02.01%20PM.png){width="48%"}
+
+![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.02.21%20PM.png){width="48%"}
 
 ### 3. AI Notes by DeepLearning.AI
 
@@ -127,11 +129,15 @@ AI Notes is a series of long-form tutorials with interactive visualizations that
 
 1.  **Initializing neural networks**
 
-    ![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.07.30%20PM.png){width="48%"} ![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.08.01%20PM.png){width="48%"}
+    ![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.07.30%20PM.png){width="48%"}
+    
+    ![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.08.01%20PM.png){width="48%"}
 
 2.  **Parameter optimization in neural networks**
 
-    ![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.08.38%20PM.png){width="48%"} ![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.09.07%20PM.png){width="48%"}
+    ![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.08.38%20PM.png){width="48%"}
+    
+    ![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.09.07%20PM.png){width="48%"}
 
 ### 4. OpenAI Microscope
 
@@ -139,7 +145,9 @@ Link: <https://microscope.openai.com/models>
 
 OpenAI Microscope is a collection of visualizations of every significant layer and neuron of several common "model organisms" which are often studied in interpretability. Microscope makes it easier to analyze the features that form inside these neural networks, and move towards understanding these complicated systems.
 
-![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.18.31%20PM.png){width="48%"} ![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.19.25%20PM.png){width="48%"}
+![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.18.31%20PM.png){width="48%"}
+
+![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.19.25%20PM.png){width="48%"}
 
 ### 5. MLU-Explain
 
@@ -149,7 +157,10 @@ MLU-Explain exists to teach important machine learning concepts through visual e
 
 It includes topics like: Cross-Validation, Linear and Logistic Regression, ROC & AUC, Train, test and validation sets, Precision & Recall, Decision Trees & Random Forests, etc.
 
-![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.22.35%20PM.png){width="48%"} ![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.23.00%20PM.png){width="48%"}
+
+![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.22.35%20PM.png){width="48%"}
+
+![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.23.00%20PM.png"){width="48%"}
 
 ------------------------------------------------------------------------
 
@@ -161,7 +172,9 @@ Link: <https://distill.pub/>
 
 Distill is a scientific journal that operated between 2016 and 2021. However, most of the research papers and articles on the website are very engaging and remain highly relevant for Data Scientists. Distill shares Machine Learning Research in interactive and new ways to facilitate learning and thinking.
 
-![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.31.01%20PM.png){width="48%"} ![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.31.25%20PM.png){width="48%"}
+![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.31.01%20PM.png){width="48%"}
+
+![](resources/learning_data_science_visually/Screenshot%202022-11-14%20at%206.31.25%20PM.png){width="48%"}
 
 ### 2. The Pudding
 
@@ -169,6 +182,8 @@ Link: <https://pudding.cool/>
 
 The Pudding is a digital publication with the aim of making data fun through their various visual essay on contemporary topics. While Pudding does not explicitly teach Data Science concepts, it's a great resource to see the fun ways of visualizing projects.
 
-![](resources/learning_data_science_visually/Screenshot%202022-11-15%20at%205.54.30%20PM.png){width="48%"} ![](resources/learning_data_science_visually/Screenshot%202022-11-15%20at%205.54.57%20PM.png){width="48%"}
+![](resources/learning_data_science_visually/Screenshot%202022-11-15%20at%205.54.30%20PM.png){width="48%"}
+
+![](resources/learning_data_science_visually/Screenshot%202022-11-15%20at%205.54.57%20PM.png){width="48%"}
 
 ------------------------------------------------------------------------

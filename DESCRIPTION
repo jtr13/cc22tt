@@ -7,6 +7,7 @@ Imports:
     tidyverse,
     geocompkg,
     widyr,
+    ggbiplot,
 Suggests:
     academictwitteR,
     anglr,
@@ -19,6 +20,7 @@ Suggests:
     caret,
     chorddiag,
     circlepackeR,
+    class,
     collapsibleTree,
     corpus,
     cowplot,
@@ -56,6 +58,7 @@ Suggests:
     mapview,
     mlbench,
     navdata,
+    NbClust,
     networkD3,
     openintro,
     osmextract,
@@ -94,6 +97,12 @@ Suggests:
     withr,
     wordcloud,
     xml2,
+    gm,
+    rayshader,
+    ggthemes,
+    rvest,
+    raster,
+    rpart,
 Remotes:
     hadley/emo,
     kassambara/navdata,
@@ -107,3 +116,5 @@ Remotes:
     dgrtwo/widyr,
     hypertidy/anglr,
     dkahle/ggmap,
+    flujoo/gm,
+    vqv/ggbiplot

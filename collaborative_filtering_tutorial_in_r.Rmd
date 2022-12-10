@@ -1,0 +1,843 @@
+# Tutorial of Collaborative Filtering in R
+
+Ziwei Yang
+
+## Motivation
+For data science students, machine learning is always a potential career path they can take. Either work as a machine learning engineer or apply some machine learning techniques to their work. So this tutorial is meant to introduce a technique in machine learning, more specifically in the recommendation system, named collaboratively filtering. 
+
+Collaboratively filtering uses algorithms to filter data from user reviews to make personalized recommendations for users with similar preferences, and it is widely being used by big companies. Netflix uses it to recommend movies or shows that you may like and Amazon uses it to match products to users based on past purchases.
+
+## Need to Address
+For this tutorial, I will walk through how to apply this technique in r by investigating the effects of three general parameters on accuracy and run time of collaborative filtering methods, which are n: number of users, m: number of items, and d: proportion of non-NA values.
+
+I use four packages for this tutorial. rectools is a feature-filled packages of tools for recommendation system. qeML is a "quick and easy" wrapper for machine learning. Both pacakges are developed by professor Matloff at UC Davis. Then ggplot2 for plot visualization, and recosystem is a wrapper for "libmy" linrary for recommendation system using matrix factorization. Note: since rectools and qeML are not on CRAN yet, there two packages need to be installed through github repo: install_github('matloff/rectools') and install_github('matloff/qeML'). 
+
+```{r message = FALSE, warning = FALSE}
+# remotes::install_github('matloff/rectools')
+library(rectools)
+# remotes::install_github('matloff/qeML')
+library(qeML)
+# The packages can be installed by command: install.packages()
+library(ggplot2)
+library(recosystem)
+```
+
+For this tutorial, I will use MovieLens 100k dataset, which contains 100000 movie ratings from 1000 users and 1700 movies. The rating has scale from 0 to 5. One can download the dataset here https://grouplens.org/datasets/movielens/. Then, I will use two models to do predictions for these dataset, one is linear model, and another one is matrix factorization. 
+
+```{r}
+load("./resources/collaborative_filtering_tutorial_in_r/ml100kpluscovs.RData")
+data_source <- "MovieLens"
+model <- "Linear Model"
+data_frame <- ml100kpluscovs
+```
+
+## Create Rating Matrix
+First, for collaborative filtering, we need the data in the format of matrix, where each row is a user and each column is a item. Thus, the function below take the original data frame as the input, and return the rating matrix, where each row is a user, and each column is a movie. Note that this rating matrix may contain NA values since not all users give ratings to all movies. Then since this tutorial needs to investigate the effect of proportion of non-NA values on collaborative filtering, I use linear model to fill these NA values and thus create a fake rating matrix. Besides ratings matrix, these function also outputs two vectors, user_mean that contains the mean rating for each users and item_mean which contains the mean rating for each movie. They will be used later.
+
+```{r}
+generate_fake_rating_matrix <- function(data_frame) {
+    user_mean <- tapply(data_frame$userMean, data_frame$user, mean)
+    item_mean <- tapply(data_frame$itemMean, data_frame$item, mean)
+
+    model <- qeLin(data_frame[, c("rating", "userMean", "itemMean")],
+    "rating", holdout = NULL)
+    user_mean_coef <- matrix(rep(user_mean, each = length(item_mean)),
+    ncol = length(item_mean), byrow = TRUE) * model$coefficients["userMean"]
+    item_mean_coef <- t(matrix(rep(item_mean, each = length(user_mean)),
+    ncol = length(user_mean), byrow = TRUE)) * model$coefficients["itemMean"]
+
+    rating_matrix <- user_mean_coef + item_mean_coef +
+    model$coefficients["(Intercept)"]
+
+    colnames(rating_matrix) <- seq_len(length(item_mean))
+    rownames(rating_matrix) <- seq_len(length(user_mean))
+
+    for (index in seq_len(length(data_frame$user))) {
+        rating_matrix[data_frame$user[index], data_frame$item[index]] <-
+        data_frame$rating[index]
+    }
+
+    return(list(rating_matrix, user_mean, item_mean))
+}
+rating_matrix_info <- generate_fake_rating_matrix(data_frame)
+rating_matrix <- rating_matrix_info[[1]]
+user_mean <- rating_matrix_info[[2]]
+item_mean <- rating_matrix_info[[3]]
+```
+
+We can take a quick look on rating_matrix. So the ratings that have integer values(although in decimal format) are real ratings user gave, and ratings that have decimal values are fake ratings we just created. But in this tutorial, we will treat these fake ratings as real to analysis our results.
+
+```{r}
+rating_matrix[1:5,1:5]
+```
+
+Then there are 943 user and 1682 movies for this rating matrix.
+
+```{r}
+length(user_mean)
+length(item_mean)
+```
+
+To investigate on different values of n(number of users), m(number of items), and d(proportion of non-NA values), I create three vectors for n, m and d based on number of total users and number of total movies.
+
+```{r}
+n <- c(150, 300, 450, 600, 750, length(user_mean))
+m <- c(300, 600, 900, 1200, length(item_mean))
+d <- c(20, 40, 60, 80, 100)
+```
+
+## Generate the Subset Rating Matrix
+We first generate the rating matrix subset based on n, m, d values we want.
+
+```{r}
+generate_rating_matrix_subset <- function(n, m, d, rating_matrix) {
+    orig_row_names <- rownames(rating_matrix)
+    orig_col_names <- colnames(rating_matrix)
+    rating_matrix_subset <- rating_matrix[1:n, 1:m]
+
+    rating_matrix_subset <- array(rating_matrix_subset)
+    random_sequence <- sample.int(n * m, floor(n * m * (100 - d) / 100))
+    rating_matrix_subset[random_sequence] <- NA
+
+    rating_matrix_subset <- matrix(rating_matrix_subset, nrow = n, ncol = m)
+    rownames(rating_matrix_subset) <- orig_row_names[1:n]
+    colnames(rating_matrix_subset) <- orig_col_names[1:m]
+
+    rating_matrix_subset
+}
+```
+
+Pick n=150, m=300, d=20, we can first check the dimension of rating_matrix_subset, and then take a quick look of this subset rating matrix. We can easily see there are a lot of NA values, since we picked d = 20, which means 80% of ratings should be missing.
+
+```{r}
+rating_matrix_subset <- generate_rating_matrix_subset(n[1], m[1], d[1], rating_matrix)
+dim(rating_matrix_subset)
+rating_matrix_subset[1:5, 1:5]
+```
+
+## Generate Training and Test Sets
+In order to test the accuracy of the model prediction, we need to have training and test sets. Here, I set 30% of data to be test data, and rest 70% of data to be training data randomly by using sample.int() function.
+
+```{r}
+data_frame <- toUserItemRatings(rating_matrix_subset)
+data_frame$userID <- as.numeric(data_frame$userID)
+data_frame$itemID <- as.numeric(data_frame$itemID)
+generate_training_test_sets <- function(data_frame) {
+    test_proportion <- 0.3
+    test_index <- sample.int(dim(data_frame)[1],
+    floor(dim(data_frame)[1] * test_proportion))
+
+    training_set <- data_frame[-test_index, ]
+    test_set <- data_frame[test_index, ]
+
+    return(list(training_set, test_set))
+}
+training_test_sets <- generate_training_test_sets(data_frame)
+```
+
+In order to split data into training and test sets, we have to convert it back to data frame format. Here we can take a quick look of training set and test set, which both have three columns, user id, movie id, and rating.
+
+```{r}
+training_set <-training_test_sets[[1]]
+test_set <-training_test_sets[[2]]
+head(training_set)
+head(test_set)
+```
+
+## Linear Model
+### Generating userMean and itemMean Columns
+The first model I'm going to use is linear model. To use linear model to do predictions, we need to use user mean and item mean, which are mean rating a user gives to all movies, and mean rating a movies receives from all users. In order to avoid calculate user mean and item mean while doing predictions, I calculate here in advance and put it into our training set as two additional columns.
+
+```{r}
+generate_usermean_itemmean <- function(data_frame) {
+    user_mean <- tapply(data_frame$ratings, data_frame$userID, mean)
+    item_mean <- tapply(data_frame$ratings, data_frame$itemID, mean)
+
+    users <- sort(unique(data_frame$userID))
+    items <- sort(unique(data_frame$itemID))
+
+    data_frame$user_mean <- user_mean[match(data_frame$userID, users)]
+    data_frame$item_mean <- item_mean[match(data_frame$itemID, items)]
+
+    return(data_frame)
+}
+training_set <- generate_usermean_itemmean(training_test_sets[[1]])
+```
+
+Here we take a quick look of this new training set which includes two addition columns, user mean and item mean.
+
+```{r}
+head(training_set)
+```
+
+### Calculate MAPE
+Now we have the training set with user mean and item mean for linear model, we can use it to do prediction based on linear model and with test set, we can calculate the accuracy of our prediction. For this tutorial, I will use MAPE for accuracy, which is the mean absolute percentage error. It is calculated by taking mean of absolute of difference between actual value and prediction value divides by actual value. We can notice that there is another function named get_infirst_notsecond before the function used to calculate MAPE. It is a helper function to get elements in the first vector but not in the second vector. I use this helper function to find users and movies that in test set but not in training set. 
+
+```{r}
+get_infirst_notsecond <- function(first_vector, second_vector) {
+    unseen_element <- c()
+
+    for (element in first_vector) {
+        if (!(element %in% second_vector)) {
+            unseen_element <- c(unseen_element, element)
+        }
+    }
+
+    return(unseen_element)
+}
+
+calculate_mape_linear_model <- function(data_frame_training, data_frame_test) {
+    model <- qeLin(data_frame_training[,
+    c("ratings", "user_mean", "item_mean")], "ratings", holdout = NULL)
+    coefficients <- model$coefficients
+
+    user_mean <- tapply(data_frame_training$ratings,
+    data_frame_training$userID, mean)
+    item_mean <- tapply(data_frame_training$ratings,
+    data_frame_training$itemID, mean)
+
+    users <- sort(unique(data_frame_training$userID))
+    items <- sort(unique(data_frame_training$itemID))
+
+    unseen_users <- get_infirst_notsecond(unique(data_frame_test$userID), users)
+    unseen_items <- get_infirst_notsecond(unique(data_frame_test$itemID), items)
+
+    users <- c(users, unseen_users)
+    items <- c(items, unseen_items)
+
+    user_mean <- c(user_mean, mean(user_mean))
+    item_mean <- c(item_mean, mean(item_mean))
+
+    data_frame_test$user_mean <- user_mean[match(data_frame_test$userID, users)]
+    data_frame_test$item_mean <- item_mean[match(data_frame_test$itemID, items)]
+
+    num_predictions <- dim(data_frame_test)[1]
+    predictions <- rep(coefficients["(Intercept)"], each = num_predictions) +
+    rep(coefficients["user_mean"], each = num_predictions) *
+    data_frame_test$user_mean +
+    rep(coefficients["item_mean"], each = num_predictions) *
+    data_frame_test$item_mean
+
+    actual_ratings <- data_frame_test$ratings
+    mape <- mean(abs((actual_ratings - predictions) / actual_ratings))
+
+    return(mape)
+}
+mape <- calculate_mape_linear_model(training_set, training_test_sets[[2]])
+```
+
+We can print out the MAPE we just calculated. It is 0.0802 = 8.02%. That means in average, the prediction rating is offed by 8.02% from the actual rating, which can be considered as a small error.
+
+```{r}
+mape
+```
+
+In order to investigate the effects on different n, m and d, we have to alter one while keep other fixed. Since I don't want this tutorial be too long, and we probably don't need much MAPE to see the trend, so I will just calculate MAPE for one fixed combination of m and d while keeping n changed and same for m and d.
+
+First, I will calculate MAPE as n changes for fixed m and d with m = 300, d = 40.
+
+```{r}
+mape_n <- c()
+for (n_choice in n) {
+  rating_matrix_subset <- generate_rating_matrix_subset(n_choice, m[1], d[2], rating_matrix)
+  data_frame <- toUserItemRatings(rating_matrix_subset)
+  data_frame$userID <- as.numeric(data_frame$userID)
+  data_frame$itemID <- as.numeric(data_frame$itemID)
+  training_test_sets <- generate_training_test_sets(data_frame)
+  training_set <- generate_usermean_itemmean(training_test_sets[[1]])
+  mape <- calculate_mape_linear_model(training_set, training_test_sets[[2]])
+  mape_n <- c(mape_n, mape)
+}
+```
+
+As we print out the MAPE value as n changes, we can easily tell that as number of users increases, MAPE decreases, that means accuracy increases.
+
+```{r}
+mape_n
+```
+
+Then, I will calculate MAPE as m changes for fixed n and d with n = 150, d = 40.
+
+```{r}
+mape_m <- c()
+for (m_choice in m) {
+  rating_matrix_subset <- generate_rating_matrix_subset(n[1], m_choice, d[2], rating_matrix)
+  data_frame <- toUserItemRatings(rating_matrix_subset)
+  data_frame$userID <- as.numeric(data_frame$userID)
+  data_frame$itemID <- as.numeric(data_frame$itemID)
+  training_test_sets <- generate_training_test_sets(data_frame)
+  training_set <- generate_usermean_itemmean(training_test_sets[[1]])
+  mape <- calculate_mape_linear_model(training_set, training_test_sets[[2]])
+  mape_m <- c(mape_m, mape)
+}
+```
+
+As we print out the MAPE value as m changes, we can easily tell that as number of items increases, MAPE decreases, that means accuracy increases.
+
+```{r}
+mape_m
+```
+
+Finally, I will calculate MAPE as d changes for fixed n and m with n = 150, m = 300.
+
+```{r}
+mape_d <- c()
+for (d_choice in d) {
+  rating_matrix_subset <- generate_rating_matrix_subset(n[1], m[1], d_choice, rating_matrix)
+  data_frame <- toUserItemRatings(rating_matrix_subset)
+  data_frame$userID <- as.numeric(data_frame$userID)
+  data_frame$itemID <- as.numeric(data_frame$itemID)
+  training_test_sets <- generate_training_test_sets(data_frame)
+  training_set <- generate_usermean_itemmean(training_test_sets[[1]])
+  mape <- calculate_mape_linear_model(training_set, training_test_sets[[2]])
+  mape_d <- c(mape_d, mape)
+}
+```
+
+As we print out the MAPE value as d changes, we can easily tell that as proportion of non-NA values increases, MAPE decreases, that means accuracy increases.
+
+```{r}
+mape_d
+```
+
+### Plot MAPE and Runtime
+To see the trend more clearly, we can plot the MAPE and runtime out by using ggplot2.
+
+First, we plot for fixed n.
+
+```{r}
+calculate_mape_fixed_n <- function(n, model) {
+    mape_d_m <- matrix(, nrow = length(d), ncol = length(m))
+    run_time_d_m <- matrix(, nrow = length(d), ncol = length(m))
+
+    for (d_choice in d) {
+        mape_m <- c()
+        run_time_m <- c()
+
+        for (m_choice in m) {
+            rating_matrix_subset <- generate_rating_matrix_subset(
+                n, m_choice, d_choice, rating_matrix
+            )
+
+            data_frame <- toUserItemRatings(rating_matrix_subset)
+            data_frame$userID <- as.numeric(data_frame$userID)
+            data_frame$itemID <- as.numeric(data_frame$itemID)
+            training_test_sets <- generate_training_test_sets(data_frame)
+
+            if (model == "Linear Model") {
+                training_set <- generate_usermean_itemmean(
+                    training_test_sets[[1]])
+                start_time <- Sys.time()
+                mape <- calculate_mape_linear_model(training_set,
+                training_test_sets[[2]])
+                end_time <- Sys.time()
+                run_time <- end_time - start_time
+            }
+
+            if (model == "MF (Reco)") {
+                training_test_files <- generate_training_test_files(
+                training_test_sets)
+                start_time <- Sys.time()
+                mape <- calculate_mape_mf_reco(training_test_files[[1]],
+                training_test_files[[2]], training_test_sets[[2]]$ratings)
+                end_time <- Sys.time()
+                run_time <- end_time - start_time
+            }
+            mape_m <- c(mape_m, mape)
+            run_time_m <- c(run_time_m, run_time)
+        }
+        mape_d_m[match(d_choice, d), ] <- mape_m
+        run_time_d_m[match(d_choice, d), ] <- run_time_m
+    }
+
+    return(list(mape_d_m, run_time_d_m))
+}
+mape_run_time_d_m <- calculate_mape_fixed_n(n[1], model)
+```
+
+```{r}
+generate_graph_for_fixed_n <- function(n, mape_run_time_d_m,
+model, data_source) {
+    mape_d_m <- mape_run_time_d_m[[1]]
+    run_time_d_m <- mape_run_time_d_m[[2]]
+
+    data_frame_d_m <- data.frame(matrix(nrow = length(m) * length(d),
+    ncol = 4))
+    colnames(data_frame_d_m) <- c("m", "d", "mape", "run_time")
+    data_frame_d_m$m <- as.factor(array(matrix(rep(m, each = length(d)),
+    ncol = length(d), byrow = TRUE)))
+    data_frame_d_m$d <- as.factor(rep(d, each = length(m)))
+    mape <- c()
+    for (i in seq_len(length(d))) {
+        mape <- c(mape, mape_d_m[i, ])
+    }
+    data_frame_d_m$mape <- mape
+    run_time <- c()
+    for (i in seq_len(length(d))) {
+        run_time <- c(run_time, run_time_d_m[i, ])
+    }
+    data_frame_d_m$run_time <- run_time
+
+    plot_mape <- ggplot(data = data_frame_d_m, aes(x = m, y = mape, group = d,
+    color = d, fill = d, shape = d)) +
+        geom_line() +
+        geom_point(size = 3) +
+        labs(
+            title = paste0("MAPE vs Number of Items for Fixed Users (", model, ")"),
+            subtitle = paste0(
+                    " where n = ",
+                    n
+                ),
+            x = "Number of Items",
+            y = "MAPE (Mean Absolute Percentage Error)",
+            caption = paste0("data source: ", data_source)
+        ) +
+        theme(plot.title = element_text(hjust = 0.5),
+              plot.subtitle = element_text(hjust = 0.5))
+
+    plot_runtime <- ggplot(data = data_frame_d_m, aes(x = m, y = run_time, group = d,
+    color = d, fill = d, shape = d)) +
+        geom_line() +
+        geom_point(size = 3) +
+        labs(
+            title = paste0("Run Time vs Number of Items for Fixed Users (", model, ")"),
+            subtitle = paste0(
+                    " where n = ",
+                    n
+                ),
+            x = "Number of Items",
+            y = "Run Time (in secs)",
+            caption = paste0("data source: ", data_source)
+        ) +
+        theme(plot.title = element_text(hjust = 0.5),
+              plot.subtitle = element_text(hjust = 0.5))
+    
+    return(list(plot_mape, plot_runtime))
+}
+plot = generate_graph_for_fixed_n(n[1], mape_run_time_d_m, model, data_source)
+plot_mape = plot[[1]]
+plot_runtime = plot[[2]]
+plot_mape
+plot_runtime
+```
+
+Then, we plot for fixed m.
+
+```{r}
+calculate_mape_fixed_m <- function(m, model) {
+    mape_n_d <- matrix(, nrow = length(n), ncol = length(d))
+    run_time_n_d <- matrix(, nrow = length(n), ncol = length(d))
+
+    for (n_choice in n) {
+        mape_d <- c()
+        run_time_d <- c()
+
+        for (d_choice in d) {
+            rating_matrix_subset <- generate_rating_matrix_subset(
+                n_choice, m, d_choice, rating_matrix
+            )
+
+            data_frame <- toUserItemRatings(rating_matrix_subset)
+            data_frame$userID <- as.numeric(data_frame$userID)
+            data_frame$itemID <- as.numeric(data_frame$itemID)
+            training_test_sets <- generate_training_test_sets(data_frame)
+
+            if (model == "Linear Model") {
+                training_set <- generate_usermean_itemmean(
+                    training_test_sets[[1]])
+                start_time <- Sys.time()
+                mape <- calculate_mape_linear_model(training_set,
+                training_test_sets[[2]])
+                end_time <- Sys.time()
+                run_time <- end_time - start_time
+            }
+
+            if (model == "MF (Reco)") {
+                training_test_files <- generate_training_test_files(
+                training_test_sets)
+                start_time <- Sys.time()
+                mape <- calculate_mape_mf_reco(training_test_files[[1]],
+                training_test_files[[2]], training_test_sets[[2]]$ratings)
+                end_time <- Sys.time()
+                run_time <- end_time - start_time
+            }
+
+            mape_d <- c(mape_d, mape)
+            run_time_d <- c(run_time_d, run_time)
+        }
+        mape_n_d[match(n_choice, n), ] <- mape_d
+        run_time_n_d[match(n_choice, n), ] <- run_time_d
+    }
+
+    return(list(mape_n_d, run_time_n_d))
+}
+mape_run_time_n_d <- calculate_mape_fixed_m(m[1], model)
+```
+
+```{r}
+generate_graph_for_fixed_m <- function(m, mape_run_time_n_d,
+model, data_source) {
+    mape_n_d <- mape_run_time_n_d[[1]]
+    run_time_n_d <- mape_run_time_n_d[[2]]
+
+    data_frame_n_d <- data.frame(matrix(nrow = length(d) * length(n),
+    ncol = 4))
+    colnames(data_frame_n_d) <- c("d", "n", "mape", "run_time")
+    data_frame_n_d$d <- as.factor(array(matrix(rep(d, each = length(n)),
+    ncol = length(n), byrow = TRUE)))
+    data_frame_n_d$n <- as.factor(rep(n, each = length(d)))
+    mape <- c()
+    for (i in seq_len(length(n))) {
+        mape <- c(mape, mape_n_d[i, ])
+    }
+    data_frame_n_d$mape <- mape
+    run_time <- c()
+    for (i in seq_len(length(n))) {
+        run_time <- c(run_time, run_time_n_d[i, ])
+    }
+    data_frame_n_d$run_time <- run_time
+
+    plot_mape <- ggplot(data = data_frame_n_d, aes(x = d, y = mape, group = n,
+    color = n, fill = n, shape = n)) +
+        geom_line() +
+        geom_point(size = 3) +
+        labs(
+            title = paste0("MAPE vs Proportion of Non-NA Values for Fixed Items (", model, ")"),
+            subtitle = paste0(
+                    " where m = ",
+                    m
+                ),
+            x = "Proportion of Non-NA Values",
+            y = "MAPE (Mean Absolute Percentage Error)",
+            caption = paste0("data source: ", data_source)
+        ) +
+        theme(plot.title = element_text(hjust = 0.5),
+              plot.subtitle = element_text(hjust = 0.5))
+
+    plot_runtime <- ggplot(data = data_frame_n_d, aes(x = d, y = run_time, group = n,
+    color = n, fill = n, shape = n)) +
+        geom_line() +
+        geom_point(size = 3) +
+        labs(
+            title = paste0("Run Time vs Proportion of Non-NA Values for Fixed Items (", model, ")"),
+            subtitle = paste0(
+                    " where m = ",
+                    m
+                ),
+            x = "Proportion of Non-NA Values",
+            y = "Run Time (in secs)",
+            caption = paste0("data source: ", data_source)
+        ) +
+        theme(plot.title = element_text(hjust = 0.5),
+              plot.subtitle = element_text(hjust = 0.5))
+    
+    return(list(plot_mape, plot_runtime))
+}
+plot = generate_graph_for_fixed_m(m[1], mape_run_time_n_d, model, data_source)
+plot_mape = plot[[1]]
+plot_runtime = plot[[2]]
+plot_mape
+plot_runtime
+```
+
+Finally, we plot for fixed d. (to save time, I use small n and m here)
+
+```{r}
+n <- c(150, 300, 450, 600)
+m <- c(300, 600, 900, 1200) 
+calculate_mape_fixed_d <- function(d, model) {
+    mape_m_n <- matrix(, nrow = length(m), ncol = length(n))
+    run_time_m_n <- matrix(, nrow = length(m), ncol = length(n))
+
+    for (m_choice in m) {
+        mape_n <- c()
+        run_time_n <- c()
+
+        for (n_choice in n) {
+            rating_matrix_subset <- generate_rating_matrix_subset(
+                n_choice, m_choice, d, rating_matrix
+            )
+
+            data_frame <- toUserItemRatings(rating_matrix_subset)
+            data_frame$userID <- as.numeric(data_frame$userID)
+            data_frame$itemID <- as.numeric(data_frame$itemID)
+            training_test_sets <- generate_training_test_sets(data_frame)
+
+            if (model == "Linear Model") {
+                training_set <- generate_usermean_itemmean(
+                    training_test_sets[[1]])
+                start_time <- Sys.time()
+                mape <- calculate_mape_linear_model(training_set,
+                training_test_sets[[2]])
+                end_time <- Sys.time()
+                run_time <- end_time - start_time
+            }
+
+            if (model == "MF (Reco)") {
+                training_test_files <- generate_training_test_files(
+                training_test_sets)
+                start_time <- Sys.time()
+                mape <- calculate_mape_mf_reco(training_test_files[[1]],
+                training_test_files[[2]], training_test_sets[[2]]$ratings)
+                end_time <- Sys.time()
+                run_time <- end_time - start_time
+            }
+
+            mape_n <- c(mape_n, mape)
+            run_time_n <- c(run_time_n, run_time)
+        }
+        mape_m_n[match(m_choice, m), ] <- mape_n
+        run_time_m_n[match(m_choice, m), ] <- run_time_n
+    }
+
+    return(list(mape_m_n, run_time_m_n))
+}
+mape_run_time_m_n <- calculate_mape_fixed_d(d[2], model)
+```
+
+```{r}
+generate_graph_for_fixed_d <- function(d, mape_run_time_m_n,
+model, data_source) {
+    mape_m_n <- mape_run_time_m_n[[1]]
+    run_time_m_n <- mape_run_time_m_n[[2]]
+
+    data_frame_m_n <- data.frame(matrix(nrow = length(n) * length(m),
+    ncol = 4))
+    colnames(data_frame_m_n) <- c("n", "m", "mape", "run_time")
+    data_frame_m_n$n <- as.factor(array(matrix(rep(n, each = length(m)),
+    ncol = length(m), byrow = TRUE)))
+    data_frame_m_n$m <- as.factor(rep(m, each = length(n)))
+    mape <- c()
+    for (i in seq_len(length(m))) {
+        mape <- c(mape, mape_m_n[i, ])
+    }
+    data_frame_m_n$mape <- mape
+    run_time <- c()
+    for (i in seq_len(length(m))) {
+        run_time <- c(run_time, run_time_m_n[i, ])
+    }
+    data_frame_m_n$run_time <- run_time
+
+    plot_mape <- ggplot(data = data_frame_m_n, aes(x = n, y = mape, group = m,
+    color = m, fill = m, shape = m)) +
+        geom_line() +
+        geom_point(size = 3) +
+        labs(
+            title = paste0("MAPE vs Number of Users for Fixed d (", model, ")"),
+            subtitle = paste0(
+                    " where d = ",
+                    d
+                ),
+            x = "Number of Users",
+            y = "MAPE (Mean Absolute Percentage Error)",
+            caption = paste0("data source: ", data_source)
+        ) +
+        theme(plot.title = element_text(hjust = 0.5),
+              plot.subtitle = element_text(hjust = 0.5))
+
+    plot_runtime <- ggplot(data = data_frame_m_n, aes(x = n, y = run_time, group = m,
+    color = m, fill = m, shape = m)) +
+        geom_line() +
+        geom_point(size = 3) +
+        labs(
+            title = paste0("Run Time vs Number of Users for Fixed d (", model, ")"),
+            subtitle = paste0(
+                    " where d = ",
+                    d
+                ),
+            x = "Number of Users",
+            y = "Run Time (in secs)",
+            caption = paste0("data source: ", data_source)
+        ) +
+        theme(plot.title = element_text(hjust = 0.5),
+              plot.subtitle = element_text(hjust = 0.5))
+
+    return(list(plot_mape, plot_runtime))
+}
+plot = generate_graph_for_fixed_d(d[2], mape_run_time_m_n, model, data_source)
+plot_mape = plot[[1]]
+plot_runtime = plot[[2]]
+plot_mape
+plot_runtime
+```
+
+## Matrix Factorization
+The second model I'm going to use is matrix factorization
+
+```{r}
+model <- "MF (Reco)"
+```
+
+### Generate Training and Test Files For Matrix Factorization
+I use recosystem to do matrix factorization. While this package provides three ways to generate training and test sets for later use, I found out that generating training and test files based on training and test sets we got is the most efficient way.
+
+```{r}
+generate_training_test_files <- function(training_test_sets) {
+    write.table(training_test_sets[[1]], "train.txt",
+    row.names = FALSE, col.names = FALSE)
+    write.table(training_test_sets[[2]][, -3], "test.txt",
+    row.names = FALSE, col.names = FALSE)
+
+    return(list("train.txt", "test.txt"))
+}
+training_test_files <- generate_training_test_files(training_test_sets)
+```
+
+### Calculate MAPE
+This time, we use matrix factorization to calculate MAPE value.
+
+```{r}
+calculate_mape_mf_reco <- function(train_file, test_file, actual_ratings) {
+    train_set <- data_file(train_file)
+    test_set <- data_file(test_file)
+
+    r <- Reco()
+    opts <- r$tune(train_set, opts = list(dim = c(10, 20, 30),
+    lrate = c(0.1, 0.2), costp_l1 = 0, costq_l1 = 0, nthread = 1, niter = 10, verbose = FALSE, progress = FALSE))
+    r$train(train_set, opts = c(opts$min, nthread = 1, niter = 10, verbose = FALSE))
+
+    pred_file <- tempfile()
+    r$predict(test_set, out_file(pred_file))
+
+    file.remove(train_file)
+    file.remove(test_file)
+
+    return(mean(abs((scan(pred_file) - actual_ratings) / actual_ratings)))
+}
+mape <- calculate_mape_mf_reco(training_test_files[[1]], training_test_files[[2]], training_test_sets[[2]]$ratings)
+```
+
+We can print out the MAPE we just calculated. It is 0.0645 = 6.45%. That means in average, the prediction rating is offed by 6.45% from the actual rating, which can be considered as a small error.
+
+```{r}
+mape
+```
+
+In order to investigate the effects on different n, m and d, we have to alter one while keep other fixed. Since I don't want this tutorial be too long, and we probably don't need much MAPE to see the trend, so I will just calculate MAPE for one fixed combination of m and d while keeping n changed and same for m and d.
+
+First, I will calculate MAPE as n changes for fixed m and d with m = 300, d = 40.
+
+```{r}
+n <- c(150, 300, 450, 600, 750, length(user_mean))
+m <- c(300, 600, 900, 1200, length(item_mean))
+mape_n <- c()
+for (n_choice in n) {
+  rating_matrix_subset <- generate_rating_matrix_subset(n_choice, m[1], d[2], rating_matrix)
+  data_frame <- toUserItemRatings(rating_matrix_subset)
+  data_frame$userID <- as.numeric(data_frame$userID)
+  data_frame$itemID <- as.numeric(data_frame$itemID)
+  training_test_sets <- generate_training_test_sets(data_frame)
+  training_test_files <- generate_training_test_files(training_test_sets)
+  mape <- calculate_mape_mf_reco(training_test_files[[1]], training_test_files[[2]], training_test_sets[[2]]$ratings)
+  mape_n <- c(mape_n, mape)
+}
+```
+
+As we print out the MAPE value as n changes, we can easily tell that as number of users increases, MAPE decreases, that means accuracy increases.
+
+```{r}
+mape_n
+```
+
+Then, I will calculate MAPE as m changes for fixed n and d with n = 150, d = 40.
+
+```{r}
+mape_m <- c()
+for (m_choice in m) {
+  rating_matrix_subset <- generate_rating_matrix_subset(n[1], m_choice, d[2], rating_matrix)
+  data_frame <- toUserItemRatings(rating_matrix_subset)
+  data_frame$userID <- as.numeric(data_frame$userID)
+  data_frame$itemID <- as.numeric(data_frame$itemID)
+  training_test_sets <- generate_training_test_sets(data_frame)
+  training_test_files <- generate_training_test_files(training_test_sets)
+  mape <- calculate_mape_mf_reco(training_test_files[[1]], training_test_files[[2]], training_test_sets[[2]]$ratings)
+  mape_m <- c(mape_m, mape)
+}
+```
+
+As we print out the MAPE value as m changes, we can easily tell that as number of items increases, MAPE decreases, that means accuracy increases.
+
+```{r}
+mape_m
+```
+
+Finally, I will calculate MAPE as d changes for fixed n and m with n = 150, m = 300.
+
+```{r}
+mape_d <- c()
+for (d_choice in d) {
+  rating_matrix_subset <- generate_rating_matrix_subset(n[1], m[1], d_choice, rating_matrix)
+  data_frame <- toUserItemRatings(rating_matrix_subset)
+  data_frame$userID <- as.numeric(data_frame$userID)
+  data_frame$itemID <- as.numeric(data_frame$itemID)
+  training_test_sets <- generate_training_test_sets(data_frame)
+  training_test_files <- generate_training_test_files(training_test_sets)
+  mape <- calculate_mape_mf_reco(training_test_files[[1]], training_test_files[[2]], training_test_sets[[2]]$ratings)
+  mape_d <- c(mape_d, mape)
+}
+```
+
+As we print out the MAPE value as d changes, we can easily tell that as proportion of non-NA values increases, MAPE decreases, that means accuracy increases.
+
+```{r}
+mape_d
+```
+
+### Plot MAPE and Runtime
+To see the trend more clearly, we can plot the MAPE and runtime out by using ggplot2.
+
+First, we plot for fixed n. (to save time, I use small m here)
+
+```{r include = FALSE}
+n <- c(150, 300, 450, 600, 750, length(user_mean))
+m <- c(300, 600, 900, 1200)
+mape_run_time_d_m <- calculate_mape_fixed_n(n[1], model)
+```
+
+```{r}
+plot = generate_graph_for_fixed_n(n[1], mape_run_time_d_m, model, data_source)
+plot_mape = plot[[1]]
+plot_runtime = plot[[2]]
+plot_mape
+plot_runtime
+```
+
+Then, we plot for fixed m. (to save time, I use small n here)
+
+```{r include=FALSE}
+n <- c(150, 300, 450, 600)
+m <- c(300, 600, 900, 1200, length(item_mean))
+mape_run_time_n_d <- calculate_mape_fixed_m(m[1], model)
+```
+
+```{r}
+plot = generate_graph_for_fixed_m(m[1], mape_run_time_n_d, model, data_source)
+plot_mape = plot[[1]]
+plot_runtime = plot[[2]]
+plot_mape
+plot_runtime
+```
+
+Finally, we plot for fixed d. (to save time, I use small n and m here)
+
+```{r include=FALSE}
+n <- c(150, 300, 450, 600)
+m <- c(300, 600, 900, 1200)
+mape_run_time_m_n <- calculate_mape_fixed_d(d[2], model)
+```
+
+```{r}
+plot = generate_graph_for_fixed_d(d[2], mape_run_time_m_n, model, data_source)
+plot_mape = plot[[1]]
+plot_runtime = plot[[2]]
+plot_mape
+plot_runtime
+```
+
+## Conclusion
+While both number of users and items have positive relationship with model accuracy, number of items affect the accuracy more. Also, a higher proportion of non-NA values results in better accuracy.
+
+Note: In order to make this tutorial not too long and contains too many plots, I only use one dataset and display few plots here. In my github repo, I include another dataset InstEval, which contains university lecture evaluations by students at ETH Zurich from 2972 students and 2160 lecturers or professors. The rating scale is 0 to 5. Also, I have all plots for every combinations of n, m, and d in my github repo under result directory.
+
+The link is here: https://github.com/Wilson0925/collaboratively-filtering
+
