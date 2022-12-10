@@ -5,7 +5,7 @@ Yaoyuan Zhang and Zimu An
 ```{r, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 knitr::knit_hooks$set(webgl = "hook_webgl")
-#sdevtools::install_github("hypertidy/anglr") #Run this line if not installed before
+#devtools::install_github("hypertidy/anglr") #Run this line if not installed before
 library(plotly)
 library(rgl)
 library(anglr)
