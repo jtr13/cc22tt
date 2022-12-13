@@ -422,6 +422,17 @@ tree-based-models
 unsupervised-learning
 k-means
 principle-component-analysis
+r-machine-learning-workflow-tutorial
+motivation-13
+machine-learning-in-r-1
+import-packages-and-example-dataset
+preprocessing
+data-splitting
+train-linear-regression-model
+cross-validation
+make-predictions
+evaluate-performance
+citation
 what-you-see-is-what-you-understand-learning-data-science-visually
 programming
 python-tutor

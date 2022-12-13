@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 52 R machine learning workflow tutorial | Community Contributions for EDAV Fall 2022 Tues/Thurs</title>
+<meta name="description" content="Tongli Su, Yifan Lu  52.0.1 Motivation Our project demonstrates the standard workflow of a machine learning prediction task in R with the ‘caret’ package. The project could serve as a cheat sheet...">
+<meta name="generator" content="bookdown 0.30 with bs4_book()">
+<meta property="og:title" content="Chapter 52 R machine learning workflow tutorial | Community Contributions for EDAV Fall 2022 Tues/Thurs">
+<meta property="og:type" content="book">
+<meta property="og:description" content="Tongli Su, Yifan Lu  52.0.1 Motivation Our project demonstrates the standard workflow of a machine learning prediction task in R with the ‘caret’ package. The project could serve as a cheat sheet...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 52 R machine learning workflow tutorial | Community Contributions for EDAV Fall 2022 Tues/Thurs">
+<meta name="twitter:description" content="Tongli Su, Yifan Lu  52.0.1 Motivation Our project demonstrates the standard workflow of a machine learning prediction task in R with the ‘caret’ package. The project could serve as a cheat sheet...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.1/transition.js"></script><script src="libs/bs3compat-0.4.1/tabs.js"></script><script src="libs/bs3compat-0.4.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><script src="libs/plotly-binding-4.10.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script><link href="libs/visjs-7.4.9/vis-timeline-graph2d.min.css" rel="stylesheet">
+<script src="libs/visjs-7.4.9/vis-timeline-graph2d.min.js"></script><link href="libs/timeline-0.4/timevis.css" rel="stylesheet">
+<script src="libs/timevis-binding-2.1.0/timevis.js"></script><link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
+<script src="libs/leaflet-1.3.1/leaflet.js"></script><link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
+<script src="libs/proj4-2.6.2/proj4.min.js"></script><script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script><link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
+<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script><link href="libs/dygraphs-1.1.1/dygraph.css" rel="stylesheet">
+<script src="libs/dygraphs-1.1.1/dygraph-combined.js"></script><script src="libs/dygraphs-1.1.1/shapes.js"></script><script src="libs/moment-2.8.4/moment.js"></script><script src="libs/moment-timezone-0.2.5/moment-timezone-with-data.js"></script><script src="libs/moment-fquarter-1.0.0/moment-fquarter.min.js"></script><script src="libs/dygraphs-binding-1.1.1.6/dygraphs.js"></script><script src="libs/Dygraph.Plugins.Crosshair-1.0/crosshair.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="libs/datatables-binding-0.26/datatables.js"></script><link href="libs/dt-core-1.12.1/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="libs/dt-core-1.12.1/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="libs/dt-core-1.12.1/js/jquery.dataTables.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Community Contributions for EDAV Fall 2022 Tues/Thurs</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Welcome!</a></li>
+<li><a class="" href="community-contribution.html"><span class="header-section-number">2</span> Community Contribution</a></li>
+<li><a class="" href="github-submission-instructions.html"><span class="header-section-number">3</span> GitHub submission instructions</a></li>
+<li><a class="" href="sample-project.html"><span class="header-section-number">4</span> Sample project</a></li>
+<li class="book-part">Cheatsheets</li>
+<li><a class="" href="r-window-functions-cheatsheet.html"><span class="header-section-number">6</span> R window functions cheatsheet</a></li>
+<li><a class="" href="rmd-chunk-option-cheat-sheet.html"><span class="header-section-number">7</span> Rmd chunk option cheat sheet</a></li>
+<li><a class="" href="helpful-ggplot2-extensions-cheatsheet.html"><span class="header-section-number">8</span> Helpful ggplot2 Extensions Cheatsheet</a></li>
+<li><a class="" href="commonly-used-graph-cheatcheet.html"><span class="header-section-number">9</span> Commonly-used graph cheatcheet</a></li>
+<li><a class="" href="git-and-version-control.html"><span class="header-section-number">10</span> Git and version control</a></li>
+<li><a class="" href="useful-plots-for-bioinfomatics-in-r.html"><span class="header-section-number">11</span> Useful plots for Bioinfomatics in R</a></li>
+<li><a class="" href="different-ways-to-create-world-map-in-r.html"><span class="header-section-number">12</span> Different ways to create world map in R</a></li>
+<li><a class="" href="color-in-r-python-and-jshtmlcss.html"><span class="header-section-number">13</span> Color in R, Python, and JS/HTML/CSS</a></li>
+<li><a class="" href="color-palettes-for-data-visualization.html"><span class="header-section-number">14</span> Color Palettes for Data Visualization</a></li>
+<li><a class="" href="data-visualization-using-seaborn.html"><span class="header-section-number">15</span> Data visualization using Seaborn</a></li>
+<li><a class="" href="machine-learning-cheatsheet-for-r-and-python.html"><span class="header-section-number">16</span> Machine Learning Cheatsheet for R and Python</a></li>
+<li><a class="" href="data-visualization-with-r-ggplot2-vs.-matlab.html"><span class="header-section-number">17</span> Data Visualization with R ggplot2 vs. Matlab</a></li>
+<li><a class="" href="ggplot2-plots-in-python-cheat-sheet-tutorial.html"><span class="header-section-number">18</span> Ggplot2 plots in python cheat sheet tutorial</a></li>
+<li><a class="" href="model-evaluation-selection-visualization-with-easystats.html"><span class="header-section-number">19</span> Model evaluation, selection &amp; visualization with easystats</a></li>
+<li><a class="" href="time-series-itsmr-cheat-sheet.html"><span class="header-section-number">20</span> Time Series: ITSMR Cheat Sheet</a></li>
+<li class="book-part">Tutorials</li>
+<li><a class="" href="preprocessing-and-visualization-of-time-series-data.html"><span class="header-section-number">22</span> Preprocessing and Visualization of Time Series Data</a></li>
+<li><a class="" href="how-to-use-sqldf.html"><span class="header-section-number">23</span> How to use sqldf</a></li>
+<li><a class="" href="googlevis-in-r.html"><span class="header-section-number">24</span> googleVis in R</a></li>
+<li><a class="" href="tutorial-for-vector-fields-in-r.html"><span class="header-section-number">25</span> Tutorial for vector fields in r</a></li>
+<li><a class="" href="data-cleaning-with-r.html"><span class="header-section-number">26</span> Data cleaning with r</a></li>
+<li><a class="" href="introduction-to-shiny-web-apps.html"><span class="header-section-number">27</span> Introduction to Shiny Web Apps</a></li>
+<li><a class="" href="python-missingno-library-tutorial.html"><span class="header-section-number">28</span> Python missingno library tutorial</a></li>
+<li><a class="" href="data-explorer-tutorial-and-automation.html"><span class="header-section-number">29</span> Data Explorer Tutorial and Automation</a></li>
+<li><a class="" href="d-visualization-in-r.html"><span class="header-section-number">30</span> 3D Visualization in R</a></li>
+<li><a class="" href="visualizing-time-series-data.html"><span class="header-section-number">31</span> Visualizing Time Series Data</a></li>
+<li><a class="" href="igraph-in-r.html"><span class="header-section-number">32</span> igraph in r</a></li>
+<li><a class="" href="geo-mapping-coordinate-extraction-using-api-calls.html"><span class="header-section-number">33</span> Geo-Mapping Coordinate Extraction Using API Calls</a></li>
+<li><a class="" href="edav-garden.html"><span class="header-section-number">34</span> EDAV Garden</a></li>
+<li><a class="" href="using-raster-data-in-r.html"><span class="header-section-number">35</span> Using raster data in R</a></li>
+<li><a class="" href="make-geographical-maps-with-different-packages.html"><span class="header-section-number">36</span> Make Geographical Maps with Different Packages</a></li>
+<li><a class="" href="how-to-obtain-data-from-api-and-process-raw-json-data.html"><span class="header-section-number">37</span> How to obtain data from API and process raw JSON data</a></li>
+<li><a class="" href="sample-statistic-tutorial.html"><span class="header-section-number">38</span> Sample Statistic Tutorial</a></li>
+<li><a class="" href="data-cleaning-tutorial.html"><span class="header-section-number">39</span> Data cleaning tutorial</a></li>
+<li><a class="" href="mlr3-package-tutorial.html"><span class="header-section-number">40</span> mlr3 Package Tutorial</a></li>
+<li><a class="" href="guide-to-nonparametric-tests.html"><span class="header-section-number">41</span> Guide to nonparametric tests</a></li>
+<li><a class="" href="dplyr-pacakage-in-r.html"><span class="header-section-number">42</span> dplyr pacakage in R</a></li>
+<li><a class="" href="how-not-to-visualize-american-elections.html"><span class="header-section-number">43</span> How (not) to visualize American elections</a></li>
+<li><a class="" href="time-series-visualization-with-r.html"><span class="header-section-number">44</span> Time series visualization with R</a></li>
+<li><a class="" href="twitter-textual-data-scraping-and-analyzing.html"><span class="header-section-number">45</span> Twitter textual data: scraping and analyzing</a></li>
+<li><a class="" href="causal-inference-tutorial-a-quick-glance-at-interventional-treatment-and-simpsons-paradox.html"><span class="header-section-number">46</span> Causal Inference Tutorial: A Quick Glance at Interventional Treatment and Simpson’s Paradox</a></li>
+<li><a class="" href="network-analysis-and-social-network-analysis.html"><span class="header-section-number">47</span> Network analysis and social network analysis</a></li>
+<li><a class="" href="network-analysis-in-r.html"><span class="header-section-number">48</span> Network Analysis in R</a></li>
+<li><a class="" href="interactive-3d-visualization-in-r.html"><span class="header-section-number">49</span> Interactive 3D Visualization in R</a></li>
+<li><a class="" href="introduction-to-common-sampling-techniques-in-r.html"><span class="header-section-number">50</span> Introduction to common sampling techniques in r</a></li>
+<li><a class="" href="machine-learning-in-r.html"><span class="header-section-number">51</span> Machine Learning in R</a></li>
+<li><a class="active" href="r-machine-learning-workflow-tutorial.html"><span class="header-section-number">52</span> R machine learning workflow tutorial</a></li>
+<li><a class="" href="what-you-see-is-what-you-understand-learning-data-science-visually.html"><span class="header-section-number">53</span> What you see is what you understand: learning data science visually</a></li>
+<li><a class="" href="is-the-data-visualization-misleading-or-not---survey.html"><span class="header-section-number">54</span> Is the data visualization misleading or not - Survey</a></li>
+<li><a class="" href="animating-functions-and-histograms-in-python-using-matplotlib.html"><span class="header-section-number">55</span> Animating functions and histograms in python using matplotlib</a></li>
+<li><a class="" href="waterfall-chart-using-meta-income-statement.html"><span class="header-section-number">56</span> Waterfall chart using meta income statement</a></li>
+<li class="book-part">Interview Prep</li>
+<li><a class="" href="ten-interview-questions-and-answers.html"><span class="header-section-number">58</span> Ten interview questions and answers</a></li>
+<li><a class="" href="data-science-internship-search-survival-guide.html"><span class="header-section-number">59</span> Data science internship search survival guide</a></li>
+<li><a class="" href="data-visualization-interview-questions-sample.html"><span class="header-section-number">60</span> Data visualization interview questions sample</a></li>
+<li><a class="" href="how-i-got-into-amazon-as-a-full-time-data-analyst.html"><span class="header-section-number">61</span> How I got into Amazon as a full time data analyst</a></li>
+<li class="book-part">Case Studies</li>
+<li><a class="" href="benford-case-study.html"><span class="header-section-number">63</span> Benford Case Study</a></li>
+<li class="book-part">Blogs</li>
+<li><a class="" href="equity-in-ai.html"><span class="header-section-number">65</span> Equity in AI</a></li>
+<li><a class="" href="breaking-into-tech-black-girl-edition.html"><span class="header-section-number">66</span> Breaking into tech: black girl edition</a></li>
+<li><a class="" href="homepage-artwork.html"><span class="header-section-number">67</span> Homepage Artwork</a></li>
+<li><a class="" href="design-homepage-for-class-community.html"><span class="header-section-number">68</span> Design homepage for class community</a></li>
+<li class="book-part">Appendices</li>
+<li><a class="" href="github-initial-setup.html"><span class="header-section-number">69</span> Github initial setup</a></li>
+<li><a class="" href="tutorial-for-pull-request-mergers.html"><span class="header-section-number">70</span> Tutorial for pull request mergers</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/jtr13/cc22tt">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="r-machine-learning-workflow-tutorial" class="section level1" number="52">
+<h1>
+<span class="header-section-number">52</span> R machine learning workflow tutorial<a class="anchor" aria-label="anchor" href="#r-machine-learning-workflow-tutorial"><i class="fas fa-link"></i></a>
+</h1>
+<p>Tongli Su, Yifan Lu</p>
+<div id="motivation-13" class="section level3" number="52.0.1">
+<h3>
+<span class="header-section-number">52.0.1</span> Motivation<a class="anchor" aria-label="anchor" href="#motivation-13"><i class="fas fa-link"></i></a>
+</h3>
+<p>Our project demonstrates the standard workflow of a machine learning prediction task in R with the ‘caret’ package. The project could serve as a cheat sheet to carry out simple machine learning prediction tasks for people who are unfamiliar with the essential steps of machine learning tasks. When conducting a machine learning study, our tutorial could be used as a quick guide for R implementation and a reference to check if any of the necessary steps is missing. Most simple machine learning tasks could be done by just copy-pasting the code sections on our cheat sheet with some minor tweaks on the parameters.</p>
+<p>In completing the project, we reviewed and familiarized with the standard machine learning workflow and strengthened our knowledge in R implementation of machine learning tasks. Both my teammate and I were CS major in college, so we are familiar with machine learning, but neither of us has done machine learning projects in R before. Therefore, we explored the functions in ‘caret’ package and learned the implementation of each step in machine learning workflow, from data processing to model evaluation.</p>
+</div>
+<div id="machine-learning-in-r-1" class="section level3" number="52.0.2">
+<h3>
+<span class="header-section-number">52.0.2</span> Machine Learning in R<a class="anchor" aria-label="anchor" href="#machine-learning-in-r-1"><i class="fas fa-link"></i></a>
+</h3>
+<p>Machine learning is one of the most popular tools to unveil information carried by a dataset. Well-established machine learning packages make the task of making prediction with machine learning models a simple and standarized process. In this blog post, we will go through the steps in carrying out a machine learning prediction task, and provide example with the ‘caret’ package in R programming language.</p>
+<p>Steps in carrying out a machine learning prediction task:</p>
+<ol style="list-style-type: decimal">
+<li><p>Data pre-processing</p></li>
+<li><p>Feature engineering</p></li>
+<li><p>Feature selection</p></li>
+<li><p>Model selection</p></li>
+<li><p>Hyperparameter tuning</p></li>
+<li><p>Model evaluation</p></li>
+</ol>
+</div>
+<div id="import-packages-and-example-dataset" class="section level3" number="52.0.3">
+<h3>
+<span class="header-section-number">52.0.3</span> Import Packages and Example Dataset<a class="anchor" aria-label="anchor" href="#import-packages-and-example-dataset"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb846"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org">tidyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-forge.r-project.org/projects/car/">carData</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/topepo/caret/">caret</a></span><span class="op">)</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">Salaries</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##        rank discipline yrs.since.phd yrs.service  sex salary
+## 1      Prof          B            19          18 Male 139750
+## 2      Prof          B            20          16 Male 173200
+## 3  AsstProf          B             4           3 Male  79750
+## 4      Prof          B            45          39 Male 115000
+## 5      Prof          B            40          41 Male 141500
+## 6 AssocProf          B             6           6 Male  97000</code></pre>
+</div>
+<div id="preprocessing" class="section level3" number="52.0.4">
+<h3>
+<span class="header-section-number">52.0.4</span> Preprocessing<a class="anchor" aria-label="anchor" href="#preprocessing"><i class="fas fa-link"></i></a>
+</h3>
+<p>Data preprocessing includes transforming the data into desired form for model input, and scale the data for models sensitive to the scale (most regression models do). One common trick to tackle categorical data is to transform them to binary variables. This can be done in many ways, including one-hot encoding, target encoding, and ordinal encoding. Here we demonstrate using one-hot encoding to transform categorical features. One-hot encoding works by assigning a binary variable to each class of a categorical features. Therefore, the number of new binary variables created equals to the dimension of the orignal categorical variable. For example, if a feature ‘Gender’ has ‘Male’ and ‘Female’, then one-hot encoding will transform it to two variables ‘is_Male’ and ‘is_Female’.</p>
+<div class="sourceCode" id="cb848"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># transform categorical features to binary features with one-hot encoding</span></span>
+<span><span class="va">dummy</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/caret/man/dummyVars.html">dummyVars</a></span><span class="op">(</span><span class="st">" ~ ."</span>, data<span class="op">=</span><span class="va">df</span><span class="op">)</span></span>
+<span><span class="va">newdata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">dummy</span>, newdata <span class="op">=</span> <span class="va">df</span><span class="op">)</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">newdata</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##   rank.AsstProf rank.AssocProf rank.Prof discipline.A discipline.B
+## 1             0              0         1            0            1
+## 2             0              0         1            0            1
+## 3             1              0         0            0            1
+## 4             0              0         1            0            1
+## 5             0              0         1            0            1
+## 6             0              1         0            0            1
+##   yrs.since.phd yrs.service sex.Female sex.Male salary
+## 1            19          18          0        1 139750
+## 2            20          16          0        1 173200
+## 3             4           3          0        1  79750
+## 4            45          39          0        1 115000
+## 5            40          41          0        1 141500
+## 6             6           6          0        1  97000</code></pre>
+<p>Example Preprocessing Methods:</p>
+<p>dummyVars: this function helps transform the input to one hot encoding format</p>
+<p>findCorrelation: this function takes a correlation matrix as a input and help decide which predictor to be removed to solve colinearity.</p>
+<p>findLinearCombos: this function uses QR decomposition to enumerate linear combiantions.</p>
+</div>
+<div id="data-splitting" class="section level3" number="52.0.5">
+<h3>
+<span class="header-section-number">52.0.5</span> Data Splitting<a class="anchor" aria-label="anchor" href="#data-splitting"><i class="fas fa-link"></i></a>
+</h3>
+<p>Before training a machine learning model, we need to split the dataset to train and test as a standard measure. Sometimes if the dataset is large enough, we might split it to development set and test set. Then, the development set can be further divided to train set and validation set. However, in most cases, we just split the data into train set and test set, then use more data-efficient methods such as k-fold cross validation or leave-one-out cross validation to validate the model.</p>
+<div class="sourceCode" id="cb850"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">X</span> <span class="op">=</span> <span class="va">df</span></span>
+<span><span class="va">trainIndex</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/caret/man/createDataPartition.html">createDataPartition</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">salary</span>, p <span class="op">=</span> <span class="fl">.8</span>, <span class="co">#the proportion of train set</span></span>
+<span>                                  list <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="co">#do not return as a list</span></span>
+<span><span class="co">#Train-test split                             </span></span>
+<span><span class="va">train</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">[</span> <span class="va">trainIndex</span>,<span class="op">]</span></span>
+<span><span class="va">test</span>  <span class="op">&lt;-</span> <span class="va">df</span><span class="op">[</span><span class="op">-</span><span class="va">trainIndex</span>,<span class="op">]</span></span></code></pre></div>
+<p>Example Splitting Methods:</p>
+<p>createDataPartition: this function can be used to create splits of the data.</p>
+<p>groupKFold: this function can split data based on groups</p>
+</div>
+<div id="train-linear-regression-model" class="section level3" number="52.0.6">
+<h3>
+<span class="header-section-number">52.0.6</span> Train Linear Regression Model<a class="anchor" aria-label="anchor" href="#train-linear-regression-model"><i class="fas fa-link"></i></a>
+</h3>
+<p>Train linear regression model with train set.</p>
+<div class="sourceCode" id="cb851"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">linearModel</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/caret/man/train.html">train</a></span><span class="op">(</span><span class="va">salary</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">train</span>, </span>
+<span>                 method <span class="op">=</span> <span class="st">"lm"</span>, <span class="co">#linear regression model</span></span>
+<span>                 <span class="op">)</span></span>
+<span><span class="va">linearModel</span></span></code></pre></div>
+<pre><code>## Linear Regression 
+## 
+## 320 samples
+##   5 predictor
+## 
+## No pre-processing
+## Resampling: Bootstrapped (25 reps) 
+## Summary of sample sizes: 320, 320, 320, 320, 320, 320, ... 
+## Resampling results:
+## 
+##   RMSE      Rsquared   MAE     
+##   23220.35  0.4199775  17076.21
+## 
+## Tuning parameter 'intercept' was held constant at a value of TRUE</code></pre>
+<p>Here, we chose to use linear regression model. Caret has 238 available models. <a href="https://topepo.github.io/caret/available-models.html" class="uri">https://topepo.github.io/caret/available-models.html</a> provides more information about model selecton.</p>
+</div>
+<div id="cross-validation" class="section level3" number="52.0.7">
+<h3>
+<span class="header-section-number">52.0.7</span> Cross Validation<a class="anchor" aria-label="anchor" href="#cross-validation"><i class="fas fa-link"></i></a>
+</h3>
+<p>k-fold cross validation is often used in model selection and performance evaluation. It works by splitting the train dataset into k equal-sized partitions, using k-1 partitions to train the model and then evaluate its performance on the unused one partition. This process is repeated for k times where each partition serves as the test set once.</p>
+<div class="sourceCode" id="cb853"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">fitControl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/caret/man/trainControl.html">trainControl</a></span><span class="op">(</span><span class="co">## 10-fold CV</span></span>
+<span>                           method <span class="op">=</span> <span class="st">"repeatedcv"</span>,</span>
+<span>                           number <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>                           <span class="co">## repeated ten times</span></span>
+<span>                           repeats <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
+<span><span class="va">linearModel2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/caret/man/train.html">train</a></span><span class="op">(</span><span class="va">salary</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">train</span>, </span>
+<span>                 method <span class="op">=</span> <span class="st">"lm"</span>, </span>
+<span>                 trControl <span class="op">=</span> <span class="va">fitControl</span>,</span>
+<span>                 <span class="op">)</span></span>
+<span><span class="va">linearModel2</span></span></code></pre></div>
+<pre><code>## Linear Regression 
+## 
+## 320 samples
+##   5 predictor
+## 
+## No pre-processing
+## Resampling: Cross-Validated (10 fold, repeated 10 times) 
+## Summary of sample sizes: 288, 288, 288, 288, 288, 288, ... 
+## Resampling results:
+## 
+##   RMSE      Rsquared   MAE     
+##   22511.04  0.4478224  16853.59
+## 
+## Tuning parameter 'intercept' was held constant at a value of TRUE</code></pre>
+</div>
+<div id="make-predictions" class="section level3" number="52.0.8">
+<h3>
+<span class="header-section-number">52.0.8</span> Make Predictions<a class="anchor" aria-label="anchor" href="#make-predictions"><i class="fas fa-link"></i></a>
+</h3>
+<p>Make predictions on the test set with trained model.</p>
+<div class="sourceCode" id="cb855"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">prediction</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">linearModel</span>, newdata <span class="op">=</span> <span class="va">test</span><span class="op">)</span></span>
+<span><span class="va">prediction</span></span></code></pre></div>
+<pre><code>##         1         6         7         9        14        30        43        48 
+## 131787.64  99591.94 135076.37 131925.12  86473.95 132572.75 138296.35 127331.75 
+##        58        62        68        70        72        73        81        85 
+## 100220.25  86120.59 134153.77 128607.41 133152.78 136273.92 139346.77 124808.82 
+##        86        93        99       101       108       109       111       113 
+## 131512.68 101133.19 138875.25 140122.23  85834.18  88288.37 118245.76  71665.78 
+##       120       121       130       131       140       144       145       149 
+##  65806.12 116144.93  71734.52  85902.92 117892.40  85698.49 131915.46 130757.96 
+##       150       153       156       168       169       178       179       183 
+##  86189.33 136568.20 131503.02 130874.70 100573.61 101761.51 137402.74  99729.42 
+##       186       192       210       221       233       238       239       242 
+## 133594.19 141879.36 131434.28 131503.02 125814.55  65521.50 120877.19 117735.60 
+##       244       248       250       263       264       265       269       270 
+## 116763.59 117892.40 126462.19 119424.00 117313.51 118570.14 119679.64 118608.78 
+##       278       279       286       292       296       297       300       311 
+## 119001.90 119364.92  87670.84 119070.64 119620.56 116419.89  89928.47 122044.64 
+##       315       316       336       339       351       355       366       371 
+## 123448.42  87171.01 131689.92 135213.85 136863.60  88996.88 119404.68  87306.69 
+##       374       378       392       396       397 
+## 118933.16  72294.10 121887.85 121122.05  72853.67</code></pre>
+</div>
+<div id="evaluate-performance" class="section level3" number="52.0.9">
+<h3>
+<span class="header-section-number">52.0.9</span> Evaluate Performance<a class="anchor" aria-label="anchor" href="#evaluate-performance"><i class="fas fa-link"></i></a>
+</h3>
+<p>Model performance on the test set could be measured by various metrics. The most frequently used ones include precision, recall, F1-score, AUC score, etc. One thing worth noticing is that accuracy is often not a good metric to evaluate model performance when the dataset is highly imbalanced (has a minority class), since in that case predicting all samples to be the majority class would still produce a nice-looking accuracy score. In that case, using metrics like ROC curve and AUC score would be a better option.</p>
+<div class="sourceCode" id="cb857"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/caret/man/postResample.html">postResample</a></span><span class="op">(</span>pred <span class="op">=</span> <span class="va">prediction</span>, obs <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">salary</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##     RMSE Rsquared      MAE 
+## 37519.75       NA 31582.34</code></pre>
+<p>Other measuring performance methods:</p>
+<p>confusionMatrix: this function measures the performance of a classification algorithm by demonstrating true positives, true negatives, false positives, and false negatives of the predicted outcomes</p>
+<p>twoClassSummary: this function measures the performance of data with two classes by showing ROC, specificity, and sensitivity.</p>
+</div>
+<div id="citation" class="section level3" number="52.0.10">
+<h3>
+<span class="header-section-number">52.0.10</span> Citation<a class="anchor" aria-label="anchor" href="#citation"><i class="fas fa-link"></i></a>
+</h3>
+<p><a href="https://topepo.github.io/caret/" class="uri">https://topepo.github.io/caret/</a></p>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="machine-learning-in-r.html"><span class="header-section-number">51</span> Machine Learning in R</a></div>
+<div class="next"><a href="what-you-see-is-what-you-understand-learning-data-science-visually.html"><span class="header-section-number">53</span> What you see is what you understand: learning data science visually</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav"><li>
+<a class="nav-link" href="#r-machine-learning-workflow-tutorial"><span class="header-section-number">52</span> R machine learning workflow tutorial</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#motivation-13"><span class="header-section-number">52.0.1</span> Motivation</a></li>
+<li><a class="nav-link" href="#machine-learning-in-r-1"><span class="header-section-number">52.0.2</span> Machine Learning in R</a></li>
+<li><a class="nav-link" href="#import-packages-and-example-dataset"><span class="header-section-number">52.0.3</span> Import Packages and Example Dataset</a></li>
+<li><a class="nav-link" href="#preprocessing"><span class="header-section-number">52.0.4</span> Preprocessing</a></li>
+<li><a class="nav-link" href="#data-splitting"><span class="header-section-number">52.0.5</span> Data Splitting</a></li>
+<li><a class="nav-link" href="#train-linear-regression-model"><span class="header-section-number">52.0.6</span> Train Linear Regression Model</a></li>
+<li><a class="nav-link" href="#cross-validation"><span class="header-section-number">52.0.7</span> Cross Validation</a></li>
+<li><a class="nav-link" href="#make-predictions"><span class="header-section-number">52.0.8</span> Make Predictions</a></li>
+<li><a class="nav-link" href="#evaluate-performance"><span class="header-section-number">52.0.9</span> Evaluate Performance</a></li>
+<li><a class="nav-link" href="#citation"><span class="header-section-number">52.0.10</span> Citation</a></li>
+</ul>
+</li></ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/jtr13/cc22tt/blob/main/machine_learning_in_r2.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/jtr13/cc22tt/edit/main/machine_learning_in_r2.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Community Contributions for EDAV Fall 2022 Tues/Thurs</strong>" was written by . It was last built on 2022-12-13.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
