@@ -67,6 +67,7 @@ rmd_files: [
   #'music_gm_package.Rmd',
   # 'concentric_circles_ggmap_ggplot.Rmd',
   'machine_learning_in_r.Rmd',
+  'machine_learning_in_r2.Rmd',
   'learning_data_science_visually.Rmd',
   'Misleading_Visualizations_Survey.Rmd',
   'python_animations_with_matplotlib.Rmd',
