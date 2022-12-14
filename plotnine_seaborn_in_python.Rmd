@@ -1,0 +1,8 @@
+# Plotnine vs. Seaborn in python
+
+Victoria Xu and Lin Gong
+
+Python and R are two of the fundamental programming languages for data science. There are a lot of similarities between these two languages. And success in data science depends on the flexible and appropriate use of both tools. However, transitions from R to Python and vice versa in terms of plotting might not be easy. Therefore we hope to use our experience in Python to help people create ggplot visualization in Python easier. We will use plotnine and seaborn to visualize the following datasets. Plotnine aims to provide a near-identical API to ggplot2 so that R users who are new to python would find it familiar and easy to use. Seaborn is a Python data visualization library based on matplotlib, which is not as intuitive as plotnine, but easier to create visually appealing graphs. In the following example code, we include the plots of the same data by using both packages. We hope this could be helpful for R users who newly started using python and also beginners for both languages.
+
+You can find the link here:
+https://github.com/lindag0615/5702_Community_Contribution/blob/main/5702%20Community%20Contribution.ipynb
