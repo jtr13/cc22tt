@@ -463,6 +463,7 @@ meta-q3-2022-income-statement
 improving-the-chart
 how-year-over-year-quarterly-income-changed
 using-plotly-to-create-simple-waterfall
+plotnine-vs.-seaborn-in-python
 part-interview-prep
 ten-interview-questions-and-answers
 forward
