@@ -6,7 +6,6 @@ Yu Song Ng
 knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 options(rgl.useNULL = TRUE,
         rgl.printRglwidget = TRUE)
-gpclibPermit()
 ```
 
 ## Rayshader
