@@ -172,7 +172,7 @@ globejs(bg="black", lat=cities$lat,     long=cities$long, value=value,
 ### Interactive Maps
 
 We can create interactive maps to observe data related to geographic distribution. It also offers zooming, hovering, minimaps and much more.
-```{r}
+```{r, eval=FALSE}
 # load example data (Fiji Earthquakes) + keep only 100 first lines
 data(quakes)
 quakes <-  head(quakes, 100)
