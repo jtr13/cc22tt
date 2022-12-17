@@ -34,7 +34,7 @@ jobs:
       - name: Build site
         env:
           TWITTER_BEARER: ${{ secrets.TWITTER_BEARER }}
-        run: Rscript -e 'bookdown::render_book("index.Rmd", quiet = TRUE)'
+        run: Rscript -e 'bookdown::render_book("index.Rmd", quiet = FALSE)'
 
       - name: Deploy to GitHub pages 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.4
