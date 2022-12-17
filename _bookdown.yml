@@ -31,7 +31,7 @@ rmd_files: [
   'ggplot2_to_python.Rmd',
   'easystats_cheat_sheet.Rmd',
   'itsmr_cheat_sheet.Rmd',
-  # 'rayshader_cheatsheet_3dviz.Rmd',
+  'rayshader_cheatsheet_3dviz.Rmd',
   # Part: Tutorials
   'time_series_visualization_project.Rmd',  
   'how_to_use_sqldf.Rmd',
@@ -61,7 +61,7 @@ rmd_files: [
   'twitter_scrape_nlp.Rmd',
   'short_causal_inference_tutorial.Rmd',
   'network_analysis.Rmd',
-  'sentiment_analysis_tutorial.Rmd',
+  # 'sentiment_analysis_tutorial.Rmd',
   'Interactive_3D_Vis.Rmd',
   'common_sampling_methods_in_r_tutorial.Rmd',
   #'music_gm_package.Rmd',
