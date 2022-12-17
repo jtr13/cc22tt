@@ -1,5 +1,5 @@
 book_filename: "cc22"
-new_session: true
+new_session: false
 before_chapter_script: _common.R
 delete_merged_file: true
 language:
@@ -31,13 +31,13 @@ rmd_files: [
   'ggplot2_to_python.Rmd',
   'easystats_cheat_sheet.Rmd',
   'itsmr_cheat_sheet.Rmd',
-  'rayshader_cheatsheet_3dviz.Rmd',
+  # 'rayshader_cheatsheet_3dviz.Rmd',
   # Part: Tutorials
   'time_series_visualization_project.Rmd',  
   'how_to_use_sqldf.Rmd',
   'googleVis.Rmd',
   'vector_field_tutorial.Rmd',
-  # 'a_summary_of_interactive_chart.Rmd',
+  'a_summary_of_interactive_chart.Rmd',
   # 'mapview_tutorial.Rmd',
   'r_data_cleaning.Rmd',
   'shiny_app_intro.Rmd',
