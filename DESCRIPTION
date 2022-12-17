@@ -41,7 +41,7 @@ Suggests:
     ggraph,
     googlesheets4,
     googleVis,
-    gpclib,
+    gpclib?source=true,
     ggmap,
     gridExtra,
     hrbrthemes,
