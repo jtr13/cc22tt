@@ -4,31 +4,375 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 37 How to obtain data from API and process raw JSON data | Community Contributions for EDAV Fall 2022 Tues/Thurs</title>
-<meta name="description" content="Boping Xia and Mingkang Yuan # load required packages, can be installed by calling install.packages() library(httr) library(jsonlite) library(tidyverse)  37.1 Motivation Obtaining data is the...">
+<title>Chapter 38 How to obtain data from API and process raw JSON data | Community Contributions for EDAV Fall 2022 Tues/Thurs</title>
+<meta name="description" content="Boping Xia and Mingkang Yuan # load required packages, can be installed by calling install.packages() library(httr) library(jsonlite) library(tidyverse)  38.1 Motivation Obtaining data is the...">
 <meta name="generator" content="bookdown 0.31 with bs4_book()">
-<meta property="og:title" content="Chapter 37 How to obtain data from API and process raw JSON data | Community Contributions for EDAV Fall 2022 Tues/Thurs">
+<meta property="og:title" content="Chapter 38 How to obtain data from API and process raw JSON data | Community Contributions for EDAV Fall 2022 Tues/Thurs">
 <meta property="og:type" content="book">
-<meta property="og:description" content="Boping Xia and Mingkang Yuan # load required packages, can be installed by calling install.packages() library(httr) library(jsonlite) library(tidyverse)  37.1 Motivation Obtaining data is the...">
+<meta property="og:description" content="Boping Xia and Mingkang Yuan # load required packages, can be installed by calling install.packages() library(httr) library(jsonlite) library(tidyverse)  38.1 Motivation Obtaining data is the...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 37 How to obtain data from API and process raw JSON data | Community Contributions for EDAV Fall 2022 Tues/Thurs">
-<meta name="twitter:description" content="Boping Xia and Mingkang Yuan # load required packages, can be installed by calling install.packages() library(httr) library(jsonlite) library(tidyverse)  37.1 Motivation Obtaining data is the...">
+<meta name="twitter:title" content="Chapter 38 How to obtain data from API and process raw JSON data | Community Contributions for EDAV Fall 2022 Tues/Thurs">
+<meta name="twitter:description" content="Boping Xia and Mingkang Yuan # load required packages, can be installed by calling install.packages() library(httr) library(jsonlite) library(tidyverse)  38.1 Motivation Obtaining data is the...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.1/transition.js"></script><script src="libs/bs3compat-0.4.1/tabs.js"></script><script src="libs/bs3compat-0.4.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-<script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script><script src="libs/plotly-binding-4.10.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
-<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
-<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script><link href="libs/visjs-7.4.9/vis-timeline-graph2d.min.css" rel="stylesheet">
+<script src="libs/htmlwidgets-1.6.0/htmlwidgets.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="libs/datatables-binding-0.26/datatables.js"></script><link href="libs/dt-core-1.12.1/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="libs/dt-core-1.12.1/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="libs/dt-core-1.12.1/js/jquery.dataTables.min.js"></script><link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script><link href="libs/dygraphs-1.1.1/dygraph.css" rel="stylesheet">
+<script src="libs/dygraphs-1.1.1/dygraph-combined.js"></script><script src="libs/dygraphs-1.1.1/shapes.js"></script><script src="libs/moment-2.8.4/moment.js"></script><script src="libs/moment-timezone-0.2.5/moment-timezone-with-data.js"></script><script src="libs/moment-fquarter-1.0.0/moment-fquarter.min.js"></script><script src="libs/dygraphs-binding-1.1.1.6/dygraphs.js"></script><script src="libs/plotly-binding-4.10.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script><script src="libs/d3-4.13.0/d3.min.js"></script><script src="libs/forceNetwork-binding-0.4/forceNetwork.js"></script><link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet">
+<script src="libs/vis-9.1.0/vis-network.min.js"></script><script src="libs/visNetwork-binding-2.1.2/visNetwork.js"></script><script src="libs/d3v3-3.5.3/./d3v3.min.js"></script><link href="libs/d3heatmapcore-0.0.0/heatmapcore.css" rel="stylesheet">
+<script src="libs/d3heatmapcore-0.0.0/heatmapcore.js"></script><script src="libs/d3v3-tip-0.6.6/index.js"></script><script src="libs/d3heatmap-binding-0.9.0/d3heatmap.js"></script><script src="libs/threejs-111/three.min.js"></script><script src="libs/threejs-111/Detector.js"></script><script src="libs/threejs-111/Projector.js"></script><script src="libs/threejs-111/CanvasRenderer.js"></script><script src="libs/threejs-111/TrackballControls.js"></script><script src="libs/threejs-111/StateOrbitControls.js"></script><script src="libs/scatterplotThree-binding-0.3.3/scatterplotThree.js"></script><script src="libs/rglWebGL-binding-0.110.3/rglWebGL.js"></script><link href="libs/rglwidgetClass-0.110.3/rgl.css" rel="stylesheet">
+<script src="libs/rglwidgetClass-0.110.3/rglClass.src.js"></script><script src="libs/rglwidgetClass-0.110.3/utils.src.js"></script><script src="libs/rglwidgetClass-0.110.3/buffer.src.js"></script><script src="libs/rglwidgetClass-0.110.3/subscenes.src.js"></script><script src="libs/rglwidgetClass-0.110.3/shaders.src.js"></script><script src="libs/rglwidgetClass-0.110.3/textures.src.js"></script><script src="libs/rglwidgetClass-0.110.3/projection.src.js"></script><script src="libs/rglwidgetClass-0.110.3/mouse.src.js"></script><script src="libs/rglwidgetClass-0.110.3/init.src.js"></script><script src="libs/rglwidgetClass-0.110.3/pieces.src.js"></script><script src="libs/rglwidgetClass-0.110.3/draw.src.js"></script><script src="libs/rglwidgetClass-0.110.3/controls.src.js"></script><script src="libs/rglwidgetClass-0.110.3/selection.src.js"></script><script src="libs/rglwidgetClass-0.110.3/rglTimer.src.js"></script><script src="libs/rglwidgetClass-0.110.3/pretty.src.js"></script><script src="libs/rglwidgetClass-0.110.3/axes.src.js"></script><script src="libs/rglwidgetClass-0.110.3/animation.src.js"></script><!--html_preserve--><script type="text/plain" id="rgl-vertex-shader">
+    #line 2 1
+    // File 1 is the vertex shader
+    #ifdef GL_ES
+    #ifdef GL_FRAGMENT_PRECISION_HIGH
+    precision highp float;
+    #else
+    precision mediump float;
+    #endif
+    #endif
+
+    attribute vec3 aPos;
+    attribute vec4 aCol;
+    uniform mat4 mvMatrix;
+    uniform mat4 prMatrix;
+    varying vec4 vCol;
+    varying vec4 vPosition;
+
+    #ifdef NEEDS_VNORMAL
+    attribute vec3 aNorm;
+    uniform mat4 normMatrix;
+    varying vec4 vNormal;
+    #endif
+
+    #if defined(HAS_TEXTURE) || defined (IS_TEXT)
+    attribute vec2 aTexcoord;
+    varying vec2 vTexcoord;
+    #endif
+
+    #ifdef FIXED_SIZE
+    uniform vec3 textScale;
+    #endif
+
+    #ifdef FIXED_QUADS
+    attribute vec3 aOfs;
+    #endif
+
+    #ifdef IS_TWOSIDED
+    #ifdef HAS_NORMALS
+    varying float normz;
+    uniform mat4 invPrMatrix;
+    #else
+    attribute vec3 aPos1;
+    attribute vec3 aPos2;
+    varying float normz;
+    #endif
+    #endif // IS_TWOSIDED
+
+    #ifdef FAT_LINES
+    attribute vec3 aNext;
+    attribute vec2 aPoint;
+    varying vec2 vPoint;
+    varying float vLength;
+    uniform float uAspect;
+    uniform float uLwd;
+    #endif
+
+
+    void main(void) {
+      
+    #ifndef IS_BRUSH
+    #if defined(NCLIPPLANES) || !defined(FIXED_QUADS) || defined(HAS_FOG)
+      vPosition = mvMatrix * vec4(aPos, 1.);
+    #endif
+      
+    #ifndef FIXED_QUADS
+      gl_Position = prMatrix * vPosition;
+    #endif
+    #endif // !IS_BRUSH
+      
+    #ifdef IS_POINTS
+      gl_PointSize = POINTSIZE;
+    #endif
+      
+      vCol = aCol;
+      
+    #ifdef NEEDS_VNORMAL
+      vNormal = normMatrix * vec4(-aNorm, dot(aNorm, aPos));
+    #endif
+      
+    #ifdef IS_TWOSIDED
+    #ifdef HAS_NORMALS
+      /* normz should be calculated *after* projection */
+      normz = (invPrMatrix*vNormal).z;
+    #else
+      vec4 pos1 = prMatrix*(mvMatrix*vec4(aPos1, 1.));
+      pos1 = pos1/pos1.w - gl_Position/gl_Position.w;
+      vec4 pos2 = prMatrix*(mvMatrix*vec4(aPos2, 1.));
+      pos2 = pos2/pos2.w - gl_Position/gl_Position.w;
+      normz = pos1.x*pos2.y - pos1.y*pos2.x;
+    #endif
+    #endif // IS_TWOSIDED
+      
+    #ifdef NEEDS_VNORMAL
+      vNormal = vec4(normalize(vNormal.xyz/vNormal.w), 1);
+    #endif
+      
+    #if defined(HAS_TEXTURE) || defined(IS_TEXT)
+      vTexcoord = aTexcoord;
+    #endif
+      
+    #if defined(FIXED_SIZE) && !defined(ROTATING)
+      vec4 pos = prMatrix * mvMatrix * vec4(aPos, 1.);
+      pos = pos/pos.w;
+      gl_Position = pos + vec4(aOfs*textScale, 0.);
+    #endif
+      
+    #if defined(IS_SPRITES) && !defined(FIXED_SIZE)
+      vec4 pos = mvMatrix * vec4(aPos, 1.);
+      pos = pos/pos.w + vec4(aOfs,  0.);
+      gl_Position = prMatrix*pos;
+    #endif
+      
+    #ifdef FAT_LINES
+      /* This code was inspired by Matt Deslauriers' code in 
+       https://mattdesl.svbtle.com/drawing-lines-is-hard */
+      vec2 aspectVec = vec2(uAspect, 1.0);
+      mat4 projViewModel = prMatrix * mvMatrix;
+      vec4 currentProjected = projViewModel * vec4(aPos, 1.0);
+      currentProjected = currentProjected/currentProjected.w;
+      vec4 nextProjected = projViewModel * vec4(aNext, 1.0);
+      vec2 currentScreen = currentProjected.xy * aspectVec;
+      vec2 nextScreen = (nextProjected.xy / nextProjected.w) * aspectVec;
+      float len = uLwd;
+      vec2 dir = vec2(1.0, 0.0);
+      vPoint = aPoint;
+      vLength = length(nextScreen - currentScreen)/2.0;
+      vLength = vLength/(vLength + len);
+      if (vLength > 0.0) {
+        dir = normalize(nextScreen - currentScreen);
+      }
+      vec2 normal = vec2(-dir.y, dir.x);
+      dir.x /= uAspect;
+      normal.x /= uAspect;
+      vec4 offset = vec4(len*(normal*aPoint.x*aPoint.y - dir), 0.0, 0.0);
+      gl_Position = currentProjected + offset;
+    #endif
+      
+    #ifdef IS_BRUSH
+      gl_Position = vec4(aPos, 1.);
+    #endif
+    }
+    </script><script type="text/plain" id="rgl-fragment-shader">
+    #line 2 2
+    // File 2 is the fragment shader
+    #ifdef GL_ES
+    #ifdef GL_FRAGMENT_PRECISION_HIGH
+    precision highp float;
+    #else
+    precision mediump float;
+    #endif
+    #endif
+    varying vec4 vCol; // carries alpha
+    varying vec4 vPosition;
+    #if defined(HAS_TEXTURE) || defined (IS_TEXT)
+    varying vec2 vTexcoord;
+    uniform sampler2D uSampler;
+    #endif
+
+    #ifdef HAS_FOG
+    uniform int uFogMode;
+    uniform vec3 uFogColor;
+    uniform vec4 uFogParms;
+    #endif
+
+    #if defined(IS_LIT) && !defined(FIXED_QUADS)
+    varying vec4 vNormal;
+    #endif
+
+    #if NCLIPPLANES > 0
+    uniform vec4 vClipplane[NCLIPPLANES];
+    #endif
+
+    #if NLIGHTS > 0
+    uniform mat4 mvMatrix;
+    #endif
+
+    #ifdef IS_LIT
+    uniform vec3 emission;
+    uniform float shininess;
+    #if NLIGHTS > 0
+    uniform vec3 ambient[NLIGHTS];
+    uniform vec3 specular[NLIGHTS]; // light*material
+    uniform vec3 diffuse[NLIGHTS];
+    uniform vec3 lightDir[NLIGHTS];
+    uniform bool viewpoint[NLIGHTS];
+    uniform bool finite[NLIGHTS];
+    #endif
+    #endif // IS_LIT
+
+    #ifdef IS_TWOSIDED
+    uniform bool front;
+    varying float normz;
+    #endif
+
+    #ifdef FAT_LINES
+    varying vec2 vPoint;
+    varying float vLength;
+    #endif
+
+    void main(void) {
+      vec4 fragColor;
+    #ifdef FAT_LINES
+      vec2 point = vPoint;
+      bool neg = point.y < 0.0;
+      point.y = neg ? (point.y + vLength)/(1.0 - vLength) :
+                     -(point.y - vLength)/(1.0 - vLength);
+    #if defined(IS_TRANSPARENT) && defined(IS_LINESTRIP)
+      if (neg && length(point) <= 1.0) discard;
+    #endif
+      point.y = min(point.y, 0.0);
+      if (length(point) > 1.0) discard;
+    #endif // FAT_LINES
+      
+    #ifdef ROUND_POINTS
+      vec2 coord = gl_PointCoord - vec2(0.5);
+      if (length(coord) > 0.5) discard;
+    #endif
+      
+    #if NCLIPPLANES > 0
+      for (int i = 0; i < NCLIPPLANES; i++)
+        if (dot(vPosition, vClipplane[i]) < 0.0) discard;
+    #endif
+        
+    #ifdef FIXED_QUADS
+        vec3 n = vec3(0., 0., 1.);
+    #elif defined(IS_LIT)
+        vec3 n = normalize(vNormal.xyz);
+    #endif
+        
+    #ifdef IS_TWOSIDED
+        if ((normz <= 0.) != front) discard;
+    #endif
+        
+    #ifdef IS_LIT
+        vec3 eye = normalize(-vPosition.xyz/vPosition.w);
+        vec3 lightdir;
+        vec4 colDiff;
+        vec3 halfVec;
+        vec4 lighteffect = vec4(emission, 0.);
+        vec3 col;
+        float nDotL;
+    #ifdef FIXED_QUADS
+        n = -faceforward(n, n, eye);
+    #endif
+        
+    #if NLIGHTS > 0
+        for (int i=0;i<NLIGHTS;i++) {
+          colDiff = vec4(vCol.rgb * diffuse[i], vCol.a);
+          lightdir = lightDir[i];
+          if (!viewpoint[i])
+            lightdir = (mvMatrix * vec4(lightdir, 1.)).xyz;
+          if (!finite[i]) {
+            halfVec = normalize(lightdir + eye);
+          } else {
+            lightdir = normalize(lightdir - vPosition.xyz/vPosition.w);
+            halfVec = normalize(lightdir + eye);
+          }
+          col = ambient[i];
+          nDotL = dot(n, lightdir);
+          col = col + max(nDotL, 0.) * colDiff.rgb;
+          col = col + pow(max(dot(halfVec, n), 0.), shininess) * specular[i];
+          lighteffect = lighteffect + vec4(col, colDiff.a);
+        }
+    #endif
+        
+    #else // not IS_LIT
+        vec4 colDiff = vCol;
+        vec4 lighteffect = colDiff;
+    #endif
+        
+    #ifdef IS_TEXT
+        vec4 textureColor = lighteffect*texture2D(uSampler, vTexcoord);
+    #endif
+        
+    #ifdef HAS_TEXTURE
+    #ifdef TEXTURE_rgb
+        vec4 textureColor = lighteffect*vec4(texture2D(uSampler, vTexcoord).rgb, 1.);
+    #endif
+        
+    #ifdef TEXTURE_rgba
+        vec4 textureColor = lighteffect*texture2D(uSampler, vTexcoord);
+    #endif
+        
+    #ifdef TEXTURE_alpha
+        vec4 textureColor = texture2D(uSampler, vTexcoord);
+        float luminance = dot(vec3(1.,1.,1.), textureColor.rgb)/3.;
+        textureColor =  vec4(lighteffect.rgb, lighteffect.a*luminance);
+    #endif
+        
+    #ifdef TEXTURE_luminance
+        vec4 textureColor = vec4(lighteffect.rgb*dot(texture2D(uSampler, vTexcoord).rgb, vec3(1.,1.,1.))/3., lighteffect.a);
+    #endif
+        
+    #ifdef TEXTURE_luminance_alpha
+        vec4 textureColor = texture2D(uSampler, vTexcoord);
+        float luminance = dot(vec3(1.,1.,1.),textureColor.rgb)/3.;
+        textureColor = vec4(lighteffect.rgb*luminance, lighteffect.a*textureColor.a);
+    #endif
+        
+        fragColor = textureColor;
+
+    #elif defined(IS_TEXT)
+        if (textureColor.a < 0.1)
+          discard;
+        else
+          fragColor = textureColor;
+    #else
+        fragColor = lighteffect;
+    #endif // HAS_TEXTURE
+        
+    #ifdef HAS_FOG
+        // uFogParms elements: x = near, y = far, z = fogscale, w = (1-sin(FOV/2))/(1+sin(FOV/2))
+        // In Exp and Exp2: use density = density/far
+        // fogF will be the proportion of fog
+        // Initialize it to the linear value
+        float fogF;
+        if (uFogMode > 0) {
+          fogF = (uFogParms.y - vPosition.z/vPosition.w)/(uFogParms.y - uFogParms.x);
+          if (uFogMode > 1)
+            fogF = mix(uFogParms.w, 1.0, fogF);
+          fogF = fogF*uFogParms.z;
+          if (uFogMode == 2)
+            fogF = 1.0 - exp(-fogF);
+          // Docs are wrong: use (density*c)^2, not density*c^2
+          // https://gitlab.freedesktop.org/mesa/mesa/-/blob/master/src/mesa/swrast/s_fog.c#L58
+          else if (uFogMode == 3)
+            fogF = 1.0 - exp(-fogF*fogF);
+          fogF = clamp(fogF, 0.0, 1.0);
+          gl_FragColor = vec4(mix(fragColor.rgb, uFogColor, fogF), fragColor.a);
+        } else gl_FragColor = fragColor;
+    #else
+        gl_FragColor = fragColor;
+    #endif // HAS_FOG
+        
+    }
+    </script><!--/html_preserve--><script src="libs/CanvasMatrix4-0.110.3/CanvasMatrix.src.js"></script><script src="libs/globe-binding-0.3.3/globe.js"></script><script src="libs/d3-tip-0.8.1/index.js"></script><link href="libs/chorddiag-0.1.2.9000/chorddiag.css" rel="stylesheet">
+<script src="libs/chorddiag-0.1.2.9000/chorddiag.js"></script><link href="libs/collapsibleTree-0.1.6/collapsibleTree.css" rel="stylesheet">
+<script src="libs/collapsibleTree-binding-0.1.7/collapsibleTree.js"></script><link href="libs/circlepackeR-0.1/./style.css" rel="stylesheet">
+<script src="libs/circlepackeR-binding-0.0.0.9000/circlepackeR.js"></script><link href="libs/colorbrewer-1/colorbrewer.css" rel="stylesheet">
+<script src="libs/colorbrewer-1/colorbrewer.js"></script><link href="libs/streamgraph-1/streamgraph.css" rel="stylesheet">
+<script src="libs/streamgraph-binding-0.9.0/streamgraph.js"></script><link href="libs/visjs-7.4.9/vis-timeline-graph2d.min.css" rel="stylesheet">
 <script src="libs/visjs-7.4.9/vis-timeline-graph2d.min.js"></script><link href="libs/timeline-0.4/timevis.css" rel="stylesheet">
 <script src="libs/timevis-binding-2.1.0/timevis.js"></script><link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
 <script src="libs/leaflet-1.3.1/leaflet.js"></script><link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
 <script src="libs/proj4-2.6.2/proj4.min.js"></script><script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script><link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
-<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script><link href="libs/dygraphs-1.1.1/dygraph.css" rel="stylesheet">
-<script src="libs/dygraphs-1.1.1/dygraph-combined.js"></script><script src="libs/dygraphs-1.1.1/shapes.js"></script><script src="libs/moment-2.8.4/moment.js"></script><script src="libs/moment-timezone-0.2.5/moment-timezone-with-data.js"></script><script src="libs/moment-fquarter-1.0.0/moment-fquarter.min.js"></script><script src="libs/dygraphs-binding-1.1.1.6/dygraphs.js"></script><script src="libs/Dygraph.Plugins.Crosshair-1.0/crosshair.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="libs/datatables-binding-0.26/datatables.js"></script><link href="libs/dt-core-1.12.1/css/jquery.dataTables.min.css" rel="stylesheet">
-<link href="libs/dt-core-1.12.1/css/jquery.dataTables.extra.css" rel="stylesheet">
-<script src="libs/dt-core-1.12.1/js/jquery.dataTables.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+<script src="libs/leaflet-binding-2.1.1/leaflet.js"></script><script src="libs/Dygraph.Plugins.Crosshair-1.0/crosshair.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -78,53 +422,54 @@
 <li><a class="" href="how-to-use-sqldf.html"><span class="header-section-number">23</span> How to use sqldf</a></li>
 <li><a class="" href="googlevis-in-r.html"><span class="header-section-number">24</span> googleVis in R</a></li>
 <li><a class="" href="tutorial-for-vector-fields-in-r.html"><span class="header-section-number">25</span> Tutorial for vector fields in r</a></li>
-<li><a class="" href="data-cleaning-with-r.html"><span class="header-section-number">26</span> Data cleaning with r</a></li>
-<li><a class="" href="introduction-to-shiny-web-apps.html"><span class="header-section-number">27</span> Introduction to Shiny Web Apps</a></li>
-<li><a class="" href="python-missingno-library-tutorial.html"><span class="header-section-number">28</span> Python missingno library tutorial</a></li>
-<li><a class="" href="data-explorer-tutorial-and-automation.html"><span class="header-section-number">29</span> Data Explorer Tutorial and Automation</a></li>
-<li><a class="" href="d-visualization-in-r.html"><span class="header-section-number">30</span> 3D Visualization in R</a></li>
-<li><a class="" href="visualizing-time-series-data.html"><span class="header-section-number">31</span> Visualizing Time Series Data</a></li>
-<li><a class="" href="igraph-in-r.html"><span class="header-section-number">32</span> igraph in r</a></li>
-<li><a class="" href="geo-mapping-coordinate-extraction-using-api-calls.html"><span class="header-section-number">33</span> Geo-Mapping Coordinate Extraction Using API Calls</a></li>
-<li><a class="" href="edav-garden.html"><span class="header-section-number">34</span> EDAV Garden</a></li>
-<li><a class="" href="using-raster-data-in-r.html"><span class="header-section-number">35</span> Using raster data in R</a></li>
-<li><a class="" href="make-geographical-maps-with-different-packages.html"><span class="header-section-number">36</span> Make Geographical Maps with Different Packages</a></li>
-<li><a class="active" href="how-to-obtain-data-from-api-and-process-raw-json-data.html"><span class="header-section-number">37</span> How to obtain data from API and process raw JSON data</a></li>
-<li><a class="" href="sample-statistic-tutorial.html"><span class="header-section-number">38</span> Sample Statistic Tutorial</a></li>
-<li><a class="" href="data-cleaning-tutorial.html"><span class="header-section-number">39</span> Data cleaning tutorial</a></li>
-<li><a class="" href="mlr3-package-tutorial.html"><span class="header-section-number">40</span> mlr3 Package Tutorial</a></li>
-<li><a class="" href="guide-to-nonparametric-tests.html"><span class="header-section-number">41</span> Guide to nonparametric tests</a></li>
-<li><a class="" href="dplyr-pacakage-in-r.html"><span class="header-section-number">42</span> dplyr pacakage in R</a></li>
-<li><a class="" href="how-not-to-visualize-american-elections.html"><span class="header-section-number">43</span> How (not) to visualize American elections</a></li>
-<li><a class="" href="time-series-visualization-with-r.html"><span class="header-section-number">44</span> Time series visualization with R</a></li>
-<li><a class="" href="twitter-textual-data-scraping-and-analyzing.html"><span class="header-section-number">45</span> Twitter textual data: scraping and analyzing</a></li>
-<li><a class="" href="causal-inference-tutorial-a-quick-glance-at-interventional-treatment-and-simpsons-paradox.html"><span class="header-section-number">46</span> Causal Inference Tutorial: A Quick Glance at Interventional Treatment and Simpson’s Paradox</a></li>
-<li><a class="" href="network-analysis-and-social-network-analysis.html"><span class="header-section-number">47</span> Network analysis and social network analysis</a></li>
-<li><a class="" href="network-analysis-in-r.html"><span class="header-section-number">48</span> Network Analysis in R</a></li>
-<li><a class="" href="interactive-3d-visualization-in-r.html"><span class="header-section-number">49</span> Interactive 3D Visualization in R</a></li>
-<li><a class="" href="introduction-to-common-sampling-techniques-in-r.html"><span class="header-section-number">50</span> Introduction to common sampling techniques in r</a></li>
-<li><a class="" href="machine-learning-in-r.html"><span class="header-section-number">51</span> Machine Learning in R</a></li>
-<li><a class="" href="r-machine-learning-workflow-tutorial.html"><span class="header-section-number">52</span> R machine learning workflow tutorial</a></li>
-<li><a class="" href="what-you-see-is-what-you-understand-learning-data-science-visually.html"><span class="header-section-number">53</span> What you see is what you understand: learning data science visually</a></li>
-<li><a class="" href="is-the-data-visualization-misleading-or-not---survey.html"><span class="header-section-number">54</span> Is the data visualization misleading or not - Survey</a></li>
-<li><a class="" href="animating-functions-and-histograms-in-python-using-matplotlib.html"><span class="header-section-number">55</span> Animating functions and histograms in python using matplotlib</a></li>
-<li><a class="" href="waterfall-chart-using-meta-income-statement.html"><span class="header-section-number">56</span> Waterfall chart using meta income statement</a></li>
-<li><a class="" href="plotnine-vs.-seaborn-in-python.html"><span class="header-section-number">57</span> Plotnine vs. Seaborn in python</a></li>
+<li><a class="" href="a-summary-of-interactive-chart.html"><span class="header-section-number">26</span> A Summary of Interactive Chart</a></li>
+<li><a class="" href="data-cleaning-with-r.html"><span class="header-section-number">27</span> Data cleaning with r</a></li>
+<li><a class="" href="introduction-to-shiny-web-apps.html"><span class="header-section-number">28</span> Introduction to Shiny Web Apps</a></li>
+<li><a class="" href="python-missingno-library-tutorial.html"><span class="header-section-number">29</span> Python missingno library tutorial</a></li>
+<li><a class="" href="data-explorer-tutorial-and-automation.html"><span class="header-section-number">30</span> Data Explorer Tutorial and Automation</a></li>
+<li><a class="" href="d-visualization-in-r.html"><span class="header-section-number">31</span> 3D Visualization in R</a></li>
+<li><a class="" href="visualizing-time-series-data.html"><span class="header-section-number">32</span> Visualizing Time Series Data</a></li>
+<li><a class="" href="igraph-in-r.html"><span class="header-section-number">33</span> igraph in r</a></li>
+<li><a class="" href="geo-mapping-coordinate-extraction-using-api-calls.html"><span class="header-section-number">34</span> Geo-Mapping Coordinate Extraction Using API Calls</a></li>
+<li><a class="" href="edav-garden.html"><span class="header-section-number">35</span> EDAV Garden</a></li>
+<li><a class="" href="using-raster-data-in-r.html"><span class="header-section-number">36</span> Using raster data in R</a></li>
+<li><a class="" href="make-geographical-maps-with-different-packages.html"><span class="header-section-number">37</span> Make Geographical Maps with Different Packages</a></li>
+<li><a class="active" href="how-to-obtain-data-from-api-and-process-raw-json-data.html"><span class="header-section-number">38</span> How to obtain data from API and process raw JSON data</a></li>
+<li><a class="" href="sample-statistic-tutorial.html"><span class="header-section-number">39</span> Sample Statistic Tutorial</a></li>
+<li><a class="" href="data-cleaning-tutorial.html"><span class="header-section-number">40</span> Data cleaning tutorial</a></li>
+<li><a class="" href="mlr3-package-tutorial.html"><span class="header-section-number">41</span> mlr3 Package Tutorial</a></li>
+<li><a class="" href="guide-to-nonparametric-tests.html"><span class="header-section-number">42</span> Guide to nonparametric tests</a></li>
+<li><a class="" href="dplyr-pacakage-in-r.html"><span class="header-section-number">43</span> dplyr pacakage in R</a></li>
+<li><a class="" href="how-not-to-visualize-american-elections.html"><span class="header-section-number">44</span> How (not) to visualize American elections</a></li>
+<li><a class="" href="time-series-visualization-with-r.html"><span class="header-section-number">45</span> Time series visualization with R</a></li>
+<li><a class="" href="twitter-textual-data-scraping-and-analyzing.html"><span class="header-section-number">46</span> Twitter textual data: scraping and analyzing</a></li>
+<li><a class="" href="causal-inference-tutorial-a-quick-glance-at-interventional-treatment-and-simpsons-paradox.html"><span class="header-section-number">47</span> Causal Inference Tutorial: A Quick Glance at Interventional Treatment and Simpson’s Paradox</a></li>
+<li><a class="" href="network-analysis-and-social-network-analysis.html"><span class="header-section-number">48</span> Network analysis and social network analysis</a></li>
+<li><a class="" href="network-analysis-in-r.html"><span class="header-section-number">49</span> Network Analysis in R</a></li>
+<li><a class="" href="interactive-3d-visualization-in-r.html"><span class="header-section-number">50</span> Interactive 3D Visualization in R</a></li>
+<li><a class="" href="introduction-to-common-sampling-techniques-in-r.html"><span class="header-section-number">51</span> Introduction to common sampling techniques in r</a></li>
+<li><a class="" href="machine-learning-in-r.html"><span class="header-section-number">52</span> Machine Learning in R</a></li>
+<li><a class="" href="r-machine-learning-workflow-tutorial.html"><span class="header-section-number">53</span> R machine learning workflow tutorial</a></li>
+<li><a class="" href="what-you-see-is-what-you-understand-learning-data-science-visually.html"><span class="header-section-number">54</span> What you see is what you understand: learning data science visually</a></li>
+<li><a class="" href="is-the-data-visualization-misleading-or-not---survey.html"><span class="header-section-number">55</span> Is the data visualization misleading or not - Survey</a></li>
+<li><a class="" href="animating-functions-and-histograms-in-python-using-matplotlib.html"><span class="header-section-number">56</span> Animating functions and histograms in python using matplotlib</a></li>
+<li><a class="" href="waterfall-chart-using-meta-income-statement.html"><span class="header-section-number">57</span> Waterfall chart using meta income statement</a></li>
+<li><a class="" href="plotnine-vs.-seaborn-in-python.html"><span class="header-section-number">58</span> Plotnine vs. Seaborn in python</a></li>
 <li class="book-part">Interview Prep</li>
-<li><a class="" href="ten-interview-questions-and-answers.html"><span class="header-section-number">59</span> Ten interview questions and answers</a></li>
-<li><a class="" href="data-science-internship-search-survival-guide.html"><span class="header-section-number">60</span> Data science internship search survival guide</a></li>
-<li><a class="" href="data-visualization-interview-questions-sample.html"><span class="header-section-number">61</span> Data visualization interview questions sample</a></li>
-<li><a class="" href="how-i-got-into-amazon-as-a-full-time-data-analyst.html"><span class="header-section-number">62</span> How I got into Amazon as a full time data analyst</a></li>
+<li><a class="" href="ten-interview-questions-and-answers.html"><span class="header-section-number">60</span> Ten interview questions and answers</a></li>
+<li><a class="" href="data-science-internship-search-survival-guide.html"><span class="header-section-number">61</span> Data science internship search survival guide</a></li>
+<li><a class="" href="data-visualization-interview-questions-sample.html"><span class="header-section-number">62</span> Data visualization interview questions sample</a></li>
+<li><a class="" href="how-i-got-into-amazon-as-a-full-time-data-analyst.html"><span class="header-section-number">63</span> How I got into Amazon as a full time data analyst</a></li>
 <li class="book-part">Case Studies</li>
-<li><a class="" href="benford-case-study.html"><span class="header-section-number">64</span> Benford Case Study</a></li>
+<li><a class="" href="benford-case-study.html"><span class="header-section-number">65</span> Benford Case Study</a></li>
 <li class="book-part">Blogs</li>
-<li><a class="" href="equity-in-ai.html"><span class="header-section-number">66</span> Equity in AI</a></li>
-<li><a class="" href="breaking-into-tech-black-girl-edition.html"><span class="header-section-number">67</span> Breaking into tech: black girl edition</a></li>
-<li><a class="" href="homepage-artwork.html"><span class="header-section-number">68</span> Homepage Artwork</a></li>
-<li><a class="" href="design-homepage-for-class-community.html"><span class="header-section-number">69</span> Design homepage for class community</a></li>
+<li><a class="" href="equity-in-ai.html"><span class="header-section-number">67</span> Equity in AI</a></li>
+<li><a class="" href="breaking-into-tech-black-girl-edition.html"><span class="header-section-number">68</span> Breaking into tech: black girl edition</a></li>
+<li><a class="" href="homepage-artwork.html"><span class="header-section-number">69</span> Homepage Artwork</a></li>
+<li><a class="" href="design-homepage-for-class-community.html"><span class="header-section-number">70</span> Design homepage for class community</a></li>
 <li class="book-part">Appendices</li>
-<li><a class="" href="github-initial-setup.html"><span class="header-section-number">70</span> Github initial setup</a></li>
-<li><a class="" href="tutorial-for-pull-request-mergers.html"><span class="header-section-number">71</span> Tutorial for pull request mergers</a></li>
+<li><a class="" href="github-initial-setup.html"><span class="header-section-number">71</span> Github initial setup</a></li>
+<li><a class="" href="tutorial-for-pull-request-mergers.html"><span class="header-section-number">72</span> Tutorial for pull request mergers</a></li>
 </ul>
 
         <div class="book-extra">
@@ -132,9 +477,9 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="how-to-obtain-data-from-api-and-process-raw-json-data" class="section level1" number="37">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="how-to-obtain-data-from-api-and-process-raw-json-data" class="section level1" number="38">
 <h1>
-<span class="header-section-number">37</span> How to obtain data from API and process raw JSON data<a class="anchor" aria-label="anchor" href="#how-to-obtain-data-from-api-and-process-raw-json-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">38</span> How to obtain data from API and process raw JSON data<a class="anchor" aria-label="anchor" href="#how-to-obtain-data-from-api-and-process-raw-json-data"><i class="fas fa-link"></i></a>
 </h1>
 <p>Boping Xia and Mingkang Yuan</p>
 <div class="sourceCode" id="cb469"><pre class="downlit sourceCode r">
@@ -142,15 +487,15 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://httr.r-lib.org/">httr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://arxiv.org/abs/1403.2805">jsonlite</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span></code></pre></div>
-<div id="motivation-6" class="section level2" number="37.1">
+<div id="motivation-6" class="section level2" number="38.1">
 <h2>
-<span class="header-section-number">37.1</span> Motivation<a class="anchor" aria-label="anchor" href="#motivation-6"><i class="fas fa-link"></i></a>
+<span class="header-section-number">38.1</span> Motivation<a class="anchor" aria-label="anchor" href="#motivation-6"><i class="fas fa-link"></i></a>
 </h2>
 <p>Obtaining data is the crucial part before we explore and visualize it. Although some processed data are provided in R packages, in a realistic project, we need to collect data from a reliable source that has yet to be processed. We’ve been able to scrap the data from the site. But scratching the data from their site is amazingly questionable since a simple alteration on the web page will break our whole scratching calculation. Moreover, the data we get may not be the one we need. Some sources may provide their data in CSV or other file formats. Still, most sources use an application programming interface (API) to allow users to access their data. However, when we were working on the final project proposal, it took us a long time to get data from the website. One reason is that most of the resources and tutorials on using APIs are obscure for people with limited knowledge. Another reason is that each source processes and distributes data in distinct ways. In addition, the data we receive from the API is most commonly a JSON file. It is not a tabular file format, so we need extra steps to clean it. This tutorial will guide you on using the httr package to request data from API and transcribe JSON files into a data frame or table.</p>
 </div>
-<div id="what-is-api-and-json" class="section level2" number="37.2">
+<div id="what-is-api-and-json" class="section level2" number="38.2">
 <h2>
-<span class="header-section-number">37.2</span> What is API and JSON?<a class="anchor" aria-label="anchor" href="#what-is-api-and-json"><i class="fas fa-link"></i></a>
+<span class="header-section-number">38.2</span> What is API and JSON?<a class="anchor" aria-label="anchor" href="#what-is-api-and-json"><i class="fas fa-link"></i></a>
 </h2>
 <p>API (application programming interface) is a method by which two programs share data. Usually, each API has its unique settings (parameters). Today API usually refers to web API, which programs communicate under Hypertext Transfer Protocol (HTTP). Online data sources typically use a web API that allows users to obtain their data remotely. Some APIs also require a personalized token to protect and monitor data transmittance. API uses designated URLs to make them unique on the Internet. Compared to data already in a file, API allows users only to download the parts they will work on.</p>
 <p>JSON (JavaScript Object Notation) is a file format that aims to exchange data more efficiently on the Internet. Because JSON is simple, human-readable and writable, and lightweight, it has been widely accepted and has become a standard. JSON stores data in key/value pairs. There are six value types in JSON: number, boolean, string, null, array, and object. An object is a collection of key/value pairs. Below is a sample JSON file:</p>
@@ -181,20 +526,20 @@
 }</code></pre>
 <p>In this example, <code>department</code> and <code>location</code> are string variables, <code>yearEst</code> is a number variable, and <code>employees</code> is an array of objects. Each element of <code>employees</code> contains two string variables, <code>name</code> and <code>title</code>, a number variable, <code>age</code>, and a boolean variable, <code>onDuty</code>. The <code>null</code> in Wei’s title is the same as NA, which means empty. Notice that this whole chunk of data is also an object. This nested structure of objects allows JSON files efficiently store data with complicated relations.</p>
 </div>
-<div id="using-httr-package-to-request-data-from-api" class="section level2" number="37.3">
+<div id="using-httr-package-to-request-data-from-api" class="section level2" number="38.3">
 <h2>
-<span class="header-section-number">37.3</span> Using <code>httr</code> package to request data from API<a class="anchor" aria-label="anchor" href="#using-httr-package-to-request-data-from-api"><i class="fas fa-link"></i></a>
+<span class="header-section-number">38.3</span> Using <code>httr</code> package to request data from API<a class="anchor" aria-label="anchor" href="#using-httr-package-to-request-data-from-api"><i class="fas fa-link"></i></a>
 </h2>
-<div id="introduction-to-http-verb-and-httr" class="section level3" number="37.3.1">
+<div id="introduction-to-http-verb-and-httr" class="section level3" number="38.3.1">
 <h3>
-<span class="header-section-number">37.3.1</span> Introduction to HTTP verb and <code>httr</code><a class="anchor" aria-label="anchor" href="#introduction-to-http-verb-and-httr"><i class="fas fa-link"></i></a>
+<span class="header-section-number">38.3.1</span> Introduction to HTTP verb and <code>httr</code><a class="anchor" aria-label="anchor" href="#introduction-to-http-verb-and-httr"><i class="fas fa-link"></i></a>
 </h3>
 <p>Since this tutorial faces people with limited CS/Internet knowledge, we will only dig a little bit into it. A key idea here is the HTTP verb, which is the action you perform on the server (we prefer HTTP method instead of HTTP verb). There are five mainly used HTTP verbs: POST, GET, PUT, PATCH, and DELETE. For our purpose of obtaining data, we will usually use GET (in some contexts, we will use POST), which is getting specific resources from the server.</p>
 <p><code>httr</code> is a package developed by RStudio, and it is an easy but powerful tool for dealing with HTTP. It contains wrapper functions that allow you to make designated requests to the server and decode the response from the server.</p>
 </div>
-<div id="example-of-use-httrget-to-request-data-from-api" class="section level3" number="37.3.2">
+<div id="example-of-use-httrget-to-request-data-from-api" class="section level3" number="38.3.2">
 <h3>
-<span class="header-section-number">37.3.2</span> Example of use <code>httr::GET</code> to request data from API<a class="anchor" aria-label="anchor" href="#example-of-use-httrget-to-request-data-from-api"><i class="fas fa-link"></i></a>
+<span class="header-section-number">38.3.2</span> Example of use <code>httr::GET</code> to request data from API<a class="anchor" aria-label="anchor" href="#example-of-use-httrget-to-request-data-from-api"><i class="fas fa-link"></i></a>
 </h3>
 <p>WARNING: This is only an example illustrating the workflow of retrieving data from API. Since each API has its unique parameters, they work differently. Therefore, as you want to utilize an API, you first need to go through its reference or usage page to understand how to communicate with it correctly.</p>
 <p>We will use an example of getting warships’ information from the game World of Warships through Wargaming developer API. Notice that to download data from Wargaming API, you must register an account and create an application id. This id is unique to you, and you should not share your id with anyone else (others may use your id to do something illegal like DDOS). For demonstration purposes, we created a temporary id and stored it in a JSON file. This temporary id will be <strong>DEACTIVATED</strong> after Dec. 15, 2022. Please <strong>DO NOT</strong> use our id in your code.</p>
@@ -259,13 +604,13 @@
 ##   .. [list output truncated]</code></pre>
 </div>
 </div>
-<div id="transform-json-to-data-frame" class="section level2" number="37.4">
+<div id="transform-json-to-data-frame" class="section level2" number="38.4">
 <h2>
-<span class="header-section-number">37.4</span> Transform JSON to data frame<a class="anchor" aria-label="anchor" href="#transform-json-to-data-frame"><i class="fas fa-link"></i></a>
+<span class="header-section-number">38.4</span> Transform JSON to data frame<a class="anchor" aria-label="anchor" href="#transform-json-to-data-frame"><i class="fas fa-link"></i></a>
 </h2>
-<div id="json-structure-analysis-list" class="section level3" number="37.4.1">
+<div id="json-structure-analysis-list" class="section level3" number="38.4.1">
 <h3>
-<span class="header-section-number">37.4.1</span> JSON structure analysis (list)<a class="anchor" aria-label="anchor" href="#json-structure-analysis-list"><i class="fas fa-link"></i></a>
+<span class="header-section-number">38.4.1</span> JSON structure analysis (list)<a class="anchor" aria-label="anchor" href="#json-structure-analysis-list"><i class="fas fa-link"></i></a>
 </h3>
 <p>We learned in class how to deal with CSV data, and our most fixed approach is to convert the data into a data frame because that’s the structure we’re used to working with data (and that’s our goal). However, data does not need to be stored in a table with columns and rows. This tabular format is inefficient, so many Internet companies never store raw data in this format. For example, let’s say a store is following your buys. Your distinctive visits may be stamped by the entire sum of cash you went through, the length of the visit, taken after by point-by-point thing data (such as item name, brand, quantity, product id, etc.). There’s a lot of detailed information, and putting away all this data in a single table isn’t exceptionally productive since you have got to rehash the total information (add up to get to and time) for each point-by-point thing. While having different tables is one solution, consumers of this dataset typically prefer a single data source with all the information. This leads to the existence of hierarchical data types like lists. We use <code><a href="https://rdrr.io/pkg/jsonlite/man/read_json.html">read_json()</a></code> to read the JSON file and return the data type list. So, how to handle JSON files is equivalent to how to handle lists.</p>
 <div class="sourceCode" id="cb476"><pre class="downlit sourceCode r">
@@ -325,13 +670,13 @@
 ##  [96] "3667867632" "3551409616" "3340645840" "3655219184" "3552458448"</code></pre>
 <p>We can see that the resulting data structure by applying the content function to the api_response is a list. Lists are the foremost adaptable data type that can contain other sorts of information. A list can contain distinctive diverse sorts of information in each component, indeed another list. Each element in the list does not have to be the same length as another element. This makes lists flexible but also relatively difficult to use. Notice that in our case, we found that our <code>raw_json</code> has three layers. The first layer contains the information on status, which has the type of character. The second layer is a list containing the elements of our meta data (summarized data) such as count, page, total… After applying <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function on the second layer (<code>meta</code>), we get the detailed information inside the second layer (<code>meta</code>) of <code>raw_json</code>. For example, we know there are seven pages. The third layer is the most crucial part, which is a huge list containing our warship data that has 100 elements in it (meaning there are 100 warships). And each element is a list as well. We apply <code><a href="https://rdrr.io/r/base/names.html">names()</a></code> function on the third layer (<code>data</code>), and we get these id’s above. If we explored further above, we would likely have deduced that the different “names” correspond to the different warships. So you can imagine that if we wanted to study warship, we could want to create a data frame where the rows correspond to different warships and the columns correspond to different features of the warships inside the third layer such as <code>name</code>, <code>nation</code>, <code>type</code>, and <code>tier</code>.</p>
 </div>
-<div id="process-to-extract-target-features-from-a-list" class="section level3" number="37.4.2">
+<div id="process-to-extract-target-features-from-a-list" class="section level3" number="38.4.2">
 <h3>
-<span class="header-section-number">37.4.2</span> Process to extract target features from a list<a class="anchor" aria-label="anchor" href="#process-to-extract-target-features-from-a-list"><i class="fas fa-link"></i></a>
+<span class="header-section-number">38.4.2</span> Process to extract target features from a list<a class="anchor" aria-label="anchor" href="#process-to-extract-target-features-from-a-list"><i class="fas fa-link"></i></a>
 </h3>
-<div id="steps-to-create-extraction-function" class="section level4" number="37.4.2.1">
+<div id="steps-to-create-extraction-function" class="section level4" number="38.4.2.1">
 <h4>
-<span class="header-section-number">37.4.2.1</span> Steps to create extraction function<a class="anchor" aria-label="anchor" href="#steps-to-create-extraction-function"><i class="fas fa-link"></i></a>
+<span class="header-section-number">38.4.2.1</span> Steps to create extraction function<a class="anchor" aria-label="anchor" href="#steps-to-create-extraction-function"><i class="fas fa-link"></i></a>
 </h4>
 <p>Here’s the code to grab some features (<code>name</code>, <code>nation</code>, <code>type</code>, and <code>tier</code>) out of a warship.
 We will demo this step by step. After figuring out the structure of the huge list (<code>raw_json</code>), let’s extract the information we need for the project. To clarify, let’s pull the elements (<code>name</code>, <code>nation</code>, <code>type</code>, and <code>tier</code>) we need for the first warship. For example, if we want to get the name of the first warship, we do the following.</p>
@@ -393,9 +738,9 @@ We will demo this step by step. After figuring out the structure of the huge lis
 <pre><code>##            name nation    type tier
 ## 1 AL Montpelier    usa Cruiser    8</code></pre>
 </div>
-<div id="lapply-function" class="section level4" number="37.4.2.2">
+<div id="lapply-function" class="section level4" number="38.4.2.2">
 <h4>
-<span class="header-section-number">37.4.2.2</span> <code>lapply()</code> function<a class="anchor" aria-label="anchor" href="#lapply-function"><i class="fas fa-link"></i></a>
+<span class="header-section-number">38.4.2.2</span> <code>lapply()</code> function<a class="anchor" aria-label="anchor" href="#lapply-function"><i class="fas fa-link"></i></a>
 </h4>
 <p>Our function works perfectly, returning the same results as the previous section. So now we can extract all the warship information using <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code> function:</p>
 <div class="sourceCode" id="cb504"><pre class="downlit sourceCode r">
@@ -419,9 +764,9 @@ We will demo this step by step. After figuring out the structure of the huge lis
 <li>The same function is “distributed” across each element within the list</li>
 </ol>
 </div>
-<div id="do.call-function" class="section level4" number="37.4.2.3">
+<div id="do.call-function" class="section level4" number="38.4.2.3">
 <h4>
-<span class="header-section-number">37.4.2.3</span> <code>do.call()</code> function<a class="anchor" aria-label="anchor" href="#do.call-function"><i class="fas fa-link"></i></a>
+<span class="header-section-number">38.4.2.3</span> <code>do.call()</code> function<a class="anchor" aria-label="anchor" href="#do.call-function"><i class="fas fa-link"></i></a>
 </h4>
 <p>Our final step is combining the outputs with <code><a href="https://rdrr.io/r/base/do.call.html">do.call()</a></code>. The code above makes a list where each component contains an information outline of a single row. Right now, we need to make them as a single data frame. <code><a href="https://rdrr.io/r/base/do.call.html">do.call()</a></code> applies a given function to the list as a whole, so there is only one function call. In this case, we will use <code><a href="https://rdrr.io/r/base/cbind.html">rbind()</a></code> function to combine our rows.</p>
 <div class="sourceCode" id="cb508"><pre class="downlit sourceCode r">
@@ -436,16 +781,16 @@ We will demo this step by step. After figuring out the structure of the huge lis
 ## 3338548944   [Shimakaze]    japan  Destroyer   10</code></pre>
 </div>
 </div>
-<div id="why-introducing-lappy-and-do.call" class="section level3" number="37.4.3">
+<div id="why-introducing-lappy-and-do.call" class="section level3" number="38.4.3">
 <h3>
-<span class="header-section-number">37.4.3</span> Why introducing <code>lappy()</code> and <code>do.call()</code><a class="anchor" aria-label="anchor" href="#why-introducing-lappy-and-do.call"><i class="fas fa-link"></i></a>
+<span class="header-section-number">38.4.3</span> Why introducing <code>lappy()</code> and <code>do.call()</code><a class="anchor" aria-label="anchor" href="#why-introducing-lappy-and-do.call"><i class="fas fa-link"></i></a>
 </h3>
 <p>From a programming perspective, using the <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code> and <code><a href="https://rdrr.io/r/base/do.call.html">do.call()</a></code> approaches can make your code easier to read. It is also more straightforward to modify if you want to add/remove parts from the data frame you want to create. It also would directly apply to a different dataset of warship data. In contrast, for the loop-based approach, you’d need to change every result occurrence in the for loop and when defining the original outcome variable too.</p>
 </div>
 </div>
-<div id="filter-desired-data-by-directly-passing-parameters-to-api" class="section level2" number="37.5">
+<div id="filter-desired-data-by-directly-passing-parameters-to-api" class="section level2" number="38.5">
 <h2>
-<span class="header-section-number">37.5</span> Filter desired data by directly passing parameters to API<a class="anchor" aria-label="anchor" href="#filter-desired-data-by-directly-passing-parameters-to-api"><i class="fas fa-link"></i></a>
+<span class="header-section-number">38.5</span> Filter desired data by directly passing parameters to API<a class="anchor" aria-label="anchor" href="#filter-desired-data-by-directly-passing-parameters-to-api"><i class="fas fa-link"></i></a>
 </h2>
 <p>Above we showed you how to parse and extract useful data in a huge JSON file. However, one advantage of API is that we can only request the data we need from the server. API like Wargaming provides detailed information on reference page that tells you how their API works and what parameters it receives. But you cannot assume every API thoroughly documents its usage. In the context of a poorly described API, excavating useful information from a mess is needed. After figuring out the information you need, you can pass corresponding parameters and convert it to a data frame. Continuing with our example, after we read the reference page, we know that setting <code>fields</code> parameters will filter out the entry we want.</p>
 <div class="sourceCode" id="cb510"><pre class="downlit sourceCode r">
@@ -522,15 +867,15 @@ We will demo this step by step. After figuring out the structure of the huge lis
 ## 5 3655251408 10    Cruiser    Smolensk      ussr    
 ## 6 3338548944 10    Destroyer  [Shimakaze]   japan</code></pre>
 </div>
-<div id="evaluation-2" class="section level2" number="37.6">
+<div id="evaluation-2" class="section level2" number="38.6">
 <h2>
-<span class="header-section-number">37.6</span> Evaluation<a class="anchor" aria-label="anchor" href="#evaluation-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">38.6</span> Evaluation<a class="anchor" aria-label="anchor" href="#evaluation-2"><i class="fas fa-link"></i></a>
 </h2>
 <p>By writing the tutorial on this topic, we gained a clearer understanding of how to legally use the API to get data from the source website and how to understand the structure of JSON files and lists in r language. This tutorial can also be said to be the final project of students as a service, to help students how to get data and how to clean data. Getting the data and cleaning it up are the most time-consuming and unique steps in a project (because every data resource is different). The purpose of this tutorial is to cover these two steps in the most general way possible. Of course, we wanted to improve our tutorial further. In that case, we might insert more graphic images to explain the list structure in detail since we believe that architectural images are always the most intuitive. We should also talk a little bit more about <code><a href="https://rdrr.io/r/base/lapply.html">lapply()</a></code> and the other functions (the <code><a href="https://rdrr.io/r/base/apply.html">apply()</a></code> family), and maybe mention the logic inherent in functions like mapping, which is also very important for understanding a function.</p>
 </div>
-<div id="reference-3" class="section level2" number="37.7">
+<div id="reference-4" class="section level2" number="38.7">
 <h2>
-<span class="header-section-number">37.7</span> Reference<a class="anchor" aria-label="anchor" href="#reference-3"><i class="fas fa-link"></i></a>
+<span class="header-section-number">38.7</span> Reference<a class="anchor" aria-label="anchor" href="#reference-4"><i class="fas fa-link"></i></a>
 </h2>
 <p><a href="https://cran.r-project.org/web/packages/httr/vignettes/quickstart.html" class="uri">https://cran.r-project.org/web/packages/httr/vignettes/quickstart.html</a></p>
 <p><a href="https://cran.r-project.org/web/packages/jsonlite/vignettes/json-aaquickstart.html" class="uri">https://cran.r-project.org/web/packages/jsonlite/vignettes/json-aaquickstart.html</a></p>
@@ -546,30 +891,30 @@ We will demo this step by step. After figuring out the structure of the huge lis
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="make-geographical-maps-with-different-packages.html"><span class="header-section-number">36</span> Make Geographical Maps with Different Packages</a></div>
-<div class="next"><a href="sample-statistic-tutorial.html"><span class="header-section-number">38</span> Sample Statistic Tutorial</a></div>
+<div class="prev"><a href="make-geographical-maps-with-different-packages.html"><span class="header-section-number">37</span> Make Geographical Maps with Different Packages</a></div>
+<div class="next"><a href="sample-statistic-tutorial.html"><span class="header-section-number">39</span> Sample Statistic Tutorial</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#how-to-obtain-data-from-api-and-process-raw-json-data"><span class="header-section-number">37</span> How to obtain data from API and process raw JSON data</a></li>
-<li><a class="nav-link" href="#motivation-6"><span class="header-section-number">37.1</span> Motivation</a></li>
-<li><a class="nav-link" href="#what-is-api-and-json"><span class="header-section-number">37.2</span> What is API and JSON?</a></li>
+<li><a class="nav-link" href="#how-to-obtain-data-from-api-and-process-raw-json-data"><span class="header-section-number">38</span> How to obtain data from API and process raw JSON data</a></li>
+<li><a class="nav-link" href="#motivation-6"><span class="header-section-number">38.1</span> Motivation</a></li>
+<li><a class="nav-link" href="#what-is-api-and-json"><span class="header-section-number">38.2</span> What is API and JSON?</a></li>
 <li>
-<a class="nav-link" href="#using-httr-package-to-request-data-from-api"><span class="header-section-number">37.3</span> Using httr package to request data from API</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#introduction-to-http-verb-and-httr"><span class="header-section-number">37.3.1</span> Introduction to HTTP verb and httr</a></li>
-<li><a class="nav-link" href="#example-of-use-httrget-to-request-data-from-api"><span class="header-section-number">37.3.2</span> Example of use httr::GET to request data from API</a></li>
+<a class="nav-link" href="#using-httr-package-to-request-data-from-api"><span class="header-section-number">38.3</span> Using httr package to request data from API</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#introduction-to-http-verb-and-httr"><span class="header-section-number">38.3.1</span> Introduction to HTTP verb and httr</a></li>
+<li><a class="nav-link" href="#example-of-use-httrget-to-request-data-from-api"><span class="header-section-number">38.3.2</span> Example of use httr::GET to request data from API</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#transform-json-to-data-frame"><span class="header-section-number">37.4</span> Transform JSON to data frame</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#json-structure-analysis-list"><span class="header-section-number">37.4.1</span> JSON structure analysis (list)</a></li>
-<li><a class="nav-link" href="#process-to-extract-target-features-from-a-list"><span class="header-section-number">37.4.2</span> Process to extract target features from a list</a></li>
-<li><a class="nav-link" href="#why-introducing-lappy-and-do.call"><span class="header-section-number">37.4.3</span> Why introducing lappy() and do.call()</a></li>
+<a class="nav-link" href="#transform-json-to-data-frame"><span class="header-section-number">38.4</span> Transform JSON to data frame</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#json-structure-analysis-list"><span class="header-section-number">38.4.1</span> JSON structure analysis (list)</a></li>
+<li><a class="nav-link" href="#process-to-extract-target-features-from-a-list"><span class="header-section-number">38.4.2</span> Process to extract target features from a list</a></li>
+<li><a class="nav-link" href="#why-introducing-lappy-and-do.call"><span class="header-section-number">38.4.3</span> Why introducing lappy() and do.call()</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#filter-desired-data-by-directly-passing-parameters-to-api"><span class="header-section-number">37.5</span> Filter desired data by directly passing parameters to API</a></li>
-<li><a class="nav-link" href="#evaluation-2"><span class="header-section-number">37.6</span> Evaluation</a></li>
-<li><a class="nav-link" href="#reference-3"><span class="header-section-number">37.7</span> Reference</a></li>
+<li><a class="nav-link" href="#filter-desired-data-by-directly-passing-parameters-to-api"><span class="header-section-number">38.5</span> Filter desired data by directly passing parameters to API</a></li>
+<li><a class="nav-link" href="#evaluation-2"><span class="header-section-number">38.6</span> Evaluation</a></li>
+<li><a class="nav-link" href="#reference-4"><span class="header-section-number">38.7</span> Reference</a></li>
 </ul>
 
       <div class="book-extra">
@@ -587,7 +932,7 @@ We will demo this step by step. After figuring out the structure of the huge lis
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Community Contributions for EDAV Fall 2022 Tues/Thurs</strong>" was written by . It was last built on 2022-12-14.</p>
+    <p>"<strong>Community Contributions for EDAV Fall 2022 Tues/Thurs</strong>" was written by . It was last built on 2022-12-17.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

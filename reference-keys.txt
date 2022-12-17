@@ -93,10 +93,27 @@ stability-analysis
 conclusion-2
 reflection
 extra
+a-summary-of-interactive-chart
+introduction-1
+interactive-table
+interactive-graph
+time-series
+histograph
+scatter-and-bubble-plots
+interactive-network-graph
+heatmaps
+d-scatterplots
+globe-plots
+interactive-maps
+interactive-chord-diagram
+interactive-collapsible-reingold-tilford-tree-diagrams
+interactive-circle-packing
+interactive-streamgraph
+reference-1
 data-cleaning-with-r
 data-cleaning-with-r-1
 import-data-set
-introduction-1
+introduction-2
 data-frame-modification-general-modification
 create-dataframe-by-arrays
 create-dataframe-by-combining-two-dataframeusing-cbindrbind
@@ -132,7 +149,7 @@ min-max-scaling
 data-encoding
 ordinal-encoding
 one-hot-encoding-3
-reference-1
+reference-2
 introduction-to-shiny-web-apps
 motivation-3
 how-to-host
@@ -147,7 +164,7 @@ reactivity
 display-output-with-render
 conclusion-3
 evaluation
-reference-2
+reference-3
 python-missingno-library-tutorial
 data-explorer-tutorial-and-automation
 d-visualization-in-r
@@ -196,7 +213,7 @@ decorating-igraph-visualizations
 details-for-decorating-igraph-visualization
 example-for-advanced-igraph-visualization
 geo-mapping-coordinate-extraction-using-api-calls
-introduction-2
+introduction-3
 motivation-5
 public-datasets
 api-calls
@@ -229,7 +246,7 @@ extraction
 vectorization
 file-output
 make-geographical-maps-with-different-packages
-introduction-3
+introduction-4
 make-geographical-maps-with-map-package
 import-dataset-with-function-map_data
 usage-of-map_data
@@ -259,7 +276,7 @@ do.call-function
 why-introducing-lappy-and-do.call
 filter-desired-data-by-directly-passing-parameters-to-api
 evaluation-2
-reference-3
+reference-4
 sample-statistic-tutorial
 motivation-7
 data-cleaning-1
@@ -268,7 +285,7 @@ missing-data
 hypothesis-testing
 bootstrapping
 hypothesis-testing-1
-reference-4
+reference-5
 data-cleaning-tutorial
 motivation-8
 observe-the-dataset
@@ -283,7 +300,7 @@ removing-outliers-optional
 conclusion-6
 mlr3-package-tutorial
 guide-to-nonparametric-tests
-introduction-4
+introduction-5
 two-sample-inference-procedure-difference-in-location-permutation-test
 summary
 assumptions
@@ -336,7 +353,7 @@ sort-function-arrange
 summary-function-summarise
 how-not-to-visualize-american-elections
 time-series-visualization-with-r
-introduction-5
+introduction-6
 line-plots-1
 bar-plots
 area-plots
@@ -344,7 +361,7 @@ areas-under-a-single-time-series
 stacked-polygons
 interactive-time-series
 conclusion-7
-reference-5
+reference-6
 twitter-textual-data-scraping-and-analyzing
 loading-all-the-required-packages
 scrape-data
@@ -378,7 +395,7 @@ relationship-between-bill-length-x-and-bill-depth-y-separated-by-species
 take-a-closer-look-at-the-distribution-given-x-41-and-x-42.
 connecting-palmer-penguins-example-with-causal-intervention
 final-sentences
-reference-6
+reference-7
 network-analysis-and-social-network-analysis
 what-is-a-network
 network-analysis-and-social-network-anlysis
@@ -503,7 +520,7 @@ how-i-got-into-amazon-as-a-full-time-data-analyst
 part-case-studies
 benford-case-study
 contents
-introduction-6
+introduction-7
 what-is-benfords-law
 applications-in-fraud-detection
 benford-package-in-r
